@@ -507,7 +507,7 @@ h3 {
   position: relative;
   padding-block: 1.7rem;
   border-bottom: 1px solid var(--line);
-  transition: background-color 0.3s ease;
+  transition: background-color 0.2s ease;
 }
 
 .project-row:hover {
@@ -524,7 +524,7 @@ h3 {
   background: #a9cbd0;
   transform: scaleY(0);
   transform-origin: center;
-  transition: transform 0.35s cubic-bezier(0.2, 0.6, 0.2, 1);
+  transition: transform 0.21s cubic-bezier(0.2, 0.6, 0.2, 1);
 }
 
 .project-row:hover::after {
