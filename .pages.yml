@@ -18,6 +18,25 @@ content:
       - { name: description, label: Short description, type: text, required: false }
       - { name: body, label: Notes, type: rich-text, required: false }
 
+  - name: projects
+    label: Projects
+    type: collection
+    path: src/content/projects
+    view:
+      fields: [title, role, status]
+      primary: title
+      sortby: date
+      sortorder: desc
+    fields:
+      - { name: title, label: Project name, type: string }
+      - { name: summary, label: One-line summary, type: text }
+      - { name: url, label: Link, type: url, required: false }
+      - { name: role, label: Your role, type: string }
+      - { name: timeline, label: Timeline, type: string, required: false }
+      - { name: status, label: Status, type: string, required: false }
+      - { name: date, label: Date, type: date, required: false }
+      - { name: body, label: Story, type: rich-text }
+
   - name: about
     label: About page
     type: file

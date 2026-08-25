@@ -1,0 +1,80 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+
+const host = project.data.url ? new URL(project.data.url).hostname : null;
+---
+
+<BaseLayout
+  title={`${project.data.title} — Projects — Saielle DaSilva`}
+  description={project.data.summary}
+>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Projects</p>
+      <h1>{project.data.title}</h1>
+      <p class="lede">{project.data.summary}</p>
+    </header>
+
+    <dl class="case-meta">
+      <div>
+        <dt class="meta-label">Role</dt>
+        <dd class="meta-value">{project.data.role}</dd>
+      </div>
+      {
+        project.data.timeline && (
+          <div>
+            <dt class="meta-label">Timeline</dt>
+            <dd class="meta-value">{project.data.timeline}</dd>
+          </div>
+        )
+      }
+      {
+        project.data.status && (
+          <div>
+            <dt class="meta-label">Status</dt>
+            <dd class="meta-value">{project.data.status}</dd>
+          </div>
+        )
+      }
+      {
+        project.data.url && (
+          <div>
+            <dt class="meta-label">Link</dt>
+            <dd class="meta-value">
+              <a href={project.data.url} rel="noopener">
+                {host}
+              </a>
+            </dd>
+          </div>
+        )
+      }
+    </dl>
+
+    <article class="prose">
+      <Content />
+    </article>
+
+    <div class="cta-row project-cta">
+      {
+        project.data.url && (
+          <a class="btn-primary" href={project.data.url} rel="noopener">
+            Visit {host}
+          </a>
+        )
+      }
+      <a class="link-arrow" href="/projects">All projects</a>
+    </div>
+  </section>
+</BaseLayout>
