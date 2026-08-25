@@ -20,6 +20,30 @@ const posPct = (iso: string) => {
 
 const years = Array.from({ length: 10 }, (_, i) => 2017 + i);
 
+// Cumulative chart geometry
+const W = 1000;
+const H = 240;
+const PAD_L = 10;
+const PAD_R = 10;
+const PAD_T = 30;
+const PAD_B = 38;
+const xOf = (iso: string) =>
+  PAD_L +
+  ((new Date(iso).valueOf() - START) / (END - START)) * (W - PAD_L - PAD_R);
+const yOf = (n: number) =>
+  H - PAD_B - (n / writingEntries.length) * (H - PAD_T - PAD_B);
+
+const chrono = [...writingEntries].sort(
+  (a, b) => new Date(a.date).valueOf() - new Date(b.date).valueOf()
+);
+let running = 0;
+const pts = chrono.map((e) => ({ e, n: ++running }));
+const linePath = pts
+  .map(({ e, n }, i) => `${i === 0 ? 'M' : 'L'} ${xOf(e.date).toFixed(1)} ${yOf(n).toFixed(1)}`)
+  .join(' ');
+const last = pts[pts.length - 1];
+const areaPath = `${linePath} L ${xOf(last.e.date).toFixed(1)} ${H - PAD_B} L ${PAD_L} ${H - PAD_B} Z`;
+
 const slugify = (s: string) =>
   s
     .toLowerCase()
@@ -64,8 +88,38 @@ const fmtDate = (e: (typeof entries)[number]) =>
 
     <section class="archive" aria-label="Writing archive">
       <div class="ribbon-wrap">
-        <div class="ribbon-track">
-          <div class="ribbon-baseline" aria-hidden="true"></div>
+        <figure class="cumulative">
+          <svg
+            viewBox={`0 0 ${W} ${H}`}
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <path class="chart-area" d={areaPath} />
+            <path
+              class="chart-line"
+              d={linePath}
+              vectorEffect="non-scaling-stroke"></path>
+          </svg>
+          {
+            pts.map(({ e, n }) => (
+              <button
+                class="tick chart-tick"
+                style={`left:${((xOf(e.date) / W) * 100).toFixed(2)}%; top:${(
+                  (yOf(n) / H) *
+                  100
+                ).toFixed(2)}%`}
+                data-theme={e.themes.join(' ')}
+                data-target={`w-${slugify(e.title)}`}
+                aria-label={`${e.title}, piece ${n} of ${pts.length}, ${fmtDate(e)}`}
+              >
+                <span class="tick-dot" />
+                <span class="tick-tip">{e.title}</span>
+              </button>
+            ))
+          }
+          <span class="chart-total" aria-hidden="true">
+            {pts.length}<small>pieces · 2017–2026</small>
+          </span>
           {
             years.map((y) => (
               <span
@@ -77,21 +131,7 @@ const fmtDate = (e: (typeof entries)[number]) =>
               </span>
             ))
           }
-          {
-            entries.map((e) => (
-              <button
-                class="tick"
-                style={`left:${posPct(e.date)}%`}
-                data-theme={e.themes.join(' ')}
-                data-target={`w-${slugify(e.title)}`}
-                aria-label={`${e.title} (${fmtDate(e)})`}
-              >
-                <span class="tick-dot" />
-                <span class="tick-tip">{e.title}</span>
-              </button>
-            ))
-          }
-        </div>
+        </figure>
       </div>
 
       <div class="chips" role="group" aria-label="Filter writing by theme">
