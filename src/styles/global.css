@@ -198,6 +198,7 @@ h3 {
   text-transform: uppercase;
   text-decoration: none;
   padding: 1em 2em;
+  border-radius: 8px;
   transition: color 0.25s ease;
 }
 
@@ -217,6 +218,7 @@ h3 {
   position: absolute;
   inset: 3px;
   border: 1px solid var(--ink);
+  border-radius: 5px;
   pointer-events: none;
   transition: border-color 0.25s ease;
 }
