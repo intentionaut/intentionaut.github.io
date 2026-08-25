@@ -20,6 +20,6 @@ My job is getting a team to that answer quickly — and keeping it honest while 
 - **Translate, don't gatekeep.** I speak designer, engineer, analyst and executive — and I move ideas between them intact.
 - **Evidence over ego.** Strong opinions, loosely held, tightly tested.
 - **Prototype to decide.** The cheapest way out of an argument is usually a rough version everyone can react to.
-- **Software is made of people.** Putting the soft back into software isn't a slogan — it's the operating principle.
+- **Software is made of people.** Putting the soft back in software isn't a slogan — it's the operating principle.
 
 If any of that sounds like the teammate you've been missing, [say hello](/contact).
