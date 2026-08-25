@@ -1,4 +1,5 @@
 ---
+import '@fontsource-variable/roboto-serif';
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
@@ -24,38 +25,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
       <p class="email-hint">hello@intentionaut.com</p>
     </header>
-
-    <section class="contact-form-section" aria-label="Send a message">
-      <h2>Or leave a note here</h2>
-      <form id="contact-form" novalidate>
-        <div class="form-grid">
-          <label>
-            <span class="form-label">Name</span>
-            <input type="text" name="name" required autocomplete="name" />
-          </label>
-          <label>
-            <span class="form-label">Email</span>
-            <input type="email" name="email" required autocomplete="email" />
-          </label>
-        </div>
-        <label>
-          <span class="form-label">What's this about?</span>
-          <select name="topic">
-            <option>Advisory</option>
-            <option>Fractional leadership</option>
-            <option>Speaking &amp; workshops</option>
-            <option>Mentoring</option>
-            <option>Something else</option>
-          </select>
-        </label>
-        <label>
-          <span class="form-label">Message</span>
-          <textarea name="message" rows="5" required></textarea>
-        </label>
-        <button class="btn-primary" type="submit">Send it</button>
-        <p class="form-status" id="form-status" role="status"></p>
-      </form>
-    </section>
 
     <section class="rates-section" aria-label="Ways to work together">
       <h2>Ways to work together</h2>
@@ -97,6 +66,40 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         Tell me what you're working on and what's keeping you up at night — I
         reply to every serious note.
       </p>
+    </section>
+
+    <section class="contact-form-section" aria-label="Send a message">
+      <div class="contact-card">
+        <h2>Or leave a note here</h2>
+        <form id="contact-form" novalidate>
+          <div class="form-grid">
+            <label>
+              <span class="form-label">Name</span>
+              <input type="text" name="name" required autocomplete="name" />
+            </label>
+            <label>
+              <span class="form-label">Email</span>
+              <input type="email" name="email" required autocomplete="email" />
+            </label>
+          </div>
+          <label>
+            <span class="form-label">What's this about?</span>
+            <select name="topic">
+              <option>Advisory</option>
+              <option>Fractional leadership</option>
+              <option>Speaking &amp; workshops</option>
+              <option>Mentoring</option>
+              <option>Something else</option>
+            </select>
+          </label>
+          <label>
+            <span class="form-label">Message</span>
+            <textarea name="message" rows="5" required></textarea>
+          </label>
+          <button class="btn-plain" type="submit">Send it</button>
+          <p class="form-status" id="form-status" role="status"></p>
+        </form>
+      </div>
     </section>
   </section>
 
