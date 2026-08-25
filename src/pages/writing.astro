@@ -20,29 +20,19 @@ const posPct = (iso: string) => {
 
 const years = Array.from({ length: 10 }, (_, i) => 2017 + i);
 
-// Cumulative chart geometry
-const W = 1000;
-const H = 240;
-const PAD_L = 10;
-const PAD_R = 10;
-const PAD_T = 30;
-const PAD_B = 38;
-const xOf = (iso: string) =>
-  PAD_L +
-  ((new Date(iso).valueOf() - START) / (END - START)) * (W - PAD_L - PAD_R);
-const yOf = (n: number) =>
-  H - PAD_B - (n / writingEntries.length) * (H - PAD_T - PAD_B);
-
+// Even-spaced dot rail: order along the line, not elapsed time
 const chrono = [...writingEntries].sort(
   (a, b) => new Date(a.date).valueOf() - new Date(b.date).valueOf()
 );
 let running = 0;
 const pts = chrono.map((e) => ({ e, n: ++running }));
-const linePath = pts
-  .map(({ e, n }, i) => `${i === 0 ? 'M' : 'L'} ${xOf(e.date).toFixed(1)} ${yOf(n).toFixed(1)}`)
-  .join(' ');
-const last = pts[pts.length - 1];
-const areaPath = `${linePath} L ${xOf(last.e.date).toFixed(1)} ${H - PAD_B} L ${PAD_L} ${H - PAD_B} Z`;
+const N = pts.length;
+const railPct = (i: number) => 4 + (i / (N - 1)) * 92;
+const yearPos = new Map<number, number>();
+pts.forEach(({ e }, i) => {
+  const y = new Date(e.date).getFullYear();
+  if (!yearPos.has(y)) yearPos.set(y, railPct(i));
+});
 
 const slugify = (s: string) =>
   s
@@ -89,28 +79,15 @@ const fmtDate = (e: (typeof entries)[number]) =>
     <section class="archive" aria-label="Writing archive">
       <div class="ribbon-wrap">
         <figure class="cumulative">
-          <svg
-            viewBox={`0 0 ${W} ${H}`}
-            preserveAspectRatio="none"
-            aria-hidden="true"
-          >
-            <path class="chart-area" d={areaPath} />
-            <path
-              class="chart-line"
-              d={linePath}
-              vectorEffect="non-scaling-stroke"></path>
-          </svg>
+          <div class="ribbon-baseline" aria-hidden="true"></div>
           {
-            pts.map(({ e, n }) => (
+            pts.map(({ e, n }, i) => (
               <button
-                class="tick chart-tick"
-                style={`left:${((xOf(e.date) / W) * 100).toFixed(2)}%; top:${(
-                  (yOf(n) / H) *
-                  100
-                ).toFixed(2)}%`}
+                class="tick"
+                style={`left:${railPct(i).toFixed(2)}%`}
                 data-theme={e.themes.join(' ')}
                 data-target={`w-${slugify(e.title)}`}
-                aria-label={`${e.title}, piece ${n} of ${pts.length}, ${fmtDate(e)}`}
+                aria-label={`${e.title}, piece ${n} of ${N}, ${fmtDate(e)}`}
               >
                 <span class="tick-dot" />
                 <span class="tick-tip">{e.title}</span>
@@ -118,15 +95,11 @@ const fmtDate = (e: (typeof entries)[number]) =>
             ))
           }
           <span class="chart-total" aria-hidden="true">
-            {pts.length}<small>pieces · 2017–2026</small>
+            {N}<small>pieces · 2017–2026</small>
           </span>
           {
-            years.map((y) => (
-              <span
-                class="year-label"
-                style={`left:${posPct(`${y}-01-01`)}%`}
-                aria-hidden="true"
-              >
+            [...yearPos].map(([y, left]) => (
+              <span class="year-label" style={`left:${left}%`} aria-hidden="true">
                 {y}
               </span>
             ))
