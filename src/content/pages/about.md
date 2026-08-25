@@ -11,7 +11,7 @@ Somewhere along the way I fell for **data** — not dashboards for their own sak
 
 > in·ten·tion·aut *(n.)* — one who navigates by intention. Chooses direction deliberately, before choosing speed.
 
-The word is invented, but the instinct is old. I studied theology before I ever opened a design tool — training in asking *why* something deserves to exist before deciding *what* it should be. And time spent organising volunteers in the wake of Hurricane Sandy taught me that organisations behave like products: the way people move through them can be designed. Most teams don't lack talent or tooling. They lack a shared answer to the question underneath every roadmap.
+The word is invented, but the instinct is old. I studied theology before I ever opened a design tool — years of training in asking *why* before anyone gets to agree on *what*. And time spent organising volunteers in the wake of Hurricane Sandy taught me that organisations behave like products: the way people move through them can be designed. Every roadmap hides a question underneath it — why this, why now, why us — and most stalled work traces back to one that never got answered.
 
 My job is getting a team to that answer quickly — and keeping it honest while it earns its keep in shipped product, customer-loved experiences and results the board can see.
 
