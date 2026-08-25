@@ -452,6 +452,38 @@ h3 {
   color: var(--accent);
 }
 
+/* ---------- Case study ---------- */
+
+.case-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 3rem;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--line);
+  padding-block: 1.1rem;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.case-meta > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.meta-label {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.meta-value {
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
 /* ---------- Talks ---------- */
 
 .talk-list {
