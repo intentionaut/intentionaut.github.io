@@ -1,0 +1,82 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { themeLabels, type Theme } from '../../data/writing';
+
+export async function getStaticPaths() {
+  const essays = await getCollection('essays');
+  return essays.map((essay) => ({
+    params: { slug: essay.id },
+    props: { essay },
+  }));
+}
+
+const { essay } = Astro.props;
+const { Content } = await render(essay);
+
+const fmtDate = essay.data.date.toLocaleDateString('en-US', {
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric',
+});
+
+const themes = essay.data.themes
+  .map((t) => themeLabels[t as Theme])
+  .filter(Boolean);
+---
+
+<BaseLayout title={`${essay.data.title} | Saielle DaSilva`} description={essay.data.description}>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Writing</p>
+      <h1>{essay.data.title}</h1>
+      <p class="lede">{essay.data.description}</p>
+    </header>
+
+    <dl class="case-meta">
+      <div>
+        <dt class="meta-label">Date</dt>
+        <dd class="meta-value">{fmtDate}</dd>
+      </div>
+      <div>
+        <dt class="meta-label">Source</dt>
+        <dd class="meta-value">{essay.data.source}</dd>
+      </div>
+      {
+        themes.length > 0 && (
+          <div>
+            <dt class="meta-label">Themes</dt>
+            <dd class="meta-value">{themes.join(' · ')}</dd>
+          </div>
+        )
+      }
+      <div class="case-meta-cta">
+        <a class="link-arrow link-arrow--back" href="/writing">All writing</a>
+      </div>
+    </dl>
+
+    <article class="prose">
+      <Content />
+    </article>
+
+    {
+      essay.data.originalUrl && (
+        <p class="archive-note">
+          Recovered from the Blossom at Work archive.{' '}
+          <a href={essay.data.originalUrl} target="_blank" rel="noopener noreferrer">
+            Original listing
+          </a>
+          .
+        </p>
+      )
+    }
+  </section>
+</BaseLayout>
+
+<style>
+  .archive-note {
+    margin-top: 3rem;
+    font-size: 0.85rem;
+    opacity: 0.65;
+  }
+</style>
