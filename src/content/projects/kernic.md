@@ -23,4 +23,4 @@ Kernic is an automated design system product: it helps LLMs develop better UI, e
 
 ## Why it matters
 
-The CLI is free forever by design. The token format is built so a future paid layer extends free-tier files without ever breaking them. Your local systems stay yours, in plain JSON. That's the whole point: the tools we use to make beautiful things should be beautiful to use, and free where it counts.
+The CLI is free forever by design. Nobody knows where code automation goes next, so we won't pretend otherwise. The paid layer on the Kernic Studio roadmap (multi-brand management, sync, version history) will extend free-tier files without ever breaking them. Your local systems stay yours, in plain JSON. In an era when everyone can build, why not make designing well easy, beautiful and smart?
