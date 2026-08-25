@@ -1042,6 +1042,8 @@ a.talk-title:hover {
   z-index: 0;
   display: inline-block;
   overflow: hidden;
+  appearance: none;
+  -webkit-appearance: none;
   background: transparent;
   border: 1px solid var(--ink);
   color: var(--ink);
