@@ -1,11 +1,14 @@
 ---
-title: Scaling the biggest solutions to the world's hardest problems
-description: "From the design studio to enterprise AI: Saielle DaSilva's path through Pivotal, Cazoo, StepStone and Sainsbury's."
+title: Direction, then speed.
+seoTitle: Saielle DaSilva | Interim & Fractional CPO, Product Leadership in AI & Data
+description: "The career behind intentionaut: product leadership across design, data and AI, from Pivotal, Cazoo and StepStone to Sainsbury's and independent practice."
 ---
 
-I'm open about being trans and neurodivergent. Finding my place took hard work, and it taught me how systems decide who belongs. Thinking about who AI and other systems we use daily are built by and for comes naturally when you've been the person they weren't built for. Lived experience has made me a sharper leader at every level.
+I'm open about being trans and neurodivergent. Finding my place took hard work, and it taught me how systems decide who belongs. Thinking about who our systems are built by, and for, comes naturally when you've been the person they weren't built for. Lived experience has made me a sharper leader at every level.
 
 I've told these stories on stage too: a keynote at Mind the Product London, plus talks at Turing Fest and Business of Software.
+
+These days I also ship my own software: Kernic, an open-source CLI for design tokens, and Friday, a career coach for film and TV crew.
 
 ## How I work
 

@@ -13,6 +13,11 @@ const arc = [
     note: 'Production AI taken from a handful of experiments to a platform serving millions of customers.',
   },
   {
+    org: 'PeskyFish',
+    role: 'Interim CPO',
+    note: '+450% MRR in 90 days.',
+  },
+  {
     org: 'StepStone',
     role: 'Global VP of Experience Design',
     note: 'Some of the earliest LLM-powered products in European recruitment; 26 global job markets.',
@@ -35,14 +40,17 @@ const arc = [
 ];
 
 const stats = [
-  { num: '$7B', label: 'IPO' },
-  { num: '100M+', label: 'Customers across career' },
-  { num: '+450%', label: 'MRR in 90 days' },
-  { num: '26', label: 'Global job markets' },
+  { num: '$7B', label: 'IPO valuation' },
+  { num: '100M+', label: 'Customers served across career' },
+  { num: '+450%', label: 'MRR in 90 days, interim CPO' },
+  { num: '26', label: 'Global job markets, StepStone' },
 ];
 ---
 
-<BaseLayout title={`${entry.data.title} | Saielle DaSilva`} description={entry.data.description}>
+<BaseLayout
+  title={entry.data.seoTitle ?? `${entry.data.title} | Saielle DaSilva`}
+  description={entry.data.description}
+>
   <section class="wrap">
     <header class="page-head long-title">
       <p class="eyebrow">About</p>
