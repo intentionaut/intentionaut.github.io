@@ -2,6 +2,8 @@
 title: Kernic
 summary: An open source CLI that turns design decisions into clean tokens. Built for small teams and the AI agents writing their interfaces.
 url: https://github.com/intentionaut/kernic
+linkLabel: GitHub Repo
+ctaLabel: Visit GitHub Repo
 role: Creator · Maintainer
 status: Open source · MIT
 ---

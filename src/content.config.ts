@@ -39,6 +39,8 @@ const projects = defineCollection({
     title: z.string(),
     summary: z.string(),
     url: z.string().url().optional(),
+    linkLabel: z.string().optional(),
+    ctaLabel: z.string().optional(),
     role: z.string(),
     timeline: z.string().optional(),
     status: z.string().optional(),

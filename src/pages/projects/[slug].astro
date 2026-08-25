@@ -54,7 +54,7 @@ const host = project.data.url ? new URL(project.data.url).hostname : null;
             <dt class="meta-label">Link</dt>
             <dd class="meta-value">
               <a href={project.data.url} target="_blank" rel="noopener noreferrer">
-                {host}
+                {project.data.linkLabel ?? host}
               </a>
             </dd>
           </div>
@@ -73,7 +73,7 @@ const host = project.data.url ? new URL(project.data.url).hostname : null;
       {
         project.data.url && (
           <a class="btn-primary" href={project.data.url} target="_blank" rel="noopener noreferrer">
-            Visit {host}
+            {project.data.ctaLabel ?? `Visit ${host}`}
           </a>
         )
       }
