@@ -501,18 +501,19 @@ h3 {
 
 .case-meta {
   display: flex;
-  flex-direction: column;
-  max-width: 22rem;
+  flex-wrap: wrap;
+  gap: var(--space-6) var(--space-9);
   border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--line);
+  padding-block: var(--space-4);
   margin-bottom: clamp(2rem, 4vw, 3rem);
 }
 
 .case-meta > div {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: var(--space-1);
-  padding-block: var(--space-3);
-  border-bottom: 1px solid var(--line);
 }
 
 .case-meta dd {
