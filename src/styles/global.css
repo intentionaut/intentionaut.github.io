@@ -397,6 +397,8 @@ h3 {
 }
 
 .lane {
+  display: flex;
+  flex-direction: column;
   border-top: 1px solid var(--ink);
   padding-top: var(--space-4);
   transition: border-color var(--dur-med) ease;
@@ -433,6 +435,11 @@ h3 {
   font-size: 0.93rem;
   color: var(--muted);
   line-height: 1.6;
+}
+
+.lane .link-arrow {
+  margin-top: auto;
+  align-self: flex-start;
 }
 
 /* ---------- Page head ---------- */
