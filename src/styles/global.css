@@ -601,20 +601,168 @@ a.talk-title:hover {
   color: var(--muted);
 }
 
-/* ---------- Writing links ---------- */
+/* ---------- Writing archive ---------- */
 
-.writing-links {
+.archive {
   padding-bottom: clamp(3rem, 6vw, 5rem);
 }
 
-.writing-links h2 {
-  font-size: 1.7rem;
-  margin-bottom: 1.6rem;
+.ribbon-wrap {
+  margin-block: 0.5rem 2.25rem;
+  overflow-x: auto;
+  scrollbar-width: thin;
 }
 
-.writing-links .talk-list {
-  border-top-color: var(--line);
-  padding-bottom: 0;
+.ribbon-track {
+  position: relative;
+  height: 104px;
+  min-width: 580px;
+}
+
+.ribbon-baseline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 36px;
+  height: 1px;
+  background: var(--line);
+}
+
+.year-label {
+  position: absolute;
+  bottom: 10px;
+  transform: translateX(-50%);
+  font-family: var(--font-body);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.tick {
+  position: absolute;
+  bottom: 30px;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.tick-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--accent);
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.tick:hover .tick-dot,
+.tick:focus-visible .tick-dot {
+  background: var(--ink);
+  transform: scale(1.55);
+}
+
+.tick-tip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translate(-50%, 6px);
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  padding: 0.4em 0.75em;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 20;
+}
+
+.tick:hover .tick-tip,
+.tick:focus-visible .tick-tip {
+  opacity: 1;
+  transform: translate(-50%, 2px);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1.75rem;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: var(--font-body);
+  font-size: 0.73rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 0.6em 1.1em;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.chip sup {
+  font-family: var(--font-display);
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.88rem;
+  line-height: 1;
+  opacity: 0.65;
+}
+
+.chip:hover {
+  border-color: var(--accent);
+  color: var(--ink);
+}
+
+.chip.is-active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+.chip.is-active sup {
+  opacity: 0.85;
+}
+
+.row-themes {
+  opacity: 0.8;
+}
+
+.ledger-row.is-hidden {
+  display: none;
+}
+
+.ledger-row.flash {
+  animation: rowflash 1.5s ease-out;
+}
+
+@keyframes rowflash {
+  0% {
+    background-color: rgba(169, 203, 208, 0.4);
+  }
+  100% {
+    background-color: transparent;
+  }
 }
 
 /* ---------- Rates ---------- */

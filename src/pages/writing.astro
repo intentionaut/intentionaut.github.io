@@ -1,24 +1,60 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import {
+  writingEntries,
+  themeLabels,
+  type Theme,
+} from '../data/writing';
 
-const newsletterUrl = 'https://saielle.beehiiv.com';
+const entries = [...writingEntries].sort(
+  (a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf()
+);
+
+const START = new Date('2017-01-01').valueOf();
+const END = new Date('2026-12-31').valueOf();
+
+const posPct = (iso: string) => {
+  const d = new Date(iso).valueOf();
+  return Math.min(100, Math.max(0, ((d - START) / (END - START)) * 100));
+};
+
+const years = Array.from({ length: 10 }, (_, i) => 2017 + i);
+
+const slugify = (s: string) =>
+  s
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+
+const counts = new Map<Theme, number>();
+for (const e of entries)
+  for (const t of e.themes) counts.set(t, (counts.get(t) ?? 0) + 1);
+const themesUsed = [...counts.entries()].sort((a, b) =>
+  themeLabels[a[0]].localeCompare(themeLabels[b[0]])
+);
+
+const fmtDate = (e: (typeof entries)[number]) =>
+  e.dateLabel ?? new Date(e.date).toLocaleDateString('en-US', {
+    month: 'short',
+    year: 'numeric',
+  });
 ---
 
 <BaseLayout
   title="Writing — Saielle Dasilva"
-  description="Essays and notes by Saielle Dasilva on product leadership, design, data and building with AI."
+  description="A decade of writing by Saielle Dasilva — from design craft and storytelling to enterprise AI. The Second Draft newsletter and the archive."
 >
   <section class="wrap">
     <header class="page-head">
       <p class="eyebrow">Writing</p>
       <h1>Thinking in public.</h1>
       <p class="lede">
-        Essays and notes on product leadership, design taste, honest use of
-        data, and building with AI — without the hype.
+        A decade of writing — from design craft to enterprise AI. New essays
+        land on The Second Draft first; the archive lives below.
       </p>
     </header>
 
-    <a class="substack-card" href={newsletterUrl}>
+    <a class="substack-card" href="https://saielle.beehiiv.com">
       <span class="card-kicker">Newsletter</span>
       <span class="card-title">The Second Draft</span>
       <span class="card-sub"
@@ -26,21 +62,119 @@ const newsletterUrl = 'https://saielle.beehiiv.com';
       >
     </a>
 
-    <section class="writing-links" aria-label="Other writing">
-      <h2>Elsewhere</h2>
-      <ol class="talk-list">
-        <li class="talk-row">
-          <span class="talk-date">Sep 2017</span>
-          <div>
-            <a
-              class="talk-title"
-              href="https://uxdesign.cc/letter-to-a-junior-designer-29b5c4471978"
-              rel="noopener">Letter to a Junior Designer</a
+    <section class="archive" aria-label="Writing archive">
+      <div class="ribbon-wrap">
+        <div class="ribbon-track">
+          <div class="ribbon-baseline" aria-hidden="true"></div>
+          {
+            years.map((y) => (
+              <span
+                class="year-label"
+                style={`left:${posPct(`${y}-01-01`)}%`}
+                aria-hidden="true"
+              >
+                {y}
+              </span>
+            ))
+          }
+          {
+            entries.map((e) => (
+              <button
+                class="tick"
+                style={`left:${posPct(e.date)}%`}
+                data-theme={e.themes.join(' ')}
+                data-target={`w-${slugify(e.title)}`}
+                aria-label={`${e.title} (${fmtDate(e)})`}
+              >
+                <span class="tick-dot" />
+                <span class="tick-tip">{e.title}</span>
+              </button>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="chips" role="group" aria-label="Filter writing by theme">
+        <button class="chip is-active" data-filter="all" aria-pressed="true">
+          Everything <sup>{entries.length}</sup>
+        </button>
+        {
+          themesUsed.map(([t, n]) => (
+            <button class="chip" data-filter={t} aria-pressed="false">
+              {themeLabels[t]} <sup>{n}</sup>
+            </button>
+          ))
+        }
+      </div>
+
+      <ol class="talk-list ledger" id="ledger">
+        {
+          entries.map((e) => (
+            <li
+              class="talk-row ledger-row"
+              id={`w-${slugify(e.title)}`}
+              data-themes={e.themes.join(' ')}
             >
-            <p class="talk-meta">UX Collective · Medium</p>
-          </div>
-        </li>
+              <span class="talk-date">{fmtDate(e)}</span>
+              <div>
+                {e.url ? (
+                  <a class="talk-title" href={e.url} rel="noopener">
+                    {e.title}
+                  </a>
+                ) : (
+                  <span class="talk-title">{e.title}</span>
+                )}
+                <p class="talk-meta">
+                  {e.source}
+                  <span class="row-themes">
+                    {' · '}
+                    {e.themes.map((t) => themeLabels[t]).join(' · ')}
+                  </span>
+                </p>
+              </div>
+            </li>
+          ))
+        }
       </ol>
+      <p class="empty is-hidden" id="ledger-empty">
+        Nothing filed under that yet.
+      </p>
     </section>
   </section>
+
+  <script>
+    const chips = document.querySelectorAll<HTMLButtonElement>('.chip');
+    const rows = document.querySelectorAll<HTMLElement>('.ledger-row');
+    const empty = document.getElementById('ledger-empty');
+
+    const applyFilter = (f: string) => {
+      let visible = 0;
+      rows.forEach((row) => {
+        const show =
+          f === 'all' || row.dataset.themes?.split(' ').includes(f);
+        row.classList.toggle('is-hidden', !show);
+        if (show) visible++;
+      });
+      if (empty) empty.classList.toggle('is-hidden', visible > 0);
+      chips.forEach((c) => {
+        const active = c.dataset.filter === f;
+        c.classList.toggle('is-active', active);
+        c.setAttribute('aria-pressed', String(active));
+      });
+    };
+
+    chips.forEach((chip) =>
+      chip.addEventListener('click', () => applyFilter(chip.dataset.filter!))
+    );
+
+    document.querySelectorAll<HTMLButtonElement>('.tick').forEach((tick) =>
+      tick.addEventListener('click', () => {
+        applyFilter('all');
+        const target = document.getElementById(tick.dataset.target ?? '');
+        target?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        target?.classList.add('flash');
+        setTimeout(() => target?.classList.remove('flash'), 1600);
+      })
+    );
+  </script>
 </BaseLayout>
