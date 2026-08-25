@@ -5,17 +5,80 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 const entry = (await getCollection('pages')).find((p) => p.id === 'about');
 if (!entry) throw new Error('About page content is missing (src/content/pages/about.md)');
 const { Content } = await render(entry);
+
+const arc = [
+  {
+    org: "Sainsbury's",
+    role: 'Senior Head of Product – AI, Data Platforms, & Machine Learning',
+    note: 'Production AI taken from a handful of experiments to a platform serving millions of customers.',
+  },
+  {
+    org: 'StepStone',
+    role: 'Global VP of Experience Design',
+    note: 'Some of the earliest LLM-powered products in European recruitment; 18 global job markets.',
+  },
+  {
+    org: 'Cazoo',
+    role: 'Founding team',
+    note: "The UK's first fully digital car-buying experience; through hyper-growth to a $7B IPO.",
+  },
+  {
+    org: 'Pivotal, Dallas',
+    role: 'Founding hire',
+    note: 'Helped companies turn practices into products.',
+  },
+  {
+    org: 'Amazon & AT&T',
+    role: 'Early chapters',
+    note: 'How very large organisations actually move.',
+  },
+];
+
+const stats = [
+  { num: '$7B', label: 'Cazoo IPO' },
+  { num: '25M', label: 'Customers served' },
+  { num: '+450%', label: 'MRR in 90 days' },
+  { num: '18', label: 'Global job markets' },
+];
 ---
 
 <BaseLayout title={`${entry.data.title} | Saielle DaSilva`} description={entry.data.description}>
   <section class="wrap">
-    <header class="page-head">
+    <header class="page-head long-title">
       <p class="eyebrow">About</p>
       <h1>{entry.data.title}</h1>
       <p class="lede">
         Enterprise AI taken from experiment to production, at national scale.
       </p>
+      <ul class="stat-strip" aria-label="Track record in numbers">
+        {
+          stats.map((s) => (
+            <li>
+              <span class="stat-num">{s.num}</span>
+              <span class="stat-label">{s.label}</span>
+            </li>
+          ))
+        }
+      </ul>
     </header>
+
+    <section class="arc-section" aria-label="Career arc">
+      <h2>Every leg chosen.</h2>
+      <ol class="talk-list arc-list">
+        {
+          arc.map((a) => (
+            <li class="talk-row">
+              <span class="talk-date">{a.org}</span>
+              <div>
+                <span class="talk-title">{a.role}</span>
+                <p class="talk-desc">{a.note}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
     <div class="prose">
       <Content />
     </div>
