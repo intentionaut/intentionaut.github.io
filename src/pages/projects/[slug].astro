@@ -53,13 +53,16 @@ const host = project.data.url ? new URL(project.data.url).hostname : null;
           <div>
             <dt class="meta-label">Link</dt>
             <dd class="meta-value">
-              <a href={project.data.url} rel="noopener">
+              <a href={project.data.url} target="_blank" rel="noopener noreferrer">
                 {host}
               </a>
             </dd>
           </div>
         )
       }
+      <div class="case-meta-cta">
+        <a class="link-arrow link-arrow--back" href="/projects">All projects</a>
+      </div>
     </dl>
 
     <article class="prose">
@@ -69,12 +72,11 @@ const host = project.data.url ? new URL(project.data.url).hostname : null;
     <div class="cta-row project-cta">
       {
         project.data.url && (
-          <a class="btn-primary" href={project.data.url} rel="noopener">
+          <a class="btn-primary" href={project.data.url} target="_blank" rel="noopener noreferrer">
             Visit {host}
           </a>
         )
       }
-      <a class="link-arrow" href="/projects">All projects</a>
     </div>
   </section>
 </BaseLayout>

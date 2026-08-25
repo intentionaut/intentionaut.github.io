@@ -542,6 +542,25 @@ h3 {
   color: var(--accent);
 }
 
+.case-meta-cta {
+  margin-left: auto;
+  justify-content: center;
+}
+
+.link-arrow--back::after {
+  content: none;
+}
+
+.link-arrow--back::before {
+  content: '←';
+  display: inline-block;
+  transition: transform var(--dur-med) ease;
+}
+
+.link-arrow--back:hover::before {
+  transform: translateX(-4px);
+}
+
 /* ---------- Projects ---------- */
 
 .project-list {
@@ -1023,6 +1042,7 @@ a.talk-title:hover {
   z-index: 0;
   display: inline-block;
   overflow: hidden;
+  background: transparent;
   border: 1px solid var(--ink);
   color: var(--ink);
   font-family: var(--font-body);
