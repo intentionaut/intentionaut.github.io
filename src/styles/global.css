@@ -601,6 +601,22 @@ a.talk-title:hover {
   color: var(--muted);
 }
 
+/* ---------- Writing links ---------- */
+
+.writing-links {
+  padding-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+.writing-links h2 {
+  font-size: 1.7rem;
+  margin-bottom: 1.6rem;
+}
+
+.writing-links .talk-list {
+  border-top-color: var(--line);
+  padding-bottom: 0;
+}
+
 /* ---------- Rates ---------- */
 
 .rates-section {
