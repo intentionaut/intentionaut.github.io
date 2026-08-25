@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const substackUrl = 'https://intentionaut.substack.com';
+const newsletterUrl = 'https://saielle.beehiiv.com';
 ---
 
 <BaseLayout
@@ -18,10 +18,12 @@ const substackUrl = 'https://intentionaut.substack.com';
       </p>
     </header>
 
-    <a class="substack-card" href={substackUrl}>
+    <a class="substack-card" href={newsletterUrl}>
       <span class="card-kicker">Newsletter</span>
-      <span class="card-title">Intentionaut on Substack</span>
-      <span class="card-sub">New writing lands there first&nbsp;→</span>
+      <span class="card-title">The Second Draft</span>
+      <span class="card-sub"
+        >Essays on AI, product and data — new issues land here first&nbsp;→</span
+      >
     </a>
   </section>
 </BaseLayout>

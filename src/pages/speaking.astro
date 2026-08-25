@@ -7,7 +7,9 @@ const talks = (await getCollection('talks')).sort(
 );
 
 const fmt = (d: Date) =>
-  d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+  d.getMonth() === 0 && d.getDate() === 1
+    ? String(d.getFullYear())
+    : d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
 ---
 
 <BaseLayout
