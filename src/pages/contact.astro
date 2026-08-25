@@ -2,12 +2,12 @@
 import '@fontsource-variable/roboto-serif';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-// Cloudflare Turnstile — paste your sitekey from dash.cloudflare.com → Turnstile
+// Cloudflare Turnstile sitekey (dash.cloudflare.com, Turnstile)
 const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
 ---
 
 <BaseLayout
-  title="Contact & rates — Saielle DaSilva"
+  title="Contact & rates | Saielle DaSilva"
   description="Work with Saielle DaSilva: advisory, fractional product leadership, speaking and mentoring."
 >
   <section class="wrap">
@@ -15,7 +15,7 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
       <p class="eyebrow">Contact &amp; rates</p>
       <h1>Work with me.</h1>
       <p class="lede">
-        I'm currently open to new engagements — advisory, fractional
+        I'm currently open to new engagements: advisory, fractional
         leadership, speaking and mentoring.
       </p>
       <div class="cta-row">
@@ -36,7 +36,7 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
           <dt>Strategy session</dt>
           <dd class="rate-price">£400 · 90 min</dd>
           <dd class="rate-desc">
-            A sounding board for founders and product leaders — strategy
+            A sounding board for founders and product leaders: strategy
             reviews, roadmap calls, hiring help, AI reality-checks.
           </dd>
           <dd class="rate-scale">Sliding scale · Yes</dd>
@@ -64,13 +64,13 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
           <dd class="rate-price">Free</dd>
           <dd class="rate-desc">
             A handful of slots each month for people finding their footing
-            across disciplines — the path I took.
+            across disciplines, the path I took.
           </dd>
-          <dd class="rate-scale">Sliding scale · Yes — at my discretion</dd>
+          <dd class="rate-scale">Sliding scale · Yes, at my discretion</dd>
         </div>
       </dl>
       <p class="contact-note">
-        Tell me what you're working on and what's keeping you up at night — I
+        Tell me what you're working on and what's keeping you up at night; I
         reply to every serious note.
       </p>
     </section>
@@ -139,7 +139,7 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
 
       if (ENDPOINT.includes('TODO')) {
         const body = encodeURIComponent(
-          `${data.message}\n\n— ${data.name} (${data.email})\nTopic: ${data.topic}`
+          `${data.message}\n\n- ${data.name} (${data.email})\nTopic: ${data.topic}`
         );
         window.location.href = `mailto:hello@intentionaut.com?subject=${encodeURIComponent(
           `[intentionaut.com] ${data.topic}`
@@ -155,12 +155,12 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
         });
         if (res.ok) {
           form.reset();
-          if (statusEl) statusEl.textContent = "Thank you — I'll reply soon.";
+          if (statusEl) statusEl.textContent = "Thank you; I'll reply soon.";
         } else {
-          if (statusEl) statusEl.textContent = 'Something went wrong — please email me directly.';
+          if (statusEl) statusEl.textContent = 'Something went wrong; please email me directly.';
         }
       } catch {
-        if (statusEl) statusEl.textContent = 'Something went wrong — please email me directly.';
+        if (statusEl) statusEl.textContent = 'Something went wrong; please email me directly.';
       }
     });
   </script>

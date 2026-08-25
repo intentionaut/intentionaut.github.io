@@ -7,7 +7,7 @@ if (!entry) throw new Error('About page content is missing (src/content/pages/ab
 const { Content } = await render(entry);
 ---
 
-<BaseLayout title={`${entry.data.title} — Saielle DaSilva`} description={entry.data.description}>
+<BaseLayout title={`${entry.data.title} | Saielle DaSilva`} description={entry.data.description}>
   <section class="wrap">
     <header class="page-head">
       <p class="eyebrow">About</p>
@@ -18,7 +18,7 @@ const { Content } = await render(entry);
     </div>
     <aside class="proof" aria-label="Experience and speaking">
       <p>Product leadership for Sainsbury's · Cazoo · StepStone · Pivotal · Amazon · AT&amp;T</p>
-      <p>Keynote speaker — Mind the Product London 2022 · Turing Fest · Business of Software</p>
+      <p>Keynote speaker: Mind the Product London 2022 · Turing Fest · Business of Software</p>
     </aside>
   </section>
 </BaseLayout>

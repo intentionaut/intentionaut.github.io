@@ -1,5 +1,5 @@
 ---
-title: Coming Out at Work — and Being Better Allies
+title: Coming Out at Work, and Being Better Allies
 event: One Knight in Product · Podcast
 date: 2022-06-28
 url: https://www.oneknightinproduct.com/saielle-dasilva/
