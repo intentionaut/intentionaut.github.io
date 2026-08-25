@@ -980,6 +980,18 @@ a.talk-title:hover {
   max-width: 56ch;
 }
 
+.rate-scale {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: 0.8;
+}
+
 .rate-price {
   align-self: center;
   white-space: nowrap;

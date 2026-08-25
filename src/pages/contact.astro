@@ -1,6 +1,9 @@
 ---
 import '@fontsource-variable/roboto-serif';
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Cloudflare Turnstile — paste your sitekey from dash.cloudflare.com → Turnstile
+const TURNSTILE_SITEKEY = '';
 ---
 
 <BaseLayout
@@ -30,36 +33,40 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <h2>Ways to work together</h2>
       <dl class="rates">
         <div class="rate-row">
-          <dt>Advisory</dt>
-          <dd class="rate-price">On request</dd>
+          <dt>Strategy session</dt>
+          <dd class="rate-price">£400 · 90 min</dd>
           <dd class="rate-desc">
             A sounding board for founders and product leaders — strategy
             reviews, roadmap calls, hiring help, AI reality-checks.
           </dd>
+          <dd class="rate-scale">Sliding scale · Yes</dd>
         </div>
         <div class="rate-row">
           <dt>Fractional leadership</dt>
-          <dd class="rate-price">On request</dd>
+          <dd class="rate-price">£1,400 / day</dd>
           <dd class="rate-desc">
             Part-time head-of-product firepower for early teams that need
             direction now, before they're ready for a full-time hire.
           </dd>
+          <dd class="rate-scale">Sliding scale · No</dd>
         </div>
         <div class="rate-row">
           <dt>Speaking &amp; workshops</dt>
-          <dd class="rate-price">Fee on request</dd>
+          <dd class="rate-price">£1,400 / event</dd>
           <dd class="rate-desc">
             From conference keynotes to hands-on team sessions about building
             with intention across design, data and AI.
           </dd>
+          <dd class="rate-scale">Sliding scale · Yes</dd>
         </div>
         <div class="rate-row">
           <dt>Mentoring</dt>
-          <dd class="rate-price">Free–discounted</dd>
+          <dd class="rate-price">Free</dd>
           <dd class="rate-desc">
             A handful of slots each month for people finding their footing
             across disciplines — the path I took.
           </dd>
+          <dd class="rate-scale">Sliding scale · Yes — at my discretion</dd>
         </div>
       </dl>
       <p class="contact-note">
@@ -96,6 +103,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <span class="form-label">Message</span>
             <textarea name="message" rows="5" required></textarea>
           </label>
+          {
+            TURNSTILE_SITEKEY && (
+              <>
+                <div
+                  class="cf-turnstile"
+                  data-sitekey={TURNSTILE_SITEKEY}
+                  data-theme="light"
+                />
+                <script
+                  is:inline
+                  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+                  async
+                  defer
+                />
+              </>
+            )
+          }
           <button class="btn-plain" type="submit">Send it</button>
           <p class="form-status" id="form-status" role="status"></p>
         </form>
