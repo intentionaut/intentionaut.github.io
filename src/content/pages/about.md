@@ -1,5 +1,5 @@
 ---
-title: Direction, then speed.
+title: A product leader intentional about clarity and direction, then speed.
 seoTitle: Saielle DaSilva | Interim & Fractional CPO, Product Leadership in AI & Data
 description: "The career behind intentionaut: product leadership across design, data and AI, from Pivotal, Cazoo and StepStone to Sainsbury's and independent practice."
 ---
