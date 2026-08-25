@@ -56,7 +56,8 @@ and once DNS propagates, tick **Enforce HTTPS**.
 - [ ] Replace sample talk in `src/content/talks/` with real ones (via CMS)
 - [ ] Personalize About story (via CMS) — current text is a strong draft
 - [ ] Confirm Substack URL in `src/pages/writing.astro`
-- [ ] Set up `hello@intentionaut.com` mailbox or swap email everywhere it appears
+- [ ] Set up email forwarding for `hello@intentionaut.com` (GoDaddy → Email Forwarding → forward to your real inbox)
+- [x] Email decided: `hello@intentionaut.com` (spelling-proof, on-brand)
 - [ ] Confirm LinkedIn URL (`saielle-dasilva`) in Header/Footer/Contact
 - [ ] Point DNS records above, then enforce HTTPS
 - [ ] Add an og-image (`public/og.png`) for nicer link previews
