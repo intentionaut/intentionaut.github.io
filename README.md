@@ -1,6 +1,6 @@
 # intentionaut.com
 
-Personal site of Saielle Dasilva — product leader across design, data & AI.
+Personal site of Saielle DaSilva — product leader across design, data & AI.
 
 ## Stack
 
