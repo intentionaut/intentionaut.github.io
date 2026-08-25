@@ -15,16 +15,47 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         leadership, speaking and mentoring.
       </p>
       <div class="cta-row">
-        <a class="btn-primary" href="mailto:hello@intentionaut.com"
-          >hello@intentionaut.com</a
-        >
+        <a class="btn-primary" href="mailto:hello@intentionaut.com">Email me</a>
         <a
           class="link-arrow"
           href="https://www.linkedin.com/in/intentionaut"
           >Find me on LinkedIn</a
         >
       </div>
+      <p class="email-hint">hello@intentionaut.com</p>
     </header>
+
+    <section class="contact-form-section" aria-label="Send a message">
+      <h2>Or leave a note here</h2>
+      <form id="contact-form" novalidate>
+        <div class="form-grid">
+          <label>
+            <span class="form-label">Name</span>
+            <input type="text" name="name" required autocomplete="name" />
+          </label>
+          <label>
+            <span class="form-label">Email</span>
+            <input type="email" name="email" required autocomplete="email" />
+          </label>
+        </div>
+        <label>
+          <span class="form-label">What's this about?</span>
+          <select name="topic">
+            <option>Advisory</option>
+            <option>Fractional leadership</option>
+            <option>Speaking &amp; workshops</option>
+            <option>Mentoring</option>
+            <option>Something else</option>
+          </select>
+        </label>
+        <label>
+          <span class="form-label">Message</span>
+          <textarea name="message" rows="5" required></textarea>
+        </label>
+        <button class="btn-primary" type="submit">Send it</button>
+        <p class="form-status" id="form-status" role="status"></p>
+      </form>
+    </section>
 
     <section class="rates-section" aria-label="Ways to work together">
       <h2>Ways to work together</h2>
@@ -68,4 +99,42 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </p>
     </section>
   </section>
+
+  <script>
+    const ENDPOINT = 'https://formspree.io/f/TODO';
+    const form = document.getElementById('contact-form');
+    const status = document.getElementById('form-status');
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form));
+      const statusEl = document.getElementById('form-status');
+
+      if (ENDPOINT.includes('TODO')) {
+        const body = encodeURIComponent(
+          `${data.message}\n\n— ${data.name} (${data.email})\nTopic: ${data.topic}`
+        );
+        window.location.href = `mailto:hello@intentionaut.com?subject=${encodeURIComponent(
+          `[intentionaut.com] ${data.topic}`
+        )}&body=${body}`;
+        return;
+      }
+
+      try {
+        const res = await fetch(ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(data),
+        });
+        if (res.ok) {
+          form.reset();
+          if (statusEl) statusEl.textContent = "Thank you — I'll reply soon.";
+        } else {
+          if (statusEl) statusEl.textContent = 'Something went wrong — please email me directly.';
+        }
+      } catch {
+        if (statusEl) statusEl.textContent = 'Something went wrong — please email me directly.';
+      }
+    });
+  </script>
 </BaseLayout>
