@@ -327,7 +327,8 @@ h3 {
 /* ---------- Proof strip ---------- */
 
 .proof {
-  padding-block: 0 clamp(3.25rem, 7vw, 5rem);
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  padding-bottom: clamp(3.5rem, 7vw, 6rem);
   text-align: center;
 }
 
