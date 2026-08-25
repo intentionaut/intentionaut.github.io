@@ -1,0 +1,57 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const talks = (await getCollection('talks')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+---
+
+<BaseLayout
+  title="Speaking — Saielle Dasilva"
+  description="Talks and workshops by Saielle Dasilva on building intentional products across design, data and AI."
+>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Speaking</p>
+      <h1>Talks &amp; workshops.</h1>
+      <p class="lede">
+        Keynotes, panels and hands-on sessions about building intentional
+        products in the age of AI.
+      </p>
+    </header>
+
+    {
+      talks.length === 0 ? (
+        <p class="empty">Talk archive coming soon.</p>
+      ) : (
+        <ol class="talk-list">
+          {talks.map((talk) => (
+            <li class="talk-row">
+              <span class="talk-date">{fmt(talk.data.date)}</span>
+              <div>
+                {talk.data.url ? (
+                  <a class="talk-title" href={talk.data.url}>
+                    {talk.data.title}
+                  </a>
+                ) : (
+                  <span class="talk-title">{talk.data.title}</span>
+                )}
+                <p class="talk-meta">
+                  {talk.data.event}
+                  {talk.data.location && ` · ${talk.data.location}`}
+                </p>
+                {talk.data.description && (
+                  <p class="talk-desc">{talk.data.description}</p>
+                )}
+              </div>
+            </li>
+          ))}
+        </ol>
+      )
+    }
+  </section>
+</BaseLayout>

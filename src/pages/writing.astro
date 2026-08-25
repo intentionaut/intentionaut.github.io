@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const substackUrl = 'https://intentionaut.substack.com';
+---
+
+<BaseLayout
+  title="Writing — Saielle Dasilva"
+  description="Essays and notes by Saielle Dasilva on product leadership, design, data and building with AI."
+>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Writing</p>
+      <h1>Thinking in public.</h1>
+      <p class="lede">
+        Essays and notes on product leadership, design taste, honest use of
+        data, and building with AI — without the hype.
+      </p>
+    </header>
+
+    <a class="substack-card" href={substackUrl}>
+      <span class="card-kicker">Newsletter</span>
+      <span class="card-title">Intentionaut on Substack</span>
+      <span class="card-sub">New writing lands there first&nbsp;→</span>
+    </a>
+  </section>
+</BaseLayout>
