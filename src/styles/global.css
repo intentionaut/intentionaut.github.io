@@ -5,15 +5,15 @@
 }
 
 :root {
-  --paper: #faf8f4;
-  --ink: #1c1a17;
-  --muted: #6e675e;
-  --line: #e5dfd5;
-  --accent: #a84b2f;
-  --accent-soft: rgba(168, 75, 47, 0.07);
+  --paper: #f7e9e0;
+  --ink: #452b52;
+  --muted: #857088;
+  --line: #e8d4cd;
+  --accent: #c85060;
+  --mendl: rgba(169, 203, 208, 0.55);
   --font-display: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
-  --font-body: 'Inter Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Helvetica, Arial, sans-serif;
+  --font-body: 'Jost Variable', Futura, 'Century Gothic', 'Trebuchet MS',
+    sans-serif;
   --wrap: 72rem;
 }
 
@@ -32,8 +32,18 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+}
+
 ::selection {
-  background: rgba(168, 75, 47, 0.16);
+  background: var(--mendl);
 }
 
 :focus-visible {
@@ -52,7 +62,7 @@ body {
   position: absolute;
   left: -9999px;
   top: 0;
-  z-index: 100;
+  z-index: 200;
   background: var(--ink);
   color: var(--paper);
   padding: 0.6rem 1rem;
@@ -91,29 +101,48 @@ body {
 .site-nav ul {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.75rem;
+  gap: 1.9rem;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
 .site-nav a {
-  font-size: 0.8125rem;
-  letter-spacing: 0.09em;
+  position: relative;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--muted);
   text-decoration: none;
   transition: color 0.15s ease;
 }
 
-.site-nav a:hover,
-.site-nav a[aria-current='page'] {
+.site-nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.25s ease;
+}
+
+.site-nav a:hover {
   color: var(--ink);
 }
 
+.site-nav a:hover::after,
+.site-nav a[aria-current='page']::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
 .site-nav a[aria-current='page'] {
-  box-shadow: inset 0 -2px 0 var(--accent);
-  padding-bottom: 2px;
+  color: var(--ink);
 }
 
 /* ---------- Shared type ---------- */
@@ -131,9 +160,10 @@ h3 {
 
 .eyebrow {
   margin: 0 0 1.4rem;
-  font-size: 0.8125rem;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--accent);
 }
@@ -155,38 +185,81 @@ h3 {
 }
 
 .btn-primary {
+  position: relative;
+  z-index: 0;
   display: inline-block;
-  background: var(--ink);
-  color: var(--paper);
+  overflow: hidden;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
   text-decoration: none;
-  font-size: 0.95rem;
-  font-weight: 500;
-  padding: 0.7em 1.6em;
-  border-radius: 999px;
-  transition: background-color 0.15s ease;
+  padding: 1em 2em;
+  transition: color 0.25s ease;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border: 1px solid var(--ink);
+  pointer-events: none;
+  transition: border-color 0.25s ease;
 }
 
 .btn-primary:hover {
-  background: var(--accent);
+  color: var(--paper);
+}
+
+.btn-primary:hover::before {
+  transform: scaleX(1);
+}
+
+.btn-primary:hover::after {
+  border-color: rgba(247, 233, 224, 0.55);
 }
 
 .link-arrow {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5em;
   color: var(--ink);
   font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
   text-decoration: none;
   border-bottom: 1px solid var(--line);
   padding-bottom: 2px;
-  transition: border-color 0.15s ease;
+  transition: border-color 0.2s ease, color 0.2s ease;
 }
 
 .link-arrow::after {
-  content: ' →';
+  content: '→';
   display: inline-block;
-  transition: transform 0.15s ease;
+  transition: transform 0.25s ease;
 }
 
 .link-arrow:hover {
   border-color: var(--accent);
+  color: var(--accent);
+}
+
+.link-arrow:hover::after {
+  transform: translateX(5px);
 }
 
 /* ---------- Home hero ---------- */
@@ -198,6 +271,38 @@ h3 {
 .hero h1 {
   max-width: 18ch;
   font-size: clamp(2.55rem, 6vw, 4.6rem);
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero .eyebrow {
+  animation: rise 0.7s cubic-bezier(0.2, 0.6, 0.2, 1) 0.05s backwards;
+}
+
+.hero h1 {
+  animation: rise 0.7s cubic-bezier(0.2, 0.6, 0.2, 1) 0.16s backwards;
+}
+
+.hero .lede {
+  animation: rise 0.7s cubic-bezier(0.2, 0.6, 0.2, 1) 0.28s backwards;
+}
+
+.hero .cta-row {
+  animation: rise 0.7s cubic-bezier(0.2, 0.6, 0.2, 1) 0.4s backwards;
 }
 
 /* ---------- Manifesto ---------- */
@@ -226,28 +331,44 @@ h3 {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 2.5rem 3rem;
-  counter-reset: lane;
+}
+
+.lanes {
+  padding-bottom: clamp(4.5rem, 9vw, 7rem);
 }
 
 .lane {
   border-top: 1px solid var(--ink);
-  padding-top: 1.2rem;
+  padding-top: 1.1rem;
+  transition: padding-left 0.25s ease;
+}
+
+.lane:hover {
+  padding-left: 0.5rem;
+}
+
+.lane .num {
+  display: block;
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-style: italic;
+  font-size: 2.1rem;
+  line-height: 1;
+  margin-bottom: 0.7rem;
+  color: var(--accent);
+  opacity: 0.85;
 }
 
 .lane h3 {
-  font-size: 1.4rem;
+  font-size: 1.35rem;
   margin-bottom: 0.6rem;
 }
 
 .lane p {
   margin: 0 0 1.1rem;
-  font-size: 0.95rem;
+  font-size: 0.93rem;
   color: var(--muted);
   line-height: 1.6;
-}
-
-.lanes {
-  padding-bottom: clamp(4.5rem, 9vw, 7rem);
 }
 
 /* ---------- Page head ---------- */
@@ -330,11 +451,17 @@ h3 {
 }
 
 .talk-date {
-  font-size: 0.8125rem;
-  letter-spacing: 0.09em;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--muted);
-  padding-top: 0.35rem;
+  padding-top: 0.45rem;
+  transition: color 0.2s ease;
+}
+
+.talk-row:hover .talk-date {
+  color: var(--accent);
 }
 
 .talk-title {
@@ -384,19 +511,27 @@ a.talk-title:hover {
   margin-bottom: clamp(3rem, 6vw, 5rem);
   padding: 1.6rem 1.8rem;
   border: 1px solid var(--ink);
-  border-radius: 10px;
+  position: relative;
   text-decoration: none;
-  transition: background-color 0.15s ease;
+  transition: background-color 0.2s ease;
+}
+
+.substack-card::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border: 1px solid var(--line);
+  pointer-events: none;
 }
 
 .substack-card:hover {
-  background: var(--accent-soft);
+  background: rgba(169, 203, 208, 0.18);
 }
 
 .card-kicker {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--accent);
 }
@@ -456,9 +591,9 @@ a.talk-title:hover {
 .rate-price {
   align-self: center;
   white-space: nowrap;
-  font-size: 0.85rem;
-  font-weight: 500;
-  letter-spacing: 0.06em;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--muted);
 }
@@ -483,8 +618,9 @@ a.talk-title:hover {
   align-items: baseline;
   justify-content: space-between;
   padding-block: 2.1rem;
-  font-size: 0.78rem;
-  letter-spacing: 0.07em;
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--muted);
 }
@@ -492,10 +628,11 @@ a.talk-title:hover {
 .site-footer a {
   color: inherit;
   text-decoration: none;
+  transition: color 0.15s ease;
 }
 
 .site-footer a:hover {
-  color: var(--ink);
+  color: var(--accent);
 }
 
 .footer-links {
@@ -537,6 +674,7 @@ a.talk-title:hover {
   *,
   *::before,
   *::after {
+    animation: none !important;
     transition: none !important;
   }
 }
