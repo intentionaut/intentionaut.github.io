@@ -15,7 +15,7 @@ const arc = [
   {
     org: 'StepStone',
     role: 'Global VP of Experience Design',
-    note: 'Some of the earliest LLM-powered products in European recruitment; 18 global job markets.',
+    note: 'Some of the earliest LLM-powered products in European recruitment; 26 global job markets.',
   },
   {
     org: 'Cazoo',
@@ -35,10 +35,10 @@ const arc = [
 ];
 
 const stats = [
-  { num: '$7B', label: 'Cazoo IPO' },
-  { num: '25M', label: 'Customers served' },
+  { num: '$7B', label: 'IPO' },
+  { num: '100M+', label: 'Customers across career' },
   { num: '+450%', label: 'MRR in 90 days' },
-  { num: '18', label: 'Global job markets' },
+  { num: '26', label: 'Global job markets' },
 ];
 ---
 
@@ -48,7 +48,7 @@ const stats = [
       <p class="eyebrow">About</p>
       <h1>{entry.data.title}</h1>
       <p class="lede">
-        Enterprise AI taken from experiment to production, at national scale.
+        Some career highlights.
       </p>
       <ul class="stat-strip" aria-label="Track record in numbers">
         {
@@ -63,7 +63,7 @@ const stats = [
     </header>
 
     <section class="arc-section" aria-label="Career arc">
-      <h2>Every leg chosen.</h2>
+      <h2>A brief history.</h2>
       <ol class="talk-list arc-list">
         {
           arc.map((a) => (
