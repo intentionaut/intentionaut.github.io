@@ -5,16 +5,51 @@
 }
 
 :root {
+  /* Palette */
   --paper: #f7e9e0;
   --ink: #452b52;
   --muted: #857088;
   --line: #e8d4cd;
   --accent: #c85060;
   --mendl: rgba(169, 203, 208, 0.55);
+
+  /* Type */
   --font-display: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
   --font-body: 'Jost Variable', Futura, 'Century Gothic', 'Trebuchet MS',
     sans-serif;
+
+  /* Layout */
   --wrap: 72rem;
+
+  /* Spacing — 4px base grid, 8pt rhythm */
+  --space-1: 0.25rem;  /*  4 */
+  --space-2: 0.5rem;   /*  8 */
+  --space-3: 0.75rem;  /* 12 */
+  --space-4: 1rem;     /* 16 */
+  --space-5: 1.25rem;  /* 20 */
+  --space-6: 1.5rem;   /* 24 */
+  --space-7: 2rem;     /* 32 */
+  --space-8: 2.5rem;   /* 40 */
+  --space-9: 3rem;     /* 48 */
+  --space-10: 4rem;    /* 64 */
+  --space-11: 5rem;    /* 80 */
+
+  /* Radius */
+  --radius-s: 3px;
+  --radius-m: 5px;
+  --radius-l: 8px;
+
+  /* Motion */
+  --dur-fast: 0.15s;
+  --dur-base: 0.2s;
+  --dur-med: 0.25s;
+  --dur-slow: 0.4s;
+  --ease-out: cubic-bezier(0.2, 0.6, 0.2, 1);
+
+  /* Z */
+  --z-tip: 20;
+  --z-grain: 100;
+  --z-skip: 200;
 }
 
 html {
@@ -36,7 +71,7 @@ body::before {
   content: '';
   position: fixed;
   inset: 0;
-  z-index: 100;
+  z-index: var(--z-grain);
   pointer-events: none;
   opacity: 0.045;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
@@ -66,10 +101,10 @@ body::before {
   position: absolute;
   left: -9999px;
   top: 0;
-  z-index: 200;
+  z-index: var(--z-skip);
   background: var(--ink);
   color: var(--paper);
-  padding: 0.6rem 1rem;
+  padding: var(--space-2) var(--space-4);
   font-size: 0.85rem;
 }
 
@@ -88,8 +123,8 @@ body::before {
   align-items: baseline;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 0.75rem 2rem;
-  padding-block: 1.35rem;
+  gap: var(--space-3) var(--space-7);
+  padding-block: var(--space-5);
 }
 
 .wordmark {
@@ -105,7 +140,7 @@ body::before {
 .site-nav ul {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.9rem;
+  gap: var(--space-7);
   list-style: none;
   margin: 0;
   padding: 0;
@@ -119,7 +154,7 @@ body::before {
   text-transform: uppercase;
   color: var(--muted);
   text-decoration: none;
-  transition: color 0.15s ease;
+  transition: color var(--dur-fast) ease;
 }
 
 .site-nav a::after {
@@ -132,7 +167,7 @@ body::before {
   background: var(--accent);
   transform: scaleX(0);
   transform-origin: right;
-  transition: transform 0.25s ease;
+  transition: transform var(--dur-med) ease;
 }
 
 .site-nav a:hover {
@@ -163,7 +198,7 @@ h3 {
 }
 
 .eyebrow {
-  margin: 0 0 1.4rem;
+  margin: 0 0 var(--space-6);
   font-family: var(--font-body);
   font-size: 0.78rem;
   font-weight: 600;
@@ -173,7 +208,7 @@ h3 {
 }
 
 .lede {
-  margin: 1.6rem 0 0;
+  margin: var(--space-6) 0 0;
   max-width: 58ch;
   font-size: 1.22rem;
   line-height: 1.65;
@@ -184,8 +219,8 @@ h3 {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 1.25rem 2rem;
-  margin-top: 2.75rem;
+  gap: var(--space-5) var(--space-7);
+  margin-top: var(--space-8);
 }
 
 .btn-primary {
@@ -202,8 +237,8 @@ h3 {
   text-transform: uppercase;
   text-decoration: none;
   padding: 1em 2em;
-  border-radius: 8px;
-  transition: color 0.25s ease;
+  border-radius: var(--radius-l);
+  transition: color var(--dur-med) ease;
 }
 
 .btn-primary::before {
@@ -214,7 +249,7 @@ h3 {
   background: var(--accent);
   transform: scaleX(0);
   transform-origin: center;
-  transition: transform 0.3s ease;
+  transition: transform var(--dur-med) ease;
 }
 
 .btn-primary::after {
@@ -222,9 +257,9 @@ h3 {
   position: absolute;
   inset: 3px;
   border: 1px solid var(--ink);
-  border-radius: 5px;
+  border-radius: var(--radius-m);
   pointer-events: none;
-  transition: border-color 0.25s ease;
+  transition: border-color var(--dur-med) ease;
 }
 
 .btn-primary:hover {
@@ -250,13 +285,13 @@ h3 {
   text-decoration: none;
   border-bottom: 1px solid var(--line);
   padding-bottom: 2px;
-  transition: border-color 0.2s ease, color 0.2s ease;
+  transition: border-color var(--dur-base) ease, color var(--dur-base) ease;
 }
 
 .link-arrow::after {
   content: '→';
   display: inline-block;
-  transition: transform 0.25s ease;
+  transition: transform var(--dur-med) ease;
 }
 
 .link-arrow:hover {
@@ -265,7 +300,7 @@ h3 {
 }
 
 .link-arrow:hover::after {
-  transform: translateX(5px);
+  transform: translateX(4px);
 }
 
 /* ---------- Home hero ---------- */
@@ -296,19 +331,19 @@ h3 {
 }
 
 .hero .eyebrow {
-  animation: rise 0.7s cubic-bezier(0.2, 0.6, 0.2, 1) 0.05s backwards;
+  animation: rise 0.7s var(--ease-out) 0.05s backwards;
 }
 
 .hero h1 {
-  animation: rise 0.7s cubic-bezier(0.2, 0.6, 0.2, 1) 0.16s backwards;
+  animation: rise 0.7s var(--ease-out) 0.16s backwards;
 }
 
 .hero .lede {
-  animation: rise 0.7s cubic-bezier(0.2, 0.6, 0.2, 1) 0.28s backwards;
+  animation: rise 0.7s var(--ease-out) 0.28s backwards;
 }
 
 .hero .cta-row {
-  animation: rise 0.7s cubic-bezier(0.2, 0.6, 0.2, 1) 0.4s backwards;
+  animation: rise 0.7s var(--ease-out) 0.4s backwards;
 }
 
 /* ---------- Manifesto ---------- */
@@ -337,7 +372,7 @@ h3 {
 }
 
 .proof p {
-  margin: 0.4rem 0;
+  margin: var(--space-2) 0;
   font-family: var(--font-body);
   font-size: 0.74rem;
   font-weight: 500;
@@ -354,7 +389,7 @@ h3 {
   padding: 0;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 2.5rem 3rem;
+  gap: var(--space-8) var(--space-9);
 }
 
 .lanes {
@@ -363,8 +398,8 @@ h3 {
 
 .lane {
   border-top: 1px solid var(--ink);
-  padding-top: 1.1rem;
-  transition: border-color 0.3s ease;
+  padding-top: var(--space-4);
+  transition: border-color var(--dur-med) ease;
 }
 
 .lane:hover {
@@ -378,23 +413,23 @@ h3 {
   font-style: italic;
   font-size: 2.1rem;
   line-height: 1;
-  margin-bottom: 0.7rem;
+  margin-bottom: var(--space-3);
   color: var(--accent);
   opacity: 0.85;
-  transition: transform 0.35s cubic-bezier(0.2, 0.6, 0.2, 1);
+  transition: transform var(--dur-med) var(--ease-out);
 }
 
 .lane:hover .num {
-  transform: translateX(6px);
+  transform: translateX(4px);
 }
 
 .lane h3 {
   font-size: 1.35rem;
-  margin-bottom: 0.6rem;
+  margin-bottom: var(--space-2);
 }
 
 .lane p {
-  margin: 0 0 1.1rem;
+  margin: 0 0 var(--space-4);
   font-size: 0.93rem;
   color: var(--muted);
   line-height: 1.6;
@@ -419,7 +454,7 @@ h3 {
 }
 
 .prose p {
-  margin: 0 0 1.4em;
+  margin: 0 0 1.5em;
 }
 
 .prose a {
@@ -436,7 +471,7 @@ h3 {
 
 .prose blockquote {
   margin: 2em 0;
-  padding-left: 1.4rem;
+  padding-left: var(--space-6);
   border-left: 2px solid var(--accent);
   font-family: var(--font-display);
   font-style: italic;
@@ -446,16 +481,16 @@ h3 {
 
 .prose h2 {
   font-size: 1.6rem;
-  margin: 2.2em 0 0.9em;
+  margin: 2.25em 0 1em;
 }
 
 .prose ul {
-  padding-left: 1.2rem;
-  margin: 0 0 1.4em;
+  padding-left: var(--space-5);
+  margin: 0 0 1.5em;
 }
 
 .prose li {
-  margin-bottom: 0.7em;
+  margin-bottom: 0.75em;
 }
 
 .prose li::marker {
@@ -466,18 +501,22 @@ h3 {
 
 .case-meta {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem 3rem;
+  flex-direction: column;
+  max-width: 22rem;
   border-top: 1px solid var(--ink);
-  border-bottom: 1px solid var(--line);
-  padding-block: 1.1rem;
   margin-bottom: clamp(2rem, 4vw, 3rem);
 }
 
 .case-meta > div {
   display: flex;
   flex-direction: column;
-  gap: 0.15rem;
+  gap: var(--space-1);
+  padding-block: var(--space-3);
+  border-bottom: 1px solid var(--line);
+}
+
+.case-meta dd {
+  margin: 0;
 }
 
 .meta-label {
@@ -494,6 +533,18 @@ h3 {
   color: var(--ink);
 }
 
+.case-meta a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+
+.case-meta a:hover {
+  color: var(--accent);
+}
+
 /* ---------- Projects ---------- */
 
 .project-list {
@@ -505,9 +556,11 @@ h3 {
 
 .project-row {
   position: relative;
-  padding-block: 1.7rem;
+  padding-block: var(--space-7);
+  padding-left: var(--space-3);
+  padding-right: var(--space-5);
   border-bottom: 1px solid var(--line);
-  transition: background-color 0.2s ease;
+  transition: background-color var(--dur-base) ease;
 }
 
 .project-row:hover {
@@ -517,14 +570,14 @@ h3 {
 .project-row::after {
   content: '';
   position: absolute;
-  top: 1.4rem;
-  bottom: 1.4rem;
+  top: var(--space-6);
+  bottom: var(--space-6);
   right: 0;
   width: 3px;
   background: #a9cbd0;
   transform: scaleY(0);
   transform-origin: center;
-  transition: transform 0.21s cubic-bezier(0.2, 0.6, 0.2, 1);
+  transition: transform var(--dur-base) var(--ease-out);
 }
 
 .project-row:hover::after {
@@ -535,12 +588,10 @@ h3 {
   display: block;
   color: inherit;
   text-decoration: none;
-  padding-inline: 0.75rem 1.25rem;
-  margin-inline: -0.75rem -1.25rem;
 }
 
 .project-card .talk-title {
-  transition: color 0.2s ease;
+  transition: color var(--dur-base) ease;
 }
 
 .project-card:hover .talk-title {
@@ -549,7 +600,7 @@ h3 {
 
 .project-summary {
   display: block;
-  margin: 0.5rem 0 0;
+  margin: var(--space-2) 0 0;
   max-width: 62ch;
   font-size: 0.98rem;
   color: var(--muted);
@@ -561,18 +612,6 @@ h3 {
 
 .project-cta {
   padding-bottom: clamp(3rem, 6vw, 5rem);
-}
-
-.case-meta a {
-  color: inherit;
-  text-decoration: underline;
-  text-decoration-color: var(--accent);
-  text-decoration-thickness: 1.5px;
-  text-underline-offset: 3px;
-}
-
-.case-meta a:hover {
-  color: var(--accent);
 }
 
 /* ---------- Talks ---------- */
@@ -587,8 +626,9 @@ h3 {
 .talk-row {
   display: grid;
   grid-template-columns: 7.5rem minmax(0, 1fr);
-  gap: 0.5rem 2rem;
-  padding-block: 1.5rem;
+  gap: var(--space-2) var(--space-7);
+  padding-block: var(--space-6);
+  padding-left: var(--space-3);
   border-bottom: 1px solid var(--line);
 }
 
@@ -598,8 +638,8 @@ h3 {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--muted);
-  padding-top: 0.45rem;
-  transition: color 0.2s ease;
+  padding-top: var(--space-2);
+  transition: color var(--dur-base) ease;
 }
 
 .talk-row:hover .talk-date {
@@ -622,13 +662,13 @@ a.talk-title:hover {
 }
 
 .talk-meta {
-  margin: 0.35rem 0 0;
+  margin: var(--space-1) 0 0;
   font-size: 0.9rem;
   color: var(--muted);
 }
 
 .talk-desc {
-  margin: 0.6rem 0 0;
+  margin: var(--space-2) 0 0;
   font-size: 0.98rem;
   color: var(--muted);
   max-width: 62ch;
@@ -638,7 +678,7 @@ a.talk-title:hover {
   font-family: var(--font-display);
   font-style: italic;
   color: var(--muted);
-  padding-block: 2.5rem 4rem;
+  padding-block: var(--space-8) var(--space-10);
   margin: 0;
   border-top: 1px solid var(--line);
 }
@@ -648,14 +688,14 @@ a.talk-title:hover {
 .substack-card {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--space-2);
   max-width: 30rem;
   margin-bottom: clamp(3rem, 6vw, 5rem);
-  padding: 1.6rem 1.8rem;
+  padding: var(--space-6) var(--space-7);
   border: 1px solid var(--ink);
   position: relative;
   text-decoration: none;
-  transition: background-color 0.2s ease;
+  transition: background-color var(--dur-base) ease;
 }
 
 .substack-card::after {
@@ -698,7 +738,7 @@ a.talk-title:hover {
 }
 
 .ribbon-wrap {
-  margin-block: 0.5rem 2.25rem;
+  margin-block: var(--space-2) var(--space-7);
   overflow-x: auto;
   scrollbar-width: thin;
 }
@@ -749,7 +789,7 @@ a.talk-title:hover {
   height: 9px;
   border-radius: 50%;
   background: var(--accent);
-  transition: transform 0.15s ease, background-color 0.15s ease;
+  transition: transform var(--dur-fast) ease, background-color var(--dur-fast) ease;
 }
 
 .tick:hover .tick-dot,
@@ -769,12 +809,12 @@ a.talk-title:hover {
   font-size: 0.72rem;
   letter-spacing: 0.04em;
   padding: 0.4em 0.75em;
-  border-radius: 4px;
+  border-radius: var(--radius-s);
   white-space: nowrap;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.15s ease, transform 0.15s ease;
-  z-index: 20;
+  transition: opacity var(--dur-fast) ease, transform var(--dur-fast) ease;
+  z-index: var(--z-tip);
 }
 
 .tick:hover .tick-tip,
@@ -786,8 +826,8 @@ a.talk-title:hover {
 .chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.6rem;
-  margin-bottom: 1.75rem;
+  gap: var(--space-2);
+  margin-bottom: var(--space-7);
 }
 
 .chip {
@@ -802,11 +842,11 @@ a.talk-title:hover {
   color: var(--muted);
   background: transparent;
   border: 1px solid var(--line);
-  border-radius: 3px;
+  border-radius: var(--radius-s);
   padding: 0.6em 1.1em;
   cursor: pointer;
-  transition: color 0.15s ease, border-color 0.15s ease,
-    background-color 0.15s ease;
+  transition: color var(--dur-fast) ease, border-color var(--dur-fast) ease,
+    background-color var(--dur-fast) ease;
 }
 
 .chip sup {
@@ -863,19 +903,19 @@ a.talk-title:hover {
 
 .rates-section h2 {
   font-size: 1.7rem;
-  margin-bottom: 1.8rem;
+  margin-bottom: var(--space-7);
 }
 
 .rates {
   border-top: 1px solid var(--ink);
-  margin: 0 0 2.5rem;
+  margin: 0 0 var(--space-8);
 }
 
 .rate-row {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  gap: 0.4rem 2.5rem;
-  padding-block: 1.4rem;
+  gap: var(--space-2) var(--space-8);
+  padding-block: var(--space-6);
   border-bottom: 1px solid var(--line);
 }
 
@@ -932,10 +972,10 @@ a.talk-title:hover {
 .site-footer .wrap {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem 2rem;
+  gap: var(--space-3) var(--space-7);
   align-items: baseline;
   justify-content: space-between;
-  padding-block: 2.1rem;
+  padding-block: var(--space-7);
   font-size: 0.74rem;
   font-weight: 500;
   letter-spacing: 0.14em;
@@ -946,7 +986,7 @@ a.talk-title:hover {
 .site-footer a {
   color: inherit;
   text-decoration: none;
-  transition: color 0.15s ease;
+  transition: color var(--dur-fast) ease;
 }
 
 .site-footer a:hover {
@@ -955,7 +995,7 @@ a.talk-title:hover {
 
 .footer-links {
   display: flex;
-  gap: 1.6rem;
+  gap: var(--space-6);
   list-style: none;
   margin: 0;
   padding: 0;
@@ -966,12 +1006,12 @@ a.talk-title:hover {
 @media (max-width: 720px) {
   .lanes ol {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: var(--space-7);
   }
 
   .talk-row {
     grid-template-columns: 1fr;
-    gap: 0.3rem;
+    gap: var(--space-1);
   }
 
   .talk-date {
