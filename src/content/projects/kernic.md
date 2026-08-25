@@ -1,6 +1,6 @@
 ---
 title: Kernic
-summary: An open-source CLI that kerns your whole app — complete design systems from the terminal, exported as CSS, Tailwind v4 or JSON tokens.
+summary: An open source CLI for vibe coders to add style to their app automatically. Design systems with a click.
 url: https://github.com/intentionaut/kernic
 role: Creator · Maintainer
 status: Open source · MIT
