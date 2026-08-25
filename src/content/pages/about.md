@@ -3,8 +3,6 @@ title: The scenic route to product
 description: "From the design studio to enterprise AI: Saielle DaSilva's path through Pivotal, Cazoo, StepStone and Sainsbury's."
 ---
 
-I didn't come to product by a straight line: I came in through the studio door.
-
 I started in **design**. There I learned that every pixel is an argument, and the best arguments win quietly. Then came the crossing into **product**. As a founding hire at Pivotal's Dallas office, I helped companies turn practices into products. At Cazoo I joined at the very beginning. We built the UK's first fully digital car-buying experience, and I stayed through hyper-growth all the way to its IPO. At StepStone I led experience design globally and shipped some of the earliest LLM-powered products in European recruitment. Most recently I led product for enterprise **AI**, ML and data platforms at Sainsbury's, one of Britain's largest retailers. There I took production AI from a handful of experiments to a real platform serving millions of customers. Earlier chapters at Amazon and AT&amp;T taught me how very large organisations actually move.
 
 Somewhere along the way I fell for **data**: not dashboards for their own sake, but the discipline of letting reality vote on our plans. It became the connective tissue between every chapter.
