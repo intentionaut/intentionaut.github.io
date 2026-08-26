@@ -632,36 +632,39 @@ h3 {
   color: var(--accent);
 }
 
-.prose img {
-  display: block;
-  margin: 2em auto;
+.img-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
   width: 80%;
-  height: auto;
-  border: 1px solid var(--ink);
-  outline: 1px solid var(--line);
-  outline-offset: 3px;
-}
-
-@media (min-width: 768px) {
-  .prose img {
-    width: 60%;
-  }
-}
-
-.prose figure {
   margin: 2.5em 0;
+  padding: var(--space-5);
+  border: 1px solid var(--ink);
+  position: relative;
 }
 
-.prose figcaption {
-  margin-top: 0.3em;
-  margin-bottom: 1.5em;
+.img-card::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border: 1px solid var(--line);
+  pointer-events: none;
+}
+
+.img-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.img-card figcaption {
   font-family: var(--font-body);
   font-size: 10pt;
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--muted);
-  text-align: center;
+  text-align: left;
 }
 
 /* ---------- Case study ---------- */

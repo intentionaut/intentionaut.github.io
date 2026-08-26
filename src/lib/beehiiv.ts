@@ -40,6 +40,21 @@ function stripBeehiivHtml(html: string): string {
     '<figcaption>$1</figcaption>'
   );
 
+  content = content.replace(
+    /<a[^>]*>\s*(<figcaption>[\s\S]*?<\/figcaption>)\s*<\/a>/gi,
+    '$1'
+  );
+
+  content = content.replace(
+    /<img[^>]*>/gi,
+    (img) => `<figure class="img-card">${img}</figure>`
+  );
+
+  content = content.replace(
+    /<\/figure>\s*<div[^>]*>\s*<figcaption>([\s\S]*?)<\/figcaption>\s*<\/div>/gi,
+    '<figcaption>$1</figcaption></figure>'
+  );
+
   return content.trim();
 }
 
