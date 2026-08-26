@@ -16,24 +16,24 @@ export interface BeehiivPost {
 }
 
 function stripBeehiivHtml(html: string): string {
-  const contentBlocksMatch = html.match(
-    /<div id='content-blocks'>([\s\S]*?)<\/div>\s*<\/div>\s*<\/div>/
-  );
-  if (!contentBlocksMatch) return html;
+  const startTag = "<div id='content-blocks'>";
+  const startIdx = html.indexOf(startTag);
+  if (startIdx === -1) return html;
 
-  let content = contentBlocksMatch[1];
+  let content = html.slice(startIdx + startTag.length);
 
   content = content.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '');
-  content = content.replace(
-    /style="[^"]*"/gi,
-    ''
-  );
+  content = content.replace(/style="[^"]*"/gi, '');
   content = content.replace(/class="[^"]*"/gi, '');
 
-  content = content.replace(
-    /<div[^>]*>((?:(?!<div).)*)<\/div>/gi,
-    (_, inner) => inner
-  );
+  const lastClosingDiv = content.lastIndexOf('</div>');
+  if (lastClosingDiv !== -1) {
+    content = content.slice(0, lastClosingDiv);
+  }
+
+  content = content.replace(/<div\s*>\s*<div\s*>\s*<\/div>\s*<\/div>/g, '');
+  content = content.replace(/<div\s*>\s*<\/div>/g, '');
+  content = content.replace(/<span\s*>\s*<\/span>/g, '');
 
   return content.trim();
 }
