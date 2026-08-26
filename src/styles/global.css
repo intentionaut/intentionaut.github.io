@@ -521,25 +521,25 @@ h3 {
   color: var(--muted);
 }
 
+/* ---------- About: intro block ---------- */
+
+.about-intro {
+  padding-bottom: 0;
+}
+
+.about-final {
+  padding-bottom: var(--space-2);
+}
+
 /* ---------- About: career arc ---------- */
 
 .arc-section {
-  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+  padding-block: 0 clamp(3rem, 6vw, 5rem);
 }
 
 .arc-section h2 {
   font-size: clamp(1.4rem, 2.4vw, 1.9rem);
   margin-bottom: var(--space-5);
-}
-
-/* ---------- About: intro block ---------- */
-
-.about-intro {
-  padding-bottom: var(--space-6);
-}
-
-.prose + .arc-section {
-  margin-top: var(--space-6);
 }
 
 /* ---------- Prose (about page) ---------- */
@@ -941,19 +941,6 @@ a.talk-title:hover {
 
 .ledger-row.is-hidden {
   display: none;
-}
-
-.ledger-row.flash {
-  animation: rowflash 1.5s ease-out;
-}
-
-@keyframes rowflash {
-  0% {
-    background-color: rgba(169, 203, 208, 0.4);
-  }
-  100% {
-    background-color: transparent;
-  }
 }
 
 /* ---------- Rates ---------- */
