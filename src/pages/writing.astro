@@ -44,7 +44,12 @@ const fmtDate = (e: (typeof entries)[number]) =>
       </p>
     </header>
 
-    <a class="substack-card" href="https://saielle.beehiiv.com">
+    <a
+      class="substack-card"
+      href="https://saielle.beehiiv.com"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
       <span class="card-kicker">Newsletter</span>
       <span class="card-title">The Second Draft</span>
       <span class="card-sub"
@@ -77,7 +82,13 @@ const fmtDate = (e: (typeof entries)[number]) =>
               <span class="talk-date">{fmtDate(e)}</span>
               <div>
                 {e.url ? (
-                  <a class="talk-title" href={e.url} rel="noopener">
+                  <a
+                    class="talk-title"
+                    href={e.url}
+                    {...(e.url.startsWith('http')
+                      ? { target: '_blank', rel: 'noopener noreferrer' }
+                      : {})}
+                  >
                     {e.title}
                   </a>
                 ) : (

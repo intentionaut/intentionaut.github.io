@@ -36,7 +36,7 @@ const fmt = (d: Date) =>
               <span class="talk-date">{fmt(talk.data.date)}</span>
               <div>
                 {talk.data.url ? (
-                  <a class="talk-title" href={talk.data.url}>
+                  <a class="talk-title" href={talk.data.url} target="_blank" rel="noopener noreferrer">
                     {talk.data.title}
                   </a>
                 ) : (
