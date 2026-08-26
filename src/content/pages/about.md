@@ -4,6 +4,14 @@ seoTitle: Saielle DaSilva | Interim & Fractional CPO, Product Leadership in AI &
 description: "The career behind intentionaut: product leadership across design, data and AI, from Pivotal, Cazoo and StepStone to Sainsbury's and independent practice."
 ---
 
+Good software is made of more than good people. Great people are everywhere, but good software is harder to find.
+
+I learned early in my career that business decisions have real impact. Organising volunteers after Hurricane Sandy taught me that organisations, like products, can be designed around the way people actually move through them.
+
+Since then, I have found the same pattern everywhere. Products, teams and businesses rarely struggle because nobody is working hard enough. They struggle when the flurry of activity loses connection to its clarity of purpose.
+
+My work is to find that connection, give it direction and turn it into something that earns its place in the world: products people want to use, experiences they come back to and results investors and customers can see.
+
 I am trans and neurodivergent. Finding my place took work, and taught me to notice the quiet ways systems decide who belongs. When something works beautifully for the people it was built around and poorly for everyone else, that is not an edge case. It is a design decision, whether anyone meant it to be or not.
 
 That perspective has made me a better product leader. It has made me pay attention to who is in the room, who is missing, what gets lost in translation and what assumptions have quietly found their way into the work.
