@@ -4,19 +4,22 @@ seoTitle: Saielle DaSilva | Interim & Fractional CPO, Product Leadership in AI &
 description: "The career behind intentionaut: product leadership across design, data and AI, from Pivotal, Cazoo and StepStone to Sainsbury's and independent practice."
 ---
 
-I'm open about being trans and neurodivergent. Finding my place took hard work, and it taught me how systems decide who belongs. Thinking about who our systems are built by, and for, comes naturally when you've been the person they weren't built for. Lived experience has made me a sharper leader at every level.
+I am trans and neurodivergent. Finding my place took work, and taught me to notice the quiet ways systems decide who belongs. When something works beautifully for the people it was built around and poorly for everyone else, that is not an edge case. It is a design decision, whether anyone meant it to be or not.
 
-I've told these stories on stage too: a keynote at Mind the Product London, plus talks at Turing Fest and Business of Software.
+That perspective has made me a better product leader. It has made me pay attention to who is in the room, who is missing, what gets lost in translation and what assumptions have quietly found their way into the work.
 
-These days I also ship my own software: Kernic, an open-source CLI for design tokens, and Friday, a career coach for film and TV crew.
+I have spoken about some of this on stage, including at Mind the Product London, Turing Fest and Business of Software.
+
+These days, I also build software of my own: Kernic, an open-source CLI for design tokens, and Friday, a career coach for film and TV crew.
 
 ## How I work
 
-- **Translate, don't gatekeep.** I speak designer, engineer, analyst and executive, and I move ideas between them intact.
-- **Evidence over ego.** Strong opinions, loosely held, tightly tested.
-- **Prototype to decide.** The cheapest way out of an argument is usually a rough version everyone can react to.
-- **Software is made of people.** Putting the soft back in software isn't a slogan; it's the operating principle.
+- **Start with intent.** Before getting attached to a solution, I want to know what we're trying to change, who it's for and why it matters. Then we move.
+- **Make complexity legible.** Good leadership is often translation: turning strategy into something a team can act on, and turning what the team learns back into something the business can understand.
+- **Make something to find out.** A prototype, model or rough version is often more useful than another hour of debate. I like thinking, but I like learning faster.
+- **Follow the evidence.** Strong opinions are useful. Being wrong is useful too. I want enough conviction to move and enough curiosity to change course.
+- **Design for the people in the system.** Products and organisations are experienced by humans, not boxes on an org chart. The details of who uses something, builds it and has to live with it matter.
 
-Design taught me delight. Data taught me discipline. Product lets me use both.
+Design taught me delight. Data taught me discipline. Product gave me somewhere to put both.
 
 If any of that sounds like the teammate you've been missing, [say hello](/contact).
