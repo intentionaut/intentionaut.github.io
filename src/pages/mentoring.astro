@@ -2,83 +2,77 @@
 import '@fontsource-variable/roboto-serif';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-// Cloudflare Turnstile sitekey (dash.cloudflare.com, Turnstile)
 const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
 ---
 
 <BaseLayout
-  title="Contact & rates | Saielle DaSilva"
-  description="Work with Saielle DaSilva: advisory, fractional product leadership, speaking and mentoring."
+  title="Mentoring | Saielle DaSilva"
+  description="A few slots each month for people finding their footing across design, data and AI. Saielle mentors the next wave of product leaders."
 >
   <section class="wrap">
     <header class="page-head">
-      <p class="eyebrow">Contact &amp; rates</p>
-      <h1>Work with me.</h1>
+      <p class="eyebrow">Mentoring</p>
+      <h1>Someone did this for me. Now I do it for others.</h1>
       <p class="lede">
-        I'm currently open to new engagements: advisory, fractional
-        leadership, speaking and mentoring.
+        A few slots each month for people finding their footing across
+        disciplines.
       </p>
-      <div class="cta-row">
-        <a class="btn-primary" href="mailto:hello@intentionaut.com">Email me</a>
-        <a
-          class="link-arrow"
-          href="https://www.linkedin.com/in/intentionaut"
-          target="_blank"
-          rel="noopener noreferrer"
-          >Find me on LinkedIn</a
-        >
-      </div>
     </header>
 
-    <section class="rates-section" aria-label="Ways to work together">
-      <h2>Ways to work together</h2>
-      <dl class="rates">
-        <a class="rate-row rate-card" href="/strategic-direction/">
-          <dt>Strategy session</dt>
-          <dd class="rate-price">£400 · 90 min</dd>
-          <dd class="rate-desc">
-            A sounding board for founders and product leaders: strategy
-            reviews, roadmap calls, hiring help, AI reality-checks.
-          </dd>
-          <dd class="rate-scale">Sliding scale · Yes</dd>
-        </a>
-        <a class="rate-row rate-card" href="/fractional/">
-          <dt>Fractional leadership</dt>
-          <dd class="rate-price">£1,400 / day</dd>
-          <dd class="rate-desc">
-            Part-time head of product for early teams that need direction
-            now, before they're ready for a full-time hire.
-          </dd>
-        </a>
-        <a class="rate-row rate-card" href="/execution/">
-          <dt>Speaking &amp; workshops</dt>
-          <dd class="rate-price">£1,400 / event</dd>
-          <dd class="rate-desc">
-            From conference keynotes to hands-on team sessions about building
-            with intention across design, data and AI.
-          </dd>
-          <dd class="rate-scale">Sliding scale · Yes</dd>
-        </a>
-        <a class="rate-row rate-card" href="/mentoring/">
-          <dt>Mentoring</dt>
-          <dd class="rate-price">Get in touch</dd>
-          <dd class="rate-desc">
-            A few slots each month for people finding their footing across
-            disciplines. That was my path too.
-          </dd>
-        </a>
-      </dl>
-    </section>
+    <div class="prose">
+      <p>
+        Early in my career, people of various disciplines helped me learn to
+        translate people and culture into great software. Designers, engineers,
+        researchers, leaders. None of them had to. They did it because someone
+        had done it for them.
+      </p>
+      <p>
+        I like giving back. That is why I keep a few mentoring slots open each
+        month. Not for career coaching or CV review. For the harder stuff:
+        figuring out what kind of work suits you, how to navigate organisations
+        that were not built with you in mind, and how to turn craft into
+        leadership without losing what made you good at it in the first place.
+      </p>
 
-    <section class="contact-form-section" aria-label="Send a message">
+      <h2>Who it is for</h2>
+      <ul>
+        <li>
+          People early in their career across design, product, data or
+          engineering who want to think bigger about where they are headed
+        </li>
+        <li>
+          People mid-career who are stuck between doing the work and leading
+          the people who do it
+        </li>
+        <li>
+          Anyone who has felt like the room was not designed for them and
+          wants to talk through what that means for their path
+        </li>
+      </ul>
+
+      <h2>How it works</h2>
+      <p>
+        A 45-minute conversation, once a month. No agenda, no homework, no
+        commitment beyond showing up honestly. We talk about what is actually
+        going on, not what sounds good in a performance review.
+      </p>
+      <p>
+        I do not have all the answers. What I have is perspective from a
+        career that moved across design, data, AI and leadership, and a
+        genuine interest in helping people who are building something that
+        matters.
+      </p>
+    </div>
+
+    <section class="contact-form-section" aria-label="Get in touch">
       <div class="contact-card">
-        <h2>Leave me a note.</h2>
+        <h2>Let's talk.</h2>
         <p class="form-lede">
-          Tell me what you're working on and what's keeping you up at night.
-          I make time to reply to everyone who takes the time to share a
-          thought or kind word.
+          If any of that sounds like it might help, get in touch. I read
+          every message.
         </p>
         <form id="contact-form" novalidate>
+          <input type="hidden" name="source" value="mentoring" />
           <div class="form-grid">
             <label>
               <span class="form-label">Name</span>
@@ -92,11 +86,15 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
           <label>
             <span class="form-label">What's this about?</span>
             <select name="topic">
-              <option>Advisory</option>
-              <option>Fractional leadership</option>
-              <option>Speaking &amp; workshops</option>
-              <option>Mentoring</option>
-              <option>Something else</option>
+              <option value="strategic-direction">
+                Strategic direction
+              </option>
+              <option value="execution">Execution &amp; transformation</option>
+              <option value="fractional">Fractional leadership</option>
+              <option value="advisory">Advisory</option>
+              <option value="speaking">Speaking &amp; workshops</option>
+              <option value="mentoring" selected>Mentoring</option>
+              <option value="other">Something else</option>
             </select>
           </label>
           <label>
@@ -142,7 +140,7 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
 
       if (ENDPOINT.includes('TODO')) {
         const body = encodeURIComponent(
-          `${data.message}\n\n- ${data.name} (${data.email})\nTopic: ${data.topic}`
+          `${data.message}\n\n- ${data.name} (${data.email})\nTopic: ${data.topic}\nSource: ${data.source}`
         );
         window.location.href = `mailto:hello@intentionaut.com?subject=${encodeURIComponent(
           `[intentionaut.com] ${data.topic}`
