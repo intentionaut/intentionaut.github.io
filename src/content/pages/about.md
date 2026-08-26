@@ -4,8 +4,6 @@ seoTitle: Saielle DaSilva | Interim & Fractional CPO, Product Leadership in AI &
 description: "The career behind intentionaut: product leadership across design, data and AI, from Pivotal, Cazoo and StepStone to Sainsbury's and independent practice."
 ---
 
-Good software is made of more than good people. Great people are everywhere, but good software is harder to find.
-
 I learned early in my career that business decisions have real impact. Organising volunteers after Hurricane Sandy taught me that organisations, like products, can be designed around the way people actually move through them.
 
 Since then, I have found the same pattern everywhere. Products, teams and businesses rarely struggle because nobody is working hard enough. They struggle when the flurry of activity loses connection to its clarity of purpose.
