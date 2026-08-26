@@ -35,6 +35,11 @@ function stripBeehiivHtml(html: string): string {
   content = content.replace(/<div\s*>\s*<\/div>/g, '');
   content = content.replace(/<span\s*>\s*<\/span>/g, '');
 
+  content = content.replace(
+    /<p[^>]*>\s*(Photo\s+by\s+[^<]+)<\/p>/gi,
+    '<figcaption>$1</figcaption>'
+  );
+
   return content.trim();
 }
 
