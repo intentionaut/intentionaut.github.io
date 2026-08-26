@@ -10,8 +10,6 @@ That perspective has made me a better product leader. It has made me pay attenti
 
 I have spoken about some of this on stage, including at <a href="https://www.mindtheproduct.com/the-f-words-of-highly-successful-product-organisations-by-saielle-dasilva/" target="_blank" rel="noopener noreferrer">Mind the Product London</a>, <a href="https://turingfest.com/speaker/saielle-dasilva/" target="_blank" rel="noopener noreferrer">Turing Fest</a> and <a href="https://businessofsoftware.org/talks/speakers/saielle-dasilva/" target="_blank" rel="noopener noreferrer">Business of Software</a>.
 
-These days, I also build software of my own: Kernic, an open-source CLI for design tokens, and Friday, a career coach for film and TV crew.
-
 ## How I work
 
 - **Start with intent.** Before getting attached to a solution, I want to know what we're trying to change, who it's for and why it matters. Then we move.
