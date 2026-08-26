@@ -133,7 +133,6 @@ const fmtDate = (e: (typeof entries)[number]) =>
       <p class="empty is-hidden" id="ledger-empty">
         Nothing filed under that yet.
       </p>
-      <div id="load-sentinel" aria-hidden="true" style="height:1px" />
     </section>
 
     <section class="signup" aria-label="Subscribe">
@@ -203,17 +202,18 @@ const fmtDate = (e: (typeof entries)[number]) =>
 
     loadBatch();
 
-    const sentinel = document.getElementById('load-sentinel');
-    if (sentinel && loaded < rows.length) {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          if (entries[0].isIntersecting && loaded < rows.length) {
-            loadBatch();
-          }
-        },
-        { rootMargin: '200px' }
-      );
-      observer.observe(sentinel);
-    }
+    const checkScroll = () => {
+      if (loaded >= rows.length) return;
+      const lastVisible = rows[loaded - 1];
+      if (!lastVisible) return;
+      const rect = lastVisible.getBoundingClientRect();
+      if (rect.bottom < window.innerHeight + 300) {
+        loadBatch();
+      }
+    };
+
+    window.addEventListener('scroll', checkScroll, { passive: true });
+    checkScroll();
+  </script>
   </script>
 </BaseLayout>
