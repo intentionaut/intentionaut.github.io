@@ -133,6 +133,7 @@ const fmtDate = (e: (typeof entries)[number]) =>
       <p class="empty is-hidden" id="ledger-empty">
         Nothing filed under that yet.
       </p>
+      <div id="load-sentinel" aria-hidden="true" style="height:1px" />
     </section>
 
     <section class="signup" aria-label="Subscribe">
@@ -188,11 +189,10 @@ const fmtDate = (e: (typeof entries)[number]) =>
     );
 
     const BATCH = 6;
-    const visibleRows = [...rows];
     let loaded = 0;
 
     const loadBatch = () => {
-      const batch = visibleRows.slice(loaded, loaded + BATCH);
+      const batch = [...rows].slice(loaded, loaded + BATCH);
       batch.forEach((row, i) => {
         setTimeout(() => row.classList.add('is-visible'), i * 80);
       });
@@ -203,19 +203,17 @@ const fmtDate = (e: (typeof entries)[number]) =>
 
     loadBatch();
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && loaded < visibleRows.length) {
+    const sentinel = document.getElementById('load-sentinel');
+    if (sentinel && loaded < rows.length) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting && loaded < rows.length) {
             loadBatch();
-            observer.disconnect();
           }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    const sentinel = document.getElementById('ledger-empty');
-    if (sentinel) observer.observe(sentinel);
+        },
+        { rootMargin: '200px' }
+      );
+      observer.observe(sentinel);
+    }
   </script>
 </BaseLayout>
