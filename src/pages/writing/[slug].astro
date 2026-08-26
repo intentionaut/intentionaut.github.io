@@ -1,82 +1,54 @@
 ---
-import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { themeLabels, type Theme } from '../../data/writing';
+import { fetchPosts } from '../../lib/beehiiv';
 
 export async function getStaticPaths() {
-  const essays = await getCollection('essays');
-  return essays.map((essay) => ({
-    params: { slug: essay.id },
-    props: { essay },
+  const posts = await fetchPosts();
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
   }));
 }
 
-const { essay } = Astro.props;
-const { Content } = await render(essay);
+const { post } = Astro.props;
 
-const fmtDate = essay.data.date.toLocaleDateString('en-US', {
-  month: 'long',
-  day: 'numeric',
-  year: 'numeric',
-});
-
-const themes = essay.data.themes
-  .map((t) => themeLabels[t as Theme])
-  .filter(Boolean);
+const fmtDate = new Date(post.publish_date * 1000).toLocaleDateString(
+  'en-US',
+  { month: 'long', day: 'numeric', year: 'numeric' }
+);
 ---
 
-<BaseLayout title={`${essay.data.title} | Saielle DaSilva`} description={essay.data.description}>
-  <section class="wrap">
+<BaseLayout
+  title={`${post.title} | Saielle DaSilva`}
+  description={post.subtitle || post.title}
+>
+  <article class="wrap">
     <header class="page-head">
-      <p class="eyebrow">Writing</p>
-      <h1>{essay.data.title}</h1>
-      <p class="lede">{essay.data.description}</p>
+      <p class="eyebrow">The Second Draft</p>
+      <h1>{post.title}</h1>
+      {post.subtitle && <p class="lede">{post.subtitle}</p>}
+      <p class="article-meta">
+        {fmtDate} · {post.authors.join(', ')}
+      </p>
     </header>
 
-    <dl class="case-meta">
-      <div>
-        <dt class="meta-label">Date</dt>
-        <dd class="meta-value">{fmtDate}</dd>
-      </div>
-      <div>
-        <dt class="meta-label">Source</dt>
-        <dd class="meta-value">{essay.data.source}</dd>
-      </div>
-      {
-        themes.length > 0 && (
-          <div>
-            <dt class="meta-label">Themes</dt>
-            <dd class="meta-value">{themes.join(' · ')}</dd>
-          </div>
-        )
-      }
-      <div class="case-meta-cta">
-        <a class="link-arrow link-arrow--back" href="/writing">All writing</a>
-      </div>
-    </dl>
+    <div class="prose article-body" set:html={post.content_html} />
 
-    <article class="prose">
-      <Content />
-    </article>
-
-    {
-      essay.data.originalUrl && (
-        <p class="archive-note">
-          Recovered from the Blossom at Work archive.{' '}
-          <a href={essay.data.originalUrl} target="_blank" rel="noopener noreferrer">
-            Original listing
-          </a>
-          .
-        </p>
-      )
-    }
-  </section>
+    <section class="article-footer">
+      <a class="link-arrow" href="/writing"><span>Back to all writing</span></a>
+    </section>
+  </article>
 </BaseLayout>
 
 <style>
-  .archive-note {
-    margin-top: 3rem;
+  .article-meta {
+    margin-top: var(--space-3);
     font-size: 0.85rem;
-    opacity: 0.65;
+    color: var(--muted);
+  }
+
+  .article-footer {
+    padding-block: clamp(3rem, 6vw, 5rem);
+    border-top: 1px solid var(--line);
   }
 </style>
