@@ -642,7 +642,7 @@ h3 {
   display: block;
   position: relative;
   border: 1px solid var(--ink);
-  padding: 0;
+  padding: 8px;
 }
 
 .img-card::after {
@@ -662,6 +662,7 @@ h3 {
 .img-wrap figcaption,
 .img-caption {
   margin-top: var(--space-2);
+  padding-left: 8px;
   font-family: var(--font-body);
   font-size: 0.58rem;
   font-weight: 600;
