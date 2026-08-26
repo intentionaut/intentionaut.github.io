@@ -559,11 +559,11 @@ h3 {
 
 /* ---------- About: intro block ---------- */
 
-.about-intro {
+.prose.about-intro {
   padding-bottom: 0;
 }
 
-.about-final {
+.prose.about-final {
   padding-bottom: var(--space-2);
 }
 
