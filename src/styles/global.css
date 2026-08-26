@@ -632,21 +632,22 @@ h3 {
   color: var(--accent);
 }
 
-.img-card {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  width: 80%;
+.img-wrap {
+  max-width: 85%;
   margin: 2.5em auto;
-  padding: var(--space-5);
-  border: 1px solid var(--ink);
+}
+
+.img-card {
+  display: block;
   position: relative;
+  border: 1px solid var(--ink);
+  padding: 0;
 }
 
 .img-card::after {
   content: '';
   position: absolute;
-  inset: 3px;
+  inset: 5px;
   border: 1px solid var(--line);
   pointer-events: none;
 }
@@ -657,13 +658,14 @@ h3 {
   display: block;
 }
 
-.img-card figcaption {
+.img-wrap figcaption {
+  margin-top: 0.4em;
   font-family: var(--font-body);
-  font-size: 10pt;
+  font-size: 0.65rem;
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--accent);
   text-align: left;
 }
 
