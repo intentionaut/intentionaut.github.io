@@ -40,7 +40,7 @@ const fmtDate = (e: (typeof entries)[number]) =>
       <h1>Thinking in public.</h1>
       <p class="lede">
         A decade of writing, from design craft to enterprise AI. New essays
-        land on The Second Draft first; the archive lives below.
+        land on my newsletter for subscribers first; the archive lives below.
       </p>
     </header>
 
@@ -70,6 +70,8 @@ const fmtDate = (e: (typeof entries)[number]) =>
       </form>
     </section>
 
+    <div class="section-rule" aria-hidden="true"></div>
+
     <section class="archive" aria-label="Writing archive">
       <div class="chips" role="group" aria-label="Filter writing by theme">
         <button class="chip is-active" data-filter="all" aria-pressed="true">
@@ -86,11 +88,12 @@ const fmtDate = (e: (typeof entries)[number]) =>
 
       <ol class="talk-list ledger" id="ledger">
         {
-          entries.map((e) => (
+          entries.map((e, i) => (
             <li
               class="talk-row ledger-row"
               id={`w-${slugify(e.title)}`}
               data-themes={e.themes.join(' ')}
+              data-index={i}
             >
               <span class="talk-date">{fmtDate(e)}</span>
               <div>
@@ -119,9 +122,42 @@ const fmtDate = (e: (typeof entries)[number]) =>
           ))
         }
       </ol>
+      <div class="skeleton" id="ledger-skeleton" aria-hidden="true">
+        <div class="skeleton-row"><span class="skeleton-date" /><span class="skeleton-title" /></div>
+        <div class="skeleton-row"><span class="skeleton-date" /><span class="skeleton-title" /></div>
+        <div class="skeleton-row"><span class="skeleton-date" /><span class="skeleton-title" /></div>
+        <div class="skeleton-row"><span class="skeleton-date" /><span class="skeleton-title" /></div>
+        <div class="skeleton-row"><span class="skeleton-date" /><span class="skeleton-title" /></div>
+        <div class="skeleton-row"><span class="skeleton-date" /><span class="skeleton-title" /></div>
+      </div>
       <p class="empty is-hidden" id="ledger-empty">
         Nothing filed under that yet.
       </p>
+    </section>
+
+    <section class="signup" aria-label="Subscribe">
+      <h2>Keep thinking in public.</h2>
+      <p class="signup-sub">
+        New essays on leadership, design and AI. Delivered fortnightly.
+      </p>
+      <form
+        class="signup-form"
+        action="https://embeds.beehiiv.com/96b7bfbb-25ad-448f-a8e8-b4d61019e30d/subscribe"
+        method="POST"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <label class="sr-only" for="writing-bottom-email">Email address</label>
+        <input
+          class="signup-input"
+          type="email"
+          id="writing-bottom-email"
+          name="email"
+          placeholder="your@email.com"
+          required
+        />
+        <button class="btn-plain" type="submit">Subscribe</button>
+      </form>
     </section>
   </section>
 
@@ -129,6 +165,7 @@ const fmtDate = (e: (typeof entries)[number]) =>
     const chips = document.querySelectorAll<HTMLButtonElement>('.chip');
     const rows = document.querySelectorAll<HTMLElement>('.ledger-row');
     const empty = document.getElementById('ledger-empty');
+    const skeleton = document.getElementById('ledger-skeleton');
 
     const applyFilter = (f: string) => {
       let visible = 0;
@@ -150,18 +187,35 @@ const fmtDate = (e: (typeof entries)[number]) =>
       chip.addEventListener('click', () => applyFilter(chip.dataset.filter!))
     );
 
+    const BATCH = 6;
+    const visibleRows = [...rows];
+    let loaded = 0;
+
+    const loadBatch = () => {
+      const batch = visibleRows.slice(loaded, loaded + BATCH);
+      batch.forEach((row, i) => {
+        setTimeout(() => row.classList.add('is-visible'), i * 80);
+      });
+      loaded += batch.length;
+    };
+
+    if (skeleton) skeleton.remove();
+
+    loadBatch();
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
+          if (entry.isIntersecting && loaded < visibleRows.length) {
+            loadBatch();
+            observer.disconnect();
           }
         });
       },
       { threshold: 0.1 }
     );
 
-    rows.forEach((row) => observer.observe(row));
+    const sentinel = document.getElementById('ledger-empty');
+    if (sentinel) observer.observe(sentinel);
   </script>
 </BaseLayout>

@@ -635,6 +635,7 @@ h3 {
 .img-wrap {
   max-width: 85%;
   margin: var(--space-8) auto;
+  padding-bottom: var(--space-4);
 }
 
 .img-card {
@@ -658,15 +659,30 @@ h3 {
   display: block;
 }
 
-.img-wrap figcaption {
-  margin-top: var(--space-1);
+.img-wrap figcaption,
+.img-caption {
+  margin-top: var(--space-2);
   font-family: var(--font-body);
-  font-size: 0.65rem;
+  font-size: 0.58rem;
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--muted);
   text-align: left;
+}
+
+.img-wrap figcaption a,
+.img-caption a {
+  color: var(--muted);
+  text-decoration: underline;
+  text-decoration-color: var(--line);
+  text-underline-offset: 2px;
+  transition: color var(--dur-base) ease;
+}
+
+.img-wrap figcaption a:hover,
+.img-caption a:hover {
+  color: lightblue;
 }
 
 /* ---------- Case study ---------- */
@@ -1122,6 +1138,44 @@ a.talk-title:hover {
 
 .ledger-row.is-hidden {
   display: none;
+}
+
+.section-rule {
+  border-top: 1px solid var(--line);
+  margin: var(--space-8) 0;
+}
+
+.skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.skeleton-row {
+  display: flex;
+  gap: var(--space-5);
+  align-items: baseline;
+}
+
+.skeleton-date {
+  width: 5rem;
+  height: 0.85rem;
+  background: var(--line);
+  border-radius: 2px;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.skeleton-title {
+  flex: 1;
+  height: 1rem;
+  background: var(--line);
+  border-radius: 2px;
+  animation: pulse 1.5s ease-in-out 0.15s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
 }
 
 /* ---------- Rates ---------- */
