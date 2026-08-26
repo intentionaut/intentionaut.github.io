@@ -4,6 +4,40 @@
   box-sizing: border-box;
 }
 
+/* Metric-tuned fallback faces: match the variable fonts' vertical rhythm and
+   glyph width so font-display:swap causes no visible layout shift.
+   Values computed from the fonts' real metrics (ascent/descent/avg width). */
+
+@font-face {
+  font-family: 'Fraunces Variable Fallback';
+  font-display: swap;
+  src: local('Georgia'), local('Times New Roman');
+  size-adjust: 115.7%;
+  ascent-override: 84.5%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Jost Variable Fallback';
+  font-display: swap;
+  src: local('Arial'), local('Helvetica Neue'), local('Helvetica');
+  size-adjust: 96%;
+  ascent-override: 111.5%;
+  descent-override: 39.1%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Roboto Serif Variable Fallback';
+  font-display: swap;
+  src: local('Georgia'), local('Times New Roman');
+  size-adjust: 116.9%;
+  ascent-override: 79.3%;
+  descent-override: 20.9%;
+  line-gap-override: 0%;
+}
+
 :root {
   /* Palette */
   --paper: #f7e9e0;
@@ -14,8 +48,10 @@
   --mendl: rgba(169, 203, 208, 0.55);
 
   /* Type */
-  --font-display: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
-  --font-body: 'Jost Variable', Futura, 'Century Gothic', 'Trebuchet MS',
+  --font-display: 'Fraunces Variable', 'Fraunces Variable Fallback', Georgia,
+    'Times New Roman', serif;
+  --font-body: 'Jost Variable', 'Jost Variable Fallback', Futura,
+    'Century Gothic', 'Trebuchet MS',
     sans-serif;
 
   /* Layout */
@@ -1121,7 +1157,8 @@ a.talk-title:hover {
 .contact-form-section input,
 .contact-form-section select,
 .contact-form-section textarea {
-  font-family: 'Roboto Serif Variable', Georgia, 'Times New Roman', serif;
+  font-family: 'Roboto Serif Variable', 'Roboto Serif Variable Fallback',
+    Georgia, 'Times New Roman', serif;
   font-size: 1.0625rem;
   color: var(--ink);
   background: transparent;
