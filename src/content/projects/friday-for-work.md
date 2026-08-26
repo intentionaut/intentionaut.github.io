@@ -1,6 +1,6 @@
 ---
 title: Friday
-summary: A career coach for early-career crew in film, TV and theatre. It coaches instead of writing.
+summary: A career coach for early-career crew and production. An experiment in how we can use LLMs to coach and guide instead of write for us.
 url: https://fridayforwork.com
 role: Founder · Product · Design · Build
 timeline: Concept to beta in one week
