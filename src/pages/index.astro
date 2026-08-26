@@ -31,32 +31,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </ul>
   </section>
 
-  <section class="wrap signup" aria-label="Newsletter signup">
-    <h2>Don't miss the post.</h2>
-    <p class="signup-sub">
-      Fortnightly thoughts on leadership, impact and getting clear about
-      things that matter.
-    </p>
-    <form
-      class="signup-form"
-      action="https://embeds.beehiiv.com/96b7bfbb-25ad-448f-a8e8-b4d61019e30d/subscribe"
-      method="POST"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <label class="sr-only" for="home-email">Email address</label>
-      <input
-        class="signup-input"
-        type="email"
-        id="home-email"
-        name="email"
-        placeholder="your@email.com"
-        required
-      />
-      <button class="btn-plain" type="submit">Subscribe</button>
-    </form>
-  </section>
-
   <section class="wrap manifesto">
     <p>
       Most teams don't lack talent or tools. They lack intention, a shared
@@ -95,5 +69,31 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <a class="link-arrow" href="/writing"><span>Read along</span></a>
       </li>
     </ol>
+  </section>
+
+  <section class="wrap signup" aria-label="Newsletter signup">
+    <h2>Don't miss the post.</h2>
+    <p class="signup-sub">
+      Fortnightly thoughts on leadership, impact and getting clear about
+      things that matter.
+    </p>
+    <form
+      class="signup-form"
+      action="https://embeds.beehiiv.com/96b7bfbb-25ad-448f-a8e8-b4d61019e30d/subscribe"
+      method="POST"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <label class="sr-only" for="home-email">Email address</label>
+      <input
+        class="signup-input"
+        type="email"
+        id="home-email"
+        name="email"
+        placeholder="your@email.com"
+        required
+      />
+      <button class="btn-plain" type="submit">Subscribe</button>
+    </form>
   </section>
 </BaseLayout>
