@@ -1178,7 +1178,7 @@ a.talk-title:hover {
   overflow: hidden;
   appearance: none;
   -webkit-appearance: none;
-  background: transparent;
+  background: var(--paper);
   border: 1px solid var(--ink);
   color: var(--ink);
   font-family: var(--font-body);
