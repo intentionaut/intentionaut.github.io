@@ -7,7 +7,7 @@ Personal site of Saielle DaSilva — product leader across design, data & AI.
 - [Astro](https://astro.build) — static site generator
 - [GitHub Pages](https://pages.github.com) — hosting (deploys on every push to `main` via GitHub Actions)
 - [PagesCMS](https://pagescms.org) — git-based CMS for editing content & uploading photos
-- Fonts self-hosted via Fontsource (Fraunces + Inter)
+- Fonts self-hosted via Fontsource: Fraunces (display), Jost (body/UI); Roboto Serif on the contact form
 
 ## Commands
 
@@ -28,7 +28,7 @@ Personal site of Saielle DaSilva — product leader across design, data & AI.
 
 - Homepage hero/lanes copy → `src/pages/index.astro`
 - Contact page & rates → `src/pages/contact.astro`
-- Writing/Substack link → `src/pages/writing.astro` (`substackUrl`)
+- Writing/Newsletter link → `src/pages/writing.astro`
 - Site-wide meta description → `src/layouts/BaseLayout.astro`
 - Colors & typography → `src/styles/global.css` (CSS variables at top)
 - Talks & About story → `src/content/…` (or use the CMS)
@@ -53,11 +53,16 @@ and once DNS propagates, tick **Enforce HTTPS**.
 
 ## TODO before "done"
 
-- [ ] Replace sample talk in `src/content/talks/` with real ones (via CMS)
+- [x] Talks are real (mtpcon keynote, Business of Software ×2, Turing Fest 2021, One Knight in Product); sample removed
 - [ ] Personalize About story (via CMS) — current text is a strong draft
-- [ ] Confirm Substack URL in `src/pages/writing.astro`
+- [x] Cloudflare Web Analytics live (token in `BaseLayout.astro`, production-only)
+- [x] Confirm newsletter URL in `src/pages/writing.astro` (beehiiv)
 - [ ] Set up email forwarding for `hello@intentionaut.com` (GoDaddy → Email Forwarding → forward to your real inbox)
 - [x] Email decided: `hello@intentionaut.com` (spelling-proof, on-brand)
-- [ ] Confirm LinkedIn URL (`saielle-dasilva`) in Header/Footer/Contact
+- [x] Confirm LinkedIn URL: `/in/intentionaut` in Footer, Contact
 - [ ] Point DNS records above, then enforce HTTPS
-- [ ] Add an og-image (`public/og.png`) for nicer link previews
+- [x] Add an og-image (`public/og.png`) for nicer link previews
+
+## Working docs
+
+- `docs/framework.md` — The Intention Test: canonical definition of the shared-understanding framework behind *Impact First Leadership* (work in progress, not published)

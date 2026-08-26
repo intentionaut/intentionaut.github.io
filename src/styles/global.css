@@ -868,7 +868,7 @@ a.talk-title:hover {
 
 /* ---------- Writing card ---------- */
 
-.substack-card {
+.newsletter-card {
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
@@ -881,7 +881,7 @@ a.talk-title:hover {
   transition: background-color var(--dur-base) ease;
 }
 
-.substack-card::after {
+.newsletter-card::after {
   content: '';
   position: absolute;
   inset: 3px;
@@ -889,8 +889,50 @@ a.talk-title:hover {
   pointer-events: none;
 }
 
-.substack-card:hover {
+.newsletter-card:hover {
   background: rgba(169, 203, 208, 0.18);
+}
+
+.news-band .newsletter-card {
+  max-width: 34rem;
+  margin: 0 auto clamp(3rem, 6vw, 5rem);
+}
+
+/* ---------- Credibility strip ---------- */
+
+.cred-strip {
+  border-block: 1px solid var(--line);
+  padding-block: var(--space-6);
+}
+
+.cred-label {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.cred-logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-3) var(--space-7);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cred-logos li {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: 0.65;
 }
 
 .card-kicker {
@@ -1192,6 +1234,26 @@ a.talk-title:hover {
   font-style: italic;
   color: var(--muted);
   min-height: 1.5em;
+}
+
+.faq-link {
+  margin: var(--space-5) 0 0;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.faq {
+  max-width: 46rem;
+}
+
+.faq h2 {
+  font-size: 1.25rem;
+  margin-top: var(--space-7);
+  margin-bottom: var(--space-2);
+}
+
+.faq p {
+  margin: 0 0 var(--space-3);
 }
 
 @media (max-width: 560px) {
