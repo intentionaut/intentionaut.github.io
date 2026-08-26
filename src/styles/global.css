@@ -1203,6 +1203,28 @@ a.talk-title:hover {
   border-bottom: 1px solid var(--line);
 }
 
+.rate-card {
+  position: relative;
+  border: 1px solid var(--ink);
+  padding: var(--space-6) var(--space-7);
+  margin-bottom: var(--space-4);
+  text-decoration: none;
+  color: inherit;
+  transition: background-color var(--dur-base) ease;
+}
+
+.rate-card::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border: 1px solid var(--line);
+  pointer-events: none;
+}
+
+.rate-card:hover {
+  background: rgba(169, 203, 208, 0.18);
+}
+
 .rate-row dt {
   font-family: var(--font-display);
   font-optical-sizing: auto;
