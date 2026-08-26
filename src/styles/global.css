@@ -302,6 +302,9 @@ h3 {
   z-index: 0;
   display: inline-block;
   overflow: hidden;
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--paper);
   border: 1px solid var(--ink);
   color: var(--ink);
   font-family: var(--font-body);
@@ -1039,7 +1042,7 @@ a.talk-title:hover {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--muted);
-  background: transparent;
+  background: var(--paper);
   border: 1px solid var(--line);
   border-radius: var(--radius-s);
   padding: 0.6em 1.1em;
