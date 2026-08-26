@@ -10,7 +10,7 @@ Since then, I have found the same pattern everywhere. Products, teams and busine
 
 My work is to find that connection, give it direction and turn it into something that earns its place in the world: products people want to use, experiences they come back to and results investors and customers can see.
 
-I am trans and neurodivergent. Finding my place took work, and taught me to notice the quiet ways systems decide who belongs. When something works beautifully for the people it was built around and poorly for everyone else, that is not an edge case. It is a design decision, whether anyone meant it to be or not.
+On a personal level, I am trans and neurodivergent. Finding my place took work, and taught me to notice the ways that systems decide who belongs. When something works beautifully for the people it was built around and poorly for everyone else, that is not an edge case. It is a decision, whether anyone meant it to be or not.
 
 That perspective has made me a better product leader. It has made me pay attention to who is in the room, who is missing, what gets lost in translation and what assumptions have quietly found their way into the work.
 
