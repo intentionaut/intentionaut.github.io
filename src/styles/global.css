@@ -997,7 +997,7 @@ a.talk-title:hover {
 .signup {
   text-align: center;
   padding-block: var(--space-7);
-  border-block: 1px solid var(--line);
+  border-top: 1px solid var(--line);
 }
 
 .signup h2 {
