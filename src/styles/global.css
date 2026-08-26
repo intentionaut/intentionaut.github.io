@@ -634,7 +634,7 @@ h3 {
 
 .img-wrap {
   max-width: 85%;
-  margin: 2.5em auto;
+  margin: var(--space-8) auto;
 }
 
 .img-card {
@@ -659,7 +659,7 @@ h3 {
 }
 
 .img-wrap figcaption {
-  margin-top: 0.4em;
+  margin-top: var(--space-1);
   font-family: var(--font-body);
   font-size: 0.65rem;
   font-weight: 600;
