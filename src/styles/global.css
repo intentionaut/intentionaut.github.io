@@ -653,7 +653,8 @@ h3 {
 }
 
 .prose figcaption {
-  margin-top: 0.5em;
+  margin-top: 0.3em;
+  margin-bottom: 1.5em;
   font-family: var(--font-body);
   font-size: 10pt;
   font-weight: 600;
@@ -1456,6 +1457,17 @@ a.talk-title:hover {
     gap: var(--space-5);
     padding-top: var(--space-4);
   }
+}
+
+.ledger-row {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.ledger-row.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 @media (prefers-reduced-motion: reduce) {
