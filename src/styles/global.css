@@ -1050,6 +1050,7 @@ a.talk-title:hover {
 
 .contact-form-section {
   max-width: 34rem;
+  margin-inline: auto;
   padding-bottom: clamp(3rem, 6vw, 5rem);
 }
 
