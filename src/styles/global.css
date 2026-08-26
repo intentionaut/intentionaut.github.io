@@ -637,7 +637,9 @@ h3 {
   margin: 2em auto;
   width: 80%;
   height: auto;
-  border-radius: 4px;
+  border: 1px solid var(--ink);
+  outline: 1px solid var(--line);
+  outline-offset: 3px;
 }
 
 @media (min-width: 768px) {
