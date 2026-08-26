@@ -34,15 +34,11 @@ function stripBeehiivHtml(html: string): string {
   content = content.replace(/<div\s*>\s*<div\s*>\s*<\/div>\s*<\/div>/g, '');
   content = content.replace(/<div\s*>\s*<\/div>/g, '');
   content = content.replace(/<span\s*>\s*<\/span>/g, '');
+  content = content.replace(/<small\s*>\s*<p[^>]*>([^<]*)<\/p>\s*<\/small>/g, '');
 
   content = content.replace(
     /<p[^>]*>\s*(Photo\s+by\s+[^<]+)<\/p>/gi,
     '<figcaption>$1</figcaption>'
-  );
-
-  content = content.replace(
-    /<a[^>]*>\s*(<figcaption>[\s\S]*?<\/figcaption>)\s*<\/a>/gi,
-    '$1'
   );
 
   content = content.replace(
@@ -51,13 +47,24 @@ function stripBeehiivHtml(html: string): string {
   );
 
   content = content.replace(
-    /<\/figure>\s*<div[^>]*>\s*<figcaption>([\s\S]*?)<\/figcaption>\s*<\/div>/gi,
-    '</figure><figcaption class="img-caption">$1</figcaption>'
+    /<\/figure>\s*(?:<div[^>]*>\s*)?(<a[^>]*>)?\s*<figcaption>([\s\S]*?)<\/figcaption>\s*(<\/a>)?\s*(?:<\/div>)?/gi,
+    (_, aOpen, caption, aClose) =>
+      `</figure>${aOpen ?? ''}<figcaption class="img-caption">${caption}</figcaption>${aClose ?? ''}`
   );
 
   content = content.replace(
-    /(<figure class="img-card">[\s\S]*?<\/figure>)([\s\S]*?<figcaption class="img-caption">[\s\S]*?<\/figcaption>)?/gi,
-    '<div class="img-wrap">$1$2</div>'
+    /<figure class="img-card">/g,
+    '<div class="img-wrap"><figure class="img-card">'
+  );
+
+  content = content.replace(
+    /(<\/figure>)([\s\S]*?)(?=<div class="img-wrap">|<figure|<p |<h[1-6]|<ul|<ol|<blockquote|$)/g,
+    (match, closeFig, between) => {
+      if (between.trim().length === 0) {
+        return closeFig + '</div>';
+      }
+      return closeFig + between + '</div>';
+    }
   );
 
   return content.trim();
