@@ -10,15 +10,6 @@ const entries = [...writingEntries].sort(
   (a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf()
 );
 
-// Even-spaced dot rail: order along the line, not elapsed time
-const chrono = [...writingEntries].sort(
-  (a, b) => new Date(a.date).valueOf() - new Date(b.date).valueOf()
-);
-let running = 0;
-const pts = chrono.map((e) => ({ e, n: ++running }));
-const N = pts.length;
-const railPct = (i: number) => 4 + (i / (N - 1)) * 92;
-
 const slugify = (s: string) =>
   s
     .toLowerCase()
@@ -62,26 +53,6 @@ const fmtDate = (e: (typeof entries)[number]) =>
     </a>
 
     <section class="archive" aria-label="Writing archive">
-      <div class="ribbon-wrap">
-        <figure class="cumulative">
-          <div class="ribbon-baseline" aria-hidden="true"></div>
-          {
-            pts.map(({ e, n }, i) => (
-              <button
-                class="tick"
-                style={`left:${railPct(i).toFixed(2)}%`}
-                data-theme={e.themes.join(' ')}
-                data-target={`w-${slugify(e.title)}`}
-                aria-label={`${e.title}, piece ${n} of ${N}, ${fmtDate(e)}`}
-              >
-                <span class="tick-dot" />
-                <span class="tick-tip">{e.title}</span>
-              </button>
-            ))
-          }
-        </figure>
-      </div>
-
       <div class="chips" role="group" aria-label="Filter writing by theme">
         <button class="chip is-active" data-filter="all" aria-pressed="true">
           Everything <sup>{entries.length}</sup>
@@ -153,16 +124,6 @@ const fmtDate = (e: (typeof entries)[number]) =>
 
     chips.forEach((chip) =>
       chip.addEventListener('click', () => applyFilter(chip.dataset.filter!))
-    );
-
-    document.querySelectorAll<HTMLButtonElement>('.tick').forEach((tick) =>
-      tick.addEventListener('click', () => {
-        applyFilter('all');
-        const target = document.getElementById(tick.dataset.target ?? '');
-        target?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        target?.classList.add('flash');
-        setTimeout(() => target?.classList.remove('flash'), 1600);
-      })
     );
   </script>
 </BaseLayout>

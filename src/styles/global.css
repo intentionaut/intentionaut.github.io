@@ -846,82 +846,6 @@ a.talk-title:hover {
   padding-bottom: clamp(3rem, 6vw, 5rem);
 }
 
-.ribbon-wrap {
-  margin-block: var(--space-2) var(--space-7);
-  overflow-x: auto;
-  scrollbar-width: thin;
-}
-
-.cumulative {
-  position: relative;
-  min-width: 560px;
-  height: 96px;
-  margin: 0;
-}
-
-.ribbon-baseline {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 34px;
-  height: 1px;
-  background: var(--line);
-}
-
-.tick {
-  position: absolute;
-  bottom: 22px;
-  transform: translateX(-50%);
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-}
-
-.tick-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--accent);
-  transition: transform var(--dur-fast) ease, background-color var(--dur-fast) ease;
-}
-
-.tick:hover .tick-dot,
-.tick:focus-visible .tick-dot {
-  background: var(--ink);
-  transform: scale(1.55);
-}
-
-.tick-tip {
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translate(-50%, 6px);
-  background: var(--ink);
-  color: var(--paper);
-  font-family: var(--font-body);
-  font-size: 0.72rem;
-  letter-spacing: 0.04em;
-  padding: 0.4em 0.75em;
-  border-radius: var(--radius-s);
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity var(--dur-fast) ease, transform var(--dur-fast) ease;
-  z-index: var(--z-tip);
-}
-
-.tick:hover .tick-tip,
-.tick:focus-visible .tick-tip {
-  opacity: 1;
-  transform: translate(-50%, 2px);
-}
-
 .chips {
   display: flex;
   flex-wrap: wrap;
@@ -1059,13 +983,6 @@ a.talk-title:hover {
   max-width: 52ch;
   color: var(--muted);
   font-size: 0.98rem;
-}
-
-.email-hint {
-  margin: var(--space-4) 0 0;
-  font-size: 0.85rem;
-  letter-spacing: 0.04em;
-  color: var(--muted);
 }
 
 /* ---------- Contact form ---------- */
