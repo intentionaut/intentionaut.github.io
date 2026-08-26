@@ -643,6 +643,7 @@ h3 {
   position: relative;
   border: 1px solid var(--ink);
   padding: 8px;
+  margin: 0;
 }
 
 .img-card::after {
