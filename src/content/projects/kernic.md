@@ -1,6 +1,6 @@
 ---
 title: Kernic
-summary: An open source CLI that turns design decisions into clean tokens. Built for small teams and the AI agents writing their interfaces.
+summary: An open source CLI that turns vibe coding into MCP ready design systems for easier management and consistency. Built for small teams and the AI agents writing their interfaces.
 url: https://github.com/intentionaut/kernic
 linkLabel: GitHub Repo
 ctaLabel: Visit GitHub Repo
