@@ -17,6 +17,13 @@ const {
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
+
+// Cloudflare Web Analytics: cookieless, GDPR-friendly, no banner required.
+// Paste your beacon token from dash.cloudflare.com -> Web Analytics below.
+// Nothing loads until this stops being the placeholder.
+const CF_ANALYTICS_TOKEN = '41ba3048abea4294bc3977e2d8074ebb';
+const showAnalytics =
+  import.meta.env.PROD && !CF_ANALYTICS_TOKEN.startsWith('REPLACE');
 ---
 
 <!doctype html>
@@ -33,6 +40,16 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta name="twitter:card" content="summary" />
+    {
+      showAnalytics && (
+        <script
+          is:inline
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon={JSON.stringify({ token: CF_ANALYTICS_TOKEN })}
+        />
+      )
+    }
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
