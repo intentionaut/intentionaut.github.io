@@ -12,7 +12,18 @@ const links = [
 <header class="site-header">
   <div class="wrap">
     <a class="wordmark" href="/">Saielle DaSilva</a>
-    <nav class="site-nav" aria-label="Main">
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="site-menu"
+      aria-label="Menu"
+    >
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+    <nav class="site-nav" id="site-menu" aria-label="Main">
       <ul>
         {
           links.map((link) => (
@@ -30,3 +41,20 @@ const links = [
     </nav>
   </div>
 </header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
+  const nav = document.getElementById('site-menu');
+
+  toggle?.addEventListener('click', () => {
+    const open = document.body.classList.toggle('menu-open');
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+
+  nav?.querySelectorAll('a').forEach((a) =>
+    a.addEventListener('click', () => {
+      document.body.classList.remove('menu-open');
+      toggle?.setAttribute('aria-expanded', 'false');
+    })
+  );
+</script>
