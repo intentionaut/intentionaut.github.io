@@ -1,0 +1,167 @@
+---
+import '@fontsource-variable/roboto-serif';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
+---
+
+<BaseLayout
+  title="Strategic Direction | Saielle DaSilva"
+  description="For teams with a strategic opportunity but fuzzy direction. Saielle helps you find the right problem before you build the wrong thing."
+>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Leadership &amp; advisory</p>
+      <h1>Find the right problem before you build the wrong thing.</h1>
+      <p class="lede">
+        For teams with a strategic opportunity but fuzzy direction.
+      </p>
+    </header>
+
+    <div class="prose">
+      <p>
+        Everyone has a different opinion about what you should do. The board
+        wants progress. The technology is moving faster than the organisation.
+        Nobody really owns the whole problem.
+      </p>
+      <p>
+        Most transformations fail here, before a line of code is written.
+        Not because the team lacks talent, but because nobody has a shared
+        answer to a basic question: what are we actually trying to do?
+      </p>
+
+      <h2>What I do</h2>
+      <p>
+        I come in for a fixed period to establish clarity. Not a roadmap
+        deck. A shared understanding of the problem, the strategic thesis,
+        the product direction and the measures that tell you whether you are
+        making progress.
+      </p>
+      <p>
+        I work with your leadership team to surface assumptions, test the
+        strategic thesis and make the implicit explicit.
+      </p>
+
+      <h2>What you get</h2>
+      <ul>
+        <li>The problem or opportunity, clearly framed</li>
+        <li>A strategic thesis the leadership team actually believes</li>
+        <li>Product direction and prioritisation logic</li>
+        <li>An operating model that matches the work</li>
+        <li>Measures of success you can track, not just report</li>
+      </ul>
+
+      <h2>How it works</h2>
+      <p>
+        Typically two to four weeks. Two or three days a week. Enough time
+        to listen, diagnose and synthesize, not so long that urgency
+        dissipates.
+      </p>
+      <p>
+        The engagement ends with a direction document and a set of decisions
+        your team can act on immediately.
+      </p>
+    </div>
+
+    <section class="contact-form-section" aria-label="Get in touch">
+      <div class="contact-card">
+        <h2>Let's talk.</h2>
+        <p class="form-lede">
+          If your team is stuck between a big opportunity and a fuzzy plan,
+          that is exactly the work I do.
+        </p>
+        <form id="contact-form" novalidate>
+          <input type="hidden" name="source" value="strategic-direction" />
+          <div class="form-grid">
+            <label>
+              <span class="form-label">Name</span>
+              <input type="text" name="name" required autocomplete="name" />
+            </label>
+            <label>
+              <span class="form-label">Email</span>
+              <input type="email" name="email" required autocomplete="email" />
+            </label>
+          </div>
+          <label>
+            <span class="form-label">What's this about?</span>
+            <select name="topic">
+              <option value="strategic-direction" selected>
+                Strategic direction
+              </option>
+              <option value="execution">Execution &amp; transformation</option>
+              <option value="fractional">Fractional leadership</option>
+              <option value="advisory">Advisory</option>
+              <option value="speaking">Speaking &amp; workshops</option>
+              <option value="mentoring">Mentoring</option>
+              <option value="other">Something else</option>
+            </select>
+          </label>
+          <label>
+            <span class="form-label">Message</span>
+            <textarea name="message" rows="5" required></textarea>
+          </label>
+          {
+            TURNSTILE_SITEKEY && (
+              <>
+                <div
+                  class="cf-turnstile"
+                  data-sitekey={TURNSTILE_SITEKEY}
+                  data-theme="light"
+                />
+                <script
+                  is:inline
+                  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+                  async
+                  defer
+                />
+              </>
+            )
+          }
+          <button class="btn-plain" type="submit">Send it</button>
+          <p class="form-status" id="form-status" role="status"></p>
+        </form>
+      </div>
+      <p class="faq-link">
+        Questions first? <a href="/faq">Read the FAQ.</a>
+      </p>
+    </section>
+  </section>
+
+  <script>
+    const ENDPOINT = 'https://formspree.io/f/TODO';
+    const form = document.getElementById('contact-form');
+    const status = document.getElementById('form-status');
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form));
+      const statusEl = document.getElementById('form-status');
+
+      if (ENDPOINT.includes('TODO')) {
+        const body = encodeURIComponent(
+          `${data.message}\n\n- ${data.name} (${data.email})\nTopic: ${data.topic}\nSource: ${data.source}`
+        );
+        window.location.href = `mailto:hello@intentionaut.com?subject=${encodeURIComponent(
+          `[intentionaut.com] ${data.topic}`
+        )}&body=${body}`;
+        return;
+      }
+
+      try {
+        const res = await fetch(ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(data),
+        });
+        if (res.ok) {
+          form.reset();
+          if (statusEl) statusEl.textContent = "Thank you; I'll reply soon.";
+        } else {
+          if (statusEl) statusEl.textContent = 'Something went wrong; please email me directly.';
+        }
+      } catch {
+        if (statusEl) statusEl.textContent = 'Something went wrong; please email me directly.';
+      }
+    });
+  </script>
+</BaseLayout>

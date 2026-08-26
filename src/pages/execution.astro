@@ -1,0 +1,172 @@
+---
+import '@fontsource-variable/roboto-serif';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
+---
+
+<BaseLayout
+  title="Execution &amp; Transformation | Saielle DaSilva"
+  description="For teams that have the strategy but are struggling to make it happen. Saielle turns direction into a system that delivers."
+>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Leadership &amp; advisory</p>
+      <h1>Turn strategy into a system that delivers.</h1>
+      <p class="lede">
+        For teams that know where they are going but are struggling to make
+        it happen.
+      </p>
+    </header>
+
+    <div class="prose">
+      <p>
+        You have bought the technology. You have a strategy deck. The board
+        has seen the plan. But the organisation has not figured out the
+        product and operational system around it.
+      </p>
+      <p>
+        This is the messy middle between strategy and execution. It is where
+        most transformations stall. Not because of a lack of investment, but
+        because nobody owns the whole chain from direction to outcome.
+      </p>
+
+      <h2>What I do</h2>
+      <p>
+        I help you translate strategy into an executable system. Portfolio to
+        products. Products to platforms. Platforms to teams. Teams to
+        governance and measurable outcomes.
+      </p>
+      <p>
+        This is especially effective around AI and data. Lots of
+        organisations have acquired the capability without building the
+        product thinking, team structure and decision-making system that
+        turns technology into value.
+      </p>
+
+      <h2>What you get</h2>
+      <ul>
+        <li>Strategy to portfolio translation</li>
+        <li>Product and platform architecture aligned to business outcomes</li>
+        <li>Team structure and operating model design</li>
+        <li>Governance that enables, not bottlenecks</li>
+        <li>Outcome frameworks you can actually measure</li>
+      </ul>
+
+      <h2>How it works</h2>
+      <p>
+        Typically four to twelve weeks. Two or three days a week. Enough
+        time to diagnose the system, design the operating model and
+        establish the rhythms that keep it running after I step back.
+      </p>
+      <p>
+        The engagement ends with an operating system your team can run
+        independently, and governance rhythms that keep strategy connected
+        to execution.
+      </p>
+    </div>
+
+    <section class="contact-form-section" aria-label="Get in touch">
+      <div class="contact-card">
+        <h2>Let's talk.</h2>
+        <p class="form-lede">
+          If you have the strategy and the technology but the system around
+          them is not working, that is the problem I solve.
+        </p>
+        <form id="contact-form" novalidate>
+          <input type="hidden" name="source" value="execution" />
+          <div class="form-grid">
+            <label>
+              <span class="form-label">Name</span>
+              <input type="text" name="name" required autocomplete="name" />
+            </label>
+            <label>
+              <span class="form-label">Email</span>
+              <input type="email" name="email" required autocomplete="email" />
+            </label>
+          </div>
+          <label>
+            <span class="form-label">What's this about?</span>
+            <select name="topic">
+              <option value="strategic-direction">
+                Strategic direction
+              </option>
+              <option value="execution" selected>
+                Execution &amp; transformation
+              </option>
+              <option value="fractional">Fractional leadership</option>
+              <option value="advisory">Advisory</option>
+              <option value="speaking">Speaking &amp; workshops</option>
+              <option value="mentoring">Mentoring</option>
+              <option value="other">Something else</option>
+            </select>
+          </label>
+          <label>
+            <span class="form-label">Message</span>
+            <textarea name="message" rows="5" required></textarea>
+          </label>
+          {
+            TURNSTILE_SITEKEY && (
+              <>
+                <div
+                  class="cf-turnstile"
+                  data-sitekey={TURNSTILE_SITEKEY}
+                  data-theme="light"
+                />
+                <script
+                  is:inline
+                  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+                  async
+                  defer
+                />
+              </>
+            )
+          }
+          <button class="btn-plain" type="submit">Send it</button>
+          <p class="form-status" id="form-status" role="status"></p>
+        </form>
+      </div>
+      <p class="faq-link">
+        Questions first? <a href="/faq">Read the FAQ.</a>
+      </p>
+    </section>
+  </section>
+
+  <script>
+    const ENDPOINT = 'https://formspree.io/f/TODO';
+    const form = document.getElementById('contact-form');
+    const status = document.getElementById('form-status');
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form));
+      const statusEl = document.getElementById('form-status');
+
+      if (ENDPOINT.includes('TODO')) {
+        const body = encodeURIComponent(
+          `${data.message}\n\n- ${data.name} (${data.email})\nTopic: ${data.topic}\nSource: ${data.source}`
+        );
+        window.location.href = `mailto:hello@intentionaut.com?subject=${encodeURIComponent(
+          `[intentionaut.com] ${data.topic}`
+        )}&body=${body}`;
+        return;
+      }
+
+      try {
+        const res = await fetch(ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(data),
+        });
+        if (res.ok) {
+          form.reset();
+          if (statusEl) statusEl.textContent = "Thank you; I'll reply soon.";
+        } else {
+          if (statusEl) statusEl.textContent = 'Something went wrong; please email me directly.';
+        }
+      } catch {
+        if (statusEl) statusEl.textContent = 'Something went wrong; please email me directly.';
+      }
+    });
+  </script>
+</BaseLayout>

@@ -1,0 +1,171 @@
+---
+import '@fontsource-variable/roboto-serif';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
+---
+
+<BaseLayout
+  title="Fractional Product Director | Saielle DaSilva"
+  description="A senior product leader without the permanent commitment. Saielle provides Director-level leadership for a defined period."
+>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Leadership &amp; advisory</p>
+      <h1>A senior product leader without the permanent commitment.</h1>
+      <p class="lede">
+        For teams that need Director-level leadership, but are not ready for
+        a permanent hire.
+      </p>
+    </header>
+
+    <div class="prose">
+      <p>
+        Sometimes you do not need a consultant. You need someone who will
+        own the problem. Someone who shows up, makes the hard calls,
+        leads the team and stays accountable for the outcome.
+      </p>
+      <p>
+        But the timing is not right for a permanent hire. The role is
+        evolving. You need to prove the model before you commit. Or you
+        need someone senior while you figure out the permanent answer.
+      </p>
+
+      <h2>What I do</h2>
+      <p>
+        I become your senior product leader for a defined period. Typically
+        one or two days a week, over three to six months. I have executive
+        stakeholder access, I lead the team, I make strategic decisions and
+        I am accountable for delivery.
+      </p>
+      <p>
+        This is not advisory from the sidelines. It is leadership from
+        inside the organisation, with the same authority and accountability
+        as a permanent Director.
+      </p>
+
+      <h2>What you get</h2>
+      <ul>
+        <li>Strategic decisions and product direction</li>
+        <li>Team leadership and coaching</li>
+        <li>Product operating model design and run</li>
+        <li>Executive stakeholder management</li>
+        <li>Delivery accountability and outcomes</li>
+      </ul>
+
+      <h2>How it works</h2>
+      <p>
+        A minimum commitment of three months. One or two days a week. Enough
+        time to build context, lead with authority and create real momentum.
+      </p>
+      <p>
+        The engagement ends with a clear handover: a functioning team, an
+        operating model that runs without me, and decisions that do not need
+        relitigating.
+      </p>
+    </div>
+
+    <section class="contact-form-section" aria-label="Get in touch">
+      <div class="contact-card">
+        <h2>Let's talk.</h2>
+        <p class="form-lede">
+          If your team needs a senior product leader who will own the problem
+          and stay until it is solved, let us talk.
+        </p>
+        <form id="contact-form" novalidate>
+          <input type="hidden" name="source" value="fractional" />
+          <div class="form-grid">
+            <label>
+              <span class="form-label">Name</span>
+              <input type="text" name="name" required autocomplete="name" />
+            </label>
+            <label>
+              <span class="form-label">Email</span>
+              <input type="email" name="email" required autocomplete="email" />
+            </label>
+          </div>
+          <label>
+            <span class="form-label">What's this about?</span>
+            <select name="topic">
+              <option value="strategic-direction">
+                Strategic direction
+              </option>
+              <option value="execution">Execution &amp; transformation</option>
+              <option value="fractional" selected>
+                Fractional leadership
+              </option>
+              <option value="advisory">Advisory</option>
+              <option value="speaking">Speaking &amp; workshops</option>
+              <option value="mentoring">Mentoring</option>
+              <option value="other">Something else</option>
+            </select>
+          </label>
+          <label>
+            <span class="form-label">Message</span>
+            <textarea name="message" rows="5" required></textarea>
+          </label>
+          {
+            TURNSTILE_SITEKEY && (
+              <>
+                <div
+                  class="cf-turnstile"
+                  data-sitekey={TURNSTILE_SITEKEY}
+                  data-theme="light"
+                />
+                <script
+                  is:inline
+                  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+                  async
+                  defer
+                />
+              </>
+            )
+          }
+          <button class="btn-plain" type="submit">Send it</button>
+          <p class="form-status" id="form-status" role="status"></p>
+        </form>
+      </div>
+      <p class="faq-link">
+        Questions first? <a href="/faq">Read the FAQ.</a>
+      </p>
+    </section>
+  </section>
+
+  <script>
+    const ENDPOINT = 'https://formspree.io/f/TODO';
+    const form = document.getElementById('contact-form');
+    const status = document.getElementById('form-status');
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form));
+      const statusEl = document.getElementById('form-status');
+
+      if (ENDPOINT.includes('TODO')) {
+        const body = encodeURIComponent(
+          `${data.message}\n\n- ${data.name} (${data.email})\nTopic: ${data.topic}\nSource: ${data.source}`
+        );
+        window.location.href = `mailto:hello@intentionaut.com?subject=${encodeURIComponent(
+          `[intentionaut.com] ${data.topic}`
+        )}&body=${body}`;
+        return;
+      }
+
+      try {
+        const res = await fetch(ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(data),
+        });
+        if (res.ok) {
+          form.reset();
+          if (statusEl) statusEl.textContent = "Thank you; I'll reply soon.";
+        } else {
+          if (statusEl) statusEl.textContent = 'Something went wrong; please email me directly.';
+        }
+      } catch {
+        if (statusEl) statusEl.textContent = 'Something went wrong; please email me directly.';
+      }
+    });
+  </script>
+</BaseLayout>
