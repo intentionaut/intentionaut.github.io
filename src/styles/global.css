@@ -1040,8 +1040,9 @@ a.talk-title:hover {
   color: var(--muted);
 }
 
-.contact-note {
+.form-lede {
   max-width: 52ch;
+  margin: 0 0 var(--space-6);
   color: var(--muted);
   font-size: 0.98rem;
 }
@@ -1125,7 +1126,7 @@ a.talk-title:hover {
 
 .contact-form-section h2 {
   font-size: 1.7rem;
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-3);
 }
 
 .contact-form-section form {
