@@ -61,6 +61,13 @@ A team inside the design system org, focused on strategic content needs across t
 
 The cost? Unsupported project teams still do not get strategic support, and prioritising legacy products is genuinely hard.
 
+## What changed from the original
+
+- Collapsed the seven rambling sub-headings into three: infrastructure, experience, and doing the hard thing early.
+- Turned the pros and cons lists into prose, with the "The cost?" beat doing the work the lists used to.
+- Moved the tense from "we are working with" to a decision already in motion: "So we are making changes".
+- Dropped the tracking params from links and cut the house-style tagline from the close.
+
 ## Further reading
 
 If you are thinking about content design in product, here is what has helped me. It takes a village, because words? Words are hard.

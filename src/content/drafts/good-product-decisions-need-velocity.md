@@ -54,6 +54,13 @@ Clarify the decision to be made and the boundaries for input as part of meeting 
 
 Whatever your approach, make it clear, limit inputs, and focus on eliminating barriers.
 
+## What changed from the original
+
+- Removed the emoji and the repeated "companies think about developer velocity" line.
+- Tightened every heading and cut filler such as "In fact" and "so how do we improve".
+- Fixed a sentence the original trailed off on, the one about what matters early in a product lifecycle. The draft completes it: knowing which decision comes next.
+- Dropped the `?ref=blossomat.work` tracking tags from every link.
+
 ---
 
 Thanks for reading. I would love your comments and feedback.

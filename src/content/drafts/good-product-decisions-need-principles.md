@@ -35,6 +35,13 @@ Each statement is reversible, and reversing it changes a lot about how a company
 
 As a leader you set the framework for decision making, then bring discussions back to principles and tradeoffs when the group hits a dead end, or when someone digs in on one position without flexing. That is one of the easiest ways to shape the conditions for good decision making.
 
+## What changed from the original
+
+- Turned the opening list of three tasks into prose, so the argument reads as a story, not an agenda.
+- Reframed the Business Tradeoffs as clear bullets instead of bold floating lines.
+- Dropped the `?ref=blossom-at-work` tracking tags and the generic thank-you sign-off.
+- Tightened the first line, losing the "can be a complex and challenging task but" throat-clearing.
+
 ---
 
 Thanks for reading. What principles do you use as the common language on your team? I would love to hear your thoughts, or start a conversation on [Mastodon](https://mastodon.lol/@intentionaut) or in the comments.
