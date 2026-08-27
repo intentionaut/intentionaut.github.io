@@ -923,6 +923,35 @@ a.talk-title:hover {
   border-top: 1px solid var(--line);
 }
 
+/* ---------- 404 ---------- */
+
+.err {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  min-height: 60vh;
+  padding-block: clamp(4.5rem, 10vw, 8rem);
+}
+
+.err .eyebrow {
+  color: var(--accent);
+}
+
+.err h1 {
+  max-width: 16ch;
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+}
+
+.err .lede {
+  max-width: 44ch;
+}
+
+.err .cta-row {
+  justify-content: center;
+  margin-block-start: var(--space-6);
+  animation: none;
+}
+
 /* ---------- Writing card ---------- */
 
 .newsletter-card {
