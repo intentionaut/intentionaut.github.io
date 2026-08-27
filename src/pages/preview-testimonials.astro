@@ -4,7 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout
   title="Testimonials preview | Saielle DaSilva"
-  description="Three ways to introduce testimonials on the contact page."
+  description="Three double-border testimonial card designs."
 >
   <style>
     .preview-head {
@@ -32,193 +32,262 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       margin-bottom: var(--space-7);
     }
 
-    /* ---- Option 1: stacked, red left-rule ---- */
-    .testi-rule {
-      border-top: 1px solid var(--ink);
-    }
-    .testi-rule .quote {
-      display: block;
-      padding: var(--space-6) 0 var(--space-6) var(--space-6);
-      border-bottom: 1px solid var(--line);
-      border-left: 3px solid var(--accent);
-      margin: 0;
-    }
-    .testi-rule .quote .q {
-      font-family: var(--font-display);
-      font-optical-sizing: auto;
-      font-size: clamp(1.15rem, 2vw, 1.35rem);
-      line-height: 1.5;
-      margin: 0 0 var(--space-3);
-    }
-    .testi-rule .quote .a {
-      font-family: var(--font-body);
-      font-size: 0.9rem;
-      color: var(--muted);
-      margin: 0;
-    }
-
-    /* ---- Option 2: grid of bordered cards ---- */
-    .testi-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: var(--space-5);
-    }
-    .testi-cards .quote {
-      border: 1px solid var(--ink);
-      padding: var(--space-6) var(--space-7);
+    /* Shared card shell: double border like .rate-card / .contact-card */
+    .tcard {
       position: relative;
-      margin: 0;
+      border: 1px solid var(--ink);
       background: var(--paper);
+      padding: var(--space-6) var(--space-7);
     }
-    .testi-cards .quote::before {
-      content: '“';
+    .tcard::after {
+      content: '';
       position: absolute;
-      top: 0;
-      left: var(--space-5);
-      font-family: var(--font-display);
-      font-size: 3rem;
-      line-height: 1;
-      color: var(--accent);
-      transform: translateY(-0.3rem);
+      inset: 3px;
+      border: 1px solid var(--line);
+      pointer-events: none;
     }
-    .testi-cards .quote .q {
+    .tcard .q {
       font-family: var(--font-display);
       font-optical-sizing: auto;
       font-size: 1.05rem;
       line-height: 1.5;
       margin: 0 0 var(--space-4);
     }
-    .testi-cards .quote .a {
+    .tcard .a {
       font-family: var(--font-body);
       font-size: 0.85rem;
       color: var(--muted);
       margin: 0;
     }
 
-    /* ---- Option 3: single pull-quote, editorial ---- */
-    .testi-editorial {
-      max-width: 46ch;
-    }
-    .testi-editorial .quote {
-      margin: 0;
-      text-align: center;
-    }
-    .testi-editorial .q {
-      font-family: var(--font-display);
-      font-optical-sizing: auto;
-      font-style: italic;
-      font-size: clamp(1.5rem, 3vw, 2rem);
-      line-height: 1.4;
-      margin: 0 0 var(--space-6);
-      position: relative;
-    }
-    .testi-editorial .q::before {
-      content: '“';
-      display: block;
-      font-size: 3rem;
-      color: var(--accent);
-      margin-bottom: var(--space-2);
-    }
-    .testi-editorial .a {
-      font-family: var(--font-body);
-      font-size: 0.9rem;
+    /* Photo / logo placeholder */
+    .ph {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(169, 203, 208, 0.35);
       color: var(--muted);
-      margin: 0;
-      letter-spacing: 0.05em;
+      border: 1px dashed var(--muted);
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    /* ---- New A: double-border grid, photo on top ---- */
+    .ta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-5);
+    }
+    .ta-grid .tcard {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+    .ta-grid .ph {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+    }
+
+    /* ---- New B: double-border grid, logo top-right ---- */
+    .tb-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-5);
+    }
+    .tb-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 220px;
+    }
+    .tb-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: var(--space-3);
+      margin-bottom: var(--space-4);
+    }
+    .tb-top .ph-logo {
+      width: 72px;
+      height: 32px;
+      flex: 0 0 auto;
+    }
+    .tb-quote {
+      margin: 0 0 var(--space-6);
+    }
+    .tb-quote .q {
+      margin-bottom: var(--space-3);
+    }
+
+    /* ---- New C: double-border, stacked photo left ---- */
+    .tc-stack {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);
+    }
+    .tc-card .tcard-inner {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: var(--space-6);
+      align-items: center;
+    }
+    .tc-card .ph {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .tc-card .q {
+      margin-bottom: var(--space-3);
+    }
+
+    @media (max-width: 560px) {
+      .tc-card .tcard-inner {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 
   <section class="wrap">
     <header class="page-head preview-head">
-      <p class="eyebrow">Design preview</p>
-      <h1>Three ways to show testimonials.</h1>
+      <p class="eyebrow">Testimonials · iteration 2</p>
+      <h1>Double-border cards, three layouts.</h1>
       <p class="lede">
-        Same three quotes, three visual treatments. Placement: contact page,
-        after the rates, before the form.
+        Same double border as the rates and contact form. A photo placeholder
+        appears in each. Deprecated the earlier three.
       </p>
     </header>
   </section>
 
-  <!-- Option 1 -->
-  <section class="preview-panel" aria-label="Option one, stacked list">
+  <!-- New A -->
+  <section class="preview-panel" aria-label="Option A photo top grid">
     <div class="wrap">
-      <p class="panel-label">Option 1 · Stacked, red left-rule</p>
-      <h2>Why people keep working with me</h2>
-      <div class="testi-rule">
-        <blockquote class="quote">
+      <p class="panel-label">A · Grid, photo on top</p>
+      <div class="ta-grid">
+        <div class="tcard">
+          <span class="ph" aria-hidden="true">Photo</span>
           <p class="q">
             Saielle doesn't tell you what you want to hear. She names the
             decision you've been avoiding and gives you the frame to make it,
             then she stays until it lands.
           </p>
           <p class="a">Chief Product Officer · UK scale-up</p>
-        </blockquote>
-        <blockquote class="quote">
+        </div>
+        <div class="tcard">
+          <span class="ph" aria-hidden="true">Photo</span>
           <p class="q">
             She gave our talk on higher impact product decisions, and the room
             hasn't made the same misaligned choice since. Teams that had never
             questioned the plan started asking which one thing mattered most.
           </p>
           <p class="a">Product leader · Sainsbury's</p>
-        </blockquote>
-        <blockquote class="quote">
+        </div>
+        <div class="tcard">
+          <span class="ph" aria-hidden="true">Photo</span>
           <p class="q">
             The rare leader who can go from a whiteboard strategy to shipped
             code in the same week. She brought our AI story into focus when
             nobody else could.
           </p>
           <p class="a">Founder &amp; CEO · pre-seed AI startup</p>
-        </blockquote>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Option 2 -->
-  <section class="preview-panel" aria-label="Option two, cards grid">
+  <!-- New B -->
+  <section class="preview-panel" aria-label="Option B logo top-right grid">
     <div class="wrap">
-      <p class="panel-label">Option 2 · Bordered card grid</p>
-      <h2>Why people keep working with me</h2>
-      <div class="testi-cards">
-        <blockquote class="quote">
-          <p class="q">
-            Saielle doesn't tell you what you want to hear. She names the
-            decision you've been avoiding and gives you the frame to make it,
-            then she stays until it lands.
-          </p>
+      <p class="panel-label">B · Grid, logo top-right</p>
+      <div class="tb-grid">
+        <div class="tcard tb-card">
+          <div>
+            <div class="tb-top">
+              <span class="ph" aria-hidden="true">Logo</span>
+              <span class="ph ph-logo" aria-hidden="true">Logo</span>
+            </div>
+            <div class="tb-quote">
+              <p class="q">
+                Saielle doesn't tell you what you want to hear. She names the
+                decision you've been avoiding and gives you the frame to make
+                it, then she stays until it lands.
+              </p>
+            </div>
+          </div>
           <p class="a">Chief Product Officer · UK scale-up</p>
-        </blockquote>
-        <blockquote class="quote">
-          <p class="q">
-            She gave our talk on higher impact product decisions, and the room
-            hasn't made the same misaligned choice since. Teams that had never
-            questioned the plan started asking which one thing mattered most.
-          </p>
+        </div>
+        <div class="tcard tb-card">
+          <div>
+            <div class="tb-top">
+              <span class="ph" aria-hidden="true">Logo</span>
+              <span class="ph ph-logo" aria-hidden="true">Logo</span>
+            </div>
+            <div class="tb-quote">
+              <p class="q">
+                She gave our talk on higher impact product decisions, and the
+                room hasn't made the same misaligned choice since. Teams that
+                had never questioned the plan started asking which one thing
+                mattered most.
+              </p>
+            </div>
+          </div>
           <p class="a">Product leader · Sainsbury's</p>
-        </blockquote>
-        <blockquote class="quote">
-          <p class="q">
-            The rare leader who can go from a whiteboard strategy to shipped
-            code in the same week. She brought our AI story into focus when
-            nobody else could.
-          </p>
+        </div>
+        <div class="tcard tb-card">
+          <div>
+            <div class="tb-top">
+              <span class="ph" aria-hidden="true">Logo</span>
+              <span class="ph ph-logo" aria-hidden="true">Logo</span>
+            </div>
+            <div class="tb-quote">
+              <p class="q">
+                The rare leader who can go from a whiteboard strategy to
+                shipped code in the same week. She brought our AI story into
+                focus when nobody else could.
+              </p>
+            </div>
+          </div>
           <p class="a">Founder &amp; CEO · pre-seed AI startup</p>
-        </blockquote>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Option 3 -->
-  <section class="preview-panel" aria-label="Option three, editorial pull quote">
+  <!-- New C -->
+  <section class="preview-panel" aria-label="Option C stacked with photo left">
     <div class="wrap">
-      <p class="panel-label">Option 3 · Editorial pull-quote</p>
-      <div class="testi-editorial">
-        <blockquote class="quote">
-          <p class="q">
-            She names the decision you've been avoiding and gives you the
-            frame to make it, then she stays until it lands.
-          </p>
-          <p class="a">Chief Product Officer · UK scale-up</p>
-        </blockquote>
+      <p class="panel-label">C · Stacked, photo left</p>
+      <div class="tc-stack">
+        <div class="tcard tc-card">
+          <div class="tcard-inner">
+            <span class="ph" aria-hidden="true">Photo</span>
+            <div>
+              <p class="q">
+                Saielle doesn't tell you what you want to hear. She names the
+                decision you've been avoiding and gives you the frame to make
+                it, then she stays until it lands.
+              </p>
+              <p class="a">Chief Product Officer · UK scale-up</p>
+            </div>
+          </div>
+        </div>
+        <div class="tcard tc-card">
+          <div class="tcard-inner">
+            <span class="ph" aria-hidden="true">Photo</span>
+            <div>
+              <p class="q">
+                She gave our talk on higher impact product decisions, and the
+                room hasn't made the same misaligned choice since. Teams that
+                had never questioned the plan started asking which one thing
+                mattered most.
+              </p>
+              <p class="a">Product leader · Sainsbury's</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
