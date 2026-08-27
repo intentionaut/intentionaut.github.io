@@ -50,7 +50,7 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
             now, before they're ready for a full-time hire.
           </dd>
         </a>
-        <a class="rate-row rate-card" href="/execution/">
+        <a class="rate-row rate-card" href="/speaking/">
           <dt>Speaking &amp; workshops</dt>
           <dd class="rate-price">£1,600 / event</dd>
           <dd class="rate-desc">
@@ -92,11 +92,12 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
           <label>
             <span class="form-label">What's this about?</span>
             <select name="topic">
-              <option>Advisory</option>
-              <option>Fractional leadership</option>
-              <option>Speaking &amp; workshops</option>
-              <option>Mentoring</option>
-              <option>Something else</option>
+              <option value="strategic-direction">Strategic direction</option>
+              <option value="execution">Execution &amp; transformation</option>
+              <option value="fractional">Fractional leadership</option>
+              <option value="speaking">Speaking &amp; workshops</option>
+              <option value="mentoring">Mentoring</option>
+              <option value="other">Something else</option>
             </select>
           </label>
           <label>
@@ -131,36 +132,26 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
   </section>
 
   <script>
-    const ENDPOINT = 'https://formspree.io/f/TODO';
+    const ENDPOINT = 'https://contact-form.intentionaut.workers.dev/contact';
     const form = document.getElementById('contact-form');
-    const status = document.getElementById('form-status');
 
     form?.addEventListener('submit', async (e) => {
       e.preventDefault();
       const data = Object.fromEntries(new FormData(form));
       const statusEl = document.getElementById('form-status');
 
-      if (ENDPOINT.includes('TODO')) {
-        const body = encodeURIComponent(
-          `${data.message}\n\n- ${data.name} (${data.email})\nTopic: ${data.topic}`
-        );
-        window.location.href = `mailto:hello@intentionaut.com?subject=${encodeURIComponent(
-          `[intentionaut.com] ${data.topic}`
-        )}&body=${body}`;
-        return;
-      }
-
       try {
         const res = await fetch(ENDPOINT, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data),
         });
+        const result = await res.json();
         if (res.ok) {
           form.reset();
-          if (statusEl) statusEl.textContent = "Thank you; I'll reply soon.";
+          if (statusEl) statusEl.textContent = result.message || "Thank you; I'll reply soon.";
         } else {
-          if (statusEl) statusEl.textContent = 'Something went wrong; please email me directly.';
+          if (statusEl) statusEl.textContent = result.error || 'Something went wrong; please email me directly.';
         }
       } catch {
         if (statusEl) statusEl.textContent = 'Something went wrong; please email me directly.';

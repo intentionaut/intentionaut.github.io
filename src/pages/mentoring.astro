@@ -129,36 +129,26 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
   </section>
 
   <script>
-    const ENDPOINT = 'https://formspree.io/f/TODO';
+    const ENDPOINT = 'https://contact-form.intentionaut.workers.dev/contact';
     const form = document.getElementById('contact-form');
-    const status = document.getElementById('form-status');
 
     form?.addEventListener('submit', async (e) => {
       e.preventDefault();
       const data = Object.fromEntries(new FormData(form));
       const statusEl = document.getElementById('form-status');
 
-      if (ENDPOINT.includes('TODO')) {
-        const body = encodeURIComponent(
-          `${data.message}\n\n- ${data.name} (${data.email})\nTopic: ${data.topic}\nSource: ${data.source}`
-        );
-        window.location.href = `mailto:hello@intentionaut.com?subject=${encodeURIComponent(
-          `[intentionaut.com] ${data.topic}`
-        )}&body=${body}`;
-        return;
-      }
-
       try {
         const res = await fetch(ENDPOINT, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data),
         });
+        const result = await res.json();
         if (res.ok) {
           form.reset();
-          if (statusEl) statusEl.textContent = "Thank you; I'll reply soon.";
+          if (statusEl) statusEl.textContent = result.message || "Thank you; I'll reply soon.";
         } else {
-          if (statusEl) statusEl.textContent = 'Something went wrong; please email me directly.';
+          if (statusEl) statusEl.textContent = result.error || 'Something went wrong; please email me directly.';
         }
       } catch {
         if (statusEl) statusEl.textContent = 'Something went wrong; please email me directly.';
