@@ -70,6 +70,307 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
       </dl>
     </section>
 
+    <section class="testimonials-section" aria-label="Testimonials">
+      <style>
+        :root {
+          --acc-blue: #a9cbd0;
+        }
+        .testimonials-section {
+          padding-bottom: clamp(3rem, 6vw, 5rem);
+        }
+        .testimonials-section h2 {
+          font-size: 1.7rem;
+          margin: 0 0 var(--space-2);
+        }
+        .testi-sub {
+          margin: 0 0 var(--space-7);
+          max-width: 52ch;
+          font-size: 1.05rem;
+          color: var(--muted);
+        }
+        .carousel {
+          position: relative;
+        }
+        .carousel-track {
+          display: grid;
+          grid-auto-flow: column;
+          grid-auto-columns: 88%;
+          gap: var(--space-6);
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          scrollbar-width: none;
+          padding: var(--space-1);
+        }
+        .carousel-track::-webkit-scrollbar {
+          display: none;
+        }
+        @media (min-width: 720px) {
+          .carousel-track {
+            grid-auto-columns: calc(50% - var(--space-3));
+          }
+        }
+        .tcard {
+          position: relative;
+          border: 1px solid var(--ink);
+          background: var(--paper);
+          padding: var(--space-6) var(--space-7);
+          display: flex;
+          flex-direction: column;
+          scroll-snap-align: start;
+          height: 380px;
+        }
+        .tcard::after {
+          content: '';
+          position: absolute;
+          inset: 3px;
+          border: 1px solid var(--line);
+          pointer-events: none;
+        }
+        .tcard .q {
+          font-family: var(--font-display);
+          font-optical-sizing: auto;
+          font-size: 1.12rem;
+          line-height: 1.55;
+          margin: 0 0 var(--space-4);
+          overflow-y: auto;
+          flex: 1 1 auto;
+          min-height: 0;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+        .tcard .a {
+          margin: 0;
+          flex-shrink: 0;
+          min-height: calc(var(--space-9) + var(--space-6));
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          font-family: var(--font-body);
+          font-size: 0.85rem;
+          color: var(--muted);
+        }
+        .tcard .a .name {
+          display: block;
+          color: var(--ink);
+          font-weight: 600;
+          font-size: 0.95rem;
+          margin-bottom: 0.15em;
+          border-top: 1px solid var(--line);
+          padding-top: var(--space-4);
+        }
+        .tcard .a .name a {
+          color: inherit;
+          text-decoration: none;
+        }
+        .tcard .a .name a:hover,
+        .tcard .a .role a:hover {
+          text-decoration: underline;
+          text-decoration-color: var(--accent);
+        }
+        .tcard .a .role {
+          display: block;
+          font-style: italic;
+        }
+        .tcard .a .role a {
+          color: var(--muted);
+          text-decoration: none;
+        }
+        .carousel-controls {
+          display: flex;
+          align-items: center;
+          gap: var(--space-3);
+          margin-top: var(--space-6);
+        }
+        .car-arrow {
+          position: relative;
+          z-index: 0;
+          appearance: none;
+          background: var(--paper);
+          border: 1px solid var(--ink);
+          color: var(--ink);
+          font-family: var(--font-body);
+          font-size: 0.78rem;
+          font-weight: 600;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+          min-width: 3rem;
+          height: 3rem;
+          padding: 0 var(--space-4);
+          cursor: pointer;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          transition: color var(--dur-med) ease;
+        }
+        .car-arrow::after {
+          content: '';
+          position: absolute;
+          inset: 3px;
+          border: 1px solid var(--line);
+          pointer-events: none;
+          transition: border-color var(--dur-med) ease;
+        }
+        .car-arrow::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          z-index: -1;
+          background: var(--acc-blue);
+          transform: scaleX(0);
+          transform-origin: center;
+          transition: transform var(--dur-med) ease;
+        }
+        .car-arrow:hover {
+          color: var(--ink);
+        }
+        .car-arrow:hover::before {
+          transform: scaleX(1);
+        }
+        .car-arrow:hover::after {
+          border-color: var(--ink);
+        }
+        .car-arrow:disabled {
+          opacity: 0.45;
+          cursor: default;
+          color: var(--muted);
+        }
+        .car-arrow:disabled::before {
+          transform: scaleX(0);
+        }
+        .car-arrow:disabled::after {
+          border-color: var(--line);
+        }
+        .car-hint {
+          font-family: var(--font-body);
+          font-size: 0.8rem;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: var(--muted);
+        }
+      </style>
+
+      <h2>Testimonials</h2>
+      <p class="testi-sub">
+        I leave organisations clearer about what matters. See for yourself.
+      </p>
+
+      <div class="carousel" id="testi-carousel">
+        <div class="carousel-track" id="testi-track">
+          <div class="tcard">
+            <p class="q">
+              Saielle is an amazing leader. She has brought strong product and
+              design skills and perspective to our organization. As a true
+              360-degree leader she has been able to listen, lead and
+              influence her team, her peers and the broader organization. I
+              highly recommend her to elevate product thinking and
+              capabilities.
+            </p>
+            <p class="a">
+              <span class="name">
+                <a href="https://www.linkedin.com/in/susanstandiford/" target="_blank" rel="noopener noreferrer">Susan Standiford</a>
+              </span>
+              <span class="role">
+                Former CTPO, <a href="https://www.linkedin.com/in/susanstandiford/" target="_blank" rel="noopener noreferrer">Stepstone, IKEA</a>
+              </span>
+            </p>
+          </div>
+
+          <div class="tcard">
+            <p class="q">
+              Saielle helped a new product team choose the right product
+              management tool for their needs. She offered her experience
+              generously, asked the right questions, and saved them a lot of
+              heartache. I can't thank her enough.
+            </p>
+            <p class="a">
+              <span class="name">
+                <a href="https://www.goroadmaps.com/" target="_blank" rel="noopener noreferrer">Bruce McCarthy</a>
+              </span>
+              <span class="role">
+                Co-Author, <a href="https://www.goroadmaps.com/" target="_blank" rel="noopener noreferrer">Product Roadmaps Relaunched</a>
+              </span>
+            </p>
+          </div>
+
+          <div class="tcard">
+            <p class="q">
+              Saielle has a great talent for listening to problems, quickly
+              understanding the situation, and helping others unpack ways to
+              get through blockers and to the next phase in decision making.
+            </p>
+            <p class="a">
+              <span class="name">
+                <a href="https://www.linkedin.com/in/thedailyem/" target="_blank" rel="noopener noreferrer">Emily Tate</a>
+              </span>
+              <span class="role">
+                VP of Product, <a href="https://www.linkedin.com/in/thedailyem/" target="_blank" rel="noopener noreferrer">Mind the Product</a>
+              </span>
+            </p>
+          </div>
+
+          <div class="tcard">
+            <p class="q">
+              Saielle has the rare gift of uncovering the "why" in every
+              situation. I've watched her do this with stakeholder requests,
+              product prioritization, and driving conversations toward the
+              outcomes that actually matter.
+            </p>
+            <p class="a">
+              <span class="name">
+                <a href="https://www.linkedin.com/in/wesgalliher/" target="_blank" rel="noopener noreferrer">Wes Galliher, PhD.</a>
+              </span>
+              <span class="role">
+                Director of Product Management, <a href="https://www.linkedin.com/in/wesgalliher/" target="_blank" rel="noopener noreferrer">Weave</a>
+              </span>
+            </p>
+          </div>
+
+          <div class="tcard">
+            <p class="q">
+              Saielle is a design leader with a great mind for product, and
+              she's also led product teams. Many of us claim expertise in
+              either product or design, but it's the rare person who can speak
+              with passion, expertise and curiosity to both. She is that rare
+              person.
+            </p>
+            <p class="a">
+              <span class="name">
+                <a href="https://www.linkedin.com/in/randysilver/" target="_blank" rel="noopener noreferrer">Randy Silver</a>
+              </span>
+              <span class="role">
+                Co-Host, <a href="https://www.linkedin.com/in/randysilver/" target="_blank" rel="noopener noreferrer">The Product Experience Podcast</a>
+              </span>
+            </p>
+          </div>
+
+          <div class="tcard">
+            <p class="q">
+              Saielle hired for potential. I was not a profile ticking all the
+              boxes, yet she believed I could make the jump from consultancy
+              into the in-house world. That's a rare skill in a product
+              leader: going beyond boxes and valuing people for what they can
+              become, not just what they already are.
+            </p>
+            <p class="a">
+              <span class="name">
+                <a href="https://www.linkedin.com/in/alessandracanella/" target="_blank" rel="noopener noreferrer">Alessandra Canella</a>
+              </span>
+              <span class="role">
+                Head of Design, <a href="https://www.linkedin.com/in/alessandracanella/" target="_blank" rel="noopener noreferrer">Mega</a>
+              </span>
+            </p>
+          </div>
+        </div>
+
+        <div class="carousel-controls">
+          <button class="car-arrow" type="button" id="testi-prev" aria-label="Previous testimonials">‹</button>
+          <button class="car-arrow" type="button" id="testi-next" aria-label="Next testimonials">›</button>
+          <span class="car-hint">Scroll or use the arrows</span>
+        </div>
+      </div>
+    </section>
+
     <section class="contact-form-section" aria-label="Send a message">
       <div class="contact-card">
         <h2>Leave me a note.</h2>
@@ -157,5 +458,33 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
         if (statusEl) statusEl.textContent = 'Something went wrong; please email me directly.';
       }
     });
+
+    const track = document.getElementById('testi-track')!;
+    const prev = document.getElementById('testi-prev') as HTMLButtonElement | null;
+    const next = document.getElementById('testi-next') as HTMLButtonElement | null;
+
+    const update = () => {
+      const max = track.scrollWidth - track.clientWidth;
+      if (prev) prev.disabled = track.scrollLeft <= 0;
+      if (next) next.disabled = track.scrollLeft >= max - 1;
+    };
+
+    const step = () => {
+      const card = track.querySelector<HTMLElement>('.tcard');
+      if (!card) return 0;
+      const cardWidth = card.getBoundingClientRect().width + 20;
+      return cardWidth * 2;
+    };
+
+    next?.addEventListener('click', () => {
+      track.scrollBy({ left: step(), behavior: 'smooth' });
+    });
+    prev?.addEventListener('click', () => {
+      track.scrollBy({ left: -step(), behavior: 'smooth' });
+    });
+
+    track.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
   </script>
 </BaseLayout>
