@@ -7,6 +7,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   description="Testimonial carousel in the Red 3 opening quote card style."
 >
   <style>
+    :root {
+      --acc-blue: #a9cbd0;
+    }
+
     .preview-head {
       padding-block: var(--space-8) var(--space-5);
       border-bottom: 1px solid var(--line);
@@ -184,7 +188,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       position: absolute;
       inset: 0;
       z-index: -1;
-      background: var(--accent);
+      background: var(--acc-blue);
       transform: scaleX(0);
       transform-origin: center;
       transition: transform var(--dur-med) ease;
@@ -193,13 +197,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       z-index: 0;
     }
     .car-arrow:hover {
-      color: var(--paper);
+      color: var(--ink);
     }
     .car-arrow:hover::before {
       transform: scaleX(1);
     }
     .car-arrow:hover::after {
-      border-color: rgba(247, 233, 224, 0.55);
+      border-color: var(--ink);
     }
     .car-arrow:disabled {
       opacity: 0.45;
