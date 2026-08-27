@@ -92,10 +92,11 @@ export const testimonials: Testimonial[] = [
     role: 'Senior Director, Software Engineering',
     org: 'Ford Motor Company',
     url: 'https://www.linkedin.com/in/scott-erkkila/',
-    enabled: true,
+    enabled: false,
     placements: ['contact'],
     source: 'LinkedIn recommendation',
     receivedAt: '2024-01-01',
+    note: 'Temporarily off at Saielle\'s request, 2026-08-27. Expected back — not removed for any problem with the quote.',
   },
   {
     id: 'emily-tate',
