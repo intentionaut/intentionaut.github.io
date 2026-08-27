@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const drafts = (await getCollection('drafts')).sort((a, b) =>
+  a.data.title.localeCompare(b.data.title)
+);
+---
+
+<BaseLayout
+  title="Drafts | Saielle DaSilva"
+  description="Amended drafts of essays reworked in Saielle DaSilva's current voice. The originals still stand."
+>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Drafts</p>
+      <h1>Rewritten, in the open.</h1>
+      <p class="lede">
+        These are amended drafts of older essays, reworked in the voice I use
+        now. The originals still stand, untouched. Drafts are here so the work
+        is visible before anything is settled.
+      </p>
+    </header>
+
+    <ol class="talk-list ledger">
+      {
+        drafts.map((draft) => (
+          <li class="talk-row ledger-row">
+            <span class="talk-date">Draft</span>
+            <div>
+              <a class="talk-title" href={`/draft/${draft.id}/`}>
+                {draft.data.title}
+              </a>
+              <p class="talk-meta">
+                Amends: <a href={draft.data.originalUrl}>{draft.data.originalTitle}</a>
+              </p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+
+    <section class="article-footer">
+      <a class="link-arrow" href="/writing"><span>Back to all writing</span></a>
+    </section>
+  </section>
+</BaseLayout>
+
+<style>
+  .article-footer {
+    padding-block: clamp(3rem, 6vw, 5rem);
+    border-top: 1px solid var(--line);
+  }
+</style>

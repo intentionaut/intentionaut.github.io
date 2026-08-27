@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const drafts = await getCollection('drafts');
+  return drafts.map((draft) => ({
+    params: { slug: draft.id },
+    props: { draft },
+  }));
+}
+
+const { draft } = Astro.props;
+const { Content } = await render(draft);
+---
+
+<BaseLayout
+  title={`${draft.data.title} (draft) | Saielle DaSilva`}
+  description={draft.data.description}
+>
+  <article class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Draft</p>
+      <h1>{draft.data.title}</h1>
+      <p class="lede">{draft.data.description}</p>
+    </header>
+
+    <section class="draft-note" aria-label="About this draft">
+      <p>
+        This is an amended draft of{' '}
+        <a href={draft.data.originalUrl}>{draft.data.originalTitle}</a>. The
+        original still stands; this is a reworked version in the current
+        voice. Reading both is the point.
+      </p>
+    </section>
+
+    <div class="prose article-body">
+      <Content />
+    </div>
+
+    <section class="article-footer">
+      <p class="article-original">
+        Original: <a href={draft.data.originalUrl}>{draft.data.originalTitle}</a>
+      </p>
+      <a class="link-arrow" href="/draft"><span>Back to all drafts</span></a>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .draft-note {
+    margin-block: var(--space-3) var(--space-5);
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--line);
+    background: color-mix(in srgb, var(--paper) 60%, transparent);
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+
+  .draft-note a {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+
+  .article-footer {
+    padding-block: clamp(3rem, 6vw, 5rem);
+    border-top: 1px solid var(--line);
+  }
+
+  .article-original {
+    margin-bottom: var(--space-4);
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+</style>
