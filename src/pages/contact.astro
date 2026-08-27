@@ -102,7 +102,7 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
         }
         @media (min-width: 720px) {
           .carousel-track {
-            grid-auto-columns: calc(100% / 2.4 - var(--space-6));
+            grid-auto-columns: calc(100% / 2.2 - var(--space-6));
           }
         }
         .tcard {
@@ -113,7 +113,7 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
           display: flex;
           flex-direction: column;
           scroll-snap-align: start;
-          height: 380px;
+          height: 460px;
         }
         .tcard::after {
           content: '';
@@ -128,7 +128,6 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
           font-size: 1.12rem;
           line-height: 1.55;
           margin: 0 0 var(--space-4);
-          overflow-y: auto;
           flex: 1 1 auto;
           min-height: 0;
           display: flex;
@@ -422,8 +421,8 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
           <span class="num">01</span>
           <h3>You write in</h3>
           <p>
-            Tell me what you are working on and what is keeping you up at
-            night. A few lines is enough.
+            A few lines about what you are working on. No pitch needed, no
+            essay.
           </p>
         </li>
         <li class="how-step">
@@ -439,21 +438,18 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
           <h3>You get clear direction</h3>
           <p>
             Written notes afterwards: decisions made, next steps, who owns
-            what. Nothing surprising arrives later.
+            what. Clear before, during and after.
           </p>
         </li>
       </ol>
     </section>
-n>
-
 
     <section class="contact-form-section" id="contact-section" aria-label="Send a message">
       <div class="contact-card">
         <h2>Leave me a note.</h2>
         <p class="form-lede">
-          Tell me what you're working on and what's keeping you up at night.
-          I make time to reply to everyone who takes the time to share a
-          thought or kind word.
+          Tell me how I can help. I'd love to know what you're working on.
+          I'll tell you how I can help.
         </p>
         <form id="contact-form" novalidate>
           <div class="form-grid">
@@ -479,7 +475,7 @@ n>
           </label>
           <label>
             <span class="form-label">Message</span>
-            <textarea name="message" rows="5" required></textarea>
+            <textarea name="message" rows="3" required></textarea>
           </label>
           {
             TURNSTILE_SITEKEY && (
@@ -580,17 +576,14 @@ n>
           <summary>How does the sliding scale work?</summary>
           <div class="faq-body">
             <p>
-              Ask. If cost is the thing standing between you and booking, say
-              so in your note. It counts if you are paying yourself rather
-              than an employer, if your company is bootstrapped or unfunded,
-              if the work is for a charity, nonprofit or the public sector,
-              or if the full rate simply means you would not book at all.
+              Ask. If cost is the blocker, say so in your note. It counts if
+              you pay yourself, if your company is bootstrapped, a charity or
+              the public sector, or if the full rate means you won't book.
             </p>
             <p>
-              There is no proof to send, no essay to write and no
-              negotiation. I will confirm an adjusted rate when we book. A
-              few reduced slots each month keeps this honest; if the month is
-              full, I will tell you and we will find another way.
+              No proof, no essay. I confirm the adjusted rate when we book.
+              Reduced slots go fast; if the month is full, we find another
+              way.
             </p>
           </div>
         </details>
@@ -642,7 +635,7 @@ n>
           <div class="faq-body">
             <p>
               Invoice and bank transfer, GBP unless we agree otherwise. Terms
-              are on every proposal; nothing surprising arrives later.
+              are on every proposal.
             </p>
           </div>
         </details>
