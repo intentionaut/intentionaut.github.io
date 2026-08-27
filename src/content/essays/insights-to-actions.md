@@ -4,7 +4,7 @@ description: "As a product team the ultimate goal isn't the features you ship or
 date: 2021-05-22
 themes: ["research", "craft"]
 source: Blossom
-originalUrl: "https://web.archive.org/web/20210401000000*/www.blossomat.work/insights-to-actions"
+originalUrl: "https://web.archive.org/web/20250720085819/https://www.blossomat.work/insights-to-actions/"
 ---
 
 As a product team the ultimate goal isn't the features you ship or how often it's clarity about what to do and why it matters. Almost any team's culture can ship things; the truth is, [not all of them are valuable](https://www.forbes.com/sites/erikkain/2019/05/30/why-anthem-failed-and-why-it-was-never-destined-to-succeed/?sh=3f1b48242c90).

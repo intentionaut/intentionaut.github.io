@@ -4,7 +4,7 @@ description: "The title of my talk this year is Designing Stronger Product Cultu
 date: 2021-11-03
 themes: ["leadership"]
 source: Blossom
-originalUrl: "https://web.archive.org/web/20210401000000*/www.blossomat.work/building-stronger-product-cultures-turingfest-edition"
+originalUrl: "https://web.archive.org/web/20250806092651/https://www.blossomat.work/building-stronger-product-cultures-turingfest-edition/"
 ---
 
 I'm proud to share thoughts with the good folks in Edinburgh at 2021's Turing Fest. I know Brian and the crew have worked very hard to put on a lovely event and I'm honoured to join you all as a speaker.

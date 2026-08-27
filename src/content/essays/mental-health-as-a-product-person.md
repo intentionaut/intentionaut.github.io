@@ -4,7 +4,7 @@ description: "Imposter syndrome, depression, and anxiety are just some of the me
 date: 2021-05-15
 themes: ["career"]
 source: Blossom
-originalUrl: "https://web.archive.org/web/20210401000000*/www.blossomat.work/mental-health-as-a-product-person"
+originalUrl: "https://web.archive.org/web/20250619100342/https://www.blossomat.work/mental-health-as-a-product-person/"
 ---
 
 This post originally appeared on [Mind the Product](https://www.mindtheproduct.com/mental-health-as-a-product-person-lets-talk/) on October 19th 2019 it was co-written with [Martin Eriksson](https://twitter.com/bfgmartin).‍

@@ -4,7 +4,7 @@ description: "Having hired designers and product managers across several roles, 
 date: 2021-04-26
 themes: ["career", "craft"]
 source: Blossom
-originalUrl: "https://web.archive.org/web/20210401000000*/www.blossomat.work/5-reasons-to-reject-a-design-candidate"
+originalUrl: "https://web.archive.org/web/20250518030835/https://www.blossomat.work/5-reasons-to-reject-a-design-candidate/"
 ---
 
 Hiring is hard. Hiring UX designers and product managers is harder. There are lots of reasons you might pass on a candidate. Here's a quick list that helps you reduce bias in your hiring process by focusing on tangible reasons to pass on someone.

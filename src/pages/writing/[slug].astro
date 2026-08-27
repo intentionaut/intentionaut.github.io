@@ -1,70 +1,126 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
 import { fetchPosts } from '../../lib/beehiiv';
 
 export async function getStaticPaths() {
-  const posts = await fetchPosts();
-  return posts.map((post) => ({
+  const [posts, essays] = await Promise.all([
+    fetchPosts(),
+    getCollection('essays'),
+  ]);
+
+  const beehiivPaths = posts.map((post) => ({
     params: { slug: post.slug },
-    props: { post },
+    props: { type: 'beehiiv', post },
   }));
+
+  const essayPaths = essays.map((essay) => ({
+    params: { slug: essay.id },
+    props: { type: 'essay', essay },
+  }));
+
+  return [...beehiivPaths, ...essayPaths];
 }
 
-const { post } = Astro.props;
+const { type, post, essay } = Astro.props;
 
-const fmtDate = new Date(post.publish_date * 1000).toLocaleDateString(
-  'en-US',
-  { month: 'long', day: 'numeric', year: 'numeric' }
-);
+let essayContent: Awaited<ReturnType<typeof render>> | null = null;
+if (type === 'essay' && essay) {
+  essayContent = await render(essay);
+}
+
+const fmtDate = (d: string | number) =>
+  new Date(d).toLocaleDateString('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  });
 ---
 
-<BaseLayout
-  title={`${post.title} | Saielle DaSilva`}
-  description={post.subtitle || post.title}
->
-  <article class="wrap">
-    <header class="page-head">
-      <p class="eyebrow">Intentionaut</p>
-      <h1>{post.title}</h1>
-      {post.subtitle && <p class="lede">{post.subtitle}</p>}
-      <p class="article-meta">
-        {fmtDate} · {post.authors.join(', ')}
-      </p>
-    </header>
+{type === 'beehiiv' && post && (
+  <BaseLayout
+    title={`${post.title} | Saielle DaSilva`}
+    description={post.subtitle || post.title}
+  >
+    <article class="wrap">
+      <header class="page-head">
+        <p class="eyebrow">Intentionaut</p>
+        <h1>{post.title}</h1>
+        {post.subtitle && <p class="lede">{post.subtitle}</p>}
+        <p class="article-meta">
+          {fmtDate(post.publish_date * 1000)} · {post.authors.join(', ')}
+        </p>
+      </header>
 
-    <div class="prose article-body" set:html={post.content_html} />
+      <div class="prose article-body" set:html={post.content_html} />
 
-    <section class="signup article-cta" aria-label="Subscribe">
-      <h2>If this landed, you'll like the next one.</h2>
-      <p class="signup-sub">
-        Fortnightly essays on leadership, design and AI. No spam, unsubscribe
-        anytime.
-      </p>
-      <form
-        class="signup-form"
-        action="https://embeds.beehiiv.com/96b7bfbb-25ad-448f-a8e8-b4d61019e30d/subscribe"
-        method="POST"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <label class="sr-only" for="article-email">Email address</label>
-        <input
-          class="signup-input"
-          type="email"
-          id="article-email"
-          name="email"
-          placeholder="your@email.com"
-          required
-        />
-        <button class="btn-plain" type="submit">Subscribe</button>
-      </form>
-    </section>
+      <section class="signup article-cta" aria-label="Subscribe">
+        <h2>If this landed, you'll like the next one.</h2>
+        <p class="signup-sub">
+          Fortnightly essays on leadership, design and AI. No spam,
+          unsubscribe anytime.
+        </p>
+        <form
+          class="signup-form"
+          action="https://embeds.beehiiv.com/96b7bfbb-25ad-448f-a8e8-b4d61019e30d/subscribe"
+          method="POST"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <label class="sr-only" for="article-email">Email address</label>
+          <input
+            class="signup-input"
+            type="email"
+            id="article-email"
+            name="email"
+            placeholder="your@email.com"
+            required
+          />
+          <button class="btn-plain" type="submit">Subscribe</button>
+        </form>
+      </section>
 
-    <section class="article-footer">
-      <a class="link-arrow" href="/writing"><span>Back to all writing</span></a>
-    </section>
-  </article>
-</BaseLayout>
+      <section class="article-footer">
+        <a class="link-arrow" href="/writing"><span>Back to all writing</span></a>
+      </section>
+    </article>
+  </BaseLayout>
+)}
+
+{type === 'essay' && essay && essayContent && (
+  <BaseLayout
+    title={`${essay.data.title} | Saielle DaSilva`}
+    description={essay.data.description}
+  >
+    <article class="wrap">
+      <header class="page-head">
+        <p class="eyebrow">{essay.data.source}</p>
+        <h1>{essay.data.title}</h1>
+        <p class="article-meta">{fmtDate(essay.data.date.toString())}</p>
+      </header>
+
+      <div class="prose article-body">
+        <essayContent.Content />
+      </div>
+
+      <section class="article-footer">
+        {essay.data.originalUrl && (
+          <p class="article-original">
+            Originally published in {essay.data.source}.{' '}
+            <a
+              href={essay.data.originalUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View original
+            </a>
+          </p>
+        )}
+        <a class="link-arrow" href="/writing"><span>Back to all writing</span></a>
+      </section>
+    </article>
+  </BaseLayout>
+)}
 
 <style>
   .article-meta {
@@ -76,5 +132,11 @@ const fmtDate = new Date(post.publish_date * 1000).toLocaleDateString(
   .article-footer {
     padding-block: clamp(3rem, 6vw, 5rem);
     border-top: 1px solid var(--line);
+  }
+
+  .article-original {
+    margin-bottom: var(--space-4);
+    color: var(--muted);
+    font-size: 0.9rem;
   }
 </style>

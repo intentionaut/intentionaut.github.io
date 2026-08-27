@@ -4,7 +4,7 @@ description: "We can make design suck less by choosing to value insight over ide
 date: 2021-03-31
 themes: ["research", "leadership"]
 source: Blossom
-originalUrl: "https://web.archive.org/web/20210401000000*/www.blossomat.work/seven-ways-product-and-research-work-together"
+originalUrl: "https://web.archive.org/web/20250619103507/https://www.blossomat.work/seven-ways-product-and-research-work-together/"
 ---
 
 I work with lots of product managers and designers, both in my day job and as a mentor and coach. Here are a few lessons I've learned about increasing the impact of research in a product team's cult

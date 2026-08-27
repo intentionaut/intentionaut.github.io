@@ -4,7 +4,7 @@ description: "Hi everyone, I'm writing you all this letter because I'd like to a
 date: 2021-06-21
 themes: ["career"]
 source: Blossom
-originalUrl: "https://web.archive.org/web/20210401000000*/www.blossomat.work/a-personal-note"
+originalUrl: "https://web.archive.org/web/20250619091614/https://www.blossomat.work/a-personal-note/"
 ---
 
 Hi everyone,

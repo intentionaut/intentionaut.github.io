@@ -4,7 +4,7 @@ description: "Many companies think about developer velocity and story points, bu
 date: 2023-03-29
 themes: ["leadership", "research"]
 source: Blossom
-originalUrl: "https://web.archive.org/web/20210401000000*/www.blossomat.work/good-product-decisions-need-speed"
+originalUrl: "https://web.archive.org/web/20250518035122/https://www.blossomat.work/good-product-decisions-need-speed/"
 ---
 
 As product leaders, one of the most important things we can do to help ourselves and our organisations is create clarity around what makes good decisions. I find that in bigger organisations, the risks people focus on when asked about risk are external: Market share, security, new technologies and competitors usually top the charts of risks.

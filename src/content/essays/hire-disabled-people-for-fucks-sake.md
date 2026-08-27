@@ -4,7 +4,7 @@ description: "In 2020, 8.4 million people of working age (16-64) reported that t
 date: 2021-04-22
 themes: ["ethics"]
 source: Blossom
-originalUrl: "https://web.archive.org/web/20210401000000*/www.blossomat.work/hire-disabled-people-for-fucks-sake"
+originalUrl: "https://web.archive.org/web/20250619101435/https://www.blossomat.work/hire-disabled-people-for-fucks-sake/"
 ---
 
 Listen. We're not doing good enough. We need to have a conversation about the ways in which we fail to provide simple and basic accommodations for disabled people in society.

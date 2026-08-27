@@ -4,7 +4,7 @@ description: "I'm proud to share thoughts with the BoSConference folks and to br
 date: 2022-04-05
 themes: ["leadership"]
 source: Blossom
-originalUrl: "https://web.archive.org/web/20210401000000*/www.blossomat.work/how-to-hack-the-culture-stack"
+originalUrl: "https://web.archive.org/web/20250518041930/https://www.blossomat.work/how-to-hack-the-culture-stack/"
 ---
 
 I'm proud to share thoughts with the BoSConference folks and to bring an updated version of this content to bear on software leaders everywhere. Mark, Jo, Kirk, and all the crew have worked very hard to put on a lovely event and I'm honoured to join you all as a speaker.

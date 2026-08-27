@@ -4,7 +4,7 @@ description: "As product leaders, one of our most important responsibilities is 
 date: 2023-03-15
 themes: ["leadership", "research"]
 source: Blossom
-originalUrl: "https://web.archive.org/web/20210401000000*/www.blossomat.work/designing-good-decisions"
+originalUrl: "https://web.archive.org/web/20250424104532/https://www.blossomat.work/designing-good-decisions/"
 ---
 
 As product leaders, one of our most important responsibilities is to establish clear conditions for good decision making. Alignment on problems without clarity about how to make good decisions is where lots of the teams I've worked with over the past few years have found themselves.

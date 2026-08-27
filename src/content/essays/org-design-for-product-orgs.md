@@ -4,7 +4,7 @@ description: "An org chart is a bet...What it says is \"This layout of people is
 date: 2023-01-10
 themes: ["leadership"]
 source: Blossom
-originalUrl: "https://web.archive.org/web/20210401000000*/www.blossomat.work/org-design-for-product-orgs"
+originalUrl: "https://web.archive.org/web/20250518034600/https://www.blossomat.work/org-design-for-product-orgs/"
 ---
 
 ### #CultureOps – Getting conscious about org design

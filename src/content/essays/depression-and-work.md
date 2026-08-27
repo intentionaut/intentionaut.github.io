@@ -4,7 +4,7 @@ description: "Basecamp blew it. But you can do better. The personal IS political
 date: 2021-04-18
 themes: ["career", "leadership"]
 source: Blossom
-originalUrl: "https://web.archive.org/web/20210401000000*/www.blossomat.work/depression-and-work"
+originalUrl: "https://web.archive.org/web/20250619090004/https://www.blossomat.work/depression-and-work/"
 ---
 
 I have depression, and anxiety. I want to share this with you because if you, like me need to hear someone to say it, here it is: I am depressed. I am not alone. You're not alone. I also happen to lead a UX team and coach designers, product managers, researchers and others on how to do their best at work in software.

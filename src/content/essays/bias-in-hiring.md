@@ -4,7 +4,7 @@ description: "As a design leader, it is your responsibility to design the outcom
 date: 2021-04-07
 themes: ["ethics", "career"]
 source: Blossom
-originalUrl: "https://web.archive.org/web/20210401000000*/www.blossomat.work/bias-in-hiring"
+originalUrl: "https://web.archive.org/web/20250518033219/https://www.blossomat.work/bias-in-hiring/"
 ---
 
 ### Let's fix it

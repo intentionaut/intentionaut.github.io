@@ -4,7 +4,7 @@ description: "Words? Words are hard. The only thing harder than words is taking 
 date: 2021-04-12
 themes: ["craft"]
 source: Blossom
-originalUrl: "https://web.archive.org/web/20210401000000*/www.blossomat.work/content-is-a-product-discipline"
+originalUrl: "https://web.archive.org/web/20250619082933/https://www.blossomat.work/content-is-a-product-discipline/"
 ---
 
 Words? Words are hard.

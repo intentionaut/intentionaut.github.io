@@ -4,7 +4,7 @@ description: "I hope you flourish. Software is hard work"
 date: 2021-03-31
 themes: ["career"]
 source: Blossom
-originalUrl: "https://web.archive.org/web/20210401000000*/www.blossomat.work/welcome-to-blossom"
+originalUrl: "https://web.archive.org/web/20250518044228/https://www.blossomat.work/welcome-to-blossom/"
 ---
 
 I hope you flourish. Software is hard work. I wanted to write a collection of ideas and thoughts on how to stay soft, humane and resilient through the challenges software leaders face.
