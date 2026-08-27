@@ -4,13 +4,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout
   title="Testimonials preview | Saielle DaSilva"
-  description="Three double-border testimonial card designs with blue accents."
+  description="Double-border testimonial cards, plain."
 >
   <style>
-    :root {
-      --acc-blue: #4f7ea8;
-    }
-
     .preview-head {
       padding-block: var(--space-8) var(--space-5);
       border-bottom: 1px solid var(--line);
@@ -42,6 +38,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       border: 1px solid var(--ink);
       background: var(--paper);
       padding: var(--space-6) var(--space-7);
+      display: flex;
+      flex-direction: column;
     }
     .tcard::after {
       content: '';
@@ -64,105 +62,29 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       margin: 0;
     }
 
-    /* ---- New A: blue top keyline ---- */
-    .ta-grid {
+    .t-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: var(--space-5);
-    }
-    .ta-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: var(--acc-blue);
-      z-index: 1;
-    }
-
-    /* ---- New B: blue left rule + attribution keyline ---- */
-    .tb-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: var(--space-5);
-    }
-    .tb-card {
-      display: flex;
-      flex-direction: column;
-    }
-    .tb-card::before {
-      content: '';
-      position: absolute;
-      top: var(--space-6);
-      bottom: var(--space-6);
-      left: 0;
-      width: 4px;
-      background: var(--acc-blue);
-    }
-    .tb-card .q {
-      margin-bottom: var(--space-5);
-    }
-    .tb-attrib {
-      border-top: 1px solid var(--line);
-      padding-top: var(--space-4);
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: var(--space-3);
-    }
-    .tb-attrib .a {
-      margin: 0;
-    }
-    .tb-attrib .idx {
-      font-family: var(--font-display);
-      font-style: italic;
-      font-size: 0.85rem;
-      color: var(--acc-blue);
-    }
-
-    /* ---- New C: big blue index numeral ---- */
-    .tc-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: var(--space-5);
-    }
-    .tc-card {
-      display: flex;
-      flex-direction: column;
-    }
-    .tc-card .num {
-      font-family: var(--font-display);
-      font-size: 3rem;
-      line-height: 1;
-      color: var(--acc-blue);
-      margin-bottom: var(--space-5);
-    }
-    .tc-card .q {
-      margin-bottom: var(--space-5);
-    }
-    .tc-card .a {
-      margin-top: auto;
     }
   </style>
 
   <section class="wrap">
     <header class="page-head preview-head">
-      <p class="eyebrow">Testimonials · iteration 3</p>
-      <h1>Double-border cards, blue keylines.</h1>
+      <p class="eyebrow">Testimonials · settled</p>
+      <h1>Double-border cards, plain.</h1>
       <p class="lede">
-        No photos. Visual interest from blue accents, keylines and index
-        numerals. Same double border as the rates and contact form.
+        No photos, no blue. Just the double border, quote and attribution,
+        matching the rates and contact form.
       </p>
     </header>
   </section>
 
-  <!-- New A -->
-  <section class="preview-panel" aria-label="Option A blue top keyline">
+  <section class="preview-panel" aria-label="Double-border testimonial cards">
     <div class="wrap">
-      <p class="panel-label">A · Blue top keyline</p>
-      <div class="ta-grid">
-        <div class="tcard ta-card">
+      <h2>Why people keep working with me</h2>
+      <div class="t-grid">
+        <div class="tcard">
           <p class="q">
             Saielle doesn't tell you what you want to hear. She names the
             decision you've been avoiding and gives you the frame to make it,
@@ -170,7 +92,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </p>
           <p class="a">Chief Product Officer · UK scale-up</p>
         </div>
-        <div class="tcard ta-card">
+        <div class="tcard">
           <p class="q">
             She gave our talk on higher impact product decisions, and the room
             hasn't made the same misaligned choice since. Teams that had never
@@ -178,85 +100,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </p>
           <p class="a">Product leader · Sainsbury's</p>
         </div>
-        <div class="tcard ta-card">
-          <p class="q">
-            The rare leader who can go from a whiteboard strategy to shipped
-            code in the same week. She brought our AI story into focus when
-            nobody else could.
-          </p>
-          <p class="a">Founder &amp; CEO · pre-seed AI startup</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- New B -->
-  <section class="preview-panel" aria-label="Option B blue left rule">
-    <div class="wrap">
-      <p class="panel-label">B · Blue left rule + divider</p>
-      <div class="tb-grid">
-        <div class="tcard tb-card">
-          <p class="q">
-            Saielle doesn't tell you what you want to hear. She names the
-            decision you've been avoiding and gives you the frame to make it,
-            then she stays until it lands.
-          </p>
-          <div class="tb-attrib">
-            <p class="a">Chief Product Officer · UK scale-up</p>
-            <span class="idx">01</span>
-          </div>
-        </div>
-        <div class="tcard tb-card">
-          <p class="q">
-            She gave our talk on higher impact product decisions, and the room
-            hasn't made the same misaligned choice since. Teams that had never
-            questioned the plan started asking which one thing mattered most.
-          </p>
-          <div class="tb-attrib">
-            <p class="a">Product leader · Sainsbury's</p>
-            <span class="idx">02</span>
-          </div>
-        </div>
-        <div class="tcard tb-card">
-          <p class="q">
-            The rare leader who can go from a whiteboard strategy to shipped
-            code in the same week. She brought our AI story into focus when
-            nobody else could.
-          </p>
-          <div class="tb-attrib">
-            <p class="a">Founder &amp; CEO · pre-seed AI startup</p>
-            <span class="idx">03</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- New C -->
-  <section class="preview-panel" aria-label="Option C big index numeral">
-    <div class="wrap">
-      <p class="panel-label">C · Large blue index numeral</p>
-      <div class="tc-grid">
-        <div class="tcard tc-card">
-          <span class="num">01</span>
-          <p class="q">
-            Saielle doesn't tell you what you want to hear. She names the
-            decision you've been avoiding and gives you the frame to make it,
-            then she stays until it lands.
-          </p>
-          <p class="a">Chief Product Officer · UK scale-up</p>
-        </div>
-        <div class="tcard tc-card">
-          <span class="num">02</span>
-          <p class="q">
-            She gave our talk on higher impact product decisions, and the room
-            hasn't made the same misaligned choice since. Teams that had never
-            questioned the plan started asking which one thing mattered most.
-          </p>
-          <p class="a">Product leader · Sainsbury's</p>
-        </div>
-        <div class="tcard tc-card">
-          <span class="num">03</span>
+        <div class="tcard">
           <p class="q">
             The rare leader who can go from a whiteboard strategy to shipped
             code in the same week. She brought our AI story into focus when
