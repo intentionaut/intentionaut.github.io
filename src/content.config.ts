@@ -44,6 +44,15 @@ const drafts = defineCollection({
   }),
 });
 
+const stubs = defineCollection({
+  loader: glob({ pattern: ['**/*.md', '!**/_*.md', '!**/media/**'], base: './src/content/stubs' }),
+  schema: z.object({
+    title: z.string(),
+    source: z.string().optional(),
+    status: z.enum(['stub', 'draft', 'done']).default('stub'),
+  }),
+});
+
 const projects = defineCollection({
     loader: glob({ pattern: ['**/*.md', '!**/_*.md'], base: './src/content/projects' }),
   schema: z.object({
@@ -59,4 +68,4 @@ const projects = defineCollection({
   }),
 });
 
-export const collections = { talks, pages, projects, essays, drafts };
+export const collections = { talks, pages, projects, essays, drafts, stubs };
