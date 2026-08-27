@@ -121,6 +121,14 @@ export const writingEntries: WritingEntry[] = [
     themes: ['leadership', 'storytelling'],
   },
   {
+    title: 'How Culture Add Changes the Conversation on Hiring',
+    date: '2019-06-01',
+    dateLabel: '2019',
+    source: 'Mind the Product',
+    url: 'https://www.mindtheproduct.com/how-culture-add-changes-the-conversation-on-hiring/',
+    themes: ['leadership', 'ethics'],
+  },
+  {
     title: 'How to Hack the Culture Stack',
     date: '2022-04-05',
     source: 'Blossom',
