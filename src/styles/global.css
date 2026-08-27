@@ -1310,6 +1310,7 @@ a.talk-title:hover {
   max-width: 34rem;
   margin-inline: auto;
   padding-bottom: clamp(3rem, 6vw, 5rem);
+  scroll-margin-top: var(--space-7);
 }
 
 .contact-card {

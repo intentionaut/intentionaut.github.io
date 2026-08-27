@@ -15,18 +15,13 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
       <p class="eyebrow">Contact &amp; rates</p>
       <h1>Work with me.</h1>
       <p class="lede">
-        I'm currently open to new engagements: advisory, fractional
-        leadership, speaking and mentoring.
+        Got a product team doing something important, while AI keeps changing
+        the rules under you? That gap is where I work. I help teams and
+        organisations turn noisy ambition into clear decisions, across
+        design, data and AI. Email me, or use the form below.
       </p>
       <div class="cta-row">
-        <a class="btn-primary" href="mailto:hello@intentionaut.com">Email me</a>
-        <a
-          class="link-arrow"
-          href="https://www.linkedin.com/in/intentionaut"
-          target="_blank"
-          rel="noopener noreferrer"
-          >Find me on LinkedIn</a
-        >
+        <a class="btn-primary" href="#contact-section">Email me</a>
       </div>
     </header>
 
@@ -70,6 +65,84 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
       </dl>
     </section>
 
+    <section class="how-section" aria-label="How it works">
+      <style>
+        .how-section {
+          padding-bottom: clamp(3rem, 6vw, 5rem);
+        }
+        .how-section h2 {
+          font-size: 1.7rem;
+          margin-bottom: var(--space-7);
+        }
+        .how-steps {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: var(--space-9);
+          border-top: 1px solid var(--ink);
+        }
+        .how-step {
+          padding-top: var(--space-4);
+        }
+        .how-step .num {
+          display: block;
+          font-family: var(--font-display);
+          font-optical-sizing: auto;
+          font-style: italic;
+          font-size: 2.1rem;
+          line-height: 1;
+          margin-bottom: var(--space-3);
+          color: var(--accent);
+          opacity: 0.85;
+        }
+        .how-step h3 {
+          font-size: 1.3rem;
+          margin-bottom: var(--space-2);
+        }
+        .how-step p {
+          margin: 0;
+          font-size: 0.95rem;
+          color: var(--muted);
+          line-height: 1.6;
+        }
+        @media (max-width: 720px) {
+          .how-steps {
+            grid-template-columns: 1fr;
+            gap: var(--space-7);
+          }
+        }
+      </style>
+      <h2>How it works</h2>
+      <ol class="how-steps">
+        <li class="how-step">
+          <span class="num">01</span>
+          <h3>You write in</h3>
+          <p>
+            Tell me what you are working on and what is keeping you up at
+            night. A few lines is enough.
+          </p>
+        </li>
+        <li class="how-step">
+          <span class="num">02</span>
+          <h3>We scope it on a call</h3>
+          <p>
+            A short call to check it is a fit. Then you get a written
+            proposal: what we would do, when, and what it costs.
+          </p>
+        </li>
+        <li class="how-step">
+          <span class="num">03</span>
+          <h3>You get clear direction</h3>
+          <p>
+            Written notes afterwards: decisions made, next steps, who owns
+            what. Nothing surprising arrives later.
+          </p>
+        </li>
+      </ol>
+    </section>
+
     <section class="testimonials-section" aria-label="Testimonials">
       <style>
         :root {
@@ -106,7 +179,7 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
         }
         @media (min-width: 720px) {
           .carousel-track {
-            grid-auto-columns: calc(50% - var(--space-3));
+            grid-auto-columns: calc(100% / 2.4 - var(--space-6));
           }
         }
         .tcard {
@@ -371,7 +444,8 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
       </div>
     </section>
 
-    <section class="contact-form-section" aria-label="Send a message">
+
+    <section class="contact-form-section" id="contact-section" aria-label="Send a message">
       <div class="contact-card">
         <h2>Leave me a note.</h2>
         <p class="form-lede">
@@ -426,9 +500,92 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
           <p class="form-status" id="form-status" role="status"></p>
         </form>
       </div>
-      <p class="faq-link">
-        Questions first? <a href="/faq">Read the FAQ.</a>
+    </section>
+
+    <section class="faq-section" aria-label="Common questions">
+      <style>
+        .faq-section {
+          padding-bottom: clamp(3rem, 6vw, 5rem);
+        }
+        .faq-section h2.faq-title {
+          font-size: 1.7rem;
+          margin-bottom: var(--space-2);
+        }
+        .faq-sect-sub {
+          margin: 0 0 var(--space-7);
+          max-width: 52ch;
+          color: var(--muted);
+          font-size: 0.98rem;
+        }
+        .faq-steps {
+          border-top: 1px solid var(--ink);
+        }
+      </style>
+      <h2 class="faq-title">Fair questions.</h2>
+      <p class="faq-sect-sub">
+        Straight answers about rates, sliding scale and how engagements
+        actually run. Anything missing: ask me.
       </p>
+      <div class="faq faq-steps">
+        <section>
+          <h2>How does the sliding scale work?</h2>
+          <p>
+            Ask. If cost is the thing standing between you and booking, say
+            so in your note. It counts if you are paying yourself rather than
+            an employer, if your company is bootstrapped or unfunded, if the
+            work is for a charity, nonprofit or the public sector, or if the
+            full rate simply means you would not book at all.
+          </p>
+          <p>
+            There is no proof to send, no essay to write and no negotiation.
+            I will confirm an adjusted rate when we book. A few reduced slots
+            each month keeps this honest; if the month is full, I will tell
+            you and we will find another way.
+          </p>
+        </section>
+
+        <section>
+          <h2>Is fractional leadership a real commitment?</h2>
+          <p>
+            Yes, and that is the point. Fractional work runs on an agreed
+            rhythm over months, not days. Quick rescue thoughts are exactly
+            what strategy sessions are for; fractional leadership is for
+            teams that want direction held steady while they build.
+          </p>
+        </section>
+
+        <section>
+          <h2>Do you speak virtually?</h2>
+          <p>
+            Yes. Remote keynotes and workshops carry the same fee unless the
+            format is much shorter. For in-person events, travel and
+            accommodation are covered by the organizer.
+          </p>
+        </section>
+
+        <section>
+          <h2>Will you sign an NDA?</h2>
+          <p>Happily. Send yours, or use mine.</p>
+        </section>
+
+        <section>
+          <h2>Can I hire you full-time?</h2>
+          <p>
+            For the right role, yes. Director level and above. The same
+            clarity principle applies: shared understanding of the goal
+            before we commit. If that sounds like your team, write me a note
+            and tell me what you are trying to accomplish.
+          </p>
+        </section>
+
+        <section>
+          <h2>How does payment work?</h2>
+          <p>
+            Invoice and bank transfer, GBP unless we agree otherwise. Terms
+            are on every proposal; nothing surprising arrives later.
+          </p>
+        </section>
+      </div>
     </section>
   </section>
 
