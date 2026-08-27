@@ -1,0 +1,225 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Testimonials preview | Saielle DaSilva"
+  description="Three ways to introduce testimonials on the contact page."
+>
+  <style>
+    .preview-head {
+      padding-block: var(--space-8) var(--space-5);
+      border-bottom: 1px solid var(--line);
+    }
+    .preview-head h1 {
+      max-width: none;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+    }
+    .preview-panel {
+      padding-block: clamp(3.5rem, 7vw, 5.5rem);
+      border-bottom: 1px solid var(--line);
+    }
+    .preview-panel .panel-label {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: var(--space-6);
+    }
+    .preview-panel h2 {
+      font-size: 1.7rem;
+      margin-bottom: var(--space-7);
+    }
+
+    /* ---- Option 1: stacked, red left-rule ---- */
+    .testi-rule {
+      border-top: 1px solid var(--ink);
+    }
+    .testi-rule .quote {
+      display: block;
+      padding: var(--space-6) 0 var(--space-6) var(--space-6);
+      border-bottom: 1px solid var(--line);
+      border-left: 3px solid var(--accent);
+      margin: 0;
+    }
+    .testi-rule .quote .q {
+      font-family: var(--font-display);
+      font-optical-sizing: auto;
+      font-size: clamp(1.15rem, 2vw, 1.35rem);
+      line-height: 1.5;
+      margin: 0 0 var(--space-3);
+    }
+    .testi-rule .quote .a {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* ---- Option 2: grid of bordered cards ---- */
+    .testi-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-5);
+    }
+    .testi-cards .quote {
+      border: 1px solid var(--ink);
+      padding: var(--space-6) var(--space-7);
+      position: relative;
+      margin: 0;
+      background: var(--paper);
+    }
+    .testi-cards .quote::before {
+      content: '“';
+      position: absolute;
+      top: 0;
+      left: var(--space-5);
+      font-family: var(--font-display);
+      font-size: 3rem;
+      line-height: 1;
+      color: var(--accent);
+      transform: translateY(-0.3rem);
+    }
+    .testi-cards .quote .q {
+      font-family: var(--font-display);
+      font-optical-sizing: auto;
+      font-size: 1.05rem;
+      line-height: 1.5;
+      margin: 0 0 var(--space-4);
+    }
+    .testi-cards .quote .a {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* ---- Option 3: single pull-quote, editorial ---- */
+    .testi-editorial {
+      max-width: 46ch;
+    }
+    .testi-editorial .quote {
+      margin: 0;
+      text-align: center;
+    }
+    .testi-editorial .q {
+      font-family: var(--font-display);
+      font-optical-sizing: auto;
+      font-style: italic;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      line-height: 1.4;
+      margin: 0 0 var(--space-6);
+      position: relative;
+    }
+    .testi-editorial .q::before {
+      content: '“';
+      display: block;
+      font-size: 3rem;
+      color: var(--accent);
+      margin-bottom: var(--space-2);
+    }
+    .testi-editorial .a {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin: 0;
+      letter-spacing: 0.05em;
+    }
+  </style>
+
+  <section class="wrap">
+    <header class="page-head preview-head">
+      <p class="eyebrow">Design preview</p>
+      <h1>Three ways to show testimonials.</h1>
+      <p class="lede">
+        Same three quotes, three visual treatments. Placement: contact page,
+        after the rates, before the form.
+      </p>
+    </header>
+  </section>
+
+  <!-- Option 1 -->
+  <section class="preview-panel" aria-label="Option one, stacked list">
+    <div class="wrap">
+      <p class="panel-label">Option 1 · Stacked, red left-rule</p>
+      <h2>Why people keep working with me</h2>
+      <div class="testi-rule">
+        <blockquote class="quote">
+          <p class="q">
+            Saielle doesn't tell you what you want to hear. She names the
+            decision you've been avoiding and gives you the frame to make it,
+            then she stays until it lands.
+          </p>
+          <p class="a">Chief Product Officer · UK scale-up</p>
+        </blockquote>
+        <blockquote class="quote">
+          <p class="q">
+            She gave our talk on higher impact product decisions, and the room
+            hasn't made the same misaligned choice since. Teams that had never
+            questioned the plan started asking which one thing mattered most.
+          </p>
+          <p class="a">Product leader · Sainsbury's</p>
+        </blockquote>
+        <blockquote class="quote">
+          <p class="q">
+            The rare leader who can go from a whiteboard strategy to shipped
+            code in the same week. She brought our AI story into focus when
+            nobody else could.
+          </p>
+          <p class="a">Founder &amp; CEO · pre-seed AI startup</p>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- Option 2 -->
+  <section class="preview-panel" aria-label="Option two, cards grid">
+    <div class="wrap">
+      <p class="panel-label">Option 2 · Bordered card grid</p>
+      <h2>Why people keep working with me</h2>
+      <div class="testi-cards">
+        <blockquote class="quote">
+          <p class="q">
+            Saielle doesn't tell you what you want to hear. She names the
+            decision you've been avoiding and gives you the frame to make it,
+            then she stays until it lands.
+          </p>
+          <p class="a">Chief Product Officer · UK scale-up</p>
+        </blockquote>
+        <blockquote class="quote">
+          <p class="q">
+            She gave our talk on higher impact product decisions, and the room
+            hasn't made the same misaligned choice since. Teams that had never
+            questioned the plan started asking which one thing mattered most.
+          </p>
+          <p class="a">Product leader · Sainsbury's</p>
+        </blockquote>
+        <blockquote class="quote">
+          <p class="q">
+            The rare leader who can go from a whiteboard strategy to shipped
+            code in the same week. She brought our AI story into focus when
+            nobody else could.
+          </p>
+          <p class="a">Founder &amp; CEO · pre-seed AI startup</p>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- Option 3 -->
+  <section class="preview-panel" aria-label="Option three, editorial pull quote">
+    <div class="wrap">
+      <p class="panel-label">Option 3 · Editorial pull-quote</p>
+      <div class="testi-editorial">
+        <blockquote class="quote">
+          <p class="q">
+            She names the decision you've been avoiding and gives you the
+            frame to make it, then she stays until it lands.
+          </p>
+          <p class="a">Chief Product Officer · UK scale-up</p>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
