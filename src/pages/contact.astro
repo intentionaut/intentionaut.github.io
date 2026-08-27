@@ -1,9 +1,15 @@
 ---
 import '@fontsource-variable/roboto-serif';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { rates, gbp } from '../data/rates';
+import { testimonialsFor } from '../data/testimonials';
 
 // Cloudflare Turnstile sitekey (dash.cloudflare.com, Turnstile)
 const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
+
+// Edit src/data/testimonials.ts to add one, reorder them, or take one down.
+// Nothing on this page needs touching for any of that.
+const testimonials = testimonialsFor('contact');
 ---
 
 <BaseLayout
@@ -30,7 +36,7 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
       <dl class="rates">
         <a class="rate-row rate-card" href="/strategic-direction/">
           <dt>Strategy session</dt>
-          <dd class="rate-price">£400 · 90 min</dd>
+          <dd class="rate-price">{gbp(rates.strategySession)} · 90 min</dd>
           <dd class="rate-desc">
             A sounding board for founders and product leaders: strategy
             reviews, roadmap calls, hiring help, AI reality-checks.
@@ -39,7 +45,7 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
         </a>
         <a class="rate-row rate-card" href="/fractional/">
           <dt>Fractional leadership</dt>
-          <dd class="rate-price">£1,200 / day</dd>
+          <dd class="rate-price">{gbp(rates.fractional)} / day</dd>
           <dd class="rate-desc">
             Part-time head of product for early teams that need direction
             now, before they're ready for a full-time hire.
@@ -47,7 +53,7 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
         </a>
         <a class="rate-row rate-card" href="/speaker/">
           <dt>Speaking &amp; workshops</dt>
-          <dd class="rate-price">£1,600 / event</dd>
+          <dd class="rate-price">{gbp(rates.speaking)} / event</dd>
           <dd class="rate-desc">
             From conference keynotes to hands-on team sessions about building
             with intention across design, data and AI.
@@ -66,6 +72,10 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
     </section>
 
 
+    {/* Hidden entirely when nothing is enabled for this page, rather than
+        leaving a heading over an empty carousel. An empty state should mean
+        "there are none", and here there being none is a choice. */}
+    {testimonials.length > 0 && (
     <section class="testimonials-section" aria-label="Testimonials">
       <style>
         :root {
@@ -252,128 +262,28 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
 
       <div class="carousel" id="testi-carousel">
         <div class="carousel-track" id="testi-track">
-          <div class="tcard">
-            <p class="q">
-              Saielle is an amazing leader. She has brought strong product and
-              design skills and perspective to our organization. As a true
-              360-degree leader she has been able to listen, lead and
-              influence her team, her peers and the broader organization. I
-              highly recommend her to elevate product thinking and
-              capabilities.
-            </p>
-            <p class="a">
-              <span class="name">
-                <a href="https://www.linkedin.com/in/susanstandiford/" target="_blank" rel="noopener noreferrer">Susan Standiford</a>
-              </span>
-              <span class="role">
-                Former CTPO, <a href="https://www.linkedin.com/in/susanstandiford/" target="_blank" rel="noopener noreferrer">IKEA, Stepstone</a>
-              </span>
-            </p>
-          </div>
-
-          <div class="tcard">
-            <p class="q">
-              Saielle helped a new product team choose the right product
-              management tool for their needs. She offered her experience
-              generously, asked the right questions, and saved them a lot of
-              heartache. I can't thank her enough.
-            </p>
-            <p class="a">
-              <span class="name">
-                <a href="https://www.goroadmaps.com/" target="_blank" rel="noopener noreferrer">Bruce McCarthy</a>
-              </span>
-              <span class="role">
-                Co-Author, <a href="https://www.goroadmaps.com/" target="_blank" rel="noopener noreferrer">Product Roadmaps Relaunched</a>
-              </span>
-            </p>
-          </div>
-
-          <div class="tcard">
-            <p class="q">
-              Saielle brings a rare willingness to both teach and learn in her
-              work with the teams she's a part of. Her unique ability to spot
-              value and identify relevant problems that aren't immediately
-              obvious lifts the business, her team, and the experience for
-              users.
-            </p>
-            <p class="a">
-              <span class="name">
-                <a href="https://www.linkedin.com/in/scott-erkkila/" target="_blank" rel="noopener noreferrer">Scott Erkkila</a>
-              </span>
-              <span class="role">
-                Senior Director, Software Engineering, <a href="https://www.linkedin.com/in/scott-erkkila/" target="_blank" rel="noopener noreferrer">Ford Motor Company</a>
-              </span>
-            </p>
-          </div>
-
-          <div class="tcard">
-            <p class="q">
-              Saielle has a great talent for listening to problems, quickly
-              understanding the situation, and helping others unpack ways to
-              get through blockers and to the next phase in decision making.
-            </p>
-            <p class="a">
-              <span class="name">
-                <a href="https://www.linkedin.com/in/thedailyem/" target="_blank" rel="noopener noreferrer">Emily Tate</a>
-              </span>
-              <span class="role">
-                VP of Product, former MD, <a href="https://www.linkedin.com/in/thedailyem/" target="_blank" rel="noopener noreferrer">Mind the Product</a>
-              </span>
-            </p>
-          </div>
-
-          <div class="tcard">
-            <p class="q">
-              Saielle has the rare gift of uncovering the "why" in every
-              situation. I've watched her do this with stakeholder requests,
-              product prioritization, and driving conversations toward the
-              outcomes that actually matter.
-            </p>
-            <p class="a">
-              <span class="name">
-                <a href="https://www.linkedin.com/in/wesgalliher/" target="_blank" rel="noopener noreferrer">Wes Galliher, PhD.</a>
-              </span>
-              <span class="role">
-                Director of Product Management, <a href="https://www.linkedin.com/in/wesgalliher/" target="_blank" rel="noopener noreferrer">Weave</a>
-              </span>
-            </p>
-          </div>
-
-          <div class="tcard">
-            <p class="q">
-              Saielle is a design leader with a great mind for product, and
-              she's also led product teams. Many of us claim expertise in
-              either product or design, but it's the rare person who can speak
-              with passion, expertise and curiosity to both. She is that rare
-              person.
-            </p>
-            <p class="a">
-              <span class="name">
-                <a href="https://www.linkedin.com/in/randysilver/" target="_blank" rel="noopener noreferrer">Randy Silver</a>
-              </span>
-              <span class="role">
-                Co-Host, <a href="https://www.linkedin.com/in/randysilver/" target="_blank" rel="noopener noreferrer">The Product Experience Podcast</a>
-              </span>
-            </p>
-          </div>
-
-          <div class="tcard">
-            <p class="q">
-              Saielle hired for potential. I was not a profile ticking all the
-              boxes, yet she believed I could make the jump from consultancy
-              into the in-house world. That's a rare skill in a product
-              leader: going beyond boxes and valuing people for what they can
-              become, not just what they already are.
-            </p>
-            <p class="a">
-              <span class="name">
-                <a href="https://www.linkedin.com/in/alessandracanella/" target="_blank" rel="noopener noreferrer">Alessandra Canella</a>
-              </span>
-              <span class="role">
-                Head of Design, <a href="https://www.linkedin.com/in/alessandracanella/" target="_blank" rel="noopener noreferrer">Mega</a>
-              </span>
-            </p>
-          </div>
+          {testimonials.map((t) => (
+            <div class="tcard">
+              <p class="q">{t.quote}</p>
+              <p class="a">
+                <span class="name">
+                  {t.url ? (
+                    <a href={t.url} target="_blank" rel="noopener noreferrer">{t.name}</a>
+                  ) : (
+                    t.name
+                  )}
+                </span>
+                <span class="role">
+                  {t.role},{' '}
+                  {t.url ? (
+                    <a href={t.url} target="_blank" rel="noopener noreferrer">{t.org}</a>
+                  ) : (
+                    t.org
+                  )}
+                </span>
+              </p>
+            </div>
+          ))}
         </div>
 
         <div class="carousel-controls">
@@ -383,6 +293,7 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
         </div>
       </div>
     </section>
+    )}
 
     <section class="how-section" aria-label="How it works">
       <style>
