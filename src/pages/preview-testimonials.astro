@@ -35,6 +35,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       font-size: 1.7rem;
       margin-bottom: var(--space-7);
     }
+    .testi-sub {
+      margin: calc(-1 * var(--space-5)) 0 var(--space-7);
+      max-width: 52ch;
+      font-size: 1.05rem;
+      color: var(--muted);
+    }
 
     /* ---- Carousel shell ---- */
     .carousel {
@@ -236,12 +242,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   <section class="preview-panel" aria-label="Testimonial carousel">
     <div class="wrap">
-      <p class="panel-label">Red 3 · Opening quote mark</p>
-      <h2>Why people keep working with me</h2>
+      <p class="panel-label">Testimonials</p>
+      <h2>Testimonials</h2>
+      <p class="testi-sub">
+        I leave organisations clearer about what matters. See for yourself.
+      </p>
 
       <div class="carousel" id="testi-carousel">
-<div class="carousel-track" id="testi-track">
-
+        <div class="carousel-track" id="testi-track">
           <div class="tcard r3">
             <p class="q">
               Saielle is an amazing leader. She has brought strong product and
