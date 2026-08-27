@@ -937,6 +937,12 @@ a.talk-title:hover {
   color: var(--accent);
 }
 
+.err-keyline {
+  display: inline-block;
+  padding-bottom: var(--space-2);
+  border-bottom: 2px solid var(--accent);
+}
+
 .err h1 {
   max-width: 16ch;
   font-size: clamp(2.2rem, 5vw, 3.6rem);
