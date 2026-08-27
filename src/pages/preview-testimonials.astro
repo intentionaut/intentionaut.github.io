@@ -240,7 +240,69 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <h2>Why people keep working with me</h2>
 
       <div class="carousel" id="testi-carousel">
-        <div class="carousel-track" id="testi-track">
+<div class="carousel-track" id="testi-track">
+
+          <div class="tcard r3">
+            <p class="q">
+              Saielle is an amazing leader. She has brought strong product and
+              design skills and perspective to our organization. As a true
+              360-degree leader she has been able to listen, lead and
+              influence her team, her peers and the broader organization. I
+              highly recommend her to elevate product thinking and
+              capabilities.
+            </p>
+            <p class="a">
+              <span class="name">
+                <a href="https://www.linkedin.com/in/susanstandiford/" target="_blank" rel="noopener noreferrer">Susan Standiford</a>
+              </span>
+              <span class="role">
+                Former CTPO, <a href="https://www.linkedin.com/in/susanstandiford/" target="_blank" rel="noopener noreferrer">Stepstone, IKEA</a>
+              </span>
+            </p>
+          </div>
+        </div>
+
+        <div class="carousel-controls">
+          <button class="car-arrow" type="button" id="testi-prev" aria-label="Previous testimonials">‹</button>
+          <button class="car-arrow" type="button" id="testi-next" aria-label="Next testimonials">›</button>
+          <span class="car-hint">Scroll or use the arrows</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const track = document.getElementById('testi-track')!;
+    const prev = document.getElementById('testi-prev') as HTMLButtonElement | null;
+    const next = document.getElementById('testi-next') as HTMLButtonElement | null;
+
+    const update = () => {
+      const max = track.scrollWidth - track.clientWidth;
+      if (prev) prev.disabled = track.scrollLeft <= 0;
+      if (next) next.disabled = track.scrollLeft >= max - 1;
+    };
+
+    const step = () => {
+      const card = track.querySelector<HTMLElement>('.tcard');
+      if (!card) return 0;
+      const cardWidth = card.getBoundingClientRect().width + 20;
+      return cardWidth * 2;
+    };
+
+    next?.addEventListener('click', () => {
+      track.scrollBy({ left: step(), behavior: 'smooth' });
+    });
+    prev?.addEventListener('click', () => {
+      track.scrollBy({ left: -step(), behavior: 'smooth' });
+    });
+
+    track.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  </script>
+</BaseLayout>
+
+
           <div class="tcard r3">
             <p class="q">
               Saielle helped a new product team choose the right product
@@ -258,6 +320,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </p>
           </div>
 
+
           <div class="tcard r3">
             <p class="q">
               Saielle has a great talent for listening to problems, quickly
@@ -273,6 +336,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               </span>
             </p>
           </div>
+
 
           <div class="tcard r3">
             <p class="q">
@@ -290,6 +354,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               </span>
             </p>
           </div>
+
 
           <div class="tcard r3">
             <p class="q">
@@ -309,6 +374,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </p>
           </div>
 
+
           <div class="tcard r3">
             <p class="q">
               Saielle hired for potential. I was not a profile ticking all the
@@ -326,26 +392,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               </span>
             </p>
           </div>
-
-          <div class="tcard r3">
-            <p class="q">
-              Saielle is an amazing leader. She has brought strong product and
-              design skills and perspective to our organization. As a true
-              360-degree leader she has been able to listen, lead and
-              influence her team, her peers and the broader organization. I
-              highly recommend her to elevate product thinking and
-              capabilities.
-            </p>
-            <p class="a">
-              <span class="name">
-                <a href="https://www.linkedin.com/in/susanstandiford/" target="_blank" rel="noopener noreferrer">Susan Standiford</a>
-              </span>
-              <span class="role">
-                NED · Advisor · Innovator
-              </span>
-            </p>
-          </div>
-        </div>
 
         <div class="carousel-controls">
           <button class="car-arrow" type="button" id="testi-prev" aria-label="Previous testimonials">‹</button>
