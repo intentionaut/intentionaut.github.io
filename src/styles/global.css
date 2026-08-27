@@ -1316,6 +1316,7 @@ a.talk-title:hover {
 .contact-card {
   position: relative;
   border: 1px solid var(--ink);
+  background: #fdf9f4;
   padding: clamp(1.5rem, 4vw, 2.5rem);
 }
 

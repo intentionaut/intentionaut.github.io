@@ -65,83 +65,6 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
       </dl>
     </section>
 
-    <section class="how-section" aria-label="How it works">
-      <style>
-        .how-section {
-          padding-bottom: clamp(3rem, 6vw, 5rem);
-        }
-        .how-section h2 {
-          font-size: 1.7rem;
-          margin-bottom: var(--space-7);
-        }
-        .how-steps {
-          list-style: none;
-          margin: 0;
-          padding: 0;
-          display: grid;
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-          gap: var(--space-9);
-          border-top: 1px solid var(--ink);
-        }
-        .how-step {
-          padding-top: var(--space-4);
-        }
-        .how-step .num {
-          display: block;
-          font-family: var(--font-display);
-          font-optical-sizing: auto;
-          font-style: italic;
-          font-size: 2.1rem;
-          line-height: 1;
-          margin-bottom: var(--space-3);
-          color: var(--accent);
-          opacity: 0.85;
-        }
-        .how-step h3 {
-          font-size: 1.3rem;
-          margin-bottom: var(--space-2);
-        }
-        .how-step p {
-          margin: 0;
-          font-size: 0.95rem;
-          color: var(--muted);
-          line-height: 1.6;
-        }
-        @media (max-width: 720px) {
-          .how-steps {
-            grid-template-columns: 1fr;
-            gap: var(--space-7);
-          }
-        }
-      </style>
-      <h2>How it works</h2>
-      <ol class="how-steps">
-        <li class="how-step">
-          <span class="num">01</span>
-          <h3>You write in</h3>
-          <p>
-            Tell me what you are working on and what is keeping you up at
-            night. A few lines is enough.
-          </p>
-        </li>
-        <li class="how-step">
-          <span class="num">02</span>
-          <h3>We scope it on a call</h3>
-          <p>
-            A short call to check it is a fit. Then you get a written
-            proposal: what we would do, when, and what it costs.
-          </p>
-        </li>
-        <li class="how-step">
-          <span class="num">03</span>
-          <h3>You get clear direction</h3>
-          <p>
-            Written notes afterwards: decisions made, next steps, who owns
-            what. Nothing surprising arrives later.
-          </p>
-        </li>
-      </ol>
-    </section>
 
     <section class="testimonials-section" aria-label="Testimonials">
       <style>
@@ -444,6 +367,85 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
       </div>
     </section>
 
+    <section class="how-section" aria-label="How it works">
+      <style>
+        .how-section {
+          padding-bottom: clamp(3rem, 6vw, 5rem);
+        }
+        .how-section h2 {
+          font-size: 1.7rem;
+          margin-bottom: var(--space-7);
+        }
+        .how-steps {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: var(--space-9);
+          border-top: 1px solid var(--ink);
+        }
+        .how-step {
+          padding-top: var(--space-4);
+        }
+        .how-step .num {
+          display: block;
+          font-family: var(--font-display);
+          font-optical-sizing: auto;
+          font-style: italic;
+          font-size: 2.1rem;
+          line-height: 1;
+          margin-bottom: var(--space-3);
+          color: var(--accent);
+          opacity: 0.85;
+        }
+        .how-step h3 {
+          font-size: 1.3rem;
+          margin-bottom: var(--space-2);
+        }
+        .how-step p {
+          margin: 0;
+          font-size: 0.95rem;
+          color: var(--muted);
+          line-height: 1.6;
+        }
+        @media (max-width: 720px) {
+          .how-steps {
+            grid-template-columns: 1fr;
+            gap: var(--space-7);
+          }
+        }
+      </style>
+      <h2>How it works</h2>
+      <ol class="how-steps">
+        <li class="how-step">
+          <span class="num">01</span>
+          <h3>You write in</h3>
+          <p>
+            Tell me what you are working on and what is keeping you up at
+            night. A few lines is enough.
+          </p>
+        </li>
+        <li class="how-step">
+          <span class="num">02</span>
+          <h3>We scope it on a call</h3>
+          <p>
+            A short call to check it is a fit. Then you get a written
+            proposal: what we would do, when, and what it costs.
+          </p>
+        </li>
+        <li class="how-step">
+          <span class="num">03</span>
+          <h3>You get clear direction</h3>
+          <p>
+            Written notes afterwards: decisions made, next steps, who owns
+            what. Nothing surprising arrives later.
+          </p>
+        </li>
+      </ol>
+    </section>
+n>
+
 
     <section class="contact-form-section" id="contact-section" aria-label="Send a message">
       <div class="contact-card">
@@ -520,6 +522,53 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
         .faq-steps {
           border-top: 1px solid var(--ink);
         }
+        .faq-item {
+          border-bottom: 1px solid var(--line);
+        }
+        .faq-item summary {
+          list-style: none;
+          cursor: pointer;
+          display: flex;
+          align-items: baseline;
+          justify-content: space-between;
+          gap: var(--space-5);
+          padding: var(--space-5) 0;
+          font-family: var(--font-display);
+          font-optical-sizing: auto;
+          font-weight: 500;
+          font-size: 1.25rem;
+          line-height: 1.25;
+          color: var(--ink);
+        }
+        .faq-item summary::-webkit-details-marker {
+          display: none;
+        }
+        .faq-item summary::after {
+          content: '+';
+          flex-shrink: 0;
+          font-family: var(--font-body);
+          font-weight: 600;
+          font-size: 1.2rem;
+          line-height: 1;
+          color: var(--accent);
+          transition: transform var(--dur-med) ease;
+        }
+        .faq-item[open] summary::after {
+          content: '–';
+        }
+        .faq-item[open] summary {
+          color: var(--accent);
+        }
+        .faq-item .faq-body {
+          padding: 0 0 var(--space-5);
+        }
+        .faq-item .faq-body p {
+          margin: 0 0 var(--space-3);
+          color: var(--muted);
+        }
+        .faq-item .faq-body p:last-child {
+          margin-bottom: 0;
+        }
       </style>
       <h2 class="faq-title">Fair questions.</h2>
       <p class="faq-sect-sub">
@@ -527,64 +576,76 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
         actually run. Anything missing: ask me.
       </p>
       <div class="faq faq-steps">
-        <section>
-          <h2>How does the sliding scale work?</h2>
-          <p>
-            Ask. If cost is the thing standing between you and booking, say
-            so in your note. It counts if you are paying yourself rather than
-            an employer, if your company is bootstrapped or unfunded, if the
-            work is for a charity, nonprofit or the public sector, or if the
-            full rate simply means you would not book at all.
-          </p>
-          <p>
-            There is no proof to send, no essay to write and no negotiation.
-            I will confirm an adjusted rate when we book. A few reduced slots
-            each month keeps this honest; if the month is full, I will tell
-            you and we will find another way.
-          </p>
-        </section>
+        <details class="faq-item">
+          <summary>How does the sliding scale work?</summary>
+          <div class="faq-body">
+            <p>
+              Ask. If cost is the thing standing between you and booking, say
+              so in your note. It counts if you are paying yourself rather
+              than an employer, if your company is bootstrapped or unfunded,
+              if the work is for a charity, nonprofit or the public sector,
+              or if the full rate simply means you would not book at all.
+            </p>
+            <p>
+              There is no proof to send, no essay to write and no
+              negotiation. I will confirm an adjusted rate when we book. A
+              few reduced slots each month keeps this honest; if the month is
+              full, I will tell you and we will find another way.
+            </p>
+          </div>
+        </details>
 
-        <section>
-          <h2>Is fractional leadership a real commitment?</h2>
-          <p>
-            Yes, and that is the point. Fractional work runs on an agreed
-            rhythm over months, not days. Quick rescue thoughts are exactly
-            what strategy sessions are for; fractional leadership is for
-            teams that want direction held steady while they build.
-          </p>
-        </section>
+        <details class="faq-item">
+          <summary>Is fractional leadership a real commitment?</summary>
+          <div class="faq-body">
+            <p>
+              Yes, and that is the point. Fractional work runs on an agreed
+              rhythm over months, not days. Quick rescue thoughts are exactly
+              what strategy sessions are for; fractional leadership is for
+              teams that want direction held steady while they build.
+            </p>
+          </div>
+        </details>
 
-        <section>
-          <h2>Do you speak virtually?</h2>
-          <p>
-            Yes. Remote keynotes and workshops carry the same fee unless the
-            format is much shorter. For in-person events, travel and
-            accommodation are covered by the organizer.
-          </p>
-        </section>
+        <details class="faq-item">
+          <summary>Do you speak virtually?</summary>
+          <div class="faq-body">
+            <p>
+              Yes. Remote keynotes and workshops carry the same fee unless
+              the format is much shorter. For in-person events, travel and
+              accommodation are covered by the organizer.
+            </p>
+          </div>
+        </details>
 
-        <section>
-          <h2>Will you sign an NDA?</h2>
-          <p>Happily. Send yours, or use mine.</p>
-        </section>
+        <details class="faq-item">
+          <summary>Will you sign an NDA?</summary>
+          <div class="faq-body">
+            <p>Happily. Send yours, or use mine.</p>
+          </div>
+        </details>
 
-        <section>
-          <h2>Can I hire you full-time?</h2>
-          <p>
-            For the right role, yes. Director level and above. The same
-            clarity principle applies: shared understanding of the goal
-            before we commit. If that sounds like your team, write me a note
-            and tell me what you are trying to accomplish.
-          </p>
-        </section>
+        <details class="faq-item">
+          <summary>Can I hire you full-time?</summary>
+          <div class="faq-body">
+            <p>
+              For the right role, yes. Director level and above. The same
+              clarity principle applies: shared understanding of the goal
+              before we commit. If that sounds like your team, write me a
+              note and tell me what you are trying to accomplish.
+            </p>
+          </div>
+        </details>
 
-        <section>
-          <h2>How does payment work?</h2>
-          <p>
-            Invoice and bank transfer, GBP unless we agree otherwise. Terms
-            are on every proposal; nothing surprising arrives later.
-          </p>
-        </section>
+        <details class="faq-item">
+          <summary>How does payment work?</summary>
+          <div class="faq-body">
+            <p>
+              Invoice and bank transfer, GBP unless we agree otherwise. Terms
+              are on every proposal; nothing surprising arrives later.
+            </p>
+          </div>
+        </details>
       </div>
     </section>
   </section>
@@ -643,5 +704,15 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
     track.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', update);
     update();
+
+    const faqItems = document.querySelectorAll<HTMLDetailsElement>('.faq-item');
+    faqItems.forEach((item) => {
+      item.addEventListener('toggle', () => {
+        if (!item.open) return;
+        faqItems.forEach((other) => {
+          if (other !== item) other.open = false;
+        });
+      });
+    });
   </script>
 </BaseLayout>
