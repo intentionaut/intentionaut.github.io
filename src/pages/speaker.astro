@@ -1,0 +1,182 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
+---
+
+<BaseLayout
+  title="Hire Me to Speak | Saielle DaSilva"
+  description="Keynotes, private talks and workshops by Saielle DaSilva on building intentional products, designing humane AI, and leading through uncertainty."
+>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Speaking &amp; workshops</p>
+      <h1>Keynotes and workshops that change what Monday looks like.</h1>
+      <p class="lede">
+        Public keynotes and private company sessions about building
+        intentional products, designing humane AI and leading through
+        uncertainty.
+      </p>
+    </header>
+
+    <div class="prose">
+      <h2>Why people ask me to speak</h2>
+      <p>
+        A good keynote changes the way a room thinks. A great one changes
+        what a team does on Monday morning. I have given talks at Mind the
+        Product, Turing Fest and Business of Software, and run workshops for
+        product and design organisations through the shift into data and AI.
+      </p>
+      <p>
+        There is plenty of "inspiration" available, and conferences are full
+        of it. I am not selling motivation. I am selling a shared mental
+        model you can actually use, delivered in a voice that does not put
+        your team to sleep.
+      </p>
+
+      <h2>Sound familiar?</h2>
+      <ul>
+        <li>Your team came back from a conference buzzing, then nothing changed.</li>
+        <li>Everyone uses AI, but nobody can say when it helps versus when it is a crutch.</li>
+        <li>People say your culture is the problem, but nobody can name the decisions that made it that way.</li>
+        <li>You keep making the same product decisions because there is no shared idea of what "good" means.</li>
+      </ul>
+
+      <h2>What I do</h2>
+      <p>
+        Keynotes for public events and private talks for companies. The
+        content is the same craft: naming the decisions behind strong
+        products and humane teams. The format is the difference between
+        inspiring a room and building capability in your teams.
+      </p>
+
+      <h3>Public keynotes</h3>
+      <p>
+        Forty to sixty minutes. A single, memorable argument your audience
+        repeats afterwards. Talks on intention, humane AI, product culture
+        and leading through uncertainty. This is where ideas like designing
+        AI as a thinking partner, not a writing service, get their name.
+      </p>
+
+      <h3>Private talks and workshops</h3>
+      <p>
+        Half or full day. Not a lecture. The same frameworks applied to your
+        actual problems: your teams, your AI choices, your culture.
+        Hands-on, interactive and specific. This is for companies that need
+        more than somebody in a nice suit to talk at their all-hands.
+      </p>
+
+      <h2>What you get</h2>
+      <ul>
+        <li>A talk your people can actually use, not just applaud</li>
+        <li>Frameworks your team keeps using after I have gone</li>
+        <li>Straight answers about AI, product and culture with no vendor agenda</li>
+        <li>From £1,600 for an event. Private workshops quoted by scope and travel.</li>
+      </ul>
+
+      <h2>How it works</h2>
+      <p>
+        Tell me the audience and the outcome you want. I shape the talk to
+        fit. For public events, we agree a title and abstract. For private
+        work, we talk about what your team is actually wrestling with before
+        I disappear to prepare.
+      </p>
+      <p>
+        I do not use slides as a crutch, I am not a motivational act, and I
+        will not pretend your industry's hard problems are simple. What you
+        get instead is a talk that respects the room enough to ask something
+        of it.
+      </p>
+    </div>
+
+    <section class="contact-form-section" aria-label="Book a talk">
+      <div class="contact-card">
+        <h2>Let's talk.</h2>
+        <p class="form-lede">
+          Whether it is a keynote for your event or a workshop for your team,
+          tell me the audience and the outcome you want.
+        </p>
+        <form id="contact-form" novalidate>
+          <input type="hidden" name="source" value="speaking" />
+          <div class="form-grid">
+            <label>
+              <span class="form-label">Name</span>
+              <input type="text" name="name" required autocomplete="name" />
+            </label>
+            <label>
+              <span class="form-label">Email</span>
+              <input type="email" name="email" required autocomplete="email" />
+            </label>
+          </div>
+          <label>
+            <span class="form-label">What's this about?</span>
+            <select name="topic">
+              <option value="strategic-direction">
+                Strategic direction
+              </option>
+              <option value="execution">Execution &amp; transformation</option>
+              <option value="fractional">Fractional leadership</option>
+              <option value="speaking" selected>Speaking &amp; workshops</option>
+              <option value="mentoring">Mentoring</option>
+              <option value="other">Something else</option>
+            </select>
+          </label>
+          <label>
+            <span class="form-label">Message</span>
+            <textarea name="message" rows="5" required></textarea>
+          </label>
+          {
+            TURNSTILE_SITEKEY && (
+              <>
+                <div
+                  class="cf-turnstile"
+                  data-sitekey={TURNSTILE_SITEKEY}
+                  data-theme="light"
+                />
+                <script
+                  is:inline
+                  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+                  async
+                  defer
+                />
+              </>
+            )
+          }
+          <button class="btn-plain" type="submit">Send it</button>
+          <p class="form-status" id="form-status" role="status"></p>
+        </form>
+      </div>
+      <p class="faq-link">
+        Questions first? <a href="/faq">Read the FAQ.</a>
+      </p>
+    </section>
+  </section>
+
+  <script>
+    const ENDPOINT = 'https://contact-form.intentionaut.workers.dev/contact';
+    const form = document.getElementById('contact-form');
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form));
+      const statusEl = document.getElementById('form-status');
+
+      try {
+        const res = await fetch(ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        const result = await res.json();
+        if (res.ok) {
+          form.reset();
+          if (statusEl) statusEl.textContent = result.message || "Thank you; I'll reply soon.";
+        } else {
+          if (statusEl) statusEl.textContent = result.error || 'Something went wrong; please email me directly.';
+        }
+      } catch {
+        if (statusEl) statusEl.textContent = 'Something went wrong; please email me directly.';
+      }
+    });
+  </script>
+</BaseLayout>
