@@ -4,7 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout
   title="Testimonials preview | Saielle DaSilva"
-  description="Red-accented double-border testimonial cards."
+  description="Real testimonials in the Red 3 opening quote card style."
 >
   <style>
     .preview-head {
@@ -53,13 +53,44 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       font-optical-sizing: auto;
       font-size: 1.05rem;
       line-height: 1.5;
-      margin: 0 0 var(--space-4);
+      margin: 0 0 var(--space-5);
+    }
+    .tcard .q em {
+      font-style: italic;
     }
     .tcard .a {
+      margin: 0;
       font-family: var(--font-body);
       font-size: 0.85rem;
       color: var(--muted);
-      margin: 0;
+      margin-top: auto;
+    }
+    .tcard .a .name {
+      display: block;
+      color: var(--ink);
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.15em;
+    }
+    .tcard .a .name a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .tcard .a .name a:hover {
+      text-decoration: underline;
+      text-decoration-color: var(--accent);
+    }
+    .tcard .a .role {
+      display: block;
+      font-style: italic;
+    }
+    .tcard .a .role a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .tcard .a .role a:hover {
+      text-decoration: underline;
+      text-decoration-color: var(--accent);
     }
 
     .t-grid {
@@ -68,40 +99,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       gap: var(--space-5);
     }
 
-    /* ---- Red accents (site --accent #c85060) ---- */
-
-    /* R1: red top keyline */
-    .r1::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: var(--accent);
-      z-index: 1;
-    }
-
-    /* R2: red left rule + divider line under quote */
-    .r2 {
-      justify-content: space-between;
-    }
-    .r2::before {
-      content: '';
-      position: absolute;
-      top: var(--space-6);
-      bottom: var(--space-6);
-      left: 0;
-      width: 4px;
-      background: var(--accent);
-    }
-    .r2 .q {
-      border-bottom: 1px solid var(--line);
-      margin-bottom: var(--space-4);
-      padding-bottom: var(--space-4);
-    }
-
-    /* R3: red opening quote mark */
+    /* Baseline: Red 3 opening quote mark */
     .r3::before {
       content: '“';
       position: absolute;
@@ -115,149 +113,101 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .r3 {
       padding-top: calc(var(--space-6) + 2.2rem);
     }
+
+    .hover-hint {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: var(--space-3);
+    }
   </style>
 
   <section class="wrap">
     <header class="page-head preview-head">
-      <p class="eyebrow">Testimonials · red accents</p>
-      <h1>Red-accented cards, on top of the settled one.</h1>
+      <p class="eyebrow">Testimonials · real</p>
+      <h1>Your testimonial cards.</h1>
       <p class="lede">
-        The plain double-border card stays. Below are three new red-accent
-        variants, consistent with the site palette.
+        Four real testimonials in the Red 3 opening-quote style. Names link
+        outward to the sources.
       </p>
     </header>
   </section>
 
-  <section class="preview-panel" aria-label="Settled plain double-border cards">
-    <div class="wrap">
-      <p class="panel-label">Baseline · plain double-border card</p>
-      <h2>Why people keep working with me</h2>
-      <div class="t-grid">
-        <div class="tcard">
-          <p class="q">
-            Saielle doesn't tell you what you want to hear. She names the
-            decision you've been avoiding and gives you the frame to make it,
-            then she stays until it lands.
-          </p>
-          <p class="a">Chief Product Officer · UK scale-up</p>
-        </div>
-        <div class="tcard">
-          <p class="q">
-            She gave our talk on higher impact product decisions, and the room
-            hasn't made the same misaligned choice since. Teams that had never
-            questioned the plan started asking which one thing mattered most.
-          </p>
-          <p class="a">Product leader · Sainsbury's</p>
-        </div>
-        <div class="tcard">
-          <p class="q">
-            The rare leader who can go from a whiteboard strategy to shipped
-            code in the same week. She brought our AI story into focus when
-            nobody else could.
-          </p>
-          <p class="a">Founder &amp; CEO · pre-seed AI startup</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- R1: red top keyline -->
-  <section class="preview-panel" aria-label="Red top keyline">
-    <div class="wrap">
-      <p class="panel-label">Red 1 · Top keyline</p>
-      <h2>Why people keep working with me</h2>
-      <div class="t-grid">
-        <div class="tcard r1">
-          <p class="q">
-            Saielle doesn't tell you what you want to hear. She names the
-            decision you've been avoiding and gives you the frame to make it,
-            then she stays until it lands.
-          </p>
-          <p class="a">Chief Product Officer · UK scale-up</p>
-        </div>
-        <div class="tcard r1">
-          <p class="q">
-            She gave our talk on higher impact product decisions, and the room
-            hasn't made the same misaligned choice since. Teams that had never
-            questioned the plan started asking which one thing mattered most.
-          </p>
-          <p class="a">Product leader · Sainsbury's</p>
-        </div>
-        <div class="tcard r1">
-          <p class="q">
-            The rare leader who can go from a whiteboard strategy to shipped
-            code in the same week. She brought our AI story into focus when
-            nobody else could.
-          </p>
-          <p class="a">Founder &amp; CEO · pre-seed AI startup</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- R2: red left rule -->
-  <section class="preview-panel" aria-label="Red left rule">
-    <div class="wrap">
-      <p class="panel-label">Red 2 · Left rule with divider</p>
-      <h2>Why people keep working with me</h2>
-      <div class="t-grid">
-        <div class="tcard r2">
-          <p class="q">
-            Saielle doesn't tell you what you want to hear. She names the
-            decision you've been avoiding and gives you the frame to make it,
-            then she stays until it lands.
-          </p>
-          <p class="a">Chief Product Officer · UK scale-up</p>
-        </div>
-        <div class="tcard r2">
-          <p class="q">
-            She gave our talk on higher impact product decisions, and the room
-            hasn't made the same misaligned choice since. Teams that had never
-            questioned the plan started asking which one thing mattered most.
-          </p>
-          <p class="a">Product leader · Sainsbury's</p>
-        </div>
-        <div class="tcard r2">
-          <p class="q">
-            The rare leader who can go from a whiteboard strategy to shipped
-            code in the same week. She brought our AI story into focus when
-            nobody else could.
-          </p>
-          <p class="a">Founder &amp; CEO · pre-seed AI startup</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- R3: red opening quote mark -->
-  <section class="preview-panel" aria-label="Red opening quote mark">
+  <section class="preview-panel" aria-label="Testimonial cards">
     <div class="wrap">
       <p class="panel-label">Red 3 · Opening quote mark</p>
       <h2>Why people keep working with me</h2>
       <div class="t-grid">
         <div class="tcard r3">
           <p class="q">
-            Saielle doesn't tell you what you want to hear. She names the
-            decision you've been avoiding and gives you the frame to make it,
-            then she stays until it lands.
+            Saielle helped a new product team choose the right product
+            management tool for their needs. She offered her experience
+            generously, asked the right questions, and saved them a lot of
+            heartache. I can't thank her enough.
           </p>
-          <p class="a">Chief Product Officer · UK scale-up</p>
+          <p class="a">
+            <span class="name">
+              <a href="https://www.goroadmaps.com/" target="_blank" rel="noopener noreferrer">Bruce McCarthy</a>
+            </span>
+            <span class="role">
+              Co-Author, <a href="https://www.goroadmaps.com/" target="_blank" rel="noopener noreferrer">Product Roadmaps Relaunched</a>
+            </span>
+          </p>
         </div>
         <div class="tcard r3">
           <p class="q">
-            She gave our talk on higher impact product decisions, and the room
-            hasn't made the same misaligned choice since. Teams that had never
-            questioned the plan started asking which one thing mattered most.
+            Saielle has a great talent for listening to problems, quickly
+            understanding the situation, and helping others unpack ways to get
+            through blockers and to the next phase in decision making. Working
+            through challenges with her, both related to my work and my
+            personal goals, has always been a pleasure and a great help. An
+            hour spent with Saielle is well worth your time.
           </p>
-          <p class="a">Product leader · Sainsbury's</p>
+          <p class="a">
+            <span class="name">
+              <a href="https://www.linkedin.com/in/thedailyem/" target="_blank" rel="noopener noreferrer">Emily Tate</a>
+            </span>
+            <span class="role">
+              Product Leader, Managing Director, <a href="https://www.linkedin.com/in/thedailyem/" target="_blank" rel="noopener noreferrer">Mind the Product</a>
+            </span>
+          </p>
         </div>
         <div class="tcard r3">
           <p class="q">
-            The rare leader who can go from a whiteboard strategy to shipped
-            code in the same week. She brought our AI story into focus when
-            nobody else could.
+            Saielle has the rare gift of uncovering the "why" in every
+            situation. I've observed her doing this effectively with
+            stakeholder requests, product prioritization, and driving
+            conversations towards desired outcomes for the business and user.
+            As someone who develops products, this ability is not only
+            valuable, but critically necessary.
           </p>
-          <p class="a">Founder &amp; CEO · pre-seed AI startup</p>
+          <p class="a">
+            <span class="name">
+              <a href="https://www.linkedin.com/in/wesgalliher/" target="_blank" rel="noopener noreferrer">Wes Galliher, PhD.</a>
+            </span>
+            <span class="role">
+              Founder, Product Management, <a href="https://www.linkedin.com/in/wesgalliher/" target="_blank" rel="noopener noreferrer">Pivotal Labs</a>
+            </span>
+          </p>
+        </div>
+        <div class="tcard r3">
+          <p class="q">
+            Saielle is a chimera. She's a design leader with a great mind for
+            product, but she's also led product teams. Many of us can claim
+            expertise in either product or design, but it's the rare person
+            that can speak with passion, expertise and curiosity to both.
+            Saielle is that rare person.
+          </p>
+          <p class="a">
+            <span class="name">
+              <a href="https://www.linkedin.com/in/randysilver/" target="_blank" rel="noopener noreferrer">Randy Silver</a>
+            </span>
+            <span class="role">
+              Co-Host, <a href="https://www.linkedin.com/in/randysilver/" target="_blank" rel="noopener noreferrer">The Product Experience Podcast</a>
+            </span>
+          </p>
         </div>
       </div>
     </div>
