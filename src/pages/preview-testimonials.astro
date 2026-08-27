@@ -4,7 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout
   title="Testimonials preview | Saielle DaSilva"
-  description="Real testimonials in the Red 3 opening quote card style."
+  description="Testimonial carousel in the Red 3 opening quote card style."
 >
   <style>
     .preview-head {
@@ -32,7 +32,35 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       margin-bottom: var(--space-7);
     }
 
-    /* Shared card shell: double border like .rate-card / .contact-card */
+    /* ---- Carousel shell ---- */
+    .carousel {
+      position: relative;
+    }
+    .carousel-track {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: 85%;
+      gap: var(--space-5);
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      padding: var(--space-1);
+    }
+    .carousel-track::-webkit-scrollbar {
+      display: none;
+    }
+    @media (min-width: 720px) {
+      .carousel-track {
+        grid-auto-columns: repeat(2, calc(50% - var(--space-3)));
+      }
+    }
+    @media (min-width: 1080px) {
+      .carousel-track {
+        grid-auto-columns: repeat(3, calc(33.333% - var(--space-4)));
+      }
+    }
+
+    /* ---- Card (Red 3 style, fixed height, scrollable) ---- */
     .tcard {
       position: relative;
       border: 1px solid var(--ink);
@@ -40,6 +68,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       padding: var(--space-6) var(--space-7);
       display: flex;
       flex-direction: column;
+      scroll-snap-align: start;
+      max-height: 340px;
     }
     .tcard::after {
       content: '';
@@ -48,58 +78,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       border: 1px solid var(--line);
       pointer-events: none;
     }
-    .tcard .q {
-      font-family: var(--font-display);
-      font-optical-sizing: auto;
-      font-size: 1.05rem;
-      line-height: 1.5;
-      margin: 0 0 var(--space-5);
-    }
-    .tcard .q em {
-      font-style: italic;
-    }
-    .tcard .a {
-      margin: 0;
-      font-family: var(--font-body);
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin-top: auto;
-    }
-    .tcard .a .name {
-      display: block;
-      color: var(--ink);
-      font-weight: 600;
-      font-size: 0.95rem;
-      margin-bottom: 0.15em;
-    }
-    .tcard .a .name a {
-      color: inherit;
-      text-decoration: none;
-    }
-    .tcard .a .name a:hover {
-      text-decoration: underline;
-      text-decoration-color: var(--accent);
-    }
-    .tcard .a .role {
-      display: block;
-      font-style: italic;
-    }
-    .tcard .a .role a {
-      color: var(--muted);
-      text-decoration: none;
-    }
-    .tcard .a .role a:hover {
-      text-decoration: underline;
-      text-decoration-color: var(--accent);
-    }
-
-    .t-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: var(--space-5);
-    }
-
-    /* Baseline: Red 3 opening quote mark */
     .r3::before {
       content: '“';
       position: absolute;
@@ -113,100 +91,249 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .r3 {
       padding-top: calc(var(--space-6) + 2.2rem);
     }
+    .tcard .q {
+      font-family: var(--font-display);
+      font-optical-sizing: auto;
+      font-size: 1.02rem;
+      line-height: 1.5;
+      margin: 0 0 var(--space-4);
+      overflow-y: auto;
+    }
+    .tcard .a {
+      margin: var(--space-4) 0 0;
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--line);
+      flex-shrink: 0;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .tcard .a .name {
+      display: block;
+      color: var(--ink);
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.15em;
+    }
+    .tcard .a .name a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .tcard .a .name a:hover,
+    .tcard .a .role a:hover {
+      text-decoration: underline;
+      text-decoration-color: var(--accent);
+    }
+    .tcard .a .role {
+      display: block;
+      font-style: italic;
+    }
+    .tcard .a .role a {
+      color: var(--muted);
+      text-decoration: none;
+    }
 
-    .hover-hint {
+    /* ---- Controls ---- */
+    .carousel-controls {
+      display: flex;
+      gap: var(--space-3);
+      margin-top: var(--space-6);
+    }
+    .car-arrow {
+      appearance: none;
+      background: var(--paper);
+      border: 1px solid var(--ink);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 1.1rem;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color var(--dur-fast) ease, color var(--dur-fast) ease;
+    }
+    .car-arrow:hover {
+      background: var(--accent);
+      color: var(--paper);
+    }
+    .car-arrow:disabled {
+      opacity: 0.4;
+      cursor: default;
+      background: var(--paper);
+      color: var(--ink);
+    }
+    .car-hint {
       font-family: var(--font-body);
       font-size: 0.8rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--muted);
-      margin-bottom: var(--space-3);
     }
   </style>
 
   <section class="wrap">
     <header class="page-head preview-head">
-      <p class="eyebrow">Testimonials · real</p>
-      <h1>Your testimonial cards.</h1>
+      <p class="eyebrow">Testimonials · carousel</p>
+      <h1>Six cards, one carousel.</h1>
       <p class="lede">
-        Four real testimonials in the Red 3 opening-quote style. Names link
-        outward to the sources.
+        Red 3 cards in a scroll-snap carousel. Cards cap at a max height and
+        scroll internally if the quote runs long.
       </p>
     </header>
   </section>
 
-  <section class="preview-panel" aria-label="Testimonial cards">
+  <section class="preview-panel" aria-label="Testimonial carousel">
     <div class="wrap">
       <p class="panel-label">Red 3 · Opening quote mark</p>
       <h2>Why people keep working with me</h2>
-      <div class="t-grid">
-        <div class="tcard r3">
-          <p class="q">
-            Saielle helped a new product team choose the right product
-            management tool for their needs. She offered her experience
-            generously, asked the right questions, and saved them a lot of
-            heartache. I can't thank her enough.
-          </p>
-          <p class="a">
-            <span class="name">
-              <a href="https://www.goroadmaps.com/" target="_blank" rel="noopener noreferrer">Bruce McCarthy</a>
-            </span>
-            <span class="role">
-              Co-Author, <a href="https://www.goroadmaps.com/" target="_blank" rel="noopener noreferrer">Product Roadmaps Relaunched</a>
-            </span>
-          </p>
+
+      <div class="carousel" id="testi-carousel">
+        <div class="carousel-track" id="testi-track">
+          <div class="tcard r3">
+            <p class="q">
+              Saielle helped a new product team choose the right product
+              management tool for their needs. She offered her experience
+              generously, asked the right questions, and saved them a lot of
+              heartache. I can't thank her enough.
+            </p>
+            <p class="a">
+              <span class="name">
+                <a href="https://www.goroadmaps.com/" target="_blank" rel="noopener noreferrer">Bruce McCarthy</a>
+              </span>
+              <span class="role">
+                Co-Author, <a href="https://www.goroadmaps.com/" target="_blank" rel="noopener noreferrer">Product Roadmaps Relaunched</a>
+              </span>
+            </p>
+          </div>
+
+          <div class="tcard r3">
+            <p class="q">
+              Saielle has a great talent for listening to problems, quickly
+              understanding the situation, and helping others unpack ways to
+              get through blockers and to the next phase in decision making.
+            </p>
+            <p class="a">
+              <span class="name">
+                <a href="https://www.linkedin.com/in/thedailyem/" target="_blank" rel="noopener noreferrer">Emily Tate</a>
+              </span>
+              <span class="role">
+                VP of Product, <a href="https://www.linkedin.com/in/thedailyem/" target="_blank" rel="noopener noreferrer">Mind the Product</a>
+              </span>
+            </p>
+          </div>
+
+          <div class="tcard r3">
+            <p class="q">
+              Saielle has the rare gift of uncovering the "why" in every
+              situation. I've watched her do this with stakeholder requests,
+              product prioritization, and driving conversations toward the
+              outcomes that actually matter.
+            </p>
+            <p class="a">
+              <span class="name">
+                <a href="https://www.linkedin.com/in/wesgalliher/" target="_blank" rel="noopener noreferrer">Wes Galliher, PhD.</a>
+              </span>
+              <span class="role">
+                Director of Product Management, <a href="https://www.linkedin.com/in/wesgalliher/" target="_blank" rel="noopener noreferrer">Weave</a>
+              </span>
+            </p>
+          </div>
+
+          <div class="tcard r3">
+            <p class="q">
+              Saielle is a design leader with a great mind for product, and
+              she's also led product teams. Many of us claim expertise in
+              either product or design, but it's the rare person who can speak
+              with passion, expertise and curiosity to both. She is that rare
+              person.
+            </p>
+            <p class="a">
+              <span class="name">
+                <a href="https://www.linkedin.com/in/randysilver/" target="_blank" rel="noopener noreferrer">Randy Silver</a>
+              </span>
+              <span class="role">
+                Co-Host, <a href="https://www.linkedin.com/in/randysilver/" target="_blank" rel="noopener noreferrer">The Product Experience Podcast</a>
+              </span>
+            </p>
+          </div>
+
+          <div class="tcard r3">
+            <p class="q">
+              Saielle hired for potential. I was not a profile ticking all the
+              boxes, yet she believed I could make the jump from consultancy
+              into the in-house world. That's a rare skill in a product
+              leader: going beyond boxes and valuing people for what they can
+              become, not just what they already are.
+            </p>
+            <p class="a">
+              <span class="name">
+                <a href="https://www.linkedin.com/in/alessandracanella/" target="_blank" rel="noopener noreferrer">Alessandra Canella</a>
+              </span>
+              <span class="role">
+                Head of Design, <a href="https://www.linkedin.com/in/alessandracanella/" target="_blank" rel="noopener noreferrer">Mega</a>
+              </span>
+            </p>
+          </div>
+
+          <div class="tcard r3">
+            <p class="q">
+              Saielle is an amazing leader. She has brought strong product and
+              design skills and perspective to our organization. As a true
+              360-degree leader she has been able to listen, lead and
+              influence her team, her peers and the broader organization. I
+              highly recommend her to elevate product thinking and
+              capabilities.
+            </p>
+            <p class="a">
+              <span class="name">
+                <a href="https://www.linkedin.com/in/susanstandiford/" target="_blank" rel="noopener noreferrer">Susan Standiford</a>
+              </span>
+              <span class="role">
+                NED · Advisor · Innovator
+              </span>
+            </p>
+          </div>
         </div>
-        <div class="tcard r3">
-          <p class="q">
-            Saielle has a great talent for listening to problems, quickly
-            understanding the situation, and helping others unpack ways to get
-            through blockers and to the next phase in decision making.
-          </p>
-          <p class="a">
-            <span class="name">
-              <a href="https://www.linkedin.com/in/thedailyem/" target="_blank" rel="noopener noreferrer">Emily Tate</a>
-            </span>
-            <span class="role">
-              VP of Product, <a href="https://www.linkedin.com/in/thedailyem/" target="_blank" rel="noopener noreferrer">Mind the Product</a>
-            </span>
-          </p>
-        </div>
-        <div class="tcard r3">
-          <p class="q">
-            Saielle has the rare gift of uncovering the "why" in every
-            situation. I've observed her doing this effectively with
-            stakeholder requests, product prioritization, and driving
-            conversations towards desired outcomes for the business and user.
-            As someone who develops products, this ability is not only
-            valuable, but critically necessary.
-          </p>
-          <p class="a">
-            <span class="name">
-              <a href="https://www.linkedin.com/in/wesgalliher/" target="_blank" rel="noopener noreferrer">Wes Galliher, PhD.</a>
-            </span>
-            <span class="role">
-              Director of Product Management, <a href="https://www.linkedin.com/in/wesgalliher/" target="_blank" rel="noopener noreferrer">Weave</a>
-            </span>
-          </p>
-        </div>
-        <div class="tcard r3">
-          <p class="q">
-            Saielle is a chimera. She's a design leader with a great mind for
-            product, but she's also led product teams. Many of us can claim
-            expertise in either product or design, but it's the rare person
-            that can speak with passion, expertise and curiosity to both.
-            Saielle is that rare person.
-          </p>
-          <p class="a">
-            <span class="name">
-              <a href="https://www.linkedin.com/in/randysilver/" target="_blank" rel="noopener noreferrer">Randy Silver</a>
-            </span>
-            <span class="role">
-              Co-Host, <a href="https://www.linkedin.com/in/randysilver/" target="_blank" rel="noopener noreferrer">The Product Experience Podcast</a>
-            </span>
-          </p>
+
+        <div class="carousel-controls">
+          <button class="car-arrow" type="button" id="testi-prev" aria-label="Previous testimonials">‹</button>
+          <button class="car-arrow" type="button" id="testi-next" aria-label="Next testimonials">›</button>
+          <span class="car-hint">Scroll or use the arrows</span>
         </div>
       </div>
     </div>
   </section>
+
+  <script>
+    const track = document.getElementById('testi-track')!;
+    const prev = document.getElementById('testi-prev') as HTMLButtonElement | null;
+    const next = document.getElementById('testi-next') as HTMLButtonElement | null;
+
+    const update = () => {
+      const max = track.scrollWidth - track.clientWidth;
+      if (prev) prev.disabled = track.scrollLeft <= 0;
+      if (next) next.disabled = track.scrollLeft >= max - 1;
+    };
+
+    const step = () => {
+      const card = track.querySelector<HTMLElement>('.tcard');
+      if (!card) return 0;
+      const cardWidth = card.getBoundingClientRect().width + 20;
+      return cardWidth * 2;
+    };
+
+    next?.addEventListener('click', () => {
+      track.scrollBy({ left: step(), behavior: 'smooth' });
+    });
+    prev?.addEventListener('click', () => {
+      track.scrollBy({ left: -step(), behavior: 'smooth' });
+    });
+
+    track.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  </script>
 </BaseLayout>
