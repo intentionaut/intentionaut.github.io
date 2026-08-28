@@ -72,14 +72,26 @@ const {
 </div>
 
 <style>
+  /* Inline forms sit in a centred .signup section (unchanged). The full form
+     lives in normal page flow, so it aligns left with the prose above it, not
+     centred in the wide .wrap. */
+  .subscribe--full {
+    max-width: 34rem;
+  }
   .subscribe--full .signup-form {
     flex-direction: column;
     align-items: stretch;
-    max-width: 30rem;
+    max-width: none;
+    margin-inline: 0;
     gap: var(--space-3);
+    text-align: left;
   }
   .subscribe--full .btn-plain {
     align-self: flex-start;
+  }
+  .subscribe--full .subscribe-status,
+  .subscribe--full .subscribe-done {
+    text-align: left;
   }
 
   .subscribe-hp {
