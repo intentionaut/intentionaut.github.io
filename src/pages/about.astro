@@ -162,21 +162,27 @@ const stats = [
   }
 
   /* Break the body into three with hairline keylines (1px var(--line), the
-     site's rule): narrative, "How I work", the ledger. Spacing uses the
-     system's fluid steps only - clamp(3rem, 6vw, 5rem) is the workhorse
-     section gap, clamp(4.5rem, 10vw, 8.5rem) the hero-tier one - so the break
-     before the ledger reads as the larger of the two. The "How I work" keyline
-     runs to the prose measure (its <h2> lives inside .prose, hence :global);
-     the ledger keyline runs the full content width, matching the ledger. */
+     site's rule): narrative, "How I work", the ledger. Each line sits roughly
+     centred in its gap - margin-top is a step smaller than padding-top to
+     offset the ~1.5rem trailing margin of the paragraph above it, and
+     .about-final drops its own bottom padding so that offset is predictable.
+     The ledger break is one step larger than "How I work". All values are
+     system fluid steps. The "How I work" keyline runs to the prose measure
+     (its <h2> lives inside .prose, hence :global); the ledger keyline runs the
+     full content width, matching the ledger. */
+  .about-final {
+    padding-bottom: 0;
+  }
+
   .about-final :global(h2) {
-    margin-top: clamp(3rem, 6vw, 5rem);
-    padding-top: clamp(2rem, 4vw, 3rem);
+    margin-top: clamp(2rem, 4vw, 3rem);
+    padding-top: clamp(3rem, 6vw, 5rem);
     border-top: 1px solid var(--line);
   }
 
   .arc-section {
-    margin-top: clamp(4.5rem, 10vw, 8.5rem);
-    padding-top: clamp(3rem, 6vw, 5rem);
+    margin-top: clamp(3rem, 6vw, 5rem);
+    padding-top: clamp(3.5rem, 8vw, 6rem);
     border-top: 1px solid var(--line);
   }
 
