@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { rates, gbp } from '../data/rates';
 
 const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
 ---
@@ -71,7 +72,7 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
         <li>A talk your people can actually use, not just applaud</li>
         <li>Frameworks your team keeps using after I have gone</li>
         <li>Straight answers about AI, product and culture with no vendor agenda</li>
-        <li>From £1,600 for an event. Private workshops quoted by scope and travel.</li>
+        <li>From {gbp(rates.speaking)} for an event. Private workshops quoted by scope and travel.</li>
       </ul>
 
       <h2>How it works</h2>

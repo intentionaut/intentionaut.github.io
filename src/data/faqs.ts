@@ -1,9 +1,23 @@
+import { rates, gbp } from './rates';
+
 export interface Faq {
   question: string;
   answer: string;
 }
 
 export const faqs: Faq[] = [
+  {
+    question: 'How much does a strategy session cost?',
+    answer: `${gbp(rates.strategySession)} for 90 minutes. Sliding scale applies, see above.`,
+  },
+  {
+    question: 'What is your day rate for fractional leadership?',
+    answer: `${gbp(rates.fractional)} a day, on the agreed rhythm we set together.`,
+  },
+  {
+    question: 'How much do keynotes and workshops cost?',
+    answer: `From ${gbp(rates.speaking)} for an event. Private workshops are quoted by scope and travel, sliding scale applies.`,
+  },
   {
     question: 'How does the sliding scale work?',
     answer:
