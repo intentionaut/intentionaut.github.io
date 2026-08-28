@@ -73,12 +73,15 @@ const stats = [
 
     <div class="about-lead">
       <figure class="portrait">
-        <img
-          src="/saielle-dasilva.jpg"
-          alt="Saielle DaSilva"
-          width="360"
-          height="480"
-        />
+        <div class="portrait-frame">
+          <img
+            src="/saielle-dasilva.jpg"
+            alt="Saielle DaSilva"
+            width="360"
+            height="480"
+          />
+        </div>
+        <figcaption>Saielle DaSilva</figcaption>
       </figure>
 
       <div class="prose about-intro">
@@ -128,25 +131,41 @@ const stats = [
 </BaseLayout>
 
 <style>
-  /* Portrait and the opening prose sit side by side, down to the definition
-     and the line after it. Everything below (about-final, the arc) is full
-     width, so the two-column treatment is scoped to .about-lead only. */
+  /* The opening prose (down to the definition and the line after it) sits left,
+     the portrait right. Everything below - about-final, the arc - is full width,
+     so the two-column treatment is scoped to .about-lead only. The text column
+     is capped at the same measure as .prose so its left edge lines up with the
+     full-width prose below. */
   .about-lead {
     display: grid;
-    grid-template-columns: 15rem minmax(0, 1fr);
+    grid-template-columns: minmax(0, 62ch) 18rem;
     gap: clamp(2rem, 5vw, 3.5rem);
     align-items: start;
     padding-bottom: clamp(3rem, 6vw, 5rem);
   }
 
-  .portrait {
+  /* Explicit placement so the DOM can keep the portrait first (it leads when the
+     grid collapses to one column on narrow screens) while it renders on the
+     right here. */
+  .about-lead .about-intro {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .about-lead .portrait {
+    grid-column: 2;
+    grid-row: 1;
     margin: 0;
+  }
+
+  .portrait-frame {
+    display: block;
     padding: 12px;
     border: 1px solid var(--ink);
     position: relative;
   }
 
-  .portrait::after {
+  .portrait-frame::after {
     content: '';
     position: absolute;
     inset: 5px;
@@ -154,14 +173,23 @@ const stats = [
     pointer-events: none;
   }
 
-  .portrait img {
+  .portrait-frame img {
     display: block;
     width: 100%;
     height: auto;
   }
 
-  /* .about-intro already zeroes its own padding-bottom in global.css; the grid
-     gap and .about-lead's padding-bottom carry the spacing from here down. */
+  /* Same treatment as .img-caption elsewhere on the site. */
+  .portrait figcaption {
+    margin-top: var(--space-2);
+    font-family: var(--font-body);
+    font-size: 0.58rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+  }
 
   @media (max-width: 720px) {
     .about-lead {
@@ -170,8 +198,14 @@ const stats = [
       padding-bottom: clamp(2.5rem, 8vw, 3.5rem);
     }
 
+    .about-lead .about-intro,
+    .about-lead .portrait {
+      grid-column: auto;
+      grid-row: auto;
+    }
+
     .portrait {
-      max-width: 14rem;
+      max-width: 15rem;
     }
   }
 </style>
