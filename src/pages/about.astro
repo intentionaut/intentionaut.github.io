@@ -71,6 +71,15 @@ const stats = [
       </ul>
     </header>
 
+    <figure class="portrait">
+      <img
+        src="/saielle-dasilva.jpg"
+        alt="Saielle DaSilva"
+        width="360"
+        height="480"
+      />
+    </figure>
+
     <div class="prose about-intro">
       <p>
         I started in design. Along the way, I discovered a passion for data.
@@ -115,3 +124,27 @@ const stats = [
     </section>
   </section>
 </BaseLayout>
+
+<style>
+  .portrait {
+    max-width: 17rem;
+    margin: 0 0 var(--space-8);
+    padding: 12px;
+    border: 1px solid var(--ink);
+    position: relative;
+  }
+
+  .portrait::after {
+    content: '';
+    position: absolute;
+    inset: 5px;
+    border: 1px solid var(--line);
+    pointer-events: none;
+  }
+
+  .portrait img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+</style>

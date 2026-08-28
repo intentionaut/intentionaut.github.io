@@ -83,11 +83,24 @@ page, robots meta on drafts only, canonical URLs, `og:type`, sitemap contents.
 
 ### Flags found, not fixed (out of phase scope)
 
-- Archive dates in `writing.ts` for the 2026 Intentionaut posts (e.g. "The AI
-  Agent Reality Check" → `2026-08-01`, label "2026") disagree with beehiiv's
-  real `publish_date` (2025-08-27), which is what the article page body AND the
-  new structured data show. Reconcile the archive to the real dates.
 - Article pages render two `<h1>`s (page header + an `<h1>` inside the imported
   beehiiv body). `stripBeehiivHtml` should demote headings one level. Phase 5.
 - No per-article OG image; no font preload; article `<img>` tags have no
   width/height/lazy. Phase 5.
+
+### 2026-08-28 (later) — follow-ups before merge
+
+- **Headshot added.** Saielle sent a portrait (iPhone, only a 360×480
+  derivative was reachable on disk — low-res but she okayed it). Saved to
+  `public/saielle-dasilva.jpg`, EXIF/APP segments stripped (no PIL/exiftool on
+  the box; did it with a small JPEG-marker script). Wired into `Person.image`
+  as an `ImageObject` and shown on `/about` in a framed portrait matching the
+  site's `.img-card` double-border style. TODO: swap in a higher-res version.
+- **Archive dates corrected.** `writing.ts` had the 2026 Intentionaut posts
+  under invented 2026 dates + `dateLabel: '2026'`. Pulled the real
+  `publish_date` from the beehiiv API and set them: Aug–Oct 2025. Dropped the
+  now-redundant `dateLabel`, so the archive shows real "Mon YYYY".
+- Note: `the-ai-opportunity-you-re-missing` (beehiiv, 2025-09-23) has a built
+  page + sitemap entry but no `writing.ts` archive row — looks like a
+  deliberate omission by Saielle, left as-is.
+- Merged to `main` and pushed → GitHub Pages deploy.
