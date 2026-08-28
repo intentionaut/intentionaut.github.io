@@ -159,12 +159,21 @@ const stats = [
     margin-top: 0;
   }
 
-  /* The body prose sits centred in the page rather than hard left, so its
-     column balances between the full-width ribbon above and the arc below.
-     Text stays left aligned; only the measure is centred. */
-  .about-intro,
-  .about-final {
-    margin-inline: auto;
+  /* Break the body into three parts with hairline keylines at the prose
+     measure: the narrative, then "How I work", then the career ledger. The
+     gaps widen on desktop (clamp maxes) so the page has room to breathe.
+     "How I work" is an <h2> from about.md, hence :global. */
+  .about-final :global(h2) {
+    margin-top: clamp(3.5rem, 8vw, 6rem);
+    padding-top: clamp(1.75rem, 4vw, 2.75rem);
+    border-top: 1px solid var(--line);
+  }
+
+  .arc-section {
+    max-width: 62ch;
+    margin-top: clamp(4.5rem, 11vw, 8.5rem);
+    padding-top: clamp(2.5rem, 5vw, 4rem);
+    border-top: 1px solid var(--line);
   }
 
   /* Below the point where a 16rem portrait would start crowding the headline,
