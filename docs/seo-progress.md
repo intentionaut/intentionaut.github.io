@@ -204,3 +204,22 @@ Missing", so it now belongs under Speaking:
 Pushed together with the held `hidden_from_feed` filter commit.
 
 Next: SEO Phase 3 — money-page titles + `/fractional` rewrite.
+
+### 2026-08-28 (later) — recap restored, repo moved
+
+Saielle un-archived and backdated "The AI Opportunity You're Missing" in beehiiv
+(displayed date 2025-09-17), reversing the plan above. So:
+- Redirect removed; the page publishes again at
+  `/writing/the-ai-opportunity-you-re-missing/` and is back in the sitemap. It's
+  *not* in the `/writing` archive list (`writing.ts`) — it stays a Speaking piece.
+- `producttank-oxford-2025.md` now has `url: /writing/the-ai-opportunity-you-re-missing/`.
+  `talks.url` schema widened to accept a root-relative path; `speaking.astro`
+  only adds `target=_blank` for `http(s)` links (matches `writing.astro`).
+- `lib/beehiiv.ts` now prefers beehiiv's `displayed_date` over `publish_date`
+  (so a backdated recap shows the talk's date). `writing/[slug]` `fmtDate` pins
+  `timeZone: 'UTC'` — a near-midnight backdate was rendering a day ahead of the
+  schema's ISO date on the CI box.
+
+**Repo moved**: `~/Vibe Coding/intentionaut` → `~/Projects/intentionaut`
+(Saielle reorganised all her project folders mid-session; `~/Vibe Coding/` is
+now empty). Same git repo, same remote, all history intact.
