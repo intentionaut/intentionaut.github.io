@@ -159,6 +159,14 @@ const stats = [
     margin-top: 0;
   }
 
+  /* The body prose sits centred in the page rather than hard left, so its
+     column balances between the full-width ribbon above and the arc below.
+     Text stays left aligned; only the measure is centred. */
+  .about-intro,
+  .about-final {
+    margin-inline: auto;
+  }
+
   /* Below the point where a 16rem portrait would start crowding the headline,
      stack: text, then portrait, then the (still full-width) stat strip. */
   @media (max-width: 52rem) {
