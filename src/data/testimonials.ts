@@ -112,19 +112,6 @@ export const testimonials: Testimonial[] = [
     receivedAt: '2024-01-01',
   },
   {
-    id: 'wes-galliher',
-    quote:
-      'Saielle has the rare gift of uncovering the "why" in every situation. I\'ve watched her do this with stakeholder requests, product prioritization, and driving conversations toward the outcomes that actually matter.',
-    name: 'Wes Galliher, PhD.',
-    role: 'Director of Product Management',
-    org: 'Weave',
-    url: 'https://www.linkedin.com/in/wesgalliher/',
-    enabled: true,
-    placements: ['contact'],
-    source: 'LinkedIn recommendation',
-    receivedAt: '2024-01-01',
-  },
-  {
     id: 'randy-silver',
     quote:
       "Saielle is a design leader with a great mind for product, and she's also led product teams. Many of us claim expertise in either product or design, but it's the rare person who can speak with passion, expertise and curiosity to both. She is that rare person.",
@@ -132,6 +119,19 @@ export const testimonials: Testimonial[] = [
     role: 'Co-Host',
     org: 'The Product Experience Podcast',
     url: 'https://www.linkedin.com/in/randysilver/',
+    enabled: true,
+    placements: ['contact'],
+    source: 'LinkedIn recommendation',
+    receivedAt: '2024-01-01',
+  },
+  {
+    id: 'wes-galliher',
+    quote:
+      'Saielle has the rare gift of uncovering the "why" in every situation. I\'ve watched her do this with stakeholder requests, product prioritization, and driving conversations toward the outcomes that actually matter.',
+    name: 'Wes Galliher, PhD.',
+    role: 'Director of Product Management',
+    org: 'Weave',
+    url: 'https://www.linkedin.com/in/wesgalliher/',
     enabled: true,
     placements: ['contact'],
     source: 'LinkedIn recommendation',
@@ -149,6 +149,20 @@ export const testimonials: Testimonial[] = [
     placements: ['contact'],
     source: 'LinkedIn recommendation',
     receivedAt: '2024-01-01',
+  },
+  {
+    id: 'jon-cockle',
+    quote:
+      'She is also particularly strong at framing choices and trade-offs for senior leaders. Rather than allowing discussions to become lost in detail, Saielle has a knack for getting to the underlying decision and articulating the options in a way that makes the consequences clear.',
+    name: 'Jon Cockle',
+    role: 'Software Delivery Consultant',
+    org: "former Head of Delivery, Sainsbury's",
+    url: 'https://www.linkedin.com/in/jon-cockle-75a78867/',
+    enabled: true,
+    placements: ['contact'],
+    source: 'LinkedIn recommendation',
+    receivedAt: '2026-08-28',
+    note: 'Excerpt. The two sentences on framing choices and trade-offs for senior leaders, chosen to match the site positioning; the full recommendation is on his LinkedIn.',
   },
 ];
 
