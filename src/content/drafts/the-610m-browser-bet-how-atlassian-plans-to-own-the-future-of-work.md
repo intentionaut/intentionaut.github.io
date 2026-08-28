@@ -2,7 +2,7 @@
 title: "The $610M Browser Bet: How Atlassian Plans to Own the Future of Work"
 description: "How Atlassian plans to transform browsers into the central nervous system of work in the AI-era"
 originalTitle: "The $610M Browser Bet: How Atlassian Plans to Own the Future of Work"
-originalUrl: "https://newsletter.intentionaut.com/p/the-610m-browser-bet-how-atlassian-plans-to-own-the-future-of-work"
+originalUrl: "/writing/the-610m-browser-bet-how-atlassian-plans-to-own-the-future-of-work/"
 ---
 *How Atlassian's acquisition of The Browser Company represents a strategic platform play to solve the enterprise productivity crisis—where the average large company wastes $21 million annually on fragmented SaaS tools—while building an uncopyable data advantage*
 

@@ -2,7 +2,7 @@
 title: "The New Architecture of Software Quality"
 description: "Why AI Broke Traditional Quality Definitions and What to do About It"
 originalTitle: "The New Architecture of Software Quality"
-originalUrl: "https://newsletter.intentionaut.com/p/the-new-architecture-of-software-quality"
+originalUrl: "/writing/the-new-architecture-of-software-quality/"
 ---
 *Traditional quality metrics optimised for predictable systems break down completely when software needs to handle ambiguity, context, and emergent behaviours. These patterns are the new normal of the AI era of software.*
 

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SubscribeForm from '../components/SubscribeForm.astro';
 import {
   writingEntries,
   themeLabels,
@@ -50,24 +51,7 @@ const fmtDate = (e: (typeof entries)[number]) =>
         Fortnightly thoughts on leadership, impact and getting clear about
         things that matter.
       </p>
-      <form
-        class="signup-form"
-        action="https://embeds.beehiiv.com/96b7bfbb-25ad-448f-a8e8-b4d61019e30d/subscribe"
-        method="POST"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <label class="sr-only" for="writing-email">Email address</label>
-        <input
-          class="signup-input"
-          type="email"
-          id="writing-email"
-          name="email"
-          placeholder="your@email.com"
-          required
-        />
-        <button class="btn-plain" type="submit">Subscribe</button>
-      </form>
+      <SubscribeForm source="writing-top" emailId="writing-email" />
     </section>
 
     <div class="section-rule" aria-hidden="true"></div>
@@ -140,24 +124,7 @@ const fmtDate = (e: (typeof entries)[number]) =>
       <p class="signup-sub">
         Join readers getting new essays on leadership, design and AI.
       </p>
-      <form
-        class="signup-form"
-        action="https://embeds.beehiiv.com/96b7bfbb-25ad-448f-a8e8-b4d61019e30d/subscribe"
-        method="POST"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <label class="sr-only" for="writing-bottom-email">Email address</label>
-        <input
-          class="signup-input"
-          type="email"
-          id="writing-bottom-email"
-          name="email"
-          placeholder="your@email.com"
-          required
-        />
-        <button class="btn-plain" type="submit">Subscribe</button>
-      </form>
+      <SubscribeForm source="writing-bottom" emailId="writing-bottom-email" />
     </section>
   </section>
 

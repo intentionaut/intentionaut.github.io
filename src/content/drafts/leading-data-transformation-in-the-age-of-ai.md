@@ -2,7 +2,7 @@
 title: "Leading Data Transformation in the Age of AI"
 description: "The Human Factors Missing from Your AI Data Strategy"
 originalTitle: "Leading Data Transformation in the Age of AI"
-originalUrl: "https://newsletter.intentionaut.com/p/leading-data-transformation-in-the-age-of-ai"
+originalUrl: "/writing/leading-data-transformation-in-the-age-of-ai/"
 ---
 *Sustainable AI success depends on building adaptive data stewardship relationships and organisational capabilities. In this week’s piece we’ll explore how to build those effectively.*
 

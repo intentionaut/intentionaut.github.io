@@ -1,0 +1,120 @@
+---
+import '@fontsource-variable/roboto-serif';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const updated = '28 August 2026';
+---
+
+<BaseLayout
+  title="Privacy | Saielle DaSilva"
+  description="How intentionaut.com handles your data: the newsletter, the contact form, and analytics. Plain English."
+>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Privacy</p>
+      <h1>What happens to your data here.</h1>
+      <p class="lede">
+        This is a small site with a newsletter and a contact form. Here is
+        everything it collects, who processes it, and how to get it removed. In
+        plain English. It is not legal advice, and I keep it current as the site
+        changes.
+      </p>
+      <p class="article-meta">Last updated: {updated}</p>
+    </header>
+
+    <div class="prose">
+      <h2>Who is responsible</h2>
+      <p>
+        Intentionaut Ltd (Saielle DaSilva) is the data controller for this site.
+        Reach me at <a href="mailto:hello@intentionaut.com">hello@intentionaut.com</a>
+        for anything on this page.
+      </p>
+
+      <h2>The newsletter</h2>
+      <p>
+        When you subscribe, I collect your email address. The newsletter runs on
+        <a href="https://www.beehiiv.com/" target="_blank" rel="noopener noreferrer">beehiiv</a>,
+        which stores your address, records whether you open or click issues, and
+        logs your IP address and approximate location at the moment you sign up.
+      </p>
+      <p>
+        The legal basis is your consent: you tick the consent box, and a
+        confirmation email checks it was really you. You can withdraw consent at
+        any time using the unsubscribe link in every issue, or by emailing me.
+        Unsubscribing removes you from future sends; beehiiv may keep a
+        suppression record so you are not accidentally re-added.
+      </p>
+      <p>
+        beehiiv is based in the United States. That transfer is covered by
+        beehiiv's data processing terms and standard contractual clauses.
+      </p>
+
+      <h2>The contact form</h2>
+      <p>
+        If you write in, I collect your name, email address and message. The
+        message is delivered to my inbox through
+        <a href="https://www.mailgun.com/" target="_blank" rel="noopener noreferrer">Mailgun</a>
+        (EU region). A
+        <a href="https://www.cloudflare.com/products/turnstile/" target="_blank" rel="noopener noreferrer">Cloudflare Turnstile</a>
+        check runs on the form to keep bots out; it processes limited technical
+        and device signals and does not track you across sites.
+      </p>
+      <p>
+        The legal basis is my legitimate interest in replying to you and, where
+        relevant, taking steps towards working together. I keep the message as
+        long as it is relevant to your enquiry or an engagement, then delete it.
+      </p>
+
+      <h2>Analytics</h2>
+      <p>
+        The site uses
+        <a href="https://www.cloudflare.com/web-analytics/" target="_blank" rel="noopener noreferrer">Cloudflare Web Analytics</a>,
+        which counts page views in aggregate. It sets no cookies, uses no
+        cross-site identifier, and is not used to identify anyone. That is why
+        there is no cookie banner: there is nothing personal to consent to.
+      </p>
+
+      <h2>Hosting</h2>
+      <p>
+        The site is served through GitHub Pages and Cloudflare (CDN and DNS).
+        Their standard server logs apply while a page is being delivered to you.
+      </p>
+
+      <h2>What I never do</h2>
+      <p>
+        No selling your data. No advertising trackers. No sharing beyond the
+        processors named above, which only act on my instructions.
+      </p>
+
+      <h2>Your rights</h2>
+      <p>
+        Under UK GDPR you can ask me to give you a copy of your data, correct it,
+        delete it, restrict or object to its use, or hand it to another service.
+        You can withdraw consent for the newsletter at any time. Email
+        <a href="mailto:hello@intentionaut.com">hello@intentionaut.com</a> and I
+        will act on it. If you are not happy with how I have handled something,
+        you can complain to the
+        <a href="https://ico.org.uk/" target="_blank" rel="noopener noreferrer">Information Commissioner's Office</a>.
+      </p>
+
+      <h2>Children</h2>
+      <p>This site is not aimed at anyone under 16.</p>
+
+      <h2>Changes</h2>
+      <p>
+        If this policy changes, the new version and its date go here.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .article-meta {
+    margin-top: var(--space-4);
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  .prose {
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+  }
+</style>

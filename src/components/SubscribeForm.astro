@@ -1,0 +1,218 @@
+---
+/**
+ * Newsletter signup. Posts to the Cloudflare Worker (/subscribe), which calls
+ * the beehiiv API server-side. The reader never leaves intentionaut.com.
+ *
+ * variant="inline" — email + button, for end-of-article / homepage CTAs.
+ * variant="full"   — adds a visible consent checkbox, for the /subscribe page.
+ */
+interface Props {
+  /** utm_source context, e.g. "home", "writing-archive", "article", "subscribe-page". */
+  source: string;
+  /** Unique per instance, ties the label to the input. */
+  emailId: string;
+  buttonLabel?: string;
+  variant?: 'inline' | 'full';
+  placeholder?: string;
+}
+
+const {
+  source,
+  emailId,
+  buttonLabel = 'Subscribe',
+  variant = 'inline',
+  placeholder = 'your@email.com',
+} = Astro.props;
+---
+
+<div class:list={['subscribe', `subscribe--${variant}`]}>
+  <form class="signup-form subscribe-form" data-subscribe={source} novalidate>
+    <label class="sr-only" for={emailId}>Email address</label>
+    <input
+      class="signup-input"
+      type="email"
+      id={emailId}
+      name="email"
+      placeholder={placeholder}
+      autocomplete="email"
+      required
+    />
+    {/* Honeypot: hidden from people, catnip for bots. */}
+    <input
+      class="subscribe-hp"
+      type="text"
+      name="website"
+      tabindex="-1"
+      autocomplete="off"
+      aria-hidden="true"
+    />
+    {
+      variant === 'full' && (
+        <label class="subscribe-consent">
+          <input type="checkbox" name="consent" required />
+          <span>
+            I consent to receive newsletters via email.{' '}
+            <a href="/terms/">Terms of use</a> and{' '}
+            <a href="/privacy/">Privacy policy</a>.
+          </span>
+        </label>
+      )
+    }
+    <button class="btn-plain" type="submit">{buttonLabel}</button>
+    <p class="subscribe-status" role="status" aria-live="polite"></p>
+    {
+      variant === 'inline' && (
+        <p class="subscribe-note">
+          No spam. Unsubscribe anytime. <a href="/privacy/">Privacy</a>.
+        </p>
+      )
+    }
+  </form>
+  <p class="subscribe-done" role="status" hidden></p>
+</div>
+
+<style>
+  .subscribe--full .signup-form {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 30rem;
+    gap: var(--space-3);
+  }
+  .subscribe--full .btn-plain {
+    align-self: flex-start;
+  }
+
+  .subscribe-hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .subscribe-consent {
+    display: flex;
+    gap: var(--space-2);
+    align-items: flex-start;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--muted);
+    text-align: left;
+  }
+  .subscribe-consent input {
+    margin-top: 0.2em;
+    flex-shrink: 0;
+  }
+  .subscribe-consent a {
+    color: inherit;
+  }
+
+  .subscribe-note {
+    margin: var(--space-2) 0 0;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  .subscribe--full .subscribe-note {
+    text-align: left;
+  }
+
+  .subscribe-status:empty {
+    display: none;
+  }
+  .subscribe-status {
+    margin: var(--space-2) 0 0;
+    font-size: 0.9rem;
+    color: var(--accent);
+  }
+  .subscribe-status[data-error] {
+    color: #b23b3b;
+  }
+
+  .subscribe-done {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--ink);
+  }
+
+  .btn-plain[disabled] {
+    opacity: 0.55;
+    cursor: default;
+  }
+</style>
+
+<script>
+  const ENDPOINT = 'https://contact-form.intentionaut.workers.dev/subscribe';
+
+  // A ?utm_source= / ?ref= on the URL wins over the form's placement label, so a
+  // link shared on Bluesky (intentionaut.com/subscribe/?utm_source=bluesky)
+  // attributes correctly. Falls back to where the form sits on the site.
+  const params = new URLSearchParams(location.search);
+  const channel = params.get('utm_source') || params.get('ref') || '';
+
+  document.querySelectorAll<HTMLFormElement>('form[data-subscribe]').forEach((form) => {
+    const status = form.querySelector<HTMLElement>('.subscribe-status');
+    const done = form.parentElement?.querySelector<HTMLElement>('.subscribe-done');
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    const consentBox = form.querySelector<HTMLInputElement>('input[name="consent"]');
+
+    const setStatus = (msg: string, isError: boolean) => {
+      if (!status) return;
+      status.textContent = msg;
+      if (isError) status.setAttribute('data-error', '');
+      else status.removeAttribute('data-error');
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      setStatus('', false);
+
+      const fd = new FormData(form);
+      const email = String(fd.get('email') ?? '').trim();
+      if (!email) {
+        setStatus('Please enter your email address.', true);
+        return;
+      }
+      if (consentBox && !consentBox.checked) {
+        setStatus('Please tick the consent box to continue.', true);
+        return;
+      }
+
+      if (button) button.disabled = true;
+
+      try {
+        const res = await fetch(ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email,
+            consent: consentBox ? consentBox.checked : true,
+            source: channel || form.dataset.subscribe,
+            website: fd.get('website') || '',
+            referrer: document.referrer || undefined,
+          }),
+        });
+        const result = (await res.json().catch(() => ({}))) as {
+          message?: string;
+          error?: string;
+        };
+
+        if (res.ok) {
+          form.hidden = true;
+          if (done) {
+            done.textContent = result.message || 'Almost there — check your inbox.';
+            done.hidden = false;
+          } else {
+            setStatus(result.message || 'Almost there — check your inbox.', false);
+          }
+        } else {
+          setStatus(result.error || 'Something went wrong. Try again in a moment.', true);
+          if (button) button.disabled = false;
+        }
+      } catch {
+        setStatus('Something went wrong. Try again in a moment.', true);
+        if (button) button.disabled = false;
+      }
+    });
+  });
+</script>

@@ -2,7 +2,7 @@
 title: "The Enterprise Guide to AI Economics"
 description: "Sustainable Budgeting Tips for Leaders in AI Adoption"
 originalTitle: "The Enterprise Guide to AI Economics"
-originalUrl: "https://newsletter.intentionaut.com/p/the-enterprise-guide-to-ai-economics"
+originalUrl: "/writing/the-enterprise-guide-to-ai-economics/"
 ---
 Picture this familiar scenario: your team confidently presents an AI project with prioritisation frameworks and estimates that worked perfectly last year. This year, on a new AI initiative [the numbers are spiralling](https://www.mckinsey.com/industries/technology-media-and-telecommunications/our-insights/cloud-migration-opportunity-business-value-grows-but-missteps-abound?utm_source=newsletter.intentionaut.com&utm_medium=referral&utm_campaign=the-enterprise-guide-to-ai-economics) beyond expectations and nobody knows how we got here.
 

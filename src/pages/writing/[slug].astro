@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import SubscribeForm from '../../components/SubscribeForm.astro';
+import KeepReading from '../../components/KeepReading.astro';
+import { relatedTo } from '../../data/writing';
 import { getCollection, render } from 'astro:content';
 import { fetchPosts } from '../../lib/beehiiv';
 
@@ -42,6 +45,8 @@ const fmtDate = (d: string | number) =>
 
 const origin = Astro.site!.origin;
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+
+const related = relatedTo(Astro.url.pathname);
 
 const meta =
   type === 'beehiiv' && post
@@ -123,25 +128,10 @@ const articleLd = meta
           Fortnightly essays on leadership, design and AI. No spam,
           unsubscribe anytime.
         </p>
-        <form
-          class="signup-form"
-          action="https://embeds.beehiiv.com/96b7bfbb-25ad-448f-a8e8-b4d61019e30d/subscribe"
-          method="POST"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <label class="sr-only" for="article-email">Email address</label>
-          <input
-            class="signup-input"
-            type="email"
-            id="article-email"
-            name="email"
-            placeholder="your@email.com"
-            required
-          />
-          <button class="btn-plain" type="submit">Subscribe</button>
-        </form>
+        <SubscribeForm source="article" emailId="article-email" buttonLabel="Get the next one" />
       </section>
+
+      <KeepReading items={related} />
 
       <section class="article-footer">
         <a class="link-arrow" href="/writing/"><span>Back to all writing</span></a>
@@ -168,6 +158,17 @@ const articleLd = meta
       <div class="prose article-body">
         <essayContent.Content />
       </div>
+
+      <section class="signup article-cta" aria-label="Subscribe">
+        <h2>If this landed, you'll like the next one.</h2>
+        <p class="signup-sub">
+          Fortnightly essays on leadership, design and AI. No spam,
+          unsubscribe anytime.
+        </p>
+        <SubscribeForm source="essay" emailId="essay-email" buttonLabel="Get the next one" />
+      </section>
+
+      <KeepReading items={related} />
 
       <section class="article-footer">
         {essay.data.originalUrl && (

@@ -1,0 +1,74 @@
+---
+import type { WritingEntry } from '../data/writing';
+
+interface Props {
+  items: WritingEntry[];
+  heading?: string;
+}
+
+const { items, heading = 'Keep reading' } = Astro.props;
+const fmtYear = (d: string) => new Date(d).getUTCFullYear();
+---
+
+{
+  items.length > 0 && (
+    <nav class="keep-reading" aria-label="More writing">
+      <h2>{heading}</h2>
+      <ul>
+        {items.map((e) => (
+          <li>
+            <a href={e.url}>
+              <span class="kr-title">{e.title}</span>
+              <span class="kr-meta">
+                {e.source} · {fmtYear(e.date)}
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}
+
+<style>
+  .keep-reading {
+    padding-block: clamp(2.5rem, 5vw, 3.5rem);
+    border-top: 1px solid var(--line);
+  }
+  .keep-reading h2 {
+    font-size: 1.1rem;
+    margin: 0 0 var(--space-5);
+  }
+  .keep-reading ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-1);
+  }
+  .keep-reading a {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15em;
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .keep-reading li:last-child a {
+    border-bottom: 0;
+  }
+  .kr-title {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-size: 1.08rem;
+    line-height: 1.3;
+  }
+  .keep-reading a:hover .kr-title {
+    color: var(--accent);
+  }
+  .kr-meta {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+</style>

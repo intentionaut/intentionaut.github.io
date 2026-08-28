@@ -233,3 +233,41 @@ export const writingEntries: WritingEntry[] = [
     themes: ['ethics', 'craft'],
   },
 ];
+
+const onSite = (e: WritingEntry) => !!e.url && e.url.startsWith('/writing/');
+
+/**
+ * Pieces to suggest at the foot of the article at `pathname`
+ * (e.g. "/writing/depression-and-work/"). Ranked by shared themes, then recency.
+ * Falls back to the most recent on-site pieces when `pathname` isn't in the list.
+ */
+export function relatedTo(pathname: string, count = 3): WritingEntry[] {
+  const here = writingEntries.find((e) => e.url === pathname);
+  const pool = writingEntries
+    .filter((e) => onSite(e) && e.url !== pathname)
+    .sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
+
+  if (!here) return pool.slice(0, count);
+
+  const themes = new Set(here.themes);
+  return [...pool]
+    .sort((a, b) => {
+      const shared = (e: WritingEntry) => e.themes.filter((t) => themes.has(t)).length;
+      return shared(b) - shared(a);
+    })
+    .slice(0, count);
+}
+
+/**
+ * The "start here" set for the /subscribe page. Slugs, newest character of the
+ * letter first. Edit this list to change what cold readers see first.
+ */
+export const startHereSlugs = [
+  '/writing/good-product-decisions-need-speed/',
+  '/writing/the-new-architecture-of-software-quality/',
+  '/writing/content-is-a-product-discipline/',
+];
+
+export const startHere: WritingEntry[] = startHereSlugs
+  .map((url) => writingEntries.find((e) => e.url === url))
+  .filter((e): e is WritingEntry => !!e);

@@ -2,7 +2,7 @@
 title: "The Coming Shift in Enterprise Metadata"
 description: "Why smart product leaders are positioning for the biggest change in enterprise data architecture since the Cloud"
 originalTitle: "The Coming Shift in Enterprise Metadata"
-originalUrl: "https://newsletter.intentionaut.com/p/the-coming-shift-in-enterprise-metadata"
+originalUrl: "/writing/the-coming-shift-in-enterprise-metadata/"
 ---
 *You've probably noticed metadata is everywhere in enterprise conversations lately. There's a reason: companies finally understand that data context isn't documentation—it's the control plane that makes AI initiatives actually work.*
 

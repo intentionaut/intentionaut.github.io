@@ -1,0 +1,86 @@
+---
+import '@fontsource-variable/roboto-serif';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const updated = '28 August 2026';
+---
+
+<BaseLayout
+  title="Terms of use | Saielle DaSilva"
+  description="The terms for using intentionaut.com and its newsletter."
+>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Terms of use</p>
+      <h1>The short version.</h1>
+      <p class="lede">
+        By using intentionaut.com or subscribing to the newsletter, you agree to
+        what follows. It is deliberately brief.
+      </p>
+      <p class="article-meta">Last updated: {updated}</p>
+    </header>
+
+    <div class="prose">
+      <h2>Who runs this</h2>
+      <p>
+        intentionaut.com is run by Intentionaut Ltd (Saielle DaSilva). Contact:
+        <a href="mailto:hello@intentionaut.com">hello@intentionaut.com</a>.
+      </p>
+
+      <h2>Using the site</h2>
+      <p>
+        Read it, link to it, quote from it with attribution and a link back. Do
+        not republish whole pieces, pass the work off as your own, or scrape the
+        site to train a model without asking me first. Ask; I am usually happy to
+        say yes.
+      </p>
+
+      <h2>The writing is opinion, not advice for you</h2>
+      <p>
+        Everything here is my experience and my view. It is not tailored
+        professional advice for your team or your situation, and decisions you
+        make after reading it are your own.
+      </p>
+
+      <h2>No warranty</h2>
+      <p>
+        The site is provided as is. Links to other sites are not endorsements,
+        and I am not responsible for their content.
+      </p>
+
+      <h2>The newsletter</h2>
+      <p>
+        Intentionaut is free and lands roughly every other week. There is no
+        guaranteed schedule. You can unsubscribe at any time, and I may change or
+        stop the newsletter whenever I choose.
+      </p>
+
+      <h2>Liability</h2>
+      <p>
+        As far as the law allows, I am not liable for any loss arising from using
+        this site or acting on its content. Nothing here limits liability that
+        cannot legally be limited.
+      </p>
+
+      <h2>Law</h2>
+      <p>
+        These terms are governed by the law of England and Wales, and the courts
+        of England and Wales have jurisdiction.
+      </p>
+
+      <h2>Changes</h2>
+      <p>Updated terms and their date go here.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .article-meta {
+    margin-top: var(--space-4);
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  .prose {
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+  }
+</style>

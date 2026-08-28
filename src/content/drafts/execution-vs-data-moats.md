@@ -2,7 +2,7 @@
 title: "When Everyone Has AI: Building Execution Advantages That Last"
 description: "Why speed and execution now outlast data in the Age of AI"
 originalTitle: "When Everyone Has AI: Building Execution Advantages That Last"
-originalUrl: "https://newsletter.intentionaut.com/p/execution-vs-data-moats"
+originalUrl: "/writing/execution-vs-data-moats/"
 ---
 *AI democratisation is eroding traditional data advantages: yesterday’s proprietary datasets can now be matched—or even surpassed—through APIs and general-purpose models*
 

@@ -1,0 +1,91 @@
+---
+import '@fontsource-variable/roboto-serif';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SubscribeForm from '../components/SubscribeForm.astro';
+import KeepReading from '../components/KeepReading.astro';
+import { startHere } from '../data/writing';
+---
+
+<BaseLayout
+  title="Subscribe to Intentionaut | Saielle DaSilva"
+  description="A fortnightly letter for leaders in product, design and data: how to set direction your teams can act on, keep understanding shared as you grow, and realign when things quietly drift."
+>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">A fortnightly letter from Saielle DaSilva</p>
+      <h1>Most teams don't lack talent or tools. They lack intention.</h1>
+      <p class="lede">
+        Intentionaut is a letter for leaders in product, design and data: how to
+        set direction your teams can act on, keep understanding shared as you
+        grow, and realign when things quietly drift.
+      </p>
+    </header>
+
+    <div class="prose subscribe-page">
+      <p>
+        I've spent 15+ years on both sides of the bridge between the people who
+        build and the boards who fund: production AI taken from a handful of
+        experiments to millions of customers at Sainsbury's, some of the
+        earliest LLM products in European recruitment at StepStone, and Cazoo's
+        founding team through hyper-growth to a $7B IPO. The technology keeps
+        changing. The hard part never does.
+      </p>
+
+      <p>Every other week, you'll get:</p>
+      <ul>
+        <li>
+          Diagnostics you can run with your team this week, starting with why
+          "we're aligned" often means nobody disagreed out loud
+        </li>
+        <li>
+          Ways to spot when activity has lost its connection to purpose, and how
+          to fix it without a reorg
+        </li>
+        <li>
+          Lessons from real deployments: what worked, what failed quietly, and
+          why
+        </li>
+      </ul>
+
+      <p>
+        Five to fifteen minutes per issue. No hype, no model-launch fever. If it
+        doesn't change a decision you make, it doesn't make the cut.
+      </p>
+    </div>
+
+    <section class="subscribe-cta" aria-label="Subscribe">
+      <SubscribeForm
+        variant="full"
+        source="subscribe-page"
+        emailId="subscribe-email"
+        buttonLabel="Get the letter"
+      />
+    </section>
+
+    <p class="subscribe-ps">
+      P.S. Subscribers will see early thinking from my book in progress with Matt
+      LeMay.
+    </p>
+
+    <KeepReading items={startHere} heading="Not sure yet? Start here." />
+  </section>
+</BaseLayout>
+
+<style>
+  .subscribe-page ul {
+    margin-block: var(--space-4);
+  }
+  .subscribe-page li {
+    margin-block: var(--space-2);
+  }
+  .subscribe-cta {
+    margin-block: var(--space-8) var(--space-6);
+  }
+  .subscribe-ps {
+    max-width: 46ch;
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-style: italic;
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+  }
+</style>

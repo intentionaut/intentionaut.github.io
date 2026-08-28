@@ -2,7 +2,7 @@
 title: "Building AI That Actually Helps"
 description: "Why I'm starting yet another AI Product Newsletter"
 originalTitle: "Building AI That Actually Helps"
-originalUrl: "https://newsletter.intentionaut.com/p/building-ai-that-actually-helps"
+originalUrl: "/writing/building-ai-that-actually-helps/"
 ---
 There's something really human starting to happen in AI as people put away the frantic AI popups and chatbot reskins and start to think deeply about the world we live in and what people need from technology. I'm talking about those moments—and I've had a few more of them in the last week than I had in the last three months—where a well-designed AI feature genuinely makes my day a little easier, a decision a little clearer, or a process a little more human.
 

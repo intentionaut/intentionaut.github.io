@@ -2,7 +2,7 @@
 title: "The AI Agent Reality Check: Why 40% Will Fail (And How to Be in the 60% That Succeed)"
 description: "How to Avoid False Starts and Run a Marathon instead of a Sprint"
 originalTitle: "The AI Agent Reality Check: Why 40% Will Fail (And How to Be in the 60% That Succeed)"
-originalUrl: "https://newsletter.intentionaut.com/p/the-ai-agent-reality-check"
+originalUrl: "/writing/the-ai-agent-reality-check/"
 ---
 Here’s the uncomfortable truth: failures in the first generation of enterprise AI agents won’t be because the models aren’t good enough—they’ll fail because enterprises don’t understand the value hidden in their own workflows. We saw the same blind spot sink the first wave of [cloud adoption](https://hbr.org/2018/11/why-companies-are-still-struggling-to-make-cloud-computing-work?utm_source=newsletter.intentionaut.com&utm_medium=referral&utm_campaign=the-ai-agent-reality-check-why-40-will-fail-and-how-to-be-in-the-60-that-succeed). Companies rushed to “lift and shift” legacy systems into the cloud, only to discover that without rethinking workflows, costs ballooned and agility disappeared. The lesson? **Software is hard work**, and skipping the unglamorous foundations always catches up with you.
 
