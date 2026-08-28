@@ -34,6 +34,10 @@ const fmtDate = (d: string | number) =>
     month: 'long',
     day: 'numeric',
     year: 'numeric',
+    // Pin to UTC so the rendered day matches the schema's ISO date on any
+    // build machine (a backdated beehiiv post stored near midnight was
+    // rolling to the next day in local time).
+    timeZone: 'UTC',
   });
 
 const origin = Astro.site!.origin;

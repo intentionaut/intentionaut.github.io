@@ -8,7 +8,9 @@ const talks = defineCollection({
     event: z.string(),
     date: z.coerce.date(),
     location: z.string().optional(),
-    url: z.string().url().optional(),
+    // A full external URL, or a root-relative path for a talk that links to a
+    // page on this site (e.g. a write-up under /writing).
+    url: z.union([z.string().url(), z.string().startsWith('/')]).optional(),
     description: z.string().optional(),
   }),
 });

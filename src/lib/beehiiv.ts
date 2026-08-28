@@ -100,7 +100,9 @@ export async function fetchPosts(): Promise<BeehiivPost[]> {
     title: post.title,
     subtitle: post.subtitle ?? '',
     slug: post.slug,
-    publish_date: post.publish_date,
+    // displayed_date is beehiiv's "show this date instead" override; use it when
+    // set (e.g. a talk recap dated to the talk, not to when it was published).
+    publish_date: post.displayed_date ?? post.publish_date,
     thumbnail_url: post.thumbnail_url ?? '',
     web_url: post.web_url,
     content_html: stripBeehiivHtml(
