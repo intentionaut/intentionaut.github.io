@@ -159,6 +159,14 @@ const stats = [
     }
   }
 
+  /* On phones the headshot costs more vertical space than it earns; the Person
+     schema still carries the image. */
+  @media (max-width: 45rem) {
+    .page-head-intro .portrait {
+      display: none;
+    }
+  }
+
   .portrait-frame {
     display: block;
     padding: 12px;
