@@ -58,9 +58,6 @@ const stats = [
         <div class="page-head-text">
           <p class="eyebrow">About</p>
           <h1>{entry.data.title}</h1>
-          <p class="lede">
-            Some career highlights.
-          </p>
         </div>
         <figure class="portrait">
           <div class="portrait-frame">
@@ -74,6 +71,7 @@ const stats = [
           <figcaption>Saielle DaSilva</figcaption>
         </figure>
       </div>
+      <p class="lede stat-lede">Some career highlights.</p>
       <ul class="stat-strip" aria-label="Track record in numbers">
         {
           stats.map((s) => (
@@ -132,18 +130,30 @@ const stats = [
 </BaseLayout>
 
 <style>
-  /* Portrait sits beside the eyebrow + headline + lede. The stat strip is a
-     sibling of this grid, not inside it, so it always spans the full width and
-     keeps its four columns on desktop regardless of the portrait. */
+  /* Just the eyebrow + headline and the portrait, sized so they read as a
+     balanced pair: the text column is capped to the headline's own measure
+     (34ch, matching .page-head.long-title h1) so the portrait sits right
+     beside it rather than across a gap. Everything else - the "career
+     highlights" line, the stat ribbon, the prose - is full width below. */
   .page-head-intro {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 16rem;
-    gap: clamp(2rem, 5vw, 3.5rem);
+    grid-template-columns: minmax(0, 34ch) 16rem;
+    gap: clamp(1.5rem, 4vw, 3rem);
     align-items: start;
   }
 
   .page-head-intro .portrait {
     margin: 0;
+  }
+
+  /* "Some career highlights." labels the stat ribbon, so it sits tight above
+     it, with the breathing room placed above the line instead. */
+  .stat-lede {
+    margin: clamp(1.75rem, 4vw, 2.75rem) 0 var(--space-3);
+  }
+
+  .page-head-intro ~ .stat-strip {
+    margin-top: 0;
   }
 
   /* Below the point where a 16rem portrait would start crowding the headline,
