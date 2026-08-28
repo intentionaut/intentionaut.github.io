@@ -181,4 +181,26 @@ Live sitemap verified: 38 URLs, 25 `/writing/`, 0 `/draft/`.
   post unhidden first, the filter is a no-op for it and nothing 404s.
 - Build with the filter: 50 pages (was 51), 24 `/writing/` sitemap URLs.
 
+### 2026-08-28 (evening cont.) — the hidden post became a Speaking entry
+
+Saielle **archived** `the-ai-opportunity-you-re-missing` on beehiiv rather than
+unhiding it (so `status=confirmed` no longer returns it — the `hidden_from_feed`
+filter still ships as a guard, but this post is out regardless).
+
+It was a **ProductTank Oxford talk (Sept 2025)**, "The AI Opportunity You're
+Missing", so it now belongs under Speaking:
+- New `src/content/talks/producttank-oxford-2025.md` — no `url` (the beehiiv
+  recap is archived and its web URL is dead). Description written from the recap
+  Saielle pasted (the "AI sweet spot" argument: real human needs ∩ things
+  machines do reliably ∩ well-defined problems; impact-first adoption).
+- `astro.config.mjs` `redirects`: `/writing/the-ai-opportunity-you-re-missing/`
+  → `/speaking/`, so the URL that's still in the *live* production sitemap
+  doesn't start 404ing after this deploy. Astro emits a `0;url=` meta-refresh
+  page with a canonical to `/speaking/`; it's not added to the new sitemap.
+- **Open:** the recap itself (reading list, slide notes, takeaways) is now
+  homeless. Offered to host it as a talk resource page; Saielle's call, not
+  built.
+
+Pushed together with the held `hidden_from_feed` filter commit.
+
 Next: SEO Phase 3 — money-page titles + `/fractional` rewrite.
