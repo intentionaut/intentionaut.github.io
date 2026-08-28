@@ -1,0 +1,73 @@
+---
+import type { Recommendation } from '../data/writing';
+
+interface Props {
+  items: Recommendation[];
+  heading: string;
+}
+
+const { items, heading } = Astro.props;
+---
+
+{
+  items.length > 0 && (
+    <section class="recs" aria-label={heading}>
+      <h2>{heading}</h2>
+      <ol>
+        {items.map(({ entry, blurb }) => (
+          <li>
+            <a href={entry.url} class="rec-title">
+              {entry.title}
+            </a>
+            <p class="rec-blurb">{blurb}</p>
+          </li>
+        ))}
+      </ol>
+      <p class="rec-more">
+        <a class="link-arrow" href="/writing/">
+          <span>The full archive</span>
+        </a>
+      </p>
+    </section>
+  )
+}
+
+<style>
+  .recs {
+    padding-block: clamp(2.5rem, 5vw, 3.5rem);
+    border-top: 1px solid var(--line);
+  }
+  .recs h2 {
+    font-size: 1.3rem;
+    margin: 0 0 var(--space-6);
+  }
+  .recs ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-6);
+  }
+  .rec-title {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-size: 1.15rem;
+    line-height: 1.3;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .rec-title:hover {
+    color: var(--accent);
+  }
+  .rec-blurb {
+    margin: var(--space-2) 0 0;
+    max-width: 58ch;
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  .rec-more {
+    margin-top: var(--space-7);
+  }
+</style>

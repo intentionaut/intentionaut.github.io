@@ -259,15 +259,41 @@ export function relatedTo(pathname: string, count = 3): WritingEntry[] {
 }
 
 /**
- * The "start here" set for the /subscribe page. Slugs, newest character of the
- * letter first. Edit this list to change what cold readers see first.
+ * The curated "start here" / "what to read" set, shown on /subscribe and the
+ * post-confirmation /thank-you page. Edit the list to change what new readers
+ * see first. Each `url` must match an entry in writingEntries.
  */
-export const startHereSlugs = [
-  '/writing/good-product-decisions-need-speed/',
-  '/writing/the-new-architecture-of-software-quality/',
-  '/writing/content-is-a-product-discipline/',
+const recommendationSource: { url: string; blurb: string }[] = [
+  {
+    url: '/writing/good-product-decisions-need-speed/',
+    blurb:
+      'Teams obsess over developer velocity and story points, then never measure the thing that actually stalls them: how long it takes to decide.',
+  },
+  {
+    url: '/writing/the-new-architecture-of-software-quality/',
+    blurb:
+      'AI broke the old definition of quality. What replaces it, with the DORA numbers and a team that went from four hours of research per customer to fifteen minutes.',
+  },
+  {
+    url: '/writing/content-is-a-product-discipline/',
+    blurb:
+      'A designer is not an octopus. Why words are product work, done alongside the team, not polish applied at the end.',
+  },
+  {
+    url: '/writing/the-enterprise-guide-to-ai-economics/',
+    blurb:
+      'Budget AI like a venture portfolio, not like process automation. Plan for most of it to fail, and extract the learning when it does.',
+  },
 ];
 
-export const startHere: WritingEntry[] = startHereSlugs
-  .map((url) => writingEntries.find((e) => e.url === url))
-  .filter((e): e is WritingEntry => !!e);
+export interface Recommendation {
+  entry: WritingEntry;
+  blurb: string;
+}
+
+export const recommendations: Recommendation[] = recommendationSource
+  .map((r) => {
+    const entry = writingEntries.find((e) => e.url === r.url);
+    return entry ? { entry, blurb: r.blurb } : null;
+  })
+  .filter((r): r is Recommendation => r !== null);

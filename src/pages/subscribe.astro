@@ -2,8 +2,8 @@
 import '@fontsource-variable/roboto-serif';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SubscribeForm from '../components/SubscribeForm.astro';
-import KeepReading from '../components/KeepReading.astro';
-import { startHere } from '../data/writing';
+import Recommendations from '../components/Recommendations.astro';
+import { recommendations } from '../data/writing';
 ---
 
 <BaseLayout
@@ -59,7 +59,6 @@ import { startHere } from '../data/writing';
         source="subscribe-page"
         emailId="subscribe-email"
         buttonLabel="Get the letter"
-        redirectTo="/thank-you/"
       />
     </section>
 
@@ -68,7 +67,7 @@ import { startHere } from '../data/writing';
       LeMay.
     </p>
 
-    <KeepReading items={startHere} heading="Not sure yet? Start here." />
+    <Recommendations items={recommendations} heading="Not sure yet? Start here." />
   </section>
 </BaseLayout>
 
