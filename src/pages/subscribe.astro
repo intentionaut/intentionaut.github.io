@@ -79,6 +79,11 @@ import { recommendations } from '../data/writing';
   .subscribe-page ul {
     margin-block: var(--space-4);
   }
+  /* The prose block's own padding-bottom is the section gap to the form.
+     Drop the trailing paragraph margin so the two don't stack. */
+  .subscribe-page > :last-child {
+    margin-bottom: 0;
+  }
   .subscribe-page li {
     margin-block: var(--space-2);
   }
