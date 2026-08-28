@@ -60,7 +60,7 @@ const stats = [
           <h1>{entry.data.title}</h1>
         </div>
         <figure class="portrait">
-          <div class="portrait-frame">
+          <div class="img-card">
             <img
               src="/saielle-dasilva.jpg"
               alt="Saielle DaSilva"
@@ -68,7 +68,7 @@ const stats = [
               height="480"
             />
           </div>
-          <figcaption>Saielle DaSilva</figcaption>
+          <figcaption class="img-caption">Saielle DaSilva</figcaption>
         </figure>
       </div>
       <p class="lede stat-lede">Some career highlights.</p>
@@ -141,7 +141,7 @@ const stats = [
   .page-head-intro {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 15rem;
-    gap: clamp(1.5rem, 3vw, 3rem);
+    gap: var(--space-8);
     align-items: center;
   }
 
@@ -149,36 +149,42 @@ const stats = [
     margin: 0;
   }
 
-  /* "Some career highlights." labels the stat ribbon, so it sits tight above
-     it, with the breathing room placed above the line instead. */
+  /* "Some career highlights." labels the stat ribbon: tight above the ribbon,
+     the breathing room placed above the line. clamp(2rem, 4vw, 3rem) is the
+     system's small section gap (--space-3 below matches the ribbon's own
+     row padding). */
   .stat-lede {
-    margin: clamp(1.75rem, 4vw, 2.75rem) 0 var(--space-3);
+    margin: clamp(2rem, 4vw, 3rem) 0 var(--space-3);
   }
 
   .page-head-intro ~ .stat-strip {
     margin-top: 0;
   }
 
-  /* Break the body into three parts with hairline keylines at the prose
-     measure: the narrative, then "How I work", then the career ledger. The
-     gaps widen on desktop (clamp maxes) so the page has room to breathe.
+  /* Break the body into three with hairline keylines (1px var(--line), the
+     site's rule) at the prose measure: narrative, "How I work", the ledger.
+     Spacing uses the system's fluid steps only - clamp(3rem, 6vw, 5rem) is the
+     workhorse section gap, clamp(4.5rem, 10vw, 8.5rem) the hero-tier one - so
+     the break before the ledger reads as the larger of the two.
      "How I work" is an <h2> from about.md, hence :global. */
   .about-final :global(h2) {
-    margin-top: clamp(3.5rem, 8vw, 6rem);
-    padding-top: clamp(1.75rem, 4vw, 2.75rem);
+    margin-top: clamp(3rem, 6vw, 5rem);
+    padding-top: clamp(2rem, 4vw, 3rem);
     border-top: 1px solid var(--line);
   }
 
   .arc-section {
     max-width: 62ch;
-    margin-top: clamp(4.5rem, 11vw, 8.5rem);
-    padding-top: clamp(2.5rem, 5vw, 4rem);
+    margin-top: clamp(4.5rem, 10vw, 8.5rem);
+    padding-top: clamp(3rem, 6vw, 5rem);
     border-top: 1px solid var(--line);
   }
 
-  /* Below the point where a 16rem portrait would start crowding the headline,
-     stack: text, then portrait, then the (still full-width) stat strip. */
-  @media (max-width: 52rem) {
+  /* The two-column head only holds together while the headline has room; below
+     ~56rem it would crush, so stack there: text, portrait, then the ribbon.
+     (56rem is a component threshold, not a site breakpoint - the site's 45rem
+     one is where the portrait drops entirely, below.) */
+  @media (max-width: 56rem) {
     .page-head-intro {
       grid-template-columns: 1fr;
       gap: var(--space-6);
@@ -196,38 +202,4 @@ const stats = [
       display: none;
     }
   }
-
-  .portrait-frame {
-    display: block;
-    padding: 12px;
-    border: 1px solid var(--ink);
-    position: relative;
-  }
-
-  .portrait-frame::after {
-    content: '';
-    position: absolute;
-    inset: 5px;
-    border: 1px solid var(--line);
-    pointer-events: none;
-  }
-
-  .portrait-frame img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-
-  /* Same treatment as .img-caption elsewhere on the site. */
-  .portrait figcaption {
-    margin-top: var(--space-2);
-    font-family: var(--font-body);
-    font-size: 0.58rem;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-align: left;
-  }
-
 </style>
