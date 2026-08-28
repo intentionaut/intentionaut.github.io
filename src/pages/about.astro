@@ -54,11 +54,26 @@ const stats = [
 >
   <section class="wrap">
     <header class="page-head long-title">
-      <p class="eyebrow">About</p>
-      <h1>{entry.data.title}</h1>
-      <p class="lede">
-        Some career highlights.
-      </p>
+      <div class="page-head-intro">
+        <div class="page-head-text">
+          <p class="eyebrow">About</p>
+          <h1>{entry.data.title}</h1>
+          <p class="lede">
+            Some career highlights.
+          </p>
+        </div>
+        <figure class="portrait">
+          <div class="portrait-frame">
+            <img
+              src="/saielle-dasilva.jpg"
+              alt="Saielle DaSilva"
+              width="360"
+              height="480"
+            />
+          </div>
+          <figcaption>Saielle DaSilva</figcaption>
+        </figure>
+      </div>
       <ul class="stat-strip" aria-label="Track record in numbers">
         {
           stats.map((s) => (
@@ -71,40 +86,26 @@ const stats = [
       </ul>
     </header>
 
-    <div class="about-lead">
-      <figure class="portrait">
-        <div class="portrait-frame">
-          <img
-            src="/saielle-dasilva.jpg"
-            alt="Saielle DaSilva"
-            width="360"
-            height="480"
-          />
-        </div>
-        <figcaption>Saielle DaSilva</figcaption>
-      </figure>
-
-      <div class="prose about-intro">
+    <div class="prose about-intro">
+      <p>
+        I started in design. Along the way, I discovered a passion for data.
+        The discipline of informing decisions with real evidence and
+        measuring real impact became a foundation of my work style.
+      </p>
+      <p>
+        Good software is made of more than good people. Great people are
+        everywhere, but good software is harder to find.
+      </p>
+      <blockquote>
         <p>
-          I started in design. Along the way, I discovered a passion for data.
-          The discipline of informing decisions with real evidence and
-          measuring real impact became a foundation of my work style.
+          in·ten·tion·aut <em>(n.)</em>: A navigator of intention; one who
+          journeys through complexity with a clear sense of what matters and
+          why.
         </p>
-        <p>
-          Good software is made of more than good people. Great people are
-          everywhere, but good software is harder to find.
-        </p>
-        <blockquote>
-          <p>
-            in·ten·tion·aut <em>(n.)</em>: A navigator of intention; one who
-            journeys through complexity with a clear sense of what matters and
-            why.
-          </p>
-        </blockquote>
-        <p>
-          The word is invented, but intention captures the arc of my work.
-        </p>
-      </div>
+      </blockquote>
+      <p>
+        The word is invented, but intention captures the arc of my work.
+      </p>
     </div>
 
     <div class="prose about-final">
@@ -131,31 +132,31 @@ const stats = [
 </BaseLayout>
 
 <style>
-  /* The opening prose (down to the definition and the line after it) sits left,
-     the portrait right. Everything below - about-final, the arc - is full width,
-     so the two-column treatment is scoped to .about-lead only. The text column
-     is capped at the same measure as .prose so its left edge lines up with the
-     full-width prose below. */
-  .about-lead {
+  /* Portrait sits beside the eyebrow + headline + lede. The stat strip is a
+     sibling of this grid, not inside it, so it always spans the full width and
+     keeps its four columns on desktop regardless of the portrait. */
+  .page-head-intro {
     display: grid;
-    grid-template-columns: minmax(0, 62ch) 18rem;
+    grid-template-columns: minmax(0, 1fr) 16rem;
     gap: clamp(2rem, 5vw, 3.5rem);
     align-items: start;
-    padding-bottom: clamp(3rem, 6vw, 5rem);
   }
 
-  /* Explicit placement so the DOM can keep the portrait first (it leads when the
-     grid collapses to one column on narrow screens) while it renders on the
-     right here. */
-  .about-lead .about-intro {
-    grid-column: 1;
-    grid-row: 1;
-  }
-
-  .about-lead .portrait {
-    grid-column: 2;
-    grid-row: 1;
+  .page-head-intro .portrait {
     margin: 0;
+  }
+
+  /* Below the point where a 16rem portrait would start crowding the headline,
+     stack: text, then portrait, then the (still full-width) stat strip. */
+  @media (max-width: 52rem) {
+    .page-head-intro {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+
+    .page-head-intro .portrait {
+      max-width: 14rem;
+    }
   }
 
   .portrait-frame {
@@ -191,21 +192,4 @@ const stats = [
     text-align: left;
   }
 
-  @media (max-width: 720px) {
-    .about-lead {
-      grid-template-columns: 1fr;
-      gap: var(--space-6);
-      padding-bottom: clamp(2.5rem, 8vw, 3.5rem);
-    }
-
-    .about-lead .about-intro,
-    .about-lead .portrait {
-      grid-column: auto;
-      grid-row: auto;
-    }
-
-    .portrait {
-      max-width: 15rem;
-    }
-  }
 </style>
