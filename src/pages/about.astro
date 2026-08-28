@@ -71,35 +71,37 @@ const stats = [
       </ul>
     </header>
 
-    <figure class="portrait">
-      <img
-        src="/saielle-dasilva.jpg"
-        alt="Saielle DaSilva"
-        width="360"
-        height="480"
-      />
-    </figure>
+    <div class="about-lead">
+      <figure class="portrait">
+        <img
+          src="/saielle-dasilva.jpg"
+          alt="Saielle DaSilva"
+          width="360"
+          height="480"
+        />
+      </figure>
 
-    <div class="prose about-intro">
-      <p>
-        I started in design. Along the way, I discovered a passion for data.
-        The discipline of informing decisions with real evidence and
-        measuring real impact became a foundation of my work style.
-      </p>
-      <p>
-        Good software is made of more than good people. Great people are
-        everywhere, but good software is harder to find.
-      </p>
-      <blockquote>
+      <div class="prose about-intro">
         <p>
-          in·ten·tion·aut <em>(n.)</em>: A navigator of intention; one who
-          journeys through complexity with a clear sense of what matters and
-          why.
+          I started in design. Along the way, I discovered a passion for data.
+          The discipline of informing decisions with real evidence and
+          measuring real impact became a foundation of my work style.
         </p>
-      </blockquote>
-      <p>
-        The word is invented, but intention captures the arc of my work.
-      </p>
+        <p>
+          Good software is made of more than good people. Great people are
+          everywhere, but good software is harder to find.
+        </p>
+        <blockquote>
+          <p>
+            in·ten·tion·aut <em>(n.)</em>: A navigator of intention; one who
+            journeys through complexity with a clear sense of what matters and
+            why.
+          </p>
+        </blockquote>
+        <p>
+          The word is invented, but intention captures the arc of my work.
+        </p>
+      </div>
     </div>
 
     <div class="prose about-final">
@@ -126,9 +128,19 @@ const stats = [
 </BaseLayout>
 
 <style>
+  /* Portrait and the opening prose sit side by side, down to the definition
+     and the line after it. Everything below (about-final, the arc) is full
+     width, so the two-column treatment is scoped to .about-lead only. */
+  .about-lead {
+    display: grid;
+    grid-template-columns: 15rem minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 3.5rem);
+    align-items: start;
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+  }
+
   .portrait {
-    max-width: 17rem;
-    margin: 0 0 var(--space-8);
+    margin: 0;
     padding: 12px;
     border: 1px solid var(--ink);
     position: relative;
@@ -146,5 +158,20 @@ const stats = [
     display: block;
     width: 100%;
     height: auto;
+  }
+
+  /* .about-intro already zeroes its own padding-bottom in global.css; the grid
+     gap and .about-lead's padding-bottom carry the spacing from here down. */
+
+  @media (max-width: 720px) {
+    .about-lead {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+      padding-bottom: clamp(2.5rem, 8vw, 3.5rem);
+    }
+
+    .portrait {
+      max-width: 14rem;
+    }
   }
 </style>
