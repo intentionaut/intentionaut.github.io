@@ -130,16 +130,19 @@ const stats = [
 </BaseLayout>
 
 <style>
-  /* Just the eyebrow + headline and the portrait, sized so they read as a
-     balanced pair: the text column is capped to the headline's own measure
-     (34ch, matching .page-head.long-title h1) so the portrait sits right
-     beside it rather than across a gap. Everything else - the "career
-     highlights" line, the stat ribbon, the prose - is full width below. */
+  /* Eyebrow + headline on the left, portrait on the right, flush to the content
+     edge. The headline keeps the whole remaining column so it wraps the way it
+     did before (its own max-width in global.css still caps it); the portrait is
+     a fixed 15rem beside it, vertically centred so the two read as a pair with
+     no gap between them. Everything else - the "career highlights" line, the
+     stat ribbon, the prose - is full width below.
+     (A `ch` track was tried here and resolved against the grid's body font, not
+     the headline's, which crushed the headline to a narrow column.) */
   .page-head-intro {
     display: grid;
-    grid-template-columns: minmax(0, 34ch) 16rem;
-    gap: clamp(1.5rem, 4vw, 3rem);
-    align-items: start;
+    grid-template-columns: minmax(0, 1fr) 15rem;
+    gap: clamp(1.5rem, 3vw, 3rem);
+    align-items: center;
   }
 
   .page-head-intro .portrait {
