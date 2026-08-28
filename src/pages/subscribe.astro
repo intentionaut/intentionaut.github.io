@@ -83,7 +83,9 @@ import { recommendations } from '../data/writing';
     margin-block: var(--space-2);
   }
   .subscribe-cta {
-    margin-block: var(--space-8) var(--space-6);
+    /* .prose already carries the section's bottom padding (matches every
+       service page: prose → CTA with no extra top margin). */
+    margin-bottom: var(--space-6);
   }
   .subscribe-ps {
     max-width: 46ch;
