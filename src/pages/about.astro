@@ -162,11 +162,12 @@ const stats = [
   }
 
   /* Break the body into three with hairline keylines (1px var(--line), the
-     site's rule) at the prose measure: narrative, "How I work", the ledger.
-     Spacing uses the system's fluid steps only - clamp(3rem, 6vw, 5rem) is the
-     workhorse section gap, clamp(4.5rem, 10vw, 8.5rem) the hero-tier one - so
-     the break before the ledger reads as the larger of the two.
-     "How I work" is an <h2> from about.md, hence :global. */
+     site's rule): narrative, "How I work", the ledger. Spacing uses the
+     system's fluid steps only - clamp(3rem, 6vw, 5rem) is the workhorse
+     section gap, clamp(4.5rem, 10vw, 8.5rem) the hero-tier one - so the break
+     before the ledger reads as the larger of the two. The "How I work" keyline
+     runs to the prose measure (its <h2> lives inside .prose, hence :global);
+     the ledger keyline runs the full content width, matching the ledger. */
   .about-final :global(h2) {
     margin-top: clamp(3rem, 6vw, 5rem);
     padding-top: clamp(2rem, 4vw, 3rem);
@@ -174,7 +175,6 @@ const stats = [
   }
 
   .arc-section {
-    max-width: 62ch;
     margin-top: clamp(4.5rem, 10vw, 8.5rem);
     padding-top: clamp(3rem, 6vw, 5rem);
     border-top: 1px solid var(--line);
