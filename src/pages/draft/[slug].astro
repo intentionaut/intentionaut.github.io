@@ -17,6 +17,7 @@ const { Content } = await render(draft);
 <BaseLayout
   title={`${draft.data.title} (draft) | Saielle DaSilva`}
   description={draft.data.description}
+  noindex
 >
   <article class="wrap">
     <header class="page-head">
@@ -42,7 +43,7 @@ const { Content } = await render(draft);
       <p class="article-original">
         Original: <a href={draft.data.originalUrl}>{draft.data.originalTitle}</a>
       </p>
-      <a class="link-arrow" href="/draft"><span>Back to all drafts</span></a>
+      <a class="link-arrow" href="/draft/"><span>Back to all drafts</span></a>
     </section>
   </article>
 </BaseLayout>

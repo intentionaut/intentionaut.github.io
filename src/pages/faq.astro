@@ -2,8 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { faqs } from '../data/faqs';
 
-const schema = {
-  '@context': 'https://schema.org',
+const faqSchema = {
   '@type': 'FAQPage',
   mainEntity: faqs.map((f) => ({
     '@type': 'Question',
@@ -14,15 +13,13 @@ const schema = {
     },
   })),
 };
-
-const schemaJson = JSON.stringify(schema);
 ---
 
 <BaseLayout
   title="FAQ | Saielle DaSilva"
   description="Practical answers about working with Saielle DaSilva: sliding scale, engagements, sessions, speaking logistics and payment."
+  jsonLd={faqSchema}
 >
-  <script is:inline slot="head" set:html={schemaJson} type="application/ld+json" />
 
   <section class="wrap">
     <header class="page-head">

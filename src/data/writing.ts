@@ -33,7 +33,7 @@ export const writingEntries: WritingEntry[] = [
     date: '2026-08-01',
     dateLabel: '2026',
     source: 'Intentionaut',
-    url: '/writing/the-ai-agent-reality-check',
+    url: '/writing/the-ai-agent-reality-check/',
     themes: ['ai', 'leadership'],
   },
   {
@@ -41,7 +41,7 @@ export const writingEntries: WritingEntry[] = [
     date: '2026-07-01',
     dateLabel: '2026',
     source: 'Intentionaut',
-    url: '/writing/the-610m-browser-bet-how-atlassian-plans-to-own-the-future-of-work',
+    url: '/writing/the-610m-browser-bet-how-atlassian-plans-to-own-the-future-of-work/',
     themes: ['ai'],
   },
   {
@@ -49,7 +49,7 @@ export const writingEntries: WritingEntry[] = [
     date: '2026-06-15',
     dateLabel: '2026',
     source: 'Intentionaut',
-    url: '/writing/the-coming-shift-in-enterprise-metadata',
+    url: '/writing/the-coming-shift-in-enterprise-metadata/',
     themes: ['ai'],
   },
   {
@@ -57,7 +57,7 @@ export const writingEntries: WritingEntry[] = [
     date: '2026-06-01',
     dateLabel: '2026',
     source: 'Intentionaut',
-    url: '/writing/leading-data-transformation-in-the-age-of-ai',
+    url: '/writing/leading-data-transformation-in-the-age-of-ai/',
     themes: ['ai', 'leadership'],
   },
   {
@@ -65,7 +65,7 @@ export const writingEntries: WritingEntry[] = [
     date: '2026-05-01',
     dateLabel: '2026',
     source: 'Intentionaut',
-    url: '/writing/execution-vs-data-moats',
+    url: '/writing/execution-vs-data-moats/',
     themes: ['ai', 'leadership'],
   },
   {
@@ -73,7 +73,7 @@ export const writingEntries: WritingEntry[] = [
     date: '2026-04-01',
     dateLabel: '2026',
     source: 'Intentionaut',
-    url: '/writing/the-enterprise-guide-to-ai-economics',
+    url: '/writing/the-enterprise-guide-to-ai-economics/',
     themes: ['ai'],
   },
   {
@@ -81,7 +81,7 @@ export const writingEntries: WritingEntry[] = [
     date: '2026-03-01',
     dateLabel: '2026',
     source: 'Intentionaut',
-    url: '/writing/the-new-architecture-of-software-quality',
+    url: '/writing/the-new-architecture-of-software-quality/',
     themes: ['craft', 'ai'],
   },
   {
@@ -89,7 +89,7 @@ export const writingEntries: WritingEntry[] = [
     date: '2026-02-01',
     dateLabel: '2026',
     source: 'Intentionaut',
-    url: '/writing/building-ai-that-actually-helps',
+    url: '/writing/building-ai-that-actually-helps/',
     themes: ['ai', 'ethics'],
   },
   {

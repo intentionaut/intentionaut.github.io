@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://intentionaut.com/sitemap.xml
+Sitemap: https://intentionaut.com/sitemap-index.xml

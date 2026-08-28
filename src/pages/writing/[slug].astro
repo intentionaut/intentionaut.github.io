@@ -35,12 +35,71 @@ const fmtDate = (d: string | number) =>
     day: 'numeric',
     year: 'numeric',
   });
+
+const origin = Astro.site!.origin;
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+
+const meta =
+  type === 'beehiiv' && post
+    ? {
+        headline: post.title,
+        description: post.subtitle || post.title,
+        published: new Date(post.publish_date * 1000).toISOString(),
+        image: post.thumbnail_url || `${origin}/og.png`,
+      }
+    : type === 'essay' && essay
+      ? {
+          headline: essay.data.title,
+          description: essay.data.description,
+          published: essay.data.date.toISOString(),
+          image: `${origin}/og.png`,
+        }
+      : null;
+
+const articleLd = meta
+  ? [
+      {
+        '@type': 'BlogPosting',
+        '@id': `${canonical}#article`,
+        headline: meta.headline,
+        description: meta.description,
+        datePublished: meta.published,
+        dateModified: meta.published,
+        image: meta.image,
+        author: { '@id': `${origin}/#person` },
+        publisher: { '@id': `${origin}/#organization` },
+        mainEntityOfPage: { '@id': `${canonical}#webpage` },
+        isPartOf: { '@id': `${origin}/#website` },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${origin}/` },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Writing',
+            item: `${origin}/writing/`,
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: meta.headline,
+            item: canonical,
+          },
+        ],
+      },
+    ]
+  : undefined;
 ---
 
 {type === 'beehiiv' && post && (
   <BaseLayout
     title={`${post.title} | Saielle DaSilva`}
     description={post.subtitle || post.title}
+    ogType="article"
+    publishedTime={meta?.published}
+    jsonLd={articleLd}
   >
     <article class="wrap">
       <header class="page-head">
@@ -81,7 +140,7 @@ const fmtDate = (d: string | number) =>
       </section>
 
       <section class="article-footer">
-        <a class="link-arrow" href="/writing"><span>Back to all writing</span></a>
+        <a class="link-arrow" href="/writing/"><span>Back to all writing</span></a>
       </section>
     </article>
   </BaseLayout>
@@ -91,6 +150,9 @@ const fmtDate = (d: string | number) =>
   <BaseLayout
     title={`${essay.data.title} | Saielle DaSilva`}
     description={essay.data.description}
+    ogType="article"
+    publishedTime={meta?.published}
+    jsonLd={articleLd}
   >
     <article class="wrap">
       <header class="page-head">
@@ -116,7 +178,7 @@ const fmtDate = (d: string | number) =>
             </a>
           </p>
         )}
-        <a class="link-arrow" href="/writing"><span>Back to all writing</span></a>
+        <a class="link-arrow" href="/writing/"><span>Back to all writing</span></a>
       </section>
     </article>
   </BaseLayout>

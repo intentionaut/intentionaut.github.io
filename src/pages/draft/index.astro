@@ -10,6 +10,7 @@ const drafts = (await getCollection('drafts')).sort((a, b) =>
 <BaseLayout
   title="Drafts | Saielle DaSilva"
   description="Amended drafts of essays reworked in Saielle DaSilva's current voice. The originals still stand."
+  noindex
 >
   <section class="wrap">
     <header class="page-head">
@@ -41,7 +42,7 @@ const drafts = (await getCollection('drafts')).sort((a, b) =>
     </ol>
 
     <section class="article-footer">
-      <a class="link-arrow" href="/writing"><span>Back to all writing</span></a>
+      <a class="link-arrow" href="/writing/"><span>Back to all writing</span></a>
     </section>
   </section>
 </BaseLayout>

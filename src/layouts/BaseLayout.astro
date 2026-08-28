@@ -9,14 +9,33 @@ import Footer from '../components/Footer.astro';
 interface Props {
   title?: string;
   description?: string;
+  /** Adds <meta name="robots" content="noindex,follow">. */
+  noindex?: boolean;
+  /** 'article' switches og:type and lets published/modified times through. */
+  ogType?: 'website' | 'article';
+  /** Marks the WebPage node as a ProfilePage about Saielle. */
+  profilePage?: boolean;
+  /** ISO date strings for article og tags. */
+  publishedTime?: string;
+  modifiedTime?: string;
+  /** Extra schema.org node(s) merged into the page @graph (no @context). */
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
   title = 'Saielle DaSilva | Product leader across design, data & AI',
   description = 'Saielle DaSilva is a product leader fluent in design, product, data and AI, putting the soft back in software and turning deliberate direction into business impact.',
+  noindex = false,
+  ogType = 'website',
+  profilePage = false,
+  publishedTime,
+  modifiedTime,
+  jsonLd,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const origin = Astro.site!.origin;
+const canonicalStr = canonical.toString();
 
 // Cloudflare Web Analytics: cookieless, GDPR-friendly, no banner required.
 // Paste your beacon token from dash.cloudflare.com -> Web Analytics below.
@@ -24,6 +43,79 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 const CF_ANALYTICS_TOKEN = '41ba3048abea4294bc3977e2d8074ebb';
 const showAnalytics =
   import.meta.env.PROD && !CF_ANALYTICS_TOKEN.startsWith('REPLACE');
+
+// --- Structured data -------------------------------------------------------
+// One @graph per page: a stable Person / Organization / WebSite identity plus
+// a per-page WebPage node, then whatever the page passes in via `jsonLd`.
+const person = {
+  '@type': 'Person',
+  '@id': `${origin}/#person`,
+  name: 'Saielle DaSilva',
+  url: `${origin}/`,
+  jobTitle: 'Fractional & Interim Product Leader',
+  description:
+    'Product leader fluent in design, product, data and AI. Founders and product leaders bring her in when direction is the bottleneck.',
+  worksFor: { '@id': `${origin}/#organization` },
+  alumniOf: ["Sainsbury's", 'StepStone', 'Cazoo', 'Pivotal', 'Amazon', 'AT&T'].map(
+    (name) => ({ '@type': 'Organization', name })
+  ),
+  knowsAbout: [
+    'Product management',
+    'Product strategy',
+    'Product leadership',
+    'AI product strategy',
+    'Data platforms',
+    'Design leadership',
+    'Product operating models',
+    'Product-led transformation',
+  ],
+  sameAs: [
+    'https://www.linkedin.com/in/intentionaut',
+    'https://turingfest.com/speaker/saielle-dasilva/',
+    'https://businessofsoftware.org/talks/speakers/saielle-dasilva/',
+    'https://www.oneknightinproduct.com/saielle-dasilva/',
+    'https://newsletter.intentionaut.com/',
+  ],
+};
+
+const organization = {
+  '@type': 'Organization',
+  '@id': `${origin}/#organization`,
+  name: 'Intentionaut Ltd',
+  url: `${origin}/`,
+  logo: `${origin}/favicon.svg`,
+  founder: { '@id': `${origin}/#person` },
+  sameAs: ['https://www.linkedin.com/in/intentionaut'],
+};
+
+const website = {
+  '@type': 'WebSite',
+  '@id': `${origin}/#website`,
+  url: `${origin}/`,
+  name: 'Saielle DaSilva',
+  publisher: { '@id': `${origin}/#organization` },
+  inLanguage: 'en',
+};
+
+const isHome = canonical.pathname === '/';
+const webPage = {
+  '@type': profilePage ? ['WebPage', 'ProfilePage'] : 'WebPage',
+  '@id': `${canonicalStr}#webpage`,
+  url: canonicalStr,
+  name: title,
+  description,
+  isPartOf: { '@id': `${origin}/#website` },
+  inLanguage: 'en',
+  ...(profilePage || isHome
+    ? { [profilePage ? 'mainEntity' : 'about']: { '@id': `${origin}/#person` } }
+    : {}),
+};
+
+const extra = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [person, organization, website, webPage, ...extra],
+};
 ---
 
 <!doctype html>
@@ -33,14 +125,33 @@ const showAnalytics =
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={new URL('/og.png', Astro.site)} />
+    <meta property="og:site_name" content="Saielle DaSilva" />
+    {ogType === 'article' && publishedTime && (
+      <meta property="article:published_time" content={publishedTime} />
+    )}
+    {ogType === 'article' && (
+      <meta
+        property="article:modified_time"
+        content={modifiedTime ?? publishedTime}
+      />
+    )}
+    {ogType === 'article' && (
+      <meta property="article:author" content="Saielle DaSilva" />
+    )}
     <meta name="twitter:card" content="summary_large_image" />
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(graph)}
+    />
     <slot name="head" />
     {
       showAnalytics && (
