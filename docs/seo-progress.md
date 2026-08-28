@@ -157,3 +157,28 @@ needing one.
 
 Nothing to build for either item — both are external console/settings work.
 Live sitemap verified: 38 URLs, 25 `/writing/`, 0 `/draft/`.
+
+### 2026-08-28 (evening) — beehiiv decisions actioned
+
+- Saielle turned **"Discoverable on the web" OFF** in beehiiv. The newsletter
+  subdomain is now noindex; `intentionaut.com/writing/` is the sole indexable
+  copy of each essay. No canonical needed, no publish-checklist step.
+- Newsletter social description: replaced the off-brand auto-generated Twitter
+  copy ("insights delivered weekly", em dash, "fast-changing world") with the
+  approved Open Graph line across meta / OG / Twitter.
+- **`fetchPosts()` now drops `hidden_from_feed` posts** (`src/lib/beehiiv.ts`).
+  beehiiv's "hide from feed" = unlisted on the newsletter; we honour the same
+  intent so that toggle is the one switch for "is this post public?". Premium
+  posts are deliberately NOT filtered — they'd publish with the free/paywalled
+  web content, which is the funnel, not a leak (noted in a code comment).
+- Tried to unhide `the-ai-opportunity-you-re-missing` via the beehiiv API
+  (`PATCH .../posts/{id}` `web_settings.hide_from_feed:false`) — **403
+  `SEND_API_NOT_ENTERPRISE_PLAN`**, the update endpoint is max/enterprise only.
+  Saielle to toggle "Hide the post from feed" off in the beehiiv post's Web
+  settings manually.
+- **Push held** until she confirms that toggle: pushing the filter first would
+  drop that (currently live, in-sitemap) URL until a later rebuild. With the
+  post unhidden first, the filter is a no-op for it and nothing 404s.
+- Build with the filter: 50 pages (was 51), 24 `/writing/` sitemap URLs.
+
+Next: SEO Phase 3 — money-page titles + `/fractional` rewrite.

@@ -88,7 +88,14 @@ export async function fetchPosts(): Promise<BeehiivPost[]> {
 
   const { data } = await res.json();
 
-  return data.map((post: any) => ({
+  // beehiiv's "hide from feed" makes a post unlisted on the newsletter site.
+  // We honour the same intent here: a hidden post stays off intentionaut.com/writing
+  // too, so that one beehiiv toggle is the single switch for "is this post public?".
+  // Premium posts are deliberately NOT filtered: they publish here with the free
+  // (paywalled) web content, which is the subscribe funnel we want, not a leak.
+  const published = (data as any[]).filter((post) => !post.hidden_from_feed);
+
+  return published.map((post: any) => ({
     id: post.id,
     title: post.title,
     subtitle: post.subtitle ?? '',
