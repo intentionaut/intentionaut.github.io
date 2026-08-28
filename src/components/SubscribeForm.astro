@@ -14,6 +14,8 @@ interface Props {
   buttonLabel?: string;
   variant?: 'inline' | 'full';
   placeholder?: string;
+  /** On success, send the reader here instead of swapping in an inline message. */
+  redirectTo?: string;
 }
 
 const {
@@ -22,10 +24,11 @@ const {
   buttonLabel = 'Subscribe',
   variant = 'inline',
   placeholder = 'your@email.com',
+  redirectTo,
 } = Astro.props;
 ---
 
-<div class:list={['subscribe', `subscribe--${variant}`]}>
+<div class:list={['subscribe', `subscribe--${variant}`]} data-redirect={redirectTo}>
   <form class="signup-form subscribe-form" data-subscribe={source} novalidate>
     <label class="sr-only" for={emailId}>Email address</label>
     <input
@@ -167,6 +170,7 @@ const {
     const done = form.parentElement?.querySelector<HTMLElement>('.subscribe-done');
     const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
     const consentBox = form.querySelector<HTMLInputElement>('input[name="consent"]');
+    const redirectTo = (form.closest('[data-redirect]') as HTMLElement | null)?.dataset.redirect;
 
     const setStatus = (msg: string, isError: boolean) => {
       if (!status) return;
@@ -210,6 +214,10 @@ const {
         };
 
         if (res.ok) {
+          if (redirectTo) {
+            location.assign(redirectTo);
+            return;
+          }
           form.hidden = true;
           if (done) {
             done.textContent = result.message || 'Almost there — check your inbox.';

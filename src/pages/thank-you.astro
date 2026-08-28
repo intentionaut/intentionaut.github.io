@@ -1,0 +1,106 @@
+---
+import '@fontsource-variable/roboto-serif';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { writingEntries } from '../data/writing';
+
+// Full archive, newest first. Includes the external pieces — it is all her writing.
+const archive = [...writingEntries].sort(
+  (a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf()
+);
+
+const fmtDate = (d: string) => {
+  const dt = new Date(d);
+  // Year-only entries are stored as Jan 1; show just the year for those.
+  return dt.getUTCMonth() === 0 && dt.getUTCDate() === 1
+    ? String(dt.getUTCFullYear())
+    : dt.toLocaleDateString('en-GB', {
+        month: 'short',
+        year: 'numeric',
+        timeZone: 'UTC',
+      });
+};
+---
+
+<BaseLayout
+  title="Thank you | Saielle DaSilva"
+  description="Confirm your subscription to Intentionaut, and browse the archive while you wait."
+  noindex
+>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Intentionaut</p>
+      <h1>Thank you. One step to go.</h1>
+      <p class="lede">
+        Check your inbox for a confirmation link and click it. That is the last
+        step, and then you are subscribed. It usually arrives within a minute;
+        if it is not there, look in spam or promotions.
+      </p>
+      <p class="ty-help">
+        Nothing after a few minutes? Email
+        <a href="mailto:hello@intentionaut.com">hello@intentionaut.com</a> and I
+        will add you by hand.
+      </p>
+    </header>
+
+    <section class="archive-static" aria-label="Writing archive">
+      <h2>While you wait, the archive.</h2>
+      <p class="archive-sub">
+        A decade of writing, newest first. New pieces land in the letter for
+        subscribers first.
+      </p>
+      <ol class="talk-list">
+        {
+          archive.map((e) => (
+            <li class="talk-row">
+              <span class="talk-date">{fmtDate(e.date)}</span>
+              <div>
+                {e.url ? (
+                  <a
+                    class="talk-title"
+                    href={e.url}
+                    {...(e.url.startsWith('http')
+                      ? { target: '_blank', rel: 'noopener noreferrer' }
+                      : {})}
+                  >
+                    {e.title}
+                  </a>
+                ) : (
+                  <span class="talk-title">{e.title}</span>
+                )}
+                <p class="talk-meta">{e.source}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+      <p class="archive-more">
+        <a class="link-arrow" href="/writing/"><span>Browse by theme</span></a>
+      </p>
+    </section>
+  </section>
+</BaseLayout>
+
+<style>
+  .ty-help {
+    margin-top: var(--space-4);
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+  .archive-static {
+    padding-block: clamp(2.5rem, 5vw, 3.5rem) clamp(3rem, 6vw, 5rem);
+    border-top: 1px solid var(--line);
+  }
+  .archive-static h2 {
+    font-size: 1.3rem;
+    margin: 0 0 var(--space-2);
+  }
+  .archive-sub {
+    margin: 0 0 var(--space-6);
+    max-width: 52ch;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+  .archive-more {
+    margin-top: var(--space-6);
+  }
+</style>
