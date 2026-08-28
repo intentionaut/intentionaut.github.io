@@ -6,7 +6,7 @@ linkLabel: Live map
 ctaLabel: Explore the live map
 role: Author · Data · Build
 status: Live
-date: 2026-08-28
+order: 3
 ---
 
 ## The Problem

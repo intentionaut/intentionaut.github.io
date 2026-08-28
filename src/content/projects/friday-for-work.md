@@ -5,6 +5,7 @@ url: https://fridayforwork.com
 role: Founder · Product · Design · Build
 timeline: Concept to beta in one week
 status: Private Beta
+order: 1
 ---
 
 ## The Problem

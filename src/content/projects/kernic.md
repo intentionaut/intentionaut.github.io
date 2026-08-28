@@ -6,6 +6,7 @@ linkLabel: GitHub Repo
 ctaLabel: Visit GitHub Repo
 role: Creator · Maintainer
 status: Open source · MIT
+order: 2
 ---
 
 ## The Problem

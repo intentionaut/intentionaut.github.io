@@ -67,6 +67,7 @@ const projects = defineCollection({
     timeline: z.string().optional(),
     status: z.string().optional(),
     date: z.coerce.date().optional(),
+    order: z.number().optional(),
   }),
 });
 
