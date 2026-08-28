@@ -103,4 +103,57 @@ page, robots meta on drafts only, canonical URLs, `og:type`, sitemap contents.
 - Note: `the-ai-opportunity-you-re-missing` (beehiiv, 2025-09-23) has a built
   page + sitemap entry but no `writing.ts` archive row — looks like a
   deliberate omission by Saielle, left as-is.
-- Merged to `main` and pushed → GitHub Pages deploy.
+- Merged to `main` and pushed → GitHub Pages deploy (live, verified).
+- MTP email sent by Saielle 2026-08-28. Recommended contributor bio (pulled
+  the old bio off the Wayback Machine and refreshed it):
+
+  > Saielle DaSilva is a product leader who works across design, product, data
+  > and AI. She was on the founding team at Cazoo, building the UK's first
+  > fully digital car-buying experience through to a $7B IPO, and has since led
+  > product and design organisations at StepStone and Sainsbury's, where she
+  > took production AI from a handful of experiments to a platform serving
+  > millions of customers. Earlier roles include founding hire at Pivotal and
+  > early chapters at Amazon and AT&T. She now takes fractional and interim
+  > product leadership engagements, writes and speaks about building strong
+  > product cultures and hiring for inclusion, and publishes the fortnightly
+  > Intentionaut newsletter.
+
+### 2026-08-28 (later still) — beehiiv canonical + Search Console
+
+**Beehiiv canonical URLs — the original plan item was wrong.** Checked the
+beehiiv API (`PATCH .../posts/{id}` `seo_settings` only supports
+default/og/twitter title+description — no canonical) and beehiiv's own docs +
+third-party writeups: **beehiiv has no canonical-URL feature at all**, UI or
+API. So there is no "Post → SEO → canonical" step to add.
+
+What beehiiv *does* have: a publication-level **"Discoverable on the web"**
+toggle and a per-post **"Search engine indexing"** toggle (Settings → Page
+settings). Publication toggle wins — if it's off, everything is noindex.
+
+**Recommended fix (Saielle to action, it's a publication setting):** turn OFF
+"Discoverable on the web" so `newsletter.intentionaut.com` stops competing with
+`intentionaut.com/writing/` for the same article text. One switch, covers the
+back catalogue and every future post, nothing to maintain. Cost: the beehiiv
+archive itself won't rank — acceptable, since the newsletter grows by
+email/referral/recommendations and intentionaut.com is the search home. The
+`/writing/` pages already carry self-canonical + BlogPosting schema and are in
+the sitemap, so they become the sole indexable version. As of this writing the
+beehiiv posts have no robots/canonical meta — still fully indexable.
+
+**Google Search Console (Saielle to action — needs her Google login).** Recon:
+`dig TXT intentionaut.com` already returns
+`google-site-verification=uKyxLgcSsXDmfFp7FGeKKaRXVZ2XkjhOS3zbRLrq0Bo`, so the
+**domain property is already DNS-verified** (or will verify instantly). Steps:
+1. search.google.com/search-console, sign in with the Google account that owns
+   it (likely the gmail on file). The `intentionaut.com` domain property should
+   be listed / verifiable with no new DNS work.
+2. Sitemaps → submit `sitemap-index.xml`.
+3. URL Inspection → `https://intentionaut.com/` → Request indexing. Repeat for
+   `/about/` and `/fractional/`.
+4. Bing: bing.com/webmasters → Import from Google Search Console (one click).
+
+No DNS record for Bing (`msvalidate`) exists yet; the GSC import path avoids
+needing one.
+
+Nothing to build for either item — both are external console/settings work.
+Live sitemap verified: 38 URLs, 25 `/writing/`, 0 `/draft/`.
