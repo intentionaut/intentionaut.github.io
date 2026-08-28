@@ -35,7 +35,7 @@ Everyone in your product team will have a slightly different definition of conte
 
 Software teams continue to grow their efforts for quality, engineering, design and research, but many have left content in the dust.
 
-Few designers understand this better than [Jessica Collier](https://twitter.com/jessicacollier), a former member of the design team at Evernote. “When no one truly owns the words that make the app work—when front-end engineers and designers and developers and product managers are all inserting language in their own particular style—that product’s voice becomes scattered and its narrative structure fragmented,” says Collier.
+Few designers understand this better than [Jessica Collier](https://twitter.com/jessicacollier), a former member of the design team at Evernote. “When no one truly owns the words that make the app work[,] when front-end engineers and designers and developers and product managers are all inserting language in their own particular style[,] that product’s voice becomes scattered and its narrative structure fragmented,” says Collier.
 
 As digital products mature, giving time and attention to words, information and content continues to be one of the easiest ways to increase quality and decrease risk. However, in many teams, words never push into how we think strategically.
 

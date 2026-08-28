@@ -7,7 +7,7 @@ source: Blossom
 originalUrl: "https://web.archive.org/web/20250518034600/https://www.blossomat.work/org-design-for-product-orgs/"
 ---
 
-### #CultureOps – Getting conscious about org design
+### #CultureOps[:] Getting conscious about org design
 
 This post came from [some thoughts I was mulling over](https://mastodon.lol/@intentionaut/109397657914342311) recently. There's a good book on Org Design for Design Orgs, but I have yet to see someone tackle the ways in which a Product Org might look in relation to all the other moving parts of a modern tech company.
 
@@ -19,7 +19,7 @@ Often reorgs are complicated by unclear logic, poor communication and a lack of 
 
 Creating clarity and structure to move people in the right direction is complicated. [Janna Bastow](https://www.mindtheproduct.com/survive-hardest-part-product-management-janna-bastow/ https://www.slideshare.net/bastow/mind-the-people-how-to-survive-the-hardest-part-of-your-prodmgmt-job) wrote a talk in 2017 that highlights this. While the talk Janna gave focuses on stakeholders, it alludes to the ways in which aligning people, which is a core product skill, takes work and effort at multiple layers.
 
-### Org Charts, ReOrgs and Outcomes–Oh My
+### Org Charts, ReOrgs and Outcomes[,] Oh My
 
 In many places I've worked for and with, org charts and org design get wrapped up in outdated processes and unclear goal structures. Org structures are one of the big frontiers of what i refer to as the "Great Unexamined," the parts of work life that are more taken for granted. The forces that drive reorganisation are often cost savings or mergers and acquisitions, but those forces arent neutral.
 

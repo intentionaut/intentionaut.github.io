@@ -41,7 +41,7 @@ Demonstrating results is a fast-track to ensuring success as a research advocate
 
 > Decision making in business is all about making bets; you’re under pressure to find the right decisions with not enough information. Making sure you’re all-in on understanding the problem is the most effective way to shape your research for decision making.
 
-Here's a great start by John Cutler on [how to integrate research faster](https://www.userinterviews.com/blog/john-cutler-on-integrating-research-faster). Leverage your existing tools and integrate research into your roadmap quickly. Make sure you are arming yourself with the latest and greatest research to help shape your talking points when you present back. If research helped you get there, make sure everyone knows it.
+Here's a great start by John Cutler on [how to integrate research faster](https://www.userinterviews.com/blog/john-cutler-on-integrating-research-faster). [Use the tools you already have] and integrate research into your roadmap quickly. Make sure you are arming yourself with the latest and greatest research to help shape your talking points when you present back. If research helped you get there, make sure everyone knows it.
 
 ### 7. Spend time with researchers
 

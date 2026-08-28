@@ -21,7 +21,7 @@ At Mind the Product London last year, Rik Higham shared research showing that [7
 
 The most important thing to take away from all of this is that you are not alone.
 
-We all feel like imposters from time to time and while it’s easy to be discouraged by this, it’s actually something we should embrace. The more we can be open about it, and embrace the uncertainty that comes with it, the more we can leverage it in our work. We don’t need to know everything, and it’s ok to admit when we don’t.
+We all feel like imposters from time to time and while it’s easy to be discouraged by this, it’s actually something we should embrace. The more we can be open about it, and embrace the uncertainty that comes with it, the more we can [use] it in our work. We don’t need to know everything, and it’s ok to admit when we don’t.
 
 ## **Depression and Anxiety**
 
@@ -33,19 +33,19 @@ Anyone who’s suffered from depression knows that this description is beyond in
 
 Depression is sometimes referred to as a “[black dog](https://www.youtube.com/watch?v=XiCrniLQGYc)” and, just like a real dog, it always follows you around. It needs to be embraced, understood, taught new tricks, and eventually brought to heel. Elizabeth Gilbert does a really fantastic [TED talk](https://www.ted.com/talks/elizabeth_gilbert_on_genius?language=en) on fear and creativity that parallels the black dog analogy on depression.
 
-Eli has made a conscious decision to [openly share](https://twitter.com/Intentionaut/status/1180882498840072192) their feelings of inadequacy, depression and struggles with mental health – and we both decided to tackle this article together in an attempt to widen that conversation in our chosen craft. We chose to do this because it starts with being open about these challenges – and while they’re certainly not unique to product people, how we experience them can be different, and we’re certainly in one of the more lonely roles in a tech organisation.
+[Saielle] has made a conscious decision to [openly share](https://twitter.com/Intentionaut/status/1180882498840072192) [her] feelings of inadequacy, depression and struggles with mental health[.] We both decided to tackle this article together in an attempt to widen that conversation in our chosen craft. We chose to do this because it starts with being open about these challenges[.] While they’re certainly not unique to product people, how we experience them can be different, and we’re certainly in one of the more lonely roles in a tech organisation.
 
 ## **It doesn’t end there**
 
-Of course, imposter syndrome, depression, and anxiety are just some of the mental health challenges facing us in the workplace. There are a number of other ways you, your friends, or colleagues might be suffering at work – the [Diagnostic and Statistical Manual of Mental Disorders](https://www.psychiatry.org/psychiatrists/practice/dsm/feedback-and-questions/frequently-asked-questions) (DSM–5) lists over 150 potential diagnoses for those suffering from mental ill-health. Many of these illnesses are complex and co-morbid, and while the stigma around anxiety and depression is improving, more complex problems are still poorly understood and heavily stigmatised.
+Of course, imposter syndrome, depression, and anxiety are just some of the mental health challenges facing us in the workplace. There are a number of other ways you, your friends, or colleagues might be suffering at work[:] the [Diagnostic and Statistical Manual of Mental Disorders](https://www.psychiatry.org/psychiatrists/practice/dsm/feedback-and-questions/frequently-asked-questions) (DSM-5) lists over 150 potential diagnoses for those suffering from mental ill-health. Many of these illnesses are complex and co-morbid, and while the stigma around anxiety and depression is improving, more complex problems are still poorly understood and heavily stigmatised.
 
 ## **You are not alone**
 
-Whatever you’re struggling with – let us say it again, you are not alone. The UK Office of National Statistics estimates that 1 in 6 workers is dealing with a mental health problem such as anxiety, depression, or stress, the Centers for Disease Control estimate 70% of US adults struggle with mental illness, and the World Health Organization (WHO) reports that 1 in 13 globally suffers from anxiety. Long hours, isolation, and stress in tech make all of these struggles especially pervasive in [tech companies](https://www.theatlantic.com/technology/archive/2014/09/tech-has-a-depression-problem/380004/).
+Whatever you’re struggling with[,] let us say it again[:] you are not alone. The UK Office of National Statistics estimates that 1 in 6 workers is dealing with a mental health problem such as anxiety, depression, or stress, the Centers for Disease Control estimate 70% of US adults struggle with mental illness, and the World Health Organization (WHO) reports that 1 in 13 globally suffers from anxiety. Long hours, isolation, and stress in tech make all of these struggles especially pervasive in [tech companies](https://www.theatlantic.com/technology/archive/2014/09/tech-has-a-depression-problem/380004/).
 
 ## **How to help yourself**
 
-The good news is, that not only are we’re getting better at talking about mental health, we’re getting better at listening too.
+[We’re getting better at talking about mental health, and we’re getting better at listening too.]
 
 The launch of Public Health England’s (PHE) new mental health campaign [“Every Mind Matters”](https://www.nhs.uk/oneyou/every-mind-matters/), and the release of its new advert, caused the NHS mental health website to crash earlier this week as people flooded to the site to see the short film, narrated by Royals Harry, Meghan, William and Kate. The initiative itself has been launched to support people in feeling more confident about taking action in relation to mental health. Through it, you can access a range of useful information and resources.
 
@@ -61,15 +61,15 @@ Men are especially susceptible to mental health issues. In the UK, 76% of [suici
 
 There are entire groups such as [Better Help](https://www.betterhelp.com/) and [The Calm Zone](https://www.thecalmzone.net/help/get-help/depression/) dedicated to helping men take up therapy and live better lives. What’s more, there’s no shame in finding support from a [professional therapist](https://www.healthline.com/health/depression/help-for-depression#first-line-of-treatment) who can help you to work through these problems.
 
-We’ve both had therapy and it’s helped us immensely. It’s just important to know that therapy is a process – it might never be done done (insert product manager joke about the definition of done here) but the journey is just as important as the destination. Every accomplishment means we discover some [new work to be done](https://twitter.com/MikeDrucker/status/1181315604801839104), (you should really click this link, it’s worth it) just like in the work we do.
+We’ve both had therapy and it’s helped us immensely. It’s just important to know that therapy is a process[:] it might never be done done (insert product manager joke about the definition of done here)[, but] the journey is just as important as the destination. Every accomplishment means we discover some [new work to be done](https://twitter.com/MikeDrucker/status/1181315604801839104), (you should really click this link, it’s worth it) just like in the work we do.
 
 #### Build a Brag Sheet
 
-Write a weekly summary of the actions you’ve taken and their impact. A great example of this is Cassie Robinson’s [WeekNotes](https://medium.com/@cassierobinson/weeknotes-44-23rd-27th-september-1cb5a20f6205). This has had a really positive effect for Eli, whose been able to create a distinct reporting style that provides a written record showing impact at work.
+Write a weekly summary of the actions you’ve taken and their impact. A great example of this is Cassie Robinson’s [WeekNotes](https://medium.com/@cassierobinson/weeknotes-44-23rd-27th-september-1cb5a20f6205). This has had a really positive effect for [Saielle], [who's] been able to create a distinct reporting style that provides a written record showing impact at work.
 
 #### Find Your Peers
 
-It’s only slightly tongue in cheek when we say that ProductTank – the world’s largest community of product people with chapters in over 185 cities around the world – is therapy for product people. Because our role can be so lonely, it’s incredibly important to find peers we can share with, confide in, and learn from. So, whether you join one to share your own challenges, listen to someone talk about theirs, or just share a drink afterwards, it’s priceless.
+It’s only slightly tongue in cheek when we say that ProductTank[,] the world’s largest community of product people with chapters in over 185 cities around the world[,] is therapy for product people. Because our role can be so lonely, it’s incredibly important to find peers we can share with, confide in, and learn from. So, whether you join one to share your own challenges, listen to someone talk about theirs, or just share a drink afterwards, it’s priceless.
 
 #### Expand Your Circle
 
@@ -87,7 +87,7 @@ Perhaps you’re not struggling with your own mental health issues but know some
 
 There are a few high-visibility ways in which you can help if you’re a product leader or employer. First, make it obvious that you care about mental health at work. Check out the [Where’s Your Head At?](http://www.wheresyourheadat.org/advice/) campaign for helpful advice and resources.
 
-You can also get some great tips from Roisi Proven who shared [how to help others without losing yourself](https://www.mindtheproduct.com/how-to-help-others-without-losing-yourself-by-roisi-proven/) at ProductTank London. She believes it all comes down to leveraging one of our product superpowers – empathy.
+You can also get some great tips from Roisi Proven who shared [how to help others without losing yourself](https://www.mindtheproduct.com/how-to-help-others-without-losing-yourself-by-roisi-proven/) at ProductTank London. She believes it all comes down to [using] one of our product superpowers[:] empathy.
 
 #### Invest in Listening
 
@@ -95,7 +95,7 @@ Active listening is step one on this journey if you’re trying to help. You’r
 
 #### Talk to your team about their whole selves
 
-If you’re a manager, see what Patrik Ward had to say when he shared how to have more [human one to ones](https://www.mindtheproduct.com/need-human-one-ones/) that allow your team members to open up about themselves, and talk about the full picture – not just work.
+If you’re a manager, see what Patrik Ward had to say when he shared how to have more [human one to ones](https://www.mindtheproduct.com/need-human-one-ones/) that allow your team members to open up about themselves, and talk about the full picture[,] not just work.
 
 #### Make it Safe
 

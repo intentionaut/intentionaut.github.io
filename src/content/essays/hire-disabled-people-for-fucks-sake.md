@@ -55,7 +55,7 @@ Hiring disabled people is work. Take it seriously. Make sure to include an accom
 
 - Use a job board like [Inclusively](https://inclusively.com/?utm_source=google&utm_medium=responsive_search&utm_campaign=21pilot&utm_term=disability%20jobs&utm_campaign=General+SEARCH+Pilot&utm_source=adwords&utm_medium=ppc&hsa_acc=9105345874&hsa_cam=12542938028&hsa_grp=117695436365&hsa_ad=506236825828&hsa_src=g&hsa_tgt=kwd-20720772&hsa_kw=disability%20jobs&hsa_mt=b&hsa_net=adwords&hsa_ver=3&gclid=CjwKCAjwgZuDBhBTEiwAXNofRCz6MYqwxVE0VBiuQp1mnDAQ9XIu_pmdkKR5vMLLU87COEK16jSsURoC8DMQAvD_BwE), they claim to be the professional network transforming the way candidates with disabilities, mental health conditions, and chronic illness connect to inclusive employers.
 - Join the [Disability Confident Employers](https://findajob.dwp.gov.uk/search?dc=1&loc=86383) scheme on Gov.uk. Any organisation that signs up to be disability confident in the UK is affirming that they will offer an interview to any disabled applicant that meets the requirements for the job. Make sure you say this on your jobs page.
-- Promote [Access to Work](https://www.gov.uk/access-to-work) – a gov programme where disabled people can apply for funding for things to help them at work. Employers shouldn't use this to pay for ‘reasonable accommodations’ which they are required to provide themselves for disabled employees.
+- Promote [Access to Work](https://www.gov.uk/access-to-work)[,] [a] gov programme where disabled people can apply for funding for things to help them at work. Employers shouldn't use this to pay for ‘reasonable accommodations’ which they are required to provide themselves for disabled employees.
 - Read some [evergreen advice](https://www.shrm.org/ResourcesAndTools/hr-topics/behavioral-competencies/global-and-cultural-effectiveness/Pages/4-Ways-to-Hire-More-People-with-Disabilities.aspx) on how to hire disabled workers
 
 Humans are a species built for social connection and survival in numbers. We thrive when we consider the ways in which our social settings include people with disabilities. When you design for disability support, you can improve the lives of people without disabilities too, Kat Holmes makes a great case in [this 2017 talk](https://www.youtube.com/watch?v=vPH1exUrSh8) from O'Reilly Design Conference. If you're not considering hiring neurodiverse talent, [you're behind the times](https://www.cio.com/article/3613909/it-hiring-targets-the-talent-of-the-neurodiverse-community.html).
@@ -74,9 +74,9 @@ In the spirit of paying it forward, here's everything I found that was relevant 
 
 If you're disabled and looking for a job, there's a few boards you can use to self serve looking for your next job.
 
-- [The Disabled Workers Cooperative](https://www.disabledworkers.org.uk/) – A cooperative charity running a jobs board for disabled people.
-- [The Disability Directory of Scotland](https://www.disabilityscot.org.uk/information-help-advice/scottish-disability-directory/) – A database of scottish companies and organisations working with disabled people, not specifically focused on employment.
-- [Disability Jobsite](https://www.disabilityjobsite.co.uk/) – A jobs board for disabled people, with some basic interview advice.
+- [The Disabled Workers Cooperative](https://www.disabledworkers.org.uk/)[,] [a] cooperative charity running a jobs board for disabled people.
+- [The Disability Directory of Scotland](https://www.disabilityscot.org.uk/information-help-advice/scottish-disability-directory/)[,] [a] database of scottish companies and organisations working with disabled people, not specifically focused on employment.
+- [Disability Jobsite](https://www.disabilityjobsite.co.uk/)[,] [a] jobs board for disabled people, with some basic interview advice.
 - [Evenbreak](https://www.evenbreak.co.uk/en) a disabled job seekers job board; lots of posts make no mention of disability
 - Scope.org has [a section](https://www.scope.org.uk/advice-and-support/disability-friendly-employers/) on helping disabled job seekers
 
