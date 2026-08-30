@@ -1,0 +1,84 @@
+---
+/**
+ * Tabbed walk through an app's stages, for /releases/<app> pages.
+ * One tab per stage; the panel shows the command, what happens, what you get.
+ * Progressive: without JavaScript every panel is visible in order.
+ */
+interface Stage {
+  n: string;
+  name: string;
+  cmd: string;
+  what: string;
+  out: string;
+}
+interface Props {
+  id: string;
+  stages: Stage[];
+  /** Label before the "you get" line, e.g. "Hands you" or "You get". */
+  outLabel?: string;
+}
+const { id, stages, outLabel = 'You get' } = Astro.props;
+---
+
+<div class="stabs" data-stabs>
+  <div class="stabs-list" role="tablist" aria-label="Stages">
+    {stages.map((s, i) => (
+      <button
+        class="stab"
+        role="tab"
+        type="button"
+        id={`${id}-tab-${i}`}
+        aria-selected={i === 0 ? 'true' : 'false'}
+        aria-controls={`${id}-panel-${i}`}
+        tabindex={i === 0 ? 0 : -1}
+      >
+        <span class="stab-n">{s.n}</span>
+        <span class="stab-name">{s.name}</span>
+      </button>
+    ))}
+  </div>
+  {stages.map((s, i) => (
+    <section
+      class="stab-panel"
+      role="tabpanel"
+      id={`${id}-panel-${i}`}
+      aria-labelledby={`${id}-tab-${i}`}
+      data-panel
+    >
+      <div class="stab-panel-head">
+        <span class="stage-n">{s.n}</span>
+        <h3>{s.name}</h3>
+      </div>
+      <code class="stage-cmd">{s.cmd}</code>
+      <p>{s.what}</p>
+      <p class="stage-out"><span>{outLabel}</span> {s.out}</p>
+    </section>
+  ))}
+</div>
+
+<script is:inline>
+  for (const root of document.querySelectorAll('[data-stabs]')) {
+    const tabs = [...root.querySelectorAll('[role="tab"]')];
+    const panels = [...root.querySelectorAll('[data-panel]')];
+    const select = (i) => {
+      tabs.forEach((t, j) => {
+        t.setAttribute('aria-selected', String(i === j));
+        t.tabIndex = i === j ? 0 : -1;
+      });
+      panels.forEach((p, j) => p.toggleAttribute('hidden', i !== j));
+    };
+    root.classList.add('stabs-js');
+    select(0);
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => select(i));
+      t.addEventListener('keydown', (e) => {
+        const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (!d) return;
+        e.preventDefault();
+        const n = (i + d + tabs.length) % tabs.length;
+        select(n);
+        tabs[n].focus();
+      });
+    });
+  }
+</script>

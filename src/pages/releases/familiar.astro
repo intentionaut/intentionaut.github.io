@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import '../../styles/release.css';
+import StageTabs from '../../components/StageTabs.astro';
+import ReleaseLog from '../../components/ReleaseLog.astro';
 
 const title = 'Familiar | A companion for your newsletter';
 const description =
@@ -171,19 +173,7 @@ const refusals = [
     <section class="wrap fam-stages">
       <p class="eyebrow">How a piece moves</p>
       <h2>Seven stages. A gate after each one.</h2>
-      <ol class="stage-list">
-        {stages.map((s) => (
-          <li class="stage">
-            <div class="stage-n">{s.n}</div>
-            <div class="stage-body">
-              <h3>{s.name}</h3>
-              <code class="stage-cmd">{s.cmd}</code>
-              <p>{s.what}</p>
-              <p class="stage-out"><span>Hands you</span> {s.out}</p>
-            </div>
-          </li>
-        ))}
-      </ol>
+      <StageTabs id="familiar" stages={stages} outLabel="Hands you" />
     </section>
 
     <section class="wrap fam-refuse">
@@ -256,6 +246,12 @@ const refusals = [
           </p>
         </div>
       </div>
+    </section>
+
+    <section class="wrap rel-log">
+      <p class="eyebrow">Activity</p>
+      <h2>What has shipped, and when.</h2>
+      <ReleaseLog repo="intentionaut/familiar" />
     </section>
 
     <section class="wrap">

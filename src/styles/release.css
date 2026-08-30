@@ -286,3 +286,157 @@
       white-space: normal;
     }
   }
+
+/* Stage tabs */
+.stabs {
+  margin-top: var(--space-7);
+}
+.stabs-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+.stab {
+  appearance: none;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.5rem 0.85rem;
+  border-radius: var(--radius-l);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  transition: background var(--dur-base), color var(--dur-base);
+}
+.stab:hover {
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.5);
+}
+.stab[aria-selected='true'] {
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.7);
+  border-color: var(--line);
+}
+.stab-n {
+  font-family: var(--font-display);
+  color: var(--accent);
+  font-size: 0.9rem;
+}
+.stab:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.stab-panel {
+  padding: var(--space-2) 0 var(--space-4);
+}
+.stabs:not(.stabs-js) .stab-panel + .stab-panel {
+  border-top: 1px solid var(--line);
+  padding-top: var(--space-6);
+  margin-top: var(--space-4);
+}
+.stab-panel-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-4);
+  margin-bottom: var(--space-3);
+}
+.stab-panel-head h3 {
+  margin: 0;
+}
+.stab-panel p {
+  max-width: 62ch;
+  margin: 0 0 var(--space-3);
+}
+
+/* Release log */
+.rlog {
+  margin-top: var(--space-7);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-l);
+  background: rgba(255, 255, 255, 0.4);
+}
+.rlog > summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-6);
+}
+.rlog > summary::-webkit-details-marker {
+  display: none;
+}
+.rlog-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--ink);
+}
+.rlog-meta {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.rlog-chev {
+  margin-left: auto;
+  width: 0.6rem;
+  height: 0.6rem;
+  border-right: 2px solid var(--accent);
+  border-bottom: 2px solid var(--accent);
+  transform: rotate(45deg);
+  transition: transform var(--dur-base);
+}
+.rlog[open] .rlog-chev {
+  transform: rotate(-135deg);
+}
+.rlog-body {
+  padding: 0 var(--space-6) var(--space-6);
+  border-top: 1px solid var(--line);
+}
+.rlog-entry {
+  padding-top: var(--space-6);
+}
+.rlog-entry + .rlog-entry {
+  margin-top: var(--space-6);
+  border-top: 1px dashed var(--line);
+}
+.rlog-entry header {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-4);
+  margin-bottom: var(--space-3);
+}
+.rlog-entry h3 {
+  margin: 0;
+  font-family: var(--font-display);
+}
+.rlog-entry time {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.rlog-prose {
+  font-size: 0.95rem;
+}
+.rlog-prose p,
+.rlog-prose li {
+  max-width: 68ch;
+}
+.rlog-older {
+  margin-top: var(--space-6);
+}
+.rlog-older > summary {
+  cursor: pointer;
+  color: var(--accent);
+}
+.rlog-note {
+  margin: var(--space-6) 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.rlog-note code {
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+}

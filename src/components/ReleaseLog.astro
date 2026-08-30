@@ -1,0 +1,116 @@
+---
+/**
+ * Collapsible release notes for a /releases/<app> page.
+ *
+ * Source of truth is CHANGELOG.md in the app's own repository, fetched at
+ * build time from raw.githubusercontent.com. Entries are headed
+ * `## x.y.z (YYYY-MM-DD)`. If the fetch fails (private repo, offline build),
+ * the section says so calmly instead of pretending there is nothing.
+ */
+import { marked } from 'marked';
+
+interface Props {
+  /** GitHub owner/repo, e.g. "intentionaut/kernic". */
+  repo: string;
+  /** Branch holding CHANGELOG.md. */
+  branch?: string;
+  /** Show this many entries expanded in the list; the rest sit behind "older". */
+  recent?: number;
+  /** Optional page on the app's own site where the notes are also published. */
+  siteUrl?: string;
+}
+
+const { repo, branch = 'main', recent = 3, siteUrl } = Astro.props;
+
+interface Entry {
+  version: string;
+  date: string;
+  html: string;
+}
+
+let entries: Entry[] = [];
+let fetched = false;
+try {
+  const res = await fetch(`https://raw.githubusercontent.com/${repo}/${branch}/CHANGELOG.md`);
+  if (res.ok) {
+    fetched = true;
+    const md = await res.text();
+    const parts = md.split(/^## /m).slice(1);
+    for (const part of parts) {
+      const nl = part.indexOf('\n');
+      const heading = part.slice(0, nl).trim();
+      const body = part.slice(nl + 1).trim();
+      const m = heading.match(/^(.+?)\s*\((\d{4}-\d{2}-\d{2})\)/);
+      if (!m) continue;
+      entries.push({ version: m[1], date: m[2], html: await marked.parse(body) });
+    }
+  }
+} catch {
+  fetched = false;
+}
+
+const fmt = (iso: string) =>
+  new Date(iso + 'T00:00:00Z').toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    timeZone: 'UTC',
+  });
+
+const latest = entries[0];
+const head = entries.slice(0, recent);
+const tail = entries.slice(recent);
+const changelogUrl = `https://github.com/${repo}/blob/${branch}/CHANGELOG.md`;
+---
+
+<details class="rlog">
+  <summary>
+    <span class="rlog-title">Release notes</span>
+    {latest ? (
+      <span class="rlog-meta">
+        v{latest.version} · {fmt(latest.date)} · {entries.length} {entries.length === 1 ? 'release' : 'releases'}
+      </span>
+    ) : (
+      <span class="rlog-meta">{fetched ? 'no entries yet' : 'not available for this build'}</span>
+    )}
+    <span class="rlog-chev" aria-hidden="true"></span>
+  </summary>
+
+  <div class="rlog-body">
+    {!fetched && (
+      <p class="rlog-note">
+        The log reads <code>CHANGELOG.md</code> from the repository when this site is
+        built. It could not be reached this time; the file itself is at
+        <a href={changelogUrl} target="_blank" rel="noopener noreferrer">GitHub</a>.
+      </p>
+    )}
+    {head.map((e) => (
+      <article class="rlog-entry">
+        <header>
+          <h3>v{e.version}</h3>
+          <time datetime={e.date}>{fmt(e.date)}</time>
+        </header>
+        <div class="prose rlog-prose" set:html={e.html} />
+      </article>
+    ))}
+    {tail.length > 0 && (
+      <details class="rlog-older">
+        <summary>{tail.length} older {tail.length === 1 ? 'release' : 'releases'}</summary>
+        {tail.map((e) => (
+          <article class="rlog-entry">
+            <header>
+              <h3>v{e.version}</h3>
+              <time datetime={e.date}>{fmt(e.date)}</time>
+            </header>
+            <div class="prose rlog-prose" set:html={e.html} />
+          </article>
+        ))}
+      </details>
+    )}
+    {fetched && (
+      <p class="rlog-note">
+        Full history in <a href={changelogUrl} target="_blank" rel="noopener noreferrer">CHANGELOG.md</a>{siteUrl && (<>, also published at <a href={siteUrl} target="_blank" rel="noopener noreferrer">{new URL(siteUrl).host}{new URL(siteUrl).pathname}</a></>)}.
+      </p>
+    )}
+  </div>
+</details>
