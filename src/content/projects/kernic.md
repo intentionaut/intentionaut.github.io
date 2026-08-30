@@ -1,7 +1,7 @@
 ---
 title: Kernic
 summary: An open source CLI that turns vibe coding into MCP ready design systems for easier management and consistency. Built for small teams and the AI agents writing their interfaces.
-url: https://github.com/intentionaut/kernic
+url: https://github.com/intentionaut/kernic?utm_source=intentionaut.com&utm_medium=referral&utm_campaign=projects
 linkLabel: GitHub Repo
 ctaLabel: Visit GitHub Repo
 role: Creator · Maintainer

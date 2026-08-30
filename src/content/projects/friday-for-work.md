@@ -1,7 +1,7 @@
 ---
 title: Friday
 summary: A career coach for early-career crew and production. An experiment in how we can use LLMs to coach and guide instead of write for us.
-url: https://fridayforwork.com
+url: https://fridayforwork.com/?utm_source=intentionaut.com&utm_medium=referral&utm_campaign=projects
 role: Founder · Product · Design · Build
 timeline: Concept to beta in one week
 status: Private Beta
