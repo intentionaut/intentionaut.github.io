@@ -1035,19 +1035,6 @@ a.talk-title:hover {
   border-top: 1px solid var(--line);
 }
 
-.signup h2 {
-  margin: 0;
-  font-size: 1.1rem;
-  animation: rise 0.7s var(--ease-out) 0.05s backwards;
-}
-
-.signup-sub {
-  margin: 0 0 var(--space-5);
-  font-size: 0.95rem;
-  color: var(--muted);
-  animation: rise 0.7s var(--ease-out) 0.16s backwards;
-}
-
 .signup-form {
   display: flex;
   gap: var(--space-2);

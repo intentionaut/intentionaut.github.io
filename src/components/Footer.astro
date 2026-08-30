@@ -4,18 +4,190 @@ const year = new Date().getFullYear();
 
 <footer class="site-footer">
   <div class="wrap">
-    <p class="footer-tagline">Putting the soft back in software.</p>
-    <p>© {year} Intentionaut Ltd · intentionaut.com</p>
-    <ul class="footer-links">
-      <li><a href="/contact/">Contact</a></li>
-      <li>
-        <a href="https://www.linkedin.com/in/intentionaut" rel="me noopener" target="_blank"
-          >LinkedIn</a
-        >
-      </li>
-      <li><a href="mailto:hello@intentionaut.com">Email</a></li>
-      <li><a href="/privacy/">Privacy</a></li>
-      <li><a href="/terms/">Terms</a></li>
-    </ul>
+    <!-- Colophon: name + short line -->
+    <div class="footer-colophon">
+      <p class="footer-name">Saielle DaSilva</p>
+      <p class="footer-line">Putting the soft back in software.</p>
+    </div>
+
+    <!-- Three columns -->
+    <div class="footer-cols">
+      <div>
+        <p class="eyebrow">Explore</p>
+        <ul>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/projects/">Projects</a></li>
+          <li><a href="/speaking/">Speaking</a></li>
+          <li><a href="/writing/">Writing</a></li>
+          <li><a href="/contact/">Work with me</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="eyebrow">Connect</p>
+        <ul>
+          <li>
+            <a href="https://www.linkedin.com/in/intentionaut" rel="me noopener" target="_blank">LinkedIn</a>
+          </li>
+          <li><a href="mailto:hello@intentionaut.com">Email</a></li>
+          <li>
+            <a href="https://newsletter.intentionaut.com/" rel="noopener" target="_blank">Newsletter</a>
+          </li>
+          <li><a href="/open-source/">Open source</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="eyebrow">The letter</p>
+        <p class="footer-col-blurb">
+          Fortnightly, every other Wednesday. Purpose, direction, action from a
+          product leader fluent in design, data and AI.
+        </p>
+        <a class="link-arrow" href="/subscribe/"><span>Subscribe</span></a>
+      </div>
+    </div>
+
+    <p class="footer-legal">
+      © {year} Intentionaut Ltd · intentionaut.com
+      <span class="footer-legal-sep"></span>
+      <a href="/privacy/">Privacy</a>
+      <a href="/terms/">Terms</a>
+    </p>
   </div>
 </footer>
+
+<style>
+  .site-footer {
+    border-top: none;
+  }
+
+  .site-footer .wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    align-items: stretch;
+    padding-block-end: var(--space-8);
+    text-transform: none;
+    letter-spacing: normal;
+  }
+
+  .footer-colophon {
+    padding-top: var(--space-7);
+  }
+
+  .footer-name {
+    margin: 0 0 var(--space-2);
+    font-family: var(--font-display);
+    font-weight: 560;
+    font-size: 1.15rem;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+
+  .footer-line {
+    max-width: 46ch;
+    margin: 0;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 460;
+    font-size: 1rem;
+    color: var(--muted);
+  }
+
+  .footer-cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--ink);
+    margin-top: var(--space-9);
+  }
+
+  .footer-cols > div {
+    padding: var(--space-7);
+    border-left: 1px solid var(--line);
+  }
+
+  .footer-cols > div:first-child {
+    border-left: none;
+    padding-left: 0;
+  }
+
+  .footer-cols > div:last-child {
+    padding-right: 0;
+  }
+
+  .footer-cols .eyebrow {
+    margin-bottom: var(--space-5);
+  }
+
+  .footer-cols ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .footer-cols ul a {
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color var(--dur-fast) ease;
+  }
+
+  .footer-cols ul a:hover {
+    color: var(--accent);
+  }
+
+  .footer-col-blurb {
+    margin: 0 0 var(--space-5);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  .footer-legal {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2) var(--space-5);
+    margin: var(--space-7) 0 0;
+    border-top: 1px solid var(--line);
+    padding-top: var(--space-5);
+    font-family: var(--font-body);
+    font-size: 0.74rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .footer-legal a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .footer-legal-sep {
+    width: 1px;
+    height: 1em;
+    background: var(--line);
+  }
+
+  @media (max-width: 720px) {
+    .footer-cols {
+      grid-template-columns: 1fr;
+      margin-top: var(--space-7);
+    }
+    .footer-cols > div {
+      border-left: none;
+      border-top: 1px solid var(--line);
+      padding: var(--space-6) 0;
+    }
+    .footer-cols > div:first-child {
+      border-top: none;
+      padding-top: 0;
+    }
+  }
+</style>

@@ -1,0 +1,103 @@
+---
+/**
+ * FrameSubscribe       a design-system element for newsletter signups.
+ *
+ * The double-bordered card (an ink outline with a soft line drawn 3px inside
+ * it) built around the newsletter signup form. It owns its heading, sub-line
+ * and form, so every signup call on the site renders the same way.
+ *
+ * Usage:
+ *   <FrameSubscribe
+ *     eyebrow="Newsletter"
+ *     heading="Intentionaut is a fortnightly letter on design, product, data and AI. What is working, what isn't, and how to keep your bearings."
+ *     source="home"
+ *     emailId="home-email"
+ *   />
+ */
+import SubscribeForm from './SubscribeForm.astro';
+
+interface Props {
+  /** Uppercase accent label above the heading. Optional. */
+  eyebrow?: string;
+  /** Prominent frame heading. Optional. */
+  heading?: string;
+  /** Supporting line under the heading. Optional. */
+  sub?: string;
+  /** utm_source context, passed through to the form. */
+  source: string;
+  /** Unique per instance, ties the input label to the field. */
+  emailId: string;
+  /** Button label. Default 'Subscribe'. */
+  buttonLabel?: string;
+  /** Max width of the card. Default 46rem. */
+  maxWidth?: string;
+  /** Horizontal alignment of the content. Default 'center'. */
+  align?: 'center' | 'left';
+}
+
+const {
+  eyebrow,
+  heading,
+  sub,
+  source,
+  emailId,
+  buttonLabel = 'Subscribe',
+  maxWidth = '46rem',
+  align = 'center',
+} = Astro.props;
+---
+
+<div
+  class="frame-subscribe"
+  style={`max-width: ${maxWidth}; text-align: ${align}; margin-inline: auto;`}
+>
+  {eyebrow && <p class="eyebrow fs-eyebrow">{eyebrow}</p>}
+  {heading && <h2 class="fs-heading">{heading}</h2>}
+  {sub && <p class="fs-sub">{sub}</p>}
+  <SubscribeForm source={source} emailId={emailId} buttonLabel={buttonLabel} />
+</div>
+
+<style>
+  .frame-subscribe {
+    position: relative;
+    width: 100%;
+    padding: var(--space-7) var(--space-8);
+    border: 1px solid var(--ink);
+  }
+
+  .frame-subscribe::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border: 1px solid var(--line);
+    pointer-events: none;
+  }
+
+  .fs-eyebrow {
+    margin-bottom: var(--space-4);
+  }
+
+  .fs-heading {
+    margin: 0 0 var(--space-6);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 460;
+    font-size: 1.15rem;
+    letter-spacing: 0;
+    line-height: 1.4;
+    color: var(--ink);
+  }
+
+  .fs-sub {
+    margin: 0 0 var(--space-6);
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--muted);
+  }
+
+  @media (max-width: 480px) {
+    .frame-subscribe {
+      padding: var(--space-6);
+    }
+  }
+</style>

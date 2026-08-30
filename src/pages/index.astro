@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SubscribeForm from '../components/SubscribeForm.astro';
+import FrameSubscribe from '../components/FrameSubscribe.astro';
 ---
 
 <BaseLayout
@@ -76,10 +76,12 @@ import SubscribeForm from '../components/SubscribeForm.astro';
   </section>
 
   <section class="wrap signup" aria-label="Newsletter signup">
-    <h2>Never miss an update.</h2>
-    <p class="signup-sub">
-      Fortnightly essays on building with intention. Unsubscribe anytime.
-    </p>
-    <SubscribeForm source="home" emailId="home-email" />
+    <FrameSubscribe
+      eyebrow="Newsletter"
+      heading="Intentionaut is a fortnightly letter on design, product, data and AI. What is working, what isn't, and how to keep your bearings."
+      source="home"
+      emailId="home-email"
+      buttonLabel="Subscribe"
+    />
   </section>
 </BaseLayout>
