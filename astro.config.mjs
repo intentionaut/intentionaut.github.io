@@ -4,9 +4,12 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://intentionaut.com',
   trailingSlash: 'always',
-  // Open source story pages live under /releases/<app>/.
+  // Open source story pages live under /open-source/<app>/.
   redirects: {
-    '/familiar': '/releases/familiar/',
+    '/familiar': '/open-source/familiar/',
+    '/releases': '/open-source/',
+    '/releases/familiar': '/open-source/familiar/',
+    '/releases/kernic': '/open-source/kernic/',
   },
   integrations: [
     sitemap({

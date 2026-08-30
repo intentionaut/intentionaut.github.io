@@ -1,4 +1,4 @@
-/* Shared styles for the /releases/<app> story pages. */
+/* Shared styles for the /open-source/<app> story pages. */
 .rel h2 {
     max-width: 22ch;
   }
@@ -107,14 +107,27 @@
     gap: var(--space-9);
     margin-top: var(--space-7);
   }
+  /* The same double border .newsletter-card and .rate-card use: an outer ink
+     rule with a second line rule inset 3px, and their padding, so the three
+     read as one family rather than three near-misses.
+
+     No radius. The pattern is square everywhere else it appears, and rounding
+     only the outer edge leaves the inner rule cutting the corners. */
   .rel-aside dl {
+    position: relative;
     margin: 0;
-    padding: var(--space-6);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-l);
+    padding: var(--space-6) var(--space-7);
+    border: 1px solid var(--ink);
     background: var(--mendl);
     display: grid;
     gap: var(--space-4);
+  }
+  .rel-aside dl::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border: 1px solid var(--line);
+    pointer-events: none;
   }
   .rel-aside dt {
     font-size: 0.75rem;

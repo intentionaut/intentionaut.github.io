@@ -20,23 +20,24 @@ const releases = [
 ---
 
 <BaseLayout
-  title="Releases | Saielle DaSilva"
+  title="Open source | Saielle DaSilva"
   description="Open source tools from Intentionaut: the story behind each one, how it works, and what it refuses to do."
 >
   <section class="wrap">
     <header class="page-head">
-      <p class="eyebrow">Releases</p>
-      <h1>Things I built and let go of.</h1>
+      <p class="eyebrow">Open source</p>
+      <h1>Tools I use, given away.</h1>
       <p class="lede">
-        Open source, MIT, built in public. Each page tells the story: where it
-        came from, how it works, and the things it will not do on purpose.
+        Everything here started as something I built for my own work and kept
+        using. Free, MIT, built in public. Each page tells the story: where it
+        came from, how it works, what it refuses to do, and what has shipped.
       </p>
     </header>
 
     <ol class="release-list">
       {releases.map((r) => (
         <li class="release-card">
-          <a class="release-link" href={`/releases/${r.slug}/`}>
+          <a class="release-link" href={`/open-source/${r.slug}/`}>
             <h2>{r.name}</h2>
             <p>{r.line}</p>
           </a>
