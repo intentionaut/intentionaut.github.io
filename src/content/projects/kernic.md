@@ -26,4 +26,7 @@ Kernic is an automated design system product: it helps LLMs develop better UI, e
 
 ## Why it Matters
 
+The longer story, with how it works and what it refuses to do, is at [intentionaut.com/releases/kernic](/releases/kernic/).
+
+
 The CLI is free forever by design. Nobody knows where code automation goes next, so we won't pretend otherwise. The paid layer on the Kernic Studio roadmap (multi-brand management, sync, version history) will extend free-tier files without ever breaking them. Your local systems stay yours, in plain JSON. In an era when everyone can build, why not make designing well easy, beautiful and smart?

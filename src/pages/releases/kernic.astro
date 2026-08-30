@@ -1,0 +1,177 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../styles/release.css';
+
+const title = 'Kernic | Design systems for vibe-coded apps';
+const description =
+  'Kernic is an open source CLI that turns a few answers in your terminal into a design system your AI agent can actually use: OKLCH colour ramps, real fonts, tokens as CSS, Tailwind, JSON and a design.md briefing.';
+
+const stages = [
+  {
+    n: '01',
+    name: 'Pick a vibe',
+    cmd: 'npx kernic',
+    what: 'A guided walk in the terminal. Name the system, pick a vibe (corporate, retro, neon, eight in all), tune the palette with live swatches, pair heading, body and mono fonts from about two thousand Google Fonts.',
+    out: 'One JSON file in ~/.config/kernic/. No account, no cloud, nothing to lose.',
+  },
+  {
+    n: '02',
+    name: 'Export',
+    cmd: 'kernic export my-app -f css > src/styles/tokens.css',
+    what: 'The same system prints as CSS custom properties, a Tailwind v4 @theme, W3C DTCG JSON tokens, or font imports. Run it in your build and it stays current.',
+    out: 'Files your stack already understands. Nothing to learn, nothing to wrap.',
+  },
+  {
+    n: '03',
+    name: 'Brief the agent',
+    cmd: 'kernic export my-app -f design.md',
+    what: 'A design.md with every token and the rules for using them, written for an AI agent. Hand it over once and the agent stops inventing colours as it goes.',
+    out: 'A vibe-coded app that looks like one decision was made, because one was.',
+  },
+  {
+    n: '04',
+    name: 'Studio, later',
+    cmd: 'npx kernic studio',
+    what: 'The local editor runs today: live OKLCH ramps, hue harmonies, font search. The cloud tier on the roadmap adds multi-brand management, sync across repos and version history.',
+    out: 'The free tier files never break. Studio extends them; it does not replace them.',
+  },
+];
+
+const refusals = [
+  {
+    h: 'It never picks colours by eye.',
+    p: 'Ramps are generated in OKLCH, a colour space where every step stays evenly bright, then fitted to the sRGB gamut. No muddy mid-tones, no accidental neon. Harmony rules and tinted neutrals come from the same maths, so a palette holds together as a set rather than as eleven separate guesses.',
+  },
+  {
+    h: 'It never locks you in.',
+    p: 'Your design system is a plain JSON file on your machine. Every export is a format your tools already read. Delete Kernic and everything it made still works.',
+  },
+  {
+    h: 'It never makes the agent guess.',
+    p: 'Vibe-coded interfaces look generic for one reason: the agent invents a design decision every time it needs one. design.md removes the need. Tokens, fonts, radii, gradients and the rules for using them, in the one file an agent reads first.',
+  },
+  {
+    h: 'It never charges for the CLI.',
+    p: 'Free forever, MIT. Nobody knows where code automation goes next, and pretending otherwise would be a bad look for a tool about honest defaults. The paid layer, if it comes, sits on top of files you already own.',
+  },
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="rel">
+    <section class="rel-hero wrap">
+      <div class="rel-hero-copy">
+        <p class="eyebrow">Kernic</p>
+        <h1>Vibe coding gets a <em>design system</em>.</h1>
+        <p class="lede">
+          Answer a few questions in your terminal. Kernic picks colours, fonts
+          and spacing that work together, then exports them as tokens your
+          stack and your AI agent can use. No design experience needed.
+        </p>
+        <div class="cta-row rel-cta">
+          <a class="btn-primary" href="https://kernic.io/?utm_source=intentionaut.com&utm_medium=referral&utm_campaign=releases" target="_blank" rel="noopener noreferrer">Visit kernic.io</a>
+          <span class="pill"><span class="pill-prompt">$</span> npx kernic</span>
+        </div>
+      </div>
+
+      <div class="term" role="img" aria-label="A kernic terminal session creating and exporting a design system">
+        <div class="term-bar"><i></i><i></i><i></i><span>zsh · kernic</span></div>
+        <pre class="term-body"><span class="t-p">$</span> <span class="t-c">kernic</span>
+
+  <span class="t-f">◆ vibe</span>      corporate <span class="t-d">(quiet, professional)</span>
+  <span class="t-f">◆ fonts</span>     Inter / IBM Plex Mono
+  <span class="t-f">◇ radius</span>    soft   <span class="t-f">◇ scale</span>  1.25
+  <span class="t-d">└── saved → ~/.config/kernic/systems/kernic-io.json</span>
+
+<span class="t-p">$</span> <span class="t-c">kernic export kernic-io -f css</span> &gt; src/styles/tokens.css
+<span class="t-d">  ✓ 63 tokens written</span>
+
+<span class="t-p">$</span> <span class="t-c">kernic export kernic-io -f design.md</span> &gt; design.md
+<span class="t-d">  ✓ briefing written for your agent</span><span class="t-cursor"></span></pre>
+      </div>
+    </section>
+
+    <section class="wrap rel-story">
+      <p class="eyebrow">Where it came from</p>
+      <h2>Design systems stopped scaling down.</h2>
+      <div class="rel-story-grid">
+        <div class="prose">
+          <p>
+            Enterprises get token pipelines and Figma libraries. Everyone else
+            gets fifteen shades of grey and three fonts that almost match. Then
+            AI agents started writing interfaces too, and they have the same
+            problem in a worse form: every time an agent needs a colour, it
+            makes one up.
+          </p>
+          <p>
+            Kernic came out of building small apps quickly with agents and
+            watching them all come out looking the same. Not bad, exactly.
+            Generic. The fix was never a bigger design tool. It was a smaller
+            one: a few good decisions, made once, written down in a form both
+            a stylesheet and an agent can read.
+          </p>
+          <p>
+            So Kernic is a CLI, and the design system it makes is a plain JSON
+            file. The colour science is real (OKLCH ramps, gamut fitting,
+            harmony rules) because the point is for the defaults to be good
+            enough that you do not have to think about them. The site at
+            <a href="https://kernic.io" target="_blank" rel="noopener noreferrer">kernic.io</a>
+            is styled by its own output, which is the only honest demo.
+          </p>
+        </div>
+        <aside class="rel-aside">
+          <dl>
+            <div><dt>Shape</dt><dd>A CLI on npm, TypeScript throughout</dd></div>
+            <div><dt>Exports</dt><dd>CSS variables, Tailwind v4 @theme, DTCG JSON, font imports, design.md</dd></div>
+            <div><dt>Looks</dt><dd>8 theme families, 27 curated looks, gradients included</dd></div>
+            <div><dt>Licence</dt><dd>MIT, free forever</dd></div>
+            <div><dt>Made by</dt><dd><a href="/">Saielle DaSilva</a>, Intentionaut</dd></div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <section class="wrap rel-stages">
+      <p class="eyebrow">How it works</p>
+      <h2>Four steps from a blank app to a system.</h2>
+      <ol class="stage-list">
+        {stages.map((s) => (
+          <li class="stage">
+            <div class="stage-n">{s.n}</div>
+            <div class="stage-body">
+              <h3>{s.name}</h3>
+              <code class="stage-cmd">{s.cmd}</code>
+              <p>{s.what}</p>
+              <p class="stage-out"><span>You get</span> {s.out}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="wrap rel-refuse">
+      <p class="eyebrow">What it refuses to do</p>
+      <h2>Four things it will not do, and why that is the product.</h2>
+      <div class="refuse-grid">
+        {refusals.map((r) => (
+          <article class="refuse-card">
+            <h3>{r.h}</h3>
+            <p>{r.p}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="wrap">
+      <div class="rel-close">
+        <h2>Free forever. MIT licensed. Runs on your machine.</h2>
+        <p>Your design system is a plain JSON file you own.</p>
+        <div class="cta-row">
+          <a class="btn-primary" href="https://github.com/intentionaut/kernic?utm_source=intentionaut.com&utm_medium=referral&utm_campaign=releases" target="_blank" rel="noopener noreferrer">Visit the repo</a>
+          <a class="link-arrow" href="/projects/kernic/">The short version</a>
+        </div>
+        <span class="pill pill-dark"><span class="pill-prompt">$</span> npx kernic</span>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

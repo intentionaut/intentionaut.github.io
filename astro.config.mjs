@@ -4,6 +4,10 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://intentionaut.com',
   trailingSlash: 'always',
+  // Open source story pages live under /releases/<app>/.
+  redirects: {
+    '/familiar': '/releases/familiar/',
+  },
   integrations: [
     sitemap({
       // /draft/* are reworked versions of published essays: kept for readers,

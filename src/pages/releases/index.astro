@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const releases = [
+  {
+    slug: 'familiar',
+    name: 'Familiar',
+    line: 'A companion for your newsletter. Interview, outline, draft, edit and social stages that hand back reports instead of rewrites.',
+    install: 'npx skills add intentionaut/familiar',
+    repo: 'https://github.com/intentionaut/familiar',
+  },
+  {
+    slug: 'kernic',
+    name: 'Kernic',
+    line: 'A CLI that turns a few answers in your terminal into a design system your stack and your AI agent can use.',
+    install: 'npx kernic',
+    repo: 'https://github.com/intentionaut/kernic',
+  },
+];
+---
+
+<BaseLayout
+  title="Releases | Saielle DaSilva"
+  description="Open source tools from Intentionaut: the story behind each one, how it works, and what it refuses to do."
+>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Releases</p>
+      <h1>Things I built and let go of.</h1>
+      <p class="lede">
+        Open source, MIT, built in public. Each page tells the story: where it
+        came from, how it works, and the things it will not do on purpose.
+      </p>
+    </header>
+
+    <ol class="release-list">
+      {releases.map((r) => (
+        <li class="release-card">
+          <a class="release-link" href={`/releases/${r.slug}/`}>
+            <h2>{r.name}</h2>
+            <p>{r.line}</p>
+          </a>
+          <div class="release-meta">
+            <code>$ {r.install}</code>
+            <a class="link-arrow" href={r.repo} target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </section>
+</BaseLayout>
+
+<style>
+  .release-list {
+    list-style: none;
+    margin: var(--space-8) 0 var(--space-11);
+    padding: 0;
+    display: grid;
+    gap: var(--space-6);
+  }
+  .release-card {
+    border: 1px solid var(--line);
+    border-radius: var(--radius-l);
+    background: rgba(255, 255, 255, 0.4);
+    padding: var(--space-7);
+    display: grid;
+    gap: var(--space-5);
+  }
+  .release-link {
+    text-decoration: none;
+    color: inherit;
+  }
+  .release-link h2 {
+    margin: 0 0 var(--space-2);
+  }
+  .release-link:hover h2 {
+    color: var(--accent);
+  }
+  .release-link p {
+    margin: 0;
+    max-width: 62ch;
+    color: var(--muted);
+  }
+  .release-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+  .release-meta code {
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 0.85rem;
+    color: var(--ink);
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-m);
+    padding: 0.35rem 0.7rem;
+  }
+</style>
