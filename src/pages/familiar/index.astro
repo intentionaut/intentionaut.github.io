@@ -1,0 +1,562 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'Familiar | A companion for your newsletter';
+const description =
+  'Familiar sits beside you while you write about the work you do, asks the questions that pull out what only you know, and hands back reports instead of rewrites. Open source, plain markdown, every stage waits for you.';
+
+const stages = [
+  {
+    n: '01',
+    name: 'Interview',
+    cmd: 'familiar interview "why our churn model kept lying"',
+    what: 'One question at a time until the idea is sharp. It goes after what happened to you first, and chases the scene behind every abstraction.',
+    out: 'notes.md: a thesis in one sentence, the stakes, an evidence list, and the lines you said that are worth building on.',
+  },
+  {
+    n: '02',
+    name: 'Outline',
+    cmd: 'familiar outline',
+    what: 'Three genuinely different shapes, not three flavours of one. Argument-led, story-led, problem-led. Each with where the spark lands and one way it could fail.',
+    out: 'outline.md. You pick, merge or veto. Nothing is drafted until you choose.',
+  },
+  {
+    n: '03',
+    name: 'Draft',
+    cmd: 'familiar draft',
+    what: 'Eighty percent of a draft you will make excellent, in your voice. Wherever it would have invented a number or a quote, it leaves a bracket instead.',
+    out: 'draft.md with [NEEDS SOURCE: what and why] wherever the evidence is missing. Better a bracket than a fabrication.',
+  },
+  {
+    n: '04',
+    name: 'Dev edit',
+    cmd: 'familiar dev-edit',
+    what: 'A demanding, loyal editor. Where is the spark, does the thesis hold, what has to move. Every flag comes with an exact rewrite.',
+    out: 'A report, not a clean version. You accept, reject or revise each item yourself.',
+  },
+  {
+    n: '05',
+    name: 'Line edit',
+    cmd: 'familiar line-edit',
+    what: 'The boring pass, on purpose. AI tells, house spelling, hedges that hide a real position, reading ease. When it is not sure whether something is a tell or your dry wit, it says so.',
+    out: 'Findings with the quoted line and the fix. Nothing applied.',
+  },
+  {
+    n: '06',
+    name: 'Social',
+    cmd: 'familiar social next',
+    what: 'A week of posts on your own cadence. One pool of candidates, you pick per channel, exact send times. Short posts are their own form, not chopped long ones.',
+    out: 'Scheduled only after a final confirm, or a paste-ready list if nothing is connected.',
+  },
+  {
+    n: '07',
+    name: 'Learn',
+    cmd: 'familiar learn diff pieces/2026-09-03-churn',
+    what: 'Reads what you actually changed between the draft and the issue you sent, and turns the recurring edits into rules. Or reads your back catalogue in bulk and drafts your voice files from evidence.',
+    out: 'Proposals, with the sentence each rule came from. You apply them section by section.',
+  },
+];
+
+const refusals = [
+  {
+    h: 'It never rewrites your file.',
+    p: 'Edits come back as reports: the quote, the problem, the exact fix. A rewrite tool has two failure modes people keep reporting. It flags your deliberate choices as mistakes, and it drops claims while only changing shape. A ranking, a superlative, a hedge that was a considered position, gone. When every change is a proposal you can see, both cost you a glance instead of a paragraph.',
+  },
+  {
+    h: 'It never fills a gap.',
+    p: 'A model asked to write about your work will invent the number it does not have. Familiar leaves a bracket. The one rule that came out of watching that happen, more than once, is that a fabricated detail in a piece with your name on it is the worst thing this tool could do.',
+  },
+  {
+    h: 'It never guesses your voice.',
+    p: 'If the voice files are still the template, it says so and asks for a sample. The voice is built from your published writing and your own answers, with counts rather than adjectives. Sixty-one percent of sentences under twelve words is a fact. Punchy is an opinion.',
+  },
+  {
+    h: 'It never moves on without you.',
+    p: 'Every stage ends where the prompt says it ends and waits. The friction is the point. The decisions stay yours, so the writing does.',
+  },
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="fam">
+    <section class="fam-hero wrap">
+      <div class="fam-hero-copy">
+        <p class="eyebrow">Familiar</p>
+        <h1>A companion for your <em>newsletter</em>.</h1>
+        <p class="lede">
+          It sits beside you while you write about the work you do, asks the
+          questions that pull out what only you know, and hands back reports
+          instead of rewrites. Plain markdown. No app, no account. Every stage
+          waits for you.
+        </p>
+        <div class="cta-row fam-cta">
+          <a class="btn-primary" href="https://github.com/intentionaut/familiar?utm_source=intentionaut.com&utm_medium=referral&utm_campaign=familiar" target="_blank" rel="noopener noreferrer">Get it on GitHub</a>
+          <span class="pill"><span class="pill-prompt">$</span> npx skills add intentionaut/familiar</span>
+        </div>
+      </div>
+
+      <div class="term" role="img" aria-label="A Familiar interview session in a terminal">
+        <div class="term-bar"><i></i><i></i><i></i><span>familiar · interview</span></div>
+        <pre class="term-body"><span class="t-p">$</span> <span class="t-c">familiar interview</span> "the churn model that kept lying"
+
+<span class="t-f">Familiar</span>  Start with what happened. When did you first
+          notice it was wrong, and what were you looking at?
+
+<span class="t-y">You</span>       A Tuesday. The model said 4% monthly churn and
+          finance said 11%. Same customers.
+
+<span class="t-f">Familiar</span>  Same customers, two numbers. What was each of
+          them counting as a customer?
+
+<span class="t-y">You</span>       Ours counted logins. Theirs counted invoices.
+
+<span class="t-f">Familiar</span>  So the piece is arguing that churn is a
+          definition problem before it is a data problem?
+
+<span class="t-y">You</span>       Yes. That's it.
+
+<span class="t-d">  → notes.md  thesis · stakes · 3 evidence items (1 needs source)</span><span class="t-cursor"></span></pre>
+      </div>
+    </section>
+
+    <section class="wrap fam-story">
+      <p class="eyebrow">Where it came from</p>
+      <h2>Five days into a build, the first three were gone.</h2>
+      <div class="fam-story-grid">
+        <div class="prose">
+          <p>
+            Familiar started as the newsroom behind Intentionaut, a letter on
+            design, product, data and AI. The problem it was built for is a
+            specific one. Writing about your own work is hard because the good
+            material is the part you take for granted. A model does not fix
+            that. It makes it worse, because a model asked to write about your
+            work will confidently fill in the parts you forgot to say.
+          </p>
+          <p>
+            So the newsroom was built the way good editors actually work.
+            Interview first, before a word is drafted. Propose structures
+            rather than pick one. Report rather than rewrite. Run the boring
+            mechanical pass last. The rule that mattered most came from
+            watching a draft invent a statistic: a bracket is always better
+            than a fabrication.
+          </p>
+          <p>
+            It ran privately for a while, alongside a build log kept in
+            <a href="https://github.com/intentionaut/captains-log" target="_blank" rel="noopener noreferrer">Captain's Log</a>,
+            which is why Familiar can start a piece from a build log and ask
+            about the ten minutes after a mistake rather than "tell me more".
+            Then the personal parts were stripped out, the voice files became
+            templates with questions in them, and it got a name.
+          </p>
+          <p>
+            A familiar is the companion in the old stories, the one that sits
+            beside the work and notices things. That is the whole job here.
+            Notice what you take for granted. Ask about it. Leave the decisions
+            where they belong.
+          </p>
+        </div>
+        <aside class="fam-aside">
+          <dl>
+            <div><dt>Shape</dt><dd>Seven stages, each a plain markdown prompt</dd></div>
+            <div><dt>Runs in</dt><dd>Claude Code, opencode, or a claude.ai Project</dd></div>
+            <div><dt>Your voice</dt><dd>Five files you fill in, or let it draft from your back catalogue</dd></div>
+            <div><dt>Licence</dt><dd>MIT, free, built in public</dd></div>
+            <div><dt>Made by</dt><dd><a href="/">Saielle DaSilva</a>, Intentionaut</dd></div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <section class="wrap fam-stages">
+      <p class="eyebrow">How a piece moves</p>
+      <h2>Seven stages. A gate after each one.</h2>
+      <ol class="stage-list">
+        {stages.map((s) => (
+          <li class="stage">
+            <div class="stage-n">{s.n}</div>
+            <div class="stage-body">
+              <h3>{s.name}</h3>
+              <code class="stage-cmd">{s.cmd}</code>
+              <p>{s.what}</p>
+              <p class="stage-out"><span>Hands you</span> {s.out}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="wrap fam-refuse">
+      <p class="eyebrow">What it refuses to do</p>
+      <h2>Four things it will not do, and why that is the product.</h2>
+      <div class="refuse-grid">
+        {refusals.map((r) => (
+          <article class="refuse-card">
+            <h3>{r.h}</h3>
+            <p>{r.p}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="wrap fam-voice">
+      <div class="voice-grid">
+        <div>
+          <p class="eyebrow">Your voice</p>
+          <h2>It learns from what you publish, not from how you describe yourself.</h2>
+          <div class="prose">
+            <p>
+              Point it at a folder of past issues and it drafts your voice
+              files from evidence: how you open, where a piece is grounded,
+              how you handle sources, what you never do. Every claim carries a
+              count. Then it shows you what it is confident about, what it is
+              not, and where it contradicts what you told it.
+            </p>
+            <p>
+              After each issue, hand it your final alongside its draft. The
+              edits you made twice become rules. A claim you removed is the
+              most important signal of all, because it usually means the draft
+              overstated.
+            </p>
+          </div>
+        </div>
+        <div class="voice-files">
+          <div class="file"><span>knowledge/</span>positioning.md<small>what it is, who reads it, house rules</small></div>
+          <div class="file"><span>knowledge/</span>voice-guide.md<small>how you write, with the moves that make it yours</small></div>
+          <div class="file"><span>knowledge/</span>style-rules.md<small>the tell list the line edit runs</small></div>
+          <div class="file"><span>knowledge/examples/</span>canonical.md<small>your own lines at full strength</small></div>
+          <div class="file"><span>knowledge/</span>social-schedule.md<small>channels, cadence, slot shapes</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap fam-lang">
+      <p class="eyebrow">Honest lists, other languages</p>
+      <h2>The tell list is checked weekly. The languages are up to you.</h2>
+      <div class="lang-grid">
+        <div class="prose">
+          <p>
+            A list of AI writing patterns goes stale fast. Once a week Familiar
+            compares its own against <a href="https://github.com/blader/humanizer" target="_blank" rel="noopener noreferrer">humanizer</a>,
+            the most actively curated one, and opens an issue with anything new.
+            Additions land one at a time with a real example, never as a bulk
+            import, because a bloated list means false positives for every
+            writer using it.
+          </p>
+        </div>
+        <div class="prose">
+          <p>
+            The mechanical rules were written for English, and some of them
+            are about English. Dashes, spelling, heading case. Those are marked
+            and skipped when the house language is something else, and a
+            per-language file adds that language's own overused words and
+            tells. There are no language files yet. If you write in something
+            other than English, that pull request is the most useful one you
+            could open.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <div class="fam-close">
+        <h2>Free, MIT, and it never sends anything without you.</h2>
+        <p>Clone it, fill in two files, and start with an idea that has been rattling around.</p>
+        <div class="cta-row">
+          <a class="btn-primary" href="https://github.com/intentionaut/familiar?utm_source=intentionaut.com&utm_medium=referral&utm_campaign=familiar" target="_blank" rel="noopener noreferrer">Visit the repo</a>
+          <a class="link-arrow" href="/projects/familiar/">The short version</a>
+        </div>
+        <span class="pill pill-dark"><span class="pill-prompt">$</span> git clone https://github.com/intentionaut/familiar.git</span>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .fam h2 {
+    max-width: 22ch;
+  }
+
+  /* Hero */
+  .fam-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: var(--space-9);
+    align-items: center;
+    padding-top: var(--space-10);
+    padding-bottom: var(--space-10);
+  }
+  .fam-hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .fam-cta {
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 0.85rem;
+    padding: 0.55rem 0.9rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-l);
+    background: rgba(255, 255, 255, 0.45);
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .pill-prompt {
+    color: var(--accent);
+  }
+  .pill-dark {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: var(--paper);
+  }
+
+  /* Terminal */
+  .term {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: var(--radius-l);
+    box-shadow: 0 30px 60px -30px rgba(56, 35, 74, 0.6);
+    overflow: hidden;
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  }
+  .term-bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0.6rem 0.9rem;
+    background: rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 0.75rem;
+    color: rgba(247, 233, 224, 0.6);
+  }
+  .term-bar i {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.18);
+  }
+  .term-bar span {
+    margin-left: auto;
+  }
+  .term-body {
+    margin: 0;
+    padding: 1.1rem 1.2rem 1.3rem;
+    font-size: 0.8rem;
+    line-height: 1.55;
+    overflow-x: auto;
+    white-space: pre;
+  }
+  .t-p { color: var(--accent); }
+  .t-c { color: #f2c9a7; }
+  .t-f { color: #a9cbd0; font-weight: 600; }
+  .t-y { color: #f2c9a7; font-weight: 600; }
+  .t-d { color: rgba(247, 233, 224, 0.55); }
+  .t-cursor::after {
+    content: '▊';
+    color: var(--accent);
+    animation: blink 1.1s steps(1) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* Story */
+  .fam-story,
+  .fam-stages,
+  .fam-refuse,
+  .fam-voice,
+  .fam-lang {
+    padding-top: var(--space-10);
+    padding-bottom: var(--space-10);
+    border-top: 1px solid var(--line);
+  }
+  .fam-story-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    gap: var(--space-9);
+    margin-top: var(--space-7);
+  }
+  .fam-aside dl {
+    margin: 0;
+    padding: var(--space-6);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-l);
+    background: var(--mendl);
+    display: grid;
+    gap: var(--space-4);
+  }
+  .fam-aside dt {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+  }
+  .fam-aside dd {
+    margin: 0.15rem 0 0;
+  }
+
+  /* Stages */
+  .stage-list {
+    list-style: none;
+    margin: var(--space-7) 0 0;
+    padding: 0;
+    display: grid;
+    gap: 0;
+  }
+  .stage {
+    display: grid;
+    grid-template-columns: 4rem minmax(0, 1fr);
+    gap: var(--space-6);
+    padding: var(--space-7) 0;
+    border-top: 1px solid var(--line);
+  }
+  .stage:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+  .stage-n {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--accent);
+    font-variation-settings: 'opsz' 144, 'SOFT' 100;
+  }
+  .stage-body h3 {
+    margin: 0 0 var(--space-2);
+  }
+  .stage-cmd {
+    display: inline-block;
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 0.8rem;
+    color: var(--muted);
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-m);
+    padding: 0.2rem 0.55rem;
+    margin-bottom: var(--space-4);
+  }
+  .stage-body p {
+    max-width: 62ch;
+    margin: 0 0 var(--space-3);
+  }
+  .stage-out {
+    color: var(--muted);
+  }
+  .stage-out span {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-right: 0.4rem;
+  }
+
+  /* Refusals */
+  .refuse-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-6);
+    margin-top: var(--space-7);
+  }
+  .refuse-card {
+    padding: var(--space-6);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-l);
+    background: rgba(255, 255, 255, 0.4);
+  }
+  .refuse-card h3 {
+    margin: 0 0 var(--space-3);
+    font-family: var(--font-display);
+  }
+  .refuse-card p {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  /* Voice */
+  .voice-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    gap: var(--space-9);
+    align-items: start;
+  }
+  .voice-files {
+    display: grid;
+    gap: var(--space-2);
+    margin-top: var(--space-8);
+  }
+  .file {
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 0.85rem;
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius-m);
+    background: rgba(255, 255, 255, 0.5);
+  }
+  .file span {
+    color: var(--muted);
+  }
+  .file small {
+    display: block;
+    font-family: var(--font-body);
+    color: var(--muted);
+    margin-top: 0.2rem;
+  }
+
+  /* Languages */
+  .lang-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-9);
+    margin-top: var(--space-7);
+  }
+
+  /* Close */
+  .fam-close {
+    margin: var(--space-10) 0;
+    padding: var(--space-9);
+    border-radius: var(--radius-l);
+    background: var(--ink);
+    color: var(--paper);
+    display: grid;
+    gap: var(--space-5);
+    justify-items: start;
+  }
+  .fam-close h2 {
+    color: var(--paper);
+    margin: 0;
+  }
+  .fam-close p {
+    margin: 0;
+    color: rgba(247, 233, 224, 0.75);
+  }
+  .fam-close .link-arrow {
+    color: var(--paper);
+  }
+
+  @media (max-width: 900px) {
+    .fam-hero,
+    .fam-story-grid,
+    .refuse-grid,
+    .voice-grid,
+    .lang-grid {
+      grid-template-columns: 1fr;
+    }
+    .fam-hero {
+      padding-top: var(--space-8);
+    }
+    .voice-files {
+      margin-top: 0;
+    }
+    .stage {
+      grid-template-columns: 3rem minmax(0, 1fr);
+      gap: var(--space-4);
+    }
+    .pill {
+      white-space: normal;
+    }
+  }
+</style>

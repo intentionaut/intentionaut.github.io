@@ -27,4 +27,7 @@ Familiar is the newsroom behind Intentionaut, made general. Seven stages, each a
 
 ## Why it Matters
 
+The longer story, with how a piece moves through the stages and what Familiar refuses to do, is at [intentionaut.com/familiar](/familiar/).
+
+
 A newsletter is worth reading when it sounds like a person who knows something. The fastest way to lose that is to let a model fill the gaps. Familiar keeps the gaps visible and the decisions yours, and it gets better at your voice the more you publish. Free, MIT, and built in public. If you write in a language other than English, the language files are where a pull request helps most.
