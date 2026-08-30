@@ -8,3 +8,8 @@ dist/
 preview.html
 .env
 contact-form/
+
+# Candid material never belongs in a public repo. This repo is public.
+# Captain's Log reflections are verbatim and personal; keep them here on disk,
+# out of git. See ~/Projects/captains-log/PROMPT.md.
+REFLECTIONS.md
