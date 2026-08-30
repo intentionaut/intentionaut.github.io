@@ -6,76 +6,57 @@ import ReleaseLog from '../../components/ReleaseLog.astro';
 
 const title = 'Familiar | A companion for your newsletter';
 const description =
-  'Familiar sits beside you while you write about the work you do, asks the questions that pull out what only you know, and hands back reports instead of rewrites. Open source, plain markdown, every stage waits for you.';
+  'Familiar is the open source newsroom behind Intentionaut, made general. It interviews you about your own work, drafts in your voice, and hands back an editor\'s report you work through yourself.';
 
 const stages = [
   {
     n: '01',
     name: 'Interview',
     cmd: 'familiar interview "why our churn model kept lying"',
-    what: 'One question at a time until the idea is sharp. It goes after what happened to you first, and chases the scene behind every abstraction.',
-    out: 'notes.md: a thesis in one sentence, the stakes, an evidence list, and the lines you said that are worth building on.',
+    what: 'It asks one question, waits for the answer, and asks the next one. The first question always goes after something that happened to you, because the scene is where the material is and the opinion usually turns up on its own once the scene is on the table. Every few answers it tries the thesis back at you in a sentence and lets you correct it.',
+    out: 'A notes file with the thesis in one sentence, who it is for and what changes for them, a list of the evidence you mentioned with a note on which of it still needs finding, and the lines you said that are worth building a piece around.',
   },
   {
     n: '02',
     name: 'Outline',
     cmd: 'familiar outline',
-    what: 'Three genuinely different shapes, not three flavours of one. Argument-led, story-led, problem-led. Each with where the spark lands and one way it could fail.',
-    out: 'outline.md. You pick, merge or veto. Nothing is drafted until you choose.',
+    what: 'It proposes three shapes for the piece and makes sure they are genuinely different from each other. One leads with the argument. One opens inside the moment and pulls the lesson out slowly. One starts from the reader\'s problem and works through the fix. For each it says where your best line would land and one way the structure could fail, then recommends one and tells you why in two sentences.',
+    out: 'An outline file you pick from, merge, or veto. It will not draft until you have chosen.',
   },
   {
     n: '03',
     name: 'Draft',
     cmd: 'familiar draft',
-    what: 'Eighty percent of a draft you will make excellent, in your voice. Wherever it would have invented a number or a quote, it leaves a bracket instead.',
-    out: 'draft.md with [NEEDS SOURCE: what and why] wherever the evidence is missing. Better a bracket than a fabrication.',
+    what: 'It writes about eighty percent of a draft you will make excellent, and it writes it in your voice. The rule it holds hardest is that it may not invent anything. Where it would have reached for a statistic it does not have or a quote nobody said, it leaves a bracket and tells you what it needed.',
+    out: 'A draft with a headline and two alternates, a word count, a reading-ease score, and a list of every bracket left in.',
   },
   {
     n: '04',
     name: 'Dev edit',
     cmd: 'familiar dev-edit',
-    what: 'A demanding, loyal editor. Where is the spark, does the thesis hold, what has to move. Every flag comes with an exact rewrite.',
-    out: 'A report, not a clean version. You accept, reject or revise each item yourself.',
+    what: 'This is the demanding, loyal editor. It looks for the line that makes the piece alive and says whether it is on top or buried in paragraph six. It checks whether the argument still holds by the end or has drifted into two arguments. Every flag comes with an exact rewrite in your voice, ordered by how much it would change the piece.',
+    out: 'A report, which you work through yourself, accepting, rejecting or revising each item. Your draft is untouched.',
   },
   {
     n: '05',
     name: 'Line edit',
     cmd: 'familiar line-edit',
-    what: 'The boring pass, on purpose. AI tells, house spelling, hedges that hide a real position, reading ease. When it is not sure whether something is a tell or your dry wit, it says so.',
-    out: 'Findings with the quoted line and the fix. Nothing applied.',
+    what: 'The boring pass, run last and on purpose. It sweeps the draft for the patterns that give a model away, checks your house spelling and your dash rule, and reports the reading ease. When it finds a hedge sitting where you could take a position, it lays out the tradeoff and asks which way you want to lean. When it cannot tell whether something is a tell or your dry wit, it says so.',
+    out: 'A list of findings, each with the quoted line and the fix, and a short summary of where the piece stands.',
   },
   {
     n: '06',
     name: 'Social',
     cmd: 'familiar social next',
-    what: 'A week of posts on your own cadence. One pool of candidates, you pick per channel, exact send times. Short posts are their own form, not chopped long ones.',
-    out: 'Scheduled only after a final confirm, or a paste-ready list if nothing is connected.',
+    what: 'You tell it your channels, your days and your times once. From a finished piece it builds a pool of candidate posts, you pick the ones you would actually say, and it maps them onto the week with exact send times. Short posts are written for the short form from the start, and every one of them has to make sense to someone who has not read the piece.',
+    out: 'A scheduled week, once you have confirmed it, or a list you can paste if nothing is connected.',
   },
   {
     n: '07',
     name: 'Learn',
     cmd: 'familiar learn diff pieces/2026-09-03-churn',
-    what: 'Reads what you actually changed between the draft and the issue you sent, and turns the recurring edits into rules. Or reads your back catalogue in bulk and drafts your voice files from evidence.',
-    out: 'Proposals, with the sentence each rule came from. You apply them section by section.',
-  },
-];
-
-const refusals = [
-  {
-    h: 'It never rewrites your file.',
-    p: 'Edits come back as reports: the quote, the problem, the exact fix. A rewrite tool has two failure modes people keep reporting. It flags your deliberate choices as mistakes, and it drops claims while only changing shape. A ranking, a superlative, a hedge that was a considered position, gone. When every change is a proposal you can see, both cost you a glance instead of a paragraph.',
-  },
-  {
-    h: 'It never fills a gap.',
-    p: 'A model asked to write about your work will invent the number it does not have. Familiar leaves a bracket. The one rule that came out of watching that happen, more than once, is that a fabricated detail in a piece with your name on it is the worst thing this tool could do.',
-  },
-  {
-    h: 'It never guesses your voice.',
-    p: 'If the voice files are still the template, it says so and asks for a sample. The voice is built from your published writing and your own answers, with counts rather than adjectives. Sixty-one percent of sentences under twelve words is a fact. Punchy is an opinion.',
-  },
-  {
-    h: 'It never moves on without you.',
-    p: 'Every stage ends where the prompt says it ends and waits. The friction is the point. The decisions stay yours, so the writing does.',
+    what: 'After an issue goes out, you hand it the version you actually sent next to the draft it gave you. It reads what you changed, and the edits you made twice become rules. It pays particular attention to anything you removed, because a claim you cut is usually a claim the draft overstated. You can also point it at a folder of past issues and let it draft your voice files from the evidence.',
+    out: 'A set of proposed rules, each one citing the sentence it came from, that you apply a section at a time.',
   },
 ];
 ---
@@ -87,12 +68,13 @@ const refusals = [
         <p class="eyebrow">Familiar</p>
         <h1>A companion for your <em>newsletter</em>.</h1>
         <p class="lede">
-          It sits beside you while you write about the work you do, asks the
-          questions that pull out what only you know, and hands back reports
-          instead of rewrites. Plain markdown. No app, no account. Every stage
-          waits for you.
+          Familiar sits beside you while you write about the work you do. It
+          asks the questions that pull out what only you know, drafts in your
+          voice, and hands back an editor's report for you to work through.
+          It is a folder of plain markdown, and every stage of it waits for
+          you.
         </p>
-        <div class="cta-row fam-cta">
+        <div class="cta-row rel-cta">
           <a class="btn-primary" href="https://github.com/intentionaut/familiar?utm_source=intentionaut.com&utm_medium=referral&utm_campaign=releases" target="_blank" rel="noopener noreferrer">Get it on GitHub</a>
           <span class="pill"><span class="pill-prompt">$</span> npx skills add intentionaut/familiar</span>
         </div>
@@ -122,40 +104,48 @@ const refusals = [
       </div>
     </section>
 
-    <section class="wrap fam-story">
+    <section class="wrap rel-story">
       <p class="eyebrow">Where it came from</p>
-      <h2>Five days into a build, the first three were gone.</h2>
+      <h2>I built this because I kept losing the story of my own work.</h2>
       <div class="rel-story-grid">
         <div class="prose">
           <p>
-            Familiar started as the newsroom behind Intentionaut, a letter on
-            design, product, data and AI. The problem it was built for is a
-            specific one. Writing about your own work is hard because the good
-            material is the part you take for granted. A model does not fix
-            that. It makes it worse, because a model asked to write about your
-            work will confidently fill in the parts you forgot to say.
+            I write a fortnightly letter about design, product, data and AI,
+            and most of what goes in it comes from things I have actually
+            built or watched being built. That should make it easy to write.
+            It does not, and the reason is a specific one: the good material
+            is the part you take for granted. When you have lived through a
+            decision you stop noticing what was interesting about it, and you
+            reach for the general lesson instead, which is the part nobody
+            needs.
           </p>
           <p>
-            So the newsroom was built the way good editors actually work.
-            Interview first, before a word is drafted. Propose structures
-            rather than pick one. Report rather than rewrite. Run the boring
-            mechanical pass last. The rule that mattered most came from
-            watching a draft invent a statistic: a bracket is always better
-            than a fabrication.
+            For a while I tried the obvious thing and asked a model to help.
+            That made it worse. A model asked to write about your work will
+            confidently fill in the parts you forgot to say, and it fills them
+            with the most plausible thing it can think of. I caught one
+            inventing a statistic for a piece with my name on it, and I caught
+            it late enough that I have never entirely trusted a generated
+            draft since.
           </p>
           <p>
-            It ran privately for a while, alongside a build log kept in
+            So I built a newsroom for myself, and I built it the way the good
+            editors I have worked with actually work. They interview you
+            before a word is written. They propose shapes for a piece and let
+            you choose. They hand back notes, because the moment an editor
+            rewrites you, the piece becomes theirs. And they run the boring
+            mechanical pass last, after the argument is settled, so it does
+            not eat the afternoon.
+          </p>
+          <p>
+            It ran privately for a while alongside a build log I keep with
             <a href="https://github.com/intentionaut/captains-log" target="_blank" rel="noopener noreferrer">Captain's Log</a>,
             which is why Familiar can start a piece from a build log and ask
-            about the ten minutes after a mistake rather than "tell me more".
-            Then the personal parts were stripped out, the voice files became
-            templates with questions in them, and it got a name.
-          </p>
-          <p>
-            A familiar is the companion in the old stories, the one that sits
-            beside the work and notices things. That is the whole job here.
-            Notice what you take for granted. Ask about it. Leave the decisions
-            where they belong.
+            about the ten minutes after a mistake. Then I took my own voice
+            out of it, turned the voice files into templates with questions in
+            them, and gave it a name. A familiar, in the old stories, is the
+            companion that sits beside the work and notices things. I liked
+            that it does not do the work for you.
           </p>
         </div>
         <aside class="rel-aside">
@@ -170,43 +160,112 @@ const refusals = [
       </div>
     </section>
 
-    <section class="wrap fam-stages">
+    <section class="wrap rel-stages">
       <p class="eyebrow">How a piece moves</p>
-      <h2>Seven stages. A gate after each one.</h2>
+      <h2>Seven stages, and it stops after every one of them.</h2>
+      <div class="prose rel-stages-intro">
+        <p>
+          The gate after each stage is there to prevent drift. A model left to
+          run a whole pipeline on its own will produce something smooth and
+          slightly wrong, because each step inherits the small errors of the
+          last one and nobody corrects them. Familiar puts you in between every
+          step instead, so the thesis you confirmed after the interview is the
+          thesis that gets outlined, and the structure you chose is the one
+          that gets drafted. It also means you can move in both directions.
+          If the draft shows you the interview missed something, you go back
+          to the interview and the notes grow; you do not start again. If one
+          section is wrong, you rework that section and leave the rest alone.
+        </p>
+        <p>
+          I did not plan the next part, but it is the thing I value most now.
+          My own pace of thought is not steady. Some days the idea arrives
+          whole and the interview is three answers long; some days I circle a
+          paragraph for a week and come back to it with a completely different
+          opening. Because every stage is a file, and every stage waits, the
+          work is always exactly where I left it and Familiar picks up at
+          whatever speed I am moving that day. It keeps up when I am fast and
+          it does not nag when I am slow. If your attention works in bursts
+          and loops too, the stage gates are the part that will feel like they
+          were built for you.
+        </p>
+      </div>
       <StageTabs id="familiar" stages={stages} outLabel="Hands you" />
     </section>
 
-    <section class="wrap fam-refuse">
-      <p class="eyebrow">What it refuses to do</p>
-      <h2>Four things it will not do, and why that is the product.</h2>
-      <div class="refuse-grid">
-        {refusals.map((r) => (
-          <article class="refuse-card">
-            <h3>{r.h}</h3>
-            <p>{r.p}</p>
-          </article>
-        ))}
+    <section class="wrap rel-refuse">
+      <p class="eyebrow">What it will not do</p>
+      <h2>The restraint is most of the design.</h2>
+      <div class="rel-story-grid">
+        <div class="prose">
+          <p>
+            Familiar never rewrites your file. The edits come back as a report
+            with the quoted line, what is wrong with it and an exact fix, and
+            you decide what to do with each one. I know this is slower than a
+            clean-up pass, and I chose it anyway, because the tools that
+            rewrite for you fail in two ways that people keep reporting and
+            that I have hit myself. They flag the things you did on purpose as
+            mistakes, so your dry aside becomes a "clarity issue". And they
+            drop claims while they think they are only changing shape: a
+            ranking, a superlative, a hedge that was in fact a considered
+            position, gone without a trace. When every change is a proposal
+            you can see, both of those cost you a glance instead of a
+            paragraph you did not know you had lost.
+          </p>
+          <p>
+            It never fills a gap. If it needs a number it does not have, it
+            leaves a bracket that says so. This came directly from the
+            invented statistic, and it is the one rule I would keep if I had
+            to throw away everything else.
+          </p>
+          <p>
+            It never guesses your voice. If the voice files are still the
+            template, it tells you and asks for a sample. When it does learn
+            your voice, it learns it from your published writing and your own
+            edits, and it reports what it found as counts. Sixty-one percent
+            of your sentences being under twelve words is a fact it can work
+            with. "Punchy" is an opinion, and it has no use for those.
+          </p>
+          <p>
+            And it never moves on without you. Every stage ends where the
+            prompt says it ends, then waits. I have come to think of that
+            friction as the feature: the decisions stay yours, and so, in the
+            end, does the writing.
+          </p>
+        </div>
+        <aside class="rel-aside">
+          <dl>
+            <div><dt>Never</dt><dd>Rewrites your file in place</dd></div>
+            <div><dt>Never</dt><dd>Invents a number, a quote or a source</dd></div>
+            <div><dt>Never</dt><dd>Guesses a voice it has not been shown</dd></div>
+            <div><dt>Never</dt><dd>Advances a stage without you</dd></div>
+          </dl>
+        </aside>
       </div>
     </section>
 
-    <section class="wrap fam-voice">
+    <section class="wrap rel-voice">
       <div class="voice-grid">
         <div>
           <p class="eyebrow">Your voice</p>
-          <h2>It learns from what you publish, not from how you describe yourself.</h2>
+          <h2>It learns your voice from what you have published.</h2>
           <div class="prose">
             <p>
-              Point it at a folder of past issues and it drafts your voice
-              files from evidence: how you open, where a piece is grounded,
-              how you handle sources, what you never do. Every claim carries a
-              count. Then it shows you what it is confident about, what it is
-              not, and where it contradicts what you told it.
+              Most writers are unreliable narrators of their own style. Ask
+              someone how they write and you get the writer they would like
+              to be. So Familiar does not ask. You point it at a folder of
+              past issues and it reads them for how you open, where a piece
+              is grounded, how you handle other people's words, what you never
+              do, and it drafts your voice files from that, with a count next
+              to every claim. Then it shows you what it is confident about,
+              what it is not, and where what it found contradicts what you
+              told it, which is usually the most useful line in the report.
             </p>
             <p>
-              After each issue, hand it your final alongside its draft. The
-              edits you made twice become rules. A claim you removed is the
-              most important signal of all, because it usually means the draft
-              overstated.
+              After each issue, you hand it the version you sent alongside the
+              draft it gave you. The edits you made twice become rules. It
+              pays the most attention to anything you removed, because a claim
+              you cut is almost always a claim the draft overstated, and that
+              is the thing worth teaching it not to do again.
             </p>
           </div>
         </div>
@@ -220,29 +279,36 @@ const refusals = [
       </div>
     </section>
 
-    <section class="wrap fam-lang">
+    <section class="wrap rel-lang">
       <p class="eyebrow">Honest lists, other languages</p>
-      <h2>The tell list is checked weekly. The languages are up to you.</h2>
+      <h2>The tell list is checked every week. The languages are up to you.</h2>
       <div class="lang-grid">
         <div class="prose">
           <p>
-            A list of AI writing patterns goes stale fast. Once a week Familiar
-            compares its own against <a href="https://github.com/blader/humanizer" target="_blank" rel="noopener noreferrer">humanizer</a>,
-            the most actively curated one, and opens an issue with anything new.
-            Additions land one at a time with a real example, never as a bulk
-            import, because a bloated list means false positives for every
-            writer using it.
+            A list of the patterns that give a model away goes stale quickly,
+            because the models change and because everyone who publishes such
+            a list is watching a different corner of the internet. So once a
+            week Familiar compares its own list against
+            <a href="https://github.com/blader/humanizer" target="_blank" rel="noopener noreferrer">humanizer</a>,
+            which is the most actively curated one I know of, and opens an
+            issue with anything it does not have yet. Nothing is added
+            automatically. Each pattern lands on its own, with a real example
+            of it in the wild, because a bloated list means false positives
+            for every writer who uses it, and I would sooner miss a tell than
+            flag your best line.
           </p>
         </div>
         <div class="prose">
           <p>
-            The mechanical rules were written for English, and some of them
-            are about English. Dashes, spelling, heading case. Those are marked
-            and skipped when the house language is something else, and a
-            per-language file adds that language's own overused words and
-            tells. There are no language files yet. If you write in something
-            other than English, that pull request is the most useful one you
-            could open.
+            The mechanical rules were written for English, and I have tried to
+            be honest about which of them are really about English and which
+            are about writing. Dashes, spelling, heading case, hyphenated
+            pairs and quotation marks are marked as English, and when your
+            house language is something else they are skipped in favour of a
+            per-language file that carries that language's own overused words
+            and tells. There are no language files yet, because I can only
+            write one of them well. If you write in something other than
+            English, that pull request is the most useful one you could open.
           </p>
         </div>
       </div>
@@ -257,7 +323,7 @@ const refusals = [
     <section class="wrap">
       <div class="rel-close">
         <h2>Free, MIT, and it never sends anything without you.</h2>
-        <p>Clone it, fill in two files, and start with an idea that has been rattling around.</p>
+        <p>Clone it, fill in two files, and start with the idea that has been rattling around.</p>
         <div class="cta-row">
           <a class="btn-primary" href="https://github.com/intentionaut/familiar?utm_source=intentionaut.com&utm_medium=referral&utm_campaign=releases" target="_blank" rel="noopener noreferrer">Visit the repo</a>
           <a class="link-arrow" href="/projects/familiar/">The short version</a>

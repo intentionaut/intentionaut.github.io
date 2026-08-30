@@ -288,6 +288,14 @@
   }
 
 /* Stage tabs */
+.rel-stages-intro {
+  margin-top: var(--space-6);
+  max-width: 68ch;
+}
+.rel-stages-intro p {
+  margin: 0 0 var(--space-4);
+}
+
 .stabs {
   margin-top: var(--space-7);
 }
