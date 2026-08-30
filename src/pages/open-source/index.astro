@@ -1,27 +1,17 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { entries } from '../../data/open-source';
 
-const releases = [
-  {
-    slug: 'familiar',
-    name: 'Familiar',
-    line: 'A companion for your newsletter. Interview, outline, draft, edit and social stages that hand back reports instead of rewrites.',
-    install: 'npx skills add intentionaut/familiar',
-    repo: 'https://github.com/intentionaut/familiar',
-  },
-  {
-    slug: 'kernic',
-    name: 'Kernic',
-    line: 'A CLI that turns a few answers in your terminal into a design system your stack and your AI agent can use.',
-    install: 'npx kernic',
-    repo: 'https://github.com/intentionaut/kernic',
-  },
-];
+const flagship = entries.filter((e) => e.tier === 'flagship');
+const projects = entries.filter((e) => e.tier === 'project');
+const contributions = entries
+  .filter((e) => e.tier === 'contribution')
+  .sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''));
 ---
 
 <BaseLayout
   title="Open source | Saielle DaSilva"
-  description="Open source tools from Intentionaut: the story behind each one, how it works, and what it refuses to do."
+  description="Open source from Intentionaut: the tools I use for my own work, given away, plus smaller projects and contributions to other people's."
 >
   <section class="wrap">
     <header class="page-head">
@@ -29,32 +19,79 @@ const releases = [
       <h1>Tools I use, given away.</h1>
       <p class="lede">
         Everything here started as something I built for my own work and kept
-        using. Free, MIT, built in public. Each page tells the story: where it
-        came from, how it works, what it refuses to do, and what has shipped.
+        using. Free, MIT, built in public. The flagship pages tell the story:
+        where it came from, how it works, what it refuses to do, and what has
+        shipped. The rest are smaller, and still mine.
       </p>
     </header>
 
+    <h2 class="os-tier">Flagship</h2>
     <ol class="release-list">
-      {releases.map((r) => (
+      {flagship.map((r) => (
         <li class="release-card">
           <a class="release-link" href={`/open-source/${r.slug}/`}>
-            <h2>{r.name}</h2>
+            <h3>{r.name}</h3>
             <p>{r.line}</p>
           </a>
           <div class="release-meta">
-            <code>$ {r.install}</code>
+            {r.install && <code>$ {r.install}</code>}
             <a class="link-arrow" href={r.repo} target="_blank" rel="noopener noreferrer">GitHub</a>
           </div>
         </li>
       ))}
     </ol>
+
+    {projects.length > 0 && (
+      <>
+        <h2 class="os-tier">Projects</h2>
+        <ul class="os-list">
+          {projects.map((r) => (
+            <li>
+              <a href={r.repo} target="_blank" rel="noopener noreferrer"><strong>{r.name}</strong></a>
+              <span>{r.line}</span>
+              {r.install && <code>$ {r.install}</code>}
+            </li>
+          ))}
+        </ul>
+      </>
+    )}
+
+    {contributions.length > 0 && (
+      <>
+        <h2 class="os-tier">Contributions</h2>
+        <p class="os-note">Pull requests, patterns and fixes that went into other people's projects.</p>
+        <ul class="os-list">
+          {contributions.map((r) => (
+            <li>
+              <a href={r.repo} target="_blank" rel="noopener noreferrer"><strong>{r.name}</strong></a>
+              {r.to && <em>to {r.to}</em>}
+              <span>{r.line}</span>
+            </li>
+          ))}
+        </ul>
+      </>
+    )}
+
+    <p class="os-note os-foot">
+      Something here saved you an afternoon? <a href="/contact/">Tell me</a>. That
+      is the whole business model.
+    </p>
   </section>
 </BaseLayout>
 
 <style>
+  .os-tier {
+    margin: var(--space-9) 0 var(--space-4);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    font-family: var(--font-body);
+    font-weight: 600;
+  }
   .release-list {
     list-style: none;
-    margin: var(--space-8) 0 var(--space-11);
+    margin: 0;
     padding: 0;
     display: grid;
     gap: var(--space-6);
@@ -71,10 +108,12 @@ const releases = [
     text-decoration: none;
     color: inherit;
   }
-  .release-link h2 {
+  .release-link h3 {
     margin: 0 0 var(--space-2);
+    font-family: var(--font-display);
+    font-size: 1.6rem;
   }
-  .release-link:hover h2 {
+  .release-link:hover h3 {
     color: var(--accent);
   }
   .release-link p {
@@ -89,7 +128,8 @@ const releases = [
     gap: var(--space-4);
     flex-wrap: wrap;
   }
-  .release-meta code {
+  .release-meta code,
+  .os-list code {
     font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
     font-size: 0.85rem;
     color: var(--ink);
@@ -97,5 +137,44 @@ const releases = [
     border: 1px solid var(--line);
     border-radius: var(--radius-m);
     padding: 0.35rem 0.7rem;
+  }
+  .os-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0;
+  }
+  .os-list li {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr) max-content;
+    align-items: baseline;
+    gap: var(--space-4);
+    padding: var(--space-4) 0;
+    border-top: 1px solid var(--line);
+  }
+  .os-list li:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+  .os-list em {
+    color: var(--muted);
+    font-style: normal;
+    font-size: 0.9rem;
+  }
+  .os-list span {
+    color: var(--muted);
+  }
+  .os-note {
+    color: var(--muted);
+    max-width: 62ch;
+  }
+  .os-foot {
+    margin: var(--space-10) 0 var(--space-11);
+  }
+  @media (max-width: 700px) {
+    .os-list li {
+      grid-template-columns: 1fr;
+      gap: var(--space-2);
+    }
   }
 </style>

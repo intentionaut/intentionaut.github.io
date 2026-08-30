@@ -9,7 +9,7 @@ interface Stage {
   name: string;
   cmd: string;
   what: string;
-  out: string;
+  out?: string;
 }
 interface Props {
   id: string;
@@ -51,7 +51,7 @@ const { id, stages, outLabel = 'You get' } = Astro.props;
       </div>
       <code class="stage-cmd">{s.cmd}</code>
       <p>{s.what}</p>
-      <p class="stage-out"><span>{outLabel}</span> {s.out}</p>
+      {s.out && <p class="stage-out"><span>{outLabel}</span> {s.out}</p>}
     </section>
   ))}
 </div>
