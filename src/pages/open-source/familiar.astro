@@ -182,7 +182,7 @@ const stages = [
           and other weeks is a fortnight.
         </p>
       </div>
-      <StageTabs id="familiar" stages={stages} linear />
+      <StageTabs id="familiar" stages={stages} linear revealCount={3} />
     </section>
 
     <section class="wrap rel-log">
@@ -318,3 +318,22 @@ const stages = [
     </section>
   </div>
 </BaseLayout>
+
+<script>
+  const list = document.querySelector<HTMLElement>('[data-stage-list]');
+  if (list) {
+    const reveal = [...list.querySelectorAll(':scope > .stage.is-reveal')];
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          reveal.forEach((el, i) => {
+            setTimeout(() => el.classList.add('is-visible'), i * 110);
+          });
+          io.disconnect();
+        }
+      },
+      { threshold: 0.15 }
+    );
+    io.observe(list);
+  }
+</script>

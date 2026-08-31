@@ -14,6 +14,7 @@ const { project } = Astro.props;
 const { Content } = await render(project);
 
 const host = project.data.url ? new URL(project.data.url).hostname : null;
+const repoHost = project.data.repoUrl ? new URL(project.data.repoUrl).hostname : null;
 ---
 
 <BaseLayout
@@ -60,6 +61,18 @@ const host = project.data.url ? new URL(project.data.url).hostname : null;
           </div>
         )
       }
+      {
+        project.data.repoUrl && (
+          <div>
+            <dt class="meta-label">Source</dt>
+            <dd class="meta-value">
+              <a href={project.data.repoUrl} target="_blank" rel="noopener noreferrer">
+                {project.data.repoLabel ?? repoHost}
+              </a>
+            </dd>
+          </div>
+        )
+      }
       <div class="case-meta-cta">
         <a class="link-arrow link-arrow--back" href="/projects/">All projects</a>
       </div>
@@ -74,6 +87,13 @@ const host = project.data.url ? new URL(project.data.url).hostname : null;
         project.data.url && (
           <a class="btn-primary" href={project.data.url} target="_blank" rel="noopener noreferrer">
             {project.data.ctaLabel ?? `Visit ${host}`}
+          </a>
+        )
+      }
+      {
+        project.data.repoUrl && (
+          <a class="link-arrow" href={project.data.repoUrl} target="_blank" rel="noopener noreferrer">
+            {project.data.repoLabel ?? "View the source"}
           </a>
         )
       }

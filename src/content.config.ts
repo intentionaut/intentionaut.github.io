@@ -63,6 +63,10 @@ const projects = defineCollection({
     url: z.string().url().optional(),
     linkLabel: z.string().optional(),
     ctaLabel: z.string().optional(),
+    // Where the source lives, when a project has a site and a repo. `url` is
+    // the project's own front door; this is the code behind it.
+    repoUrl: z.string().url().optional(),
+    repoLabel: z.string().optional(),
     role: z.string(),
     timeline: z.string().optional(),
     status: z.string().optional(),

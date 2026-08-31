@@ -1,12 +1,14 @@
 ---
 title: Familiar
 summary: A companion for your newsletter. Open source prompts that interview you, propose structures, draft in your voice and hand back editor's reports instead of rewrites. Every stage waits for you.
-url: https://github.com/intentionaut/familiar?utm_source=intentionaut.com&utm_medium=referral&utm_campaign=projects
-linkLabel: GitHub Repo
-ctaLabel: Visit GitHub Repo
+url: https://intentionaut.com/open-source/familiar/?utm_source=intentionaut.com&utm_medium=referral&utm_campaign=projects
+linkLabel: intentionaut.com/open-source/familiar
+ctaLabel: Read the full story
 role: Creator · Maintainer
 status: Open source · MIT
 order: 4
+repoUrl: https://github.com/intentionaut/familiar?utm_source=intentionaut.com&utm_medium=referral&utm_campaign=projects
+repoLabel: GitHub Repo
 ---
 
 ## The Problem

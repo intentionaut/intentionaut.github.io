@@ -21,24 +21,35 @@ interface Props {
   outLabel?: string;
   /** Render as a static linear list (one line per stage) instead of tabs. */
   linear?: boolean;
+  /** In linear mode, apply the reveal animation to the last N stages. */
+  revealCount?: number;
 }
-const { id, stages, outLabel = 'You get', linear = false } = Astro.props;
+const {
+  id,
+  stages,
+  outLabel = 'You get',
+  linear = false,
+  revealCount = 0,
+} = Astro.props;
 ---
 
 {
   linear ? (
-    <ol class="stage-list">
-      {stages.map((s) => (
-        <li class="stage">
-          <span class="stage-n">{s.n}</span>
-          <div class="stage-body">
-            <h3>{s.name}</h3>
-            <code class="stage-cmd">{s.cmd}</code>
-            <p>{s.what}</p>
-            {s.out && <p class="stage-out"><span>{outLabel}</span> {s.out}</p>}
-          </div>
-        </li>
-      ))}
+    <ol class="stage-list" data-stage-list>
+      {stages.map((s, i) => {
+        const reveal = revealCount > 0 && i >= stages.length - revealCount;
+        return (
+          <li class={`stage${reveal ? ' is-reveal' : ''}`}>
+            <span class="stage-n">{s.n}</span>
+            <div class="stage-body">
+              <h3>{s.name}</h3>
+              <code class="stage-cmd">{s.cmd}</code>
+              <p>{s.what}</p>
+              {s.out && <p class="stage-out"><span>{outLabel}</span> {s.out}</p>}
+            </div>
+          </li>
+        );
+      })}
     </ol>
   ) : (
     <div class="stabs" data-stabs>
