@@ -28,7 +28,7 @@
     font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
     font-size: 0.85rem;
     padding: 0.55rem 0.9rem;
-    border: 1px solid var(--line);
+    border: 1px solid var(--slate);
     border-radius: var(--radius-l);
     background: rgba(255, 255, 255, 0.45);
     color: var(--ink);
@@ -99,7 +99,7 @@
   .rel-lang {
     padding-top: var(--space-10);
     padding-bottom: var(--space-10);
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--slate);
   }
   .rel-story-grid {
     display: grid;
@@ -126,7 +126,7 @@
     content: '';
     position: absolute;
     inset: 3px;
-    border: 1px solid var(--line);
+    border: 1px solid var(--slate);
     pointer-events: none;
   }
   .rel-aside dt {
@@ -152,10 +152,10 @@
     grid-template-columns: 4rem minmax(0, 1fr);
     gap: var(--space-6);
     padding: var(--space-7) 0;
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--slate);
   }
   .stage:last-child {
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid var(--slate);
   }.stage-n {
     font-family: var(--font-display);
     font-size: 2rem;
@@ -171,8 +171,8 @@
     font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
     font-size: 0.8rem;
     color: var(--muted);
-    background: var(--line);
-    border: 1px solid var(--line);
+    background: var(--slate);
+    border: 1px solid var(--slate);
     border-radius: var(--radius-m);
     padding: 0.2rem 0.55rem;
     margin-bottom: var(--space-4);
@@ -212,7 +212,7 @@
   }
   .refuse-card {
     padding: var(--space-6);
-    border: 1px solid var(--line);
+    border: 1px solid var(--slate);
     border-radius: var(--radius-l);
     background: rgba(255, 255, 255, 0.4);
   }
@@ -241,7 +241,7 @@
     font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
     font-size: 0.85rem;
     padding: 0.8rem 1rem;
-    border: 1px solid var(--line);
+    border: 1px solid var(--slate);
     border-left: 3px solid var(--accent);
     border-radius: var(--radius-m);
     background: rgba(255, 255, 255, 0.5);
@@ -326,7 +326,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--slate);
   padding-bottom: var(--space-4);
   margin-bottom: var(--space-6);
 }
@@ -352,7 +352,7 @@
 .stab[aria-selected='true'] {
   color: var(--ink);
   background: rgba(255, 255, 255, 0.7);
-  border-color: var(--line);
+  border-color: var(--slate);
 }
 .stab-n {
   font-family: var(--font-display);
@@ -367,7 +367,7 @@
   padding: var(--space-2) 0 var(--space-4);
 }
 .stabs:not(.stabs-js) .stab-panel + .stab-panel {
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--slate);
   padding-top: var(--space-6);
   margin-top: var(--space-4);
 }
@@ -388,7 +388,7 @@
 /* Release log */
 .rlog {
   margin-top: var(--space-7);
-  border: 1px solid var(--line);
+  border: 1px solid var(--slate);
   border-radius: var(--radius-l);
   background: rgba(255, 255, 255, 0.4);
 }
@@ -426,14 +426,14 @@
 }
 .rlog-body {
   padding: 0 var(--space-6) var(--space-6);
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--slate);
 }
 .rlog-entry {
   padding-top: var(--space-6);
 }
 .rlog-entry + .rlog-entry {
   margin-top: var(--space-6);
-  border-top: 1px dashed var(--line);
+  border-top: 1px dashed var(--slate);
 }
 .rlog-entry header {
   display: flex;

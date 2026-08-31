@@ -10,7 +10,7 @@ const palette = [
   { token: '--paper', name: 'Paper', hex: '#f7e9e0', use: 'Base background' },
   { token: '--ink', name: 'Ink', hex: '#38234a', use: 'Primary text' },
   { token: '--muted', name: 'Muted', hex: '#74607b', use: 'Secondary text, captions' },
-  { token: '--line', name: 'Line', hex: '#e0d2cb', use: 'Borders, dividers' },
+  { token: '--slate', name: 'Slate', hex: '#e0d2cb', use: 'Borders, dividers, code blocks' },
   { token: '--accent', name: 'Accent', hex: '#c85060', use: 'Links, emphasis, eyebrows' },
   { token: '--mendl', name: 'Teal wash', hex: 'rgba(169, 203, 208, 0.55)', use: 'Highlights, selection, washes' },
 ];
@@ -212,7 +212,9 @@ const zindex = [
         <h2>The few things that repeat</h2>
         <p class="ds-note">
           The site favours restraint. These appear most: an eyebrow, two kinds of
-          call to action, a pill for command lines, and the double-border card.
+          call to action, a pill and a code block for command lines, a hairline
+          card for asides, and the double-border card for products and rates.
+          Text on a card is ink; only the small labels step down to muted.
         </p>
 
         <h3 class="ds-sub">Eyebrow</h3>
@@ -239,7 +241,33 @@ const zindex = [
         <div class="ds-demo ds-demo-block">
           <span class="pill pill-light"><span class="pill-prompt">$</span> git clone https://github.com/intentionaut/familiar.git</span>
           <p class="ds-demo-caption">
-            Monospace, a prompt marker in accent, and a muted chip behind it.
+            Monospace, a prompt marker in accent, and a slate chip behind it.
+          </p>
+        </div>
+
+        <h3 class="ds-sub">Code block</h3>
+        <div class="ds-demo ds-demo-block">
+          <pre class="ds-code"><span class="t-p">$</span> <span class="t-c">familiar interview</span> "the churn model that kept lying"
+<span class="t-f">Familiar</span>  Start with what happened. When did you first notice.
+<span class="t-y">You</span>       A Tuesday. The model said 4% and finance said 11%.</pre>
+          <pre class="ds-code"><span class="t-p">$</span> git clone https://github.com/intentionaut/familiar.git</pre>
+          <p class="ds-demo-caption">
+            Set on ink with paper text, set on slate with ink text. Monospace via
+            <code>--font-mono</code>. The <code>--slate</code> surface is the same
+            colour as the borders.
+          </p>
+        </div>
+
+        <h3 class="ds-sub">Hairline card</h3>
+        <div class="ds-demo ds-demo-block">
+          <div class="ds-haircard" role="note">
+            <div><span class="ds-haircard-dt">Shape</span><span class="ds-haircard-dd">A gate at every step, each a plain markdown prompt</span></div>
+            <div><span class="ds-haircard-dt">Licence</span><span class="ds-haircard-dd">MIT, free, built in public</span></div>
+          </div>
+          <p class="ds-demo-caption">
+            A single <code>--slate</code> rule, rounded corners, ink text. The
+            small uppercase labels are <code>--muted</code>; the answers stay
+            ink. This is the aside on product pages.
           </p>
         </div>
 
@@ -248,12 +276,17 @@ const zindex = [
           <div class="ds-card">
             <p class="ds-card-title">A double border is a signature</p>
             <p class="ds-card-body">
-              An outer ink rule with a second line rule inset three pixels. Square
-              corners, cream paper behind. It is how products, rates and asides
-              read as one family.
+              An outer ink rule with a second slate rule inset three pixels.
+              Square corners, cream paper behind, text in ink. It is how
+              products, rates and the highlighted aside read as one family.
             </p>
           </div>
         </div>
+        <p class="ds-demo-caption" style="max-width:60ch">
+          Text on any card is <code>--ink</code>. Only the small uppercase
+          group labels step down to <code>--muted</code>; the answers and body
+          stay ink so the card reads as a solid block of readable text.
+        </p>
       </section>
 
       <div class="ds-close">
@@ -282,7 +315,7 @@ const zindex = [
 
   .ds-section {
     padding-block: var(--space-9);
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--slate);
   }
 
   .ds-kicker {
@@ -350,7 +383,7 @@ const zindex = [
     display: block;
     width: 4.5rem;
     height: 4.5rem;
-    border: 1px solid var(--line);
+    border: 1px solid var(--slate);
     border-radius: var(--radius-m);
   }
 
@@ -371,7 +404,7 @@ const zindex = [
     gap: var(--space-6);
     align-items: center;
     padding-block: var(--space-6);
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--slate);
   }
 
   .ds-face-sample {
@@ -408,7 +441,7 @@ const zindex = [
   /* Type scale */
   .ds-scale {
     margin-top: var(--space-4);
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--slate);
   }
 
   .ds-scale-row {
@@ -417,7 +450,7 @@ const zindex = [
     gap: var(--space-6);
     align-items: baseline;
     padding-block: var(--space-4);
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid var(--slate);
   }
 
   .ts-xs { font-size: var(--text-xs); }
@@ -478,7 +511,7 @@ const zindex = [
   .ds-tokens {
     margin-top: var(--space-6);
     max-width: 42rem;
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--slate);
   }
 
   .ds-token-row {
@@ -486,14 +519,14 @@ const zindex = [
     justify-content: space-between;
     gap: var(--space-5);
     padding-block: var(--space-3);
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid var(--slate);
     font-size: 0.9rem;
   }
 
   /* Components */
   .ds-demo {
     padding: var(--space-6);
-    border: 1px solid var(--line);
+    border: 1px solid var(--slate);
     border-radius: var(--radius-l);
     background: rgba(247, 233, 224, 0.5);
   }
@@ -534,7 +567,7 @@ const zindex = [
     content: '';
     position: absolute;
     inset: 3px;
-    border: 1px solid var(--line);
+    border: 1px solid var(--slate);
     pointer-events: none;
   }
 
@@ -552,11 +585,56 @@ const zindex = [
     color: var(--ink);
   }
 
+  .ds-haircard {
+    display: grid;
+    gap: var(--space-4);
+    padding: var(--space-5) var(--space-6);
+    border: 1px solid var(--slate);
+    border-radius: var(--radius-l);
+  }
+
+  .ds-haircard > div {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    gap: var(--space-4);
+    align-items: baseline;
+  }
+
+  .ds-haircard-dt {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+  }
+
+  .ds-haircard-dd {
+    color: var(--ink);
+    font-size: 0.95rem;
+  }
+
+  .ds-code {
+    margin: 0;
+    padding: var(--space-5) var(--space-6);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    line-height: 1.55;
+    white-space: pre;
+    overflow-x: auto;
+    border-radius: var(--radius-l);
+    background: var(--slate);
+    color: var(--ink);
+  }
+
+  .ds-code .t-p { color: var(--accent); }
+  .ds-code .t-c { color: #b0652f; }
+  .ds-code .t-f { color: #2f7e86; font-weight: 600; }
+  .ds-code .t-y { color: #8a5a1f; font-weight: 600; }
+
   /* Close */
   .ds-close {
     max-width: 46ch;
     padding-top: var(--space-9);
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--slate);
   }
 
   .ds-close p {

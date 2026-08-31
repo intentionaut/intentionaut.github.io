@@ -43,7 +43,7 @@
   --paper: #f7e9e0;
   --ink: #38234a;
   --muted: #74607b;
-  --line: #e0d2cb;
+  --slate: #e0d2cb;
   --accent: #c85060;
   --mendl: rgba(169, 203, 208, 0.55);
 
@@ -53,6 +53,7 @@
   --font-body: 'Jost Variable', 'Jost Variable Fallback', Futura,
     'Century Gothic', 'Trebuchet MS',
     sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
   /* Type scale — body baseline is 1.0625rem (17px on a 16px root); sizes below
      are the step values the components settle on, tokenised so the design
@@ -162,7 +163,7 @@ body::before {
 /* ---------- Header ---------- */
 
 .site-header {
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--slate);
 }
 
 .site-header .wrap {
@@ -242,7 +243,7 @@ body::before {
   height: 36px;
   padding: 0 9px;
   background: none;
-  border: 1px solid var(--line);
+  border: 1px solid var(--slate);
   border-radius: var(--radius-s);
   cursor: pointer;
 }
@@ -371,7 +372,7 @@ h3 {
   font-size: 0.95rem;
   letter-spacing: 0.02em;
   text-decoration: none;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--slate);
   padding-bottom: 2px;
   transition: border-color var(--dur-base) ease, color var(--dur-base) ease;
 }
@@ -437,7 +438,7 @@ h3 {
 /* ---------- Manifesto ---------- */
 
 .manifesto {
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--slate);
   padding-block: clamp(3.5rem, 7vw, 5.5rem);
 }
 
@@ -661,7 +662,7 @@ h3 {
   content: '';
   position: absolute;
   inset: 5px;
-  border: 1px solid var(--line);
+  border: 1px solid var(--slate);
   pointer-events: none;
 }
 
@@ -687,7 +688,7 @@ h3 {
 .img-caption a {
   color: var(--muted);
   text-decoration: underline;
-  text-decoration-color: var(--line);
+  text-decoration-color: var(--slate);
   text-underline-offset: 2px;
   transition: color var(--dur-base) ease;
 }
@@ -704,7 +705,7 @@ h3 {
   flex-wrap: wrap;
   gap: var(--space-6) var(--space-9);
   border-top: 1px solid var(--ink);
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--slate);
   padding-block: var(--space-4);
   margin-bottom: clamp(2rem, 4vw, 3rem);
 }
@@ -779,7 +780,7 @@ h3 {
   padding-block: var(--space-7);
   padding-left: var(--space-3);
   padding-right: var(--space-5);
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--slate);
   transition: background-color var(--dur-base) ease;
 }
 
@@ -851,7 +852,7 @@ h3 {
   padding-block: var(--space-6);
   padding-left: var(--space-3);
   padding-right: var(--space-5);
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--slate);
   transition: background-color var(--dur-base) ease;
 }
 
@@ -931,7 +932,7 @@ a.talk-title:hover {
   color: var(--muted);
   padding-block: var(--space-8) var(--space-10);
   margin: 0;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--slate);
 }
 
 /* ---------- 404 ---------- */
@@ -988,7 +989,7 @@ a.talk-title:hover {
   content: '';
   position: absolute;
   inset: 3px;
-  border: 1px solid var(--line);
+  border: 1px solid var(--slate);
   pointer-events: none;
 }
 
@@ -1004,7 +1005,7 @@ a.talk-title:hover {
 /* ---------- Credibility strip ---------- */
 
 .cred-strip {
-  border-block: 1px solid var(--line);
+  border-block: 1px solid var(--slate);
   padding-block: var(--space-6);
 }
 
@@ -1043,7 +1044,7 @@ a.talk-title:hover {
 .signup {
   text-align: center;
   padding-block: var(--space-7);
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--slate);
 }
 
 .signup-form {
@@ -1059,7 +1060,7 @@ a.talk-title:hover {
   padding: var(--space-3) var(--space-4);
   font-family: var(--font-body);
   font-size: 0.95rem;
-  border: 1px solid var(--line);
+  border: 1px solid var(--slate);
   background: var(--paper);
   color: var(--ink);
   border-radius: 0;
@@ -1133,7 +1134,7 @@ a.talk-title:hover {
   text-transform: uppercase;
   color: var(--muted);
   background: var(--paper);
-  border: 1px solid var(--line);
+  border: 1px solid var(--slate);
   border-radius: var(--radius-s);
   padding: 0.6em 1.1em;
   cursor: pointer;
@@ -1175,7 +1176,7 @@ a.talk-title:hover {
 }
 
 .section-rule {
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--slate);
   margin: var(--space-8) 0;
 }
 
@@ -1194,7 +1195,7 @@ a.talk-title:hover {
 .skeleton-date {
   width: 5rem;
   height: 0.85rem;
-  background: var(--line);
+  background: var(--slate);
   border-radius: 2px;
   animation: pulse 1.5s ease-in-out infinite;
 }
@@ -1202,7 +1203,7 @@ a.talk-title:hover {
 .skeleton-title {
   flex: 1;
   height: 1rem;
-  background: var(--line);
+  background: var(--slate);
   border-radius: 2px;
   animation: pulse 1.5s ease-in-out 0.15s infinite;
 }
@@ -1233,7 +1234,7 @@ a.talk-title:hover {
   grid-template-columns: minmax(0, 1fr) auto;
   gap: var(--space-2) var(--space-8);
   padding-block: var(--space-6);
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--slate);
 }
 
 .rate-card {
@@ -1250,7 +1251,7 @@ a.talk-title:hover {
   content: '';
   position: absolute;
   inset: 3px;
-  border: 1px solid var(--line);
+  border: 1px solid var(--slate);
   pointer-events: none;
 }
 
@@ -1322,7 +1323,7 @@ a.talk-title:hover {
   content: '';
   position: absolute;
   inset: 3px;
-  border: 1px solid var(--line);
+  border: 1px solid var(--slate);
   pointer-events: none;
 }
 
@@ -1422,7 +1423,7 @@ a.talk-title:hover {
   color: var(--ink);
   background: transparent;
   border: 0;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--slate);
   padding: var(--space-1) 0;
   border-radius: 0;
 }
@@ -1480,7 +1481,7 @@ a.talk-title:hover {
 /* ---------- Footer ---------- */
 
 .site-footer {
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--slate);
   margin-top: clamp(2rem, 4vw, 3rem);
 }
 
@@ -1562,7 +1563,7 @@ a.talk-title:hover {
     display: none;
     width: 100%;
     padding-block: var(--space-3) var(--space-4);
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--slate);
   }
 
   .menu-open .site-nav {

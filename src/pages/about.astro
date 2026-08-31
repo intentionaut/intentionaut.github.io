@@ -162,7 +162,7 @@ const stats = [
     margin-top: 0;
   }
 
-  /* Break the body into three with hairline keylines (1px var(--line), the
+  /* Break the body into three with hairline keylines (1px var(--slate), the
      site's rule): narrative, "How I work", the ledger. Each line sits roughly
      centred in its gap - margin-top is a step smaller than padding-top to
      offset the ~1.5rem trailing margin of the paragraph above it, and
@@ -178,13 +178,13 @@ const stats = [
   .about-final :global(h2) {
     margin-top: clamp(2rem, 4vw, 3rem);
     padding-top: clamp(3rem, 6vw, 5rem);
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--slate);
   }
 
   .arc-section {
     margin-top: clamp(3rem, 6vw, 5rem);
     padding-top: clamp(3.5rem, 8vw, 6rem);
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--slate);
   }
 
   /* The two-column head only holds together while the headline has room; below
