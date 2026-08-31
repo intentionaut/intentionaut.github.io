@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import '../../styles/release.css';
 import StageTabs from '../../components/StageTabs.astro';
 import ReleaseLog from '../../components/ReleaseLog.astro';
+import ReleaseSubscribe from '../../components/ReleaseSubscribe.astro';
 
 const title = 'Kernic | Design systems for vibe-coded apps';
 const description =
@@ -156,6 +157,10 @@ const refusals = [
       <p class="eyebrow">Activity</p>
       <h2>What has shipped, and when.</h2>
       <ReleaseLog repo="intentionaut/kernic" siteUrl="https://kernic.io/releases" />
+    </section>
+
+    <section class="wrap">
+      <ReleaseSubscribe source="open-source-kernic" tool="Kernic" />
     </section>
 
     <section class="wrap">

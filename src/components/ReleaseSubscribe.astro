@@ -1,0 +1,40 @@
+---
+/**
+ * The letter CTA for /open-source pages: the tools come from the build stories,
+ * the build stories live in the letter. One line of pitch, the inline form.
+ */
+import SubscribeForm from './SubscribeForm.astro';
+
+interface Props {
+  /** utm_source, e.g. "open-source", "open-source-familiar". */
+  source: string;
+  /** Name the tool so the line reads specific, not boilerplate. */
+  tool?: string;
+}
+const { source, tool } = Astro.props;
+const line = tool
+  ? `${tool} exists because of a newsletter. Intentionaut is where the build stories land first: what shipped, what went wrong, and what it cost.`
+  : 'These tools come out of a newsletter. Intentionaut is where the build stories land first: what shipped, what went wrong, and what it cost.';
+---
+
+<aside class="rel-subscribe">
+  <div class="rel-subscribe-inner">
+    <p class="rel-subscribe-line">{line}</p>
+    <SubscribeForm source={source} emailId={`email-${source}`} buttonLabel="Get the letter" />
+  </div>
+</aside>
+
+<style>
+  .rel-subscribe {
+    border-top: 1px solid var(--line);
+    padding: var(--space-9) 0;
+  }
+  .rel-subscribe-inner {
+    max-width: 34rem;
+  }
+  .rel-subscribe-line {
+    margin: 0 0 var(--space-4);
+    color: var(--muted);
+    max-width: 52ch;
+  }
+</style>

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { entries } from '../../data/open-source';
+import ReleaseSubscribe from '../../components/ReleaseSubscribe.astro';
 
 const flagship = entries.filter((e) => e.tier === 'flagship');
 const projects = entries.filter((e) => e.tier === 'project');
@@ -69,6 +70,8 @@ const contributions = entries
         </ul>
       </>
     )}
+
+    <ReleaseSubscribe source="open-source" />
 
     <p class="os-note os-foot">
       Something here saved you an afternoon? <a href="/contact/">Tell me</a>. That
