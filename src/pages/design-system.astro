@@ -520,7 +520,14 @@ const zindex = [
     position: relative;
     padding: var(--space-6);
     border: 1px solid var(--ink);
+  }
+
+  .ds-card::before {
+    content: '';
+    position: absolute;
+    inset: 7px;
     background: var(--mendl);
+    pointer-events: none;
   }
 
   .ds-card::after {
