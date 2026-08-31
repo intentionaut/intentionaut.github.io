@@ -8,17 +8,18 @@ on:
   # Scale/Enterprise only (the API returns 403 ACCESS_FORBIDDEN on this plan),
   # so this is on a schedule instead. Nothing to trigger by hand.
   #
-  # Times are UTC; GitHub cron has no timezone. Every issue so far has sent
-  # between 06:50 and 07:08 UTC, i.e. 08:00 UK time. The 07:20 run catches
-  # that during British Summer Time and the 08:20 run catches it once the
-  # clocks go back, so a new issue is on the site within about twenty minutes
-  # either way. Midday and evening are safety nets for an off-pattern send or
-  # a failed earlier run.
+  # Times are UTC; GitHub cron has no timezone, so the UK clock change matters.
+  # Saielle always publishes before 09:00 UK time, which is 08:00 UTC during
+  # British Summer Time and 09:00 UTC once the clocks go back. So there is a
+  # run after her latest possible publish time in both halves of the year:
+  # 08:20 UTC covers summer, 09:20 UTC covers winter. 07:20 usually catches it
+  # sooner than that, since issues have in practice sent around 07:00 UTC.
+  # Midday and evening are safety nets for a failed earlier run.
   #
-  # Minute 20 rather than 00 on purpose: scheduled runs queue behind everyone
-  # else's on the hour and can be delayed.
+  # Minute 20 rather than 00 on purpose: runs scheduled on the hour queue
+  # behind everyone else's and get delayed.
   schedule:
-    - cron: '20 7,8,12,18 * * *'
+    - cron: '20 7,8,9,12,18 * * *'
   workflow_dispatch:
 
 permissions:
