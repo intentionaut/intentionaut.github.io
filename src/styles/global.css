@@ -54,6 +54,17 @@
     'Century Gothic', 'Trebuchet MS',
     sans-serif;
 
+  /* Type scale — body baseline is 1.0625rem (17px on a 16px root); sizes below
+     are the step values the components settle on, tokenised so the design
+     system page and any new surface can reference one source of truth. */
+  --text-xs: 0.75rem;    /* 12 */
+  --text-sm: 0.92rem;    /* 14.7 - captions, meta */
+  --text-base: 1.0625rem;/* 17 - body */
+  --text-md: 1.25rem;    /* 20 - lede, subheads */
+  --text-lg: 1.5rem;     /* 24 - section headings */
+  --text-xl: 2rem;       /* 32 - page headings */
+  --text-display: clamp(2.55rem, 6vw, 4.6rem);
+
   /* Layout */
   --wrap: 72rem;
 

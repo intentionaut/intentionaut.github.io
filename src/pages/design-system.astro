@@ -1,0 +1,584 @@
+---
+import '@fontsource-variable/fraunces';
+import '@fontsource-variable/fraunces/wght-italic.css';
+import '@fontsource-variable/jost';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const updated = '31 August 2026';
+
+const palette = [
+  { token: '--paper', name: 'Paper', hex: '#f7e9e0', use: 'Base background' },
+  { token: '--ink', name: 'Ink', hex: '#38234a', use: 'Primary text' },
+  { token: '--muted', name: 'Muted', hex: '#74607b', use: 'Secondary text, captions' },
+  { token: '--line', name: 'Line', hex: '#e0d2cb', use: 'Borders, dividers' },
+  { token: '--accent', name: 'Accent', hex: '#c85060', use: 'Links, emphasis, eyebrows' },
+  { token: '--mendl', name: 'Teal wash', hex: 'rgba(169, 203, 208, 0.55)', use: 'Highlights, selection, washes' },
+];
+
+const typeScale = [
+  { token: '--text-xs', size: '0.75rem', sample: 'Captions and meta', cls: 'ts-xs' },
+  { token: '--text-sm', size: '0.92rem', sample: 'Meta, footnotes', cls: 'ts-sm' },
+  { token: '--text-base', size: '1.0625rem', sample: 'Body text', cls: 'ts-base' },
+  { token: '--text-md', size: '1.25rem', sample: 'Ledes, subheads', cls: 'ts-md' },
+  { token: '--text-lg', size: '1.5rem', sample: 'Section headings', cls: 'ts-lg' },
+  { token: '--text-xl', size: '2rem', sample: 'Page headings', cls: 'ts-xl' },
+];
+
+const spacing = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((i) => ({
+  step: i,
+  token: `--space-${i}`,
+  px: 4 * i,
+}));
+
+const radii = [
+  { token: '--radius-s', value: '3px' },
+  { token: '--radius-m', value: '5px' },
+  { token: '--radius-l', value: '8px' },
+];
+
+const motion = [
+  { token: '--dur-fast', value: '0.15s' },
+  { token: '--dur-base', value: '0.2s' },
+  { token: '--dur-med', value: '0.25s' },
+  { token: '--dur-slow', value: '0.4s' },
+  { token: '--ease-out', value: 'cubic-bezier(0.2, 0.6, 0.2, 1)' },
+];
+
+const zindex = [
+  { token: '--z-tip', value: '20' },
+  { token: '--z-grain', value: '100' },
+  { token: '--z-skip', value: '200' },
+];
+---
+
+<BaseLayout
+  title="Design system | Saielle DaSilva"
+  description="The design system behind intentionaut.com: colour, type, spacing, radius, motion, and the components they compose."
+>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Design system</p>
+      <h1>The parts this site is built from.</h1>
+      <p class="lede">
+        Not a mandate for everyone else, just an honest index of the choices
+        already in the CSS. Colour, type, spacing, radius, motion, and the handful
+        of components they compose. Odd numbers stay odd. Things are softer than
+        they look.
+      </p>
+      <p class="article-meta">Living document · updated {updated}</p>
+    </header>
+
+    <div class="ds-index">
+      <section class="ds-section" id="palette">
+        <p class="ds-kicker">Foundations</p>
+        <h2>Colour</h2>
+        <p class="ds-note">
+          Warm paper and plum ink, set off by a coral that does the pointing. The
+          teal never appears at full strength; it reads as a wash.
+        </p>
+        <div class="ds-swatches">
+          {palette.map((c) => (
+            <div class="ds-swatch">
+              <span class="ds-chip" style={`background: var(${c.token})`}></span>
+              <div class="ds-swatch-meta">
+                <strong>{c.name}</strong>
+                <code>{c.token}</code>
+                <span class="ds-muted">{c.use}</span>
+                <span>{c.hex}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="ds-section" id="type">
+        <p class="ds-kicker">Foundations</p>
+        <h2>Type</h2>
+        <p class="ds-note">
+          Fraunces sets the voice, Jost does the work. Letters are set tight, a
+          touch tighter than the browser would choose, and lines stay generous.
+        </p>
+
+        <div class="ds-type-face">
+          <div class="ds-face-sample ds-face-display">
+            Abcdefghijklmnopqrstuvwxyz
+            <br />ABCDEFGHIJKLMNOPQRSTUVWXYZ
+          </div>
+          <div class="ds-face-meta">
+            <strong>Fraunces</strong>
+            <code>--font-display</code>
+            <span class="ds-muted">Display and headings, weight 460–560, italic for pull quotes and asides</span>
+          </div>
+        </div>
+
+        <div class="ds-type-face">
+          <div class="ds-face-sample ds-face-body">
+            Abcdefghijklmnopqrstuvwxyz
+            <br />ABCDEFGHIJKLMNOPQRSTUVWXYZ
+          </div>
+          <div class="ds-face-meta">
+            <strong>Jost</strong>
+            <code>--font-body</code>
+            <span class="ds-muted">Body, labels, eyebrows. Upper case and letter-spaced for chrome</span>
+          </div>
+        </div>
+
+        <h3 class="ds-sub">Type scale</h3>
+        <div class="ds-scale">
+          {typeScale.map((s) => (
+            <div class="ds-scale-row">
+              <div class={`ds-scale-sample ${s.cls}`}>{s.sample}</div>
+              <code>{s.token}</code>
+              <code>{s.size}</code>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="ds-section" id="spacing">
+        <p class="ds-kicker">Foundations</p>
+        <h2>Spacing</h2>
+        <p class="ds-note">
+          A 4px base grid on an 8pt rhythm: every step multiplies four. Odd sizes
+          are rare; when they appear they are for optical correction only.
+        </p>
+        <div class="ds-spacing">
+          {spacing.map((s) => (
+            <div class="ds-space-row">
+              <code>--space-{s.step}</code>
+              <span class="ds-space-rule" style={`width: ${s.px}px`}></span>
+              <div class="ds-space-meta">
+                {s.px}px / {s.px / 16}rem
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="ds-section" id="radius">
+        <p class="ds-kicker">Foundations</p>
+        <h2>Radius</h2>
+        <p class="ds-note">
+          Square is part of the identity. The few corners that round do so a
+          little, and never far.
+        </p>
+        <div class="ds-radii">
+          {radii.map((r) => (
+            <div class="ds-radius">
+              <span
+                class="ds-radius-shape"
+                style={`border-radius: var(${r.token})`}
+              ></span>
+              <code>{r.token}</code>
+              <span class="ds-muted">{r.value}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="ds-section" id="motion">
+        <p class="ds-kicker">Foundations</p>
+        <h2>Motion</h2>
+        <p class="ds-note">
+          Short, restrained, and it always yields to
+          <code>prefers-reduced-motion</code>. Rise from below, never from the
+          sides.
+        </p>
+        <div class="ds-tokens">
+          {motion.map((m) => (
+            <div class="ds-token-row">
+              <code>{m.token}</code>
+              <span>{m.value}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="ds-section" id="layer">
+        <p class="ds-kicker">Foundations</p>
+        <h2>Layer order</h2>
+        <div class="ds-tokens">
+          {zindex.map((z) => (
+            <div class="ds-token-row">
+              <code>{z.token}</code>
+              <span>{z.value}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="ds-section" id="components">
+        <p class="ds-kicker">Components</p>
+        <h2>The few things that repeat</h2>
+        <p class="ds-note">
+          The site favours restraint. These appear most: an eyebrow, two kinds of
+          call to action, a pill for command lines, and the double-border card.
+        </p>
+
+        <h3 class="ds-sub">Eyebrow</h3>
+        <div class="ds-demo ds-demo-block">
+          <p class="eyebrow">What follows</p>
+          <p class="ds-demo-caption">
+            <code>0.78rem</code> Jost, weight 600, <code>0.18em</code> tracking,
+            <code>--accent</code>. The small label that opens a section.
+          </p>
+        </div>
+
+        <h3 class="ds-sub">Buttons</h3>
+        <div class="ds-demo ds-demo-row">
+          <button type="button" class="btn-primary">Primary action</button>
+          <a class="link-arrow" href="#components"><span>Text link with arrow</span></a>
+        </div>
+        <p class="ds-note">
+          <code>.btn-primary</code> fills with <code>--accent</code> on hover and
+          carries a hairline inset. <code>.link-arrow</code> uses a thin rule that
+          turns accent and nudges the arrow forward.
+        </p>
+
+        <h3 class="ds-sub">Command pill</h3>
+        <div class="ds-demo ds-demo-block">
+          <span class="pill pill-light"><span class="pill-prompt">$</span> git clone https://github.com/intentionaut/familiar.git</span>
+          <p class="ds-demo-caption">
+            Monospace, a prompt marker in accent, and a muted chip behind it.
+          </p>
+        </div>
+
+        <h3 class="ds-sub">Card</h3>
+        <div class="ds-demo ds-demo-block">
+          <div class="ds-card">
+            <p class="ds-card-title">A double border is a signature</p>
+            <p class="ds-card-body">
+              An outer ink rule with a second line rule inset three pixels. Square
+              corners, cream paper behind. It is how products, rates and asides
+              read as one family.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div class="ds-close">
+        <h2>That is most of it.</h2>
+        <p>
+          Everything here is plain CSS variables in
+          <code>src/styles/global.css</code>. If you are building with it and
+          something feels off, that is a useful signal, not a bug. Write to
+          <a href="mailto:hello@intentionaut.com">hello@intentionaut.com</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .article-meta {
+    margin-top: var(--space-4);
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .ds-index {
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+  }
+
+  .ds-section {
+    padding-block: var(--space-9);
+    border-top: 1px solid var(--line);
+  }
+
+  .ds-kicker {
+    margin: 0 0 var(--space-2);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .ds-section h2 {
+    margin: 0;
+    max-width: 22ch;
+  }
+
+  .ds-sub {
+    margin: var(--space-7) 0 var(--space-5);
+    font-size: 1rem;
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  .ds-note {
+    max-width: 60ch;
+    color: var(--muted);
+  }
+
+  .ds-note code,
+  .ds-demo-caption code,
+  .ds-close code {
+    font-size: 0.9em;
+    color: var(--ink);
+    background: rgba(56, 35, 74, 0.06);
+    padding: 0.05em 0.35em;
+    border-radius: 3px;
+  }
+
+  .ds-index code {
+    font-family: 'SFMono-Regular', ui-monospace, 'Roboto Mono', Menlo, monospace;
+    font-size: 0.78rem;
+  }
+
+  .ds-muted {
+    color: var(--muted);
+    font-size: 0.88rem;
+  }
+
+  /* Palette */
+  .ds-swatches {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-5);
+    margin-top: var(--space-7);
+  }
+
+  .ds-swatch {
+    display: grid;
+    grid-template-columns: 4.5rem 1fr;
+    gap: var(--space-4);
+    align-items: start;
+  }
+
+  .ds-chip {
+    display: block;
+    width: 4.5rem;
+    height: 4.5rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-m);
+  }
+
+  .ds-swatch-meta {
+    display: grid;
+    gap: 0.15rem;
+  }
+
+  .ds-swatch-meta strong {
+    font-family: var(--font-display);
+    font-weight: 560;
+    font-size: 1.05rem;
+  }
+
+  /* Type */
+  .ds-type-face {
+    display: flex;
+    gap: var(--space-6);
+    align-items: center;
+    padding-block: var(--space-6);
+    border-top: 1px solid var(--line);
+  }
+
+  .ds-face-sample {
+    flex: 0 1 auto;
+    font-size: 1.35rem;
+    line-height: 1.35;
+    min-width: 24ch;
+  }
+
+  .ds-face-display {
+    font-family: var(--font-display);
+    font-weight: 520;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+
+  .ds-face-body {
+    font-family: var(--font-body);
+    font-weight: 400;
+    color: var(--ink);
+  }
+
+  .ds-face-meta {
+    display: grid;
+    gap: 0.15rem;
+  }
+
+  .ds-face-meta strong {
+    font-family: var(--font-display);
+    font-weight: 560;
+    font-size: 1.1rem;
+  }
+
+  /* Type scale */
+  .ds-scale {
+    margin-top: var(--space-4);
+    border-top: 1px solid var(--line);
+  }
+
+  .ds-scale-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) auto auto;
+    gap: var(--space-6);
+    align-items: baseline;
+    padding-block: var(--space-4);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .ts-xs { font-size: var(--text-xs); }
+  .ts-sm { font-size: var(--text-sm); }
+  .ts-base { font-size: var(--text-base); }
+  .ts-md { font-size: var(--text-md); }
+  .ts-lg { font-size: var(--text-lg); }
+  .ts-xl { font-size: var(--text-xl); }
+
+  /* Spacing */
+  .ds-spacing {
+    margin-top: var(--space-7);
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .ds-space-row {
+    display: grid;
+    grid-template-columns: 7rem 1fr 7rem;
+    gap: var(--space-5);
+    align-items: center;
+  }
+
+  .ds-space-rule {
+    display: block;
+    height: 1.5rem;
+    background: var(--mendl);
+    max-width: 100%;
+  }
+
+  .ds-space-meta {
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+
+  /* Radius */
+  .ds-radii {
+    display: flex;
+    gap: var(--space-8);
+    margin-top: var(--space-7);
+  }
+
+  .ds-radius {
+    display: grid;
+    gap: var(--space-3);
+    justify-items: start;
+  }
+
+  .ds-radius-shape {
+    display: block;
+    width: 5rem;
+    height: 5rem;
+    border: 1px solid var(--ink);
+    background: var(--paper);
+  }
+
+  /* Motion + layer */
+  .ds-tokens {
+    margin-top: var(--space-6);
+    max-width: 42rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .ds-token-row {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-5);
+    padding-block: var(--space-3);
+    border-bottom: 1px solid var(--line);
+    font-size: 0.9rem;
+  }
+
+  /* Components */
+  .ds-demo {
+    padding: var(--space-6);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-l);
+    background: rgba(247, 233, 224, 0.5);
+  }
+
+  .ds-demo-block {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .ds-demo-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-7);
+    align-items: center;
+  }
+
+  .ds-demo-caption {
+    margin: 0;
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+
+  .ds-card {
+    position: relative;
+    padding: var(--space-6);
+    border: 1px solid var(--ink);
+    background: var(--mendl);
+  }
+
+  .ds-card::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border: 1px solid var(--line);
+    pointer-events: none;
+  }
+
+  .ds-card-title {
+    margin: 0 0 var(--space-3);
+    font-family: var(--font-display);
+    font-weight: 560;
+    font-size: 1.15rem;
+  }
+
+  .ds-card-body {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+
+  /* Close */
+  .ds-close {
+    max-width: 46ch;
+    padding-top: var(--space-9);
+    border-top: 1px solid var(--line);
+  }
+
+  .ds-close p {
+    color: var(--muted);
+  }
+
+  .ds-close a {
+    color: var(--accent);
+  }
+
+  @media (max-width: 720px) {
+    .ds-swatches {
+      grid-template-columns: 1fr;
+    }
+    .ds-type-face {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .ds-scale-row {
+      grid-template-columns: 1fr auto;
+    }
+    .ds-scale-row code:nth-child(3) {
+      display: none;
+    }
+    .ds-space-row {
+      grid-template-columns: 6rem 1fr;
+    }
+    .ds-space-meta {
+      grid-column: 2;
+    }
+  }
+</style>
