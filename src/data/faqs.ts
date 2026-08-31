@@ -37,7 +37,7 @@ export const faqs: Faq[] = [
   },
   {
     question: 'What is your day rate for forward deployed product building?',
-    answer: `${gbp(rates.forwardDeployed)} a day, three days a week, six weeks minimum. It starts with a five-day scoping block at ${gbp(rates.scopingBlock)}, which is the fractional rate rather than this one. Where an advisor or recruiter introduces the work, their margin sits on top of that rate rather than inside it.`,
+    answer: `${gbp(rates.forwardDeployed)} a day, three days a week, four weeks minimum. It starts with a five-day scoping block at ${gbp(rates.scopingBlock)}, which is the fractional rate rather than this one. Where an advisor or recruiter introduces the work, their margin sits on top of that rate rather than inside it.`,
   },
   {
     question: 'What is the difference between fractional leadership and forward deployed product building?',
@@ -117,7 +117,7 @@ export const faqs: Faq[] = [
 export const forwardDeployedFaqs: Faq[] = [
   {
     question: 'What does it cost?',
-    answer: `${gbp(rates.forwardDeployed)} a day, three days a week, six weeks minimum. Before that, a five-day scoping block at ${gbp(rates.scopingBlock)}, which is my standard fractional rate rather than this one. An eight-week block at three days a week comes to £42,000 plus the scoping. Where an advisor or recruiter introduces the work, their margin sits on top of my rate rather than inside it.`,
+    answer: `${gbp(rates.forwardDeployed)} a day, three days a week, four weeks minimum. Before that, a five-day scoping block at ${gbp(rates.scopingBlock)}, which is my standard fractional rate rather than this one. Four weeks at three days a week is £21,000; eight weeks is £42,000, plus the scoping either way. Where an advisor or recruiter introduces the work, their margin sits on top of my rate rather than inside it.`,
   },
   {
     question: 'What is the most complex thing you have personally built, not advised on?',
@@ -162,7 +162,9 @@ export const forwardDeployedFaqs: Faq[] = [
   {
     question: 'Does this put us inside IR35?',
     answer:
-      'The determination is yours to make, and I am not going to tell you what it will say. What I can tell you is how the engagement is built: a defined deliverable rather than a block of my time, three days a week rather than four or five, my own method and my own equipment, and other clients running alongside where possible. Ask your own adviser, and ask early, because the answer may change the shape we agree.',
+      `That depends partly on how big you are. If you are a small company under the Companies Act tests, the off-payroll rules do not apply to you, and the status determination is mine to make rather than yours. Above that threshold it is yours. Either way, ask your adviser early, because the answer can change the shape we agree.
+
+What I can tell you is how I work: my own method, my own equipment, other clients running alongside, and a scope written around what gets built. The day rate is how we price the work. It is not what you are buying.`,
   },
   {
     question: 'How is this different from your fractional leadership?',

@@ -30,7 +30,7 @@ const faqSchema = {
   mainEntity: forwardDeployedFaqs.map((f) => ({
     '@type': 'Question',
     name: f.question,
-    acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    acceptedAnswer: { '@type': 'Answer', text: f.answer.replace(/\s+/g, ' ').trim() },
   })),
 };
 ---
@@ -107,7 +107,7 @@ const faqSchema = {
         and whether it is me you need. You can stop there. Some people should.
       </p>
       <p>
-        Then a block of six to twelve weeks, three days a week, at
+        Then a block of four to twelve weeks, three days a week, at
         {' '}{gbp(rates.forwardDeployed)} a day. Four days a week is possible
         at the same daily rate, though three is the default. The day away is
         where the thinking happens.

@@ -62,7 +62,7 @@ shipped artefacts. **It half holds.** The correction matters.
 | Axis | Fractional & interim | Forward Deployed Product Builder |
 |---|---|---|
 | What the client is buying | A senior product owner in the room. Judgement, direction, someone accountable when it is unclear what to do. | A working prototype of the thing they cannot yet describe, plus the conversation that makes them able to describe it. |
-| Time shape and intensity | One or two days a week, three months minimum, open-ended rhythm. | Three days a week default, four by exception, six to twelve weeks, fixed start and stop. |
+| Time shape and intensity | One or two days a week, three months minimum, open-ended rhythm. | Three days a week default, four by exception, four to twelve weeks, fixed start and stop. |
 | Who does the hands-on work | The client's team. Saielle leads and decides. | Saielle. In their repo, their stack, their data. The team works alongside, not underneath. |
 | What exists at the end that did not before | A functioning team, an operating model, decisions that do not need relitigating. | Working software, sometimes ready for a team to take over, and a written record of what it proved and what it did not. |
 | Decision rights | Executive authority. Leads the team, makes strategic calls, owns delivery. | Deliberately less. Facilitates the team to its own intent, then builds against it. Saielle decides how to build, not what the business should want. |
@@ -148,11 +148,14 @@ attached.
   objections at once, reversibility and proof, and it is how the premium on
   the main block gets earned rather than asserted. Lands at 12.5 per cent of a
   typical total, inside the 8 to 15 per cent discovery convention.
-- **Main block: six to twelve weeks, three days a week.** Eight weeks at three
+- **Main block: four to twelve weeks, three days a week.** Eight weeks at three
   days is £42,000. Four days a week is available and priced the same per day,
   with the IR35 caveat below.
-- **Minimums:** three days a week, six weeks. Below that this is a strategy
-  session or fractional, not this.
+- **Minimums:** three days a week, four weeks. Four weeks at three days is
+  £21,000, so with scoping the smallest realistic engagement is £27,000.
+  Lowered from six weeks on 31 Aug: with no case study yet, a smaller first
+  cheque is easier to say yes to, and the scoping block already carries the
+  risk. Below four weeks this is a strategy session or fractional, not this.
 - **Fallback:** if the market resists at £1,750, drop to £1,500 before
   dropping the shape. The shape is the product.
 
@@ -171,8 +174,14 @@ What follows for the offering: keep three days the default, contract on a
 defined deliverable rather than on time, retain freedom over method, and keep
 a second client running where possible. **This needs an accountant or IR35
 specialist to confirm before any of it is stated as fact on a public page.**
-The pages as drafted make no IR35 claim; the FAQ acknowledges the question and
-says the determination is the client's to make.
+The pages make no IR35 claim of their own. The FAQ says who holds the
+determination, and that turns on client size: small companies under the
+Companies Act tests are outside the off-payroll rules entirely, so the
+determination falls back to Saielle's own company. The thresholds rose on
+6 April 2026 to turnover under £15m, balance sheet under £7.5m and 50 or fewer
+employees, which puts a large share of the target buyers in "small". An
+earlier version of the FAQ said the determination was always the client's.
+That was wrong and is corrected.
 
 ## Proof
 

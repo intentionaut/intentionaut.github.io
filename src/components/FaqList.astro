@@ -29,7 +29,9 @@ const { items, heading = 'Fair questions.', sub } = Astro.props;
           <details class="faq-item">
             <summary>{f.question}</summary>
             <div class="faq-body">
-              <p>{f.answer}</p>
+              {f.answer.split(/\n\s*\n/).map((para) => (
+                <p>{para.trim()}</p>
+              ))}
             </div>
           </details>
         ))}
