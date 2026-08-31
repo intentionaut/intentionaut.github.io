@@ -29,5 +29,6 @@ Familiar is what makes Intentionaut. Every issue of the letter goes through it, 
 
 The longer story, with how a piece moves from a question to something sent, and what Familiar refuses to do, is at [intentionaut.com/open-source/familiar](/open-source/familiar/).
 
+## Why it matters to you
 
 A newsletter is worth reading when it sounds like a person who knows something. The fastest way to lose that is to let a model fill the gaps. Familiar keeps the gaps visible and the decisions yours, and it gets better at your voice the more you publish. Free, MIT, and built in public. If you write in a language other than English, the language files are where a pull request helps most.
