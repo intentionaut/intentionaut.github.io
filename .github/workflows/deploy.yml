@@ -9,17 +9,27 @@ on:
   # so this is on a schedule instead. Nothing to trigger by hand.
   #
   # Times are UTC; GitHub cron has no timezone, so the UK clock change matters.
-  # Saielle always publishes before 09:00 UK time, which is 08:00 UTC during
-  # British Summer Time and 09:00 UTC once the clocks go back. So there is a
-  # run after her latest possible publish time in both halves of the year:
-  # 08:20 UTC covers summer, 09:20 UTC covers winter. 07:20 usually catches it
-  # sooner than that, since issues have in practice sent around 07:00 UTC.
-  # Midday and evening are safety nets for a failed earlier run.
   #
-  # Minute 20 rather than 00 on purpose: runs scheduled on the hour queue
-  # behind everyone else's and get delayed.
+  # Saielle aims to send between 06:30 and 07:30 UK time, to catch the commute.
+  # Actual sends have landed a little later, clustering 07:45 to 08:10 local.
+  # These four morning runs cover the union of both, in summer and winter:
+  #
+  #        UTC     BST local    GMT local
+  #        05:50   06:50        05:50
+  #        06:50   07:50        06:50
+  #        07:50   08:50        07:50
+  #        08:50   09:50        08:50
+  #
+  # So whatever hour inside 06:30 to 08:10 local an issue actually sends, in
+  # either half of the year, a build follows within about forty-five minutes
+  # and usually much less. Midday and evening catch an off-pattern send or
+  # recover a failed morning run.
+  #
+  # Minute 50 and 20 rather than 00 on purpose: runs scheduled on the hour
+  # queue behind everyone else's and get delayed.
   schedule:
-    - cron: '20 7,8,9,12,18 * * *'
+    - cron: '50 5,6,7,8 * * *'
+    - cron: '20 12,18 * * *'
   workflow_dispatch:
 
 permissions:
