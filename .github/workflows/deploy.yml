@@ -10,26 +10,23 @@ on:
   #
   # Times are UTC; GitHub cron has no timezone, so the UK clock change matters.
   #
-  # Saielle aims to send between 06:30 and 07:30 UK time, to catch the commute.
-  # Actual sends have landed a little later, clustering 07:45 to 08:10 local.
-  # These four morning runs cover the union of both, in summer and winter:
+  # Saielle's default send time is 06:40 UK. That is 05:40 UTC during British
+  # Summer Time and 06:40 UTC once the clocks go back, so the two morning runs
+  # sit fifteen minutes after it in each half of the year:
   #
   #        UTC     BST local    GMT local
-  #        05:50   06:50        05:50
-  #        06:50   07:50        06:50
-  #        07:50   08:50        07:50
-  #        08:50   09:50        08:50
+  #        05:55   06:55  <-    05:55
+  #        06:55   07:55        06:55  <-
   #
-  # So whatever hour inside 06:30 to 08:10 local an issue actually sends, in
-  # either half of the year, a build follows within about forty-five minutes
-  # and usually much less. Midday and evening catch an off-pattern send or
-  # recover a failed morning run.
+  # A new issue is therefore on the site, and in the sitemap, about a quarter
+  # of an hour after it lands in inboxes. The 09:20 run catches an issue sent
+  # later than usual; 18:20 recovers a failed morning run.
   #
-  # Minute 50 and 20 rather than 00 on purpose: runs scheduled on the hour
+  # Minute 55 and 20 rather than 00 on purpose: runs scheduled on the hour
   # queue behind everyone else's and get delayed.
   schedule:
-    - cron: '50 5,6,7,8 * * *'
-    - cron: '20 12,18 * * *'
+    - cron: '55 5,6 * * *'
+    - cron: '20 9,18 * * *'
   workflow_dispatch:
 
 permissions:
