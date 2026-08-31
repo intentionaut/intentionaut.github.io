@@ -70,7 +70,7 @@ Every link added, with the paragraph it sits in and its exact anchor text.
 | From | Anchor text | Where | Status |
 |---|---|---|---|
 | `/contact/` | the rate card itself | Rate card 2 of 5 | **Done** |
-| `/fractional/` | forward deployed product building | New closing paragraph under "How it works": the reader who wants building rather than leadership | **Not done.** Needs Saielle's sign-off, because it puts a competing option on her main money page. Recommended, but her call. |
+| `/fractional/` | forward deployed product building | Closing paragraph of the prose, after the handover sentence: "Sometimes what is missing is not direction but a working version of the idea, quickly." | **Done**, 31 Aug, on Saielle's instruction. The routing is now bidirectional. |
 | `/projects/familiar/` | (see linking decision below) | | Not done |
 
 ## 3. The "Taking a spell" link, and why it only runs one way
