@@ -3,6 +3,13 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  # The site pulls beehiiv at build time, so a post published on beehiiv does
+  # not appear at /writing/<slug>/ until a build runs. beehiiv webhooks are
+  # Scale/Enterprise only (the API returns 403 ACCESS_FORBIDDEN on this plan),
+  # so this rebuilds every six hours instead. New issues go live, and become
+  # indexable, without anyone having to remember to do anything.
+  schedule:
+    - cron: '0 */6 * * *'
   workflow_dispatch:
 
 permissions:

@@ -70,8 +70,25 @@ function stripBeehiivHtml(html: string): string {
   return content.trim();
 }
 
+/**
+ * Every essay's only indexable copy lives at /writing/<slug>/, built from this
+ * fetch. So an empty result is never a safe default in a real build: it would
+ * publish a site with no archive, drop ~24 URLs out of the sitemap, and 404
+ * every essay Google already knows about. Nobody would see it happen, because
+ * the build runs on a schedule.
+ *
+ * So: return [] only where an empty archive is genuinely expected (a local dev
+ * run with no key). Anywhere else, throw. A failed build keeps the last good
+ * site live and sends a failure notification, which is the outcome we want.
+ */
 export async function fetchPosts(): Promise<BeehiivPost[]> {
   if (!API_KEY) {
+    if (import.meta.env.PROD) {
+      throw new Error(
+        'BEEHIIV_API_KEY is not set. Refusing to build a production site with an ' +
+          'empty /writing archive. Check the repository secret.'
+      );
+    }
     console.warn('BEEHIIV_API_KEY not set; skipping post fetch.');
     return [];
   }
@@ -82,8 +99,10 @@ export async function fetchPosts(): Promise<BeehiivPost[]> {
   );
 
   if (!res.ok) {
-    console.error(`beehiiv API error: ${res.status}`);
-    return [];
+    throw new Error(
+      `beehiiv API returned ${res.status}. Refusing to build with an empty ` +
+        '/writing archive; the previous deploy stays live.'
+    );
   }
 
   const { data } = await res.json();
