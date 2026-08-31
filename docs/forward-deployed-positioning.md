@@ -15,10 +15,15 @@ facilitation and part building: get the team to say what they actually intend,
 then build a working proof of concept against it, in their stack, with their
 data, while they watch.
 
-The artefact at the end is **a working proof of concept, not production
-software**. Every page says this in plain words. Overclaiming here would fail
-on first contact with a technical buyer, and it would contradict the ethic in
-"Taking a spell", which is the piece that makes this offering legible.
+The artefact at the end is **working software, and how far it goes depends on
+the problem**. Where the hard part was the unknown rather than the
+engineering, a block can end with something a team takes over and runs. Where
+the unknown is the whole thing, it ends with something that works and answers
+the question, and should be rebuilt before it carries customers. The pages say
+this range in plain words and promise the client will know which one they are
+getting by about week two. Capping it at "proof of concept" undersold it;
+promising production software every time would fail on first contact with a
+technical buyer.
 
 ## Who is buying
 
@@ -59,9 +64,9 @@ shipped artefacts. **It half holds.** The correction matters.
 | What the client is buying | A senior product owner in the room. Judgement, direction, someone accountable when it is unclear what to do. | A working prototype of the thing they cannot yet describe, plus the conversation that makes them able to describe it. |
 | Time shape and intensity | One or two days a week, three months minimum, open-ended rhythm. | Three days a week default, four by exception, six to twelve weeks, fixed start and stop. |
 | Who does the hands-on work | The client's team. Saielle leads and decides. | Saielle. In their repo, their stack, their data. The team works alongside, not underneath. |
-| What exists at the end that did not before | A functioning team, an operating model, decisions that do not need relitigating. | A proof of concept that runs, and a written record of what it proved and what it did not. |
+| What exists at the end that did not before | A functioning team, an operating model, decisions that do not need relitigating. | Working software, sometimes ready for a team to take over, and a written record of what it proved and what it did not. |
 | Decision rights | Executive authority. Leads the team, makes strategic calls, owns delivery. | Deliberately less. Facilitates the team to its own intent, then builds against it. Saielle decides how to build, not what the business should want. |
-| Exit condition | The operating model runs without her. | The prototype exists and the team can carry it, extend it, or bin it on evidence. |
+| Exit condition | The operating model runs without her. | The software exists and the team can take it over, extend it, or bin it on evidence. |
 
 **Where the hypothesis was wrong.** `/fractional` already claims delivery
 accountability, in those words. So the line is not "advises versus delivers".
@@ -76,9 +81,10 @@ than narrowing it.
 Five principles. Each names a trade-off actually accepted. Each reverses into
 something a reasonable person sells, which is how you know it is choosing.
 
-1. **A rough thing that runs, even over a polished thing that does not.**
-   Accepts: what you get has edges, no test suite worth the name, and code
-   nobody should ship to customers without rewriting.
+1. **A thing that runs, even over a thing that is finished.**
+   Accepts: the block ends on its date whatever state the work is in, and
+   sometimes that state is a prototype to learn from rather than software to
+   run. Said out loud in week two, not at the end.
 
 2. **Your environment, even over my convenience.**
    Accepts: slow starts, access requests, security review, and days spent on

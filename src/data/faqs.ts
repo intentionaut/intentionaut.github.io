@@ -30,7 +30,7 @@ export const faqs: Faq[] = [
   {
     question: 'What is the difference between fractional leadership and forward deployed product building?',
     answer:
-      'Fractional leadership buys authority: I lead your team, make the strategic calls and stay accountable for delivery, one or two days a week over months. Forward deployed product building buys construction: I sit inside your team three days a week for a fixed block, help you get clear about what you intend, and build a working proof of concept in your environment. The authority stays where it is. If nobody senior is holding product direction, you want the first one.',
+      'Fractional leadership buys authority: I lead your team, make the strategic calls and stay accountable for delivery, one or two days a week over months. Forward deployed product building buys construction: I sit inside your team three days a week for a fixed block, help you get clear about what you intend, and build a working version of it in your environment. The authority stays where it is. If nobody senior is holding product direction, you want the first one.',
   },
   {
     question: 'What happens after I get in touch?',
@@ -110,7 +110,7 @@ export const forwardDeployedFaqs: Faq[] = [
   {
     question: 'Is what you build production software?',
     answer:
-      'No. It runs, in your environment, against your real constraints, and it is built to be understood and then rewritten. It will not have the test coverage, the error handling or the operational care that customer-facing software needs. That is the trade: you find out whether the idea is right in weeks instead of a quarter, and you spend the engineering budget afterwards on the version you now know is worth building.',
+      'Sometimes, and it depends on how much of the problem is genuinely new. If the hard part was the unknown rather than the engineering, a block can end with software your team takes over and runs. If the unknown is the whole thing, you get something that works and answers the question, and it should be rebuilt properly before it carries customers. Either way it runs in your environment against your real constraints, and I will tell you which of the two you have by about week two rather than at the end.',
   },
   {
     question: 'What did you build that still works without you?',

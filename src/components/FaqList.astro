@@ -1,0 +1,105 @@
+---
+/**
+ * Collapsible FAQ list. Same accordion as /contact, driven by data.
+ *
+ * The questions live in src/data/faqs.ts so a page never hand-writes twenty
+ * lines of nested <details> markup to add one. /contact still has its own
+ * hand-written subset from before this existed; switching it over to this
+ * component is a tidy-up worth doing, and would mean one set of styles
+ * instead of two.
+ */
+import type { Faq } from '../data/faqs';
+
+interface Props {
+  items: Faq[];
+  heading?: string;
+  sub?: string;
+}
+
+const { items, heading = 'Fair questions.', sub } = Astro.props;
+---
+
+{
+  items.length > 0 && (
+    <section class="faq-section" aria-label="Common questions">
+      <h2 class="faq-title">{heading}</h2>
+      {sub && <p class="faq-sect-sub">{sub}</p>}
+      <div class="faq faq-steps">
+        {items.map((f) => (
+          <details class="faq-item">
+            <summary>{f.question}</summary>
+            <div class="faq-body">
+              <p>{f.answer}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .faq-section {
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+  }
+  .faq-section h2.faq-title {
+    font-size: 1.7rem;
+    margin-bottom: var(--space-2);
+  }
+  .faq-sect-sub {
+    margin: 0 0 var(--space-7);
+    max-width: 52ch;
+    color: var(--muted);
+    font-size: 0.98rem;
+  }
+  .faq-steps {
+    border-top: 1px solid var(--ink);
+  }
+  .faq-item {
+    border-bottom: 1px solid var(--line);
+  }
+  .faq-item summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-5);
+    padding: var(--space-5) 0;
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-size: 1.25rem;
+    line-height: 1.25;
+    color: var(--ink);
+  }
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-item summary::after {
+    content: '+';
+    flex-shrink: 0;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 1.2rem;
+    line-height: 1;
+    color: var(--accent);
+    transition: transform var(--dur-med) ease;
+  }
+  .faq-item[open] summary::after {
+    content: '–';
+  }
+  .faq-item[open] summary {
+    color: var(--accent);
+  }
+  .faq-item .faq-body {
+    padding: 0 0 var(--space-5);
+  }
+  .faq-item .faq-body p {
+    margin: 0 0 var(--space-3);
+    color: var(--muted);
+  }
+  .faq-item .faq-body p:last-child {
+    margin-bottom: 0;
+  }
+</style>

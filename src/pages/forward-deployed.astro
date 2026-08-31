@@ -3,6 +3,7 @@ import '@fontsource-variable/roboto-serif';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { rates, gbp } from '../data/rates';
 import { forwardDeployedFaqs } from '../data/faqs';
+import FaqList from '../components/FaqList.astro';
 
 const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
 
@@ -12,7 +13,7 @@ const serviceSchema = {
   name: 'Forward Deployed Product Builder',
   serviceType: 'Embedded product prototyping',
   description:
-    'Embedded product building: three days a week inside your team, prototyping in your environment on your problems, ending in a working proof of concept and a written record of what it proved.',
+    'Embedded product building: three days a week inside your team, building in your environment on your problems, ending in working software your team can take over or a prototype that tells them whether to build it.',
   provider: { '@id': 'https://intentionaut.com/#person' },
   areaServed: { '@type': 'Country', name: 'United Kingdom' },
   offers: {
@@ -36,7 +37,7 @@ const faqSchema = {
 
 <BaseLayout
   title="Forward Deployed Product Building | Saielle DaSilva"
-  description="Embedded product building for teams that cannot get a working version of the idea in front of anyone: three days a week in your environment, prototyping on your problems, ending in a proof of concept your team can carry."
+  description="Embedded product building for teams that cannot get a working version of the idea in front of anyone: three days a week in your environment, building on your problems, ending in working software your team can take over."
   jsonLd={[serviceSchema, faqSchema]}
 >
   <section class="wrap">
@@ -91,11 +92,11 @@ const faqSchema = {
 
       <h2>What you get</h2>
       <ul>
-        <li>A working proof of concept in your environment, not a demo in mine</li>
-        <li>A written record of what it proved and what it did not</li>
-        <li>Your team's intent, said out loud and agreed</li>
-        <li>Build decisions documented well enough to change</li>
-        <li>An honest read on whether this is worth taking further</li>
+        <li>Working software in your environment, not a demo in mine</li>
+        <li>A codebase your team can take over, extend or bin without asking me</li>
+        <li>The failure modes you would otherwise have found in month six</li>
+        <li>A real estimate of what finishing it costs, in time and people</li>
+        <li>A straight recommendation: keep going, change the shape, or stop</li>
       </ul>
 
       <h2>How it works</h2>
@@ -113,17 +114,18 @@ const faqSchema = {
       </p>
       <p>
         It ends on a date agreed at the start. What exists afterwards is a
-        prototype your team can extend or bin on evidence, and enough written
-        reasoning that the next person to touch it knows why it is shaped the
-        way it is. I do not sell a support tail.
+        something that runs, which your team can take over, extend or bin on
+        evidence, and enough written reasoning that the next person to touch it
+        knows why it is shaped the way it is. I do not sell a support tail.
       </p>
 
       <h2>What this is not</h2>
       <p>
-        It is not production software. What you get runs, and it is built to be
-        understood and then rewritten, not to carry your customers. Anyone
-        selling you a six-week prototype as production-ready is selling you a
-        rewrite you have not budgeted for.
+        How far it goes depends on the problem. Some blocks end with a
+        prototype that answers the question and should then be rebuilt
+        properly. Some end with software your team can take over and run. What
+        I will not do is hand you the first and call it the second. You will
+        know which one you are getting by about week two, not at the end.
       </p>
       <p>
         It will not replace a product leader either. If the real problem
@@ -157,15 +159,6 @@ const faqSchema = {
         that would own this afterwards, and who still writes the code.
       </p>
 
-      <h2>Fair questions.</h2>
-      {
-        forwardDeployedFaqs.map((f) => (
-          <>
-            <h3>{f.question}</h3>
-            <p>{f.answer}</p>
-          </>
-        ))
-      }
     </div>
 
     <section class="contact-form-section" aria-label="Get in touch">
@@ -227,10 +220,12 @@ const faqSchema = {
           <p class="form-status" id="form-status" role="status"></p>
         </form>
       </div>
-      <p class="faq-link">
-        Questions first? <a href="/faq/">Read the FAQ.</a>
-      </p>
     </section>
+
+    <FaqList
+      items={forwardDeployedFaqs}
+      sub="Straight answers about cost, attention, what happens if it is not working, and what this does not do."
+    />
   </section>
 
   <script>

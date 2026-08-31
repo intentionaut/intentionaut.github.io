@@ -40,7 +40,7 @@ Every link added, with the paragraph it sits in and its exact anchor text.
 |---|---|---|
 | fractional and interim leadership | `/fractional/` | "What this is not", second paragraph, immediately after the sentence about prototyping around an absent product leader. Routes the wrong-fit reader out rather than converting them badly. |
 | projects page | `/projects/` | "What I have built", second paragraph, after naming Friday, Familiar and Kernic. |
-| Read the FAQ. | `/faq/` | Standard house `.faq-link` line under the form. |
+| (none) | | The `.faq-link` line was removed: the page carries its own collapsible FAQ, as /contact does. |
 
 **Outbound from `/ai-pilot-to-production/`**
 
@@ -129,8 +129,8 @@ other is not, so I have not written it.
 - **Meta:** Embedded product building for teams that cannot get a working version of the idea in front of anyone: three days a week in your environment, prototyping on your problems, ending in a proof of concept your team can carry.
 - **Slug:** `/forward-deployed/` — short, memorable, pasteable into an email. Chosen over a keyword slug on purpose, because this page's job is forwarding rather than ranking.
 - **H1:** Someone who builds it, not just decides what to build.
-- **H2s:** Sound familiar? / What I do / What you get / How it works / What this is not / Where you can see the work / Fair questions. / Let's talk.
-- **H3s:** the twelve FAQ questions.
+- **H2s:** Sound familiar? / What I do / What you get / How it works / What this is not / What I have built / Let's talk. / Fair questions.
+- **H3s:** none. The twelve FAQs are `<details>` accordions via `components/FaqList.astro`, matching /contact.
 - **Schema:** `Service` with an `Offer` (GBP 1750, unit day, LimitedAvailability) plus `FAQPage` with all twelve, merged into the site `@graph`. Verified in `dist/`.
 
 ### `/ai-pilot-to-production/`
