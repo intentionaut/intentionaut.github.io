@@ -20,6 +20,11 @@ interface Props {
   modifiedTime?: string;
   /** Extra schema.org node(s) merged into the page @graph (no @context). */
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  /**
+   * Point the canonical somewhere else. For a page whose content now lives on
+   * its own domain, so the two do not compete in search while both stay live.
+   */
+  canonicalUrl?: string;
 }
 
 const {
@@ -31,9 +36,12 @@ const {
   publishedTime,
   modifiedTime,
   jsonLd,
+  canonicalUrl,
 } = Astro.props;
 
-const canonical = new URL(Astro.url.pathname, Astro.site);
+const canonical = canonicalUrl
+  ? new URL(canonicalUrl)
+  : new URL(Astro.url.pathname, Astro.site);
 const origin = Astro.site!.origin;
 const canonicalStr = canonical.toString();
 
