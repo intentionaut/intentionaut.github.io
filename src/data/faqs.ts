@@ -88,12 +88,6 @@ export const faqs: Faq[] = [
     answer: 'Happily. Send yours, or use mine.',
   },
   {
-    question: 'Can I hire you full-time?',
-    placements: ['faq', 'contact'],
-    answer:
-      'For the right role, yes. Director level and above. The same clarity principle applies: shared understanding of the goal before we commit. If that sounds like your team, write me a note and tell me what you are trying to accomplish.',
-  },
-  {
     question: 'How does payment work?',
     placements: ['faq', 'contact'],
     answer:
