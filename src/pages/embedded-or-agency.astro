@@ -1,0 +1,179 @@
+---
+import '@fontsource-variable/roboto-serif';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
+---
+
+<BaseLayout
+  title="Embedded Product Builder or Agency? | Saielle DaSilva"
+  description="How to choose between hiring an agency and embedding one senior product builder in your team, including the cases where the agency is the right answer."
+>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Build &amp; delivery</p>
+      <h1>One builder inside your team, or an agency around it.</h1>
+      <p class="lede">
+        For teams deciding how to get something built when they cannot build it themselves.
+      </p>
+    </header>
+
+    <div class="prose">
+      <p>
+        You have a thing that needs building and no capacity to build it. Two
+        obvious routes: a firm, which brings a team and a process, or one
+        senior person who sits inside yours. They are different purchases, and
+        the sales material on both sides blurs that.
+      </p>
+
+      <h2>When an agency is the right answer</h2>
+      <ul>
+        <li>The scope is known and the work is mostly volume.</li>
+        <li>You need several disciplines at once and do not have any of them.</li>
+        <li>What you want at the end is production software with a warranty.</li>
+        <li>The work has to continue whether or not one person is available.</li>
+      </ul>
+      <p>
+        In all four cases a firm will serve you better than I will, and I will
+        say so on the call rather than after the invoice.
+      </p>
+
+      <h2>When one embedded builder is the right answer</h2>
+      <ul>
+        <li>Nobody can yet write the brief an agency would need.</li>
+        <li>The question is whether the idea works, not how to scale it.</li>
+        <li>You want your own team to end up understanding the thing.</li>
+        <li>The environment is the hard part: your data, your systems, your constraints.</li>
+      </ul>
+      <p>
+        An agency will build what the brief says. That is a strength when the
+        brief is right and an expensive problem when it is not. The reason to
+        embed one person is to find out what the brief should have said, while
+        building it.
+      </p>
+
+      <h2>What is different in practice</h2>
+      <p>
+        A firm brings its own environment, its own process and a team that
+        changes. Work happens over there and arrives here. An embedded builder
+        works in your environment from the first week. That is slower to start
+        and it tells you far more, because everything you would have hit during
+        integration turns up in week one instead.
+      </p>
+      <p>
+        The trade is real and it runs both ways. One person is one person. No
+        bench, no cover, and a hard limit on how much gets built. If that
+        limit is the problem, you want the firm.
+      </p>
+
+      <h2>What it costs, both ways</h2>
+      <p>
+        I charge a day rate and publish it, so the arithmetic is yours to do:
+        the shape and the numbers are on the
+        {' '}<a href="/forward-deployed/">forward deployed product building</a>
+        {' '}page. Agencies generally quote by project, which buys you
+        certainty on price and costs you flexibility on scope. Neither is
+        cheaper in the abstract. The cheaper one is whichever matches how well
+        you can describe what you want.
+      </p>
+
+      <h2>A third answer</h2>
+      <p>
+        Sometimes the honest answer is neither. If the problem is that nobody
+        senior owns product direction, buying build capacity produces a
+        well-built version of an unresolved argument. That is
+        {' '}<a href="/fractional/">fractional and interim leadership</a>, and
+        it is usually cheaper than finding out the other way.
+      </p>
+    </div>
+
+    <section class="contact-form-section" aria-label="Get in touch">
+      <div class="contact-card">
+        <h2>Let's talk.</h2>
+        <p class="form-lede">
+          If you are weighing this up and want a straight answer about which one you need, ask me.
+        </p>
+        <form id="contact-form" novalidate>
+          <input type="hidden" name="source" value="embedded-or-agency" />
+          <div class="form-grid">
+            <label>
+              <span class="form-label">Name</span>
+              <input type="text" name="name" required autocomplete="name" />
+            </label>
+            <label>
+              <span class="form-label">Email</span>
+              <input type="email" name="email" required autocomplete="email" />
+            </label>
+          </div>
+          <label>
+            <span class="form-label">What's this about?</span>
+            <select name="topic">
+              <option value="forward-deployed" selected>Forward deployed product building</option>
+              <option value="advisor-intro">Advisor or recruiter introduction</option>
+              <option value="strategic-direction">Strategic direction</option>
+              <option value="execution">Execution &amp; transformation</option>
+              <option value="fractional">Fractional leadership</option>
+              <option value="speaking">Speaking &amp; workshops</option>
+              <option value="mentoring">Mentoring</option>
+              <option value="other">Something else</option>
+            </select>
+          </label>
+          <label>
+            <span class="form-label">Message</span>
+            <textarea name="message" rows="5" required></textarea>
+          </label>
+          {
+            TURNSTILE_SITEKEY && (
+              <>
+                <div
+                  class="cf-turnstile"
+                  data-sitekey={TURNSTILE_SITEKEY}
+                  data-theme="light"
+                />
+                <script
+                  is:inline
+                  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+                  async
+                  defer
+                />
+              </>
+            )
+          }
+          <button class="btn-plain" type="submit">Send it</button>
+          <p class="form-status" id="form-status" role="status"></p>
+        </form>
+      </div>
+      <p class="faq-link">
+        Questions first? <a href="/faq/">Read the FAQ.</a>
+      </p>
+    </section>
+  </section>
+
+  <script>
+    const ENDPOINT = 'https://contact-form.intentionaut.workers.dev/contact';
+    const form = document.getElementById('contact-form');
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form));
+      const statusEl = document.getElementById('form-status');
+
+      try {
+        const res = await fetch(ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        const result = await res.json();
+        if (res.ok) {
+          form.reset();
+          if (statusEl) statusEl.textContent = result.message || "Thank you; I'll reply soon.";
+        } else {
+          if (statusEl) statusEl.textContent = result.error || 'Something went wrong; please email me directly.';
+        }
+      } catch {
+        if (statusEl) statusEl.textContent = 'Something went wrong; please email me directly.';
+      }
+    });
+  </script>
+</BaseLayout>

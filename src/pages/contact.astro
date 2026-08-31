@@ -51,6 +51,15 @@ const testimonials = testimonialsFor('contact');
             now, before they're ready for a full-time hire.
           </dd>
         </a>
+        <a class="rate-row rate-card" href="/forward-deployed/">
+          <dt>Forward Deployed Builder</dt>
+          <dd class="rate-price">{gbp(rates.forwardDeployed)} / day</dd>
+          <dd class="rate-desc">
+            Three days a week inside your team, building a working prototype
+            in your environment. Starts with a five-day scoping block at
+            {' '}{gbp(rates.scopingBlock)}.
+          </dd>
+        </a>
         <a class="rate-row rate-card" href="/speaker/">
           <dt>Speaking &amp; workshops</dt>
           <dd class="rate-price">{gbp(rates.speaking)} / event</dd>
@@ -394,6 +403,8 @@ const testimonials = testimonialsFor('contact');
           <label>
             <span class="form-label">What's this about?</span>
             <select name="topic">
+              <option value="forward-deployed">Forward deployed product building</option>
+              <option value="advisor-intro">Advisor or recruiter introduction</option>
               <option value="strategic-direction">Strategic direction</option>
               <option value="execution">Execution &amp; transformation</option>
               <option value="fractional">Fractional leadership</option>

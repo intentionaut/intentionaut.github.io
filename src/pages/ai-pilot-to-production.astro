@@ -1,0 +1,184 @@
+---
+import '@fontsource-variable/roboto-serif';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
+---
+
+<BaseLayout
+  title="From an AI Pilot to a Working Product | Saielle DaSilva"
+  description="For teams whose AI pilot proves something in a notebook and nothing in production: embedded product building that gets a working version running against your real data and your real constraints."
+>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Build &amp; delivery</p>
+      <h1>Your AI pilot works. It never became a product.</h1>
+      <p class="lede">
+        For teams with a model that proves something in a notebook and nothing anywhere else.
+      </p>
+    </header>
+
+    <div class="prose">
+      <p>
+        The pilot did what it was asked to do. The numbers were good enough to
+        show people. Then it stopped, somewhere between the notebook and
+        anything a customer could touch, and it has been stopped for a while.
+      </p>
+      <p>
+        The usual diagnosis is engineering capacity, and that is usually wrong.
+        A pilot answers a question about the model. A product has to answer a
+        different set of questions: what happens on the bad input, who is
+        accountable when it is confidently wrong, where the data lives, and what the person on the other end is supposed to do with the
+        output. Nobody asked those during the pilot, because the pilot was not
+        the place to ask them.
+      </p>
+
+      <h2>Sound familiar?</h2>
+      <ul>
+        <li>The demo runs on an export somebody took in March.</li>
+        <li>It is accurate enough for a slide and not accurate enough to act on.</li>
+        <li>Everyone agrees it should be "in the product" and nobody can say where.</li>
+      </ul>
+
+      <h2>What is in the way</h2>
+      <p>
+        Almost always one of three things. The model never met real data, so nobody
+        knows what it does with the messy half. The output has no
+        decision attached to it, so there is nothing for a user to do next.
+        Or the thing it automates was never the expensive part of the job.
+      </p>
+      <p>
+        IDC put numbers on this in the Lenovo CIO Playbook 2025. Of the proofs
+        of concept it observed, 88 per cent never reached widescale
+        deployment. For every thirty-three a company started, four made it to
+        production. The pilot is not the hard part and has not been for a
+        while.
+      </p>
+
+      <h2>What I do about it</h2>
+      <p>
+        I embed with your team for a fixed block and build the smallest real
+        version: your data, your systems, a user with a decision to make at the
+        end of it. Not a better model. A working path from the thing the model
+        knows to the thing somebody does about it.
+      </p>
+      <p>
+        Sometimes that proves the pilot was right and the product around it was
+        missing. Sometimes it proves the opposite, and you have saved a
+        quarter. Both are useful results and I will tell you which one you got.
+      </p>
+
+      <h2>What you get</h2>
+      <ul>
+        <li>A working path from model output to a decision somebody makes</li>
+        <li>An honest read on how it behaves against your real data</li>
+        <li>The failure modes written down, including the embarrassing ones</li>
+        <li>A build your team can extend or replace on evidence</li>
+        <li>A clear answer on whether this belongs in the product at all</li>
+      </ul>
+
+      <h2>How it works</h2>
+      <p>
+        Five days of scoping first, then a block of six to twelve weeks at
+        three days a week. The full shape and the rates are on the
+        {' '}<a href="/forward-deployed/">forward deployed product building</a>
+        {' '}page.
+      </p>
+      <p>
+        If what you need is someone senior to own AI product direction
+        over a longer horizon rather than build a proof of concept, that is
+        {' '}<a href="/fractional/">fractional and interim leadership</a>
+        {' '}instead.
+      </p>
+    </div>
+
+    <section class="contact-form-section" aria-label="Get in touch">
+      <div class="contact-card">
+        <h2>Let's talk.</h2>
+        <p class="form-lede">
+          If you have a pilot that works and a product that does not exist, tell me where it stalled.
+        </p>
+        <form id="contact-form" novalidate>
+          <input type="hidden" name="source" value="ai-pilot-to-production" />
+          <div class="form-grid">
+            <label>
+              <span class="form-label">Name</span>
+              <input type="text" name="name" required autocomplete="name" />
+            </label>
+            <label>
+              <span class="form-label">Email</span>
+              <input type="email" name="email" required autocomplete="email" />
+            </label>
+          </div>
+          <label>
+            <span class="form-label">What's this about?</span>
+            <select name="topic">
+              <option value="forward-deployed" selected>Forward deployed product building</option>
+              <option value="advisor-intro">Advisor or recruiter introduction</option>
+              <option value="strategic-direction">Strategic direction</option>
+              <option value="execution">Execution &amp; transformation</option>
+              <option value="fractional">Fractional leadership</option>
+              <option value="speaking">Speaking &amp; workshops</option>
+              <option value="mentoring">Mentoring</option>
+              <option value="other">Something else</option>
+            </select>
+          </label>
+          <label>
+            <span class="form-label">Message</span>
+            <textarea name="message" rows="5" required></textarea>
+          </label>
+          {
+            TURNSTILE_SITEKEY && (
+              <>
+                <div
+                  class="cf-turnstile"
+                  data-sitekey={TURNSTILE_SITEKEY}
+                  data-theme="light"
+                />
+                <script
+                  is:inline
+                  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+                  async
+                  defer
+                />
+              </>
+            )
+          }
+          <button class="btn-plain" type="submit">Send it</button>
+          <p class="form-status" id="form-status" role="status"></p>
+        </form>
+      </div>
+      <p class="faq-link">
+        Questions first? <a href="/faq/">Read the FAQ.</a>
+      </p>
+    </section>
+  </section>
+
+  <script>
+    const ENDPOINT = 'https://contact-form.intentionaut.workers.dev/contact';
+    const form = document.getElementById('contact-form');
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form));
+      const statusEl = document.getElementById('form-status');
+
+      try {
+        const res = await fetch(ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        const result = await res.json();
+        if (res.ok) {
+          form.reset();
+          if (statusEl) statusEl.textContent = result.message || "Thank you; I'll reply soon.";
+        } else {
+          if (statusEl) statusEl.textContent = result.error || 'Something went wrong; please email me directly.';
+        }
+      } catch {
+        if (statusEl) statusEl.textContent = 'Something went wrong; please email me directly.';
+      }
+    });
+  </script>
+</BaseLayout>

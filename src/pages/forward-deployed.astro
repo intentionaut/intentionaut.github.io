@@ -1,0 +1,263 @@
+---
+import '@fontsource-variable/roboto-serif';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { rates, gbp } from '../data/rates';
+import { forwardDeployedFaqs } from '../data/faqs';
+
+const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
+
+const serviceSchema = {
+  '@type': 'Service',
+  '@id': 'https://intentionaut.com/forward-deployed/#service',
+  name: 'Forward Deployed Product Builder',
+  serviceType: 'Embedded product prototyping',
+  description:
+    'Embedded product building: three days a week inside your team, prototyping in your environment on your problems, ending in a working proof of concept and a written record of what it proved.',
+  provider: { '@id': 'https://intentionaut.com/#person' },
+  areaServed: { '@type': 'Country', name: 'United Kingdom' },
+  offers: {
+    '@type': 'Offer',
+    priceCurrency: 'GBP',
+    price: rates.forwardDeployed,
+    unitText: 'day',
+    availability: 'https://schema.org/LimitedAvailability',
+  },
+};
+
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: forwardDeployedFaqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer },
+  })),
+};
+---
+
+<BaseLayout
+  title="Forward Deployed Product Building | Saielle DaSilva"
+  description="Embedded product building for teams that cannot get a working version of the idea in front of anyone: three days a week in your environment, prototyping on your problems, ending in a proof of concept your team can carry."
+  jsonLd={[serviceSchema, faqSchema]}
+>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Build &amp; delivery</p>
+      <h1>Someone who builds it, not just decides what to build.</h1>
+      <p class="lede">
+        For teams with a real problem, a rough idea of the answer, and nobody
+        free to build it.
+      </p>
+    </header>
+
+    <div class="prose">
+      <p>
+        You can describe the problem. You can nearly describe the answer. What
+        you cannot do is get a working version of it in front of anyone,
+        because everyone who could build it is already committed to this
+        quarter.
+      </p>
+      <p>
+        So it stays a document. It gets discussed in one meeting, then a
+        different meeting. Six weeks later the argument is still about what it
+        might do, because nobody has watched it do anything. That is not a
+        prioritisation failure. It is what happens when the only way to test an
+        idea is to spend a quarter building it properly.
+      </p>
+
+      <h2>Sound familiar?</h2>
+      <ul>
+        <li>The prototype has been two sprints away for four months.</li>
+        <li>Your AI proof of concept runs on one laptop, nowhere near your real data.</li>
+        <li>Three people describe the same feature three different ways, and all three are right.</li>
+      </ul>
+
+      <h2>What I do</h2>
+      <p>
+        I embed with your team for a fixed block, three days a week, and build
+        in your environment. Your repo, your stack, your data, your
+        constraints. Part of the work is getting the team to say out loud what
+        they intend, because that is usually the thing nobody has written
+        down. The rest is building against it while everyone watches.
+      </p>
+      <p>
+        This is not an agency engagement and it is not fractional leadership.
+        Nobody hands you a deck at the end, and I do not take over your product
+        decisions. You keep the authority. I bring the hands.
+      </p>
+      <p>
+        I will also tell you when the answer is that you should not build it.
+        That happens, and it is cheaper to hear in week two than in month six.
+      </p>
+
+      <h2>What you get</h2>
+      <ul>
+        <li>A working proof of concept in your environment, not a demo in mine</li>
+        <li>A written record of what it proved and what it did not</li>
+        <li>Your team's intent, said out loud and agreed</li>
+        <li>Build decisions documented well enough to change</li>
+        <li>An honest read on whether this is worth taking further</li>
+      </ul>
+
+      <h2>How it works</h2>
+      <p>
+        It starts with five days of scoping, at {gbp(rates.scopingBlock)}. I
+        look at the problem, the environment and the team, and you get a
+        written recommendation: what is worth prototyping, what it would take,
+        and whether it is me you need. You can stop there. Some people should.
+      </p>
+      <p>
+        Then a block of six to twelve weeks, three days a week, at
+        {' '}{gbp(rates.forwardDeployed)} a day. Four days a week is possible
+        at the same daily rate, though three is the default. The day away is
+        where the thinking happens.
+      </p>
+      <p>
+        It ends on a date agreed at the start. What exists afterwards is a
+        prototype your team can extend or bin on evidence, and enough written
+        reasoning that the next person to touch it knows why it is shaped the
+        way it is. I do not sell a support tail.
+      </p>
+
+      <h2>What this is not</h2>
+      <p>
+        It is not production software. What you get runs, and it is built to be
+        understood and then rewritten, not to carry your customers. Anyone
+        selling you a six-week prototype as production-ready is selling you a
+        rewrite you have not budgeted for.
+      </p>
+      <p>
+        It will not replace a product leader either. If the real problem
+        is that nobody senior owns product direction, prototyping around that
+        gets you a good demo and the same argument. That is
+        {' '}<a href="/fractional/">fractional and interim leadership</a>, and
+        it is a different engagement.
+      </p>
+
+      <h2>What I have built</h2>
+      <p>
+        In companies: I led the product and design organisation at StepStone,
+        where the satellite portfolio returned 3.2x. At Sainsbury's I ran
+        product for AI, data platforms and machine learning, and took
+        production AI from a handful of experiments to a platform serving over
+        100 million customers. I was on the founding team at Cazoo, through to
+        a $7B IPO. At PeskyFish, as interim CPO, monthly recurring revenue grew
+        450 per cent in 90 days. Founding hire at Pivotal. Amazon and AT&amp;T
+        before that.
+      </p>
+      <p>
+        On my own: Friday, a coaching product for early-career film and
+        television crew. Familiar, a set of writing tools. Kernic, a command
+        line tool that turns a few answers into a design system. Each was
+        built and released in days rather than quarters, and each is on the
+        {' '}<a href="/projects/">projects page</a> with what it bet on and how
+        it was made.
+      </p>
+      <p>
+        The mix is the point. You are getting someone who has run the function
+        that would own this afterwards, and who still writes the code.
+      </p>
+
+      <h2>Fair questions.</h2>
+      {
+        forwardDeployedFaqs.map((f) => (
+          <>
+            <h3>{f.question}</h3>
+            <p>{f.answer}</p>
+          </>
+        ))
+      }
+    </div>
+
+    <section class="contact-form-section" aria-label="Get in touch">
+      <div class="contact-card">
+        <h2>Let's talk.</h2>
+        <p class="form-lede">
+          If there is something you need to see working before you can decide
+          about it, tell me what it is.
+        </p>
+        <form id="contact-form" novalidate>
+          <input type="hidden" name="source" value="forward-deployed" />
+          <div class="form-grid">
+            <label>
+              <span class="form-label">Name</span>
+              <input type="text" name="name" required autocomplete="name" />
+            </label>
+            <label>
+              <span class="form-label">Email</span>
+              <input type="email" name="email" required autocomplete="email" />
+            </label>
+          </div>
+          <label>
+            <span class="form-label">What's this about?</span>
+            <select name="topic">
+              <option value="forward-deployed" selected>
+                Forward deployed product building
+              </option>
+              <option value="strategic-direction">Strategic direction</option>
+              <option value="execution">Execution &amp; transformation</option>
+              <option value="fractional">Fractional leadership</option>
+              <option value="advisory">Advisory</option>
+              <option value="speaking">Speaking &amp; workshops</option>
+              <option value="mentoring">Mentoring</option>
+              <option value="other">Something else</option>
+            </select>
+          </label>
+          <label>
+            <span class="form-label">Message</span>
+            <textarea name="message" rows="5" required></textarea>
+          </label>
+          {
+            TURNSTILE_SITEKEY && (
+              <>
+                <div
+                  class="cf-turnstile"
+                  data-sitekey={TURNSTILE_SITEKEY}
+                  data-theme="light"
+                />
+                <script
+                  is:inline
+                  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+                  async
+                  defer
+                />
+              </>
+            )
+          }
+          <button class="btn-plain" type="submit">Send it</button>
+          <p class="form-status" id="form-status" role="status"></p>
+        </form>
+      </div>
+      <p class="faq-link">
+        Questions first? <a href="/faq/">Read the FAQ.</a>
+      </p>
+    </section>
+  </section>
+
+  <script>
+    const ENDPOINT = 'https://contact-form.intentionaut.workers.dev/contact';
+    const form = document.getElementById('contact-form');
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form));
+      const statusEl = document.getElementById('form-status');
+
+      try {
+        const res = await fetch(ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        const result = await res.json();
+        if (res.ok) {
+          form.reset();
+          if (statusEl) statusEl.textContent = result.message || "Thank you; I'll reply soon.";
+        } else {
+          if (statusEl) statusEl.textContent = result.error || 'Something went wrong; please email me directly.';
+        }
+      } catch {
+        if (statusEl) statusEl.textContent = 'Something went wrong; please email me directly.';
+      }
+    });
+  </script>
+</BaseLayout>

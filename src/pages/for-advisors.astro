@@ -1,0 +1,183 @@
+---
+import '@fontsource-variable/roboto-serif';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
+---
+
+<BaseLayout
+  title="For Advisors &amp; Recruiters | Saielle DaSilva"
+  description="For startup advisors and recruiters placing fractional and interim product people: what Saielle DaSilva does, the two engagement shapes, availability, rates and what to send a client."
+>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">For advisors &amp; recruiters</p>
+      <h1>If you place product people, here is the short version.</h1>
+      <p class="lede">
+        For advisors and recruiters working out whether I fit a brief.
+      </p>
+    </header>
+
+    <div class="prose">
+      <p>
+        You have a brief and a shortlist to build. This page is written to be
+        read in two minutes and forwarded without editing.
+      </p>
+
+      <h2>What I am</h2>
+      <p>
+        A product leader who works across design, product, data and AI, and who
+        still builds. Director and VP level in-house before going independent.
+      </p>
+      <p>
+        Global VP of Experience Design at StepStone, where the satellite
+        portfolio returned 3.2x. At Sainsbury's I was Senior Head of Product
+        for AI, data platforms and machine learning, and took production AI
+        from a handful of experiments to a platform serving over 100 million
+        customers. Founding team at Cazoo, through to a $7B IPO. As interim CPO
+        at PeskyFish, monthly recurring revenue grew 450 per cent in 90 days.
+        Before all of that: Pivotal, Amazon, AT&amp;T.
+      </p>
+      <p>
+        The unusual part, and the one worth putting in front of a client: I
+        prototype. Not slideware. Working software, built in the client's
+        environment, during the engagement.
+      </p>
+
+      <h2>Two shapes I take</h2>
+      <p>
+        <strong>Fractional and interim product leadership.</strong> One or two
+        days a week, three months and up. I lead the team, hold direction and
+        stay accountable for delivery. Full detail on the
+        {' '}<a href="/fractional/">fractional page</a>.
+      </p>
+      <p>
+        <strong>Forward deployed product building.</strong> Three days a week
+        for six to twelve weeks, embedded, building a proof of concept in the
+        client's environment. The authority stays with their people; I bring
+        the hands. Full detail on the
+        {' '}<a href="/forward-deployed/">forward deployed page</a>.
+      </p>
+
+      <h2>What I am not right for</h2>
+      <ul>
+        <li>Permanent roles below Director level</li>
+        <li>Pure delivery management or programme management</li>
+        <li>Production engineering with a warranty attached</li>
+        <li>Anything needing more than one pair of hands at once</li>
+      </ul>
+      <p>
+        Telling you this now is cheaper for both of us than telling you at
+        second stage.
+      </p>
+
+      <h2>Commercials</h2>
+      <ul>
+        <li>Rates are published on the <a href="/contact/">contact page</a> and I do not quote differently in private</li>
+        <li>Quoted rates are net to me; your margin sits on top, not inside</li>
+        <li>UK-based, GBP, limited company, happy to sign an NDA</li>
+        <li>The client makes the employment-status determination; I will work with whatever their adviser concludes</li>
+        <li>Permanent roles considered at Director level and above</li>
+      </ul>
+
+      <h2>What to send your client</h2>
+      <p>
+        One link is usually enough. Send the
+        {' '}<a href="/forward-deployed/">forward deployed page</a> if they need
+        something built, the <a href="/fractional/">fractional page</a> if they
+        need someone to hold direction, and
+        {' '}<a href="/projects/">projects</a> if they want to see what I have
+        built recently before they commit to a call.
+      </p>
+    </div>
+
+    <section class="contact-form-section" aria-label="Get in touch">
+      <div class="contact-card">
+        <h2>Let's talk.</h2>
+        <p class="form-lede">
+          Send me the brief, or the rough shape of it. I will tell you straight whether it is me.
+        </p>
+        <form id="contact-form" novalidate>
+          <input type="hidden" name="source" value="for-advisors" />
+          <div class="form-grid">
+            <label>
+              <span class="form-label">Name</span>
+              <input type="text" name="name" required autocomplete="name" />
+            </label>
+            <label>
+              <span class="form-label">Email</span>
+              <input type="email" name="email" required autocomplete="email" />
+            </label>
+          </div>
+          <label>
+            <span class="form-label">What's this about?</span>
+            <select name="topic">
+              <option value="forward-deployed">Forward deployed product building</option>
+              <option value="advisor-intro" selected>Advisor or recruiter introduction</option>
+              <option value="strategic-direction">Strategic direction</option>
+              <option value="execution">Execution &amp; transformation</option>
+              <option value="fractional">Fractional leadership</option>
+              <option value="speaking">Speaking &amp; workshops</option>
+              <option value="mentoring">Mentoring</option>
+              <option value="other">Something else</option>
+            </select>
+          </label>
+          <label>
+            <span class="form-label">Message</span>
+            <textarea name="message" rows="5" required></textarea>
+          </label>
+          {
+            TURNSTILE_SITEKEY && (
+              <>
+                <div
+                  class="cf-turnstile"
+                  data-sitekey={TURNSTILE_SITEKEY}
+                  data-theme="light"
+                />
+                <script
+                  is:inline
+                  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+                  async
+                  defer
+                />
+              </>
+            )
+          }
+          <button class="btn-plain" type="submit">Send it</button>
+          <p class="form-status" id="form-status" role="status"></p>
+        </form>
+      </div>
+      <p class="faq-link">
+        Questions first? <a href="/faq/">Read the FAQ.</a>
+      </p>
+    </section>
+  </section>
+
+  <script>
+    const ENDPOINT = 'https://contact-form.intentionaut.workers.dev/contact';
+    const form = document.getElementById('contact-form');
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form));
+      const statusEl = document.getElementById('form-status');
+
+      try {
+        const res = await fetch(ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        const result = await res.json();
+        if (res.ok) {
+          form.reset();
+          if (statusEl) statusEl.textContent = result.message || "Thank you; I'll reply soon.";
+        } else {
+          if (statusEl) statusEl.textContent = result.error || 'Something went wrong; please email me directly.';
+        }
+      } catch {
+        if (statusEl) statusEl.textContent = 'Something went wrong; please email me directly.';
+      }
+    });
+  </script>
+</BaseLayout>
