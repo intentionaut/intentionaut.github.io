@@ -1,8 +1,19 @@
 import { rates, gbp } from './rates';
 
+/** Where a question may appear. Add to this as pages need them. */
+export type FaqPlacement = 'faq' | 'contact';
+
 export interface Faq {
   question: string;
   answer: string;
+  /**
+   * Which pages it may appear on. Omitted means the FAQ page only.
+   *
+   * /contact used to hand-write its own shortlist as nested <details> markup,
+   * which drifted from the wording here. Now it filters this list, so there is
+   * one answer to every question and adding a page needs one word.
+   */
+  placements?: FaqPlacement[];
 }
 
 export const faqs: Faq[] = [
@@ -20,6 +31,7 @@ export const faqs: Faq[] = [
   },
   {
     question: 'How does the sliding scale work?',
+    placements: ['faq', 'contact'],
     answer:
       'Ask. If cost is the thing standing between you and booking, say so in your note. It counts if you are paying yourself rather than an employer, if your company is bootstrapped or unfunded, if the work is for a charity, nonprofit or the public sector, or if the full rate simply means you would not book at all. There is no proof to send, no essay to write and no negotiation. I will confirm an adjusted rate when we book. A few reduced slots each month keeps this honest; if the month is full, I will tell you and we will find another way.',
   },
@@ -44,6 +56,7 @@ export const faqs: Faq[] = [
   },
   {
     question: 'Is fractional leadership a real commitment?',
+    placements: ['faq', 'contact'],
     answer:
       'Yes, and that is the point. Fractional work runs on an agreed rhythm over months, not days. Quick rescue thoughts are exactly what strategy sessions are for; fractional leadership is for teams that want direction held steady while they build.',
   },
@@ -59,20 +72,24 @@ export const faqs: Faq[] = [
   },
   {
     question: 'Do you speak virtually?',
+    placements: ['faq', 'contact'],
     answer:
       'Yes. Remote keynotes and workshops carry the same fee unless the format is much shorter. For in-person events, travel and accommodation are covered by the organiser.',
   },
   {
     question: 'Will you sign an NDA?',
+    placements: ['faq', 'contact'],
     answer: 'Happily. Send yours, or use mine.',
   },
   {
     question: 'Can I hire you full-time?',
+    placements: ['faq', 'contact'],
     answer:
       'For the right role, yes. Director level and above. The same clarity principle applies: shared understanding of the goal before we commit. If that sounds like your team, write me a note and tell me what you are trying to accomplish.',
   },
   {
     question: 'How does payment work?',
+    placements: ['faq', 'contact'],
     answer:
       'Invoice and bank transfer, GBP unless we agree otherwise. Terms are on every proposal; nothing surprising arrives later.',
   },
@@ -158,3 +175,13 @@ export const forwardDeployedFaqs: Faq[] = [
       'Yes, at the same daily rate. Three is the default for two reasons. It keeps a second client running, which matters for how the engagement is treated for tax on your side as well as mine. And the day away is where the thinking happens; four-day weeks have produced more code and worse decisions every time I have tried them.',
   },
 ];
+
+/**
+ * The questions to show on a page, in file order.
+ *
+ * Mirrors testimonialsFor() in testimonials.ts: order is deliberate rather
+ * than sorted, so reordering is a cut and paste.
+ */
+export function faqsFor(placement: FaqPlacement): Faq[] {
+  return faqs.filter((f) => (f.placements ?? ['faq']).includes(placement));
+}

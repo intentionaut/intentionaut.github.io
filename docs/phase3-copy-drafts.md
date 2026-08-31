@@ -84,7 +84,7 @@ handful of experiments to a platform serving millions of customers.
   Production AI from experiments to a platform serving 100M+ customers.
 - StepStone — Global VP of Experience Design. Some of the earliest LLM-powered
   products in European recruitment; 3.2x ROI across the satellite portfolio.
-- PeskyFish — Interim CPO. +450% MRR in 90 days.
+- Direct-to-consumer grocery scaleup — Interim CPO. +450% MRR in 90 days.
 - Cazoo — founding team, through hyper-growth to a $7B IPO.
 - Pivotal — founding hire. Amazon and AT&T before that.
 

@@ -2,7 +2,9 @@
 import '@fontsource-variable/roboto-serif';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { rates, gbp } from '../data/rates';
+import { faqsFor } from '../data/faqs';
 import { testimonialsFor } from '../data/testimonials';
+import FaqList from '../components/FaqList.astro';
 
 // Cloudflare Turnstile sitekey (dash.cloudflare.com, Turnstile)
 const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
@@ -440,147 +442,10 @@ const testimonials = testimonialsFor('contact');
       </div>
     </section>
 
-    <section class="faq-section" aria-label="Common questions">
-      <style>
-        .faq-section {
-          padding-bottom: clamp(3rem, 6vw, 5rem);
-        }
-        .faq-section h2.faq-title {
-          font-size: 1.7rem;
-          margin-bottom: var(--space-2);
-        }
-        .faq-sect-sub {
-          margin: 0 0 var(--space-7);
-          max-width: 52ch;
-          color: var(--muted);
-          font-size: 0.98rem;
-        }
-        .faq-steps {
-          border-top: 1px solid var(--ink);
-        }
-        .faq-item {
-          border-bottom: 1px solid var(--line);
-        }
-        .faq-item summary {
-          list-style: none;
-          cursor: pointer;
-          display: flex;
-          align-items: baseline;
-          justify-content: space-between;
-          gap: var(--space-5);
-          padding: var(--space-5) 0;
-          font-family: var(--font-display);
-          font-optical-sizing: auto;
-          font-weight: 500;
-          font-size: 1.25rem;
-          line-height: 1.25;
-          color: var(--ink);
-        }
-        .faq-item summary::-webkit-details-marker {
-          display: none;
-        }
-        .faq-item summary::after {
-          content: '+';
-          flex-shrink: 0;
-          font-family: var(--font-body);
-          font-weight: 600;
-          font-size: 1.2rem;
-          line-height: 1;
-          color: var(--accent);
-          transition: transform var(--dur-med) ease;
-        }
-        .faq-item[open] summary::after {
-          content: '–';
-        }
-        .faq-item[open] summary {
-          color: var(--accent);
-        }
-        .faq-item .faq-body {
-          padding: 0 0 var(--space-5);
-        }
-        .faq-item .faq-body p {
-          margin: 0 0 var(--space-3);
-          color: var(--muted);
-        }
-        .faq-item .faq-body p:last-child {
-          margin-bottom: 0;
-        }
-      </style>
-      <h2 class="faq-title">Fair questions.</h2>
-      <p class="faq-sect-sub">
-        Straight answers about rates, sliding scale and how engagements
-        actually run. Anything missing: ask me.
-      </p>
-      <div class="faq faq-steps">
-        <details class="faq-item">
-          <summary>How does the sliding scale work?</summary>
-          <div class="faq-body">
-            <p>
-              Ask. If cost is the blocker, say so in your note. It counts if
-              you pay yourself, if your company is bootstrapped, a charity or
-              the public sector, or if the full rate means you won't book.
-            </p>
-            <p>
-              No proof, no essay. I confirm the adjusted rate when we book.
-              Reduced slots go fast; if the month is full, we find another
-              way.
-            </p>
-          </div>
-        </details>
-
-        <details class="faq-item">
-          <summary>Is fractional leadership a real commitment?</summary>
-          <div class="faq-body">
-            <p>
-              Yes, and that is the point. Fractional work runs on an agreed
-              rhythm over months, not days. Quick rescue thoughts are exactly
-              what strategy sessions are for; fractional leadership is for
-              teams that want direction held steady while they build.
-            </p>
-          </div>
-        </details>
-
-        <details class="faq-item">
-          <summary>Do you speak virtually?</summary>
-          <div class="faq-body">
-            <p>
-              Yes. Remote keynotes and workshops carry the same fee unless
-              the format is much shorter. For in-person events, travel and
-              accommodation are covered by the organizer.
-            </p>
-          </div>
-        </details>
-
-        <details class="faq-item">
-          <summary>Will you sign an NDA?</summary>
-          <div class="faq-body">
-            <p>Happily. Send yours, or use mine.</p>
-          </div>
-        </details>
-
-        <details class="faq-item">
-          <summary>Can I hire you full-time?</summary>
-          <div class="faq-body">
-            <p>
-              For the right role, yes. Director level and above. The same
-              clarity principle applies: shared understanding of the goal
-              before we commit. If that sounds like your team, write me a
-              note and tell me what you are trying to accomplish.
-            </p>
-          </div>
-        </details>
-
-        <details class="faq-item">
-          <summary>How does payment work?</summary>
-          <div class="faq-body">
-            <p>
-              Invoice and bank transfer, GBP unless we agree otherwise. Terms
-              are on every proposal.
-            </p>
-          </div>
-        </details>
-      </div>
-    </section>
+    <FaqList
+      items={faqsFor('contact')}
+      sub="Straight answers about rates, sliding scale and how engagements actually run. Anything missing: ask me."
+    />
   </section>
 
   <script>
