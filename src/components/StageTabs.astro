@@ -1,8 +1,11 @@
 ---
 /**
- * Tabbed walk through an app's stages, for /releases/<app> pages.
- * One tab per stage; the panel shows the command, what happens, what you get.
- * Progressive: without JavaScript every panel is visible in order.
+ * Walk through an app's stages, for /releases/<app> pages.
+ * By default a tabbed walkthrough: one tab per stage; the panel shows the
+ * command, what happens, what you get. Without JavaScript every panel is
+ * visible in order.
+ * Pass linear: true to render a static linear list (one line per stage)
+ * instead of tabs.
  */
 interface Stage {
   n: string;
@@ -16,45 +19,65 @@ interface Props {
   stages: Stage[];
   /** Label before the "you get" line, e.g. "Hands you" or "You get". */
   outLabel?: string;
+  /** Render as a static linear list (one line per stage) instead of tabs. */
+  linear?: boolean;
 }
-const { id, stages, outLabel = 'You get' } = Astro.props;
+const { id, stages, outLabel = 'You get', linear = false } = Astro.props;
 ---
 
-<div class="stabs" data-stabs>
-  <div class="stabs-list" role="tablist" aria-label="Stages">
-    {stages.map((s, i) => (
-      <button
-        class="stab"
-        role="tab"
-        type="button"
-        id={`${id}-tab-${i}`}
-        aria-selected={i === 0 ? 'true' : 'false'}
-        aria-controls={`${id}-panel-${i}`}
-        tabindex={i === 0 ? 0 : -1}
-      >
-        <span class="stab-n">{s.n}</span>
-        <span class="stab-name">{s.name}</span>
-      </button>
-    ))}
-  </div>
-  {stages.map((s, i) => (
-    <section
-      class="stab-panel"
-      role="tabpanel"
-      id={`${id}-panel-${i}`}
-      aria-labelledby={`${id}-tab-${i}`}
-      data-panel
-    >
-      <div class="stab-panel-head">
-        <span class="stage-n">{s.n}</span>
-        <h3>{s.name}</h3>
+{
+  linear ? (
+    <ol class="stage-list">
+      {stages.map((s) => (
+        <li class="stage">
+          <span class="stage-n">{s.n}</span>
+          <div class="stage-body">
+            <h3>{s.name}</h3>
+            <code class="stage-cmd">{s.cmd}</code>
+            <p>{s.what}</p>
+            {s.out && <p class="stage-out"><span>{outLabel}</span> {s.out}</p>}
+          </div>
+        </li>
+      ))}
+    </ol>
+  ) : (
+    <div class="stabs" data-stabs>
+      <div class="stabs-list" role="tablist" aria-label="Stages">
+        {stages.map((s, i) => (
+          <button
+            class="stab"
+            role="tab"
+            type="button"
+            id={`${id}-tab-${i}`}
+            aria-selected={i === 0 ? 'true' : 'false'}
+            aria-controls={`${id}-panel-${i}`}
+            tabindex={i === 0 ? 0 : -1}
+          >
+            <span class="stab-n">{s.n}</span>
+            <span class="stab-name">{s.name}</span>
+          </button>
+        ))}
       </div>
-      <code class="stage-cmd">{s.cmd}</code>
-      <p>{s.what}</p>
-      {s.out && <p class="stage-out"><span>{outLabel}</span> {s.out}</p>}
-    </section>
-  ))}
-</div>
+      {stages.map((s, i) => (
+        <section
+          class="stab-panel"
+          role="tabpanel"
+          id={`${id}-panel-${i}`}
+          aria-labelledby={`${id}-tab-${i}`}
+          data-panel
+        >
+          <div class="stab-panel-head">
+            <span class="stage-n">{s.n}</span>
+            <h3>{s.name}</h3>
+          </div>
+          <code class="stage-cmd">{s.cmd}</code>
+          <p>{s.what}</p>
+          {s.out && <p class="stage-out"><span>{outLabel}</span> {s.out}</p>}
+        </section>
+      ))}
+    </div>
+  )
+}
 
 <script is:inline>
   for (const root of document.querySelectorAll('[data-stabs]')) {
