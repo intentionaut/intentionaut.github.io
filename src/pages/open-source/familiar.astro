@@ -7,7 +7,7 @@ import ReleaseSubscribe from '../../components/ReleaseSubscribe.astro';
 
 const title = 'Familiar | A companion for your newsletter';
 const description =
-  'Familiar sits beside you while you work and then helps you write about it: questions that pull out what only you know, notes from your coding sessions drafted into your voice, and an editor\'s report to collaborate on.';
+  'You finish something good and then cannot say how you did it. Familiar takes you through a series of gates that get what you know written down in your own words, and ready to send.';
 
 const stages = [
   {
@@ -42,12 +42,24 @@ const stages = [
   },
   {
     n: '06',
-    name: 'Social',
-    cmd: 'familiar social next',
-    what: 'A week of posts on your own cadence. One pool of candidates, you pick per channel, exact send times. Nothing is scheduled until you confirm; with nothing connected you get a paste-ready list.',
+    name: 'Repurpose',
+    cmd: 'familiar repurpose',
+    what: 'One finished piece, two ways to use it again. Short is a week of posts. Long is a companion piece for somewhere else, and it does not write that piece: it reads what you already have and hands you back to the interview, so the second piece gets asked the same hard questions the first one did.',
   },
   {
     n: '07',
+    name: 'Social',
+    cmd: 'familiar social next',
+    what: 'A week of posts on your own cadence. One pool of candidates, you pick per channel, exact send times. It ends at copy you have approved, and goes no further.',
+  },
+  {
+    n: '08',
+    name: 'Publish',
+    cmd: 'familiar publish',
+    what: 'The posts you approved, into your scheduler. It builds each link and counts the finished post before it schedules, because a post that fitted in the draft stops fitting once the tracking is on the end of it. Over the limit it stops and tells you by how much. Connect nothing and you get a table to paste.',
+  },
+  {
+    n: '09',
     name: 'Learn',
     cmd: 'familiar learn diff pieces/2026-09-03-churn',
     what: 'Hand it the issue you sent next to the draft it gave you. The edits you made twice become rules, with the sentence each came from. Or point it at your back catalogue and let it draft your voice files from evidence.',
@@ -62,12 +74,11 @@ const stages = [
         <p class="eyebrow">Familiar</p>
         <h1>A companion for your <em>newsletter</em>.</h1>
         <p class="lede">
-          Familiar sits beside you while you work and then helps you write
-          about the work you do. It asks the questions that pull out what only
-          you know, drafts additional notes from your coding sessions into your
-          voice, and hands back an editor's report for you to collaborate on so
-          that you can show your work and talk about the products you're
-          making.
+          You finish something good and then cannot say how you did it. The
+          reasons were obvious in June and they are gone by September. Familiar
+          takes you through a series of gates, each one asking for the part
+          only you can give, until what you know is written down in your own
+          words and ready to send.
         </p>
         <div class="cta-row rel-cta">
           <a class="btn-primary" href="https://github.com/intentionaut/familiar?utm_source=intentionaut.com&utm_medium=referral&utm_campaign=open-source" target="_blank" rel="noopener noreferrer">Get it on GitHub</a>
@@ -75,8 +86,8 @@ const stages = [
         </div>
       </div>
 
-      <div class="term" role="img" aria-label="A Familiar interview session in a terminal">
-        <div class="term-bar"><i></i><i></i><i></i><span>familiar · interview</span></div>
+      <div class="term" role="img" aria-label="A Familiar session in a terminal: an interview that finds the thesis, then an outline stage that offers three shapes and waits">
+        <div class="term-bar"><i></i><i></i><i></i><span>familiar · interview → outline</span></div>
         <pre class="term-body"><span class="t-p">$</span> <span class="t-c">familiar interview</span> "the churn model that kept lying"
 
 <span class="t-f">Familiar</span>  Start with what happened. When did you first
@@ -95,7 +106,17 @@ const stages = [
 
 <span class="t-y">You</span>       Yes. That's it.
 
-<span class="t-d">  → notes.md  thesis · stakes · 3 evidence items (1 needs source)</span><span class="t-cursor"></span></pre>
+<span class="t-d">  → notes.md  thesis · stakes · 3 evidence items (1 needs source)</span>
+
+<span class="t-p">$</span> <span class="t-c">familiar outline</span>
+
+<span class="t-f">Familiar</span>  Three shapes. Your best line lands in the
+          second one. The third is the one that could
+          fail: it needs a number you do not have.
+
+          Pick one, merge two, or throw them out.
+
+<span class="t-d">  waiting for you</span><span class="t-cursor"></span></pre>
       </div>
     </section>
 
@@ -111,11 +132,14 @@ const stages = [
             you take for granted. When I asked a model to help, it made things
             worse: it filled in the parts I forgot to say with the most
             plausible thing it could think of, and I caught one inventing a
-            statistic for a piece with my name on it. So I built a newsroom for
-            myself the way good editors work. Interview first. Propose shapes
-            and let the writer choose. Hand back notes, never a rewrite. Then I
-            took my own voice out of it and gave it a name: a familiar, in the
-            old stories, sits beside the work and notices things.
+            statistic for a piece with my name on it. So I built the thing I
+            actually needed, the way good editors work. Interview first. Propose
+            shapes and let the writer choose. Hand back notes, never a rewrite.
+            Every issue of this letter now goes through it. It is open source
+            because the problem is not mine alone, and because a tool that
+            shapes how someone writes should be one they can read. It has a name
+            for the same reason it has a temperament: a familiar, in the old
+            stories, sits beside the work and notices things.
           </p>
           <p>
             The part I did not plan is the part I value most. My pace of
@@ -130,7 +154,7 @@ const stages = [
         </div>
         <aside class="rel-aside">
           <dl>
-            <div><dt>Shape</dt><dd>Seven stages, each a plain markdown prompt</dd></div>
+            <div><dt>Shape</dt><dd>A gate at every step, each a plain markdown prompt</dd></div>
             <div><dt>Runs in</dt><dd>Claude Code, opencode, Dex, or a claude.ai Project</dd></div>
             <div><dt>Your voice</dt><dd>Five files you fill in, or let it draft from your back catalogue</dd></div>
             <div><dt>Licence</dt><dd>MIT, free, built in public</dd></div>
@@ -142,15 +166,20 @@ const stages = [
 
     <section class="wrap rel-stages">
       <p class="eyebrow">How a piece moves</p>
-      <h2>Seven stages, and it stops after every one of them.</h2>
+      <h2>The stopping is the point.</h2>
       <div class="prose rel-stages-intro">
         <p>
-          A model left to run a whole pipeline produces something smooth and
-          slightly wrong, because each step inherits the last one's small
-          errors and nobody corrects them. The gate after each stage puts you
-          in between. It also lets you move in both directions: go back to the
-          interview and the notes grow, or rework one section and the rest is
-          left alone.
+          A model left to run from one end to the other gives you something
+          smooth and slightly wrong. Each step inherits the last step's small
+          errors and there is nobody standing there to catch them. So Familiar
+          stops, every time, and the thing it wants next is a decision only you
+          can make.
+        </p>
+        <p>
+          You can walk back through it too. Return to the interview and your
+          notes grow. Rework one section and the rest is left where it was. The
+          piece waits in a folder between gates, which some weeks is an hour
+          and other weeks is a fortnight.
         </p>
       </div>
       <StageTabs id="familiar" stages={stages} />

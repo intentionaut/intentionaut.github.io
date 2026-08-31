@@ -15,7 +15,7 @@ Writing about your own work is hard for a specific reason: the good material is 
 
 ## The Bet
 
-Familiar is the newsroom behind Intentionaut, made general. Seven stages, each a plain markdown prompt: interview, outline, draft, developmental edit, line edit, social, learn. It asks you questions one at a time until the idea is sharp. It proposes three structures and you pick. It drafts in your voice with a bracket wherever it would otherwise have invented something. Then the edits come back as reports: the quote, the problem, the exact fix, and you decide. Nothing is applied for you. Nothing ships until you say so.
+Familiar is what makes Intentionaut. Every issue of the letter goes through it, and it is open source so it can make yours too. It takes you through a series of gates, each one a plain markdown prompt, and each one asking for the part only you can give. It asks you questions one at a time until the idea is sharp. It proposes three structures and you pick. It drafts in your voice with a bracket wherever it would otherwise have invented something. Then the edits come back as reports: the quote, the problem, the exact fix, and you decide. What comes out is the piece and the posts that carry it. Nothing is applied for you. Nothing ships until you say so.
 
 ## Under the Hood
 
@@ -27,7 +27,7 @@ Familiar is the newsroom behind Intentionaut, made general. Seven stages, each a
 
 ## Why it Matters
 
-The longer story, with how a piece moves through the stages and what Familiar refuses to do, is at [intentionaut.com/open-source/familiar](/open-source/familiar/).
+The longer story, with how a piece moves from a question to something sent, and what Familiar refuses to do, is at [intentionaut.com/open-source/familiar](/open-source/familiar/).
 
 
 A newsletter is worth reading when it sounds like a person who knows something. The fastest way to lose that is to let a model fill the gaps. Familiar keeps the gaps visible and the decisions yours, and it gets better at your voice the more you publish. Free, MIT, and built in public. If you write in a language other than English, the language files are where a pull request helps most.
