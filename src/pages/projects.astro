@@ -2,14 +2,9 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const projects = (await getCollection('projects')).sort((a, b) => {
-  const oa = a.data.order ?? Infinity;
-  const ob = b.data.order ?? Infinity;
-  if (oa !== ob) return oa - ob;
-  const da = a.data.date?.valueOf() ?? 0;
-  const db = b.data.date?.valueOf() ?? 0;
-  return db - da;
-});
+const projects = (await getCollection('projects')).sort((a, b) =>
+  a.data.title.localeCompare(b.data.title)
+);
 ---
 
 <BaseLayout
