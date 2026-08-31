@@ -6,10 +6,19 @@ on:
   # The site pulls beehiiv at build time, so a post published on beehiiv does
   # not appear at /writing/<slug>/ until a build runs. beehiiv webhooks are
   # Scale/Enterprise only (the API returns 403 ACCESS_FORBIDDEN on this plan),
-  # so this rebuilds every six hours instead. New issues go live, and become
-  # indexable, without anyone having to remember to do anything.
+  # so this is on a schedule instead. Nothing to trigger by hand.
+  #
+  # Times are UTC; GitHub cron has no timezone. Every issue so far has sent
+  # between 06:50 and 07:08 UTC, i.e. 08:00 UK time. The 07:20 run catches
+  # that during British Summer Time and the 08:20 run catches it once the
+  # clocks go back, so a new issue is on the site within about twenty minutes
+  # either way. Midday and evening are safety nets for an off-pattern send or
+  # a failed earlier run.
+  #
+  # Minute 20 rather than 00 on purpose: scheduled runs queue behind everyone
+  # else's on the hour and can be delayed.
   schedule:
-    - cron: '0 */6 * * *'
+    - cron: '20 7,8,12,18 * * *'
   workflow_dispatch:
 
 permissions:
