@@ -48,8 +48,12 @@ const LETTER_FOOTER_ID = 'thank-you-for-reading';
 /** Opening sentence of the perma-footer, verbatim from positioning.md. */
 const LETTER_FOOTER_OPENING = 'is a fortnightly letter from Saielle DaSilva';
 
-/** Words only the footer uses; if these survive the cut, both markers missed. */
-const LETTER_FOOTER_SIGN_OFF = 'Putting the soft back in software';
+/**
+ * A second line from the footer, used only to detect a footer the markers
+ * failed to cut. Deliberately not the sign-off: the sign-off is body copy now,
+ * so keying on it would warn on every issue that signs off by hand.
+ */
+const LETTER_FOOTER_FORWARD_LINE = 'forward it to one person';
 
 function stripLetterFooter(content: string): string {
   const cuts: number[] = [];
@@ -68,7 +72,7 @@ function stripLetterFooter(content: string): string {
 
   // Rewording the footer would silently put it back on every essay page. Say so
   // in the build log rather than let it drift back in unnoticed.
-  if (content.includes(LETTER_FOOTER_SIGN_OFF)) {
+  if (content.includes(LETTER_FOOTER_FORWARD_LINE)) {
     console.warn(
       'beehiiv: letter footer found but not removed - it matched neither the ' +
         `"${LETTER_FOOTER_ID}" heading nor the opening "${LETTER_FOOTER_OPENING}". ` +
