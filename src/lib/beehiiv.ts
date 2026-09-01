@@ -151,6 +151,21 @@ function stripBeehiivHtml(html: string): string {
  * run with no key). Anywhere else, throw. A failed build keeps the last good
  * site live and sends a failure notification, which is the outcome we want.
  */
+/**
+ * beehiiv can serve a post with its web body gated, returning the title and a
+ * paywall marker and nothing else. Astro would happily build a page from that,
+ * and it renders as a headline above an empty column.
+ *
+ * Both the archive listing and the page generation ask this before using a
+ * post, so the two can never disagree about what exists. A gated post gets no
+ * page and no row; ungating it in beehiiv brings both back on the next build,
+ * with no code change.
+ */
+export function hasWebBody(post: BeehiivPost): boolean {
+  if (post.content_html.includes("id='paywall'")) return false;
+  return post.content_html.replace(/<[^>]+>/g, '').trim().length > 0;
+}
+
 export async function fetchPosts(): Promise<BeehiivPost[]> {
   if (!API_KEY) {
     if (import.meta.env.PROD) {

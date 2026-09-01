@@ -1,13 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SubscribeForm from '../components/SubscribeForm.astro';
+import { getCollection } from 'astro:content';
 import {
   writingEntries,
   themeLabels,
   type Theme,
   type WritingEntry,
 } from '../data/writing';
-import { fetchPosts } from '../lib/beehiiv';
+import { fetchPosts, hasWebBody } from '../lib/beehiiv';
 
 /*
  * The archive in data/writing.ts is hand-curated: it carries themes, the
@@ -28,16 +29,25 @@ const posts = await fetchPosts();
 const autoEntries: WritingEntry[] = [];
 const noBody: string[] = [];
 
+// On-site entries get a one-line summary for the archive. Sources: the local
+// essay frontmatter (keyed by the same slug the archive links to) and, for
+// beehiiv posts, the subtitle. Curated entries win in the merged list but still
+// want a description, so this map backfills them whichever source they came from.
+const essays = await getCollection('essays');
+const descByUrl = new Map<string, string>();
+for (const e of essays) descByUrl.set(`/writing/${e.id}/`, e.data.description);
+for (const p of posts) {
+  const url = `/writing/${p.slug}/`;
+  if (!descByUrl.has(url) && p.subtitle) descByUrl.set(url, p.subtitle);
+}
+
 for (const post of posts) {
   const url = `/writing/${post.slug}/`;
   if (curated.has(url)) continue;
 
-  // beehiiv can serve a post with its web body gated, leaving nothing but a
-  // paywall marker. Linking to that from the archive would send readers to a
-  // blank page, so it is named in the build log instead of listed. Ungating it
-  // in beehiiv is all it takes for the post to appear here on the next build.
-  const text = post.content_html.replace(/<[^>]+>/g, '').trim();
-  if (text.length === 0 || post.content_html.includes("id='paywall'")) {
+  // A gated post has no page either (see hasWebBody), so listing it would link
+  // at a 404. Named in the build log instead.
+  if (!hasWebBody(post)) {
     noBody.push(post.slug);
     continue;
   }
@@ -48,20 +58,29 @@ for (const post of posts) {
     source: 'Intentionaut',
     url,
     themes: [],
+    description: descByUrl.get(url),
   });
 }
 
 if (noBody.length > 0) {
   console.warn(
-    `writing: ${noBody.length} published post(s) have no web body and are not ` +
-      `listed at /writing/: ${noBody.join(', ')}. ` +
+    `writing: ${noBody.length} published post(s) have no web body, so they get ` +
+      `no page and no archive row: ${noBody.join(', ')}. ` +
       'Check that post\'s web settings in beehiiv.'
   );
 }
 
-const entries = [...writingEntries, ...autoEntries].sort(
-  (a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf()
-);
+const entries = [...writingEntries, ...autoEntries]
+  .map((e) =>
+    // Backfill a missing description for on-site entries from the local essay
+    // or beehiiv subtitle when one exists.
+    e.description || !e.url?.startsWith('/writing/')
+      ? e
+      : { ...e, description: descByUrl.get(e.url) }
+  )
+  .sort(
+    (a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf()
+  );
 
 const slugify = (s: string) =>
   s
@@ -155,6 +174,9 @@ const fmtDate = (e: (typeof entries)[number]) =>
                     </span>
                   )}
                 </p>
+                {e.description && (
+                  <p class="talk-desc">{e.description}</p>
+                )}
               </div>
             </li>
           ))

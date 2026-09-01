@@ -5,7 +5,7 @@ import AuthorBio from '../../components/AuthorBio.astro';
 import KeepReading from '../../components/KeepReading.astro';
 import { relatedTo } from '../../data/writing';
 import { getCollection, render } from 'astro:content';
-import { fetchPosts } from '../../lib/beehiiv';
+import { fetchPosts, hasWebBody } from '../../lib/beehiiv';
 
 export async function getStaticPaths() {
   const [posts, essays] = await Promise.all([
@@ -13,7 +13,9 @@ export async function getStaticPaths() {
     getCollection('essays'),
   ]);
 
-  const beehiivPaths = posts.map((post) => ({
+  // A gated post has no body to show, so it gets no page at all rather than a
+  // blank one. See hasWebBody.
+  const beehiivPaths = posts.filter(hasWebBody).map((post) => ({
     params: { slug: post.slug },
     props: { type: 'beehiiv', post },
   }));
