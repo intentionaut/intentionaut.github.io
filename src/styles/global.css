@@ -1296,6 +1296,16 @@ a.talk-title:hover {
   color: var(--muted);
 }
 
+.rates-note {
+  margin: 0 0 var(--space-8);
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.rates-note a {
+  color: var(--accent);
+}
+
 .form-lede {
   max-width: 52ch;
   margin: 0 0 var(--space-6);
