@@ -117,7 +117,7 @@ export const faqs: Faq[] = [
 export const forwardDeployedFaqs: Faq[] = [
   {
     question: 'What does it cost?',
-    answer: `${gbp(rates.forwardDeployed)} a day, three days a week, four weeks minimum. Before that, a five-day scoping block at ${gbp(rates.fractional)} a day, which is my standard fractional rate rather than this one. Four weeks at three days a week is £21,000; eight weeks is £42,000, plus the scoping either way. Where an advisor or recruiter introduces the work, their margin sits on top of my rate rather than inside it.`,
+    answer: `${gbp(rates.forwardDeployed)} a day, three days a week, four weeks minimum. Before that, a five-day scoping block at ${gbp(rates.fractional)} a day, which is my standard fractional rate rather than this one. Four weeks at three days a week is ${gbp(rates.forwardDeployed * 12)}; eight weeks is ${gbp(rates.forwardDeployed * 24)}, plus the scoping either way. Where an advisor or recruiter introduces the work, their margin sits on top of my rate rather than inside it.`,
   },
   {
     question: 'What is the most complex thing you have personally built, not advised on?',
