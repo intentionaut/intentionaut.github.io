@@ -11,7 +11,6 @@ export const rates = {
   // recruiter introduces the work, their margin sits on top of this, not
   // inside it. See docs/forward-deployed-positioning.md.
   forwardDeployed: 1750, // per day
-  scopingBlock: 6000, // five days, fixed, at the standard fractional rate
 } as const;
 
 /** Formats a GBP amount with thousands separators, e.g. gbp(1200) -> "£1,200" */

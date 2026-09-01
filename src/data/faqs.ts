@@ -43,7 +43,7 @@ export const faqs: Faq[] = [
   },
   {
     question: 'What is your day rate for forward deployed product building?',
-    answer: `${gbp(rates.forwardDeployed)} a day, three days a week, four weeks minimum. It starts with a five-day scoping block at ${gbp(rates.scopingBlock)}, which is the fractional rate rather than this one. Where an advisor or recruiter introduces the work, their margin sits on top of that rate rather than inside it.`,
+    answer: `${gbp(rates.forwardDeployed)} a day, three days a week, four weeks minimum. It starts with a five-day scoping block at ${gbp(rates.fractional)} a day, which is the fractional rate rather than this one. Where an advisor or recruiter introduces the work, their margin sits on top of that rate rather than inside it.`,
   },
   {
     question: 'What is the difference between fractional leadership and forward deployed product building?',
@@ -117,7 +117,7 @@ export const faqs: Faq[] = [
 export const forwardDeployedFaqs: Faq[] = [
   {
     question: 'What does it cost?',
-    answer: `${gbp(rates.forwardDeployed)} a day, three days a week, four weeks minimum. Before that, a five-day scoping block at ${gbp(rates.scopingBlock)}, which is my standard fractional rate rather than this one. Four weeks at three days a week is £21,000; eight weeks is £42,000, plus the scoping either way. Where an advisor or recruiter introduces the work, their margin sits on top of my rate rather than inside it.`,
+    answer: `${gbp(rates.forwardDeployed)} a day, three days a week, four weeks minimum. Before that, a five-day scoping block at ${gbp(rates.fractional)} a day, which is my standard fractional rate rather than this one. Four weeks at three days a week is £21,000; eight weeks is £42,000, plus the scoping either way. Where an advisor or recruiter introduces the work, their margin sits on top of my rate rather than inside it.`,
   },
   {
     question: 'What is the most complex thing you have personally built, not advised on?',
@@ -142,7 +142,7 @@ export const forwardDeployedFaqs: Faq[] = [
   {
     question: 'What if it is not working?',
     answer:
-      'The five-day scoping block exists so you can find that out for six thousand pounds instead of forty-two thousand. After that, either of us can end the block on two weeks\' notice and you pay for the days worked. No exit fee, no minimum-term claim on the rest of it.',
+      `The five-day scoping block exists so you can find that out for ${gbp(rates.fractional)} a day instead of committing to a full block. After that, either of us can end the block on two weeks' notice and you pay for the days worked. No exit fee, no minimum-term claim on the rest of it.`,
   },
   {
     question: 'What conditions make this engagement fail?',
