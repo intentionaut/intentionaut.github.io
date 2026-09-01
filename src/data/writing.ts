@@ -25,6 +25,9 @@ export interface WritingEntry {
   dateLabel?: string;
   source: string;
   themes: Theme[];
+  /** One-line summary shown under the title in the /writing/ archive. For on-site
+   *  entries set at build time from the essay frontmatter or beehiiv subtitle. */
+  description?: string;
 }
 
 export const writingEntries: WritingEntry[] = [
@@ -76,6 +79,20 @@ export const writingEntries: WritingEntry[] = [
     source: 'Intentionaut',
     url: '/writing/the-new-architecture-of-software-quality/',
     themes: ['craft', 'ai'],
+  },
+  {
+    title: "The AI Opportunity You're Missing",
+    date: '2025-09-17',
+    source: 'Intentionaut',
+    url: '/writing/the-ai-opportunity-you-re-missing/',
+    themes: ['ai', 'leadership'],
+  },
+  {
+    title: 'Taking a Spell',
+    date: '2026-09-01',
+    source: 'Intentionaut',
+    url: '/writing/taking-a-spell/',
+    themes: ['career', 'craft'],
   },
   {
     title: 'Building AI That Actually Helps',
