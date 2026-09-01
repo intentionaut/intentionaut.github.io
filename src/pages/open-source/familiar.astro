@@ -1,13 +1,12 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import '../../styles/release.css';
-import StageTabs from '../../components/StageTabs.astro';
 import ReleaseLog from '../../components/ReleaseLog.astro';
 import ReleaseSubscribe from '../../components/ReleaseSubscribe.astro';
 
-const title = 'Familiar | A companion for your newsletter';
+const title = 'Familiar | Why I built it';
 const description =
-  'You finish something good and then cannot say how you did it. Familiar takes you through a series of gates that get what you know written down in your own words, and ready to send.';
+  'Why I built Familiar: I kept finishing things and losing the reasons. The tool itself, and how to use it, lives at familiar.intentionaut.com.';
 
 const stages = [
   {
@@ -164,26 +163,6 @@ const stages = [
       </div>
     </section>
 
-    <section class="wrap rel-stages">
-      <p class="eyebrow">How a piece moves</p>
-      <h2>The stopping is the point.</h2>
-      <div class="prose rel-stages-intro">
-        <p>
-          A model left to run from one end to the other gives you something
-          smooth and slightly wrong. Each step inherits the last step's small
-          errors and there is nobody standing there to catch them. So Familiar
-          stops, every time, and the thing it wants next is a decision only you
-          can make.
-        </p>
-        <p>
-          You can walk back through it too. Return to the interview and your
-          notes grow. Rework one section and the rest is left where it was. The
-          piece waits in a folder between gates, which some weeks is an hour
-          and other weeks is a fortnight.
-        </p>
-      </div>
-      <StageTabs id="familiar" stages={stages} linear revealCount={3} />
-    </section>
 
     <section class="wrap rel-log">
       <p class="eyebrow">Activity</p>
@@ -191,113 +170,23 @@ const stages = [
       <ReleaseLog repo="intentionaut/familiar" />
     </section>
 
+
+
+
     <section class="wrap rel-refuse">
-      <p class="eyebrow">What it will not do</p>
-      <h2>The restraint is most of the design.</h2>
-      <div class="rel-story-grid">
-        <div class="prose">
-          <p>
-            Rewrite tools fail in two ways people keep reporting: they flag the
-            things you did on purpose as mistakes, and they drop claims while
-            they think they are only changing shape. So Familiar never touches
-            your file. Every edit is a proposal you can see, and the cost of a
-            wrong one is a glance. Its list of AI tells is checked weekly
-            against <a href="https://github.com/blader/humanizer" target="_blank" rel="noopener noreferrer">humanizer</a>,
-            and additions land one at a time with a real example, because a
-            bloated list means false positives for every writer using it.
-          </p>
-        </div>
-        <aside class="rel-aside">
-          <dl>
-            <div><dt>Never</dt><dd>Rewrites your file in place</dd></div>
-            <div><dt>Never</dt><dd>Invents a number, a quote or a source</dd></div>
-            <div><dt>Never</dt><dd>Guesses a voice it has not been shown</dd></div>
-            <div><dt>Never</dt><dd>Advances a stage without you</dd></div>
-          </dl>
-        </aside>
-      </div>
-    </section>
-
-    <section class="wrap rel-voice">
-      <div class="voice-grid">
-        <div>
-          <p class="eyebrow">Your voice, your language</p>
-          <h2>It learns from what you have published.</h2>
-          <div class="prose">
-            <p>
-              Ask a writer how they write and you get the writer they would
-              like to be. So Familiar reads your past issues instead and drafts
-              your voice files from them, with a count next to every claim.
-              After each issue, the edits you made twice become rules, and a
-              claim you cut is the one it pays most attention to, because it
-              usually means the draft overstated.
-            </p>
-            <p>
-              The rules that are really about English (dashes, spelling,
-              heading case) are marked and skipped for other languages, and a
-              per-language file carries that language's own tells. There are
-              none yet, because I can only write one of them well. If you write
-              in something other than English, that pull request is the most
-              useful one you could open.
-            </p>
-          </div>
-        </div>
-        <div class="voice-files">
-          <div class="file"><span>knowledge/</span>positioning.md<small>what it is, who reads it, house rules</small></div>
-          <div class="file"><span>knowledge/</span>voice-guide.md<small>how you write, with the moves that make it yours</small></div>
-          <div class="file"><span>knowledge/</span>style-rules.md<small>the tell list the line edit runs</small></div>
-          <div class="file"><span>knowledge/examples/</span>canonical.md<small>your own lines at full strength</small></div>
-          <div class="file"><span>knowledge/languages/</span>&lt;code&gt;.md<small>rules and tells for a language that is not English</small></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="wrap rel-expect">
-      <p class="eyebrow">Before you start</p>
-      <h2>The first hour is mostly you talking.</h2>
-      <div class="rel-story-grid">
-        <div class="prose">
-          <p>
-            Familiar cannot draft in your voice until it has one to work from.
-            If you have published before, point the learn stage at that folder
-            and it will read your writing and draft the voice files from
-            evidence, with counts rather than adjectives, and you accept or
-            reject each section. If you have not published, you answer two short
-            files instead. Either way this happens before your first draft, not
-            after you are disappointed by one.
-          </p>
-          <p>
-            Then the interview, which is the part people try to skip. It asks
-            one question at a time and it wants real answers, because your
-            answers are the material. Everything downstream is built from what
-            you said. Ten or fifteen honest minutes here is the difference
-            between a piece that sounds like you and a piece that sounds like
-            a competent stranger who read your notes.
-          </p>
-          <p>
-            After that it is unhurried. Every stage ends in a file and waits.
-            You can come back in an hour or in a fortnight and the work is
-            exactly where you left it, which matters more than it sounds if
-            your attention arrives in bursts. Nothing expires and nothing runs
-            while you are not looking.
-          </p>
-          <p>
-            What you should not expect is a finished piece. The draft stage
-            gets you most of the way in your own words, and the edit stages
-            hand back a report you work through yourself. The last stretch is
-            yours. That is the design, not a limitation being apologised for.
-          </p>
-        </div>
-        <aside class="rel-aside">
-          <dl>
-            <div><dt>You need</dt><dd>Something of your own worth writing about</dd></div>
-            <div><dt>Teaching it your voice</dt><dd>Minutes, if you have published. Two short files if not</dd></div>
-            <div><dt>First interview</dt><dd>Ten to fifteen minutes of honest answers</dd></div>
-            <div><dt>Between stages</dt><dd>It waits. An hour or a fortnight, no expiry</dd></div>
-            <div><dt>You still do</dt><dd>The last stretch of the draft, and every edit</dd></div>
-            <div><dt>Runs</dt><dd>On your machine, on files you can read</dd></div>
-          </dl>
-        </aside>
+      <p class="eyebrow">The rest of it</p>
+      <h2>Everything about using it lives on its own site.</h2>
+      <div class="prose">
+        <p>
+          Every stage, what each one asks of you, what it refuses to do, and
+          how to install it: <a href="https://familiar.intentionaut.com/?utm_source=intentionaut.com&amp;utm_medium=referral&amp;utm_campaign=open-source">familiar.intentionaut.com</a>.
+          It is free and MIT licensed, and it sends nothing anywhere without
+          you saying so.
+        </p>
+        <p>
+          This page is only the story of why it exists. That site is the
+          documentation, and it is the one kept current.
+        </p>
       </div>
     </section>
 
@@ -305,17 +194,6 @@ const stages = [
       <ReleaseSubscribe source="open-source-familiar" tool="Familiar" />
     </section>
 
-    <section class="wrap">
-      <div class="rel-close">
-        <h2>Free, MIT, and it never sends anything without you.</h2>
-        <p>Clone it, teach it your voice, and start with the idea that has been rattling around.</p>
-        <div class="cta-row">
-          <a class="btn-primary" href="https://github.com/intentionaut/familiar?utm_source=intentionaut.com&utm_medium=referral&utm_campaign=open-source" target="_blank" rel="noopener noreferrer">Visit the repo</a>
-          <a class="link-arrow" href="/projects/familiar/">The short version</a>
-        </div>
-        <span class="pill pill-dark"><span class="pill-prompt">$</span> git clone https://github.com/intentionaut/familiar.git</span>
-      </div>
-    </section>
   </div>
 </BaseLayout>
 
