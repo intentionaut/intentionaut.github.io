@@ -12,6 +12,13 @@
 interface Props {
   /** utm_source context, e.g. "home", "writing-top", "article", "subscribe-page". */
   source: string;
+  /**
+   * utm_campaign, when this form belongs to one piece rather than the site in
+   * general. Pass the essay's slug. Without it every signup is attributed to
+   * the site as a whole, so a per-piece prompt cannot be told from a generic
+   * one and there is no way to learn which writing actually converts.
+   */
+  campaign?: string;
   /** Unique per instance, ties the label to the input. */
   emailId: string;
   buttonLabel?: string;
@@ -21,6 +28,7 @@ interface Props {
 
 const {
   source,
+  campaign,
   emailId,
   buttonLabel = 'Subscribe',
   variant = 'inline',
@@ -29,7 +37,12 @@ const {
 ---
 
 <div class:list={['subscribe', `subscribe--${variant}`]}>
-  <form class="signup-form subscribe-form" data-subscribe={source} novalidate>
+  <form
+    class="signup-form subscribe-form"
+    data-subscribe={source}
+    data-campaign={campaign}
+    novalidate
+  >
     <label class="sr-only" for={emailId}>Email address</label>
     <input
       class="signup-input"
@@ -171,6 +184,13 @@ const {
   const params = new URLSearchParams(location.search);
   const channel = params.get('utm_source') || params.get('ref') || '';
 
+  // The medium and campaign on the URL are the rest of the same fact and were
+  // previously thrown away here, which collapsed every arrival into
+  // "someone came from the website". Medium is what separates a newsletter
+  // click from a feed post, so a link that declares one keeps it.
+  const medium = params.get('utm_medium') || '';
+  const urlCampaign = params.get('utm_campaign') || '';
+
   document.querySelectorAll<HTMLFormElement>('form[data-subscribe]').forEach((form) => {
     const wrap = form.parentElement;
     const status = wrap?.querySelector<HTMLElement>('.subscribe-status');
@@ -211,6 +231,10 @@ const {
             email,
             consent: consentBox ? consentBox.checked : true,
             source: channel || form.dataset.subscribe,
+            // A campaign named on the URL is the sharper fact: it says which
+            // link was followed, not merely which page the form sits on.
+            campaign: urlCampaign || form.dataset.campaign || undefined,
+            medium: medium || undefined,
             website: fd.get('website') || '',
             referrer: document.referrer || undefined,
           }),
@@ -224,10 +248,10 @@ const {
           form.hidden = true;
           if (note) note.hidden = true;
           if (done) {
-            done.textContent = result.message || 'Almost there — check your inbox.';
+            done.textContent = result.message || 'Almost there. Check your inbox.';
             done.hidden = false;
           } else {
-            setStatus(result.message || 'Almost there — check your inbox.', false);
+            setStatus(result.message || 'Almost there. Check your inbox.', false);
           }
         } else {
           setStatus(result.error || 'Something went wrong. Try again in a moment.', true);

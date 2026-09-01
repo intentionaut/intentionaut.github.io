@@ -1,0 +1,85 @@
+---
+/**
+ * The two lines under every piece: who wrote it, what she does, and what she is
+ * open to. Growth Plan action 1.2.
+ *
+ * Speaking is in the list on purpose. Growth Plan 3.2 (book two podcasts or
+ * guest slots per quarter) calls itself the most-skipped action in the plan,
+ * and an essay reaches the people who programme events, so this is the one
+ * place the ask costs nothing to make. /keynote-speaker/ is the booking
+ * page; /speaking/ is the archive of past talks and is not linked here.
+ *
+ * It exists because an essay can be someone's first contact with Saielle and,
+ * until now, ended without ever saying who wrote it or that she is available.
+ * Third person on purpose: the essay above it is first person, and the switch
+ * is what marks this as the credential block rather than more of the piece.
+ *
+ * One component, used by both the beehiiv and the local-essay branches of
+ * /writing/[slug], so the bio cannot drift between them.
+ */
+---
+
+<aside class="author-bio" aria-label="About the author">
+  <img
+    class="author-bio-portrait"
+    src="/saielle-dasilva.jpg"
+    alt=""
+    width="72"
+    height="72"
+    loading="lazy"
+    decoding="async"
+  />
+  <p class="author-bio-text">
+    <strong>Saielle DaSilva</strong> is a fractional product leader and
+    forward-deployed builder. She helps teams work out what to build, then stays
+    and builds it with them.
+    <br />
+    <span class="author-bio-open"
+      >Currently open to <a href="/fractional/">fractional product leadership</a>,
+      <a href="/forward-deployed/">embedded build work</a> and
+      <a href="/keynote-speaker/">speaking</a>.</span
+    >
+  </p>
+</aside>
+
+<style>
+  .author-bio {
+    display: flex;
+    gap: var(--space-4);
+    align-items: flex-start;
+    margin: var(--space-6) 0 0;
+    padding: var(--space-4) 0 0;
+    border-top: 1px solid var(--slate);
+  }
+
+  .author-bio-portrait {
+    flex-shrink: 0;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .author-bio-text {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  .author-bio-text strong {
+    color: var(--ink);
+  }
+
+  .author-bio-open {
+    display: inline-block;
+    margin-top: var(--space-2);
+  }
+
+  @media (max-width: 34rem) {
+    .author-bio {
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+  }
+</style>

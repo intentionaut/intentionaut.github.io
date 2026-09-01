@@ -8,7 +8,8 @@
     "prebuild": "rm -rf node_modules/.astro",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "subscribers": "node scripts/subscribers.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
