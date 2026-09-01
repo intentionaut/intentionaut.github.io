@@ -13,3 +13,15 @@ contact-form/
 # Captain's Log reflections are verbatim and personal; keep them here on disk,
 # out of git. See ~/Projects/captains-log/PROMPT.md.
 REFLECTIONS.md
+
+# Reasoning never ships. This repo is public, so the only markdown in it is
+# markdown a stranger is meant to read: the README, the agent notes, and the
+# site's own content under src/content/. Everything else (positioning
+# arguments, pricing and cannibalisation analysis, SEO logs, competitor
+# benchmarks, copy drafts, anything worked out in conversation) lives in the
+# vault at 06-Resources/Intentionaut/Site_Docs/, which has no remote.
+# Enforced by .githooks/pre-commit, not by anyone remembering.
+docs/
+/*.md
+!/README.md
+!/AGENTS.md
