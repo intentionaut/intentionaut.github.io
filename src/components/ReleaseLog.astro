@@ -16,11 +16,14 @@ interface Props {
   branch?: string;
   /** Show this many entries expanded in the list; the rest sit behind "older". */
   recent?: number;
+  /** Render at most this many entries. Older ones stay in the full changelog,
+   *  which is linked at the foot. Unset means all of them. */
+  limit?: number;
   /** Optional page on the app's own site where the notes are also published. */
   siteUrl?: string;
 }
 
-const { repo, branch = 'main', recent = 3, siteUrl } = Astro.props;
+const { repo, branch = 'main', recent = 3, limit, siteUrl } = Astro.props;
 
 interface Entry {
   version: string;
@@ -58,8 +61,10 @@ const fmt = (iso: string) =>
   });
 
 const latest = entries[0];
-const head = entries.slice(0, recent);
-const tail = entries.slice(recent);
+const total = entries.length;
+const shown = limit ? entries.slice(0, limit) : entries;
+const head = shown.slice(0, recent);
+const tail = shown.slice(recent);
 const changelogUrl = `https://github.com/${repo}/blob/${branch}/CHANGELOG.md`;
 ---
 
@@ -68,7 +73,7 @@ const changelogUrl = `https://github.com/${repo}/blob/${branch}/CHANGELOG.md`;
     <span class="rlog-title">Release notes</span>
     {latest ? (
       <span class="rlog-meta">
-        v{latest.version} · {fmt(latest.date)} · {entries.length} {entries.length === 1 ? 'release' : 'releases'}
+        v{latest.version} · {fmt(latest.date)} · {total} {total === 1 ? 'release' : 'releases'}
       </span>
     ) : (
       <span class="rlog-meta">{fetched ? 'no entries yet' : 'not available for this build'}</span>
