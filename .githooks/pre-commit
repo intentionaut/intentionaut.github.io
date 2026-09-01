@@ -4,6 +4,11 @@
 # Deliberate override, for the rare legitimate case: git commit --no-verify
 set -uo pipefail
 
+# This repo sets core.hooksPath locally, which shadows the global guard.
+# Run the global scoping + PII check first, then this repo's own rules.
+GLOBAL="$HOME/.config/git/hooks/pre-commit"
+[ -x "$GLOBAL" ] && { "$GLOBAL" || exit 1; }
+
 staged=$(git diff --cached --name-only --diff-filter=ACMR)
 [ -z "$staged" ] && exit 0
 
