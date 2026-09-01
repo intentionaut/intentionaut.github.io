@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+# Blocks internal reasoning from reaching this public repo.
+# Fails loudly on purpose: a silent guard is a guard you stop trusting.
+# Deliberate override, for the rare legitimate case: git commit --no-verify
+set -uo pipefail
+
+# This repo sets core.hooksPath locally, which shadows the global guard.
+# Run the global scoping + PII check first, then this repo's own rules.
+GLOBAL="$HOME/.config/git/hooks/pre-commit"
+[ -x "$GLOBAL" ] && { "$GLOBAL" || exit 1; }
+
+staged=$(git diff --cached --name-only --diff-filter=ACMR)
+[ -z "$staged" ] && exit 0
+
+bad_files=""
+bad_content=""
+
+while IFS= read -r f; do
+  case "$f" in
+    docs/*)                       bad_files+="  $f  (docs/ is vault-only)"$'\n' ;;
+    README.md|AGENTS.md)          ;;
+    *[!/]*/*.md)                  ;;   # nested .md (src/content/**) is site content, allowed
+    *.md)                         bad_files+="  $f  (root .md that is not README/AGENTS)"$'\n' ;;
+  esac
+
+  [ -f "$f" ] || continue
+  # The guard and the ignore file legitimately name the patterns they block.
+  case "$f" in .githooks/*|.gitignore) continue ;; esac
+  hits=$(grep -n -i -E "Discount_and_Referral_Rule|06-Resources/|net to Saielle|below the floor|the floor is absolute|Bruce McCarthy" "$f" 2>/dev/null | head -3)
+  [ -n "$hits" ] && bad_content+="  $f"$'\n'"$(echo "$hits" | sed 's/^/      /')"$'\n'
+done <<< "$staged"
+
+if [ -n "$bad_files" ] || [ -n "$bad_content" ]; then
+  echo ""
+  echo "  ██  COMMIT BLOCKED — this repo is PUBLIC"
+  echo ""
+  [ -n "$bad_files" ] && { echo "  Internal-only files staged:"; echo "$bad_files"; }
+  [ -n "$bad_content" ] && { echo "  Internal-only content staged:"; echo "$bad_content"; }
+  cat <<'MSG'
+  Reasoning, pricing logic and named private contacts live in the vault:
+    ~/Documents/Dex/06-Resources/Intentionaut/Site_Docs/
+
+  Move the file there, or unstage it:
+    git restore --staged <file>
+
+  If this is genuinely publishable and the guard is wrong:
+    git commit --no-verify
+MSG
+  echo ""
+  exit 1
+fi
+exit 0

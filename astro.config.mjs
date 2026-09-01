@@ -1,27 +1,37 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
+// Old paths kept alive by src/layouts/RedirectLayout.astro. They forward, so
+// they must never appear in the sitemap competing with where they forward to.
+//
+// Exact pathnames, compared whole. A substring match here is a trap: /familiar/
+// is also the tail of /open-source/familiar/ and /projects/familiar/, and a
+// regex on the URL silently drops those real pages from the sitemap.
+const LEGACY_REDIRECTS = new Set([
+  '/speaker/',
+  '/familiar/',
+  '/releases/',
+  '/releases/familiar/',
+  '/releases/kernic/',
+]);
+
 export default defineConfig({
   site: 'https://intentionaut.com',
   trailingSlash: 'always',
-  // Open source story pages live under /open-source/<app>/.
-  redirects: {
-    // Renamed 1 Sep 2026 to put the search term people actually book on into
-    // the URL. GitHub Pages cannot serve a 301, so Astro emits a noindex
-    // meta-refresh page with a canonical to the new URL. Weaker than a real
-    // redirect, but it keeps every existing link and business card working.
-    '/speaker': '/keynote-speaker/',
-    '/familiar': '/open-source/familiar/',
-    '/releases': '/open-source/',
-    '/releases/familiar': '/open-source/familiar/',
-    '/releases/kernic': '/open-source/kernic/',
-  },
+  // Legacy paths are real pages using RedirectLayout, not entries here.
+  // Astro's built-in redirects emit a meta-refresh that drops the query
+  // string, so a tagged link to an old path lost its campaign on the hop.
+  // See src/layouts/RedirectLayout.astro. They are excluded from the sitemap
+  // below so they are never indexed as duplicates of their destinations.
   integrations: [
     sitemap({
       // /draft/* are reworked versions of published essays: kept for readers,
       // noindex'd, and excluded from the sitemap so search engines don't treat
       // them as duplicates of the /writing/* originals.
-      filter: (page) => !/\/draft(\/|$)/.test(page) && !/\/preview(\/|$)/.test(page),
+      filter: (page) =>
+        !/\/draft(\/|$)/.test(page) &&
+        !/\/preview(\/|$)/.test(page) &&
+        !LEGACY_REDIRECTS.has(new URL(page).pathname),
     }),
   ],
   build: {

@@ -1,0 +1,75 @@
+---
+/**
+ * A legacy path that forwards to its current home, without losing the campaign
+ * tags on the way.
+ *
+ * Astro's built-in `redirects` emits a meta-refresh that drops the query
+ * string, so a tagged link to an old path (/speaker/?utm_source=linkedin.com)
+ * arrived at the destination clean and the campaign was gone. These pages
+ * forward the query string and the hash instead, and store the arrival before
+ * they go, so attribution survives the hop either way.
+ *
+ * Still not a 301: GitHub Pages cannot serve one. A Cloudflare redirect rule
+ * with query-string preservation is the real fix and would mean these pages
+ * are never reached. They are the fallback for when it is not, and they are
+ * excluded from the sitemap in astro.config.mjs so they cannot be indexed as
+ * duplicates of their destinations.
+ */
+interface Props {
+  /** Absolute site path, with trailing slash, e.g. "/keynote-speaker/". */
+  to: string;
+}
+
+const { to } = Astro.props;
+const canonical = new URL(to, Astro.site).href;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Redirecting to {to}</title>
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content="noindex, follow" />
+    <script
+      is:inline
+      set:html={`
+      (function () {
+        var to = ${JSON.stringify(to)};
+        var qs = location.search;
+
+        // Store the arrival here as well as forwarding it. If anything later
+        // strips the query string, the session still knows where this reader
+        // came from, and the subscribe form reads the same key.
+        try {
+          if (!sessionStorage.getItem('firstTouch')) {
+            var p = new URLSearchParams(qs);
+            var t = {
+              source: p.get('utm_source') || p.get('ref') || '',
+              medium: p.get('utm_medium') || '',
+              campaign: p.get('utm_campaign') || '',
+            };
+            if (t.source || t.medium || t.campaign) {
+              sessionStorage.setItem('firstTouch', JSON.stringify(t));
+            }
+          }
+        } catch (e) {
+          /* storage disabled; the query string below still carries it */
+        }
+
+        // replace(), not assign(), so the old path does not sit in history and
+        // send the reader back here when they press back.
+        location.replace(to + qs + location.hash);
+      })();
+    `}
+    />
+    <noscript>
+      <meta http-equiv="refresh" content={`0;url=${to}`} />
+    </noscript>
+  </head>
+  <body>
+    <p>
+      This page has moved to <a href={to}>{to}</a>.
+    </p>
+  </body>
+</html>
