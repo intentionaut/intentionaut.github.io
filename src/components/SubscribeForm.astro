@@ -182,14 +182,29 @@ const {
   // link shared on Bluesky (intentionaut.com/subscribe/?utm_source=bluesky)
   // attributes correctly. Falls back to where the form sits on the site.
   const params = new URLSearchParams(location.search);
-  const channel = params.get('utm_source') || params.get('ref') || '';
 
-  // The medium and campaign on the URL are the rest of the same fact and were
-  // previously thrown away here, which collapsed every arrival into
-  // "someone came from the website". Medium is what separates a newsletter
-  // click from a feed post, so a link that declares one keeps it.
-  const medium = params.get('utm_medium') || '';
-  const urlCampaign = params.get('utm_campaign') || '';
+  // What the reader arrived with, captured on their first page by the script in
+  // BaseLayout. Most subscribes do not happen on the landing page, and 22 pages
+  // carry no form at all, so without this the campaign is lost the moment
+  // somebody clicks a second link.
+  let firstTouch: { source?: string; medium?: string; campaign?: string } = {};
+  try {
+    firstTouch = JSON.parse(sessionStorage.getItem('firstTouch') || '{}');
+  } catch {
+    /* storage unavailable; fall through to this page's own query string */
+  }
+
+  // Precedence: this page's query string, then the arrival, then where the form
+  // sits. A tag on the current URL is the most specific thing we know; the
+  // placement label is only ever a fallback and says nothing about referral.
+  const channel =
+    params.get('utm_source') || params.get('ref') || firstTouch.source || '';
+
+  // The medium and campaign are the rest of the same fact and were previously
+  // thrown away here, which collapsed every arrival into "someone came from the
+  // website". Medium is what separates a newsletter click from a feed post.
+  const medium = params.get('utm_medium') || firstTouch.medium || '';
+  const urlCampaign = params.get('utm_campaign') || firstTouch.campaign || '';
 
   document.querySelectorAll<HTMLFormElement>('form[data-subscribe]').forEach((form) => {
     const wrap = form.parentElement;

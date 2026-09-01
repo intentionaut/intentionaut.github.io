@@ -166,6 +166,44 @@ const graph = {
       is:inline
       set:html={JSON.stringify(graph)}
     />
+    {/*
+      First-touch campaign capture.
+
+      The subscribe form only ever saw the query string of the page it sat on,
+      and 22 pages carry no form at all (/keynote-speaker/, /fractional/,
+      /forward-deployed/, /about/ among them). So a reader arriving from a
+      newsletter or a post, browsing, and subscribing a page or two later was
+      recorded as having come from whatever page the form happened to be on.
+      That is the arrival this whole funnel exists to measure.
+
+      So the tags are stored on arrival, on every page, and the form falls back
+      to them. First touch wins: a reader who lands from LinkedIn and wanders
+      the site is still a LinkedIn arrival, and later internal navigation must
+      not overwrite the campaign that actually earned them.
+
+      sessionStorage, not localStorage, so it expires with the visit rather
+      than crediting a campaign months later. Inline and in the head so it runs
+      before any navigation. Wrapped, because storage throws outright in some
+      privacy modes and an analytics nicety must never break a page.
+    */}
+    <script is:inline>
+      (function () {
+        try {
+          if (sessionStorage.getItem('firstTouch')) return;
+          var p = new URLSearchParams(location.search);
+          var t = {
+            source: p.get('utm_source') || p.get('ref') || '',
+            medium: p.get('utm_medium') || '',
+            campaign: p.get('utm_campaign') || '',
+          };
+          if (t.source || t.medium || t.campaign) {
+            sessionStorage.setItem('firstTouch', JSON.stringify(t));
+          }
+        } catch (e) {
+          /* private mode, or storage disabled. Attribution is optional. */
+        }
+      })();
+    </script>
     <slot name="head" />
     {
       showAnalytics && (
