@@ -48,7 +48,9 @@
     gap: var(--space-4);
     align-items: flex-start;
     margin: var(--space-6) 0 0;
-    padding: var(--space-4) 0 0;
+    /* Hairline block: vertical inset only, matching .signup below, so the bio
+       stays aligned to the text column rather than indenting away from it. */
+    padding-block: var(--space-4);
     border-top: 1px solid var(--slate);
   }
 

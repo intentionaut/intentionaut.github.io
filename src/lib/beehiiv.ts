@@ -15,6 +15,70 @@ export interface BeehiivPost {
   content_tags: string[];
 }
 
+/**
+ * The letter footer is written for an inbox: it says what Intentionaut is, and
+ * asks the reader to forward it. That is the right close in email, where
+ * everyone reading is already subscribed.
+ *
+ * On the web it is the wrong close twice over. The reader is usually not a
+ * subscriber, so "forward this" is not the useful ask; and AuthorBio and the
+ * subscribe card directly below already say who wrote this, what she does, and
+ * how to get the next one. Left in, the page ends four times over and repeats
+ * "fortnightly" three times before the site footer says it again.
+ *
+ * So the footers are segmented. Email gets the perma-footer below; the web
+ * render cuts it and closes with its own line instead (see .letter-close in
+ * src/pages/writing/[slug].astro).
+ *
+ * Two markers, because the perma-footer replaced an earlier one:
+ *   - Issues up to and including "Taking a Spell" opened the footer with a
+ *     "Thank you for reading" H2, which beehiiv slugifies into an id.
+ *   - The perma-footer has no heading, so it is anchored on its opening
+ *     sentence instead - which is the positioning.md one-liner, and perma by
+ *     definition. Matched last-occurrence-first so a piece that happens to
+ *     quote the line in its body is not truncated at the quote.
+ * Whichever marker sits earliest wins, so an issue carrying both is cut at the
+ * heading.
+ *
+ * Older archive posts predate both and have no marker; for them this is a
+ * no-op, which is correct - they end however they were written.
+ */
+const LETTER_FOOTER_ID = 'thank-you-for-reading';
+
+/** Opening sentence of the perma-footer, verbatim from positioning.md. */
+const LETTER_FOOTER_OPENING = 'is a fortnightly letter from Saielle DaSilva';
+
+/** Words only the footer uses; if these survive the cut, both markers missed. */
+const LETTER_FOOTER_SIGN_OFF = 'Putting the soft back in software';
+
+function stripLetterFooter(content: string): string {
+  const cuts: number[] = [];
+
+  const headingIdx = content.indexOf(`<div id="${LETTER_FOOTER_ID}"`);
+  if (headingIdx !== -1) cuts.push(headingIdx);
+
+  // Cut at the block boundary, not mid-paragraph, so the markup stays balanced.
+  const openingIdx = content.lastIndexOf(LETTER_FOOTER_OPENING);
+  if (openingIdx !== -1) {
+    const blockIdx = content.lastIndexOf('<div', openingIdx);
+    if (blockIdx !== -1) cuts.push(blockIdx);
+  }
+
+  if (cuts.length > 0) return content.slice(0, Math.min(...cuts));
+
+  // Rewording the footer would silently put it back on every essay page. Say so
+  // in the build log rather than let it drift back in unnoticed.
+  if (content.includes(LETTER_FOOTER_SIGN_OFF)) {
+    console.warn(
+      'beehiiv: letter footer found but not removed - it matched neither the ' +
+        `"${LETTER_FOOTER_ID}" heading nor the opening "${LETTER_FOOTER_OPENING}". ` +
+        'Has the footer been reworded? Update the markers in src/lib/beehiiv.ts.'
+    );
+  }
+
+  return content;
+}
+
 function stripBeehiivHtml(html: string): string {
   const startTag = "<div id='content-blocks'>";
   const startIdx = html.indexOf(startTag);
@@ -30,6 +94,8 @@ function stripBeehiivHtml(html: string): string {
   if (lastClosingDiv !== -1) {
     content = content.slice(0, lastClosingDiv);
   }
+
+  content = stripLetterFooter(content);
 
   content = content.replace(/<div\s*>\s*<div\s*>\s*<\/div>\s*<\/div>/g, '');
   content = content.replace(/<div\s*>\s*<\/div>/g, '');
