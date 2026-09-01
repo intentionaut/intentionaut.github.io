@@ -5,9 +5,61 @@ import {
   writingEntries,
   themeLabels,
   type Theme,
+  type WritingEntry,
 } from '../data/writing';
+import { fetchPosts } from '../lib/beehiiv';
 
-const entries = [...writingEntries].sort(
+/*
+ * The archive in data/writing.ts is hand-curated: it carries themes, the
+ * external publications, and the Blossom years, none of which beehiiv knows
+ * about. But it was also the only source of this list, so every new issue had
+ * to be typed in by hand - and three had been missed, sitting live at their own
+ * URLs with nothing linking to them.
+ *
+ * So beehiiv issues are merged in automatically. A curated entry always wins,
+ * because it has themes the API cannot supply; anything else is appended from
+ * the fetch and appears the moment it is published.
+ */
+const curated = new Set(
+  writingEntries.map((e) => e.url).filter(Boolean) as string[]
+);
+
+const posts = await fetchPosts();
+const autoEntries: WritingEntry[] = [];
+const noBody: string[] = [];
+
+for (const post of posts) {
+  const url = `/writing/${post.slug}/`;
+  if (curated.has(url)) continue;
+
+  // beehiiv can serve a post with its web body gated, leaving nothing but a
+  // paywall marker. Linking to that from the archive would send readers to a
+  // blank page, so it is named in the build log instead of listed. Ungating it
+  // in beehiiv is all it takes for the post to appear here on the next build.
+  const text = post.content_html.replace(/<[^>]+>/g, '').trim();
+  if (text.length === 0 || post.content_html.includes("id='paywall'")) {
+    noBody.push(post.slug);
+    continue;
+  }
+
+  autoEntries.push({
+    title: post.title,
+    date: new Date(post.publish_date * 1000).toISOString().slice(0, 10),
+    source: 'Intentionaut',
+    url,
+    themes: [],
+  });
+}
+
+if (noBody.length > 0) {
+  console.warn(
+    `writing: ${noBody.length} published post(s) have no web body and are not ` +
+      `listed at /writing/: ${noBody.join(', ')}. ` +
+      'Check that post\'s web settings in beehiiv.'
+  );
+}
+
+const entries = [...writingEntries, ...autoEntries].sort(
   (a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf()
 );
 
@@ -96,10 +148,12 @@ const fmtDate = (e: (typeof entries)[number]) =>
                 )}
                 <p class="talk-meta">
                   {e.source}
-                  <span class="row-themes">
-                    {' · '}
-                    {e.themes.map((t) => themeLabels[t]).join(' · ')}
-                  </span>
+                  {e.themes.length > 0 && (
+                    <span class="row-themes">
+                      {' · '}
+                      {e.themes.map((t) => themeLabels[t]).join(' · ')}
+                    </span>
+                  )}
                 </p>
               </div>
             </li>
