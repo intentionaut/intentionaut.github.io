@@ -192,12 +192,35 @@ export async function fetchPosts(): Promise<BeehiivPost[]> {
 
   const { data } = await res.json();
 
-  // beehiiv's "hide from feed" makes a post unlisted on the newsletter site.
-  // We honour the same intent here: a hidden post stays off intentionaut.com/writing
-  // too, so that one beehiiv toggle is the single switch for "is this post public?".
-  // Premium posts are deliberately NOT filtered: they publish here with the free
-  // (paywalled) web content, which is the subscribe funnel we want, not a leak.
-  const published = (data as any[]).filter((post) => !post.hidden_from_feed);
+  // beehiiv's v2 API has only three raw statuses: draft, confirmed, archived.
+  // "confirmed" covers both "scheduled to send later" and "already sent" - there
+  // is no separate scheduled status at this layer, so status=confirmed alone
+  // would put a post on this site the moment it is scheduled, not when beehiiv
+  // actually sends it.
+  //
+  // On top of that, the web page is deliberately held back a further 3 days
+  // after the actual send: the newsletter is the first read, the site is the
+  // archive. The 3-day gap is load-bearing for the LinkedIn cadence - teasers
+  // in week one, the post goes live Monday of week two, and teasers for the
+  // next issue run the Friday of week two, so the archive page lands inside
+  // that same steady two-week clockwork rather than surprising it.
+  // This gate is against post.publish_date (the real send time), never
+  // displayed_date - that field only overrides what date is *shown* on the
+  // page once it exists, e.g. dating a talk recap to the talk instead of to
+  // when it went out.
+  // Posts already sent before the embargo shipped are grandfathered: they were
+  // already public on the site, so the embargo must not retroactively pull them
+  // down and reintroduce this bug's user-visible symptom in reverse. Only posts
+  // sent from the cutoff onward wait out the 3 days.
+  const WEB_EMBARGO_SECONDS = 3 * 24 * 60 * 60;
+  const EMBARGO_CUTOFF = Date.UTC(2026, 8, 2) / 1000; // 2026-09-02, when this shipped
+  const now = Date.now() / 1000;
+  const published = (data as any[]).filter((post) => {
+    if (post.hidden_from_feed) return false;
+    if (typeof post.publish_date !== 'number') return false;
+    if (post.publish_date <= now && post.publish_date < EMBARGO_CUTOFF) return true;
+    return post.publish_date + WEB_EMBARGO_SECONDS <= now;
+  });
 
   return published.map((post: any) => ({
     id: post.id,
