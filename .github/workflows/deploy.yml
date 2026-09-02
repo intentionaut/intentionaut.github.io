@@ -8,25 +8,15 @@ on:
   # Scale/Enterprise only (the API returns 403 ACCESS_FORBIDDEN on this plan),
   # so this is on a schedule instead. Nothing to trigger by hand.
   #
-  # Times are UTC; GitHub cron has no timezone, so the UK clock change matters.
-  #
-  # Saielle's default send time is 06:40 UK. That is 05:40 UTC during British
-  # Summer Time and 06:40 UTC once the clocks go back, so the two morning runs
-  # sit fifteen minutes after it in each half of the year:
-  #
-  #        UTC     BST local    GMT local
-  #        05:55   06:55  <-    05:55
-  #        06:55   07:55        06:55  <-
-  #
-  # A new issue is therefore on the site, and in the sitemap, about a quarter
-  # of an hour after it lands in inboxes. The 09:20 run catches an issue sent
-  # later than usual; 18:20 recovers a failed morning run.
-  #
-  # Minute 55 and 20 rather than 00 on purpose: runs scheduled on the hour
-  # queue behind everyone else's and get delayed.
+  # src/lib/beehiiv.ts holds every post back 3 days after it actually sends,
+  # timed to the LinkedIn cadence (teasers week one, post live Monday week
+  # two, next teasers Friday week two) - so a build catching a send within
+  # minutes is no longer the point; the 3-day buffer already covers same-day
+  # send-time drift. One run a day is enough to pick up whatever just cleared
+  # its embargo. Minute 10 rather than 00 on purpose: runs scheduled on the
+  # hour queue behind everyone else's and get delayed.
   schedule:
-    - cron: '55 5,6 * * *'
-    - cron: '20 9,18 * * *'
+    - cron: '10 6 * * *'
   workflow_dispatch:
 
 permissions:
