@@ -60,9 +60,20 @@ const fmt = (iso: string) =>
     timeZone: 'UTC',
   });
 
+// A release with nothing under its heading is real, but it is not news. By
+// convention a quiet release is written as "Bug fixes and updates." and nothing
+// else, and three of those in a row read as the notes having stopped. They stay
+// in CHANGELOG.md, which is linked at the foot; they do not spend one of the
+// slots on the page. `total` still counts every release, because it is the
+// honest number.
+const isQuiet = (html: string) =>
+  html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().toLowerCase()
+    === 'bug fixes and updates.';
+
 const latest = entries[0];
 const total = entries.length;
-const shown = limit ? entries.slice(0, limit) : entries;
+const worthShowing = entries.filter((e) => !isQuiet(e.html));
+const shown = limit ? worthShowing.slice(0, limit) : worthShowing;
 const head = shown.slice(0, recent);
 const tail = shown.slice(recent);
 const changelogUrl = `https://github.com/${repo}/blob/${branch}/CHANGELOG.md`;
