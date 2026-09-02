@@ -189,6 +189,10 @@ const stats = [
      threshold (40rem) sits below the smallest iPad (768px = 48rem), so every
      tablet keeps the 50/50 split and only phones drop the photo. */
   @media (max-width: 40rem) {
+    .page-head-intro {
+      grid-template-columns: 1fr;
+    }
+
     .page-head-intro .portrait {
       display: none;
     }
