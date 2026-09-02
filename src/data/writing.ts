@@ -5,6 +5,8 @@ export type Theme =
   | 'ethics'
   | 'leadership'
   | 'ai'
+  | 'data'
+  | 'product'
   | 'career';
 
 export const themeLabels: Record<Theme, string> = {
@@ -14,6 +16,8 @@ export const themeLabels: Record<Theme, string> = {
   ethics: 'Ethics & Inclusion',
   leadership: 'Leadership',
   ai: 'AI & Data',
+  data: 'Data',
+  product: 'Product',
   career: 'Career',
 };
 
@@ -50,14 +54,14 @@ export const writingEntries: WritingEntry[] = [
     date: '2025-09-24',
     source: 'Intentionaut',
     url: '/writing/the-coming-shift-in-enterprise-metadata/',
-    themes: ['ai'],
+    themes: ['ai', 'data'],
   },
   {
     title: 'Leading Data Transformation in the Age of AI',
     date: '2025-09-17',
     source: 'Intentionaut',
     url: '/writing/leading-data-transformation-in-the-age-of-ai/',
-    themes: ['ai', 'leadership'],
+    themes: ['ai', 'data', 'leadership'],
   },
   {
     title: 'When Everyone Has AI: Building Execution Advantages That Last',
@@ -106,21 +110,21 @@ export const writingEntries: WritingEntry[] = [
     date: '2023-03-29',
     source: 'Blossom',
     url: '/writing/good-product-decisions-need-speed/',
-    themes: ['leadership', 'research'],
+    themes: ['product', 'leadership', 'research'],
   },
   {
     title: 'Good Product Decisions Need Principles',
     date: '2023-03-15',
     source: 'Blossom',
     url: '/writing/designing-good-decisions/',
-    themes: ['leadership', 'research'],
+    themes: ['product', 'leadership', 'research'],
   },
   {
     title: 'Org Design for Product Orgs',
     date: '2023-01-10',
     source: 'Blossom',
     url: '/writing/org-design-for-product-orgs/',
-    themes: ['leadership'],
+    themes: ['product', 'leadership'],
   },
   {
     title: 'Beyond human-centered design',
@@ -149,7 +153,7 @@ export const writingEntries: WritingEntry[] = [
     date: '2021-11-03',
     source: 'Blossom',
     url: '/writing/building-stronger-product-cultures-turingfest-edition/',
-    themes: ['leadership'],
+    themes: ['product', 'leadership'],
   },
   {
     title: 'Meet Saielle DaSilva',
@@ -163,7 +167,7 @@ export const writingEntries: WritingEntry[] = [
     date: '2021-05-22',
     source: 'Blossom',
     url: '/writing/insights-to-actions/',
-    themes: ['research', 'craft'],
+    themes: ['product', 'research', 'craft'],
   },
   {
     title: 'Mental health as a product person',
@@ -219,7 +223,7 @@ export const writingEntries: WritingEntry[] = [
     date: '2021-03-31',
     source: 'Blossom',
     url: '/writing/seven-ways-product-and-research-work-together/',
-    themes: ['research', 'leadership'],
+    themes: ['product', 'research', 'leadership'],
   },
   {
     title: 'User research for decision making',
