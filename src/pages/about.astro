@@ -131,17 +131,14 @@ const stats = [
 </BaseLayout>
 
 <style>
-  /* Eyebrow + headline on the left, portrait on the right, flush to the content
-     edge. The headline keeps the whole remaining column so it wraps the way it
-     did before (its own max-width in global.css still caps it); the portrait is
-     a fixed 15rem beside it, vertically centred so the two read as a pair with
-     no gap between them. Everything else - the "career highlights" line, the
-     stat ribbon, the prose - is full width below.
-     (A `ch` track was tried here and resolved against the grid's body font, not
-     the headline's, which crushed the headline to a narrow column.) */
+  /* The header is binary: the headline and portrait sit side by side, each
+     taking half the row (50/50), flush to the content edge and vertically
+     centred so they read as a pair. Everything else - the "career highlights"
+     line, the stat ribbon, the prose - is full width below. Below the tablet
+     width (40rem) the portrait is hidden entirely, leaving just the headline. */
   .page-head-intro {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 15rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-8);
     align-items: center;
   }
@@ -187,24 +184,11 @@ const stats = [
     border-top: 1px solid var(--slate);
   }
 
-  /* The two-column head only holds together while the headline has room; below
-     ~56rem it would crush, so stack there: text, portrait, then the ribbon.
-     (56rem is a component threshold, not a site breakpoint - the site's 45rem
-     one is where the portrait drops entirely, below.) */
-  @media (max-width: 56rem) {
-    .page-head-intro {
-      grid-template-columns: 1fr;
-      gap: var(--space-6);
-    }
-
-    .page-head-intro .portrait {
-      max-width: 14rem;
-    }
-  }
-
-  /* On phones the headshot costs more vertical space than it earns; the Person
-     schema still carries the image. */
-  @media (max-width: 45rem) {
+  /* Below the tablet width the headshot costs more vertical space than it earns,
+     so hide it entirely; the Person schema still carries the image. The
+     threshold (40rem) sits below the smallest iPad (768px = 48rem), so every
+     tablet keeps the 50/50 split and only phones drop the photo. */
+  @media (max-width: 40rem) {
     .page-head-intro .portrait {
       display: none;
     }
