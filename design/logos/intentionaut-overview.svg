@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="Intentionaut mark: Overview">
+  <g transform="translate(0 1)">
+    <path d="M20 77.4A240 240 0 0 1 100 77.4" fill="none" stroke="#A9CBD0" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M16 88.3A230 230 0 0 1 104 88.3" fill="none" stroke="#38234A" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="74" cy="40" r="14" fill="#C85060"/>
+  </g>
+</svg>
