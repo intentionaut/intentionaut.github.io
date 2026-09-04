@@ -1055,6 +1055,16 @@ a.talk-title:hover {
   animation: rise 0.7s var(--ease-out) 0.28s backwards;
 }
 
+/* On success SubscribeForm sets form.hidden, which sets the attribute and
+   relies on the browser's own [hidden] { display: none }. A class selector
+   beats that rule, so `display: flex` above kept every subscribe form on
+   screen after a successful signup: the reader saw "Almost there. Check your
+   inbox" underneath their address still sitting in the field, with the button
+   still live. Confirmed end to end against the live site on 2026-09-04. */
+.signup-form[hidden] {
+  display: none;
+}
+
 .signup-input {
   flex: 1;
   padding: var(--space-3) var(--space-4);
