@@ -926,19 +926,6 @@ a.talk-title:hover {
   max-width: 62ch;
 }
 
-.talk-list.has-note {
-  padding-bottom: 0;
-}
-
-.talk-earlier {
-  margin: var(--space-5) 0 0;
-  padding-bottom: clamp(3rem, 6vw, 5rem);
-  font-size: 0.92rem;
-  line-height: 1.6;
-  color: var(--muted);
-  max-width: 62ch;
-}
-
 .empty {
   font-family: var(--font-display);
   font-style: italic;

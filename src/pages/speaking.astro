@@ -30,7 +30,7 @@ const fmt = (d: Date) =>
       talks.length === 0 ? (
         <p class="empty">Talk archive coming soon.</p>
       ) : (
-        <ol class="talk-list has-note">
+        <ol class="talk-list">
           {talks.map((talk) => (
             <li class="talk-row">
               <span class="talk-date">{fmt(talk.data.date)}</span>
@@ -61,11 +61,5 @@ const fmt = (d: Date) =>
         </ol>
       )
     }
-
-    <p class="talk-earlier">
-      Before this archive begins I spoke at AlterConf and at Chicago Camps'
-      Leadership By Design, both on treating diversity and inclusion as an
-      organisational design problem rather than a hiring target.
-    </p>
   </section>
 </BaseLayout>
