@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="Intentionaut mark: Fix">
+  <g transform="translate(0 2)">
+    <circle cx="60" cy="60" r="40" fill="none" stroke="#38234A" stroke-width="6"/>
+    <g transform="rotate(22 60 60)">
+      <polygon points="60,31 66.5,60 53.5,60" fill="#38234A"/>
+      <polygon points="60,89 66.5,60 53.5,60" fill="#74607B"/>
+    </g>
+    <circle cx="74.98" cy="22.91" r="7" fill="#C85060"/>
+  </g>
+</svg>
