@@ -86,53 +86,6 @@ const testimonials = testimonialsFor('contact');
       </p>
     </section>
 
-    <section class="fit-section" aria-label="Which one fits?">
-      <h2>Which one fits?</h2>
-      <div class="fit-table-wrap">
-        <table class="fit-table">
-          <thead>
-            <tr>
-              <th scope="col"></th>
-              <th scope="col">Who it's for</th>
-              <th scope="col">Shape</th>
-              <th scope="col">Price</th>
-              <th scope="col">First step</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Strategy session</th>
-              <td>Founders and product leaders who want a sounding board</td>
-              <td>90 minutes, one-off</td>
-              <td>{gbp(rates.strategySession)}</td>
-              <td>Book directly</td>
-            </tr>
-            <tr>
-              <th scope="row">Fractional leadership</th>
-              <td>Teams that need direction now, not ready for a full-time hire</td>
-              <td>1-2 days a week, 3 months and up</td>
-              <td>{gbp(rates.fractional)} / day</td>
-              <td>Free scoping call</td>
-            </tr>
-            <tr>
-              <th scope="row">Forward Deployed Builder</th>
-              <td>Teams with an idea and nobody free to build it</td>
-              <td>3 days a week, 4-12 weeks</td>
-              <td>{gbp(rates.forwardDeployed)} / day</td>
-              <td>5 days paid scoping, at {gbp(rates.fractional)} / day</td>
-            </tr>
-            <tr>
-              <th scope="row">Speaking &amp; workshops</th>
-              <td>Conferences and teams wanting a session</td>
-              <td>Per event</td>
-              <td>{gbp(rates.speaking)}, from</td>
-              <td>Get in touch</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
     {/* Hidden entirely when nothing is enabled for this page, rather than
         leaving a heading over an empty carousel. An empty state should mean
         "there are none", and here there being none is a choice. */}
@@ -355,6 +308,53 @@ const testimonials = testimonialsFor('contact');
       </div>
     </section>
     )}
+
+    <section class="fit-section" aria-label="Which one fits?">
+      <h2>Which one fits?</h2>
+      <div class="fit-table-wrap">
+        <table class="fit-table">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Who it's for</th>
+              <th scope="col">Shape</th>
+              <th scope="col">Price</th>
+              <th scope="col">First step</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Strategy session</th>
+              <td>Founders and product leaders who want a sounding board</td>
+              <td>90 minutes, one-off</td>
+              <td>{gbp(rates.strategySession)}</td>
+              <td>Free preliminary call</td>
+            </tr>
+            <tr>
+              <th scope="row">Fractional leadership</th>
+              <td>Teams that need direction now, not ready for a full-time hire</td>
+              <td>1-2 days a week, 3 months and up</td>
+              <td>{gbp(rates.fractional)} / day</td>
+              <td>Free preliminary call</td>
+            </tr>
+            <tr>
+              <th scope="row">Forward Deployed Builder</th>
+              <td>Teams with an idea and nobody free to build it</td>
+              <td>3 days a week, 4-12 weeks</td>
+              <td>{gbp(rates.forwardDeployed)} / day</td>
+              <td>Free preliminary call</td>
+            </tr>
+            <tr>
+              <th scope="row">Speaking &amp; workshops</th>
+              <td>Conferences and teams wanting a session</td>
+              <td>Per event</td>
+              <td>{gbp(rates.speaking)}, from</td>
+              <td>Free preliminary call</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
     <section class="how-section" aria-label="How it works">
       <style>
