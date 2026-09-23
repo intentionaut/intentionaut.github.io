@@ -536,6 +536,27 @@ h3 {
   font-size: clamp(2.1rem, 4.4vw, 3.15rem);
 }
 
+/* Short buyer-problem lines, named before the offer. Sits under the lede,
+   above the prose, on pages that open with what I do rather than what the
+   visitor is dealing with. */
+.problem-lines {
+  list-style: none;
+  margin: var(--space-6) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-2);
+  max-width: 58ch;
+}
+.problem-lines li {
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.problem-lines li::before {
+  content: '· ';
+  color: var(--accent);
+}
+
 /* ---------- About: stat strip ---------- */
 
 .stat-strip {

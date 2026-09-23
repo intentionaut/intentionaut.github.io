@@ -1,6 +1,7 @@
 ---
 import '@fontsource-variable/roboto-serif';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { rates, gbp } from '../data/rates';
 
 const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
 ---
@@ -17,6 +18,11 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
         For teams that need Director-level leadership, but are not ready for
         a permanent hire.
       </p>
+      <ul class="problem-lines">
+        <li>A product that works and nobody likes, with no agreement on why.</li>
+        <li>Designers with nobody senior leading them.</li>
+        <li>AI features where nobody can yet say what good looks like.</li>
+      </ul>
     </header>
 
     <div class="prose">
@@ -69,6 +75,17 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
         {' '}<a href="/forward-deployed/">forward deployed product building</a>:
         three days a week in your environment, four weeks and up, building
         rather than leading.
+      </p>
+
+      <h2>How to start</h2>
+      <p>
+        A free scoping call. We check it is a fit. If it is, you get a
+        written proposal: what we would do, when, and what it costs.
+      </p>
+      <p>
+        Need a second opinion rather than a leader? That is the
+        {' '}<a href="/contact/">strategy session</a>: {gbp(rates.strategySession)},
+        90 minutes, on its own, separate from fractional work.
       </p>
     </div>
 
