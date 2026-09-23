@@ -14,7 +14,7 @@ AI is simultaneously [more expensive, cheaper and faster](https://decision.subst
 
 Training models and writing code represent the visible tip. Beneath the surface lie the real expenses—data operations, infrastructure scaling, cross-functional coordination, and capability building. None of which appear in early budgets.
 
-What emerges is actually a fairly predictable pattern. Enterprise AI investments follow the same cycle we witnessed during the dot-com boom, cloud adoption, and mobile transformation. Technology promises everything. Consultants sell transformation. Most companies struggle to capture value while a small minority quietly builds sustainable competitive advantages.
+What emerges is actually a fairly predictable pattern. Enterprise AI investments follow the same cycle we witnessed during the dot-com boom, cloud adoption, and mobile transformation. Technology promises everything. Consultants sell transformation. Most companies struggle to capture value while a small minority builds sustainable competitive advantages without saying so.
 
 ## The ROI Measurement Trap
 

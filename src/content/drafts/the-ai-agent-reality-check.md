@@ -17,7 +17,7 @@ Vendors are rebranding chatbots, RPA tools, and assistants as “agents” when 
 **3\. Weak data foundations**
 Data is the oxygen of agents, yet most enterprises still operate with stale, fragmented systems. Gartner estimates more than half of organisations admit their data isn’t AI-ready. Poor quality and poor integration turn every AI initiative into a tax rather than a multiplier. It’s tempting to race ahead because agents *look exciting*—but without strong data pipelines, real-time context, and auditability, you’re just accelerating bad decisions.
 
-The pattern here is simple but often ignored: **agents don’t fail because the models can’t think—they fail because organisations haven’t done the hard work of preparing their own systems and workflows.** The ones who take that seriously will be the ones still standing in three years, while the rest quietly wind down their “transformative” pilots.
+The pattern here is simple but often ignored: **agents don’t fail because the models can’t think—they fail because organisations haven’t done the hard work of preparing their own systems and workflows.** The ones who take that seriously will be the ones still standing in three years, while the rest wind down their “transformative” pilots without saying so.
 
 ## Why European Regulation Creates Strategic Advantage
 
@@ -33,7 +33,7 @@ The current AI agent adoption wave echoes the cloud migration patterns of the 20
 
 Take [Netflix’s 2008 hardware failure](https://www.virtasant.com/ai-today/how-is-ai-powered-cloud-migration-impacting-enterprises?utm_source=newsletter.intentionaut.com&utm_medium=referral&utm_campaign=the-ai-agent-reality-check-why-40-will-fail-and-how-to-be-in-the-60-that-succeed): a two-day outage forced a hard rethink of infrastructure, which eventually enabled one of the most successful cloud migrations in enterprise history. The lesson? **Failures in infrastructure are opportunities for transformation—but only if organisations are prepared to act strategically.**
 
-We’re seeing a similar evolution in AI: early deployments will shift from chatbot rebranding to **genuine agentic capability**. [MIT research](https://fortune.com/2025/08/18/mit-report-95-percent-generative-ai-pilots-at-companies-failing-cfo/?utm_source=newsletter.intentionaut.com&utm_medium=referral&utm_campaign=the-ai-agent-reality-check-why-40-will-fail-and-how-to-be-in-the-60-that-succeed) shows buying tools from specialised vendors succeeds 67% of the time, whereas internal builds succeed only one-third as often. The pattern is clear: infrastructure, governance, and workflow alignment—not just the technology itself—determine whether organisations capture the value of agents or watch their pilots quietly fade.
+We’re seeing a similar evolution in AI: early deployments will shift from chatbot rebranding to **genuine agentic capability**. [MIT research](https://fortune.com/2025/08/18/mit-report-95-percent-generative-ai-pilots-at-companies-failing-cfo/?utm_source=newsletter.intentionaut.com&utm_medium=referral&utm_campaign=the-ai-agent-reality-check-why-40-will-fail-and-how-to-be-in-the-60-that-succeed) shows buying tools from specialised vendors succeeds 67% of the time, whereas internal builds succeed only one-third as often. The pattern is clear: infrastructure, governance, and workflow alignment—not just the technology itself—determine whether organisations capture the value of agents or watch their pilots fade, unannounced.
 
 ## Three Infrastructure-First Patterns Differentiating Successful Agent Deployments
 
