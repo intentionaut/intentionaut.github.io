@@ -1,6 +1,7 @@
 ---
 import '@fontsource-variable/roboto-serif';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { BOOKING_URL } from '../data/links';
 import { rates, gbp } from '../data/rates';
 import { forwardDeployedFaqs } from '../data/faqs';
 import FaqList from '../components/FaqList.astro';
@@ -222,6 +223,10 @@ const faqSchema = {
           <button class="btn-plain" type="submit">Send it</button>
           <p class="form-status" id="form-status" role="status"></p>
         </form>
+        <p class="form-alt">
+          Rather talk first?
+          {' '}<a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a free call</a>.
+        </p>
       </div>
     </section>
 

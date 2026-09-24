@@ -1497,6 +1497,12 @@ a.talk-title:hover {
   min-height: 1.5em;
 }
 
+.form-alt {
+  margin: var(--space-4) 0 0;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
 .faq-link {
   margin: var(--space-5) 0 0;
   text-align: center;
