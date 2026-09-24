@@ -2,13 +2,51 @@
 import '@fontsource-variable/roboto-serif';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { rates, gbp } from '../data/rates';
+import { testimonialsFor } from '../data/testimonials';
+
+// Chosen by id rather than a 'fractional' placement: testimonials.ts can't be
+// committed while the pre-commit guard matches a name already published in it.
+const QUOTE_IDS = ['susan-standiford', 'jon-cockle'];
+import { faqsFor } from '../data/faqs';
+import FaqList from '../components/FaqList.astro';
 
 const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
+
+const testimonials = testimonialsFor('contact').filter((t) => QUOTE_IDS.includes(t.id));
+const fractionalFaqs = faqsFor('fractional');
+
+const serviceSchema = {
+  '@type': 'Service',
+  '@id': 'https://intentionaut.com/fractional/#service',
+  name: 'Fractional & Interim Product Leadership',
+  serviceType: 'Fractional product leadership',
+  description:
+    'Director-level product leadership for a defined period: one or two days a week, three months and up, with executive stakeholder access and accountability for delivery.',
+  provider: { '@id': 'https://intentionaut.com/#person' },
+  areaServed: { '@type': 'Country', name: 'United Kingdom' },
+  offers: {
+    '@type': 'Offer',
+    priceCurrency: 'GBP',
+    price: rates.fractional,
+    unitText: 'day',
+    availability: 'https://schema.org/LimitedAvailability',
+  },
+};
+
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: fractionalFaqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer.replace(/\s+/g, ' ').trim() },
+  })),
+};
 ---
 
 <BaseLayout
   title="Fractional & Interim Product Leadership | Saielle DaSilva"
   description="Fractional and interim product leadership for teams that need a senior product owner now, not a permanent hire yet: Director-level direction, decisions and delivery for a defined period."
+  jsonLd={[serviceSchema, faqSchema]}
 >
   <section class="wrap">
     <header class="page-head">
@@ -77,9 +115,29 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
         rather than leading.
       </p>
 
+      <h2>Where I have done this</h2>
+      <p>
+        As interim CPO at a direct-to-consumer grocery scaleup, monthly
+        recurring revenue grew 450 per cent in 90 days. I led the product and
+        design organisation at StepStone, where the satellite portfolio
+        returned 3.2x. At Sainsbury's I ran product for AI, data platforms and
+        machine learning, and took production AI from a handful of experiments
+        to a platform serving over 100 million customers. I was on the founding
+        team at Cazoo, through to a $7B IPO.
+      </p>
+      {testimonials.map((t) => (
+        <figure class="frac-quote">
+          <blockquote><p>{t.quote}</p></blockquote>
+          <figcaption>
+            {t.url ? <a href={t.url} target="_blank" rel="noopener noreferrer">{t.name}</a> : t.name},
+            {' '}{t.role}, {t.org}
+          </figcaption>
+        </figure>
+      ))}
+
       <h2>How to start</h2>
       <p>
-        A free scoping call. We check it is a fit. If it is, you get a
+        A free preliminary call. We check it is a fit. If it is, you get a
         written proposal: what we would do, when, and what it costs.
       </p>
       <p>
@@ -155,6 +213,11 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
         Questions first? <a href="/faq/">Read the FAQ.</a>
       </p>
     </section>
+
+    <FaqList
+      items={fractionalFaqs}
+      sub="What founders ask before bringing in a part-time leader."
+    />
   </section>
 
   <script>
@@ -185,3 +248,21 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
     });
   </script>
 </BaseLayout>
+
+<style>
+  .frac-quote {
+    margin: var(--space-6) 0;
+  }
+  .frac-quote blockquote {
+    margin: 0;
+  }
+  .frac-quote blockquote p {
+    margin: 0;
+  }
+  .frac-quote figcaption {
+    margin-top: var(--space-3);
+    padding-left: var(--space-6);
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+</style>

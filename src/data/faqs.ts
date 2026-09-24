@@ -1,7 +1,7 @@
 import { rates, gbp } from './rates';
 
 /** Where a question may appear. Add to this as pages need them. */
-export type FaqPlacement = 'faq' | 'contact';
+export type FaqPlacement = 'faq' | 'contact' | 'fractional';
 
 export interface Faq {
   question: string;
@@ -62,17 +62,19 @@ export const faqs: Faq[] = [
   },
   {
     question: 'Is fractional leadership a real commitment?',
-    placements: ['faq', 'contact'],
+    placements: ['faq', 'contact', 'fractional'],
     answer:
       'Yes, and that is the point. Fractional work runs on an agreed rhythm over months, not days. Quick rescue thoughts are exactly what strategy sessions are for; fractional leadership is for teams that want direction held steady while they build.',
   },
   {
     question: 'Who do you work with as a fractional product leader?',
+    placements: ['faq', 'fractional'],
     answer:
       'Founders and product leaders whose teams are fluent in design, product, data and AI, and whose bottleneck is direction. I step in when there is no senior product voice in the room, when a big bet needs a clear owner, or when the team has tools and talent but no shared answer about why the work matters.',
   },
   {
     question: 'How is a product leader different from a coach or consultant?',
+    placements: ['faq', 'fractional'],
     answer:
       'A coach develops the people and a consultant hands over a report. A product leader owns the outcome and stays accountable for it. I work directly on your direction, your decisions and your shipped results, and I help the team build the muscle to keep doing it when I leave.',
   },
