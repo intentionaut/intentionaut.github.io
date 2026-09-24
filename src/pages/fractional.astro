@@ -3,16 +3,12 @@ import '@fontsource-variable/roboto-serif';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { rates, gbp } from '../data/rates';
 import { testimonialsFor } from '../data/testimonials';
-
-// Chosen by id rather than a 'fractional' placement: testimonials.ts can't be
-// committed while the pre-commit guard matches a name already published in it.
-const QUOTE_IDS = ['susan-standiford', 'jon-cockle'];
 import { faqsFor } from '../data/faqs';
 import FaqList from '../components/FaqList.astro';
 
 const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
 
-const testimonials = testimonialsFor('contact').filter((t) => QUOTE_IDS.includes(t.id));
+const testimonials = testimonialsFor('fractional');
 const fractionalFaqs = faqsFor('fractional');
 
 const serviceSchema = {

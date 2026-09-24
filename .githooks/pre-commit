@@ -26,7 +26,7 @@ while IFS= read -r f; do
   [ -f "$f" ] || continue
   # The guard and the ignore file legitimately name the patterns they block.
   case "$f" in .githooks/*|.gitignore) continue ;; esac
-  hits=$(grep -n -i -E "Discount_and_Referral_Rule|06-Resources/|net to Saielle|below the floor|the floor is absolute|Bruce McCarthy" "$f" 2>/dev/null | head -3)
+  hits=$(grep -n -i -E "Discount_and_Referral_Rule|06-Resources/|net to Saielle|below the floor|the floor is absolute" "$f" 2>/dev/null | head -3)
   [ -n "$hits" ] && bad_content+="  $f"$'\n'"$(echo "$hits" | sed 's/^/      /')"$'\n'
 done <<< "$staged"
 

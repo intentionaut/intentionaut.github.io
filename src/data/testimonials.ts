@@ -19,7 +19,7 @@
  */
 
 /** Where a testimonial may appear. Add to this as pages need them. */
-export type Placement = 'contact' | 'home' | 'speaking';
+export type Placement = 'contact' | 'home' | 'speaking' | 'fractional';
 
 export interface Testimonial {
   /** Stable, human-readable. Used as a key and to talk about one in a commit. */
@@ -67,7 +67,7 @@ export const testimonials: Testimonial[] = [
     org: 'IKEA, Stepstone',
     url: 'https://www.linkedin.com/in/susanstandiford/',
     enabled: true,
-    placements: ['contact'],
+    placements: ['contact', 'fractional'],
     source: 'LinkedIn recommendation',
     receivedAt: '2024-01-01',
   },
@@ -159,7 +159,7 @@ export const testimonials: Testimonial[] = [
     org: "former Head of Delivery, Sainsbury's",
     url: 'https://www.linkedin.com/in/jon-cockle-75a78867/',
     enabled: true,
-    placements: ['contact'],
+    placements: ['contact', 'fractional'],
     source: 'LinkedIn recommendation',
     receivedAt: '2026-08-28',
     note: 'Excerpt. The two sentences on framing choices and trade-offs for senior leaders, chosen to match the site positioning; the full recommendation is on his LinkedIn.',
