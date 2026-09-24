@@ -35,51 +35,50 @@ const testimonials = testimonialsFor('contact');
 
     <section class="rates-section" aria-label="Ways to work together">
       <h2>Ways to work together</h2>
-      <dl class="rates">
+      <div class="rates">
         <a class="rate-row rate-card" href="/strategic-direction/">
-          <dt>Strategy session</dt>
-          <dd class="rate-price">{gbp(rates.strategySession)} · 90 min</dd>
-          <dd class="rate-desc">
+          <p class="rate-name">Strategy session</p>
+          <p class="rate-price">{gbp(rates.strategySession)} · 90 min</p>
+          <p class="rate-desc">
             A sounding board for founders and product leaders: strategy
             reviews, roadmap calls, hiring help, AI reality-checks.
-          </dd>
-          <dd class="rate-scale">Sliding scale · Yes</dd>
+          </p>
+          <p class="rate-scale">Sliding scale · Yes</p>
         </a>
         <a class="rate-row rate-card" href="/fractional/">
-          <dt>Fractional leadership</dt>
-          <dd class="rate-price">{gbp(rates.fractional)} / day</dd>
-          <dd class="rate-desc">
+          <p class="rate-name">Fractional leadership</p>
+          <p class="rate-price">{gbp(rates.fractional)} / day</p>
+          <p class="rate-desc">
             Part-time head of product for early teams that need direction
             now, before they're ready for a full-time hire.
-          </dd>
+          </p>
         </a>
         <a class="rate-row rate-card" href="/forward-deployed/">
-          <dt>Forward Deployed Builder</dt>
-          <dd class="rate-price">{gbp(rates.forwardDeployed)} / day</dd>
-          <dd class="rate-desc">
+          <p class="rate-name">Forward Deployed Builder</p>
+          <p class="rate-price">{gbp(rates.forwardDeployed)} / day</p>
+          <p class="rate-desc">
             Three days a week inside your team, building a working prototype
-            in your environment. Starts with five days of scoping at
-            {' '}{gbp(rates.fractional)} a day.
-          </dd>
+            in your environment.
+          </p>
         </a>
         <a class="rate-row rate-card" href="/keynote-speaker/">
-          <dt>Speaking &amp; workshops</dt>
-          <dd class="rate-price">{gbp(rates.speaking)} / event</dd>
-          <dd class="rate-desc">
+          <p class="rate-name">Speaking &amp; workshops</p>
+          <p class="rate-price">{gbp(rates.speaking)} / event</p>
+          <p class="rate-desc">
             From conference keynotes to hands-on team sessions about building
             with intention across design, data and AI.
-          </dd>
-          <dd class="rate-scale">Sliding scale · Yes</dd>
+          </p>
+          <p class="rate-scale">Sliding scale · Yes</p>
         </a>
         <a class="rate-row rate-card" href="/mentoring/">
-          <dt>Mentoring</dt>
-          <dd class="rate-price">Get in touch</dd>
-          <dd class="rate-desc">
+          <p class="rate-name">Mentoring</p>
+          <p class="rate-price">Get in touch</p>
+          <p class="rate-desc">
             A few slots each month for people finding their footing across
             disciplines. That was my path too.
-          </dd>
+          </p>
         </a>
-      </dl>
+      </div>
       <p class="rates-note">
         Placing a fractional or interim product person? The short version for
         advisors and recruiters is <a href="/for-advisors/">over here</a>.
@@ -385,7 +384,7 @@ const testimonials = testimonialsFor('contact');
           font-size: 2.1rem;
           line-height: 1;
           margin-bottom: var(--space-3);
-          color: var(--accent);
+          color: var(--accent-text);
           opacity: 0.85;
         }
         .how-step h3 {

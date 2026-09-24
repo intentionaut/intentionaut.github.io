@@ -45,6 +45,8 @@
   --muted: #74607b;
   --slate: #e0d2cb;
   --accent: #c85060;
+  /* Accent for text: --accent is 3.7:1 on --paper, under the 4.5:1 small text needs. */
+  --accent-text: #b03e4c;
   --mendl: rgba(169, 203, 208, 0.55);
 
   /* Type */
@@ -290,7 +292,7 @@ h3 {
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 .lede {
@@ -385,7 +387,7 @@ h3 {
 
 .link-arrow:hover {
   border-color: var(--accent);
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 .link-arrow:hover::after {
@@ -405,7 +407,7 @@ h3 {
 
 .hero h1 em {
   font-style: italic;
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 @keyframes rise {
@@ -494,7 +496,7 @@ h3 {
   font-size: 2.1rem;
   line-height: 1;
   margin-bottom: var(--space-3);
-  color: var(--accent);
+  color: var(--accent-text);
   opacity: 0.85;
   transition: transform var(--dur-med) var(--ease-out);
 }
@@ -503,7 +505,7 @@ h3 {
   transform: translateX(4px);
 }
 
-.lane h3 {
+.lane h2 {
   font-size: 1.35rem;
   margin-bottom: var(--space-2);
 }
@@ -554,7 +556,7 @@ h3 {
 }
 .problem-lines li::before {
   content: '· ';
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 /* ---------- About: stat strip ---------- */
@@ -580,7 +582,7 @@ h3 {
   font-style: italic;
   font-size: clamp(1.6rem, 2.6vw, 2.1rem);
   line-height: 1;
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 .stat-label {
@@ -634,7 +636,7 @@ h3 {
 }
 
 .prose a:hover {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 .prose blockquote {
@@ -662,7 +664,7 @@ h3 {
 }
 
 .prose li::marker {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 .img-wrap {
@@ -748,7 +750,7 @@ h3 {
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 .meta-value {
@@ -765,7 +767,7 @@ h3 {
 }
 
 .case-meta a:hover {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 .case-meta-cta {
@@ -837,7 +839,7 @@ h3 {
 }
 
 .project-card:hover .talk-title {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 .project-summary {
@@ -916,7 +918,7 @@ a.talk-title::after {
 }
 
 .talk-row:hover .talk-date {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 .talk-title {
@@ -931,7 +933,7 @@ a.talk-title::after {
 }
 
 a.talk-title:hover {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 .talk-meta {
@@ -967,7 +969,7 @@ a.talk-title:hover {
 }
 
 .err .eyebrow {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 .err-keyline {
@@ -1056,8 +1058,7 @@ a.talk-title:hover {
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--ink);
-  opacity: 0.65;
+  color: var(--muted);
 }
 
 /* ---------- Signup form ---------- */
@@ -1125,7 +1126,7 @@ a.talk-title:hover {
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 .card-title {
@@ -1290,7 +1291,11 @@ a.talk-title:hover {
   background: rgba(169, 203, 208, 0.18);
 }
 
-.rate-row dt {
+.rate-row > p {
+  margin: 0;
+}
+
+.rate-row .rate-name {
   font-family: var(--font-display);
   font-optical-sizing: auto;
   font-weight: 500;
@@ -1314,7 +1319,6 @@ a.talk-title:hover {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--muted);
-  opacity: 0.8;
 }
 
 .rate-price {
@@ -1334,7 +1338,7 @@ a.talk-title:hover {
 }
 
 .rates-note a {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 .form-lede {
@@ -1559,7 +1563,7 @@ a.talk-title:hover {
 }
 
 .site-footer a:hover {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 .footer-links {

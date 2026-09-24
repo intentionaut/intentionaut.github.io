@@ -85,14 +85,14 @@ const { items, heading = 'Fair questions.', sub } = Astro.props;
     font-weight: 600;
     font-size: 1.2rem;
     line-height: 1;
-    color: var(--accent);
+    color: var(--accent-text);
     transition: transform var(--dur-med) ease;
   }
   .faq-item[open] summary::after {
     content: '–';
   }
   .faq-item[open] summary {
-    color: var(--accent);
+    color: var(--accent-text);
   }
   .faq-item .faq-body {
     padding: 0 0 var(--space-5);
