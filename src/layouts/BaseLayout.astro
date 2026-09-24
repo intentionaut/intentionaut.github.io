@@ -191,14 +191,20 @@ const graph = {
         try {
           if (sessionStorage.getItem('firstTouch')) return;
           var p = new URLSearchParams(location.search);
-          var t = {
+          var ref = '';
+          try {
+            var h = document.referrer ? new URL(document.referrer).host : '';
+            if (h && h !== location.host) ref = h;
+          } catch (e) {}
+          // Stored on every first page, tagged or not, so an enquiry can say
+          // where the visit began even when nobody tagged the link.
+          sessionStorage.setItem('firstTouch', JSON.stringify({
             source: p.get('utm_source') || p.get('ref') || '',
             medium: p.get('utm_medium') || '',
             campaign: p.get('utm_campaign') || '',
-          };
-          if (t.source || t.medium || t.campaign) {
-            sessionStorage.setItem('firstTouch', JSON.stringify(t));
-          }
+            landing: location.pathname,
+            referrer: ref,
+          }));
         } catch (e) {
           /* private mode, or storage disabled. Attribution is optional. */
         }
@@ -223,5 +229,30 @@ const graph = {
       <slot />
     </main>
     <Footer />
+    {/* Every contact form on the site posts its FormData as-is, so hidden
+        fields added here reach the worker without touching ten page scripts. */}
+    <script is:inline>
+      (function () {
+        var form = document.getElementById('contact-form');
+        if (!form) return;
+        var t = {};
+        try { t = JSON.parse(sessionStorage.getItem('firstTouch') || '{}'); } catch (e) {}
+        var fields = {
+          first_source: t.source,
+          first_medium: t.medium,
+          first_campaign: t.campaign,
+          first_landing: t.landing,
+          first_referrer: t.referrer,
+        };
+        Object.keys(fields).forEach(function (k) {
+          if (!fields[k]) return;
+          var i = document.createElement('input');
+          i.type = 'hidden';
+          i.name = k;
+          i.value = String(fields[k]).slice(0, 200);
+          form.appendChild(i);
+        });
+      })();
+    </script>
   </body>
 </html>
