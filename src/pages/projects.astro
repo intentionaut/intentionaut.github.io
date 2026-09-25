@@ -25,7 +25,7 @@ const projects = (await getCollection('projects')).sort((a, b) =>
       {
         projects.map((project) => (
           <li class="project-row">
-            <a class="project-card" href={`/projects/${project.id}`}>
+            <a class="project-card" href={`/projects/${project.id}/`}>
               <span class="talk-title">{project.data.title}</span>
               <span class="project-summary">{project.data.summary}</span>
               <span class="talk-meta">
