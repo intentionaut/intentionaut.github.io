@@ -43,7 +43,7 @@ export const faqs: Faq[] = [
   },
   {
     question: 'What is your day rate for product building?',
-    answer: `${gbp(rates.forwardDeployed)} a day, three days a week, four weeks minimum. It starts with a five-day scoping block at ${gbp(rates.fractional)} a day, which is the fractional rate rather than this one. Where an advisor or recruiter introduces the work, their margin sits on top of that rate rather than inside it.`,
+    answer: `${gbp(rates.forwardDeployed)} a day, three days a week, four weeks minimum. Where an advisor or recruiter introduces the work, their margin sits on top of that rate rather than inside it.`,
   },
   {
     question: 'What is the difference between fractional leadership and product building?',
@@ -130,8 +130,13 @@ export const faqs: Faq[] = [
  */
 export const forwardDeployedFaqs: Faq[] = [
   {
+    question: 'What does a product builder do?',
+    answer:
+      "A product builder joins your team for a fixed block and builds a working version of the idea in your environment: your repo, your stack, your data. Three days a week, for four to twelve weeks. The block ends with either a prototype that tells you whether to build it, or software your team can take over, and you know which within two to four weeks of discovery and building. It is hands-on product leadership, with real AI skills, alongside your team.",
+  },
+  {
     question: 'What does it cost?',
-    answer: `${gbp(rates.forwardDeployed)} a day, three days a week, four weeks minimum. Before that, a five-day scoping block at ${gbp(rates.fractional)} a day, which is my standard fractional rate rather than this one. Four weeks at three days a week is ${gbp(rates.forwardDeployed * 12)}; eight weeks is ${gbp(rates.forwardDeployed * 24)}, plus the scoping either way. Where an advisor or recruiter introduces the work, their margin sits on top of my rate rather than inside it.`,
+    answer: `${gbp(rates.forwardDeployed)} a day, three days a week, four weeks minimum. Four weeks at three days a week is ${gbp(rates.forwardDeployed * 12)}; eight weeks is ${gbp(rates.forwardDeployed * 24)}. Where an advisor or recruiter introduces the work, their margin sits on top of my rate rather than inside it.`,
   },
   {
     question: 'What is the most complex thing you have personally built, not advised on?',
@@ -141,7 +146,7 @@ export const forwardDeployedFaqs: Faq[] = [
   {
     question: 'Is what you build production software?',
     answer:
-      'Sometimes, and it depends on how much of the problem is genuinely new. If the hard part was the unknown rather than the engineering, a block can end with software your team takes over and runs. If the unknown is the whole thing, you get something that works and answers the question, and it should be rebuilt properly before it carries customers. Either way it runs in your environment against your real constraints, and I will tell you which of the two you have by about week two rather than at the end.',
+      'Sometimes, and it depends on how much of the problem is genuinely new. If the hard part was the unknown rather than the engineering, a block can end with software your team takes over and runs. If the unknown is the whole thing, you get something that works and answers the question, and it should be rebuilt properly before it carries customers. Either way it runs in your environment against your real constraints, and I will tell you which of the two you have within two to four weeks rather than at the end.',
   },
   {
     question: 'What did you build that still works without you?',
@@ -156,7 +161,7 @@ export const forwardDeployedFaqs: Faq[] = [
   {
     question: 'What if it is not working?',
     answer:
-      `The five-day scoping block exists so you can find that out for ${gbp(rates.fractional)} a day instead of committing to a full block. After that, either of us can end the block on two weeks' notice and you pay for the days worked. No exit fee, no minimum-term claim on the rest of it.`,
+      `The free preliminary call is where we find out whether it is a fit, before you commit to anything. After that, either of us can end the block on two weeks' notice and you pay for the days worked. No exit fee, no minimum-term claim on the rest of it.`,
   },
   {
     question: 'What conditions make this engagement fail?',
