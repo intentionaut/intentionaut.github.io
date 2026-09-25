@@ -61,6 +61,12 @@ export const faqs: Faq[] = [
       'Beforehand you answer a few questions, so the clock starts on substance rather than introductions. Then ninety minutes working your actual problem. Afterwards you get written notes: decisions made, next steps, who owns what.',
   },
   {
+    question: 'What does a fractional CPO do?',
+    placements: ['faq', 'fractional'],
+    answer:
+      "A fractional CPO does the chief product officer's job part time. In practice that means one or two days a week, for three months or more: setting product direction, making the strategic calls, leading and coaching the team, and managing executive stakeholders, with the same accountability for delivery as a permanent hire. It works when the team is strong enough to keep running on the other days, and it ends with a handover, not a dependency.",
+  },
+  {
     question: "Fractional vs interim CPO: what's the difference?",
     placements: ['faq', 'fractional'],
     answer:
