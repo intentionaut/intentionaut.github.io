@@ -1,86 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SubscribeForm from '../components/SubscribeForm.astro';
-import { getCollection } from 'astro:content';
-import {
-  writingEntries,
-  themeLabels,
-  type Theme,
-  type WritingEntry,
-} from '../data/writing';
-import { fetchPosts, hasWebBody } from '../lib/beehiiv';
+import { themeLabels, type Theme } from '../data/writing';
+import { allEntries } from '../lib/archive';
 
-/*
- * The archive in data/writing.ts is hand-curated: it carries themes, the
- * external publications, and the Blossom years, none of which beehiiv knows
- * about. But it was also the only source of this list, so every new issue had
- * to be typed in by hand - and three had been missed, sitting live at their own
- * URLs with nothing linking to them.
- *
- * So beehiiv issues are merged in automatically. A curated entry always wins,
- * because it has themes the API cannot supply; anything else is appended from
- * the fetch and appears the moment it is published.
- */
-const curated = new Set(
-  writingEntries.map((e) => e.url).filter(Boolean) as string[]
-);
-
-const posts = await fetchPosts();
-const autoEntries: WritingEntry[] = [];
-const noBody: string[] = [];
-
-// On-site entries get a one-line summary for the archive. Sources: the local
-// essay frontmatter (keyed by the same slug the archive links to) and, for
-// beehiiv posts, the subtitle. Curated entries win in the merged list but still
-// want a description, so this map backfills them whichever source they came from.
-const essays = await getCollection('essays');
-const descByUrl = new Map<string, string>();
-for (const e of essays) descByUrl.set(`/writing/${e.id}/`, e.data.description);
-for (const p of posts) {
-  const url = `/writing/${p.slug}/`;
-  if (!descByUrl.has(url) && p.subtitle) descByUrl.set(url, p.subtitle);
-}
-
-for (const post of posts) {
-  const url = `/writing/${post.slug}/`;
-  if (curated.has(url)) continue;
-
-  // A gated post has no page either (see hasWebBody), so listing it would link
-  // at a 404. Named in the build log instead.
-  if (!hasWebBody(post)) {
-    noBody.push(post.slug);
-    continue;
-  }
-
-  autoEntries.push({
-    title: post.title,
-    date: new Date(post.publish_date * 1000).toISOString().slice(0, 10),
-    source: 'Intentionaut',
-    url,
-    themes: [],
-    description: descByUrl.get(url),
-  });
-}
-
-if (noBody.length > 0) {
-  console.warn(
-    `writing: ${noBody.length} published post(s) have no web body, so they get ` +
-      `no page and no archive row: ${noBody.join(', ')}. ` +
-      'Check that post\'s web settings in beehiiv.'
-  );
-}
-
-const entries = [...writingEntries, ...autoEntries]
-  .map((e) =>
-    // Backfill a missing description for on-site entries from the local essay
-    // or beehiiv subtitle when one exists.
-    e.description || !e.url?.startsWith('/writing/')
-      ? e
-      : { ...e, description: descByUrl.get(e.url) }
-  )
-  .sort(
-    (a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf()
-  );
+// One merged, page-checked list shared with "Keep reading" and the
+// recommendations. See src/lib/archive.ts.
+const entries = await allEntries();
 
 const slugify = (s: string) =>
   s
@@ -217,7 +143,12 @@ const fmtDate = (e: (typeof entries)[number]) =>
         const show =
           f === 'all' || row.dataset.themes?.split(' ').includes(f);
         row.classList.toggle('is-hidden', !show);
-        if (show) visible++;
+        // Rows fade in as the reader scrolls; a filtered row may sit past the
+        // reveal line, so show it now or the list looks empty.
+        if (show) {
+          row.classList.add('is-visible');
+          visible++;
+        }
       });
       if (empty) empty.classList.toggle('is-hidden', visible > 0);
       chips.forEach((c) => {

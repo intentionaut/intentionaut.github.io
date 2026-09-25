@@ -262,9 +262,13 @@ const onSite = (e: WritingEntry) => !!e.url && e.url.startsWith('/writing/');
  * (e.g. "/writing/depression-and-work/"). Ranked by shared themes, then recency.
  * Falls back to the most recent on-site pieces when `pathname` isn't in the list.
  */
-export function relatedTo(pathname: string, count = 3): WritingEntry[] {
-  const here = writingEntries.find((e) => e.url === pathname);
-  const pool = writingEntries
+export function relatedTo(
+  pathname: string,
+  entries: WritingEntry[],
+  count = 3
+): WritingEntry[] {
+  const here = entries.find((e) => e.url === pathname);
+  const pool = entries
     .filter((e) => onSite(e) && e.url !== pathname)
     .sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
 
@@ -284,7 +288,7 @@ export function relatedTo(pathname: string, count = 3): WritingEntry[] {
  * post-confirmation /thank-you page. Edit the list to change what new readers
  * see first. Each `url` must match an entry in writingEntries.
  */
-const recommendationSource: { url: string; blurb: string }[] = [
+export const recommendationSource: { url: string; blurb: string }[] = [
   {
     url: '/writing/good-product-decisions-need-speed/',
     blurb:
@@ -312,9 +316,3 @@ export interface Recommendation {
   blurb: string;
 }
 
-export const recommendations: Recommendation[] = recommendationSource
-  .map((r) => {
-    const entry = writingEntries.find((e) => e.url === r.url);
-    return entry ? { entry, blurb: r.blurb } : null;
-  })
-  .filter((r): r is Recommendation => r !== null);

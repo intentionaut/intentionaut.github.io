@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import SubscribeForm from '../../components/SubscribeForm.astro';
 import AuthorBio from '../../components/AuthorBio.astro';
 import KeepReading from '../../components/KeepReading.astro';
-import { relatedTo } from '../../data/writing';
+import { relatedFor } from '../../lib/archive';
 import { getCollection, render } from 'astro:content';
 import { fetchPosts, hasWebBody } from '../../lib/beehiiv';
 
@@ -49,7 +49,7 @@ const fmtDate = (d: string | number) =>
 const origin = Astro.site!.origin;
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 
-const related = relatedTo(Astro.url.pathname);
+const related = await relatedFor(Astro.url.pathname);
 
 const meta =
   type === 'beehiiv' && post

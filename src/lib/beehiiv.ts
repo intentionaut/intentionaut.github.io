@@ -1,6 +1,6 @@
+import { fetchRawPosts, isOnSite, fingerprint } from './beehiiv-core.mjs';
+
 const API_KEY = import.meta.env.BEEHIIV_API_KEY;
-const PUB_ID = 'pub_96b7bfbb-25ad-448f-a8e8-b4d61019e30d';
-const API_BASE = 'https://api.beehiiv.com/v2';
 
 export interface BeehiivPost {
   id: string;
@@ -166,62 +166,37 @@ export function hasWebBody(post: BeehiivPost): boolean {
   return post.content_html.replace(/<[^>]+>/g, '').trim().length > 0;
 }
 
+// Several pages need the posts. One fetch per build, shared, so the archive and
+// the pages are built from the same response and the same clock.
+let onSitePosts: Promise<any[]> | undefined;
+
+function loadOnSitePosts(): Promise<any[]> {
+  if (!onSitePosts) {
+    onSitePosts = (async () => {
+      if (!API_KEY) {
+        if (import.meta.env.PROD) {
+          throw new Error(
+            'BEEHIIV_API_KEY is not set. Refusing to build a production site with an ' +
+              'empty /writing archive. Check the repository secret.'
+          );
+        }
+        console.warn('BEEHIIV_API_KEY not set; skipping post fetch.');
+        return [];
+      }
+      const now = Date.now() / 1000;
+      return (await fetchRawPosts(API_KEY)).filter((post: any) => isOnSite(post, now));
+    })();
+  }
+  return onSitePosts;
+}
+
+/** Published at /posts-fingerprint.txt so the daily check can skip no-op rebuilds. */
+export async function postsFingerprint(): Promise<string> {
+  return fingerprint(await loadOnSitePosts());
+}
+
 export async function fetchPosts(): Promise<BeehiivPost[]> {
-  if (!API_KEY) {
-    if (import.meta.env.PROD) {
-      throw new Error(
-        'BEEHIIV_API_KEY is not set. Refusing to build a production site with an ' +
-          'empty /writing archive. Check the repository secret.'
-      );
-    }
-    console.warn('BEEHIIV_API_KEY not set; skipping post fetch.');
-    return [];
-  }
-
-  const res = await fetch(
-    `${API_BASE}/publications/${PUB_ID}/posts?status=confirmed&limit=50&expand=free_web_content`,
-    { headers: { Authorization: `Bearer ${API_KEY}` } }
-  );
-
-  if (!res.ok) {
-    throw new Error(
-      `beehiiv API returned ${res.status}. Refusing to build with an empty ` +
-        '/writing archive; the previous deploy stays live.'
-    );
-  }
-
-  const { data } = await res.json();
-
-  // beehiiv's v2 API has only three raw statuses: draft, confirmed, archived.
-  // "confirmed" covers both "scheduled to send later" and "already sent" - there
-  // is no separate scheduled status at this layer, so status=confirmed alone
-  // would put a post on this site the moment it is scheduled, not when beehiiv
-  // actually sends it.
-  //
-  // On top of that, the web page is deliberately held back a further 3 days
-  // after the actual send: the newsletter is the first read, the site is the
-  // archive. The 3-day gap is load-bearing for the LinkedIn cadence - teasers
-  // in week one, the post goes live Monday of week two, and teasers for the
-  // next issue run the Friday of week two, so the archive page lands inside
-  // that same steady two-week clockwork rather than surprising it.
-  // This gate is against post.publish_date (the real send time), never
-  // displayed_date - that field only overrides what date is *shown* on the
-  // page once it exists, e.g. dating a talk recap to the talk instead of to
-  // when it went out.
-  // Posts already sent before the embargo shipped are grandfathered: they were
-  // already public on the site, so the embargo must not retroactively pull them
-  // down and reintroduce this bug's user-visible symptom in reverse. Only posts
-  // sent from the cutoff onward wait out the 3 days.
-  const WEB_EMBARGO_SECONDS = 3 * 24 * 60 * 60;
-  const EMBARGO_CUTOFF = Date.UTC(2026, 8, 2) / 1000; // 2026-09-02, when this shipped
-  const now = Date.now() / 1000;
-  const published = (data as any[]).filter((post) => {
-    if (post.hidden_from_feed) return false;
-    if (typeof post.publish_date !== 'number') return false;
-    if (post.publish_date <= now && post.publish_date < EMBARGO_CUTOFF) return true;
-    return post.publish_date + WEB_EMBARGO_SECONDS <= now;
-  });
-
+  const published = await loadOnSitePosts();
   return published.map((post: any) => ({
     id: post.id,
     title: post.title,

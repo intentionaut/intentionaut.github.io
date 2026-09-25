@@ -3,7 +3,9 @@ import '@fontsource-variable/roboto-serif';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SubscribeForm from '../components/SubscribeForm.astro';
 import Recommendations from '../components/Recommendations.astro';
-import { recommendations } from '../data/writing';
+import { liveRecommendations } from '../lib/archive';
+
+const recommendations = await liveRecommendations();
 ---
 
 <BaseLayout

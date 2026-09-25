@@ -25,7 +25,41 @@ permissions:
   id-token: write
 
 jobs:
+  # Scheduled runs only: skip the rebuild when the posts that belong on the
+  # site haven't changed since the last deploy (scripts/posts-changed.mjs
+  # compares beehiiv with /posts-fingerprint.txt on the live site). Pushes and
+  # manual runs always build.
+  check:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.posts.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - id: posts
+        run: node scripts/posts-changed.mjs
+        env:
+          BEEHIIV_API_KEY: ${{ secrets.BEEHIIV_API_KEY }}
+
+  # GitHub switches off scheduled workflows in a public repo after 60 days with
+  # no commits. Re-enabling it through the API resets that clock without an
+  # empty commit, so the daily check keeps running between pushes.
+  keepalive:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - run: gh api -X PUT "repos/${{ github.repository }}/actions/workflows/deploy.yml/enable"
+        env:
+          GH_TOKEN: ${{ github.token }}
+
   build:
+    needs: check
+    if: ${{ !cancelled() && (github.event_name != 'schedule' || needs.check.outputs.changed == 'true') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

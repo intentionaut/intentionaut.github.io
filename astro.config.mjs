@@ -31,6 +31,8 @@ export default defineConfig({
       filter: (page) =>
         !/\/draft(\/|$)/.test(page) &&
         !/\/preview(\/|$)/.test(page) &&
+        // noindex'd: listing it made Search Console report "Submitted URL marked noindex".
+        !/\/thank-you\/?$/.test(page) &&
         !LEGACY_REDIRECTS.has(new URL(page).pathname),
     }),
   ],
