@@ -1,0 +1,133 @@
+---
+/**
+ * The enquiry form used on /contact/ and every service page. It was copied
+ * into ten pages and had drifted (three topic lists, no double-submit guard);
+ * now there is one.
+ *
+ * Posts to the contact-form Worker (/contact), which emails hello@. BaseLayout
+ * adds the first_* arrival fields to #contact-form, so the id must stay.
+ */
+import '@fontsource-variable/roboto-serif';
+import { BOOKING_URL } from '../data/links';
+
+interface Props {
+  /** Which page sent it, e.g. "fractional". Omit on /contact/. */
+  source?: string;
+  /** Topic pre-selected in the dropdown. */
+  selected?: string;
+  rows?: number;
+  /** Show "Rather talk first? Book a free call." under the form. */
+  booking?: boolean;
+}
+
+const { source, selected, rows = 5, booking = false } = Astro.props;
+
+const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
+
+// Values match the Worker's label map in contact-form/src/index.ts.
+const topics: [string, string][] = [
+  ['forward-deployed', 'Product building'],
+  ['fractional', 'Fractional leadership'],
+  ['strategic-direction', 'Strategic direction'],
+  ['execution', 'Execution & transformation'],
+  ['advisor-intro', 'Advisor or recruiter introduction'],
+  ['speaking', 'Speaking & workshops'],
+  ['mentoring', 'Mentoring'],
+  ['other', 'Something else'],
+];
+---
+
+<form id="contact-form" novalidate>
+  {source && <input type="hidden" name="source" value={source} />}
+  <div class="form-grid">
+    <label>
+      <span class="form-label">Name</span>
+      <input type="text" name="name" required autocomplete="name" maxlength="100" />
+    </label>
+    <label>
+      <span class="form-label">Email</span>
+      <input type="email" name="email" required autocomplete="email" maxlength="254" />
+    </label>
+  </div>
+  <label>
+    <span class="form-label">What's this about?</span>
+    <select name="topic">
+      {topics.map(([value, label]) => (
+        <option value={value} selected={value === selected}>{label}</option>
+      ))}
+    </select>
+  </label>
+  <label>
+    <span class="form-label">Message</span>
+    <textarea name="message" rows={rows} required maxlength="5000"></textarea>
+  </label>
+  {/* Honeypot: hidden from people, filled by bots. The Worker drops any
+      message that has it. */}
+  <input class="hp-field" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+  <div class="cf-turnstile" data-sitekey={TURNSTILE_SITEKEY} data-theme="light"></div>
+  <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <button class="btn-plain" type="submit">Send it</button>
+  <p class="form-status" id="form-status" role="status"></p>
+</form>
+{
+  booking && (
+    <p class="form-alt">
+      Rather talk first?
+      {' '}<a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a free call</a>.
+    </p>
+  )
+}
+
+<style>
+  .hp-field {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+    padding: 0;
+  }
+</style>
+
+<script>
+  const ENDPOINT = 'https://contact-form.intentionaut.workers.dev/contact';
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const statusEl = document.getElementById('form-status');
+  const button = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+
+  const say = (msg: string) => {
+    if (statusEl) statusEl.textContent = msg;
+  };
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    // One click, one email: the button stays off until this attempt finishes.
+    if (button?.disabled) return;
+    if (button) button.disabled = true;
+    say('');
+
+    try {
+      const data = Object.fromEntries(new FormData(form));
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      const result = (await res.json().catch(() => ({}))) as { message?: string; error?: string };
+      if (res.ok) {
+        form.reset();
+        say(result.message || "Thank you; I'll reply soon.");
+      } else {
+        say(result.error || 'Something went wrong; please email me directly.');
+      }
+    } catch {
+      say('Something went wrong; please email me directly.');
+    } finally {
+      // A Turnstile token is single-use; a retry needs a fresh one.
+      (window as any).turnstile?.reset?.();
+      if (button) button.disabled = false;
+    }
+  });
+</script>

@@ -621,6 +621,19 @@ h3 {
 .prose {
   max-width: 62ch;
   padding-bottom: clamp(3rem, 6vw, 5rem);
+  /* Long bare URLs in imported essays pushed pages wider than a phone. */
+  overflow-wrap: anywhere;
+}
+
+.prose img {
+  max-width: 100%;
+  height: auto;
+}
+
+.prose table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
 }
 
 .prose p {
@@ -993,38 +1006,6 @@ a.talk-title:hover {
   animation: none;
 }
 
-/* ---------- Writing card ---------- */
-
-.newsletter-card {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  max-width: 30rem;
-  margin-bottom: clamp(3rem, 6vw, 5rem);
-  padding: var(--space-6) var(--space-7);
-  border: 1px solid var(--ink);
-  position: relative;
-  text-decoration: none;
-  transition: background-color var(--dur-base) ease;
-}
-
-.newsletter-card::after {
-  content: '';
-  position: absolute;
-  inset: 3px;
-  border: 1px solid var(--slate);
-  pointer-events: none;
-}
-
-.newsletter-card:hover {
-  background: rgba(169, 203, 208, 0.18);
-}
-
-.news-band .newsletter-card {
-  max-width: 34rem;
-  margin: 0 auto clamp(3rem, 6vw, 5rem);
-}
-
 /* ---------- Credibility strip ---------- */
 
 .cred-strip {
@@ -1121,25 +1102,12 @@ a.talk-title:hover {
   }
 }
 
-.card-kicker {
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--accent-text);
-}
-
 .card-title {
   font-family: var(--font-display);
   font-optical-sizing: auto;
   font-weight: 500;
   font-size: 1.5rem;
   color: var(--ink);
-}
-
-.card-sub {
-  font-size: 0.92rem;
-  color: var(--muted);
 }
 
 /* ---------- Writing archive ---------- */
@@ -1485,8 +1453,13 @@ a.talk-title:hover {
   border-bottom-color: var(--accent);
 }
 
-.contact-form-section .btn-primary {
-  align-self: flex-start;
+/* The underline colour alone is too faint to find with a keyboard. */
+.contact-form-section input:focus-visible,
+.contact-form-section select:focus-visible,
+.contact-form-section textarea:focus-visible,
+.signup-input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .form-status {
@@ -1536,18 +1509,6 @@ a.talk-title:hover {
   margin-top: clamp(2rem, 4vw, 3rem);
 }
 
-.footer-tagline {
-  width: 100%;
-  margin: 0;
-  font-family: var(--font-display);
-  font-optical-sizing: auto;
-  font-style: italic;
-  font-size: 1rem;
-  letter-spacing: normal;
-  text-transform: none;
-  color: var(--ink);
-}
-
 .site-footer .wrap {
   display: flex;
   flex-wrap: wrap;
@@ -1570,14 +1531,6 @@ a.talk-title:hover {
 
 .site-footer a:hover {
   color: var(--accent-text);
-}
-
-.footer-links {
-  display: flex;
-  gap: var(--space-6);
-  list-style: none;
-  margin: 0;
-  padding: 0;
 }
 
 /* ---------- Responsive ---------- */

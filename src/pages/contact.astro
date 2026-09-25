@@ -1,14 +1,12 @@
 ---
 import '@fontsource-variable/roboto-serif';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { BOOKING_URL } from '../data/links';
+import ContactForm from '../components/ContactForm.astro';
 import { rates, gbp } from '../data/rates';
 import { faqsFor } from '../data/faqs';
 import { testimonialsFor } from '../data/testimonials';
 import FaqList from '../components/FaqList.astro';
 
-// Cloudflare Turnstile sitekey (dash.cloudflare.com, Turnstile)
-const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
 
 // Edit src/data/testimonials.ts to add one, reorder them, or take one down.
 // Nothing on this page needs touching for any of that.
@@ -441,58 +439,7 @@ const testimonials = testimonialsFor('contact');
           Tell me how I can help. I'd love to know what you're working on.
           I'll tell you how I can help.
         </p>
-        <form id="contact-form" novalidate>
-          <div class="form-grid">
-            <label>
-              <span class="form-label">Name</span>
-              <input type="text" name="name" required autocomplete="name" />
-            </label>
-            <label>
-              <span class="form-label">Email</span>
-              <input type="email" name="email" required autocomplete="email" />
-            </label>
-          </div>
-          <label>
-            <span class="form-label">What's this about?</span>
-            <select name="topic">
-              <option value="forward-deployed">Product building</option>
-              <option value="advisor-intro">Advisor or recruiter introduction</option>
-              <option value="strategic-direction">Strategic direction</option>
-              <option value="execution">Execution &amp; transformation</option>
-              <option value="fractional">Fractional leadership</option>
-              <option value="speaking">Speaking &amp; workshops</option>
-              <option value="mentoring">Mentoring</option>
-              <option value="other">Something else</option>
-            </select>
-          </label>
-          <label>
-            <span class="form-label">Message</span>
-            <textarea name="message" rows="3" required></textarea>
-          </label>
-          {
-            TURNSTILE_SITEKEY && (
-              <>
-                <div
-                  class="cf-turnstile"
-                  data-sitekey={TURNSTILE_SITEKEY}
-                  data-theme="light"
-                />
-                <script
-                  is:inline
-                  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-                  async
-                  defer
-                />
-              </>
-            )
-          }
-          <button class="btn-plain" type="submit">Send it</button>
-          <p class="form-status" id="form-status" role="status"></p>
-        </form>
-        <p class="form-alt">
-          Rather talk first?
-          {' '}<a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a free call</a>.
-        </p>
+        <ContactForm rows={3} booking />
       </div>
     </section>
 
@@ -503,70 +450,37 @@ const testimonials = testimonialsFor('contact');
   </section>
 
   <script>
-    const ENDPOINT = 'https://contact-form.intentionaut.workers.dev/contact';
-    const form = document.getElementById('contact-form') as HTMLFormElement | null;
+    // The carousel is left out when no testimonials are enabled; without this
+    // guard the script threw and the FAQ below never got its handler.
+    const track = document.getElementById('testi-track');
+    if (track) {
+      const prev = document.getElementById('testi-prev') as HTMLButtonElement | null;
+      const next = document.getElementById('testi-next') as HTMLButtonElement | null;
 
-    // A link that already knows what this is about (e.g. from the Decision
-    // Velocity Review) shouldn't make the reader pick a topic again.
-    const params = new URLSearchParams(location.search);
-    const topicParam = params.get('topic');
-    if (form && topicParam) {
-      const topicSelect = form.querySelector<HTMLSelectElement>('select[name="topic"]');
-      if (topicSelect && [...topicSelect.options].some((o) => o.value === topicParam)) {
-        topicSelect.value = topicParam;
-      }
+      const update = () => {
+        const max = track.scrollWidth - track.clientWidth;
+        if (prev) prev.disabled = track.scrollLeft <= 0;
+        if (next) next.disabled = track.scrollLeft >= max - 1;
+      };
+
+      const step = () => {
+        const card = track.querySelector<HTMLElement>('.tcard');
+        if (!card) return 0;
+        const cardWidth = card.getBoundingClientRect().width + 20;
+        return cardWidth * 2;
+      };
+
+      next?.addEventListener('click', () => {
+        track.scrollBy({ left: step(), behavior: 'smooth' });
+      });
+      prev?.addEventListener('click', () => {
+        track.scrollBy({ left: -step(), behavior: 'smooth' });
+      });
+
+      track.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
     }
-
-    form?.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const data = Object.fromEntries(new FormData(form));
-      const statusEl = document.getElementById('form-status');
-
-      try {
-        const res = await fetch(ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
-        });
-        const result = await res.json();
-        if (res.ok) {
-          form.reset();
-          if (statusEl) statusEl.textContent = result.message || "Thank you; I'll reply soon.";
-        } else {
-          if (statusEl) statusEl.textContent = result.error || 'Something went wrong; please email me directly.';
-        }
-      } catch {
-        if (statusEl) statusEl.textContent = 'Something went wrong; please email me directly.';
-      }
-    });
-
-    const track = document.getElementById('testi-track')!;
-    const prev = document.getElementById('testi-prev') as HTMLButtonElement | null;
-    const next = document.getElementById('testi-next') as HTMLButtonElement | null;
-
-    const update = () => {
-      const max = track.scrollWidth - track.clientWidth;
-      if (prev) prev.disabled = track.scrollLeft <= 0;
-      if (next) next.disabled = track.scrollLeft >= max - 1;
-    };
-
-    const step = () => {
-      const card = track.querySelector<HTMLElement>('.tcard');
-      if (!card) return 0;
-      const cardWidth = card.getBoundingClientRect().width + 20;
-      return cardWidth * 2;
-    };
-
-    next?.addEventListener('click', () => {
-      track.scrollBy({ left: step(), behavior: 'smooth' });
-    });
-    prev?.addEventListener('click', () => {
-      track.scrollBy({ left: -step(), behavior: 'smooth' });
-    });
-
-    track.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', update);
-    update();
 
     const faqItems = document.querySelectorAll<HTMLDetailsElement>('.faq-item');
     faqItems.forEach((item) => {

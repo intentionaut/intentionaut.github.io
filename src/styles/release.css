@@ -225,18 +225,6 @@
     color: var(--muted);
   }
 
-  /* Voice */
-  .voice-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-    gap: var(--space-9);
-    align-items: start;
-  }
-  .voice-files {
-    display: grid;
-    gap: var(--space-2);
-    margin-top: var(--space-8);
-  }
   .file {
     font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
     font-size: 0.85rem;
@@ -254,14 +242,6 @@
     font-family: var(--font-body);
     color: var(--muted);
     margin-top: 0.2rem;
-  }
-
-  /* Languages */
-  .lang-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-9);
-    margin-top: var(--space-7);
   }
 
   /* Close */
@@ -298,9 +278,7 @@
     .rel-hero {
       padding-top: var(--space-8);
     }
-    .voice-files {
-      margin-top: 0;
-    }
+
     .stage {
       grid-template-columns: 3rem minmax(0, 1fr);
       gap: var(--space-4);
@@ -309,15 +287,6 @@
       white-space: normal;
     }
   }
-
-/* Stage tabs */
-.rel-stages-intro {
-  margin-top: var(--space-6);
-  max-width: 68ch;
-}
-.rel-stages-intro p {
-  margin: 0 0 var(--space-4);
-}
 
 .stabs {
   margin-top: var(--space-7);

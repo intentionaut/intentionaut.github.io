@@ -1,8 +1,8 @@
 ---
 import '@fontsource-variable/roboto-serif';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
 
-const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
 ---
 
 <BaseLayout
@@ -72,58 +72,7 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
           If any of that sounds like it might help, get in touch. I read
           every message.
         </p>
-        <form id="contact-form" novalidate>
-          <input type="hidden" name="source" value="mentoring" />
-          <div class="form-grid">
-            <label>
-              <span class="form-label">Name</span>
-              <input type="text" name="name" required autocomplete="name" />
-            </label>
-            <label>
-              <span class="form-label">Email</span>
-              <input type="email" name="email" required autocomplete="email" />
-            </label>
-          </div>
-          <label>
-            <span class="form-label">What's this about?</span>
-            <select name="topic">
-              <option value="forward-deployed">Product building</option>
-              <option value="advisor-intro">Advisor or recruiter introduction</option>
-              <option value="strategic-direction">
-                Strategic direction
-              </option>
-              <option value="execution">Execution &amp; transformation</option>
-              <option value="fractional">Fractional leadership</option>
-              <option value="advisory">Advisory</option>
-              <option value="speaking">Speaking &amp; workshops</option>
-              <option value="mentoring" selected>Mentoring</option>
-              <option value="other">Something else</option>
-            </select>
-          </label>
-          <label>
-            <span class="form-label">Message</span>
-            <textarea name="message" rows="5" required></textarea>
-          </label>
-          {
-            TURNSTILE_SITEKEY && (
-              <>
-                <div
-                  class="cf-turnstile"
-                  data-sitekey={TURNSTILE_SITEKEY}
-                  data-theme="light"
-                />
-                <script
-                  is:inline
-                  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-                  async
-                  defer
-                />
-              </>
-            )
-          }
-          <button class="btn-plain" type="submit">Send it</button>
-          <p class="form-status" id="form-status" role="status"></p>
-        </form>
+        <ContactForm source="mentoring" selected="mentoring" />
       </div>
       <p class="faq-link">
         Questions first? <a href="/faq/">Read the FAQ.</a>
@@ -131,31 +80,4 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
     </section>
   </section>
 
-  <script>
-    const ENDPOINT = 'https://contact-form.intentionaut.workers.dev/contact';
-    const form = document.getElementById('contact-form');
-
-    form?.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const data = Object.fromEntries(new FormData(form));
-      const statusEl = document.getElementById('form-status');
-
-      try {
-        const res = await fetch(ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
-        });
-        const result = await res.json();
-        if (res.ok) {
-          form.reset();
-          if (statusEl) statusEl.textContent = result.message || "Thank you; I'll reply soon.";
-        } else {
-          if (statusEl) statusEl.textContent = result.error || 'Something went wrong; please email me directly.';
-        }
-      } catch {
-        if (statusEl) statusEl.textContent = 'Something went wrong; please email me directly.';
-      }
-    });
-  </script>
 </BaseLayout>

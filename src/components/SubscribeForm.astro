@@ -187,7 +187,12 @@ const {
   // BaseLayout. Most subscribes do not happen on the landing page, and 22 pages
   // carry no form at all, so without this the campaign is lost the moment
   // somebody clicks a second link.
-  let firstTouch: { source?: string; medium?: string; campaign?: string } = {};
+  let firstTouch: {
+    source?: string;
+    medium?: string;
+    campaign?: string;
+    referrer?: string;
+  } = {};
   try {
     firstTouch = JSON.parse(sessionStorage.getItem('firstTouch') || '{}');
   } catch {
@@ -251,7 +256,10 @@ const {
             campaign: urlCampaign || form.dataset.campaign || undefined,
             medium: medium || undefined,
             website: fd.get('website') || '',
-            referrer: document.referrer || undefined,
+            // The site that sent them, recorded on their first page. The
+            // current page's document.referrer is usually intentionaut.com
+            // itself by the time someone subscribes.
+            referrer: firstTouch.referrer ? `https://${firstTouch.referrer}` : undefined,
           }),
         });
         const result = (await res.json().catch(() => ({}))) as {
