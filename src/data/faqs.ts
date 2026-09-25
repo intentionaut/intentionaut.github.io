@@ -61,6 +61,12 @@ export const faqs: Faq[] = [
       'Beforehand you answer a few questions, so the clock starts on substance rather than introductions. Then ninety minutes working your actual problem. Afterwards you get written notes: decisions made, next steps, who owns what.',
   },
   {
+    question: "Fractional vs interim CPO: what's the difference?",
+    placements: ['faq', 'fractional'],
+    answer:
+      "The difference is how much of the week the job needs. An interim CPO takes the role full time for a fixed spell, usually to cover a vacancy, a transition or a turnaround. A fractional CPO holds the same senior role part time over months, which works when the team underneath is strong enough to run on the days they're not there. If your product would stall without a leader in the room every day, hire interim.",
+  },
+  {
     question: 'Is fractional leadership a real commitment?',
     placements: ['faq', 'contact', 'fractional'],
     answer:
