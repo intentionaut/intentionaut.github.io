@@ -18,7 +18,7 @@ const pages = [
   },
   {
     slug: 'forward-deployed',
-    eyebrow: 'Saielle DaSilva · Forward deployed building',
+    eyebrow: 'Saielle DaSilva · Product builder',
     lines: ['Someone who <i>builds</i> it,', 'not just decides', 'what to build.'],
   },
   {

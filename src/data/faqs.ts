@@ -42,13 +42,13 @@ export const faqs: Faq[] = [
       'Ask. If cost is the thing standing between you and booking, say so in your note. It counts if you are paying yourself rather than an employer, if your company is bootstrapped or unfunded, if the work is for a charity, nonprofit or the public sector, or if the full rate simply means you would not book at all. There is no proof to send, no essay to write and no negotiation. I will confirm an adjusted rate when we book. A few reduced slots each month keeps this honest; if the month is full, I will tell you and we will find another way.',
   },
   {
-    question: 'What is your day rate for forward deployed product building?',
+    question: 'What is your day rate for product building?',
     answer: `${gbp(rates.forwardDeployed)} a day, three days a week, four weeks minimum. It starts with a five-day scoping block at ${gbp(rates.fractional)} a day, which is the fractional rate rather than this one. Where an advisor or recruiter introduces the work, their margin sits on top of that rate rather than inside it.`,
   },
   {
-    question: 'What is the difference between fractional leadership and forward deployed product building?',
+    question: 'What is the difference between fractional leadership and product building?',
     answer:
-      'Fractional leadership buys authority: I lead your team, make the strategic calls and stay accountable for delivery, one or two days a week over months. Forward deployed product building buys construction: I sit inside your team three days a week for a fixed block, help you get clear about what you intend, and build a working version of it in your environment. The authority stays where it is. If nobody senior is holding product direction, you want the first one.',
+      'Fractional leadership buys authority: I lead your team, make the strategic calls and stay accountable for delivery, one or two days a week over months. Product building buys construction: I sit inside your team three days a week for a fixed block, help you get clear about what you intend, and build a working version of it in your environment. The authority stays where it is. If nobody senior is holding product direction, you want the first one.',
   },
   {
     question: 'What happens after I get in touch?',
@@ -103,7 +103,7 @@ export const faqs: Faq[] = [
 ];
 
 /**
- * Questions for the Forward Deployed Product Builder page.
+ * Questions for the Product builder page (/forward-deployed/).
  *
  * Drawn from buyer-side "questions to ask before you hire" guides rather than
  * from seller FAQ pages, which mostly define services instead of answering
