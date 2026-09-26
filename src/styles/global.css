@@ -1476,6 +1476,20 @@ a.talk-title:hover {
   color: var(--muted);
 }
 
+.form-alt a,
+.form-sent a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+
+.form-alt a:hover,
+.form-sent a:hover {
+  color: var(--accent-text);
+}
+
 .faq-link {
   margin: var(--space-5) 0 0;
   text-align: center;

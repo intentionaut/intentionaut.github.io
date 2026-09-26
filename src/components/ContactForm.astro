@@ -69,9 +69,23 @@ const topics: [string, string][] = [
   <button class="btn-plain" type="submit">Send it</button>
   <p class="form-status" id="form-status" role="status"></p>
 </form>
+{/* Shown in place of the form once the Worker confirms the send. A line of
+    status text under a cleared form was too easy to miss. */}
+<div class="form-sent" id="form-sent" tabindex="-1" hidden>
+  <p class="form-sent-title">Message sent.</p>
+  <p>
+    Thank you<span data-sent-name></span>. It is in my inbox now, and I reply to
+    every note, usually within a couple of working days, to
+    {' '}<strong data-sent-email></strong>.
+  </p>
+  <p>
+    Rather talk sooner?
+    {' '}<a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a free call</a>.
+  </p>
+</div>
 {
   booking && (
-    <p class="form-alt">
+    <p class="form-alt" id="form-alt">
       Rather talk first?
       {' '}<a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a free call</a>.
     </p>
@@ -79,6 +93,34 @@ const topics: [string, string][] = [
 }
 
 <style>
+  /* The site's form layout sets display, which beats the hidden attribute. */
+  form[hidden],
+  .form-alt[hidden] {
+    display: none;
+  }
+  .form-sent {
+    padding: var(--space-6) 0 var(--space-2);
+    border-top: 2px solid var(--accent);
+  }
+  .form-sent:focus {
+    outline: none;
+  }
+  .form-sent-title {
+    margin: 0 0 var(--space-3);
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+  .form-sent p:not(.form-sent-title) {
+    margin: 0 0 var(--space-3);
+    color: var(--muted);
+  }
+  .form-sent strong {
+    color: var(--ink);
+    font-weight: 600;
+    overflow-wrap: anywhere;
+  }
   .hp-field {
     position: absolute;
     width: 1px;
@@ -96,6 +138,9 @@ const topics: [string, string][] = [
   const form = document.getElementById('contact-form') as HTMLFormElement | null;
   const statusEl = document.getElementById('form-status');
   const button = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+  const sent = document.getElementById('form-sent');
+  const bookingLine = document.getElementById('form-alt');
+  const buttonLabel = button?.textContent ?? 'Send it';
 
   const say = (msg: string) => {
     if (statusEl) statusEl.textContent = msg;
@@ -105,7 +150,10 @@ const topics: [string, string][] = [
     e.preventDefault();
     // One click, one email: the button stays off until this attempt finishes.
     if (button?.disabled) return;
-    if (button) button.disabled = true;
+    if (button) {
+      button.disabled = true;
+      button.textContent = 'Sending…';
+    }
     say('');
 
     try {
@@ -117,8 +165,22 @@ const topics: [string, string][] = [
       });
       const result = (await res.json().catch(() => ({}))) as { message?: string; error?: string };
       if (res.ok) {
+        const firstName = String(data.name ?? '').trim().split(/\s+/)[0];
+        const nameSlot = sent?.querySelector('[data-sent-name]');
+        const emailSlot = sent?.querySelector('[data-sent-email]');
+        if (nameSlot) nameSlot.textContent = firstName ? `, ${firstName}` : '';
+        if (emailSlot) emailSlot.textContent = String(data.email ?? '');
         form.reset();
-        say(result.message || "Thank you; I'll reply soon.");
+        form.hidden = true;
+        if (bookingLine) bookingLine.hidden = true;
+        if (sent) {
+          sent.hidden = false;
+          // Move focus so screen readers announce it and the reader's eye lands on it.
+          sent.focus();
+          sent.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        } else {
+          say(result.message || "Thank you; I'll reply soon.");
+        }
       } else {
         say(result.error || 'Something went wrong; please email me directly.');
       }
@@ -127,7 +189,10 @@ const topics: [string, string][] = [
     } finally {
       // A Turnstile token is single-use; a retry needs a fresh one.
       (window as any).turnstile?.reset?.();
-      if (button) button.disabled = false;
+      if (button) {
+        button.disabled = false;
+        button.textContent = buttonLabel;
+      }
     }
   });
 </script>
