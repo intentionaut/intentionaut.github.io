@@ -704,6 +704,35 @@ h3 {
   color: var(--accent-text);
 }
 
+/* beehiiv's card block, as the design system's hairline card: one slate
+   rule, rounded corners, ink text, a muted attribution. See
+   convertBeehiivBlocks in src/lib/beehiiv.ts. */
+.prose .post-card {
+  margin: 2em 0;
+  padding: var(--space-5) var(--space-6);
+  border: 1px solid var(--slate);
+  border-radius: var(--radius-l);
+  color: var(--ink);
+}
+
+.prose .post-card p {
+  margin: 0;
+}
+
+.prose .post-card .post-card-by {
+  margin-top: var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+.prose .pull-quote {
+  margin: 2em 0;
+}
+
+.prose .pull-quote blockquote {
+  margin: 0;
+}
+
 .prose blockquote {
   margin: 2em 0;
   padding-left: var(--space-6);
@@ -716,7 +745,8 @@ h3 {
 
 /* A prose block ends on the section gap alone: no trailing paragraph margin
    on top of its padding. */
-.prose > :last-child {
+.prose > :last-child,
+.prose > :last-child > :last-child {
   margin-bottom: 0;
 }
 

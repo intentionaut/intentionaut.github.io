@@ -51,11 +51,11 @@ The launch of Public Health England’s (PHE) new mental health campaign [“Eve
 
 Here are some additional ways to look after your mental health:
 
-#### Allow Acceptance to Help
+### Allow Acceptance to Help
 
 Research and experts say that [acceptance can help depression](https://www.psychologytoday.com/gb/blog/open-gently/201906/how-acceptance-can-help-depression) and anxiety. It’s extremely difficult to do anything else as long as you’re fighting or denying the fact that you’re struggling with mental health issues. If you can learn to accept that depression and anxiety are along for the ride, you can be in the driver’s seat.
 
-#### Find a Support Group or Therapist
+### Find a Support Group or Therapist
 
 Men are especially susceptible to mental health issues. In the UK, 76% of [suicides are committed by men](https://www.safeline.org.uk/mens-mental-health-a-silent-crisis/) and suicide is the biggest cause of death for men under 35, but you do not have to suffer in silence.
 
@@ -63,19 +63,19 @@ There are entire groups such as [Better Help](https://www.betterhelp.com/) and [
 
 We’ve both had therapy and it’s helped us immensely. It’s just important to know that therapy is a process[:] it might never be done done (insert product manager joke about the definition of done here)[, but] the journey is just as important as the destination. Every accomplishment means we discover some [new work to be done](https://twitter.com/MikeDrucker/status/1181315604801839104), (you should really click this link, it’s worth it) just like in the work we do.
 
-#### Build a Brag Sheet
+### Build a Brag Sheet
 
 Write a weekly summary of the actions you’ve taken and their impact. A great example of this is Cassie Robinson’s [WeekNotes](https://medium.com/@cassierobinson/weeknotes-44-23rd-27th-september-1cb5a20f6205). This has had a really positive effect for [Saielle], [who's] been able to create a distinct reporting style that provides a written record showing impact at work.
 
-#### Find Your Peers
+### Find Your Peers
 
 It’s only slightly tongue in cheek when we say that ProductTank[,] the world’s largest community of product people with chapters in over 185 cities around the world[,] is therapy for product people. Because our role can be so lonely, it’s incredibly important to find peers we can share with, confide in, and learn from. So, whether you join one to share your own challenges, listen to someone talk about theirs, or just share a drink afterwards, it’s priceless.
 
-#### Expand Your Circle
+### Expand Your Circle
 
 As well as finding support within your peer group, it’s just as important to find support and help *outside* it. If you regularly hang out at tech meetups, and all of your friends are product or tech folks, it can be hard to see how much value and experience you have, so mix it up. [One study](https://www.sciencedirect.com/science/article/abs/pii/S0001879119301095?via%3Dihub#ab0010) recently [cited by MSNBC](https://www.cnbc.com/2019/09/25/how-to-cope-with-impostor-syndrome-study.html) shows that If you develop friendships with those outside your field or area, you can keep a better sense of the big picture.
 
-#### Volunteer or Teach
+### Volunteer or Teach
 
 There’s nothing like learning, and one of the best ways to prove you know something is by teaching. Whether it’s a new skill or a hobby, give yourself the ability to show mastery in something and give back to others along the way. We know a product manager who volunteers with helping immigrants learn English, and another that works for a charity focused on Alzheimers. Looking outside yourself and your problems can help you find perspective and show you that you have earned skills you might be taking for granted at work.
 
@@ -83,20 +83,20 @@ There’s nothing like learning, and one of the best ways to prove you know some
 
 Perhaps you’re not struggling with your own mental health issues but know someone who is. Or, maybe you are but still find that [helping others](https://www.nhs.uk/oneyou/every-mind-matters/helping-others/), in turn, helps you. There are plenty of ways to offer support to those who need it. Here’s just a small selection.
 
-#### Show that you Care
+### Show that you Care
 
 There are a few high-visibility ways in which you can help if you’re a product leader or employer. First, make it obvious that you care about mental health at work. Check out the [Where’s Your Head At?](http://www.wheresyourheadat.org/advice/) campaign for helpful advice and resources.
 
 You can also get some great tips from Roisi Proven who shared [how to help others without losing yourself](https://www.mindtheproduct.com/how-to-help-others-without-losing-yourself-by-roisi-proven/) at ProductTank London. She believes it all comes down to [using] one of our product superpowers[:] empathy.
 
-#### Invest in Listening
+### Invest in Listening
 
 Active listening is step one on this journey if you’re trying to help. You’re not going to get any further than the surface if you’re not truly listening to others. Lisa Rogoff shares [how to be a better listener](https://www.mindtheproduct.com/why-listening-is-crucial-to-product-and-how-to-do-it-better/) to our team members and customers.
 
-#### Talk to your team about their whole selves
+### Talk to your team about their whole selves
 
 If you’re a manager, see what Patrik Ward had to say when he shared how to have more [human one to ones](https://www.mindtheproduct.com/need-human-one-ones/) that allow your team members to open up about themselves, and talk about the full picture[,] not just work.
 
-#### Make it Safe
+### Make it Safe
 
 [Psychological Safety](https://hbr.org/2017/08/high-performing-teams-need-psychological-safety-heres-how-to-create-it) is a strong advantage in tackling mental health issues at work. Your team has to know that it’s safe to bring themselves to work. But the behaviors that create psychological safety for our teams and the behaviors that bring us rewards and recognition as individuals [are often fundamentally at odds with each other](https://www.mindtheproduct.com/why-is-psychological-safety-at-odds-with-the-way-we-work/), which is why it’s so important to work on continuously.

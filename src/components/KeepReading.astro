@@ -31,12 +31,14 @@ const fmtYear = (d: string) => new Date(d).getUTCFullYear();
 }
 
 <style>
+  /* A band: one section gap to its rule, --space-7 inside. */
   .keep-reading {
-    padding-block: clamp(2.5rem, 5vw, 3.5rem);
+    margin-top: clamp(3rem, 6vw, 5rem);
+    padding-top: var(--space-7);
     border-top: 1px solid var(--slate);
   }
   .keep-reading h2 {
-    font-size: 1.1rem;
+    font-size: var(--text-lg);
     margin: 0 0 var(--space-5);
   }
   .keep-reading ul {
@@ -61,14 +63,14 @@ const fmtYear = (d: string) => new Date(d).getUTCFullYear();
   .kr-title {
     font-family: var(--font-display);
     font-optical-sizing: auto;
-    font-size: 1.08rem;
+    font-size: var(--text-md);
     line-height: 1.3;
   }
   .keep-reading a:hover .kr-title {
     color: var(--accent-text);
   }
   .kr-meta {
-    font-size: 0.8rem;
+    font-size: var(--text-sm);
     color: var(--muted);
   }
 </style>

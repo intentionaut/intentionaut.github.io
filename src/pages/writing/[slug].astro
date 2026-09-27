@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import SubscribeForm from '../../components/SubscribeForm.astro';
+import FrameSubscribe from '../../components/FrameSubscribe.astro';
 import AuthorBio from '../../components/AuthorBio.astro';
 import KeepReading from '../../components/KeepReading.astro';
 import { relatedFor } from '../../lib/archive';
@@ -127,17 +127,15 @@ const articleLd = meta
 
       <AuthorBio />
 
-      <section class="signup article-cta" aria-label="Subscribe">
-        <h2>If &ldquo;{post.title}&rdquo; was useful, the next one will be too.</h2>
-        <p class="signup-sub">
-          How leaders set direction when AI does more of the building.
-          Field-tested with the receipts.
-        </p>
-        <SubscribeForm
+      <section class="article-cta" aria-label="Subscribe">
+        <FrameSubscribe
+          heading={`If “${post.title}” was useful, the next one will be too.`}
+          sub="How leaders set direction when AI does more of the building. Field-tested with the receipts."
           source="article"
           campaign={post.slug}
           emailId="article-email"
           buttonLabel="Get the next one"
+          align="left"
         />
       </section>
 
@@ -171,17 +169,15 @@ const articleLd = meta
 
       <AuthorBio />
 
-      <section class="signup article-cta" aria-label="Subscribe">
-        <h2>If &ldquo;{essay.data.title}&rdquo; was useful, the next one will be too.</h2>
-        <p class="signup-sub">
-          How leaders set direction when AI does more of the building.
-          Field-tested with the receipts.
-        </p>
-        <SubscribeForm
+      <section class="article-cta" aria-label="Subscribe">
+        <FrameSubscribe
+          heading={`If “${essay.data.title}” was useful, the next one will be too.`}
+          sub="How leaders set direction when AI does more of the building. Field-tested with the receipts."
           source="essay"
           campaign={essay.id}
           emailId="essay-email"
           buttonLabel="Get the next one"
+          align="left"
         />
       </section>
 
@@ -209,18 +205,28 @@ const articleLd = meta
 <style>
   .article-meta {
     margin-top: var(--space-3);
-    font-size: 0.85rem;
+    font-size: var(--text-sm);
     color: var(--muted);
   }
 
+  /* The close of an essay, in bands (design system, Layout): the sign-up
+     card and the footer each sit one section gap below the block before;
+     the footer's rule takes that gap, then --space-7 inside, and the page
+     ends on the section gap. */
+  .article-cta {
+    margin-top: clamp(3rem, 6vw, 5rem);
+  }
+
   .article-footer {
-    padding-block: clamp(3rem, 6vw, 5rem);
+    margin-top: clamp(3rem, 6vw, 5rem);
+    padding-top: var(--space-7);
+    padding-bottom: clamp(3rem, 6vw, 5rem);
     border-top: 1px solid var(--slate);
   }
 
   .article-original {
     margin-bottom: var(--space-4);
     color: var(--muted);
-    font-size: 0.9rem;
+    font-size: var(--text-sm);
   }
 </style>

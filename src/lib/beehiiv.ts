@@ -91,6 +91,14 @@ function stripBeehiivHtml(html: string): string {
   let content = html.slice(startIdx + startTag.length);
 
   content = content.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '');
+
+  // beehiiv's card block (a background, rounded corners and a one-pixel
+  // border) is known only by its inline style, which the next line strips.
+  // Mark it first; convertBeehiivBlocks turns it into the site's card.
+  content = content.replace(
+    /<div style="[^"]*border-radius:\d+px;border:1px solid[^"]*">/gi,
+    '<div data-bh="card">'
+  );
   content = content.replace(/style="[^"]*"/gi, '');
   content = content.replace(/class="[^"]*"/gi, '');
 
@@ -139,7 +147,39 @@ function stripBeehiivHtml(html: string): string {
     }
   );
 
-  return renumberHeadings(content.trim());
+  return renumberHeadings(convertBeehiivBlocks(content).trim());
+}
+
+/**
+ * beehiiv's quote and card blocks lose their look with their inline styles,
+ * and came out as a stray "❝", a plain paragraph and a tiny attribution in
+ * <small>. Each becomes its design-system component instead:
+ *   - the pull quote (❝, the line, an optional attribution) becomes
+ *     .pull-quote, the attribution its caption;
+ *   - the card (marked data-bh="card" before the styles went) becomes the
+ *     hairline card, .post-card, the attribution a line under the text.
+ * An empty attribution is dropped. Runs last, after the image wrapping, which
+ * closes a wrapper after every </figure> it meets.
+ */
+function convertBeehiivBlocks(html: string): string {
+  const attribution = (raw: string, cls: string, tag: string) => {
+    const text = raw.trim();
+    return text ? `<${tag} class="${cls}">${text}</${tag}>` : '';
+  };
+
+  html = html.replace(
+    /<div\s*>\s*❝\s*<\/div>\s*<div\s*>\s*(<p\s*>[\s\S]*?<\/p>)\s*<\/div>\s*<div\s*>\s*<small\s*>([\s\S]*?)<\/small>\s*<\/div>/g,
+    (_, quote: string, by: string) =>
+      `<figure class="pull-quote"><blockquote>${quote.replace(/<\/?(b|strong)\s*>/g, '')}</blockquote>${attribution(by, 'pull-quote-by', 'figcaption')}</figure>`
+  );
+
+  html = html.replace(
+    /<div data-bh="card">\s*<div\s*>\s*([\s\S]*?)<\/div>\s*<div\s*>\s*<small\s*>([\s\S]*?)<\/small>\s*<\/div>\s*<\/div>/g,
+    (_, body: string, by: string) =>
+      `<aside class="post-card">${body}${attribution(by, 'post-card-by', 'p')}</aside>`
+  );
+
+  return html;
 }
 
 /**

@@ -255,7 +255,9 @@ const zindex = [
         <p class="ds-note">
           A band that opens with a full-width slate rule (the newsletter sign-up)
           counts its gap to the rule, then pads <code>--space-7</code> inside.
-          The same band breaks a long page into parts (the keylines on /about/).
+          The same band breaks a long page into parts (the keylines on /about/)
+          and closes every essay: author, sign-up card, "Keep reading", back
+          link, each one section gap below the last.
           A prose block ends on the section gap alone: its last paragraph drops
           its bottom margin. It starts on the intro gap alone too: a heading
           that opens it drops its top margin. An <code>h3</code> sits
@@ -328,7 +330,9 @@ const zindex = [
           <p class="ds-demo-caption">
             A single <code>--slate</code> rule, rounded corners, ink text. The
             small uppercase labels are <code>--muted</code>; the answers stay
-            ink. This is the aside on product pages.
+            ink. This is the aside on product pages, and beehiiv's card block
+            in newsletter posts (<code>.post-card</code>, converted at build
+            time).
           </p>
         </div>
 
@@ -397,7 +401,8 @@ const zindex = [
             <code>.pull-quote</code>: Fraunces italic at <code>--text-md</code>
             behind a 2px <code>--accent</code> rule, the caption muted at
             <code>--text-sm</code> and level with the quote text. One testimonial
-            set into a page (homepage, /fractional/).
+            set into a page (homepage, /fractional/), and beehiiv's quote block
+            in newsletter posts, converted at build time.
           </p>
         </div>
 
@@ -462,7 +467,8 @@ const zindex = [
           remains for pages that need it. It is the only newsletter sign-up:
           the homepage, and the top and foot of /writing/ (a short italic
           heading with the promise as its sub-line), and through
-          <code>ReleaseSubscribe</code> on /open-source/ and the tool pages.
+          <code>ReleaseSubscribe</code> on /open-source/ and the tool pages,
+          and at the close of every essay and post, naming the piece.
         </p>
 
         <h3 class="ds-sub">Testimonial card</h3>

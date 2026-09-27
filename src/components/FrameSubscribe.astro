@@ -25,6 +25,8 @@ interface Props {
   sub?: string;
   /** utm_source context, passed through to the form. */
   source: string;
+  /** utm_campaign, passed through: the essay's slug when the card closes one. */
+  campaign?: string;
   /** Unique per instance, ties the input label to the field. */
   emailId: string;
   /** Button label. Default 'Subscribe'. */
@@ -40,6 +42,7 @@ const {
   heading,
   sub,
   source,
+  campaign,
   emailId,
   buttonLabel = 'Subscribe',
   maxWidth = '46rem',
@@ -54,7 +57,7 @@ const {
   {eyebrow && <p class="eyebrow fs-eyebrow">{eyebrow}</p>}
   {heading && <h2 class="fs-heading">{heading}</h2>}
   {sub && <p class="fs-sub">{sub}</p>}
-  <SubscribeForm source={source} emailId={emailId} buttonLabel={buttonLabel} />
+  <SubscribeForm source={source} campaign={campaign} emailId={emailId} buttonLabel={buttonLabel} />
 </div>
 
 <style>
