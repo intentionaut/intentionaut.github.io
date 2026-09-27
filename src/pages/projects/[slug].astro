@@ -28,55 +28,55 @@ const repoHost = project.data.repoUrl ? new URL(project.data.repoUrl).hostname :
       <p class="lede">{project.data.summary}</p>
     </header>
 
-    <dl class="case-meta">
-      <div>
+    <div class="case-meta">
+      <dl>
         <dt class="meta-label">Role</dt>
         <dd class="meta-value">{project.data.role}</dd>
-      </div>
+      </dl>
       {
         project.data.timeline && (
-          <div>
+          <dl>
             <dt class="meta-label">Timeline</dt>
             <dd class="meta-value">{project.data.timeline}</dd>
-          </div>
+          </dl>
         )
       }
       {
         project.data.status && (
-          <div>
+          <dl>
             <dt class="meta-label">Status</dt>
             <dd class="meta-value">{project.data.status}</dd>
-          </div>
+          </dl>
         )
       }
       {
         project.data.url && (
-          <div>
+          <dl>
             <dt class="meta-label">Link</dt>
             <dd class="meta-value">
               <a href={project.data.url} target="_blank" rel="noopener noreferrer">
                 {project.data.linkLabel ?? host}
               </a>
             </dd>
-          </div>
+          </dl>
         )
       }
       {
         project.data.repoUrl && (
-          <div>
+          <dl>
             <dt class="meta-label">Source</dt>
             <dd class="meta-value">
               <a href={project.data.repoUrl} target="_blank" rel="noopener noreferrer">
                 {project.data.repoLabel ?? repoHost}
               </a>
             </dd>
-          </div>
+          </dl>
         )
       }
       <div class="case-meta-cta">
         <a class="link-arrow link-arrow--back" href="/projects/">All projects</a>
       </div>
-    </dl>
+    </div>
 
     <article class="prose">
       <Content />

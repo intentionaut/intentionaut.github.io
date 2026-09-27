@@ -129,11 +129,14 @@
     border: 1px solid var(--slate);
     pointer-events: none;
   }
+  /* Ink, not muted: on the teal wash muted falls under 4.5:1. Weight keeps
+     the labels distinct from the answers. */
   .rel-aside dt {
     font-size: 0.75rem;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--muted);
+    color: var(--ink);
   }
   .rel-aside dd {
     margin: 0.15rem 0 0;
@@ -170,7 +173,7 @@
     display: inline-block;
     font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
     font-size: 0.8rem;
-    color: var(--muted);
+    color: var(--ink);
     background: var(--slate);
     border: 1px solid var(--slate);
     border-radius: var(--radius-m);
@@ -188,7 +191,7 @@
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--accent);
+    color: var(--accent-text);
     margin-right: 0.4rem;
   }
 
@@ -325,7 +328,7 @@
 }
 .stab-n {
   font-family: var(--font-display);
-  color: var(--accent);
+  color: var(--accent-text);
   font-size: 0.9rem;
 }
 .stab:focus-visible {

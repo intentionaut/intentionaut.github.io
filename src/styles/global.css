@@ -46,7 +46,7 @@
   --slate: #e0d2cb;
   --accent: #c85060;
   /* Accent for text: --accent is 3.7:1 on --paper, under the 4.5:1 small text needs. */
-  --accent-text: #b03e4c;
+  --accent-text: #b8404f;
   --mendl: rgba(169, 203, 208, 0.55);
 
   /* Type */
@@ -402,7 +402,7 @@ h3 {
 
 .hero h1 {
   max-width: 18ch;
-  font-size: clamp(2.55rem, 6vw, 4.6rem);
+  font-size: var(--text-display);
 }
 
 .hero h1 em {
@@ -746,7 +746,9 @@ h3 {
   margin-bottom: clamp(2rem, 4vw, 3rem);
 }
 
+.case-meta > dl,
 .case-meta > div {
+  margin: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -1149,7 +1151,6 @@ a.talk-title:hover {
   letter-spacing: 0;
   font-size: 0.88rem;
   line-height: 1;
-  opacity: 0.65;
 }
 
 .chip:hover {
@@ -1167,8 +1168,9 @@ a.talk-title:hover {
   opacity: 0.85;
 }
 
+/* Plain --muted: faded with opacity it fell under 4.5:1. */
 .row-themes {
-  opacity: 0.8;
+  color: var(--muted);
 }
 
 .ledger-row.is-hidden {
