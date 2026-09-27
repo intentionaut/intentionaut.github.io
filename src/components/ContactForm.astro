@@ -75,8 +75,7 @@ const topics: [string, string][] = [
   <p class="form-sent-title">Message sent.</p>
   <p>
     Thank you<span data-sent-name></span>. It is in my inbox now, and I reply to
-    every note, usually within a couple of working days, to
-    {' '}<strong data-sent-email></strong>.
+    every note, usually within a couple of working days.
   </p>
   <p>
     Rather talk sooner?
@@ -114,11 +113,6 @@ const topics: [string, string][] = [
   .form-sent p:not(.form-sent-title) {
     margin: 0 0 var(--space-3);
     color: var(--muted);
-  }
-  .form-sent strong {
-    color: var(--ink);
-    font-weight: 600;
-    overflow-wrap: anywhere;
   }
   .hp-field {
     position: absolute;
@@ -164,11 +158,12 @@ const topics: [string, string][] = [
       });
       const result = (await res.json().catch(() => ({}))) as { message?: string; error?: string };
       if (res.ok) {
-        const firstName = String(data.name ?? '').trim().split(/\s+/)[0];
+        // First name only, capitalised. The email address is deliberately not
+        // echoed back: the screen may be shared or screenshotted.
+        const first = String(data.name ?? '').trim().split(/\s+/)[0] ?? '';
+        const firstName = first ? first[0].toLocaleUpperCase() + first.slice(1) : '';
         const nameSlot = sent?.querySelector('[data-sent-name]');
-        const emailSlot = sent?.querySelector('[data-sent-email]');
         if (nameSlot) nameSlot.textContent = firstName ? `, ${firstName}` : '';
-        if (emailSlot) emailSlot.textContent = String(data.email ?? '');
         // Hold the card at its current height so nothing below it moves, then
         // swap the heading, intro and form for the confirmation.
         const card = form.closest<HTMLElement>('.contact-card');
