@@ -637,6 +637,34 @@ h3 {
   display: block;
   max-width: 100%;
   overflow-x: auto;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+  margin: 0 0 1.5em;
+  /* .prose breaks anywhere so long URLs fit a phone; in a table that splits
+     words letter by letter. The table scrolls sideways instead. */
+  overflow-wrap: normal;
+}
+
+.prose th,
+.prose td {
+  padding: var(--space-3) var(--space-4) var(--space-3) 0;
+  border-bottom: 1px solid var(--slate);
+  text-align: left;
+  vertical-align: top;
+}
+
+.prose th {
+  border-bottom-color: var(--ink);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.prose td:first-child {
+  font-weight: 500;
+  min-width: 8rem;
 }
 
 .prose p {
@@ -679,6 +707,14 @@ h3 {
 
 .prose h3 {
   font-size: var(--text-md);
+  line-height: 1.2;
+  margin: 1.75em 0 0.6em;
+}
+
+/* The page intro already sets the gap above the prose; a heading that opens
+   it must not add its own on top. */
+.prose > :first-child {
+  margin-top: 0;
 }
 
 .prose ul {

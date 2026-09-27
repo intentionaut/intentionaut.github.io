@@ -257,7 +257,12 @@ const zindex = [
           counts its gap to the rule, then pads <code>--space-7</code> inside.
           The same band breaks a long page into parts (the keylines on /about/).
           A prose block ends on the section gap alone: its last paragraph drops
-          its bottom margin.
+          its bottom margin. It starts on the intro gap alone too: a heading
+          that opens it drops its top margin. An <code>h3</code> sits
+          <code>1.75em</code> below the paragraph above and <code>0.6em</code>
+          above its own, so it binds to what it introduces. Tables in prose
+          take small uppercase muted headers over an ink rule, slate rules
+          between rows, and scroll sideways on phones rather than break words.
         </p>
       </section>
 

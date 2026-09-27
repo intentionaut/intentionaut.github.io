@@ -31,9 +31,8 @@ I also shared some key details of how we built the hiring practice at Cazoo. One
 
 Each company's scorecard is going to depend on roles, values and culture to shape the best things for your team. The most important thing to keep in mind when designing a hiring scorecard is to clearly define the technical and people skills you need and leave little room for bias. Focus on [culture add not culture fit](https://bit.ly/culture-add) when you define your scorecard.
 
-|  |  |  |  |
-| --- | --- | --- | --- |
 | Skill | Description | Score | Notes |
+| --- | --- | --- | --- |
 | Research | Presentation and communication shows this person makes research informed design decisions. Their prior work relies on a variety of techniques like interviews, diary studies, jobs to be done, journey maps, and quantitative data with confidence. | 1-5 | Each of these is about a 3/5  on the scale of maturity |
 | Information Architecture | Considers content needs in work before interactions. Can break down work into content, objects, and events as needed. Organises interactions around mental models and content needs. |  |  |
 | Interaction Design | Defines and articulates a problem and aligns with others on it before exploring solutions. Comfortable and confident in challenging decisions and asking questions. Work demonstrates an understanding of how to balance user needs and business needs. |  |  |
