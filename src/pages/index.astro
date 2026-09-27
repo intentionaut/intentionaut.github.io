@@ -21,14 +21,12 @@ const offers = [
     who: 'For teams that need Director-level leadership, but are not ready for a permanent hire.',
     shape: 'One or two days a week, three months and up.',
     href: '/fractional/',
-    link: 'How fractional works',
   },
   {
     title: 'Product building',
     who: 'For teams with a real problem, a rough idea of the answer, and nobody free to build it.',
     shape: 'Three days a week in your environment, four to twelve weeks.',
     href: '/forward-deployed/',
-    link: 'How product building works',
   },
 ];
 
@@ -72,14 +70,13 @@ const [quote] = testimonialsFor('home');
 
   <section class="wrap home-section" aria-labelledby="offers-h">
     <h2 id="offers-h" class="home-h2">Two ways to work together.</h2>
-    <div class="offer-grid">
+    <div class="rates rates-pair">
       {offers.map((o) => (
-        <article class="offer-card">
-          <h3>{o.title}</h3>
-          <p class="offer-who">{o.who}</p>
-          <p class="offer-shape">{o.shape}</p>
-          <a class="link-arrow" href={o.href}><span>{o.link}</span></a>
-        </article>
+        <a class="rate-row rate-card" href={o.href}>
+          <p class="rate-name">{o.title}</p>
+          <p class="rate-desc">{o.who}</p>
+          <p class="rate-shape">{o.shape}</p>
+        </a>
       ))}
     </div>
     <p class="home-note">
@@ -105,7 +102,7 @@ const [quote] = testimonialsFor('home');
 
   {quote && (
     <section class="wrap home-section" aria-label="What people say">
-      <figure class="home-quote">
+      <figure class="pull-quote">
         <blockquote><p>{quote.quote}</p></blockquote>
         <figcaption>
           {quote.url ? <a href={quote.url} target="_blank" rel="noopener noreferrer">{quote.name}</a> : quote.name},
@@ -143,23 +140,27 @@ const [quote] = testimonialsFor('home');
       source="home"
       emailId="home-email"
       buttonLabel="Subscribe"
+      align="left"
     />
   </section>
 </BaseLayout>
 
 <style>
+  /* The design system's one section gap (Layout). */
   .home-section {
-    padding-bottom: clamp(3.5rem, 7vw, 5.5rem);
-  }
-  .home-section .eyebrow {
-    margin-bottom: var(--space-2);
+    padding-bottom: clamp(3rem, 6vw, 5rem);
   }
   .home-h2 {
-    font-size: clamp(1.7rem, 3.2vw, 2.3rem);
-    margin-bottom: var(--space-7);
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-6);
   }
   .home-stats {
     margin-top: 0;
+  }
+  /* The shared list carries its own section gap; here the section does. */
+  .home-section .project-list {
+    padding-bottom: 0;
+    margin-bottom: var(--space-6);
   }
   .home-also,
   .home-note {
@@ -167,82 +168,14 @@ const [quote] = testimonialsFor('home');
     font-size: 0.95rem;
     color: var(--muted);
   }
-  .home-note a {
-    color: var(--ink);
-    text-decoration-color: var(--accent);
-    text-underline-offset: 3px;
-  }
 
-  .offer-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-6);
-  }
-  .offer-card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    border: 1px solid var(--ink);
-    padding: clamp(1.5rem, 3vw, 2.25rem);
-  }
-  .offer-card::after {
-    content: '';
-    position: absolute;
-    inset: 3px;
-    border: 1px solid var(--slate);
-    pointer-events: none;
-  }
-  .offer-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: var(--space-4);
-  }
-  .offer-who {
-    margin: 0 0 var(--space-3);
-  }
-  .offer-shape {
-    margin: 0 0 var(--space-6);
-    font-size: 0.9rem;
-    color: var(--muted);
-  }
-  .offer-card .link-arrow {
-    margin-top: auto;
-    align-self: flex-start;
-  }
 
-  .home-quote {
-    margin: 0;
-    max-width: 46rem;
-  }
-  .home-quote blockquote {
-    margin: 0;
-    padding-left: var(--space-6);
-    border-left: 2px solid var(--accent);
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: clamp(1.2rem, 2.2vw, 1.5rem);
-    line-height: 1.5;
-  }
-  .home-quote blockquote p {
+  .home-section .pull-quote {
     margin: 0;
   }
-  .home-quote figcaption {
-    margin-top: var(--space-4);
-    padding-left: var(--space-6);
-    font-size: 0.9rem;
-    color: var(--muted);
-  }
-  .home-quote figcaption a {
-    color: inherit;
-  }
 
-  .home-follow .lane h2 {
-    font-size: 1.2rem;
-  }
 
   @media (max-width: 720px) {
-    .offer-grid {
-      grid-template-columns: 1fr;
-    }
     .home-stats {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }

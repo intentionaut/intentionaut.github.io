@@ -13,7 +13,7 @@ const palette = [
   { token: '--ink', name: 'Ink', hex: '#38234a', use: 'Primary text' },
   { token: '--muted', name: 'Muted', hex: '#74607b', use: 'Secondary text, captions' },
   { token: '--slate', name: 'Slate', hex: '#e0d2cb', use: 'Borders, dividers, code blocks' },
-  { token: '--accent', name: 'Accent', hex: '#c85060', use: 'Rules, borders, underlines, focus rings, large numerals' },
+  { token: '--accent', name: 'Accent', hex: '#c85060', use: 'Rules, borders, underlines, focus rings, and any text 24px and up (numerals, the italic word in a headline): 3.71:1 passes for large text' },
   { token: '--accent-text', name: 'Accent text', hex: '#b8404f', use: 'Accent-coloured text at small sizes: eyebrows, links, open questions. 4.55:1 on paper, the closest shade to --accent that passes' },
   { token: '--mendl', name: 'Teal wash', hex: 'rgba(169, 203, 208, 0.55)', use: 'Highlights, selection, washes' },
 ];
@@ -152,9 +152,10 @@ const zindex = [
         </div>
         <p class="ds-note">
           Section headings use <code>--text-lg</code> and the headings inside a
-          section use <code>--text-md</code>. Card titles are Fraunces 560 at
-          <code>1.15rem</code>. Page headings run larger than the scale, set by
-          <code>.page-head h1</code>.
+          section use <code>--text-md</code>, list-row and lane titles
+          included. Card titles are Fraunces 560 at <code>1.15rem</code>. Page
+          headings run larger than the scale, set by <code>.page-head h1</code>;
+          the homepage headline uses <code>--text-display</code>.
         </p>
       </section>
 
@@ -244,7 +245,13 @@ const zindex = [
           <div class="ds-token-row"><code>reading width</code><span>46rem · forms, FAQ lists</span></div>
           <div class="ds-token-row"><code>section gap</code><span>clamp(3rem, 6vw, 5rem)</span></div>
           <div class="ds-token-row"><code>after the page intro</code><span>clamp(2rem, 4vw, 3rem) · .page-head</span></div>
+          <div class="ds-token-row"><code>after the homepage hero</code><span>the section gap; it is larger than a page intro</span></div>
+          <div class="ds-token-row"><code>list rows</code><span>inset --space-3 (12px) so the hover wash has room</span></div>
         </div>
+        <p class="ds-note">
+          A band that opens with a full-width slate rule (the newsletter sign-up)
+          counts its gap to the rule, then pads <code>--space-7</code> inside.
+        </p>
       </section>
 
       <section class="ds-section" id="components">
@@ -347,7 +354,9 @@ const zindex = [
             muted label, description in ink, then the shape in ink at
             <code>--text-sm</code>, weight 500. An optional "Sliding scale" label
             closes it. On phones the price moves above the title. Used in
-            "Which one fits?" on /contact/.
+            "Which one fits?" on /contact/, and two side by side
+            (<code>.rates-pair</code>, no price) on the homepage. The whole
+            card is the link.
           </p>
         </div>
 
@@ -362,6 +371,61 @@ const zindex = [
           centred, with the reader's first name and never their email address.
           On /contact/ it sits beside "How it works": steps on the left, the
           card on the right, its top edge level with the rule under the heading.
+        </p>
+
+        <h3 class="ds-sub">Pull quote</h3>
+        <div class="ds-demo ds-demo-block">
+          <figure class="pull-quote ds-flush">
+            <blockquote><p>Saielle has a knack for getting to the underlying decision.</p></blockquote>
+            <figcaption><a href="/contact/">Jon Cockle</a>, former Head of Delivery, Sainsbury's</figcaption>
+          </figure>
+          <p class="ds-demo-caption">
+            <code>.pull-quote</code>: Fraunces italic at <code>--text-md</code>
+            behind a 2px <code>--accent</code> rule, the caption muted at
+            <code>--text-sm</code> and level with the quote text. One testimonial
+            set into a page (homepage, /fractional/).
+          </p>
+        </div>
+
+        <h3 class="ds-sub">Results strip</h3>
+        <div class="ds-demo ds-demo-block">
+          <ul class="stat-strip ds-flush">
+            <li><span class="stat-num">+450%</span><span class="stat-label">MRR in 90 days</span></li>
+            <li><span class="stat-num">3.2x</span><span class="stat-label">Satellite portfolio</span></li>
+            <li><span class="stat-num">100M+</span><span class="stat-label">Customers served</span></li>
+            <li><span class="stat-num">$7B</span><span class="stat-label">IPO</span></li>
+          </ul>
+          <p class="ds-demo-caption">
+            <code>.stat-strip</code>: an ink rule over each figure, the figure in
+            Fraunces italic in <code>--accent</code> (never below 25.6px, so the
+            original coral passes), the label a small uppercase muted line. Four
+            across, two on phones. Homepage and /about/.
+          </p>
+        </div>
+
+        <h3 class="ds-sub">List rows</h3>
+        <p class="ds-note">
+          <code>.project-row</code> and <code>.talk-row</code>: an ink rule above
+          the list, a slate rule under each row, the title in Fraunces 500 at
+          <code>--text-md</code> and a muted line beneath. Rows are inset 12px and
+          take a faint teal wash on hover, so they read as one tappable unit.
+          Projects, writing, speaking and the homepage's "What I've built lately".
+        </p>
+
+        <h3 class="ds-sub">Lanes</h3>
+        <p class="ds-note">
+          <code>.lanes</code>: side-by-side entry points, each an ink rule, a
+          <code>--text-md</code> title, one muted line and a text link with
+          arrow. Two across on the homepage for speaking and writing.
+        </p>
+
+        <h3 class="ds-sub">Newsletter box</h3>
+        <p class="ds-note">
+          <code>FrameSubscribe.astro</code>: a Card holding an eyebrow, an italic
+          Fraunces line, the email row and the small print, all ink. With
+          <code>align="left"</code> the box, its text and the email row sit on
+          the page's left edge, as the Layout rule asks; the centred default
+          remains for pages that need it.
         </p>
 
         <h3 class="ds-sub">Testimonial card</h3>
@@ -737,6 +801,10 @@ const zindex = [
   }
 
   .ds-rates {
+    margin: 0;
+  }
+
+  .ds-flush {
     margin: 0;
   }
 

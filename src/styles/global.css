@@ -396,8 +396,10 @@ h3 {
 
 /* ---------- Home hero ---------- */
 
+/* Ends on the section gap (design system Layout); it is bigger than a
+   .page-head, so it doesn't take the page-intro gap. */
 .hero {
-  padding-block: clamp(4.5rem, 10vw, 8.5rem) clamp(3.5rem, 8vw, 6rem);
+  padding-block: clamp(4.5rem, 10vw, 8.5rem) clamp(3rem, 6vw, 5rem);
 }
 
 .hero h1 {
@@ -406,8 +408,9 @@ h3 {
 }
 
 .hero h1 em {
+  /* Large text (24px and up) only needs 3:1: the original coral, 3.71:1 on paper. */
   font-style: italic;
-  color: var(--accent-text);
+  color: var(--accent);
 }
 
 @keyframes rise {
@@ -466,7 +469,7 @@ h3 {
 }
 
 .lanes {
-  padding-bottom: clamp(4.5rem, 9vw, 7rem);
+  padding-bottom: clamp(3rem, 6vw, 5rem);
 }
 
 .lane {
@@ -496,7 +499,7 @@ h3 {
   font-size: 2.1rem;
   line-height: 1;
   margin-bottom: var(--space-3);
-  color: var(--accent-text);
+  color: var(--accent);
   opacity: 0.85;
   transition: transform var(--dur-med) var(--ease-out);
 }
@@ -506,13 +509,13 @@ h3 {
 }
 
 .lane h2 {
-  font-size: 1.35rem;
+  font-size: var(--text-md);
   margin-bottom: var(--space-2);
 }
 
 .lane p {
   margin: 0 0 var(--space-4);
-  font-size: 0.93rem;
+  font-size: var(--text-sm);
   color: var(--muted);
   line-height: 1.6;
 }
@@ -582,7 +585,7 @@ h3 {
   font-style: italic;
   font-size: clamp(1.6rem, 2.6vw, 2.1rem);
   line-height: 1;
-  color: var(--accent-text);
+  color: var(--accent);
 }
 
 .stat-label {
@@ -941,7 +944,7 @@ a.talk-title::after {
   font-family: var(--font-display);
   font-optical-sizing: auto;
   font-weight: 500;
-  font-size: 1.35rem;
+  font-size: var(--text-md);
   line-height: 1.25;
   color: var(--ink);
   text-decoration: none;
@@ -1228,6 +1231,24 @@ a.talk-title:hover {
 
 .rates {
   margin: 0 0 var(--space-8);
+}
+
+/* Offer cards side by side (homepage). */
+.rates-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-6);
+  margin-bottom: 0;
+}
+
+.rates-pair .rate-card {
+  margin-bottom: 0;
+}
+
+@media (max-width: 720px) {
+  .rates-pair {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 .rate-row {
@@ -1524,7 +1545,8 @@ a.talk-title:hover {
 
 .form-alt a,
 .form-sent a,
-.faq-link a {
+.faq-link a,
+.home-note a {
   color: var(--ink);
   text-decoration: underline;
   text-decoration-color: var(--accent);
@@ -1534,7 +1556,8 @@ a.talk-title:hover {
 
 .form-alt a:hover,
 .form-sent a:hover,
-.faq-link a:hover {
+.faq-link a:hover,
+.home-note a:hover {
   color: var(--accent-text);
 }
 
@@ -1665,4 +1688,45 @@ a.talk-title:hover {
     animation: none !important;
     transition: none !important;
   }
+}
+
+/* ---------- Pull quote ---------- */
+
+/* A testimonial set into a page (homepage, /fractional/). Fraunces italic for
+   pull quotes, per the design system; last in the file so it wins over
+   .prose blockquote when it sits inside prose. */
+.pull-quote {
+  margin: var(--space-6) 0;
+  max-width: 46rem;
+}
+
+.pull-quote blockquote {
+  margin: 0;
+  padding-left: var(--space-6);
+  border-left: 2px solid var(--accent);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--text-md);
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.pull-quote blockquote p {
+  margin: 0;
+}
+
+.pull-quote figcaption {
+  margin-top: var(--space-3);
+  /* Level with the quote text, which sits after the 2px rule. */
+  padding-left: calc(var(--space-6) + 2px);
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+.pull-quote figcaption a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
 }

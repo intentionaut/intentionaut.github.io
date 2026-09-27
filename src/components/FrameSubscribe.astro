@@ -31,7 +31,7 @@ interface Props {
   buttonLabel?: string;
   /** Max width of the card. Default 46rem. */
   maxWidth?: string;
-  /** Horizontal alignment of the content. Default 'center'. */
+  /** Horizontal alignment of the box and its content. Default 'center'; 'left' sits it on the page's left edge (design system Layout). */
   align?: 'center' | 'left';
 }
 
@@ -48,8 +48,8 @@ const {
 ---
 
 <div
-  class="frame-subscribe"
-  style={`max-width: ${maxWidth}; text-align: ${align}; margin-inline: auto;`}
+  class:list={['frame-subscribe', align === 'left' && 'frame-subscribe--left']}
+  style={`max-width: ${maxWidth}; text-align: ${align}; margin-inline: ${align === 'left' ? '0' : 'auto'};`}
 >
   {eyebrow && <p class="eyebrow fs-eyebrow">{eyebrow}</p>}
   {heading && <h2 class="fs-heading">{heading}</h2>}
@@ -92,7 +92,19 @@ const {
     margin: 0 0 var(--space-6);
     font-size: 0.95rem;
     line-height: 1.55;
-    color: var(--muted);
+    color: var(--ink);
+  }
+
+  /* Left-aligned box: the sign-up row starts on the same edge as the text. */
+  .frame-subscribe--left :global(.signup-form) {
+    margin-inline: 0;
+    justify-content: flex-start;
+  }
+
+  /* A Card: everything written inside it is ink, the sign-up small print too. */
+  .frame-subscribe :global(.subscribe-note),
+  .frame-subscribe :global(.subscribe-status) {
+    color: var(--ink);
   }
 
   @media (max-width: 480px) {
