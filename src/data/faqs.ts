@@ -24,6 +24,12 @@ export const faqs: Faq[] = [
       'For the right role, yes. Director level and above. The same clarity principle applies: shared understanding of the goal before we commit. If that sounds like your team, write me a note and tell me what you are trying to accomplish.',
   },
   {
+    question: 'How does the sliding scale work?',
+    placements: ['faq', 'contact'],
+    answer:
+      'Ask. If cost is the thing standing between you and booking, say so in your note. It counts if you are paying yourself rather than an employer, if your company is bootstrapped or unfunded, if the work is for a charity, nonprofit or the public sector, or if the full rate simply means you would not book at all. There is no proof to send, no essay to write and no negotiation. I will confirm an adjusted rate when we book. A few reduced slots each month keeps this honest; if the month is full, I will tell you and we will find another way.',
+  },
+  {
     question: 'How much does a strategy session cost?',
     answer: `${gbp(rates.strategySession)} for 90 minutes. Sliding scale applies, see above.`,
   },
@@ -34,12 +40,6 @@ export const faqs: Faq[] = [
   {
     question: 'How much do keynotes and workshops cost?',
     answer: `From ${gbp(rates.speaking)} for an event. Private workshops are quoted by scope and travel, sliding scale applies.`,
-  },
-  {
-    question: 'How does the sliding scale work?',
-    placements: ['faq', 'contact'],
-    answer:
-      'Ask. If cost is the thing standing between you and booking, say so in your note. It counts if you are paying yourself rather than an employer, if your company is bootstrapped or unfunded, if the work is for a charity, nonprofit or the public sector, or if the full rate simply means you would not book at all. There is no proof to send, no essay to write and no negotiation. I will confirm an adjusted rate when we book. A few reduced slots each month keeps this honest; if the month is full, I will tell you and we will find another way.',
   },
   {
     question: 'What is your day rate for product building?',
