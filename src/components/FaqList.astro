@@ -1,12 +1,8 @@
 ---
 /**
- * Collapsible FAQ list. Same accordion as /contact, driven by data.
- *
- * The questions live in src/data/faqs.ts so a page never hand-writes twenty
- * lines of nested <details> markup to add one. /contact still has its own
- * hand-written subset from before this existed; switching it over to this
- * component is a tidy-up worth doing, and would mean one set of styles
- * instead of two.
+ * Collapsible FAQ list, driven by src/data/faqs.ts so a page never hand-writes
+ * <details> markup. Used on /contact/, /fractional/ and /forward-deployed/;
+ * each page filters faqs.ts by placement.
  */
 import type { Faq } from '../data/faqs';
 
@@ -45,7 +41,7 @@ const { items, heading = 'Fair questions.', sub } = Astro.props;
     padding-bottom: clamp(3rem, 6vw, 5rem);
   }
   .faq-section h2.faq-title {
-    font-size: 1.7rem;
+    font-size: var(--text-lg);
     margin-bottom: var(--space-2);
   }
   .faq-sect-sub {
@@ -71,7 +67,7 @@ const { items, heading = 'Fair questions.', sub } = Astro.props;
     font-family: var(--font-display);
     font-optical-sizing: auto;
     font-weight: 500;
-    font-size: 1.25rem;
+    font-size: var(--text-md);
     line-height: 1.25;
     color: var(--ink);
   }

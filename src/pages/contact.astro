@@ -2,6 +2,7 @@
 import '@fontsource-variable/roboto-serif';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.astro';
+import { BOOKING_URL } from '../data/links';
 import { rates, gbp } from '../data/rates';
 import { faqsFor } from '../data/faqs';
 import { testimonialsFor } from '../data/testimonials';
@@ -25,15 +26,17 @@ const testimonials = testimonialsFor('contact');
         Got a product team doing something important, while AI keeps changing
         the rules under you? That gap is where I work. I help teams and
         organisations turn noisy ambition into clear decisions, across
-        design, data and AI. Email me, or use the form below.
+        design, data and AI.
       </p>
       <div class="cta-row">
-        <a class="btn-primary" href="#contact-section">Email me</a>
+        <a class="btn-primary" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a free call</a>
+        <a class="link-arrow" href="#contact-section"><span>Send a message</span></a>
       </div>
     </header>
 
-    <section class="rates-section" aria-label="Ways to work together">
-      <h2>Ways to work together</h2>
+    <section class="rates-section" aria-label="Which one fits?">
+      <h2>Which one fits?</h2>
+      <p class="rates-intro">Every option starts with a free preliminary call.</p>
       <div class="rates">
         <a class="rate-row rate-card" href="/strategic-direction/">
           <p class="rate-name">Strategy session</p>
@@ -51,6 +54,7 @@ const testimonials = testimonialsFor('contact');
             Part-time head of product for early teams that need direction
             now, before they're ready for a full-time hire.
           </p>
+          <p class="rate-shape">One or two days a week, three months and up.</p>
         </a>
         <a class="rate-row rate-card" href="/forward-deployed/">
           <p class="rate-name">Product builder</p>
@@ -59,6 +63,7 @@ const testimonials = testimonialsFor('contact');
             Three days a week inside your team, building a working prototype
             in your environment.
           </p>
+          <p class="rate-shape">Three days a week, four to twelve weeks.</p>
         </a>
         <a class="rate-row rate-card" href="/keynote-speaker/">
           <p class="rate-name">Speaking &amp; workshops</p>
@@ -67,6 +72,7 @@ const testimonials = testimonialsFor('contact');
             From conference keynotes to hands-on team sessions about building
             with intention across design, data and AI.
           </p>
+          <p class="rate-shape">Keynotes and workshops, per event.</p>
           <p class="rate-scale">Sliding scale · Yes</p>
         </a>
         <a class="rate-row rate-card" href="/mentoring/">
@@ -84,6 +90,99 @@ const testimonials = testimonialsFor('contact');
       </p>
     </section>
 
+
+
+    {/* What happens, then do it: the steps and the form side by side. */}
+    <div class="start-band">
+    <section class="how-section" aria-label="How it works">
+      <style>
+        .how-section {
+          padding-bottom: clamp(3rem, 6vw, 5rem);
+        }
+        .how-section h2 {
+          font-size: var(--text-lg);
+          margin-bottom: var(--space-7);
+        }
+        .how-steps {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: var(--space-9);
+          border-top: 1px solid var(--ink);
+        }
+        .how-step {
+          padding-top: var(--space-4);
+        }
+        .how-step .num {
+          display: block;
+          font-family: var(--font-display);
+          font-optical-sizing: auto;
+          font-style: italic;
+          font-size: 2.1rem;
+          line-height: 1;
+          margin-bottom: var(--space-3);
+          color: var(--accent-text);
+          opacity: 0.85;
+        }
+        .how-step h3 {
+          font-size: var(--text-md);
+          margin-bottom: var(--space-2);
+        }
+        .how-step p {
+          margin: 0;
+          font-size: 0.95rem;
+          color: var(--muted);
+          line-height: 1.6;
+        }
+        @media (max-width: 720px) {
+          .how-steps {
+            grid-template-columns: 1fr;
+            gap: var(--space-7);
+          }
+        }
+      </style>
+      <h2>How it works</h2>
+      <ol class="how-steps">
+        <li class="how-step">
+          <span class="num">01</span>
+          <h3>You write in</h3>
+          <p>
+            A few lines about what you are working on. No pitch needed, no
+            essay.
+          </p>
+        </li>
+        <li class="how-step">
+          <span class="num">02</span>
+          <h3>We scope it on a call</h3>
+          <p>
+            A short call to check it is a fit. Then you get a written
+            proposal: what we would do, when, and what it costs.
+          </p>
+        </li>
+        <li class="how-step">
+          <span class="num">03</span>
+          <h3>You get clear direction</h3>
+          <p>
+            Written notes afterwards: decisions made, next steps, who owns
+            what. Clear before, during and after.
+          </p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="contact-form-section" id="contact-section" aria-label="Send a message">
+      <div class="contact-card">
+        <h2>Leave me a note.</h2>
+        <p class="form-lede">
+          Tell me what you're working on, and I'll tell you how I can help.
+        </p>
+        <ContactForm rows={3} selected="other" booking />
+      </div>
+    </section>
+    </div>
+
     {/* Hidden entirely when nothing is enabled for this page, rather than
         leaving a heading over an empty carousel. An empty state should mean
         "there are none", and here there being none is a choice. */}
@@ -94,10 +193,10 @@ const testimonials = testimonialsFor('contact');
           --acc-blue: #a9cbd0;
         }
         .testimonials-section {
-          padding-bottom: clamp(2.5rem, 5vw, 3.5rem);
+          padding-bottom: clamp(3rem, 6vw, 5rem);
         }
         .testimonials-section h2 {
-          font-size: 1.7rem;
+          font-size: var(--text-lg);
           margin: 0 0 var(--space-2);
         }
         .testi-sub {
@@ -135,7 +234,8 @@ const testimonials = testimonialsFor('contact');
           display: flex;
           flex-direction: column;
           scroll-snap-align: start;
-          height: 460px;
+          /* Grows with the quote; the carousel row stretches every card to the tallest. */
+          min-height: 460px;
         }
         .tcard::after {
           content: '';
@@ -154,7 +254,7 @@ const testimonials = testimonialsFor('contact');
           min-height: 0;
           display: flex;
           flex-direction: column;
-          justify-content: center;
+          justify-content: safe center;
         }
         .tcard .a {
           margin: 0;
@@ -164,8 +264,8 @@ const testimonials = testimonialsFor('contact');
           flex-direction: column;
           justify-content: flex-end;
           font-family: var(--font-body);
-          font-size: 0.85rem;
-          color: var(--muted);
+          font-size: var(--text-sm);
+          color: var(--ink);
         }
         .tcard .a .name {
           display: block;
@@ -190,7 +290,7 @@ const testimonials = testimonialsFor('contact');
           font-style: italic;
         }
         .tcard .a .role a {
-          color: var(--muted);
+          color: var(--ink);
           text-decoration: none;
         }
         .carousel-controls {
@@ -307,142 +407,6 @@ const testimonials = testimonialsFor('contact');
     </section>
     )}
 
-    <section class="fit-section" aria-label="Which one fits?">
-      <h2>Which one fits?</h2>
-      <div class="fit-table-wrap">
-        <table class="fit-table">
-          <thead>
-            <tr>
-              <th scope="col"></th>
-              <th scope="col">Who it's for</th>
-              <th scope="col">Shape</th>
-              <th scope="col">Price</th>
-              <th scope="col">First step</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Strategy session</th>
-              <td>Founders and product leaders who want a sounding board</td>
-              <td>90 minutes, one-off</td>
-              <td>{gbp(rates.strategySession)}</td>
-              <td>Free preliminary call</td>
-            </tr>
-            <tr>
-              <th scope="row">Fractional leadership</th>
-              <td>Teams that need direction now, not ready for a full-time hire</td>
-              <td>1-2 days a week, 3 months and up</td>
-              <td>{gbp(rates.fractional)} / day</td>
-              <td>Free preliminary call</td>
-            </tr>
-            <tr>
-              <th scope="row">Product builder</th>
-              <td>Teams with an idea and nobody free to build it</td>
-              <td>3 days a week, 4-12 weeks</td>
-              <td>{gbp(rates.forwardDeployed)} / day</td>
-              <td>Free preliminary call</td>
-            </tr>
-            <tr>
-              <th scope="row">Speaking &amp; workshops</th>
-              <td>Conferences and teams wanting a session</td>
-              <td>Per event</td>
-              <td>{gbp(rates.speaking)}, from</td>
-              <td>Free preliminary call</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <section class="how-section" aria-label="How it works">
-      <style>
-        .how-section {
-          padding-bottom: clamp(3rem, 6vw, 5rem);
-        }
-        .how-section h2 {
-          font-size: 1.7rem;
-          margin-bottom: var(--space-7);
-        }
-        .how-steps {
-          list-style: none;
-          margin: 0;
-          padding: 0;
-          display: grid;
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-          gap: var(--space-9);
-          border-top: 1px solid var(--ink);
-        }
-        .how-step {
-          padding-top: var(--space-4);
-        }
-        .how-step .num {
-          display: block;
-          font-family: var(--font-display);
-          font-optical-sizing: auto;
-          font-style: italic;
-          font-size: 2.1rem;
-          line-height: 1;
-          margin-bottom: var(--space-3);
-          color: var(--accent-text);
-          opacity: 0.85;
-        }
-        .how-step h3 {
-          font-size: 1.3rem;
-          margin-bottom: var(--space-2);
-        }
-        .how-step p {
-          margin: 0;
-          font-size: 0.95rem;
-          color: var(--muted);
-          line-height: 1.6;
-        }
-        @media (max-width: 720px) {
-          .how-steps {
-            grid-template-columns: 1fr;
-            gap: var(--space-7);
-          }
-        }
-      </style>
-      <h2>How it works</h2>
-      <ol class="how-steps">
-        <li class="how-step">
-          <span class="num">01</span>
-          <h3>You write in</h3>
-          <p>
-            A few lines about what you are working on. No pitch needed, no
-            essay.
-          </p>
-        </li>
-        <li class="how-step">
-          <span class="num">02</span>
-          <h3>We scope it on a call</h3>
-          <p>
-            A short call to check it is a fit. Then you get a written
-            proposal: what we would do, when, and what it costs.
-          </p>
-        </li>
-        <li class="how-step">
-          <span class="num">03</span>
-          <h3>You get clear direction</h3>
-          <p>
-            Written notes afterwards: decisions made, next steps, who owns
-            what. Clear before, during and after.
-          </p>
-        </li>
-      </ol>
-    </section>
-
-    <section class="contact-form-section" id="contact-section" aria-label="Send a message">
-      <div class="contact-card">
-        <h2>Leave me a note.</h2>
-        <p class="form-lede">
-          Tell me how I can help. I'd love to know what you're working on.
-          I'll tell you how I can help.
-        </p>
-        <ContactForm rows={3} booking />
-      </div>
-    </section>
-
     <FaqList
       items={faqsFor('contact')}
       sub="Straight answers about rates, sliding scale and how engagements actually run. Anything missing: ask me."
@@ -495,38 +459,35 @@ const testimonials = testimonialsFor('contact');
 </BaseLayout>
 
 <style>
-  .fit-section {
-    padding-block: clamp(2rem, 4vw, 3rem);
+  .start-band {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: var(--space-10);
+    align-items: start;
+    padding-bottom: clamp(3rem, 6vw, 5rem);
   }
-  .fit-section h2 {
-    margin: 0 0 var(--space-5);
-    font-size: 1.5rem;
+  .start-band .how-section {
+    padding-bottom: 0;
   }
-  .fit-table-wrap {
-    overflow-x: auto;
+  .start-band .how-steps {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
   }
-  .fit-table {
-    width: 100%;
-    min-width: 640px;
-    border-collapse: collapse;
-    font-size: 0.9rem;
+  /* The card starts level with the rule under "How it works": the heading's
+     height (one line of --text-lg at line-height 1.08) plus its margin. */
+  .start-band .contact-form-section {
+    max-width: none;
+    margin: calc(var(--text-lg) * 1.08 + var(--space-7)) 0 0;
+    /* The band carries the section gap; don't add the form's own on top. */
+    padding-bottom: 0;
   }
-  .fit-table th,
-  .fit-table td {
-    border-bottom: 1px solid var(--slate);
-    padding: var(--space-3) var(--space-4) var(--space-3) 0;
-    text-align: left;
-    vertical-align: top;
-  }
-  .fit-table thead th {
-    color: var(--muted);
-    font-weight: 500;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-  .fit-table tbody th {
-    font-weight: 600;
-    white-space: nowrap;
+  @media (max-width: 900px) {
+    .start-band {
+      grid-template-columns: 1fr;
+      gap: var(--space-9);
+    }
+    .start-band .contact-form-section {
+      margin-top: 0;
+    }
   }
 </style>

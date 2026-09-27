@@ -2,16 +2,19 @@
 import '@fontsource-variable/fraunces';
 import '@fontsource-variable/fraunces/wght-italic.css';
 import '@fontsource-variable/jost';
+import '@fontsource-variable/roboto-serif';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { rates, gbp } from '../data/rates';
 
-const updated = '31 August 2026';
+const updated = '27 September 2026';
 
 const palette = [
   { token: '--paper', name: 'Paper', hex: '#f7e9e0', use: 'Base background' },
   { token: '--ink', name: 'Ink', hex: '#38234a', use: 'Primary text' },
   { token: '--muted', name: 'Muted', hex: '#74607b', use: 'Secondary text, captions' },
   { token: '--slate', name: 'Slate', hex: '#e0d2cb', use: 'Borders, dividers, code blocks' },
-  { token: '--accent', name: 'Accent', hex: '#c85060', use: 'Links, emphasis, eyebrows' },
+  { token: '--accent', name: 'Accent', hex: '#c85060', use: 'Rules, borders, underlines, focus rings, large numerals' },
+  { token: '--accent-text', name: 'Accent text', hex: '#b03e4c', use: 'Accent-coloured text at small sizes: eyebrows, links, open questions. 4.86:1 on paper' },
   { token: '--mendl', name: 'Teal wash', hex: 'rgba(169, 203, 208, 0.55)', use: 'Highlights, selection, washes' },
 ];
 
@@ -74,7 +77,9 @@ const zindex = [
         <h2>Colour</h2>
         <p class="ds-note">
           Warm paper and plum ink, set off by a coral that does the pointing. The
-          teal never appears at full strength; it reads as a wash.
+          teal never appears at full strength; it reads as a wash. Small coral
+          text uses <code>--accent-text</code>, a shade deeper, because
+          <code>--accent</code> is 3.7:1 on paper and small text needs 4.5:1.
         </p>
         <div class="ds-swatches">
           {palette.map((c) => (
@@ -123,6 +128,18 @@ const zindex = [
           </div>
         </div>
 
+        <div class="ds-type-face">
+          <div class="ds-face-sample ds-face-form">
+            Abcdefghijklmnopqrstuvwxyz
+            <br />ABCDEFGHIJKLMNOPQRSTUVWXYZ
+          </div>
+          <div class="ds-face-meta">
+            <strong>Roboto Serif</strong>
+            <code>form fields only</code>
+            <span class="ds-muted">What a reader types into the contact form, and the topic menu. Nowhere else</span>
+          </div>
+        </div>
+
         <h3 class="ds-sub">Type scale</h3>
         <div class="ds-scale">
           {typeScale.map((s) => (
@@ -133,6 +150,12 @@ const zindex = [
             </div>
           ))}
         </div>
+        <p class="ds-note">
+          Section headings use <code>--text-lg</code> and the headings inside a
+          section use <code>--text-md</code>. Card titles are Fraunces 560 at
+          <code>1.15rem</code>. Page headings run larger than the scale, set by
+          <code>.page-head h1</code>.
+        </p>
       </section>
 
       <section class="ds-section" id="spacing">
@@ -207,6 +230,23 @@ const zindex = [
         </div>
       </section>
 
+      <section class="ds-section" id="layout">
+        <p class="ds-kicker">Foundations</p>
+        <h2>Layout</h2>
+        <p class="ds-note">
+          Two widths, one left edge. Grids and cards run the full width of the
+          page; text, forms and question lists sit at one reading width. Nothing
+          is centred on its own. Between sections there is one gap, so the page
+          reads at one pace.
+        </p>
+        <div class="ds-tokens">
+          <div class="ds-token-row"><code>--wrap</code><span>72rem · full width: cards, grids, carousels</span></div>
+          <div class="ds-token-row"><code>reading width</code><span>46rem · forms, FAQ lists</span></div>
+          <div class="ds-token-row"><code>section gap</code><span>clamp(3rem, 6vw, 5rem)</span></div>
+          <div class="ds-token-row"><code>after the page intro</code><span>clamp(2rem, 4vw, 3rem) · .page-head</span></div>
+        </div>
+      </section>
+
       <section class="ds-section" id="components">
         <p class="ds-kicker">Components</p>
         <h2>The few things that repeat</h2>
@@ -222,7 +262,7 @@ const zindex = [
           <p class="eyebrow">What follows</p>
           <p class="ds-demo-caption">
             <code>0.78rem</code> Jost, weight 600, <code>0.18em</code> tracking,
-            <code>--accent</code>. The small label that opens a section.
+            <code>--accent-text</code>. The small label that opens a section.
           </p>
         </div>
 
@@ -277,8 +317,9 @@ const zindex = [
             <p class="ds-card-title">A double border is a signature</p>
             <p class="ds-card-body">
               An outer ink rule with a second slate rule inset three pixels.
-              Square corners, cream paper behind, text in ink. It is how
-              products, rates and the highlighted aside read as one family.
+              Square corners, text in ink. Offer cards, the contact form and
+              testimonials sit straight on paper; the highlighted aside adds a
+              teal wash inside, as here. One family either way.
             </p>
           </div>
         </div>
@@ -286,6 +327,49 @@ const zindex = [
           Text on any card is <code>--ink</code>. Only the small uppercase
           group labels step down to <code>--muted</code>; the answers and body
           stay ink so the card reads as a solid block of readable text.
+        </p>
+
+        <h3 class="ds-sub">Offer card</h3>
+        <div class="ds-demo ds-demo-block">
+          <div class="rates ds-rates">
+            <div class="rate-row rate-card">
+              <p class="rate-name">Fractional leadership</p>
+              <p class="rate-price">{gbp(rates.fractional)} / day</p>
+              <p class="rate-desc">
+                Part-time head of product for early teams that need direction
+                now, before they're ready for a full-time hire.
+              </p>
+              <p class="rate-shape">One or two days a week, three months and up.</p>
+            </div>
+          </div>
+          <p class="ds-demo-caption">
+            A Card. Title in the card-title style, price as a small uppercase
+            muted label, description in ink, then the shape in ink at
+            <code>--text-sm</code>, weight 500. An optional "Sliding scale" label
+            closes it. On phones the price moves above the title. Used in
+            "Which one fits?" on /contact/.
+          </p>
+        </div>
+
+        <h3 class="ds-sub">Contact form</h3>
+        <p class="ds-note">
+          <code>ContactForm.astro</code>, always inside a Card at the reading
+          width. Heading at <code>--text-lg</code>, a one-line intro in ink,
+          uppercase muted field labels, fields in Roboto Serif on a slate
+          underline, one full-width button, and "Rather talk first? Book a free
+          call." under it. While sending, the button reads "Sending…". Once
+          sent, the card keeps its height and shows only "Message sent.",
+          centred, with the reader's first name and never their email address.
+          On /contact/ it sits beside "How it works": steps on the left, the
+          card on the right, its top edge level with the rule under the heading.
+        </p>
+
+        <h3 class="ds-sub">Testimonial card</h3>
+        <p class="ds-note">
+          A Card holding a quote in Fraunces, then the name in Jost 600 and the
+          role in italic, both ink at <code>--text-sm</code>. Cards grow to fit
+          their quote and the carousel row evens them to the tallest; a fixed
+          height clipped long quotes on phones.
         </p>
       </section>
 
@@ -625,10 +709,11 @@ const zindex = [
     color: var(--ink);
   }
 
-  .ds-code .t-p { color: var(--accent); }
-  .ds-code .t-c { color: #b0652f; }
-  .ds-code .t-f { color: #2f7e86; font-weight: 600; }
-  .ds-code .t-y { color: #8a5a1f; font-weight: 600; }
+  /* Same hues as the terminal on ink, darkened to 4.5:1 on the slate surface. */
+  .ds-code .t-p { color: #a13241; }
+  .ds-code .t-c { color: #844c23; }
+  .ds-code .t-f { color: #25636a; font-weight: 600; }
+  .ds-code .t-y { color: #7b501c; font-weight: 600; }
 
   /* Close */
   .ds-close {
@@ -642,7 +727,17 @@ const zindex = [
   }
 
   .ds-close a {
-    color: var(--accent);
+    color: var(--accent-text);
+  }
+
+  .ds-face-form {
+    font-family: 'Roboto Serif Variable', Georgia, serif;
+    font-weight: 400;
+    color: var(--ink);
+  }
+
+  .ds-rates {
+    margin: 0;
   }
 
   @media (max-width: 720px) {
