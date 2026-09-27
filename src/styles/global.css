@@ -1332,6 +1332,19 @@ a.talk-title:hover {
   padding: clamp(1.5rem, 4vw, 2.5rem);
 }
 
+/* After a successful send (ContactForm adds this): the card keeps its height
+   and shows only the confirmation, centred. */
+.contact-card.is-sent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.contact-card.is-sent > h2,
+.contact-card.is-sent > .form-lede {
+  display: none;
+}
+
 .contact-card::after {
   content: '';
   position: absolute;

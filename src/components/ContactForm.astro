@@ -99,8 +99,7 @@ const topics: [string, string][] = [
     display: none;
   }
   .form-sent {
-    padding: var(--space-6) 0 var(--space-2);
-    border-top: 2px solid var(--accent);
+    padding: 0;
   }
   .form-sent:focus {
     outline: none;
@@ -170,14 +169,20 @@ const topics: [string, string][] = [
         const emailSlot = sent?.querySelector('[data-sent-email]');
         if (nameSlot) nameSlot.textContent = firstName ? `, ${firstName}` : '';
         if (emailSlot) emailSlot.textContent = String(data.email ?? '');
+        // Hold the card at its current height so nothing below it moves, then
+        // swap the heading, intro and form for the confirmation.
+        const card = form.closest<HTMLElement>('.contact-card');
+        if (card) {
+          card.style.minHeight = `${card.offsetHeight}px`;
+          card.classList.add('is-sent');
+        }
         form.reset();
         form.hidden = true;
         if (bookingLine) bookingLine.hidden = true;
         if (sent) {
           sent.hidden = false;
-          // Move focus so screen readers announce it and the reader's eye lands on it.
-          sent.focus();
-          sent.scrollIntoView({ block: 'center', behavior: 'smooth' });
+          // Focus so screen readers announce it; no scroll, it appears in place.
+          sent.focus({ preventScroll: true });
         } else {
           say(result.message || "Thank you; I'll reply soon.");
         }
