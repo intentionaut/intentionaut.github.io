@@ -6,7 +6,6 @@ dist/
 .env
 .env.*
 preview.html
-.env
 contact-form/
 
 # Candid material never belongs in a public repo. This repo is public.
