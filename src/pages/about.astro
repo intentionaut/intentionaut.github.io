@@ -84,7 +84,7 @@ const stats = [
       </ul>
     </header>
 
-    <div class="prose about-intro">
+    <div class="prose about-body">
       <p>
         I started in design. Along the way, I discovered a passion for data.
         The discipline of informing decisions with real evidence and
@@ -105,14 +105,11 @@ const stats = [
       <p>
         The word is invented, but intention captures the arc of my work.
       </p>
-    </div>
-
-    <div class="prose about-final">
       <Content />
     </div>
 
-    <section class="arc-section" aria-label="Career arc">
-      <h2>A brief history.</h2>
+    <section class="arc-section" aria-labelledby="arc-title">
+      <h2 id="arc-title">A brief history.</h2>
       <ol class="talk-list arc-list">
         {
           arc.map((a) => (
@@ -161,29 +158,32 @@ const stats = [
     margin-top: 0;
   }
 
-  /* Break the body into three with hairline keylines (1px var(--slate), the
-     site's rule): narrative, "How I work", the ledger. Each line sits roughly
-     centred in its gap - margin-top is a step smaller than padding-top to
-     offset the ~1.5rem trailing margin of the paragraph above it, and
-     .about-final drops its own bottom padding so that offset is predictable.
-     The ledger break is one step larger than "How I work". All values are
-     system fluid steps. The "How I work" keyline runs to the prose measure
-     (its <h2> lives inside .prose, hence :global); the ledger keyline runs the
-     full content width, matching the ledger. */
-  .about-final {
+  /* The body breaks into three with hairline keylines (1px var(--slate), the
+     site's rule): narrative, "How I work", the ledger. Each break is the
+     design system's band: the section gap to the rule, then --space-7 inside.
+     The "How I work" rule runs to the reading width (its <h2> lives inside
+     .prose, hence :global); the ledger rule runs the full width, matching the
+     ledger. The h2's top margin collapses with the paragraph's above it, so
+     the gap to the rule is the section gap exactly. The ledger's rule brings
+     its own gap, so the prose drops its bottom padding. */
+  .about-body {
     padding-bottom: 0;
   }
 
-  .about-final :global(h2) {
-    margin-top: clamp(2rem, 4vw, 3rem);
-    padding-top: clamp(3rem, 6vw, 5rem);
+  .about-body :global(h2) {
+    margin-top: clamp(3rem, 6vw, 5rem);
+    padding-top: var(--space-7);
     border-top: 1px solid var(--slate);
   }
 
   .arc-section {
     margin-top: clamp(3rem, 6vw, 5rem);
-    padding-top: clamp(3.5rem, 8vw, 6rem);
+    padding-top: var(--space-7);
     border-top: 1px solid var(--slate);
+  }
+
+  .arc-section h2 {
+    font-size: var(--text-lg);
   }
 
   /* Below the tablet width the headshot costs more vertical space than it earns,
