@@ -285,6 +285,27 @@ h3 {
   margin: 0;
 }
 
+/* Without these, a heading with no class of its own fell back to the
+   browser's sizes (1.5em and 1.17em: 25.5px and 19.9px), off the scale.
+   Every class that sizes a heading still wins. */
+h2 {
+  font-size: var(--text-lg);
+}
+
+h3 {
+  font-size: var(--text-md);
+}
+
+/* The site's link, for any link no component styles: ink, with the coral
+   underline. :where() keeps it at zero specificity, so every class rule
+   wins. Without it, such links rendered in the browser's blue. */
+:where(a) {
+  color: var(--ink);
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+
 .eyebrow {
   margin: 0 0 var(--space-6);
   font-family: var(--font-body);
@@ -925,6 +946,46 @@ h3 {
 .project-cta {
   margin-top: 0;
   padding-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+/* ---------- Command pill ---------- */
+
+/* A one-line command to copy: monospace on a slate chip, the prompt marker in
+   coral. The prompt is small text, so it takes --accent-text (the original
+   coral is 3.71:1 on paper). On ink (.pill-dark) the paper-coloured text
+   carries it. Used on /open-source/ and both tool pages. */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid var(--slate);
+  border-radius: var(--radius-l);
+  background: rgba(255, 255, 255, 0.45);
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.pill-prompt {
+  color: var(--accent-text);
+}
+
+.pill-dark {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--paper);
+}
+
+.pill-dark .pill-prompt {
+  color: var(--accent);
+}
+
+@media (max-width: 900px) {
+  .pill {
+    white-space: normal;
+  }
 }
 
 /* ---------- Talks ---------- */

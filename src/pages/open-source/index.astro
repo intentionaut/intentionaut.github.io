@@ -33,7 +33,7 @@ const contributions = entries
             <p>{r.line}</p>
           </a>
           <div class="release-meta">
-            {r.install && <code>$ {r.install}</code>}
+            {r.install && <span class="pill"><span class="pill-prompt">$</span> {r.install}</span>}
             <a class="link-arrow" href={r.repo} target="_blank" rel="noopener noreferrer">GitHub</a>
           </div>
         </li>
@@ -48,7 +48,7 @@ const contributions = entries
             <li>
               <a href={r.repo} target="_blank" rel="noopener noreferrer"><strong>{r.name}</strong></a>
               <span>{r.line}</span>
-              {r.install && <code>$ {r.install}</code>}
+              {r.install && <span class="pill"><span class="pill-prompt">$</span> {r.install}</span>}
             </li>
           ))}
         </ul>
@@ -81,88 +81,96 @@ const contributions = entries
 </BaseLayout>
 
 <style>
+  /* Tier labels are headings set as eyebrows: one small label per group. The
+     first sits on the page intro's gap alone; each later tier is one section
+     gap below the list before it. */
   .os-tier {
-    margin: var(--space-9) 0 var(--space-4);
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--accent-text);
+    margin: clamp(3rem, 6vw, 5rem) 0 var(--space-4);
     font-family: var(--font-body);
+    font-size: 0.78rem;
     font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-text);
+  }
+  .page-head + .os-tier {
+    margin-top: 0;
   }
   .release-list {
     list-style: none;
     margin: 0;
     padding: 0;
     display: grid;
-    gap: var(--space-6);
+    gap: var(--space-4);
   }
+  /* The design system's Card: an ink rule, a slate rule inset 3px, square
+     corners, ink text. */
   .release-card {
-    border: 1px solid var(--slate);
-    border-radius: var(--radius-l);
-    background: rgba(255, 255, 255, 0.4);
-    padding: var(--space-7);
+    position: relative;
+    border: 1px solid var(--ink);
+    padding: var(--space-6);
     display: grid;
     gap: var(--space-5);
   }
+  .release-card::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border: 1px solid var(--slate);
+    pointer-events: none;
+  }
   .release-link {
+    position: relative;
+    z-index: 1;
     text-decoration: none;
     color: inherit;
   }
   .release-link h3 {
     margin: 0 0 var(--space-2);
     font-family: var(--font-display);
-    font-size: 1.6rem;
+    font-size: var(--text-md);
+    font-weight: 560;
+    line-height: 1.3;
+    letter-spacing: 0;
+    transition: color var(--dur-base) ease;
   }
   .release-link:hover h3 {
-    color: var(--accent);
+    color: var(--accent-text);
   }
   .release-link p {
     margin: 0;
     max-width: 62ch;
-    color: var(--muted);
+    color: var(--ink);
   }
   .release-meta {
+    position: relative;
+    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: var(--space-4);
     flex-wrap: wrap;
   }
-  .release-meta code,
-  .os-list code {
-    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
-    font-size: 0.85rem;
-    color: var(--ink);
-    background: rgba(255, 255, 255, 0.5);
-    border: 1px solid var(--slate);
-    border-radius: var(--radius-m);
-    padding: 0.35rem 0.7rem;
-  }
   .os-list {
     list-style: none;
     margin: 0;
     padding: 0;
-    display: grid;
-    gap: 0;
+    border-top: 1px solid var(--ink);
   }
   .os-list li {
     display: grid;
     grid-template-columns: max-content minmax(0, 1fr) max-content;
     align-items: baseline;
     gap: var(--space-4);
-    padding: var(--space-4) 0;
-    border-top: 1px solid var(--slate);
-  }
-  .os-list li:last-child {
+    padding: var(--space-4) var(--space-3);
     border-bottom: 1px solid var(--slate);
   }
   .os-list em {
     color: var(--muted);
     font-style: normal;
-    font-size: 0.9rem;
+    font-size: var(--text-sm);
   }
-  .os-list span {
+  .os-list span:not(.pill):not(.pill-prompt) {
     color: var(--muted);
   }
   .os-note {
@@ -170,7 +178,18 @@ const contributions = entries
     max-width: 62ch;
   }
   .os-foot {
-    margin: var(--space-10) 0 var(--space-11);
+    margin: clamp(3rem, 6vw, 5rem) 0;
+    color: var(--ink);
+  }
+  .os-foot a {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 3px;
+  }
+  .os-foot a:hover {
+    color: var(--accent-text);
   }
   @media (max-width: 700px) {
     .os-list li {

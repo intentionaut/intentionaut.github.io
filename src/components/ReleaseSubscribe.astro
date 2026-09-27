@@ -1,9 +1,10 @@
 ---
 /**
  * The letter CTA for /open-source pages: the tools come from the build stories,
- * the build stories live in the letter. One line of pitch, the inline form.
+ * the build stories live in the letter. One line of pitch in the design
+ * system's newsletter card, on the page's left edge.
  */
-import SubscribeForm from './SubscribeForm.astro';
+import FrameSubscribe from './FrameSubscribe.astro';
 
 interface Props {
   /** utm_source, e.g. "open-source", "open-source-familiar". */
@@ -17,24 +18,20 @@ const line = tool
   : 'These tools come out of a newsletter. Intentionaut is where the build stories land first: what shipped, what went wrong, and what it cost.';
 ---
 
-<aside class="rel-subscribe">
-  <div class="rel-subscribe-inner">
-    <p class="rel-subscribe-line">{line}</p>
-    <SubscribeForm source={source} emailId={`email-${source}`} buttonLabel="Get the letter" />
-  </div>
-</aside>
+<section class="rel-subscribe" aria-label="Newsletter signup">
+  <FrameSubscribe
+    eyebrow="Newsletter"
+    sub={line}
+    source={source}
+    emailId={`email-${source}`}
+    buttonLabel="Get the letter"
+    align="left"
+  />
+</section>
 
 <style>
+  /* One section gap above, like every other section (Layout). */
   .rel-subscribe {
-    border-top: 1px solid var(--slate);
-    padding: var(--space-9) 0;
-  }
-  .rel-subscribe-inner {
-    max-width: 34rem;
-  }
-  .rel-subscribe-line {
-    margin: 0 0 var(--space-4);
-    color: var(--muted);
-    max-width: 52ch;
+    margin-top: clamp(3rem, 6vw, 5rem);
   }
 </style>
