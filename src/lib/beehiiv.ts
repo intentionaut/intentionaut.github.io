@@ -33,10 +33,13 @@ export interface BeehiivPost {
  * Two markers, because the perma-footer replaced an earlier one:
  *   - Issues up to and including "Taking a Spell" opened the footer with a
  *     "Thank you for reading" H2, which beehiiv slugifies into an id.
- *   - The perma-footer has no heading, so it is anchored on its opening
- *     sentence instead - which is the positioning.md one-liner, and perma by
- *     definition. Matched last-occurrence-first so a piece that happens to
- *     quote the line in its body is not truncated at the quote.
+ *   - The perma-footer has no heading, so it is anchored on the words its
+ *     opening sentence has kept through every rewording: "letter from
+ *     Saielle DaSilva". The cadence word in front of it has changed
+ *     ("fortnightly" to none, 27 Sep 2026) and may change again; sent issues
+ *     keep whichever footer they went out with, so the marker has to match
+ *     all of them. Matched last-occurrence-first so a piece that quotes the
+ *     line in its body is not truncated at the quote.
  * Whichever marker sits earliest wins, so an issue carrying both is cut at the
  * heading.
  *
@@ -45,8 +48,8 @@ export interface BeehiivPost {
  */
 const LETTER_FOOTER_ID = 'thank-you-for-reading';
 
-/** Opening sentence of the perma-footer, verbatim from positioning.md. */
-const LETTER_FOOTER_OPENING = 'is a fortnightly letter from Saielle DaSilva';
+/** The part of the perma-footer's opening that every version shares. */
+const LETTER_FOOTER_OPENING = 'letter from Saielle DaSilva';
 
 /**
  * A second line from the footer, used only to detect a footer the markers
