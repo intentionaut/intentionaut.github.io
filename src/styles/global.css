@@ -1578,7 +1578,7 @@ a.talk-title:hover {
 .faq-link {
   margin: var(--space-5) 0 0;
   text-align: left;
-  font-size: 0.9rem;
+  font-size: var(--text-sm);
 }
 
 .faq {
