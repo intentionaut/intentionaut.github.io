@@ -159,7 +159,7 @@ export const testimonials: Testimonial[] = [
     org: "former Head of Delivery, Sainsbury's",
     url: 'https://www.linkedin.com/in/jon-cockle-75a78867/',
     enabled: true,
-    placements: ['contact', 'fractional'],
+    placements: ['contact', 'fractional', 'home'],
     source: 'LinkedIn recommendation',
     receivedAt: '2026-08-28',
     note: 'Excerpt. The two sentences on framing choices and trade-offs for senior leaders, chosen to match the site positioning; the full recommendation is on his LinkedIn.',

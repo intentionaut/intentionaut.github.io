@@ -1,6 +1,42 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FrameSubscribe from '../components/FrameSubscribe.astro';
+import { testimonialsFor } from '../data/testimonials';
+import { BOOKING_URL } from '../data/links';
+
+// The story, top to bottom: who she is and who brings her in, proof, the two
+// offers, what she has built, what someone said, then ways to follow along.
+// Every figure below is already published on /for-advisors/ and /fractional/.
+const results = [
+  { num: '+450%', label: 'MRR in 90 days as interim CPO' },
+  { num: '3.2x', label: 'Return on StepStone’s satellite portfolio' },
+  { num: '100M+', label: 'Customers on Sainsbury’s AI platform' },
+  { num: '$7B', label: 'Cazoo IPO, from the founding team' },
+];
+
+const offers = [
+  {
+    title: 'Fractional leadership',
+    who: 'For teams that need Director-level leadership, but are not ready for a permanent hire.',
+    shape: 'One or two days a week, three months and up.',
+    href: '/fractional/',
+    link: 'How fractional works',
+  },
+  {
+    title: 'Product building',
+    who: 'For teams with a real problem, a rough idea of the answer, and nobody free to build it.',
+    shape: 'Three days a week in your environment, four to twelve weeks.',
+    href: '/forward-deployed/',
+    link: 'How product building works',
+  },
+];
+
+const built = (await getCollection('projects'))
+  .filter((p) => ['friday-for-work', 'kernic', 'familiar'].includes(p.id))
+  .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+
+const [quote] = testimonialsFor('home');
 ---
 
 <BaseLayout
@@ -8,7 +44,7 @@ import FrameSubscribe from '../components/FrameSubscribe.astro';
   description="Fractional and interim product leadership for teams working across AI, data and design. Founders and product leaders bring Saielle DaSilva in when direction is the bottleneck."
 >
   <section class="wrap hero">
-    <p class="eyebrow">Saielle DaSilva · Product Leader</p>
+    <p class="eyebrow">Saielle DaSilva · Product leader</p>
     <h1>I speak <em>four</em> languages: design, product, data&nbsp;&amp;&nbsp;AI.</h1>
     <p class="lede">
       Hi, I'm Saielle. Founders and product leaders bring me in when
@@ -16,55 +52,72 @@ import FrameSubscribe from '../components/FrameSubscribe.astro';
       deliberate choices, aligned teams and shipped results.
     </p>
     <div class="cta-row">
-      <a class="btn-primary" href="/contact/">Work with me</a>
+      <a class="btn-primary" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a free call</a>
       <a class="link-arrow" href="/about/">My story</a>
     </div>
   </section>
 
-  <section class="wrap cred-strip" aria-label="Teams and clients">
-    <p class="cred-label">Teams &amp; clients</p>
-    <ul class="cred-logos">
-      <li>StepStone</li>
-      <li>Sainsbury's</li>
-      <li>Cazoo</li>
-      <li>Pivotal</li>
-      <li>Amazon</li>
-      <li>AT&amp;T</li>
-      <li>Google</li>
-      <li>VMware</li>
+  <section class="wrap home-section" aria-labelledby="proof-h">
+    <h2 id="proof-h" class="eyebrow">Track record</h2>
+    <ul class="stat-strip home-stats">
+      {results.map((r) => (
+        <li>
+          <span class="stat-num">{r.num}</span>
+          <span class="stat-label">{r.label}</span>
+        </li>
+      ))}
     </ul>
+    <p class="home-also">Before that: Pivotal, Amazon, AT&amp;T, Google and VMware.</p>
   </section>
 
-  <section class="wrap manifesto">
-    <p>
-      In most teams, productivity does not stall on talent or tools but on
-      intention: no clear sense of what the work is for. I help teams set
-      that, and build from it.
+  <section class="wrap home-section" aria-labelledby="offers-h">
+    <h2 id="offers-h" class="home-h2">Two ways to work together.</h2>
+    <div class="offer-grid">
+      {offers.map((o) => (
+        <article class="offer-card">
+          <h3>{o.title}</h3>
+          <p class="offer-who">{o.who}</p>
+          <p class="offer-shape">{o.shape}</p>
+          <a class="link-arrow" href={o.href}><span>{o.link}</span></a>
+        </article>
+      ))}
+    </div>
+    <p class="home-note">
+      Not sure which? <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a free call</a>
+      {' '}and we'll work it out, or compare them on the <a href="/contact/">contact page</a>.
     </p>
   </section>
 
-  <section class="wrap lanes" aria-label="What I do">
+  <section class="wrap home-section" aria-labelledby="built-h">
+    <h2 id="built-h" class="home-h2">What I've built lately.</h2>
+    <ol class="project-list">
+      {built.map((p) => (
+        <li class="project-row">
+          <a class="project-card" href={`/projects/${p.id}/`}>
+            <span class="talk-title">{p.data.title}</span>
+            <span class="project-summary">{p.data.summary}</span>
+          </a>
+        </li>
+      ))}
+    </ol>
+    <a class="link-arrow" href="/projects/"><span>All projects</span></a>
+  </section>
+
+  {quote && (
+    <section class="wrap home-section" aria-label="What people say">
+      <figure class="home-quote">
+        <blockquote><p>{quote.quote}</p></blockquote>
+        <figcaption>
+          {quote.url ? <a href={quote.url} target="_blank" rel="noopener noreferrer">{quote.name}</a> : quote.name},
+          {' '}{quote.role}, {quote.org}
+        </figcaption>
+      </figure>
+    </section>
+  )}
+
+  <section class="wrap lanes home-follow" aria-label="Follow the thinking">
     <ol>
       <li class="lane">
-        <span class="num" aria-hidden="true">01</span>
-        <h2>Fractional leadership</h2>
-        <p>
-          A senior product leader one or two days a week, for teams not ready
-          for a permanent hire.
-        </p>
-        <a class="link-arrow" href="/fractional/"><span>How fractional works</span></a>
-      </li>
-      <li class="lane">
-        <span class="num" aria-hidden="true">02</span>
-        <h2>Product building</h2>
-        <p>
-          Embedded in your team, building working software in your
-          environment, for ideas nobody is free to build.
-        </p>
-        <a class="link-arrow" href="/forward-deployed/"><span>How product building works</span></a>
-      </li>
-      <li class="lane">
-        <span class="num" aria-hidden="true">03</span>
         <h2>Speaking</h2>
         <p>
           Talks and workshops on building intentional products in the age of
@@ -73,7 +126,6 @@ import FrameSubscribe from '../components/FrameSubscribe.astro';
         <a class="link-arrow" href="/speaking/"><span>See talks</span></a>
       </li>
       <li class="lane">
-        <span class="num" aria-hidden="true">04</span>
         <h2>Writing</h2>
         <p>
           Notes on craft, leadership and learning in public. New essays land
@@ -94,3 +146,105 @@ import FrameSubscribe from '../components/FrameSubscribe.astro';
     />
   </section>
 </BaseLayout>
+
+<style>
+  .home-section {
+    padding-bottom: clamp(3.5rem, 7vw, 5.5rem);
+  }
+  .home-section .eyebrow {
+    margin-bottom: var(--space-2);
+  }
+  .home-h2 {
+    font-size: clamp(1.7rem, 3.2vw, 2.3rem);
+    margin-bottom: var(--space-7);
+  }
+  .home-stats {
+    margin-top: 0;
+  }
+  .home-also,
+  .home-note {
+    margin: var(--space-6) 0 0;
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+  .home-note a {
+    color: var(--ink);
+    text-decoration-color: var(--accent);
+    text-underline-offset: 3px;
+  }
+
+  .offer-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-6);
+  }
+  .offer-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--ink);
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+  }
+  .offer-card::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border: 1px solid var(--slate);
+    pointer-events: none;
+  }
+  .offer-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: var(--space-4);
+  }
+  .offer-who {
+    margin: 0 0 var(--space-3);
+  }
+  .offer-shape {
+    margin: 0 0 var(--space-6);
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+  .offer-card .link-arrow {
+    margin-top: auto;
+    align-self: flex-start;
+  }
+
+  .home-quote {
+    margin: 0;
+    max-width: 46rem;
+  }
+  .home-quote blockquote {
+    margin: 0;
+    padding-left: var(--space-6);
+    border-left: 2px solid var(--accent);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+    line-height: 1.5;
+  }
+  .home-quote blockquote p {
+    margin: 0;
+  }
+  .home-quote figcaption {
+    margin-top: var(--space-4);
+    padding-left: var(--space-6);
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+  .home-quote figcaption a {
+    color: inherit;
+  }
+
+  .home-follow .lane h2 {
+    font-size: 1.2rem;
+  }
+
+  @media (max-width: 720px) {
+    .offer-grid {
+      grid-template-columns: 1fr;
+    }
+    .home-stats {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>
