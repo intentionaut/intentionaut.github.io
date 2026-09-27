@@ -31,15 +31,40 @@ const faqSchema = {
       </p>
     </header>
 
-    <div class="faq">
+    <div class="faq faq-page">
       {
         faqs.map((f) => (
           <section>
             <h2>{f.question}</h2>
-            <p>{f.answer}</p>
+            {f.answer.split(/\n\s*\n/).map((para) => (
+              <p>{para.trim()}</p>
+            ))}
           </section>
         ))
       }
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  /* The question list from the design system, every answer open: an ink rule
+     above the list, a slate rule under each question, questions at
+     --text-md. It starts on the page intro's gap and ends on the section gap. */
+  .faq-page {
+    border-top: 1px solid var(--ink);
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+  }
+  .faq-page section {
+    padding: var(--space-5) 0;
+    border-bottom: 1px solid var(--slate);
+  }
+  .faq-page h2 {
+    margin: 0 0 var(--space-2);
+    font-size: var(--text-md);
+    font-weight: 500;
+    line-height: 1.25;
+  }
+  .faq-page p:last-child {
+    margin-bottom: 0;
+  }
+</style>
