@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SubscribeForm from '../components/SubscribeForm.astro';
+import FrameSubscribe from '../components/FrameSubscribe.astro';
 import { themeLabels, type Theme } from '../data/writing';
 import { allEntries } from '../lib/archive';
 
@@ -42,16 +42,15 @@ const fmtDate = (e: (typeof entries)[number]) =>
       </p>
     </header>
 
-    <section class="signup" aria-label="Newsletter signup">
-      <h2>Don't miss the post.</h2>
-      <p class="signup-sub">
-        How leaders set direction when AI does more of the building.
-        Field-tested with the receipts.
-      </p>
-      <SubscribeForm source="writing-top" emailId="writing-email" />
+    <section aria-label="Newsletter signup">
+      <FrameSubscribe
+        heading="Don't miss the post."
+        sub="How leaders set direction when AI does more of the building. Field-tested with the receipts."
+        source="writing-top"
+        emailId="writing-email"
+        align="left"
+      />
     </section>
-
-    <div class="section-rule" aria-hidden="true"></div>
 
     <section class="archive" aria-label="Writing archive">
       <div class="chips" role="group" aria-label="Filter writing by theme">
@@ -121,13 +120,14 @@ const fmtDate = (e: (typeof entries)[number]) =>
       </p>
     </section>
 
-    <section class="signup" aria-label="Subscribe">
-      <h2>Want the next one?</h2>
-      <p class="signup-sub">
-        How leaders set direction when AI does more of the building.
-        Field-tested with the receipts.
-      </p>
-      <SubscribeForm source="writing-bottom" emailId="writing-bottom-email" />
+    <section aria-label="Subscribe">
+      <FrameSubscribe
+        heading="Want the next one?"
+        sub="How leaders set direction when AI does more of the building. Field-tested with the receipts."
+        source="writing-bottom"
+        emailId="writing-bottom-email"
+        align="left"
+      />
     </section>
   </section>
 

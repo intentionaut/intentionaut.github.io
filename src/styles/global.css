@@ -1167,8 +1167,10 @@ a.talk-title:hover {
 
 /* ---------- Writing archive ---------- */
 
+/* One section gap after the sign-up card; the list itself ends on the same
+   gap (.talk-list), so the archive adds none below. */
 .archive {
-  padding-bottom: clamp(3rem, 6vw, 5rem);
+  margin-top: clamp(3rem, 6vw, 5rem);
 }
 
 .chips {
@@ -1228,11 +1230,6 @@ a.talk-title:hover {
 
 .ledger-row.is-hidden {
   display: none;
-}
-
-.section-rule {
-  border-top: 1px solid var(--slate);
-  margin: var(--space-8) 0;
 }
 
 .skeleton {
