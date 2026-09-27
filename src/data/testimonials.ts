@@ -153,7 +153,7 @@ export const testimonials: Testimonial[] = [
   {
     id: 'jon-cockle',
     quote:
-      'She is also particularly strong at framing choices and trade-offs for senior leaders. Rather than allowing discussions to become lost in detail, Saielle has a knack for getting to the underlying decision and articulating the options in a way that makes the consequences clear.',
+      '…Saielle has a knack for getting to the underlying decision and articulating the options in a way that makes the consequences clear.',
     name: 'Jon Cockle',
     role: 'Software Delivery Consultant',
     org: "former Head of Delivery, Sainsbury's",
@@ -162,7 +162,7 @@ export const testimonials: Testimonial[] = [
     placements: ['contact', 'fractional', 'home'],
     source: 'LinkedIn recommendation',
     receivedAt: '2026-08-28',
-    note: 'Excerpt. The two sentences on framing choices and trade-offs for senior leaders, chosen to match the site positioning; the full recommendation is on his LinkedIn.',
+    note: 'Excerpt, trimmed further 2026-09-27 at Saielle\'s request: it opened "She is also particularly strong at framing choices and trade-offs for senior leaders. Rather than allowing discussions to become lost in detail," which read oddly out of context. The full recommendation is on his LinkedIn.',
   },
 ];
 
