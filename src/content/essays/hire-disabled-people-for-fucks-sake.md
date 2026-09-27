@@ -13,13 +13,13 @@ A friend asked me for support connecting with someone who could help them into e
 
 This is a universal challenge to all employers, please hire disabled people. For fuck's sake, hire disabled people. There are lots of jobs you have where you're not even doing basic outreach or decently advertising you'd make workplace accommodations. Hire disabled people. Yes you. Right now. For fuck's sake.
 
-### One in five working age adults in Britain is disabled
+## One in five working age adults in Britain is disabled
 
 There are [over 2 billion disabled people on the planet](https://www.who.int/disabilities/world_report/2011/report.pdf) according to the World Health Organisation, that's [37.5% of the global population](https://www.inclusivecitymaker.com/disabled-people-in-the-world-in-2019-facts-and-figures/#:~:text=There%20are%20currently%20more%20than,37.5%25%20of%20the%20world's%20population.).
 
 In 2020, **8.4 million** people of working age (16-64) [reported that they were disabled](https://commonslibrary.parliament.uk/research-briefings/cbp-7540/); this is 20% of Britain's working age population. This means 1 in 5 working age adults has limitations impacting their ability to work. We can all do more, chances are you know more than one disabled person.
 
-### The benefits of disability inclusion in the workplace
+## The benefits of disability inclusion in the workplace
 
 The UK Government website lists [a few benefits](https://www.gov.uk/government/publications/employing-disabled-people-and-people-with-health-conditions/employing-disabled-people-and-people-with-health-conditions#:~:text=1.2%20The%20benefits%20of%20employing%20disabled%20people&text=Encouraging%20applications%20from%20disabled%20people,in%20which%20it%20is%20based) of hiring disabled people. The broader truth is [disability inclusion benefits everyone](https://www.ilo.org/infostories/stories/employment/the-win-win-of-disability-inclusion#the-benefits-of-inclusive-workplaces). We have to do more than just end stigma. There are a range of benefits to hiring disabled people you might be unaware of.
 

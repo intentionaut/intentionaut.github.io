@@ -155,7 +155,11 @@ const zindex = [
           section use <code>--text-md</code>, list-row and lane titles
           included. Card titles are Fraunces 560 at <code>1.15rem</code>. Page
           headings run larger than the scale, set by <code>.page-head h1</code>;
-          the homepage headline uses <code>--text-display</code>.
+          the homepage headline uses <code>--text-display</code>. In prose
+          (service pages, essays, newsletter posts) <code>h2</code> is
+          <code>--text-lg</code> and <code>h3</code> is <code>--text-md</code>;
+          a page's only <code>h1</code> is its title, and headings never skip a
+          level (newsletter posts are renumbered at build time to keep it so).
         </p>
       </section>
 
@@ -251,6 +255,8 @@ const zindex = [
         <p class="ds-note">
           A band that opens with a full-width slate rule (the newsletter sign-up)
           counts its gap to the rule, then pads <code>--space-7</code> inside.
+          A prose block ends on the section gap alone: its last paragraph drops
+          its bottom margin.
         </p>
       </section>
 

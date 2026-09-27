@@ -19,7 +19,7 @@ Making good decisions at the organisational level as a product leader means  do
 2. Decision barriers are managed and reduced
 3. Focus on quality of decision *first* then quality of outcome
 
-### Ensure principles shape decisions
+## Ensure principles shape decisions
 
 Values and principles are a good way to ensure you're making good decisions or at least the best possible decisions with the information you have.
 
@@ -41,7 +41,7 @@ As a leader, you can set the framework for making decisions, and then bring disc
 
 ---
 
-### Thank You
+## Thank You
 
 Thanks for reading and/or subscribing. If you find these posts valuable, please do let me know.
 

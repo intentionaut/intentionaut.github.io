@@ -15,7 +15,7 @@ When we're successful by society's standards, often our lives look perfect and p
 
 Over half of people diagnosed with one condition have the other. The world has been unkind to us, with a global pandemic, a dangerous virus and a lockdown that's kept us from touching and holding our loved ones, this is a tough time for many people and you're not alone.
 
-### It will be sunny, one day
+## It will be sunny, one day
 
 This has been a pretty important mantra for my family over the past few months. We've been struggling with a lot of difficult things and what we've learned is that feelings aren't facts. Sometimes, feelings are a useful barometer of something that *is* wrong. In people with depression, this barometer is hypersensitive and can change on a dime. I love what Stephen Fry has to say [about depression](https://lettersofnote.com/2009/10/08/it-will-be-sunny-one-day/).
 
@@ -28,7 +28,7 @@ This has been a pretty important mantra for my family over the past few months. 
 
 Moods are real. They're sometimes fleeting, sometimes persistent. They can change on a dime with me, and they can deeply affect my sense of self-worth. But they're temporary. And they aren't facts.
 
-### Where am I measuring value?
+## Where am I measuring value?
 
 I use the question "Where are we measuring value?" a lot at work. It's a very powerful question that can often shift the tide of a conversation and move things towards clarity in unexpected ways. One of the most important things I've learned that works for me in managing my moods and depression is to apply product thinking and observation to my mental state.
 

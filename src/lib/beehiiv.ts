@@ -130,14 +130,31 @@ function stripBeehiivHtml(html: string): string {
   content = content.replace(
     /(<\/figure>)([\s\S]*?)(?=<div class="img-wrap">|<figure|<p |<h[1-6]|<ul|<ol|<blockquote|$)/g,
     (match, closeFig, between) => {
-      if (between.trim().length === 0) {
-        return closeFig + '</div>';
+      // An image inside a link: close the wrapper before the link closes, or
+      // the browser repairs <a><div>…</a></div> by emptying the link.
+      if (between.trim().length === 0 || /^\s*<\/a>/.test(between)) {
+        return closeFig + '</div>' + between;
       }
       return closeFig + between + '</div>';
     }
   );
 
-  return content.trim();
+  return renumberHeadings(content.trim());
+}
+
+/**
+ * The page's own title is the only h1, so a post's headings start at h2 and,
+ * read in order, never step down more than one level (h2 then h4 becomes h2
+ * then h3). Only the numbers change, never the text. Screen reader users move
+ * by heading level, and a skipped level reads as a gap.
+ */
+function renumberHeadings(html: string): string {
+  let last = 1;
+  return html.replace(/<h([1-6])\b([^>]*)>([\s\S]*?)<\/h\1>/gi, (_, level, attrs, inner) => {
+    const next = Math.min(Math.max(Number(level), 2), last + 1);
+    last = next;
+    return `<h${next}${attrs}>${inner}</h${next}>`;
+  });
 }
 
 /**

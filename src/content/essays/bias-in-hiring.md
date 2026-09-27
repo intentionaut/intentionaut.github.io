@@ -7,7 +7,7 @@ source: Blossom
 originalUrl: "https://web.archive.org/web/20250518033219/https://www.blossomat.work/bias-in-hiring/"
 ---
 
-### Let's fix it
+## Let's fix it
 
 As a product or design leader, it is your responsibility to design the outcomes and work conditions for your team to succeed. Let's talk about interviews.
 

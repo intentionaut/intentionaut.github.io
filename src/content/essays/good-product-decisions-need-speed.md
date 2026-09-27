@@ -19,7 +19,7 @@ Decision velocity is one of the key measures of a successful business culture. I
 
 So, how do we improve decision velocity?
 
-### Identify and eliminate decision barriers
+## Identify and eliminate decision barriers
 
 The less important a decision, the faster you should get to it. One of the easiest things product leaders can do to start helping improve decision velocity is to identify barriers to decision making.
 
@@ -34,7 +34,7 @@ Make it easy for your team to make decisions clearly and effectively by proactiv
 
 To tackle these, ask your team where they struggle with getting to the next step right now, and do some investigating.
 
-### Create room for structured input
+## Create room for structured input
 
 In my time as a product person I've noticed is teams or executives have a lot of clarity up front about what's absolutely critical. Over time more and more risk factors pile up to the point where teams are juggling 12-15 diverging opinions, risk factors in the dozens and an approval process that takes months.
 
@@ -46,7 +46,7 @@ Having clear input on just 4 risks is a great way to create what I've come to ca
 
 How are you helping limit barriers to decisions as a product leader?
 
-### Establish a decision making approach
+## Establish a decision making approach
 
 The reality is most of the decisions many leaders weigh in on at work are not important enough to warrant the meetings they generate.
 

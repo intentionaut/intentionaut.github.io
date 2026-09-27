@@ -665,9 +665,20 @@ h3 {
   line-height: 1.5;
 }
 
+/* A prose block ends on the section gap alone: no trailing paragraph margin
+   on top of its padding. */
+.prose > :last-child {
+  margin-bottom: 0;
+}
+
+/* Section headings on the scale (design system, Type). */
 .prose h2 {
-  font-size: 1.6rem;
+  font-size: var(--text-lg);
   margin: 2.25em 0 1em;
+}
+
+.prose h3 {
+  font-size: var(--text-md);
 }
 
 .prose ul {

@@ -7,7 +7,7 @@ source: Blossom
 originalUrl: "https://web.archive.org/web/20250518034600/https://www.blossomat.work/org-design-for-product-orgs/"
 ---
 
-### #CultureOps[:] Getting conscious about org design
+## #CultureOps[:] Getting conscious about org design
 
 This post came from [some thoughts I was mulling over](https://mastodon.lol/@intentionaut/109397657914342311) recently. There's a good book on Org Design for Design Orgs, but I have yet to see someone tackle the ways in which a Product Org might look in relation to all the other moving parts of a modern tech company.
 
@@ -19,7 +19,7 @@ Often reorgs are complicated by unclear logic, poor communication and a lack of 
 
 Creating clarity and structure to move people in the right direction is complicated. [Janna Bastow](https://www.mindtheproduct.com/survive-hardest-part-product-management-janna-bastow/ https://www.slideshare.net/bastow/mind-the-people-how-to-survive-the-hardest-part-of-your-prodmgmt-job) wrote a talk in 2017 that highlights this. While the talk Janna gave focuses on stakeholders, it alludes to the ways in which aligning people, which is a core product skill, takes work and effort at multiple layers.
 
-### Org Charts, ReOrgs and Outcomes[,] Oh My
+## Org Charts, ReOrgs and Outcomes[,] Oh My
 
 In many places I've worked for and with, org charts and org design get wrapped up in outdated processes and unclear goal structures. Org structures are one of the big frontiers of what i refer to as the "Great Unexamined," the parts of work life that are more taken for granted. The forces that drive reorganisation are often cost savings or mergers and acquisitions, but those forces arent neutral.
 
@@ -31,7 +31,7 @@ There's a real psychological impact on all employees, not just those impacted by
 
 If we take [Conway's Law](https://www.atlassian.com/blog/teamwork/what-is-conways-law-acmi) seriously, we should optimise our communication and structures as well as our product. As long as we're making those seams invisible to customers why not ease them for ourselves internally?
 
-### What a good ReOrg looks like
+## What a good ReOrg looks like
 
 If a people org is a kind of product, surely a different way of accounting for people changes can generate better results for the science of org design, whatever science there might be. An emerging important role for the transformation product leader is to provide shape for outcomes and ensure shared understanding of what a good reorg looks like.
 
@@ -49,7 +49,7 @@ A good reorg starts with the friction to customer value and business outcomes an
 
 A good reorg is informed by service design. How do we better get value into the hands of our customers through the ways we organise and communicate our work? This isn't just an HR concern, it's a design decision for product leaders.
 
-### Looking to the future of product org design
+## Looking to the future of product org design
 
 While a product manager needs to know how to bring together other business stakeholders, engineers, and design, the Product Leader has considerations beyond that. The Product Leader isn't just responsible for the viability of good software, they're responsible for the organisation that makes it happen. The capabilites that make that happen have grown and refined over the last decade. Modern product organisations need to think of scale, impact, and distributed teams as much as anything else when it comes to org design.
 

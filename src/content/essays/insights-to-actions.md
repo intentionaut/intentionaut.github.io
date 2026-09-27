@@ -15,7 +15,7 @@ As a product leader, one of the most important things you can do to achieve clar
 
 Usually this isn't because people in your company are lazy, or uninterested but because they face friction to take action. To get others to take action on the insights you bring to light, you need to ensure they're set up for action and ease of access.
 
-### Idea in brief
+## Idea in brief
 
 - Product discovery is meant to clarify future decisions; Discovery that doesn't inform actions is never going to be valued
 - Getting people to take action on Discovery is about making sure that results are clear and action oriented

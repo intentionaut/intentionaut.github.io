@@ -11,7 +11,7 @@ Hiring is hard. Hiring UX designers and product managers is harder. There are lo
 
 Having hired designers and product managers across several roles, I noticed that design is always in flux.The responsibilities designers need in organisations can be a lot more fluid than product management. I wanted to share a few things I've looked for in hiring designers and a few key reasons I'll pass on a candidate with my design team. This list isn't exhaustive, but it helps narrow things and limit the [excuse of culture fit](https://www.mindtheproduct.com/how-culture-add-changes-the-conversation-on-hiring/).
 
-### 1. They don't have a clear understanding of their choices
+## 1. They don't have a clear understanding of their choices
 
 The biggest factor is whether a designer understands the choices they make and has reasons for it.
 
