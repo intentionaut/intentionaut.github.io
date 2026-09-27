@@ -908,7 +908,10 @@ h3 {
   transition: background-color var(--dur-base) ease;
 }
 
-.talk-row:hover {
+/* The wash, the bar and the date colour say "this row is a link", so only a
+   row that holds one gets them. The ledger on /about/ and an unlinked talk
+   stay still. */
+.talk-row:has(a):hover {
   background: rgba(169, 203, 208, 0.08);
 }
 
@@ -926,7 +929,7 @@ h3 {
   pointer-events: none;
 }
 
-.talk-row:hover::after {
+.talk-row:has(a):hover::after {
   transform: scaleY(1);
 }
 
@@ -946,7 +949,7 @@ a.talk-title::after {
   transition: color var(--dur-base) ease;
 }
 
-.talk-row:hover .talk-date {
+.talk-row:has(a):hover .talk-date {
   color: var(--accent-text);
 }
 
@@ -967,7 +970,7 @@ a.talk-title:hover {
 
 .talk-meta {
   margin: var(--space-1) 0 0;
-  font-size: 0.9rem;
+  font-size: var(--text-sm);
   color: var(--muted);
 }
 
