@@ -1,0 +1,14 @@
+# Intentionaut
+
+Saielle DaSilva is a product leader working across design, data and AI. She offers fractional and interim product leadership, product building, mentoring, and speaking.
+
+## Main pages
+
+- [About Saielle](https://intentionaut.com/about/): background and approach.
+- [Fractional leadership](https://intentionaut.com/fractional/): part-time product leadership.
+- [Product building](https://intentionaut.com/forward-deployed/): embedded work to make a product idea tangible.
+- [Work with me](https://intentionaut.com/contact/): services, rates and ways to get in touch.
+- [Writing](https://intentionaut.com/writing/): published essays and articles.
+- [Projects](https://intentionaut.com/projects/): selected work and products.
+
+The website pages are the source for current details. The [sitemap](https://intentionaut.com/sitemap-index.xml) lists published URLs.
