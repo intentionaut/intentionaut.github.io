@@ -130,9 +130,9 @@ export const faqs: Faq[] = [
  */
 export const forwardDeployedFaqs: Faq[] = [
   {
-    question: 'What does a product builder do?',
+    question: 'What does product building involve?',
     answer:
-      "A product builder joins your team for a fixed block and builds a working version of the idea in your environment: your repo, your stack, your data. Three days a week, for four to twelve weeks. The block ends with either a prototype that tells you whether to build it, or software your team can take over, and you know which within two to four weeks of discovery and building. It is hands-on product leadership, with real AI skills, alongside your team.",
+      "For product building, I join your team for a fixed block and build a working version of the idea in your environment: your repo, your stack, your data. Three days a week, for four to twelve weeks. The block ends with either a prototype that tells you whether to build it, or software your team can take over, and you know which within two to four weeks of discovery and building. It is hands-on product leadership, with real AI skills, alongside your team.",
   },
   {
     question: 'What does it cost?',
