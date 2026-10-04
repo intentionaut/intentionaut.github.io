@@ -583,6 +583,15 @@ h3 {
   color: var(--accent-text);
 }
 
+/* One line on how the work is done, under the problem lines. Ink rather than
+   muted: the lines above are the visitor's problem, this one is the answer. */
+.how-line {
+  margin: var(--space-6) 0 0;
+  max-width: 58ch;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
 /* ---------- About: stat strip ---------- */
 
 .stat-strip {
