@@ -19,7 +19,7 @@ const pages = [
   {
     slug: 'forward-deployed',
     eyebrow: 'Saielle DaSilva · Product builder',
-    lines: ['Someone who <i>builds</i> it,', 'not just decides', 'what to build.'],
+    lines: ['The prototype has been', '<i>two sprints</i> away', 'for four months.'],
   },
   {
     slug: 'for-advisors',
