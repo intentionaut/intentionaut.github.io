@@ -1,4 +1,19 @@
+# Cloudflare prepends a managed block above this file: the Content-Signal line
+# (ai-train=no) and Disallow rules for training crawlers. Keep those there, not
+# here, so the two never disagree.
+
+# Answer, search and user-initiated agents: allowed.
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Googlebot
+User-agent: Bingbot
+Allow: /
+
 User-agent: *
 Allow: /
 
-Sitemap: https://intentionaut.com/sitemap-index.xml
+Sitemap: https://intentionaut.com/sitemap.xml
