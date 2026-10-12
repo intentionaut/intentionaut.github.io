@@ -24,7 +24,13 @@ const serviceSchema = {
     '@type': 'Offer',
     priceCurrency: 'GBP',
     price: rates.fractional,
-    unitText: 'day',
+    // unitText is not an Offer property; the per-day unit lives on the price spec.
+    priceSpecification: {
+      '@type': 'UnitPriceSpecification',
+      price: rates.fractional,
+      priceCurrency: 'GBP',
+      unitText: 'day',
+    },
     availability: 'https://schema.org/LimitedAvailability',
   },
 };

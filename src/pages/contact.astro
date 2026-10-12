@@ -12,11 +12,43 @@ import FaqList from '../components/FaqList.astro';
 // Edit src/data/testimonials.ts to add one, reorder them, or take one down.
 // Nothing on this page needs touching for any of that.
 const testimonials = testimonialsFor('contact');
+
+// The priced cards below, as data. Each price comes from rates.ts, the same
+// value the card shows. Fractional and product building point at the Service
+// nodes on their own pages rather than describing them twice. Mentoring has
+// no published price, so it is left out.
+const offer = (itemOffered: Record<string, unknown>, price: number, unitText: string) => ({
+  '@type': 'Offer',
+  itemOffered,
+  priceCurrency: 'GBP',
+  price,
+  priceSpecification: { '@type': 'UnitPriceSpecification', price, priceCurrency: 'GBP', unitText },
+});
+const offerCatalog = {
+  '@type': 'OfferCatalog',
+  '@id': 'https://intentionaut.com/contact/#offers',
+  name: 'Services and rates',
+  itemListElement: [
+    offer(
+      { '@type': 'Service', name: 'Strategy session', provider: { '@id': 'https://intentionaut.com/#person' }, url: 'https://intentionaut.com/strategic-direction/' },
+      rates.strategySession,
+      '90-minute session'
+    ),
+    offer({ '@id': 'https://intentionaut.com/fractional/#service' }, rates.fractional, 'day'),
+    offer({ '@id': 'https://intentionaut.com/forward-deployed/#service' }, rates.forwardDeployed, 'day'),
+    offer(
+      { '@type': 'Service', name: 'Speaking and workshops', provider: { '@id': 'https://intentionaut.com/#person' }, url: 'https://intentionaut.com/keynote-speaker/' },
+      rates.speaking,
+      'event'
+    ),
+  ],
+};
 ---
 
 <BaseLayout
   title="Contact & rates | Saielle DaSilva"
   description="Work with Saielle DaSilva: advisory, fractional product leadership, speaking and mentoring."
+  jsonLd={offerCatalog}
 >
   <section class="wrap">
     <header class="page-head">

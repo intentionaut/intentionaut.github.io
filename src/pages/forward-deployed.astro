@@ -20,7 +20,13 @@ const serviceSchema = {
     '@type': 'Offer',
     priceCurrency: 'GBP',
     price: rates.forwardDeployed,
-    unitText: 'day',
+    // unitText is not an Offer property; the per-day unit lives on the price spec.
+    priceSpecification: {
+      '@type': 'UnitPriceSpecification',
+      price: rates.forwardDeployed,
+      priceCurrency: 'GBP',
+      unitText: 'day',
+    },
     availability: 'https://schema.org/LimitedAvailability',
   },
 };
