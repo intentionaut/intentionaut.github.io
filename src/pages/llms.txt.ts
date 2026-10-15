@@ -23,6 +23,7 @@ Saielle DaSilva is a product leader working across design, data and AI. She offe
 - [Work with me](https://intentionaut.com/contact/): services, rates and ways to get in touch.
 - [FAQ](https://intentionaut.com/faq/): engagements, sessions, speaking logistics and payment.
 - [Writing](https://intentionaut.com/writing/): published essays and articles.
+- [Case studies](https://intentionaut.com/case-studies/): the Cazoo design organisation, the Cazoo Purchase line and Cazoo logistics.
 - [Projects](https://intentionaut.com/projects/): selected work and products.
 
 The website pages are the source for current details. The [sitemap](https://intentionaut.com/sitemap.xml) lists published URLs.

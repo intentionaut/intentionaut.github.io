@@ -1,0 +1,48 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../styles/case-studies.css';
+
+export async function getStaticPaths() {
+  const studies = (await getCollection('caseStudies')).sort((a, b) => a.data.order - b.data.order);
+  return studies.map((study, i) => ({
+    params: { slug: study.id },
+    props: { study, next: studies[(i + 1) % studies.length] },
+  }));
+}
+
+const { study, next } = Astro.props;
+const { Content } = await render(study);
+---
+
+<BaseLayout title={`${study.data.title} | Saielle DaSilva`} description={study.data.summary}>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Case study · {study.data.company}</p>
+      <h1>{study.data.title}</h1>
+      <p class="lede">{study.data.summary}</p>
+    </header>
+
+    <div class="case-meta">
+      <dl>
+        <dt class="meta-label">Role</dt>
+        <dd class="meta-value">{study.data.role}</dd>
+      </dl>
+      <dl>
+        <dt class="meta-label">When</dt>
+        <dd class="meta-value">{study.data.years}</dd>
+      </dl>
+      <div class="case-meta-cta">
+        <a class="link-arrow link-arrow--back" href="/case-studies/">All case studies</a>
+      </div>
+    </div>
+
+    <article class="prose cs-prose">
+      <Content />
+    </article>
+
+    <div class="cta-row project-cta">
+      <a class="link-arrow" href={`/case-studies/${next.id}/`}>Next: {next.data.title}</a>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,39 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../styles/case-studies.css';
+
+const studies = (await getCollection('caseStudies')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title="Case studies | Saielle DaSilva"
+  description="Organisations built, products shipped, and the decisions behind them."
+>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Case studies</p>
+      <h1>Work, in depth.</h1>
+      <p class="lede">
+        Organisations built, products shipped, and the decisions behind them, from design leadership to product
+        leadership.
+      </p>
+    </header>
+
+    <ol class="project-list">
+      {
+        studies.map((s) => (
+          <li class="project-row">
+            <a class="project-card" href={`/case-studies/${s.id}/`}>
+              <span class="talk-title">{s.data.title}</span>
+              <span class="project-summary">{s.data.summary}</span>
+              <span class="talk-meta">
+                {s.data.company} · {s.data.years}
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+</BaseLayout>
