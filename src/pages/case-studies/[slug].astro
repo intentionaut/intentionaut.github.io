@@ -26,6 +26,8 @@ export async function getStaticPaths() {
 const { study } = Astro.props;
 const { locked } = study.data;
 const { Content } = await render(study);
+// Asking for access is an email, not the contact form: one tap, subject filled.
+const accessMail = 'mailto:hello@intentionaut.com?subject=Case%20study%20access%20request';
 ---
 
 <BaseLayout title={`${study.data.title} | Saielle DaSilva`} description={study.data.summary} noindex={locked}>
@@ -52,9 +54,9 @@ const { Content } = await render(study);
 
     {
       locked ? (
-        <div class="cs-lock" data-lock={`/case-studies/${study.id}/locked.json`} data-slug={study.id}>
+        <div class="cs-lock" data-lock={`/case-studies/${study.id}/locked.json`} data-slug={study.id} data-ask={accessMail}>
           <p class="cs-lock-note" role="status" aria-live="polite">
-            This case study is private. Open it from the link you were sent, or <a href="/contact/">ask me for one</a>.
+            This case study is private. Open it from the link you were sent, or <a href={accessMail}>ask me for one</a>.
           </p>
           <article class="prose cs-prose" hidden />
         </div>
@@ -89,7 +91,11 @@ const { Content } = await render(study);
         forgetKey();
         article.hidden = true;
         note.hidden = false;
-        note.textContent = "This link no longer opens the case study. Ask me for a new one.";
+        note.textContent = 'This link no longer opens the case study. ';
+        const ask = document.createElement('a');
+        ask.href = box.dataset.ask!;
+        ask.textContent = 'Ask me for a new one';
+        note.append(ask, '.');
       }
     };
     open();
