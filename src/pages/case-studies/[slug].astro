@@ -5,13 +5,13 @@ import '../../styles/case-studies.css';
 
 export async function getStaticPaths() {
   const studies = (await getCollection('caseStudies')).sort((a, b) => a.data.order - b.data.order);
-  return studies.map((study, i) => ({
+  return studies.map((study) => ({
     params: { slug: study.id },
-    props: { study, next: studies[(i + 1) % studies.length] },
+    props: { study },
   }));
 }
 
-const { study, next } = Astro.props;
+const { study } = Astro.props;
 const { Content } = await render(study);
 ---
 
@@ -40,9 +40,5 @@ const { Content } = await render(study);
     <article class="prose cs-prose">
       <Content />
     </article>
-
-    <div class="cta-row project-cta">
-      <a class="link-arrow" href={`/case-studies/${next.id}/`}>Next: {next.data.title}</a>
-    </div>
   </section>
 </BaseLayout>
