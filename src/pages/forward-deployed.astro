@@ -50,7 +50,7 @@ const faqSchema = {
   <section class="wrap">
     <header class="page-head">
       <p class="eyebrow">Build &amp; delivery</p>
-      <h1>The prototype has been two sprints away for four months.</h1>
+      <h1>The prototype has been two sprints away for months.</h1>
       <p class="lede">
         You want to make bigger bets but don't have capacity to build.
       </p>
@@ -62,6 +62,10 @@ const faqSchema = {
         I run the build, in your repo and on your data. Along the way I connect
         the people, the technology and the language around it.
       </p>
+      <div class="cta-row">
+        <a class="btn-primary" href="mailto:hello@intentionaut.com?subject=FDE%20pilot">Start with a two-day pilot</a>
+        <span class="cta-note">{gbp(rates.fdePilot)} fixed price.</span>
+      </div>
     </header>
 
     <div class="prose">
@@ -189,3 +193,9 @@ const faqSchema = {
   </section>
 
 </BaseLayout>
+
+<style>
+  .cta-note {
+    color: var(--muted);
+  }
+</style>

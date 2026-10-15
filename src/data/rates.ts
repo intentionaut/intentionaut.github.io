@@ -7,8 +7,7 @@
 // These are list prices and they are the only prices that exist in public.
 // What may be given away against them — sliding scale, referral fees, the
 // floor beneath which nothing is booked — is deliberately not in this repo,
-// which is public. That lives in the vault:
-// 06-Resources/Intentionaut/Discount_and_Referral_Rule.md
+// which is public. That lives in the private vault, not here.
 export const rates = {
   strategySession: 500, // per 90-minute session
   fractional: 1500, // per day
@@ -17,6 +16,7 @@ export const rates = {
   // recruiter introduces the work, their margin sits on top of this, not
   // inside it. See docs/forward-deployed-positioning.md.
   forwardDeployed: 2250, // per day
+  fdePilot: 4000, // fixed price for the two-day pilot that opens a block
 } as const;
 
 /** Formats a GBP amount with thousands separators, e.g. gbp(1500) -> "£1,500" */
