@@ -1,0 +1,55 @@
+---
+import '@fontsource-variable/roboto-serif';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const START = 'mailto:hello@intentionaut.com?subject=FDE%20pilot';
+---
+
+<BaseLayout
+  title="2-day FDE pilot | Saielle DaSilva"
+  description="A 2-day FDE pilot to help teams and organizations bring predictability and observability to their AI systems. £4,050 fixed price."
+>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">FDE pilot</p>
+      <h1>
+        I'm offering a 2-day FDE pilot to help teams and organizations bring
+        predictability and observability to their AI systems.
+      </h1>
+    </header>
+
+    <div class="prose">
+      <p>
+        Over the last year, I’ve heard from a lot of folks who are struggling
+        with the unexpected and inconsistent behavior of AI models. Things
+        regress, quality slips, and they don’t know about it until they hear
+        from their users.
+      </p>
+      <p>
+        I’ve been building to fix these exact issues: a framework for applying
+        deterministic rules to probabilistic outputs, and pipelines for
+        decision provenance and observability.
+      </p>
+      <p>
+        I’ve been using these tools for myself and my clients for months now,
+        and I’m so excited to offer them as a 2-day FDE pilot. It works like
+        this: I come into your environment, work with your team on a sample of
+        your real data, and by the end of day two we compare the new results to
+        the prior ones. .
+      </p>
+      <p>
+        £4,050 fixed price. If the idea can't be honestly attempted in two
+        days, I'll tell you before we start.
+      </p>
+      <p>
+        Ready to go? Any questions Questions? Drop me a line at
+        {' '}<a href={START}>hello@intentionaut.com</a> and let’s make something
+        happen.
+      </p>
+    </div>
+
+    <div class="cta-row">
+      <a class="btn-primary" href={START}>Start the FDE pilot</a>
+    </div>
+  </section>
+</BaseLayout>
