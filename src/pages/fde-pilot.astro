@@ -51,19 +51,28 @@ const START = 'mailto:hello@intentionaut.com?subject=FDE%20pilot';
 
     <section class="prose" aria-labelledby="example-h">
       <h2 id="example-h">A real example</h2>
+      <ul class="stat-strip example-stats" aria-label="The engagement in numbers">
+        <li>
+          <span class="stat-num">48 hours</span>
+          <span class="stat-label">To validate a platform bet for their data stack</span>
+        </li>
+        <li>
+          <span class="stat-num">4 weeks</span>
+          <span class="stat-label">Working together on the longer build</span>
+        </li>
+        <li>
+          <span class="stat-num">A few months</span>
+          <span class="stat-label">The data they wanted to act on had sat in the backlog</span>
+        </li>
+      </ul>
       <p>
-        One client validated a platform bet for their data stack in 48 hours.
         We built a prototype experience and showed the concept could work.
       </p>
       <p>
-        They worked with me for four weeks on the longer build. They're seeing
-        strong adoption and consistent improvements in data they had wanted to
-        act on but that had sat in the backlog for a few months.
-      </p>
-      <p>
-        Cycle time was cut. I taught them how to build with AI, getting them to
-        work through issues daily and improving their AI native ways of working
-        as a team.
+        They're seeing strong adoption and consistent improvements in that
+        data. Cycle time was cut. I taught them how to build with AI, getting
+        them to work through issues daily and improving their AI native ways
+        of working as a team.
       </p>
     </section>
 
@@ -72,3 +81,15 @@ const START = 'mailto:hello@intentionaut.com?subject=FDE%20pilot';
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .example-stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-bottom: var(--space-6);
+  }
+  @media (max-width: 40rem) {
+    .example-stats {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
