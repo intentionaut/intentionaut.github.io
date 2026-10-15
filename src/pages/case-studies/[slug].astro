@@ -53,23 +53,9 @@ const { Content } = await render(study);
     {
       locked ? (
         <div class="cs-lock" data-lock={`/case-studies/${study.id}/locked.json`} data-slug={study.id}>
-          <form class="cs-lock-form" novalidate>
-            <p class="cs-lock-note">This case study is password protected.</p>
-            <div class="signup-form cs-lock-row">
-              <label class="sr-only" for="cs-lock-password">Password</label>
-              <input
-                class="signup-input"
-                type="password"
-                id="cs-lock-password"
-                name="password"
-                placeholder="Password"
-                autocomplete="current-password"
-                required
-              />
-              <button class="btn-primary" type="submit">Unlock</button>
-            </div>
-            <p class="form-status" role="status" aria-live="polite" />
-          </form>
+          <p class="cs-lock-note" role="status" aria-live="polite">
+            This case study is private. Open it from the link you were sent, or <a href="/contact/">ask me for one</a>.
+          </p>
           <article class="prose cs-prose" hidden />
         </div>
       ) : (
@@ -82,70 +68,45 @@ const { Content } = await render(study);
 </BaseLayout>
 
 <script>
-  import { keyFor, unlockWithKey, exportKey, importKey } from '../../lib/case-lock.js';
+  import { keyFromLink, unlock } from '../../lib/case-lock.js';
 
   const box = document.querySelector<HTMLElement>('.cs-lock');
   if (box) {
-    const form = box.querySelector('form')!;
-    const input = form.querySelector('input')!;
-    const button = form.querySelector('button')!;
-    const status = form.querySelector('.form-status')!;
+    const note = box.querySelector('.cs-lock-note')!;
     const article = box.querySelector('article')!;
-    // The key, not the password, is kept for this tab only, so a reload or the
-    // next case study in the same tab does not ask again.
+    // The key from the link is kept for this tab, so a reload or a hop to
+    // another page and back doesn't need the link again.
     const keyName = `case-lock:${box.dataset.slug}`;
 
-    const show = (html: string) => {
-      article.innerHTML = html;
-      article.hidden = false;
-      form.hidden = true;
-    };
-
-    const load = fetch(box.dataset.lock!).then((r) => {
-      if (!r.ok) throw new Error(String(r.status));
-      return r.json();
-    });
-
-    (async () => {
-      let saved: string | null = null;
+    const open = async () => {
+      let key = keyFromLink(location.hash);
+      if (!key) {
+        try {
+          key = sessionStorage.getItem(keyName);
+        } catch {}
+      }
+      if (!key) return;
       try {
-        saved = sessionStorage.getItem(keyName);
-      } catch {}
-      if (!saved) return;
-      try {
-        show(await unlockWithKey(await load, await importKey(saved)));
+        const res = await fetch(box.dataset.lock!);
+        if (!res.ok) throw new Error(String(res.status));
+        article.innerHTML = await unlock(await res.json(), key);
+        article.hidden = false;
+        note.hidden = true;
+        try {
+          sessionStorage.setItem(keyName, key);
+        } catch {}
       } catch {
         try {
           sessionStorage.removeItem(keyName);
         } catch {}
+        article.hidden = true;
+        note.hidden = false;
+        note.textContent = "This link no longer opens the case study. Ask me for a new one.";
       }
-    })();
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      if (!input.value) return;
-      button.disabled = true;
-      status.textContent = 'Unlocking…';
-      let data;
-      try {
-        data = await load;
-      } catch {
-        status.textContent = "The page couldn't load. Refresh and try again.";
-        button.disabled = false;
-        return;
-      }
-      try {
-        const key = await keyFor(data, input.value);
-        show(await unlockWithKey(data, key));
-        try {
-          sessionStorage.setItem(keyName, await exportKey(key));
-        } catch {}
-      } catch {
-        status.textContent = "That password didn't work.";
-        input.select();
-      } finally {
-        button.disabled = false;
-      }
-    });
+    };
+    open();
+    // A link pasted while already on the page only changes the hash, which
+    // doesn't reload it.
+    window.addEventListener('hashchange', open);
   }
 </script>

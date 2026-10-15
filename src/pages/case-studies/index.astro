@@ -29,7 +29,7 @@ const studies = (await getCollection('caseStudies')).sort((a, b) => a.data.order
               <span class="project-summary">{s.data.summary}</span>
               <span class="talk-meta">
                 {s.data.company} · {s.data.years}
-                {s.data.locked && ' · Password protected'}
+                {s.data.locked && ' · Private link'}
               </span>
             </a>
           </li>

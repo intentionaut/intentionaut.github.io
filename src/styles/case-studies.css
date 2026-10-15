@@ -75,22 +75,11 @@
   }
 }
 
-/* Password lock (locked: true). The row reuses the subscribe form's input. */
-.cs-lock-form {
-  max-width: 30rem;
+/* Private-link lock (locked: true). */
+.cs-lock-note {
   margin: var(--space-7) 0;
 }
 
-.cs-lock-note {
-  margin: 0 0 var(--space-3);
-}
-
-.cs-lock-row {
-  margin: 0 0 var(--space-2);
-  max-width: none;
-  animation: none;
-}
-
-.cs-lock-form[hidden] {
+.cs-lock-note[hidden] {
   display: none;
 }
