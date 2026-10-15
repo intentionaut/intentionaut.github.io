@@ -48,22 +48,6 @@ The rubric sat on two tracks. People could grow by leading people or by leading 
 
 <figcaption>Rebuilt from the original framework board. The board named a real person as the example at each level; those names are left out here.</figcaption>
 
-Interviewers scored each candidate on eleven attributes, each marked No, Mixed, Yes or Star. The same attributes carried into development.
-
-| Attribute | What it looks for |
-|---|---|
-| **Customer obsessed** | Coaches the team to understand and work from customer needs, and drives their own work from them. |
-| **Data driven** | Curious, and wants to learn from customers, colleagues and the wider industry. Backs decisions with data where it exists. |
-| **Fast driver** | Generates real customer outcomes from their work, measures themselves against them, and keeps improving the experience at pace. |
-| **Team player** | Vocally self-critical and empathetic. Shares feedback often to improve themselves and others, and puts customer and team outcomes first. |
-| **Has ownership** | No job too big or small. Acts on behalf of others and the company, and challenges others appropriately. |
-| **Is flexible** | Makes assumptions, communicates them visually, and flexes with changing input from others and the business. |
-| **Works backwards** | Aligns design decisions to business outcomes, and works back from those requirements into several possible solutions. |
-| **Externalises ideas** | Brings ideas out quickly and discusses them, with strong visual communication of complex ideas. |
-| **Drives discovery** | Runs product discovery start to finish and drives new possibilities from research, spending time frugally on the right problem at each phase. |
-| **Embraces constraints** | Clarifies and pushes the limits of constraints, while understanding common design patterns, systems and platform constraints and their effect on the experience. |
-| **Adds something new** | Adds new skills, experience or representation to the team. |
-
 Above the rubric sat a written model I called the *culture stack*: the beliefs, systems and behaviours a new company cannot take for granted, written down so they could be designed.
 
 <figure>
