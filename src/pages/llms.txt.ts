@@ -13,6 +13,7 @@ Saielle DaSilva is a product leader working across design, data and AI. She offe
 - [Strategy session](https://intentionaut.com/strategic-direction/): ${gbp(rates.strategySession)} for a 90-minute session.
 - [Fractional leadership](https://intentionaut.com/fractional/): part-time product leadership, ${gbp(rates.fractional)} a day.
 - [Product building](https://intentionaut.com/forward-deployed/): embedded work to make a product idea tangible, ${gbp(rates.forwardDeployed)} a day.
+- [Two-day pilot](https://intentionaut.com/forward-deployed/): a fixed-price pilot that opens a product building block, ${gbp(rates.fdePilot)}.
 - [AI pilot to production](https://intentionaut.com/ai-pilot-to-production/): product building for an AI pilot that has not reached production.
 - [Speaking and workshops](https://intentionaut.com/keynote-speaker/): from ${gbp(rates.speaking)} an event.
 
