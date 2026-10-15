@@ -50,8 +50,15 @@ const pages = srcs.map((src) => {
   const [, front, body] = m;
   if (!body.trim()) fail(`${slug}: the body is empty`);
   if (/<mark class="ask">/.test(body)) fail(`${slug}: the body still has <mark class="ask"> questions. Finish the page first.`);
-  // Images sit in public/ as plain files, readable by anyone. Not supported yet.
-  if (/<img\b|!\[[^\]]*\]\(/.test(body)) fail(`${slug}: the body has images, which would be public. Locking images is not supported yet.`);
+  // A local image would sit in public/ as a plain file, readable by anyone, so
+  // only images already public elsewhere (an https URL) may appear. Same for
+  // an iframe: an embed from another site, never a page of this one.
+  const srcs = [
+    ...[...body.matchAll(/<(?:img|iframe|source|video)\b[^>]*\bsrc="([^"]*)"/g)].map((m) => m[1]),
+    ...[...body.matchAll(/!\[[^\]]*\]\(([^)\s]*)/g)].map((m) => m[1]),
+  ];
+  const local = srcs.filter((u) => !/^https:\/\//.test(u));
+  if (local.length) fail(`${slug}: these would be public, unencrypted files: ${local.join(', ')}. Only images and embeds already public elsewhere (https) can go on a locked page.`);
 
   // Public front matter: drop sources (the public template never shows them)
   // and any existing locked line, then add locked: true.
