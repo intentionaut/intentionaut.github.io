@@ -62,37 +62,11 @@ const faqSchema = {
         I run the build, in your repo and on your data. Along the way I connect
         the people, the technology and the language around it.
       </p>
+      <div class="cta-row">
+        <a class="btn-primary" href="mailto:hello@intentionaut.com?subject=FDE%20pilot">Start with a two-day pilot</a>
+        <span class="cta-note">{gbp(rates.fdePilot)} fixed price.</span>
+      </div>
     </header>
-
-    <section class="prose" aria-labelledby="example-h">
-      <h2 id="example-h">A real example</h2>
-      <ul class="stat-strip example-stats" aria-label="One engagement in numbers">
-        <li>
-          <span class="stat-num">3.7 days</span>
-          <span class="stat-label">Per release, down from 7.7 days</span>
-        </li>
-        <li>
-          <span class="stat-num">80%+</span>
-          <span class="stat-label">New user adoption</span>
-        </li>
-        <li>
-          <span class="stat-num">Weekly</span>
-          <span class="stat-label">Customer contact, up from quarterly</span>
-        </li>
-        <li>
-          <span class="stat-num">54%</span>
-          <span class="stat-label">Decrease in agentic coding errors, from 68% to 31%</span>
-        </li>
-      </ul>
-      <p>
-        One client validated a platform bet for their data stack in 48 hours,
-        then worked with me for four weeks. We built a prototype experience in
-        two days and showed the concept could work, and the longer build took a
-        few weeks. The team has built confidence and does more user research.
-        I taught them how to build with AI, getting them to work through issues
-        daily and improving their AI native ways of working as a team.
-      </p>
-    </section>
 
     <div class="prose">
       <p>
@@ -141,16 +115,10 @@ const faqSchema = {
 
       <h2>How it works</h2>
       <p>
-        It starts with a two-day pilot. I come into your environment, work
-        with your team on a sample of your real data, and by the end of day two
-        we compare the new results to the prior ones. {gbp(rates.fdePilot)}
-        fixed price. If the idea can't be honestly attempted in two days, I'll
-        tell you before we start.
-      </p>
-      <p>
-        If it is a fit, you get a written proposal: what is worth prototyping,
-        what it would take, and what it costs. You can stop there. Some people
-        should.
+        It starts with a free preliminary call. We talk through the problem
+        and the team, and if it is a fit you get a written proposal: what is
+        worth prototyping, what it would take, and what it costs. You can stop
+        there. Some people should.
       </p>
       <p>
         Then a block of four to twelve weeks, three days a week, at
@@ -163,15 +131,6 @@ const faqSchema = {
         something that runs, which your team can take over, extend or bin on
         evidence, and enough written reasoning that the next person to touch it
         knows why it is shaped the way it is. I do not sell a support tail.
-      </p>
-
-      <h2>What the two days test</h2>
-      <p>
-        Things regress and quality slips, and teams do not know until they hear
-        from their users. I have been building a framework for applying
-        deterministic rules to probabilistic outputs, and pipelines for
-        decision provenance and observability, and using them for myself and my
-        clients for months. The pilot puts them on a sample of your real data.
       </p>
 
       <h2>What this is not</h2>
@@ -216,10 +175,6 @@ const faqSchema = {
 
     </div>
 
-    <div class="cta-row">
-      <a class="btn-primary" href="mailto:hello@intentionaut.com?subject=FDE%20pilot">Start the pilot</a>
-    </div>
-
     <section class="contact-form-section" aria-label="Get in touch">
       <div class="contact-card">
         <h2>Let's talk.</h2>
@@ -240,13 +195,7 @@ const faqSchema = {
 </BaseLayout>
 
 <style>
-  .example-stats {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    margin-bottom: var(--space-6);
-  }
-  @media (max-width: 40rem) {
-    .example-stats {
-      grid-template-columns: 1fr;
-    }
+  .cta-note {
+    color: var(--muted);
   }
 </style>
