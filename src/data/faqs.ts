@@ -141,7 +141,7 @@ export const forwardDeployedFaqs: Faq[] = [
   {
     question: 'What is the most complex thing you have personally built, not advised on?',
     answer:
-      'Friday, a coaching product for early-career film and TV crew, went from concept to private beta in a week and is in use. Familiar, a set of writing tools, was built, documented and released in a day. Both are on the projects page with what they bet on and how they were built. Earlier than that, I led the product and design work that took production AI at Sainsbury\'s from a handful of experiments to a platform serving over 100 million customers, though on that one I was leading rather than building.',
+      'Friday, a CV and career coaching SaaS, went from concept to private beta in a week and is in use. Familiar, an agent trained to help you write about your coding work, was built, documented and released in a day. Both are on the projects page with what they bet on and how they were built. Earlier than that, I led the product and design work that took production AI at Sainsbury\'s from a handful of experiments to a platform serving over 100 million customers, though on that one I was leading rather than building.',
   },
   {
     question: 'Is what you build production software?',
