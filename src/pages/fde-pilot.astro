@@ -49,8 +49,80 @@ const START = 'mailto:hello@intentionaut.com?subject=FDE%20pilot';
       </p>
     </div>
 
+    <section class="example prose" aria-labelledby="example-h">
+      <h2 id="example-h">A real example</h2>
+      <ol class="example-steps">
+        <li>
+          <span class="example-when">48 hours</span>
+          <p>One client validated a platform bet for their data stack.</p>
+        </li>
+        <li>
+          <span class="example-when">Two days</span>
+          <p>
+            We built a prototype experience and managed to prove the concept
+            could work.
+          </p>
+        </li>
+        <li>
+          <span class="example-when">Four weeks</span>
+          <p>
+            The client worked with me for four weeks. The longer build took a
+            few weeks.
+          </p>
+        </li>
+        <li>
+          <span class="example-when">Result</span>
+          <p>
+            They're seeing strong adoption and consistent improvements in data
+            they had wanted to act on but that had sat in the backlog for a few
+            months. Cycle time was cut.
+          </p>
+        </li>
+        <li>
+          <span class="example-when">Team</span>
+          <p>
+            I taught them how to build with AI, getting them to work through
+            issues daily and improving their AI native ways of working as a
+            team.
+          </p>
+        </li>
+      </ol>
+    </section>
+
     <div class="cta-row">
       <a class="btn-primary" href={START}>Start the FDE pilot</a>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .example-steps {
+    list-style: none;
+    margin: var(--space-6) 0 0;
+    padding: 0;
+  }
+  .example-steps li {
+    display: grid;
+    grid-template-columns: 9rem 1fr;
+    gap: var(--space-4) var(--space-6);
+    padding: var(--space-5) 0;
+    border-top: 1px solid var(--ink);
+  }
+  .example-steps li:last-child {
+    border-bottom: 1px solid var(--ink);
+  }
+  .example-when {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .example-steps p {
+    margin: 0;
+  }
+  @media (max-width: 36rem) {
+    .example-steps li {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
