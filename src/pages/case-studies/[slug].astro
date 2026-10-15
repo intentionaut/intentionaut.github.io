@@ -68,23 +68,15 @@ const { Content } = await render(study);
 </BaseLayout>
 
 <script>
-  import { keyFromLink, unlock } from '../../lib/case-lock.js';
+  import { forgetKey, keyFromLink, saveKey, savedKey, unlock } from '../../lib/case-lock.js';
 
   const box = document.querySelector<HTMLElement>('.cs-lock');
   if (box) {
     const note = box.querySelector('.cs-lock-note')!;
     const article = box.querySelector('article')!;
-    // The key from the link is kept for this tab, so a reload or a hop to
-    // another page and back doesn't need the link again.
-    const keyName = `case-lock:${box.dataset.slug}`;
 
     const open = async () => {
-      let key = keyFromLink(location.hash);
-      if (!key) {
-        try {
-          key = sessionStorage.getItem(keyName);
-        } catch {}
-      }
+      const key = keyFromLink(location.hash) ?? savedKey();
       if (!key) return;
       try {
         const res = await fetch(box.dataset.lock!);
@@ -92,13 +84,9 @@ const { Content } = await render(study);
         article.innerHTML = await unlock(await res.json(), key);
         article.hidden = false;
         note.hidden = true;
-        try {
-          sessionStorage.setItem(keyName, key);
-        } catch {}
+        saveKey(key);
       } catch {
-        try {
-          sessionStorage.removeItem(keyName);
-        } catch {}
+        forgetKey();
         article.hidden = true;
         note.hidden = false;
         note.textContent = "This link no longer opens the case study. Ask me for a new one.";

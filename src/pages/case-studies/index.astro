@@ -38,3 +38,16 @@ const studies = (await getCollection('caseStudies')).sort((a, b) => a.data.order
     </ol>
   </section>
 </BaseLayout>
+
+<script>
+  // The private link can point here (/case-studies/#k=...). Keep the key, so
+  // every locked page in the list opens from it. Checked on the page itself.
+  import { keyFromLink, saveKey } from '../../lib/case-lock.js';
+
+  const keep = () => {
+    const key = keyFromLink(location.hash);
+    if (key) saveKey(key);
+  };
+  keep();
+  window.addEventListener('hashchange', keep);
+</script>

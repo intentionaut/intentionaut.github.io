@@ -1,67 +1,82 @@
 #!/usr/bin/env node
-// Locks a case study behind a private link.
+// Locks case studies behind one private link. Every locked page shares the
+// same key, so one link opens them all.
 //
-//   node scripts/lock-case-study.mjs <path/to/slug.md>
+//   node scripts/lock-case-study.mjs <path/to/slug.md> [<path/to/other.md> ...]
 //
-// The source .md lives OUTSIDE this repo (the private prototype). This repo is
-// public, so the readable text must never be written here. The script:
-//   1. refuses a source inside this repo, a body still carrying an
-//      <mark class="ask"> (unfinished pages don't ship, locked or not), and
-//      images (they would sit in public/ unencrypted);
-//   2. asks for the current link, hidden. Paste it to keep the key (for an
-//      edit), or press Enter for a new key (first lock, or a rotation);
-//   3. renders the body the way Astro does and writes
-//      public/case-studies/<slug>/locked.json (ciphertext only) and
-//      src/content/case-studies/<slug>.md (front matter, locked: true, no
-//      body, no sources);
-//   4. decrypts what it wrote and compares, and deletes both files if they
-//      don't round-trip;
-//   5. prints the link to send. The key is never written to disk.
+// The source .md files live OUTSIDE this repo (the private prototype). This
+// repo is public, so the readable text must never be written here.
 //
-// A new key means old links stop opening the current page. The old ciphertext
-// stays in git history, and an old link still opens that old version.
+// At the prompt, paste the current link to keep the key (locking a new page,
+// or re-locking one after an edit), or press Enter for a new key (the first
+// lock ever, or a rotation). The key is never written to disk.
+//
+// Two rules keep the key universal, and the script enforces both:
+//   - a pasted link must open every page already locked; a mistyped or old
+//     link is refused before anything is written;
+//   - a new key must re-lock every locked page in the same run, so no page is
+//     left on the old key. Name all their source files.
+//
+// After a rotation, old links stop opening the current pages. Old ciphertext
+// stays in git history, and an old link still opens those old versions.
 
 import { createMarkdownProcessor } from '@astrojs/markdown-remark';
-import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { basename, dirname, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { keyFromLink, lock, newKey, unlock } from '../src/lib/case-lock.js';
 
 const SITE = 'https://intentionaut.com';
-
 const repo = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const contentDir = resolve(repo, 'src/content/case-studies');
+const jsonFor = (slug) => resolve(repo, 'public/case-studies', slug, 'locked.json');
+const mdFor = (slug) => resolve(contentDir, `${slug}.md`);
 const fail = (msg) => {
   console.error(`lock-case-study: ${msg}`);
   process.exit(1);
 };
 
-const src = process.argv[2] && resolve(process.argv[2]);
-if (!src || !src.endsWith('.md')) fail('usage: node scripts/lock-case-study.mjs <path/to/slug.md>');
-if (!relative(repo, src).startsWith('..')) fail(`${src} is inside this public repo. Lock from the private copy.`);
-
-const slug = basename(src, '.md');
-const raw = readFileSync(src, 'utf8');
-const m = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
-if (!m) fail('no front matter found');
-const [, front, body] = m;
-if (!body.trim()) fail('the body is empty');
-if (/<mark class="ask">/.test(body)) fail('the body still has <mark class="ask"> questions. Finish the page first.');
-// Images sit in public/ as plain files, readable by anyone. Not supported yet.
-if (/<img\b|!\[[^\]]*\]\(/.test(body)) fail('the body has images, which would be public. Locking images is not supported yet.');
-
-// Public front matter: drop sources (the public template never shows them) and
-// any existing locked line, then add locked: true.
-const lines = front.split('\n');
-const kept = [];
-for (let i = 0; i < lines.length; i++) {
-  if (/^sources:/.test(lines[i])) {
-    while (i + 1 < lines.length && /^\s+-/.test(lines[i + 1])) i++;
-    continue;
-  }
-  if (/^locked:/.test(lines[i])) continue;
-  kept.push(lines[i]);
+const srcs = process.argv.slice(2).map((p) => resolve(p));
+if (!srcs.length || srcs.some((s) => !s.endsWith('.md'))) {
+  fail('usage: node scripts/lock-case-study.mjs <path/to/slug.md> [<path/to/other.md> ...]');
 }
-kept.push('locked: true');
+
+// Read and check every source before asking for anything.
+const pages = srcs.map((src) => {
+  if (!relative(repo, src).startsWith('..')) fail(`${src} is inside this public repo. Lock from the private copy.`);
+  const slug = basename(src, '.md');
+  const m = readFileSync(src, 'utf8').match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
+  if (!m) fail(`${slug}: no front matter found`);
+  const [, front, body] = m;
+  if (!body.trim()) fail(`${slug}: the body is empty`);
+  if (/<mark class="ask">/.test(body)) fail(`${slug}: the body still has <mark class="ask"> questions. Finish the page first.`);
+  // Images sit in public/ as plain files, readable by anyone. Not supported yet.
+  if (/<img\b|!\[[^\]]*\]\(/.test(body)) fail(`${slug}: the body has images, which would be public. Locking images is not supported yet.`);
+
+  // Public front matter: drop sources (the public template never shows them)
+  // and any existing locked line, then add locked: true.
+  const lines = front.split('\n');
+  const kept = [];
+  for (let i = 0; i < lines.length; i++) {
+    if (/^sources:/.test(lines[i])) {
+      while (i + 1 < lines.length && /^\s+-/.test(lines[i + 1])) i++;
+      continue;
+    }
+    if (/^locked:/.test(lines[i])) continue;
+    kept.push(lines[i]);
+  }
+  kept.push('locked: true');
+  return { slug, body, front: kept.join('\n') };
+});
+if (new Set(pages.map((p) => p.slug)).size !== pages.length) fail('the same page is named twice');
+
+// Pages already locked in this repo, from their front matter.
+const lockedNow = readdirSync(contentDir)
+  .filter((f) => f.endsWith('.md') && !f.startsWith('_'))
+  .filter((f) => /^locked:\s*true\s*$/m.test(readFileSync(resolve(contentDir, f), 'utf8')))
+  .map((f) => basename(f, '.md'));
+const running = new Set(pages.map((p) => p.slug));
+const others = lockedNow.filter((s) => !running.has(s));
 
 const askHidden = async (prompt) => {
   if (!process.stdin.isTTY) fail('run this in a terminal; a link is pasted, never passed in.');
@@ -94,34 +109,62 @@ const askHidden = async (prompt) => {
   });
 };
 
-const pasted = (await askHidden(`Current link for ${slug} (paste it to keep it, or press Enter for a new one): `)).trim();
-const key = pasted ? keyFromLink(pasted) : newKey();
-if (!key) fail("that doesn't look like a case study link (no #k=...). Nothing was written.");
-
-// Astro's own markdown pipeline with its defaults (GFM, smart quotes), so the
-// unlocked page reads like every other case study.
-const md = await createMarkdownProcessor();
-const { code: html } = await md.render(body);
-
-const jsonPath = resolve(repo, 'public/case-studies', slug, 'locked.json');
-const mdPath = resolve(repo, 'src/content/case-studies', `${slug}.md`);
-mkdirSync(dirname(jsonPath), { recursive: true });
-writeFileSync(jsonPath, JSON.stringify(await lock(html, key)) + '\n');
-writeFileSync(mdPath, `---\n${kept.join('\n')}\n---\n`);
-
-// Validate what was written, from disk, before calling it done.
-const back = JSON.parse(readFileSync(jsonPath, 'utf8'));
-const ok = (await unlock(back, key).catch(() => null)) === html;
-const leaked = readFileSync(mdPath, 'utf8').includes(body.trim().slice(0, 80));
-if (!ok || leaked) {
-  rmSync(jsonPath, { force: true });
-  rmSync(mdPath, { force: true });
-  fail(ok ? 'readable text reached the public .md; removed both files' : "the ciphertext didn't round-trip; removed both files");
+const pasted = (await askHidden('Current private link (paste it to keep the key, or press Enter for a new one): ')).trim();
+let key;
+if (pasted) {
+  key = keyFromLink(pasted);
+  if (!key) fail("that doesn't look like a private link (no #k=...). Nothing was written.");
+  for (const slug of lockedNow) {
+    const opens = await unlock(JSON.parse(readFileSync(jsonFor(slug), 'utf8')), key).then(
+      () => true,
+      () => false,
+    );
+    if (!opens) fail(`that link doesn't open ${slug}, so it isn't the current key. Nothing was written.`);
+  }
+} else {
+  if (others.length) {
+    fail(
+      `a new key has to re-lock every locked page, or they'd need different links.\n` +
+        `  Also name: ${others.join(', ')} (their .md files in the private copy). Nothing was written.`,
+    );
+  }
+  key = newKey();
 }
 
-console.log(`Locked ${slug}${pasted ? ' with the same key. Existing links keep working.' : ' with a new key. Older links no longer open it.'}`);
-console.log(`  ${relative(repo, jsonPath)}  (encrypted)`);
-console.log(`  ${relative(repo, mdPath)}  (front matter only, locked: true)`);
+// Astro's own markdown pipeline with its defaults (GFM, smart quotes), so the
+// unlocked pages read like every other case study.
+const md = await createMarkdownProcessor();
+const touched = []; // { path, before } so a failure puts every file back
+for (const page of pages) {
+  const { code: html } = await md.render(page.body);
+  const jsonPath = jsonFor(page.slug);
+  const mdPath = mdFor(page.slug);
+  for (const path of [jsonPath, mdPath]) {
+    touched.push({ path, before: existsSync(path) ? readFileSync(path) : null });
+  }
+  mkdirSync(dirname(jsonPath), { recursive: true });
+  writeFileSync(jsonPath, JSON.stringify(await lock(html, key)) + '\n');
+  writeFileSync(mdPath, `---\n${page.front}\n---\n`);
+
+  // Validate what was written, from disk, before calling it done.
+  const ok = (await unlock(JSON.parse(readFileSync(jsonPath, 'utf8')), key).catch(() => null)) === html;
+  const leaked = readFileSync(mdPath, 'utf8').includes(page.body.trim().slice(0, 80));
+  if (!ok || leaked) {
+    for (const { path, before } of touched) {
+      if (before) writeFileSync(path, before);
+      else rmSync(path, { force: true });
+    }
+    fail(`${page.slug}: ${ok ? 'readable text reached the public .md' : "the ciphertext didn't round-trip"}. Every file is back as it was.`);
+  }
+}
+
+const all = [...new Set([...lockedNow, ...running])].sort();
+console.log(`Locked ${pages.map((p) => p.slug).join(', ')}${pasted ? ' with the current key. Existing links keep working.' : ' with a new key. Older links no longer open them.'}`);
+for (const p of pages) console.log(`  public/case-studies/${p.slug}/locked.json, src/content/case-studies/${p.slug}.md`);
 console.log('');
-console.log('The link to send (keep it in your password manager; it is not saved anywhere):');
-console.log(`  ${SITE}/case-studies/${slug}/#k=${key}`);
+console.log(`One link opens every locked page (${all.join(', ')}).`);
+console.log('Keep it in your password manager; it is not saved anywhere:');
+console.log(`  ${SITE}/case-studies/#k=${key}`);
+console.log('');
+console.log('The same #k=... on the end of any locked page works too, e.g.');
+console.log(`  ${SITE}/case-studies/${pages[0].slug}/#k=${key}`);

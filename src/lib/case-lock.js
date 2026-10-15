@@ -51,3 +51,26 @@ export async function unlock(box, key) {
 
 // The key from a whole link, or from "#k=..." / "k=...", or null.
 export const keyFromLink = (s) => s.match(/(?:^|[#&])k=([A-Za-z0-9_-]{43})(?:&|$)/)?.[1] ?? null;
+
+// One key opens every locked page, so the browser keeps one key, not one per
+// page. localStorage, so a reader who opened the link once can come back from
+// the list or a new tab. Storage can be blocked (private windows, strict
+// settings); then the link simply has to be used each time.
+const STORE = 'case-lock';
+export const savedKey = () => {
+  try {
+    return localStorage.getItem(STORE);
+  } catch {
+    return null;
+  }
+};
+export const saveKey = (k) => {
+  try {
+    localStorage.setItem(STORE, k);
+  } catch {}
+};
+export const forgetKey = () => {
+  try {
+    localStorage.removeItem(STORE);
+  } catch {}
+};
