@@ -12,6 +12,11 @@ const talks = defineCollection({
     // page on this site (e.g. a write-up under /writing).
     url: z.union([z.string().url(), z.string().startsWith('/')]).optional(),
     description: z.string().optional(),
+    // Anonymised audience feedback, shown under the talk on /speaking/.
+    // Attribution is a broad role, never a name or employer.
+    quotes: z
+      .array(z.object({ text: z.string(), attribution: z.string() }))
+      .optional(),
   }),
 });
 

@@ -1843,6 +1843,25 @@ a.talk-title:hover {
 
 /* ---------- Pull quote ---------- */
 
+/* Audience quotes under a talk on /speaking/. They sit above the row's
+   full-cover link so the quotes can be read and selected, not clicked
+   through. Smaller than a page pull quote: they belong to one row. */
+.talk-quotes {
+  position: relative;
+  z-index: 1;
+  margin-top: var(--space-5);
+  display: grid;
+  gap: var(--space-5);
+}
+
+.talk-quotes .pull-quote {
+  margin: 0;
+}
+
+.talk-quotes .pull-quote blockquote {
+  font-size: 1.05rem;
+}
+
 /* A testimonial set into a page (homepage, /fractional/). Fraunces italic for
    pull quotes, per the design system; last in the file so it wins over
    .prose blockquote when it sits inside prose. */
