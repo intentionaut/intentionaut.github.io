@@ -1,10 +1,22 @@
 ---
+import { existsSync } from 'node:fs';
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import '../../styles/case-studies.css';
 
 export async function getStaticPaths() {
   const studies = (await getCollection('caseStudies')).sort((a, b) => a.data.order - b.data.order);
+  // A locked study's text lives only in its ciphertext. These two checks fail
+  // the build, so a readable body can never ship on a locked page and a locked
+  // page can never ship without its ciphertext.
+  for (const s of studies.filter((s) => s.data.locked)) {
+    if (s.body?.trim()) {
+      throw new Error(`case study "${s.id}" is locked but its .md has a body. Locked text belongs only in the ciphertext.`);
+    }
+    if (!existsSync(`public/case-studies/${s.id}/locked.json`)) {
+      throw new Error(`case study "${s.id}" is locked but public/case-studies/${s.id}/locked.json is missing.`);
+    }
+  }
   return studies.map((study) => ({
     params: { slug: study.id },
     props: { study },
@@ -12,10 +24,11 @@ export async function getStaticPaths() {
 }
 
 const { study } = Astro.props;
+const { locked } = study.data;
 const { Content } = await render(study);
 ---
 
-<BaseLayout title={`${study.data.title} | Saielle DaSilva`} description={study.data.summary}>
+<BaseLayout title={`${study.data.title} | Saielle DaSilva`} description={study.data.summary} noindex={locked}>
   <section class="wrap">
     <header class="page-head">
       <p class="eyebrow">Case study · {study.data.company}</p>
@@ -37,8 +50,102 @@ const { Content } = await render(study);
       </div>
     </div>
 
-    <article class="prose cs-prose">
-      <Content />
-    </article>
+    {
+      locked ? (
+        <div class="cs-lock" data-lock={`/case-studies/${study.id}/locked.json`} data-slug={study.id}>
+          <form class="cs-lock-form" novalidate>
+            <p class="cs-lock-note">This case study is password protected.</p>
+            <div class="signup-form cs-lock-row">
+              <label class="sr-only" for="cs-lock-password">Password</label>
+              <input
+                class="signup-input"
+                type="password"
+                id="cs-lock-password"
+                name="password"
+                placeholder="Password"
+                autocomplete="current-password"
+                required
+              />
+              <button class="btn-primary" type="submit">Unlock</button>
+            </div>
+            <p class="form-status" role="status" aria-live="polite" />
+          </form>
+          <article class="prose cs-prose" hidden />
+        </div>
+      ) : (
+        <article class="prose cs-prose">
+          <Content />
+        </article>
+      )
+    }
   </section>
 </BaseLayout>
+
+<script>
+  import { keyFor, unlockWithKey, exportKey, importKey } from '../../lib/case-lock.js';
+
+  const box = document.querySelector<HTMLElement>('.cs-lock');
+  if (box) {
+    const form = box.querySelector('form')!;
+    const input = form.querySelector('input')!;
+    const button = form.querySelector('button')!;
+    const status = form.querySelector('.form-status')!;
+    const article = box.querySelector('article')!;
+    // The key, not the password, is kept for this tab only, so a reload or the
+    // next case study in the same tab does not ask again.
+    const keyName = `case-lock:${box.dataset.slug}`;
+
+    const show = (html: string) => {
+      article.innerHTML = html;
+      article.hidden = false;
+      form.hidden = true;
+    };
+
+    const load = fetch(box.dataset.lock!).then((r) => {
+      if (!r.ok) throw new Error(String(r.status));
+      return r.json();
+    });
+
+    (async () => {
+      let saved: string | null = null;
+      try {
+        saved = sessionStorage.getItem(keyName);
+      } catch {}
+      if (!saved) return;
+      try {
+        show(await unlockWithKey(await load, await importKey(saved)));
+      } catch {
+        try {
+          sessionStorage.removeItem(keyName);
+        } catch {}
+      }
+    })();
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!input.value) return;
+      button.disabled = true;
+      status.textContent = 'Unlocking…';
+      let data;
+      try {
+        data = await load;
+      } catch {
+        status.textContent = "The page couldn't load. Refresh and try again.";
+        button.disabled = false;
+        return;
+      }
+      try {
+        const key = await keyFor(data, input.value);
+        show(await unlockWithKey(data, key));
+        try {
+          sessionStorage.setItem(keyName, await exportKey(key));
+        } catch {}
+      } catch {
+        status.textContent = "That password didn't work.";
+        input.select();
+      } finally {
+        button.disabled = false;
+      }
+    });
+  }
+</script>

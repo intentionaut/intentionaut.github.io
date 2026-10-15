@@ -87,6 +87,9 @@ const caseStudies = defineCollection({
     depth: z.enum(['in-depth', 'outline']),
     order: z.number(),
     sources: z.array(z.string()).default([]),
+    // Body is encrypted in public/case-studies/<slug>/locked.json and the .md
+    // body stays empty. Written by scripts/lock-case-study.mjs, never by hand.
+    locked: z.boolean().default(false),
   }),
 });
 

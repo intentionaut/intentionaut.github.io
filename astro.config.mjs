@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import { readFile, writeFile } from 'node:fs/promises';
+import { readdirSync, readFileSync } from 'node:fs';
 
 // Old paths kept alive by src/layouts/RedirectLayout.astro. They forward, so
 // they must never appear in the sitemap competing with where they forward to.
@@ -15,6 +16,16 @@ const LEGACY_REDIRECTS = new Set([
   '/releases/familiar/',
   '/releases/kernic/',
 ]);
+
+// Password-locked case studies are noindex'd, so they stay out of the sitemap
+// too (listing them made Search Console report "Submitted URL marked noindex"
+// for /thank-you/). Read from the front matter, so locking a page is one flag.
+const LOCKED_CASE_STUDIES = new Set(
+  readdirSync('src/content/case-studies')
+    .filter((f) => f.endsWith('.md') && !f.startsWith('_'))
+    .filter((f) => /^locked:\s*true\s*$/m.test(readFileSync(`src/content/case-studies/${f}`, 'utf8').split(/^---$/m)[1] ?? ''))
+    .map((f) => `/case-studies/${f.replace(/\.md$/, '')}/`),
+);
 
 // Agent scanners look for /sitemap.xml; @astrojs/sitemap only writes an index
 // and numbered chunks. After the build, fold every chunk into one flat urlset at
@@ -53,7 +64,8 @@ export default defineConfig({
         !/\/preview(\/|$)/.test(page) &&
         // noindex'd: listing it made Search Console report "Submitted URL marked noindex".
         !/\/thank-you\/?$/.test(page) &&
-        !LEGACY_REDIRECTS.has(new URL(page).pathname),
+        !LEGACY_REDIRECTS.has(new URL(page).pathname) &&
+        !LOCKED_CASE_STUDIES.has(new URL(page).pathname),
     }),
     flatSitemap,
   ],
