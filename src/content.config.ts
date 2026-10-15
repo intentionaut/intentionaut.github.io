@@ -76,4 +76,18 @@ const projects = defineCollection({
   }),
 });
 
-export const collections = { talks, pages, projects, essays, drafts, stubs };
+const caseStudies = defineCollection({
+  loader: glob({ pattern: ['**/*.md', '!**/_*.md'], base: './src/content/case-studies' }),
+  schema: z.object({
+    title: z.string(),
+    summary: z.string(),
+    company: z.string(),
+    role: z.string(),
+    years: z.string(),
+    depth: z.enum(['in-depth', 'outline']),
+    order: z.number(),
+    sources: z.array(z.string()).default([]),
+  }),
+});
+
+export const collections = { talks, pages, projects, essays, drafts, stubs, caseStudies };

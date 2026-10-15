@@ -1,0 +1,76 @@
+/* Case study pages. Site tokens only. */
+
+.cs-prose figure {
+  margin: var(--space-8) 0;
+}
+
+.cs-prose figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--slate);
+  border-radius: var(--radius-m);
+  background: #fff;
+}
+
+.cs-prose figcaption {
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+/* Wider than the 62ch reading column: the callouts, figures and tables use the
+   full wrap, and body text keeps a readable measure inside it. */
+.prose.cs-prose {
+  max-width: none;
+}
+
+.prose.cs-prose > :not(.cs-stats):not(figure):not(table) {
+  max-width: 70ch;
+}
+
+.cs-prose .cs-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-4);
+  margin: var(--space-7) 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cs-prose .cs-stats li {
+  border-top: 2px solid var(--accent);
+  padding-top: var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+.cs-prose .cs-stats strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.1;
+  margin-bottom: var(--space-1);
+}
+
+.cs-prose table {
+  font-size: var(--text-sm);
+  margin: var(--space-6) 0;
+}
+
+.cs-prose th,
+.cs-prose td {
+  border-bottom: 1px solid var(--slate);
+  padding: var(--space-2) var(--space-3);
+  text-align: left;
+  vertical-align: top;
+}
+
+
+@media (max-width: 720px) {
+  .cs-prose .cs-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
