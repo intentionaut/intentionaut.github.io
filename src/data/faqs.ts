@@ -136,7 +136,7 @@ export const forwardDeployedFaqs: Faq[] = [
   },
   {
     question: 'What does it cost?',
-    answer: `${gbp(rates.forwardDeployed)} a day, three days a week, four weeks minimum. Four weeks at three days a week is ${gbp(rates.forwardDeployed * 12)}; eight weeks is ${gbp(rates.forwardDeployed * 24)}. Where an advisor or recruiter introduces the work, their margin sits on top of my rate rather than inside it.`,
+    answer: `It starts with a two-day pilot at ${gbp(rates.fdePilot)} fixed. A block after that is ${gbp(rates.forwardDeployed)} a day, three days a week, four weeks minimum. Four weeks at three days a week is ${gbp(rates.forwardDeployed * 12)}; eight weeks is ${gbp(rates.forwardDeployed * 24)}. Where an advisor or recruiter introduces the work, their margin sits on top of my rate rather than inside it.`,
   },
   {
     question: 'What is the most complex thing you have personally built, not advised on?',
@@ -161,7 +161,7 @@ export const forwardDeployedFaqs: Faq[] = [
   {
     question: 'What if it is not working?',
     answer:
-      `The free preliminary call is where we find out whether it is a fit, before you commit to anything. After that, either of us can end the block on two weeks' notice and you pay for the days worked. No exit fee, no minimum-term claim on the rest of it.`,
+      `The two-day pilot is where we find out whether it is a fit, before you commit to a block. After that, either of us can end the block on two weeks' notice and you pay for the days worked. No exit fee, no minimum-term claim on the rest of it.`,
   },
   {
     question: 'What conditions make this engagement fail?',
