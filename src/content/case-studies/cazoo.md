@@ -48,6 +48,22 @@ The rubric sat on two tracks. People could grow by leading people or by leading 
 
 <figcaption>Rebuilt from the original framework board. The board named a real person as the example at each level; those names are left out here.</figcaption>
 
+Interviewers scored each candidate on eleven attributes, each marked No, Mixed, Yes or Star. The same attributes carried into development.
+
+| Attribute | What it looks for |
+|---|---|
+| **Customer obsessed** | Coaches the team to understand and work from customer needs, and drives their own work from them. |
+| **Data driven** | Curious, and wants to learn from customers, colleagues and the wider industry. Backs decisions with data where it exists. |
+| **Fast driver** | Generates real customer outcomes from their work, measures themselves against them, and keeps improving the experience at pace. |
+| **Team player** | Vocally self-critical and empathetic. Shares feedback often to improve themselves and others, and puts customer and team outcomes first. |
+| **Has ownership** | No job too big or small. Acts on behalf of others and the company, and challenges others appropriately. |
+| **Is flexible** | Makes assumptions, communicates them visually, and flexes with changing input from others and the business. |
+| **Works backwards** | Aligns design decisions to business outcomes, and works back from those requirements into several possible solutions. |
+| **Externalises ideas** | Brings ideas out quickly and discusses them, with strong visual communication of complex ideas. |
+| **Drives discovery** | Runs product discovery start to finish and drives new possibilities from research, spending time frugally on the right problem at each phase. |
+| **Embraces constraints** | Clarifies and pushes the limits of constraints, while understanding common design patterns, systems and platform constraints and their effect on the experience. |
+| **Adds something new** | Adds new skills, experience or representation to the team. |
+
 Above the rubric sat a written model I called the *culture stack*: the beliefs, systems and behaviours a new company cannot take for granted, written down so they could be designed.
 
 <figure>
@@ -72,6 +88,17 @@ Behind both was a shared practice library in Notion: opportunity cards, discover
 The fourth move did the most work. Because people looked at the rubric continuously, they learned to judge the skills themselves. They talked about those skills and gave each other feedback on where they thought they were. That produced self-reflection and team reflection, and a healthy friction over what the standards should be and why.
 
 One thing the team disagreed about at first was how much user research should matter to senior designers. The rubric ended up with a fork at senior level: management on one path, individual contributor on the other. Before either, every designer had to show they could lead and facilitate research. That made the organisation more research-literate.
+
+## The 2019 targets
+
+The UX objectives for 2019, as written. These were the targets the team set, not results.
+
+| Objective | Key results |
+|---|---|
+| **Launch a standard-setting online car-buying experience** | NPS above 50 by Boxing Day, with a minimum 20% response rate.<br>Part Exchange and consumer financing at 50 transactions each by Boxing Day.<br>More than 80% of customers who respond report a positive digital purchase experience. |
+| **Cultivate a customer-obsessed product culture** | 10 post-sales and 20 potential customers in usability interviews by the end of 2019.<br>Every product team running sustainable, high-quality, self-service user research every two weeks.<br>At least 4 hours of user research exposure per squad member by 1 December. |
+| **Make design a differentiator for Cazoo** | More than 85% of customers say the car matched their expectations in follow-up calls.<br>A design system baseline (typography, grids, breakpoints) in production for search and checkout.<br>A design team staffed to meet the organisation's needs: 4 permanent designers, 2 researchers. |
+| **Establish a reputation as a product and design leading company** | A permanent designer in every team with consumer-facing UX by December 2019.<br>2 London meetups sponsored before the end of 2019.<br>A design and tech blog, 3 posts, to share how the team works and build the employer brand. |
 
 ## What it produced
 
