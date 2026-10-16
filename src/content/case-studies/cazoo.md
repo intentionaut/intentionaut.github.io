@@ -99,6 +99,8 @@ I have since moved into product leadership, and the method came with me. It work
 
 As a product leader fluent in design and research, I've learned to build balanced skills in organisations by shaping clear incentives, structured expectations and creating self-serve development paths for the people I lead, whether in product, design, data or research.
 
+If you are scaling a team and the standard depends on you being in the room, that is the work I do as a [fractional product leader](/fractional/).
+
 At Cazoo the team grew from one person to 65 on one standard, and about seven of the people I led went on to be directors and leaders.
 
 If your teams need new skills faster than you can hire for them, [let's talk](/contact/).
