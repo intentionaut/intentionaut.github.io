@@ -4,9 +4,12 @@
   margin: var(--space-8) 0;
 }
 
+/* Images default to 80% of the column, centred. */
 .cs-prose figure img {
   display: block;
   width: 100%;
+  max-width: 80%;
+  margin-inline: auto;
   height: auto;
   border: 1px solid var(--slate);
   border-radius: var(--radius-m);
