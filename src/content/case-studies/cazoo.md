@@ -98,3 +98,7 @@ The UX objectives for 2019, as written. These were the targets the team set, not
 I have since moved into product leadership, and the method came with me. It works at any level of maturity: write the standard down, tie hiring to growth, and make the standard something a team is allowed to argue with.
 
 As a product leader fluent in design and research, I've learned to build balanced skills in organisations by shaping clear incentives, structured expectations and creating self-serve development paths for the people I lead, whether in product, design, data or research.
+
+At Cazoo the team grew from one person to 65 on one standard, and about seven of the people I led went on to be directors and leaders.
+
+If your teams need new skills faster than you can hire for them, [let's talk](/contact/).
