@@ -52,4 +52,8 @@ Keeping the promise created a compound advantage at the time: Cazoo bought a car
 
 ## Why it matters
 
-Inventory was the constraint, and the team bet that trust would unlock it: one price, kept in over 97% of cases. Those numbers are the line's own: 38% of all transactions, a 91% five-star rating in its first 90 days and a 22% repeat purchase rate. The design decision started from a commercial constraint, was built with valuations, data, commercial operations and sales, and was judged on volume, trust and retention.
+I'm the leader you bring in when trust is what stands between a new product and the people meant to use it.
+
+At Cazoo, one price was kept in over 97% of cases. Purchase reached 38% of all transactions, with a 22% repeat purchase rate.
+
+If people aren't using what you've built, [let's talk](/contact/).

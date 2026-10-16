@@ -44,4 +44,8 @@ The division's users were Cazoo's own drivers and technicians, and I owned CSAT 
 
 ## Why it matters
 
-The constraint moved from buying cars to delivering them. The decision was to own the part of the operation customers felt, argued against an existing vendor and the product team's own answer. It cost storefront features for a time, and it was judged on days to sale, cost per sale and satisfaction.
+I'm the leader you bring in when the constraint moves, and someone has to own the part of the operation customers feel.
+
+At Cazoo, cost per sale fell by more than £900, a 45% reduction per vehicle, and the Trustpilot rating recovered to 4.5.
+
+If you're paying for something that isn't paying back, [let's talk](/contact/).
