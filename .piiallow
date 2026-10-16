@@ -1,1 +1,6 @@
 hello@intentionaut\.com
+# Locked case-study ciphertext (scripts/lock-case-study.mjs): one JSON line of
+# base64url, generated, so it cannot hold readable PII; random base64 trips the
+# phone and postcode patterns. Matches only that exact shape (pre-commit
+# prefixes each added line with its line number; pre-push does not).
+^([0-9]+:)?\{"v":2,"alg":"AES-GCM-256","iv":"[A-Za-z0-9_-]{16}","ct":"[A-Za-z0-9_-]+"\}$
