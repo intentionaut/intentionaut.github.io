@@ -14,7 +14,7 @@ That is the headline. The part worth reading is how the standard held while the 
 
 <ul class="cs-stats">
   <li><strong>65</strong>designers, researchers and content designers, from zero</li>
-  <li><strong>5</strong>heads reporting: UX ×3, research, content design</li>
+  <li><strong>267%</strong>revenue growth year on year, to £174.4m</li>
   <li><strong>39,000+</strong>five-star Trustpilot reviews</li>
   <li><strong>4</strong>new markets: France, Germany, Spain, Italy</li>
 </ul>
@@ -95,9 +95,7 @@ The UX objectives for 2019, as written. These were the targets the team set, not
 
 ## Where it applies now
 
-I have since moved into product leadership, and the method came with me. It works at any level of maturity: write the standard down, tie hiring to growth, and make the standard something a team is allowed to argue with.
-
-As a product leader fluent in design and research, I've learned to build balanced skills in organisations by shaping clear incentives, structured expectations and creating self-serve development paths for the people I lead, whether in product, design, data or research.
+I have since moved into product leadership, and the method came with me.
 
 If you are scaling a team and the standard depends on you being in the room, that is the work I do as a [fractional product leader](/fractional/).
 
