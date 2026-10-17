@@ -12,7 +12,6 @@ Cazoo's third-party logistics partner could not keep up with demand, and more or
 
 <ul class="cs-stats">
   <li><strong>34 to 21</strong>average days to sale, from 2019 to 2020</li>
-  <li><strong>24</strong>days average to sale, held through 2021</li>
   <li><strong>£900+</strong>cut from cost per sale, a 45% reduction per vehicle</li>
   <li><strong>4.5</strong>Trustpilot rating, recovered after the division took on delivery and support</li>
 </ul>
