@@ -7,6 +7,7 @@ import { rates, gbp } from '../data/rates';
 import { faqsFor } from '../data/faqs';
 import { testimonialsFor } from '../data/testimonials';
 import FaqList from '../components/FaqList.astro';
+import { LOCATION_LINE } from '../data/positioning';
 
 
 // Edit src/data/testimonials.ts to add one, reorder them, or take one down.
@@ -46,8 +47,8 @@ const offerCatalog = {
 ---
 
 <BaseLayout
-  title="Contact & rates | Saielle DaSilva"
-  description="Work with Saielle DaSilva: advisory, fractional product leadership, speaking and mentoring."
+  title="Contact & rates | Fractional CPO, London | Saielle DaSilva"
+  description={`Work with Saielle DaSilva: advisory, fractional product leadership, speaking and mentoring. ${LOCATION_LINE}`}
   jsonLd={offerCatalog}
 >
   <section class="wrap">
@@ -58,7 +59,7 @@ const offerCatalog = {
         Got a product team doing something important, while AI keeps changing
         the rules under you? That gap is where I work. I help teams and
         organisations turn noisy ambition into clear decisions, across
-        design, data and AI.
+        design, data and AI. {LOCATION_LINE}
       </p>
       <div class="cta-row">
         <a class="btn-primary" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a free call</a>
