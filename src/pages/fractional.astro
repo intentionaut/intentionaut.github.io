@@ -6,6 +6,7 @@ import { rates, gbp } from '../data/rates';
 import { testimonialsFor } from '../data/testimonials';
 import { faqsFor } from '../data/faqs';
 import FaqList from '../components/FaqList.astro';
+import { PRIMARY_PHRASE } from '../data/positioning';
 
 
 const testimonials = testimonialsFor('fractional');
@@ -19,7 +20,11 @@ const serviceSchema = {
   description:
     'Director-level product leadership for a defined period: one or two days a week, three months and up, with executive stakeholder access and accountability for delivery.',
   provider: { '@id': 'https://intentionaut.com/#person' },
-  areaServed: { '@type': 'Country', name: 'United Kingdom' },
+  areaServed: [
+    { '@type': 'City', name: 'London' },
+    { '@type': 'Country', name: 'United Kingdom' },
+    'Europe',
+  ],
   offers: {
     '@type': 'Offer',
     priceCurrency: 'GBP',
@@ -46,8 +51,8 @@ const faqSchema = {
 ---
 
 <BaseLayout
-  title="Fractional & Interim Product Leadership | Saielle DaSilva"
-  description="Fractional and interim product leadership for teams that need a senior product owner now, not a permanent hire yet: Director-level direction, decisions and delivery for a defined period."
+  title={`${PRIMARY_PHRASE}, London | Saielle DaSilva`}
+  description="Fractional and interim CPO, based in London and working across the UK and Europe. Senior leadership for a defined period."
   jsonLd={[serviceSchema, faqSchema]}
   ogImage="/og/fractional.png"
 >
