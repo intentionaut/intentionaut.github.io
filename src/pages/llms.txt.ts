@@ -7,6 +7,7 @@ import { rates, gbp } from '../data/rates';
 const body = `# Intentionaut
 
 Saielle DaSilva is a product leader working across design, data and AI. She offers fractional and interim product leadership, product building, mentoring, and speaking.
+She is based in London and works across the UK, Europe and the East Coast.
 
 ## Services and rates
 
