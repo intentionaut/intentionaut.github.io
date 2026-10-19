@@ -1,4 +1,4 @@
-import { rates, gbp } from './rates';
+import { rates, gbp, fractionalMonthly1Day, fractionalMonthly2Day, buildingWeekly } from './rates';
 
 /** Where a question may appear. Add to this as pages need them. */
 export type FaqPlacement = 'faq' | 'contact' | 'fractional';
@@ -35,15 +35,15 @@ export const faqs: Faq[] = [
   },
   {
     question: 'What is your day rate for fractional leadership?',
-    answer: `${gbp(rates.fractional)} a day, on the agreed rhythm we set together.`,
+    answer: `From ${gbp(fractionalMonthly1Day)} a month for one day a week (four days), or ${gbp(fractionalMonthly2Day)} a month for two days a week (eight days), on the agreed rhythm we set together. Three months and up. The day rate is ${gbp(rates.fractional)}.`,
   },
   {
     question: 'How much do keynotes and workshops cost?',
-    answer: `From ${gbp(rates.speaking)} for an event. Private workshops are quoted by scope and travel, sliding scale applies.`,
+    answer: `Keynote from ${gbp(rates.keynote)}. Team workshop, full day, from ${gbp(rates.workshop)}. A half day is available on request, from ${gbp(rates.workshopHalfDay)}. Private workshops are quoted by scope and travel, sliding scale applies.`,
   },
   {
     question: 'What is your day rate for product building?',
-    answer: `${gbp(rates.forwardDeployed)} a day, three days a week, four weeks minimum. Where an advisor or recruiter introduces the work, their margin sits on top of that rate rather than inside it.`,
+    answer: `${gbp(buildingWeekly)} a week, three days a week, four to twelve weeks. Four days a week is possible and quoted separately. Where an advisor or recruiter introduces the work, their margin sits on top of that rate rather than inside it.`,
   },
   {
     question: 'What is the difference between fractional leadership and product building?',
@@ -136,7 +136,7 @@ export const forwardDeployedFaqs: Faq[] = [
   },
   {
     question: 'What does it cost?',
-    answer: `${gbp(rates.forwardDeployed)} a day, three days a week, four weeks minimum. Four weeks at three days a week is ${gbp(rates.forwardDeployed * 12)}; eight weeks is ${gbp(rates.forwardDeployed * 24)}. Where an advisor or recruiter introduces the work, their margin sits on top of my rate rather than inside it.`,
+    answer: `${gbp(buildingWeekly)} a week, three days a week, four to twelve weeks. Four weeks is ${gbp(buildingWeekly * 4)}; eight weeks is ${gbp(buildingWeekly * 8)}. Where an advisor or recruiter introduces the work, their margin sits on top of my rate rather than inside it.`,
   },
   {
     question: 'What is the most complex thing you have personally built, not advised on?',

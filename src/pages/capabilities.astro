@@ -1,7 +1,7 @@
 ---
 import '@fontsource-variable/roboto-serif';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { rates, gbp } from '../data/rates';
+import { rates, gbp, buildingWeekly } from '../data/rates';
 ---
 
 <BaseLayout
@@ -88,7 +88,7 @@ import { rates, gbp } from '../data/rates';
         <li>
           <a href="/forward-deployed/">Product building</a>: embedded with the
           client's team three days a week for four to twelve weeks, working in
-          the client's own environment. {gbp(rates.forwardDeployed)} a day. A
+          the client's own environment. {gbp(buildingWeekly)} a week. A
           fixed-price two-day pilot is {gbp(rates.fdePilot)}.
         </li>
         <li>

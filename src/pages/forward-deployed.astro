@@ -2,7 +2,7 @@
 import '@fontsource-variable/roboto-serif';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.astro';
-import { rates, gbp } from '../data/rates';
+import { rates, gbp, buildingWeekly } from '../data/rates';
 import { forwardDeployedFaqs } from '../data/faqs';
 import FaqList from '../components/FaqList.astro';
 
@@ -19,13 +19,13 @@ const serviceSchema = {
   offers: {
     '@type': 'Offer',
     priceCurrency: 'GBP',
-    price: rates.forwardDeployed,
-    // unitText is not an Offer property; the per-day unit lives on the price spec.
+    price: buildingWeekly,
+    // unitText is not an Offer property; the per-week unit lives on the price spec.
     priceSpecification: {
       '@type': 'UnitPriceSpecification',
-      price: rates.forwardDeployed,
+      price: buildingWeekly,
       priceCurrency: 'GBP',
-      unitText: 'day',
+      unitText: 'week',
     },
     availability: 'https://schema.org/LimitedAvailability',
   },
@@ -113,7 +113,7 @@ const faqSchema = {
       <h2>How it works</h2>
       <ul>
         <li><strong>Start.</strong> A free preliminary call on the problem and the team. If it fits, the two-day pilot, {gbp(rates.fdePilot)} fixed: a prototype against your real problem and a written proposal for the block. You can stop there. Some people should.</li>
-        <li><strong>Block.</strong> Four to twelve weeks, three days a week, {gbp(rates.forwardDeployed)} a day. Four days is possible at the same rate. The day away is where the thinking happens.</li>
+        <li><strong>Block.</strong> Four to twelve weeks, three days a week, {gbp(buildingWeekly)} a week. Four days a week is possible and quoted separately. The day away is where the thinking happens.</li>
         <li><strong>End.</strong> On a date agreed at the start. You get something that runs, which your team can take over, extend or bin on evidence, plus the written reasoning for why it is shaped that way. No support tail.</li>
       </ul>
 
