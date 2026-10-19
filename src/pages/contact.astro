@@ -3,7 +3,7 @@ import '@fontsource-variable/roboto-serif';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.astro';
 import { BOOKING_URL } from '../data/links';
-import { rates, gbp } from '../data/rates';
+import { rates, gbp, fractionalMonthly1Day, fractionalMonthly2Day, buildingWeekly } from '../data/rates';
 import { faqsFor } from '../data/faqs';
 import { testimonialsFor } from '../data/testimonials';
 import FaqList from '../components/FaqList.astro';
@@ -35,12 +35,19 @@ const offerCatalog = {
       rates.strategySession,
       '90-minute session'
     ),
+    offer({ '@id': 'https://intentionaut.com/fractional/#service' }, fractionalMonthly1Day, 'month (1 day a week)'),
+    offer({ '@id': 'https://intentionaut.com/fractional/#service' }, fractionalMonthly2Day, 'month (2 days a week)'),
     offer({ '@id': 'https://intentionaut.com/fractional/#service' }, rates.fractional, 'day'),
-    offer({ '@id': 'https://intentionaut.com/forward-deployed/#service' }, rates.forwardDeployed, 'day'),
+    offer({ '@id': 'https://intentionaut.com/forward-deployed/#service' }, buildingWeekly, 'week'),
     offer(
       { '@type': 'Service', name: 'Speaking and workshops', provider: { '@id': 'https://intentionaut.com/#person' }, url: 'https://intentionaut.com/keynote-speaker/' },
-      rates.speaking,
-      'event'
+      rates.keynote,
+      'keynote'
+    ),
+    offer(
+      { '@type': 'Service', name: 'Team workshop', provider: { '@id': 'https://intentionaut.com/#person' }, url: 'https://intentionaut.com/keynote-speaker/' },
+      rates.workshop,
+      'full-day workshop'
     ),
   ],
 };
@@ -82,16 +89,16 @@ const offerCatalog = {
         </a>
         <a class="rate-row rate-card" href="/fractional/">
           <p class="rate-name">Fractional leadership</p>
-          <p class="rate-price">{gbp(rates.fractional)} / day</p>
+          <p class="rate-price">From {gbp(fractionalMonthly1Day)} a month</p>
           <p class="rate-desc">
             Part-time head of product for early teams that need direction
             now, before they're ready for a full-time hire.
           </p>
-          <p class="rate-shape">One or two days a week, three months and up.</p>
+          <p class="rate-shape">One day a week ({gbp(fractionalMonthly1Day)} a month) or two ({gbp(fractionalMonthly2Day)} a month). Three months and up. Day rate {gbp(rates.fractional)}.</p>
         </a>
         <a class="rate-row rate-card" href="/forward-deployed/">
           <p class="rate-name">Product building</p>
-          <p class="rate-price">{gbp(rates.forwardDeployed)} / day</p>
+          <p class="rate-price">{gbp(buildingWeekly)} / week</p>
           <p class="rate-desc">
             Three days a week inside your team, building a working prototype
             in your environment.
@@ -100,12 +107,12 @@ const offerCatalog = {
         </a>
         <a class="rate-row rate-card" href="/keynote-speaker/">
           <p class="rate-name">Speaking &amp; workshops</p>
-          <p class="rate-price">{gbp(rates.speaking)} / event</p>
+          <p class="rate-price">Keynote from {gbp(rates.keynote)}</p>
           <p class="rate-desc">
             From conference keynotes to hands-on team sessions about building
             with intention across design, data and AI.
           </p>
-          <p class="rate-shape">Keynotes and workshops, per event.</p>
+          <p class="rate-shape">Team workshop, full day, from {gbp(rates.workshop)}. Half day on request, from {gbp(rates.workshopHalfDay)}.</p>
           <p class="rate-scale">Sliding scale · Yes</p>
         </a>
         <a class="rate-row rate-card" href="/mentoring/">

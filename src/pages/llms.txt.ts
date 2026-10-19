@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { rates, gbp } from '../data/rates';
+import { rates, gbp, fractionalMonthly1Day, fractionalMonthly2Day, buildingWeekly } from '../data/rates';
 
 // Built, not hand-written, so every price here is the one the pages show:
 // both read rates.ts. Only published offers and public pages belong in it.
@@ -12,11 +12,11 @@ She is based in London and works across the UK and Europe.
 ## Services and rates
 
 - [Strategy session](https://intentionaut.com/strategic-direction/): ${gbp(rates.strategySession)} for a 90-minute session.
-- [Fractional leadership](https://intentionaut.com/fractional/): part-time product leadership, ${gbp(rates.fractional)} a day.
-- [Product building](https://intentionaut.com/forward-deployed/): embedded work to make a product idea tangible, ${gbp(rates.forwardDeployed)} a day.
+- [Fractional leadership](https://intentionaut.com/fractional/): part-time product leadership, from ${gbp(fractionalMonthly1Day)} a month for one day a week or ${gbp(fractionalMonthly2Day)} a month for two; day rate ${gbp(rates.fractional)}.
+- [Product building](https://intentionaut.com/forward-deployed/): embedded work to make a product idea tangible, ${gbp(buildingWeekly)} a week.
 - [Two-day pilot](https://intentionaut.com/forward-deployed/): a fixed-price pilot that opens a product building block, ${gbp(rates.fdePilot)}.
 - [AI pilot to production](https://intentionaut.com/ai-pilot-to-production/): product building for an AI pilot that has not reached production.
-- [Speaking and workshops](https://intentionaut.com/keynote-speaker/): from ${gbp(rates.speaking)} an event.
+- [Speaking and workshops](https://intentionaut.com/keynote-speaker/): keynote from ${gbp(rates.keynote)}, full-day team workshop from ${gbp(rates.workshop)}, half day on request from ${gbp(rates.workshopHalfDay)}.
 
 ## Capabilities
 

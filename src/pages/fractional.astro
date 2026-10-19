@@ -2,7 +2,7 @@
 import '@fontsource-variable/roboto-serif';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.astro';
-import { rates, gbp } from '../data/rates';
+import { rates, gbp, fractionalMonthly1Day, fractionalMonthly2Day } from '../data/rates';
 import { testimonialsFor } from '../data/testimonials';
 import { faqsFor } from '../data/faqs';
 import FaqList from '../components/FaqList.astro';
@@ -29,13 +29,12 @@ const serviceSchema = {
     '@type': 'Offer',
     priceCurrency: 'GBP',
     price: rates.fractional,
-    // unitText is not an Offer property; the per-day unit lives on the price spec.
-    priceSpecification: {
-      '@type': 'UnitPriceSpecification',
-      price: rates.fractional,
-      priceCurrency: 'GBP',
-      unitText: 'day',
-    },
+    // unitText is not an Offer property; the units live on the price specs.
+    priceSpecification: [
+      { '@type': 'UnitPriceSpecification', price: fractionalMonthly1Day, priceCurrency: 'GBP', unitText: 'month (1 day a week)' },
+      { '@type': 'UnitPriceSpecification', price: fractionalMonthly2Day, priceCurrency: 'GBP', unitText: 'month (2 days a week)' },
+      { '@type': 'UnitPriceSpecification', price: rates.fractional, priceCurrency: 'GBP', unitText: 'day' },
+    ],
     availability: 'https://schema.org/LimitedAvailability',
   },
 };
@@ -109,6 +108,11 @@ const faqSchema = {
       <p>
         A minimum commitment of three months. One or two days a week. Enough
         time to build context, lead with authority and create real momentum.
+      </p>
+      <p>
+        {gbp(fractionalMonthly1Day)} a month for one day a week (four days),
+        or {gbp(fractionalMonthly2Day)} a month for two days a week (eight
+        days). Three months and up. Day rate {gbp(rates.fractional)}.
       </p>
       <p>
         The engagement ends with a clear handover: a functioning team, an
