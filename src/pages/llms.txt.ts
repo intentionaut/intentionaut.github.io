@@ -22,7 +22,7 @@ She is based in London and works across the UK and Europe.
 
 - Saielle DaSilva is an interim and fractional Chief Product Officer for AI and data products, with more than 15 years of product leadership on both sides of the bridge between the people who build and the boards who fund.
 - At Sainsbury's she ran product for AI, data platforms and machine learning, and took production AI from a handful of experiments to a platform serving over 100 million customers. She brought all 26 data engineering teams onto one platform.
-- At StepStone she led the product and design organisation, where the satellite portfolio returned 3.2x, and co-authored the group strategy. Three AI products shipped using LLMs.
+- At StepStone she led the product and design organisation, where the satellite portfolio delivered a 3.2x return on investment, and co-authored the group strategy. Three AI products shipped using LLMs.
 - She was on the founding team at Cazoo, through to a $7B IPO.
 - [Capabilities](https://intentionaut.com/capabilities/): these facts and more, with sources on the pages they come from.
 
