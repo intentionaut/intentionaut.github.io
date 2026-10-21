@@ -1,0 +1,149 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import data from '../data/ai-adoption-evidence.json';
+import { TOPICS, SOURCE_TYPES, REGIONS, isStale, sortNewestFirst, validate } from '../lib/evidence.mjs';
+
+// Fail the build on bad data; warn on cards not reviewed for six months.
+const problems = validate(data);
+if (problems.length) throw new Error('ai-adoption-evidence data: ' + problems.join('; '));
+for (const c of data.cards) {
+  if (isStale(c.reviewed)) console.warn(`[ai-adoption-evidence] "${c.id}" was last reviewed ${c.reviewed}: more than 6 months ago. Re-read the source.`);
+}
+
+const cards = sortNewestFirst(data.cards);
+// Only offer chips for values that have at least one card, so no chip leads to nothing.
+const used = (key: 'topic' | 'sourceType' | 'region') => new Set(cards.map((c) => c[key]));
+const groups = [
+  { key: 'topic', label: 'Topic', options: TOPICS },
+  { key: 'sourceType', label: 'Source type', options: SOURCE_TYPES },
+  { key: 'region', label: 'Region', options: REGIONS },
+].map((g) => ({ ...g, options: Object.entries(g.options).filter(([v]) => used(g.key as any).has(v)) }));
+
+const title = 'What the data says about AI in business | Saielle DaSilva';
+// COPY FOR APPROVAL (site owner): description, intro and the "last checked" line.
+const description = 'Published figures on AI in business, each with who measured it, the base, the date and a link to the original document.';
+
+const lastChecked = new Date(data.lastChecked + 'T00:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+
+const jsonLd = {
+  '@type': 'ItemList',
+  name: 'What the data says about AI in business',
+  dateModified: data.lastChecked,
+  itemListElement: cards.map((c, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'CreativeWork',
+      name: c.title,
+      abstract: `${c.figure} ${c.base}`,
+      url: c.url,
+      datePublished: c.published,
+      publisher: { '@type': 'Organization', name: c.publisher },
+    },
+  })),
+};
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <section class="wrap evidence">
+    <header class="page-head">
+      <p class="eyebrow">Evidence</p>
+      <h1>What the data says about AI in business</h1>
+      <p class="lede">
+        Published figures, each with who measured it, the base, the date and a link to the original document.
+      </p>
+      <p class="ev-checked">Last checked <time datetime={data.lastChecked}>{lastChecked}</time></p>
+    </header>
+
+    <form class="ev-filters" id="ev-filters" hidden aria-label="Filter the figures" onsubmit="return false">
+      {groups.map((g) => (
+        <div class="ev-group" role="group" aria-labelledby={`ev-l-${g.key}`}>
+          <span class="ev-label" id={`ev-l-${g.key}`}>{g.label}</span>
+          <button type="button" class="ev-chip" data-group={g.key} data-value="" aria-pressed="true">All</button>
+          {g.options.map(([v, label]) => (
+            <button type="button" class="ev-chip" data-group={g.key} data-value={v} aria-pressed="false">{label}</button>
+          ))}
+        </div>
+      ))}
+      <p class="ev-status" id="ev-count" role="status" aria-live="polite">Showing {cards.length} of {cards.length} figures</p>
+    </form>
+
+    <ol class="ev-grid" id="ev-grid">
+      {cards.map((c) => (
+        <li class="ev-card" data-topic={c.topic} data-sourcetype={c.sourceType} data-region={c.region}>
+          <p class="ev-badges">
+            <span class={`ev-badge ev-${c.sourceType}`}>{SOURCE_TYPES[c.sourceType as keyof typeof SOURCE_TYPES]}</span>
+            <span class="ev-badge ev-kind">{c.kind}</span>
+          </p>
+          <h2 class="ev-figure">{c.figure}</h2>
+          <dl class="ev-meta">
+            <dt>Measured by</dt><dd>{c.publisher}</dd>
+            <dt>Base</dt><dd>{c.base}</dd>
+            <dt>Published</dt><dd><time datetime={c.published}>{c.publishedLabel}</time></dd>
+          </dl>
+          <a class="ev-source" href={c.url} rel="noopener">Read the original: {c.title}</a>
+        </li>
+      ))}
+    </ol>
+
+    <p class="ev-none" id="ev-none" hidden>No figures match these filters.</p>
+  </section>
+</BaseLayout>
+
+<style>
+  .evidence { padding-bottom: var(--space-10); }
+  .ev-checked { color: var(--muted); font-size: var(--text-sm); margin: var(--space-2) 0 0; }
+  .ev-filters { display: grid; gap: var(--space-3); margin: var(--space-6) 0 var(--space-7); }
+  .ev-filters[hidden] { display: none; }
+  .ev-group { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
+  .ev-label { font-size: var(--text-sm); color: var(--muted); min-width: 6.5rem; }
+  .ev-chip {
+    font: inherit; font-size: var(--text-sm); color: var(--ink);
+    background: transparent; border: 1px solid var(--ink); border-radius: var(--radius-l);
+    padding: var(--space-1) var(--space-3); cursor: pointer; min-height: 2.75rem;
+  }
+  .ev-chip:hover { background: var(--slate); }
+  .ev-chip[aria-pressed='true'] { background: var(--ink); color: var(--paper); }
+  .ev-status { margin: 0; font-size: var(--text-sm); color: var(--muted); }
+  .ev-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-6); grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr)); }
+  .ev-card { border: 1px solid var(--slate); border-top: 2px solid var(--accent); border-radius: var(--radius-m); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3); }
+  .ev-card[hidden] { display: none; }
+  .ev-badges { display: flex; gap: var(--space-2); margin: 0; flex-wrap: wrap; }
+  .ev-badge { font-size: var(--text-xs); letter-spacing: 0.04em; text-transform: uppercase; border: 1px solid var(--muted); border-radius: var(--radius-s); padding: 0 var(--space-2); color: var(--muted); }
+  .ev-figure { font-family: var(--font-display); font-size: var(--text-md); font-weight: 500; line-height: 1.25; margin: 0; }
+  .ev-meta { margin: 0; font-size: var(--text-sm); display: grid; grid-template-columns: max-content 1fr; gap: var(--space-1) var(--space-3); }
+  .ev-meta dt { color: var(--muted); }
+  .ev-meta dd { margin: 0; }
+  .ev-source { margin-top: auto; font-size: var(--text-sm); color: var(--accent-text); overflow-wrap: anywhere; }
+  .ev-none { color: var(--muted); }
+</style>
+
+<script>
+  // Progressive enhancement: without this script all cards show and the filter bar stays hidden.
+  const form = document.getElementById('ev-filters') as HTMLElement | null;
+  const cards = [...document.querySelectorAll<HTMLElement>('.ev-card')];
+  if (form && cards.length) {
+    form.hidden = false;
+    const state: Record<string, string> = { topic: '', sourcetype: '', region: '' };
+    const count = document.getElementById('ev-count')!;
+    const none = document.getElementById('ev-none')!;
+    const apply = () => {
+      let shown = 0;
+      for (const c of cards) {
+        const ok = Object.entries(state).every(([k, v]) => !v || c.dataset[k] === v);
+        c.hidden = !ok;
+        if (ok) shown++;
+      }
+      count.textContent = `Showing ${shown} of ${cards.length} figures`;
+      none.hidden = shown !== 0;
+    };
+    form.addEventListener('click', (e) => {
+      const b = (e.target as HTMLElement).closest<HTMLButtonElement>('.ev-chip');
+      if (!b) return;
+      const group = (b.dataset.group as string).toLowerCase();
+      state[group] = b.dataset.value ?? '';
+      form.querySelectorAll<HTMLButtonElement>(`.ev-chip[data-group="${b.dataset.group}"]`).forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      apply();
+    });
+  }
+</script>
