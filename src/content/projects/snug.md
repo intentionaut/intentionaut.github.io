@@ -16,7 +16,7 @@ A Mac menu bar fills up. Every app that runs in the background adds an icon, and
 
 ## The Bet
 
-Snug hides the icons you don't need to see. Click the beard, or press ⌃⌥⌘B, and a dropdown shows three rows: Showing, Hidden and Always hidden. Click an icon to use it. Drag it to another row to move it. That is the whole app.
+Snug hides the icons you don't need to see. Click the mousehole, or press ⌃⌥⌘B, and a dropdown shows three rows: Showing, Hidden and Always hidden. Click an icon to use it. Drag it to another row to move it. That is the whole app.
 
 The hard part was moving icons that sit beside the notch. My first approach dragged them across the screen, took about five seconds and sometimes never landed. Reading how the open source app Ice does it showed a better way: send the click straight to the icon's own window instead of dragging. Snug now does that, written from the technique rather than copied code, and a move takes under a third of a second.
 
