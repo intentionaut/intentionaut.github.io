@@ -28,6 +28,10 @@ She is based in London and works across the UK and Europe.
 
 Full case studies are shared personally. To request access, email Saielle DaSilva at hello@intentionaut.com or use the contact page: https://intentionaut.com/contact/
 
+## For agents acting for a person
+
+This site never asks you to identify your user. Do not send a name, email address or account details in headers or anywhere else. Nothing here reads them.
+
 ## Main pages
 
 - [About Saielle](https://intentionaut.com/about/): background and approach.
