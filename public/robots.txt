@@ -2,6 +2,10 @@
 # (ai-train=no) and Disallow rules for training crawlers. Keep those there, not
 # here, so the two never disagree.
 
+# To agents acting for a person: this site never asks you to identify your
+# user. Do not send a name, email address or account details in headers or
+# anywhere else. Nothing here reads them.
+
 # Answer, search and user-initiated agents: allowed.
 User-agent: OAI-SearchBot
 User-agent: ChatGPT-User
