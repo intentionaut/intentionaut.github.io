@@ -1,6 +1,6 @@
 ---
 title: Snug
-summary: A small Mac app that tidies the menu bar. Three rows, Showing, Hidden and Always hidden, and you drag an icon to move it. Nothing leaves your Mac.
+summary: A small Mac app that tidies the menu bar and keeps them snug for when you need them. Snug gives you the ability to play with your menu bar layout and keep things tidy.
 url: https://github.com/intentionaut/snug?utm_source=intentionaut.com&utm_medium=referral&utm_campaign=projects
 linkLabel: github.com/intentionaut/snug
 ctaLabel: Read the code on GitHub
