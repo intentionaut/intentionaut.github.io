@@ -18,6 +18,12 @@ test('the card sits in the open branch, after the body', () => {
   assert.ok(openBranch.indexOf('<Content />') < openBranch.indexOf('<FrameSubscribe'));
 });
 
+test('the card carries the approved copy, exactly', () => {
+  assert.ok(openBranch.includes('heading="Results start as decisions"'));
+  assert.ok(openBranch.includes('sub="Follow the reasoning behind them, one letter at a time."'));
+  assert.ok(openBranch.includes('buttonLabel="Follow along"'));
+});
+
 test('a locked study has no card', () => {
   assert.ok(!lockedBranch.includes('FrameSubscribe'));
 });
