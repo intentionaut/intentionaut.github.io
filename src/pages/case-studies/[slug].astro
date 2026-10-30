@@ -2,6 +2,7 @@
 import { existsSync } from 'node:fs';
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FrameSubscribe from '../../components/FrameSubscribe.astro';
 import '../../styles/case-studies.css';
 
 export async function getStaticPaths() {
@@ -61,13 +62,31 @@ const accessMail = 'mailto:hello@intentionaut.com?subject=Case%20study%20access%
           <article class="prose cs-prose" hidden />
         </div>
       ) : (
-        <article class="prose cs-prose">
-          <Content />
-        </article>
+        <>
+          <article class="prose cs-prose">
+            <Content />
+          </article>
+          <section class="cs-subscribe" aria-label="Subscribe">
+            <FrameSubscribe
+              sub="How leaders set direction when AI does more of the building. Field-tested with the receipts."
+              source="case-study"
+              campaign={study.id}
+              emailId="case-study-email"
+              buttonLabel="Get the next one"
+              align="left"
+            />
+          </section>
+        </>
       )
     }
   </section>
 </BaseLayout>
+
+<style>
+  .cs-subscribe {
+    margin-top: clamp(3rem, 6vw, 5rem);
+  }
+</style>
 
 <script>
   import { forgetKey, keyFromLink, saveKey, savedKey, unlock } from '../../lib/case-lock.js';
