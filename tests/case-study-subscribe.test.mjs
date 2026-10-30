@@ -9,8 +9,8 @@ const page = readFileSync(new URL('../src/pages/case-studies/[slug].astro', impo
 const [lockedBranch, openBranch] = page.slice(page.indexOf('locked ? (')).split(/\)\s*:\s*\(/);
 
 test('the card posts source=case-study and campaign=<slug>', () => {
-  assert.match(page, /source="case-study"/);
-  assert.match(page, /campaign=\{study\.id\}/);
+  assert.match(openBranch, /source="case-study"/);
+  assert.match(openBranch, /campaign=\{study\.id\}/);
 });
 
 test('the card sits in the open branch, after the body', () => {
