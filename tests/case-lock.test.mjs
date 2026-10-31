@@ -1,7 +1,7 @@
 // npm test
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { keyFromLink, lock, newKey, unlock } from '../src/lib/case-lock.js';
+import { keyFromLink, lock, newKey, openWith, unlock } from '../src/lib/case-lock.js';
 
 const html = '<h2>The problem</h2><p>Managers were drowning in reports.</p>';
 
@@ -38,4 +38,16 @@ test('the key comes out of a whole link, a fragment, or nothing', () => {
   assert.equal(keyFromLink(`k=${k}`), k);
   assert.equal(keyFromLink('https://intentionaut.com/case-studies/quorso/'), null);
   assert.equal(keyFromLink(`#k=${k.slice(0, 20)}`), null);
+});
+
+test('a wrong link key falls back to the good saved key', async () => {
+  const good = newKey();
+  const box = await lock(html, good);
+  const opened = await openWith(box, [newKey(), good]);
+  assert.equal(opened.key, good);
+  assert.equal(opened.html, html);
+});
+
+test('no working key gives null', async () => {
+  assert.equal(await openWith(await lock(html, newKey()), [newKey()]), null);
 });

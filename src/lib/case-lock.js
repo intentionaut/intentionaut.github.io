@@ -49,6 +49,19 @@ export async function unlock(box, key) {
   return dec.decode(pt);
 }
 
+// Try each key on a fetched box. Returns the one that opens it with the text,
+// or null. Failure here means a wrong key; a failed fetch never gets this far.
+export async function openWith(box, keys) {
+  for (const key of keys) {
+    try {
+      return { key, html: await unlock(box, key) };
+    } catch {
+      // Wrong key: try the next.
+    }
+  }
+  return null;
+}
+
 // The key from a whole link, or from "#k=..." / "k=...", or null.
 export const keyFromLink = (s) => s.match(/(?:^|[#&])k=([A-Za-z0-9_-]{43})(?:&|$)/)?.[1] ?? null;
 
