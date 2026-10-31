@@ -1,4 +1,5 @@
 import { fetchRawPosts, isOnSite, fingerprint } from './beehiiv-core.mjs';
+import { sanitise } from './sanitise.mjs';
 
 const API_KEY = import.meta.env.BEEHIIV_API_KEY;
 
@@ -267,9 +268,9 @@ export async function fetchPosts(): Promise<BeehiivPost[]> {
     publish_date: post.displayed_date ?? post.publish_date,
     thumbnail_url: post.thumbnail_url ?? '',
     web_url: post.web_url,
-    content_html: stripBeehiivHtml(
+    content_html: sanitise(stripBeehiivHtml(
       post.content?.free?.web ?? ''
-    ),
+    )),
     authors: post.authors ?? [],
     content_tags: post.content_tags ?? [],
   }));

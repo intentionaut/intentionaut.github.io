@@ -7,6 +7,7 @@ const studies = (await getCollection('caseStudies')).sort((a, b) => a.data.order
 ---
 
 <BaseLayout
+  noAnalytics
   title="Case studies | Saielle DaSilva"
   description="Organisations built, products shipped, and the decisions behind them."
 >
@@ -46,7 +47,9 @@ const studies = (await getCollection('caseStudies')).sort((a, b) => a.data.order
 
   const keep = () => {
     const key = keyFromLink(location.hash);
-    if (key) saveKey(key);
+    if (!key) return;
+    saveKey(key);
+    history.replaceState(null, '', location.pathname + location.search);
   };
   keep();
   window.addEventListener('hashchange', keep);

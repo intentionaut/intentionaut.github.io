@@ -31,7 +31,7 @@ const { Content } = await render(study);
 const accessMail = 'mailto:hello@intentionaut.com?subject=Case%20study%20access%20request';
 ---
 
-<BaseLayout title={`${study.data.title} | Saielle DaSilva`} description={study.data.summary} noindex={locked}>
+<BaseLayout title={`${study.data.title} | Saielle DaSilva`} description={study.data.summary} noindex={locked} noAnalytics={locked}>
   <section class="wrap">
     <header class="page-head">
       <p class="eyebrow">Case study · {study.data.company}</p>
@@ -106,6 +106,8 @@ const accessMail = 'mailto:hello@intentionaut.com?subject=Case%20study%20access%
         article.hidden = false;
         note.hidden = true;
         saveKey(key);
+        // The key is saved, so it needn't stay in the address bar or history.
+        history.replaceState(null, '', location.pathname + location.search);
       } catch {
         forgetKey();
         article.hidden = true;
