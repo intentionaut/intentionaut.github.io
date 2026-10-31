@@ -34,6 +34,11 @@ const built = (await getCollection('projects'))
   .filter((p) => ['friday-for-work', 'kernic', 'familiar'].includes(p.id))
   .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
 
+const studyOrder = ['cazoo', 'cazoo-purchase', 'stepstone'];
+const studies = (await getCollection('case-studies'))
+  .filter((s) => studyOrder.includes(s.id))
+  .sort((a, b) => studyOrder.indexOf(a.id) - studyOrder.indexOf(b.id));
+
 const [quote] = testimonialsFor('home');
 ---
 
@@ -83,6 +88,21 @@ const [quote] = testimonialsFor('home');
       Not sure which? <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a free call</a>
       {' '}and we'll work it out, or compare them on the <a href="/contact/">contact page</a>.
     </p>
+  </section>
+
+  <section class="wrap home-section" aria-labelledby="studies-h">
+    <h2 id="studies-h" class="home-h2">The work behind the numbers.</h2>
+    <ol class="project-list">
+      {studies.map((s) => (
+        <li class="project-row">
+          <a class="project-card" href={`/case-studies/${s.id}/`}>
+            <span class="talk-title">{s.data.title}</span>
+            <span class="project-summary">{s.data.summary}</span>
+          </a>
+        </li>
+      ))}
+    </ol>
+    <a class="link-arrow" href="/case-studies/"><span>All case studies</span></a>
   </section>
 
   <section class="wrap home-section" aria-labelledby="built-h">
