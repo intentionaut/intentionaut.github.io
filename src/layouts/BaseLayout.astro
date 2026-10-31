@@ -12,6 +12,8 @@ interface Props {
   description?: string;
   /** Adds <meta name="robots" content="noindex,follow">. */
   noindex?: boolean;
+  /** Skips the analytics beacon. Pages that can hold a case-study key. */
+  noAnalytics?: boolean;
   /** 'article' switches og:type and lets published/modified times through. */
   ogType?: 'website' | 'article';
   /** Marks the WebPage node as a ProfilePage about Saielle. */
@@ -34,6 +36,7 @@ const {
   title = 'Saielle DaSilva | Product leader across design, data & AI',
   description = 'Saielle DaSilva is a fractional product leader who still builds. Founders bring her in when direction is the bottleneck and AI is doing more of the building.',
   noindex = false,
+  noAnalytics = false,
   ogType = 'website',
   profilePage = false,
   publishedTime,
@@ -173,7 +176,7 @@ const graph = {
     <script
       type="application/ld+json"
       is:inline
-      set:html={JSON.stringify(graph)}
+      set:html={JSON.stringify(graph).replace(/</g, '\\u003c')}
     />
     {/*
       First-touch campaign capture.
@@ -221,7 +224,7 @@ const graph = {
     </script>
     <slot name="head" />
     {
-      showAnalytics && (
+      showAnalytics && !noAnalytics && (
         <script
           is:inline
           defer
