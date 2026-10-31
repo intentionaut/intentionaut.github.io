@@ -89,7 +89,7 @@ const accessMail = 'mailto:hello@intentionaut.com?subject=Case%20study%20access%
 </style>
 
 <script>
-  import { forgetKey, keyFromLink, saveKey, savedKey, unlock } from '../../lib/case-lock.js';
+  import { forgetKey, keyFromLink, openWith, saveKey, savedKey } from '../../lib/case-lock.js';
 
   const box = document.querySelector<HTMLElement>('.cs-lock');
   if (box) {
@@ -97,18 +97,31 @@ const accessMail = 'mailto:hello@intentionaut.com?subject=Case%20study%20access%
     const article = box.querySelector('article')!;
 
     const open = async () => {
-      const key = keyFromLink(location.hash) ?? savedKey();
-      if (!key) return;
+      const fromLink = keyFromLink(location.hash);
+      const saved = savedKey();
+      const keys = [fromLink, saved].filter(Boolean);
+      if (!keys.length) return;
+      let locked;
       try {
         const res = await fetch(box.dataset.lock!);
         if (!res.ok) throw new Error(String(res.status));
-        article.innerHTML = await unlock(await res.json(), key);
+        locked = await res.json();
+      } catch {
+        // A failed load says nothing about the key, so keep it.
+        note.hidden = false;
+        note.textContent = 'This case study did not load. Refresh to try again.';
+        return;
+      }
+      const opened = await openWith(locked, keys);
+      if (opened) {
+        article.innerHTML = opened.html;
         article.hidden = false;
         note.hidden = true;
-        saveKey(key);
+        saveKey(opened.key);
         // The key is saved, so it needn't stay in the address bar or history.
         history.replaceState(null, '', location.pathname + location.search);
-      } catch {
+      } else {
+        // No key opens it, so the saved one is stale too.
         forgetKey();
         article.hidden = true;
         note.hidden = false;

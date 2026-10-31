@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import '../../styles/case-studies.css';
 
 const studies = (await getCollection('caseStudies')).sort((a, b) => a.data.order - b.data.order);
+const probe = studies.find((s) => s.data.locked);
 ---
 
 <BaseLayout
@@ -38,16 +39,25 @@ const studies = (await getCollection('caseStudies')).sort((a, b) => a.data.order
       }
     </ol>
   </section>
+  {probe && <div id="lock-probe" hidden data-lock={`/case-studies/${probe.id}/locked.json`} />}
 </BaseLayout>
 
 <script>
   // The private link can point here (/case-studies/#k=...). Keep the key, so
-  // every locked page in the list opens from it. Checked on the page itself.
-  import { keyFromLink, saveKey } from '../../lib/case-lock.js';
+  // every locked page in the list opens from it, but only once it has opened
+  // one: a wrong link must not replace a good saved key.
+  import { keyFromLink, openWith, saveKey } from '../../lib/case-lock.js';
 
-  const keep = () => {
+  const keep = async () => {
     const key = keyFromLink(location.hash);
-    if (!key) return;
+    const lock = document.getElementById('lock-probe')?.dataset.lock;
+    if (!key || !lock) return;
+    try {
+      const res = await fetch(lock);
+      if (!res.ok || !(await openWith(await res.json(), [key]))) return;
+    } catch {
+      return;
+    }
     saveKey(key);
     history.replaceState(null, '', location.pathname + location.search);
   };
