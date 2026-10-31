@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { BOOKING_URL } from '../data/links';
 
 const entry = (await getCollection('pages')).find((p) => p.id === 'about');
 if (!entry) throw new Error('About page content is missing (src/content/pages/about.md)');
@@ -124,6 +125,11 @@ const stats = [
         }
       </ol>
     </section>
+
+    <div class="cta-row about-cta">
+      <a class="btn-primary" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a free call</a>
+      <a class="link-arrow" href="/contact/#contact-section"><span>Send a message</span></a>
+    </div>
   </section>
 </BaseLayout>
 
@@ -180,6 +186,10 @@ const stats = [
     margin-top: clamp(3rem, 6vw, 5rem);
     padding-top: var(--space-7);
     border-top: 1px solid var(--slate);
+  }
+
+  .about-cta {
+    margin-top: clamp(3rem, 6vw, 5rem);
   }
 
   .arc-section h2 {
