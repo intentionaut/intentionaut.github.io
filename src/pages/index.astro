@@ -35,9 +35,10 @@ const built = (await getCollection('projects'))
   .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
 
 const studyOrder = ['cazoo', 'cazoo-purchase', 'stepstone'];
-const studies = (await getCollection('case-studies'))
+const studies = (await getCollection('caseStudies'))
   .filter((s) => studyOrder.includes(s.id))
   .sort((a, b) => studyOrder.indexOf(a.id) - studyOrder.indexOf(b.id));
+if (studies.length !== studyOrder.length) throw new Error('A homepage case study is missing');
 
 const [quote] = testimonialsFor('home');
 ---
