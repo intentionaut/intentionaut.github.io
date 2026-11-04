@@ -7,6 +7,7 @@ import { testimonialsFor } from '../data/testimonials';
 import { faqsFor } from '../data/faqs';
 import FaqList from '../components/FaqList.astro';
 import { PRIMARY_PHRASE } from '../data/positioning';
+import { BOOKING_URL } from '../data/links';
 
 
 const testimonials = testimonialsFor('fractional');
@@ -63,6 +64,9 @@ const faqSchema = {
         For teams that need Director-level leadership, but are not ready for
         a permanent hire.
       </p>
+      <div class="cta-row">
+        <a class="btn-primary" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a free call <span class="sr-only">(opens in a new tab)</span></a>
+      </div>
       <ul class="problem-lines">
         <li>A product that works and nobody likes, with no agreement on why.</li>
         <li>Designers with nobody senior leading them.</li>
