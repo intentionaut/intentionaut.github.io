@@ -41,6 +41,7 @@ const {
     class="signup-form subscribe-form"
     data-subscribe={source}
     data-campaign={campaign}
+    data-variant={variant}
     novalidate
   >
     <label class="sr-only" for={emailId}>Email address</label>
@@ -184,6 +185,8 @@ const {
 </style>
 
 <script>
+  import { trackEvent } from '../lib/pendo';
+
   const ENDPOINT = 'https://contact-form.intentionaut.workers.dev/subscribe';
 
   // A ?utm_source= / ?ref= on the URL wins over the form's placement label, so a
@@ -251,6 +254,22 @@ const {
 
       if (button) button.disabled = true;
 
+      const source = channel || form.dataset.subscribe;
+      // A campaign named on the URL is the sharper fact: it says which link was
+      // followed, not merely which page the form sits on.
+      const signupCampaign = urlCampaign || form.dataset.campaign || undefined;
+      // The site that sent them, recorded on their first page. The current
+      // page's document.referrer is usually intentionaut.com itself by the time
+      // someone subscribes.
+      const referrer = firstTouch.referrer ? `https://${firstTouch.referrer}` : undefined;
+      // What Pendo gets: attribution and placement, never the email address.
+      const tracked = {
+        source,
+        placement: form.dataset.subscribe,
+        campaign: signupCampaign,
+        variant: form.dataset.variant,
+      };
+
       try {
         const res = await fetch(ENDPOINT, {
           method: 'POST',
@@ -258,16 +277,11 @@ const {
           body: JSON.stringify({
             email,
             consent: consentBox ? consentBox.checked : true,
-            source: channel || form.dataset.subscribe,
-            // A campaign named on the URL is the sharper fact: it says which
-            // link was followed, not merely which page the form sits on.
-            campaign: urlCampaign || form.dataset.campaign || undefined,
+            source,
+            campaign: signupCampaign,
             medium: medium || undefined,
             website: fd.get('website') || '',
-            // The site that sent them, recorded on their first page. The
-            // current page's document.referrer is usually intentionaut.com
-            // itself by the time someone subscribes.
-            referrer: firstTouch.referrer ? `https://${firstTouch.referrer}` : undefined,
+            referrer,
           }),
         });
         const result = (await res.json().catch(() => ({}))) as {
@@ -276,6 +290,12 @@ const {
         };
 
         if (res.ok) {
+          // Accepted, not yet confirmed: beehiiv still sends the opt-in email.
+          trackEvent('newsletter_signup_accepted', {
+            ...tracked,
+            medium: medium || undefined,
+            referrer,
+          });
           form.hidden = true;
           if (note) note.hidden = true;
           if (done) {
@@ -285,10 +305,16 @@ const {
             setStatus(result.message || 'Almost there. Check your inbox.', false);
           }
         } else {
+          trackEvent('newsletter_signup_failed', {
+            ...tracked,
+            http_status: res.status,
+            error_type: 'http_error',
+          });
           setStatus(result.error || 'Something went wrong. Try again in a moment.', true);
           if (button) button.disabled = false;
         }
       } catch {
+        trackEvent('newsletter_signup_failed', { ...tracked, error_type: 'network_error' });
         setStatus('Something went wrong. Try again in a moment.', true);
         if (button) button.disabled = false;
       }
