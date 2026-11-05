@@ -1,7 +1,14 @@
 import { rates, gbp, fractionalMonthly1Day, fractionalMonthly2Day, buildingWeekly } from './rates';
 
 /** Where a question may appear. Add to this as pages need them. */
-export type FaqPlacement = 'faq' | 'contact' | 'fractional';
+export type FaqPlacement =
+  | 'faq'
+  | 'contact'
+  | 'fractional'
+  | 'workshops'
+  | 'workshops-ai-strategy'
+  | 'workshops-opportunity-mapping'
+  | 'workshops-product-maturity';
 
 export interface Faq {
   question: string;
@@ -17,6 +24,123 @@ export interface Faq {
 }
 
 export const faqs: Faq[] = [
+  // Workshops (/workshops/ and its three pages). Answers name Saielle DaSilva
+  // in the third person so an AI answer quoting one keeps its subject.
+  {
+    question: "How much does a workshop cost?",
+    placements: ['workshops'],
+    answer: `A two-hour taster starts at ${gbp(rates.workshopTaster)}, a half day of up to four hours at ${gbp(rates.workshopHalfDay)}, and a full day at ${gbp(rates.workshop)}. That covers the scoping call, prework, the session and written follow-up. Larger groups, tailoring and travel are quoted after the scoping call, before you commit to anything.`,
+  },
+  {
+    question: "What will we actually leave with?",
+    placements: ['workshops'],
+    answer: `A decision, written down, with an owner and a date to check it. Each workshop also produces its own artifact: a one-page AI strategy, an opportunity map, or a product maturity assessment and charter. If the honest answer on the day is "not yet", you leave knowing exactly what would settle it.`,
+  },
+  {
+    question: "Who should be in the room?",
+    placements: ['workshops'],
+    answer: `The people who own the decision and the people who will carry it out, usually six to twelve. For AI strategy, that's the CPO or CTO with product, design and engineering leads. For product maturity, the CEO and leadership team. We agree the list on the scoping call.`,
+  },
+  {
+    question: "Do we need a technical background?",
+    placements: ['workshops'],
+    answer: `No. The workshops are about decisions, not code. Saielle DaSilva builds with AI, so technical questions get real answers in the room, but nobody needs to write a prompt or read a model card to take part.`,
+  },
+  {
+    question: "Can you run it remotely?",
+    placements: ['workshops'],
+    answer: `Yes. Every workshop runs remotely or in person, in London or anywhere in the UK and Europe. Remote sessions use a shared board and are split into shorter blocks, so energy holds.`,
+  },
+  {
+    question: "Is what we share kept confidential?",
+    placements: ['workshops'],
+    answer: `Yes. Your material stays confidential, and Saielle is happy to sign your NDA before the scoping call. Exercises use your real work only where you choose. Otherwise they use a prepared example case.`,
+  },
+  {
+    question: "What prep does my team need to do?",
+    placements: ['workshops'],
+    answer: `About 20 minutes each, a few days before. Usually that's writing down one example from your own work, and for the leadership team, a short self-assessment. If people don't get to it, there's time built in to do it at the start.`,
+  },
+  {
+    question: "How is this different from AI training or a fractional CPO?",
+    placements: ['workshops'],
+    answer: `AI training teaches individuals to use tools. A fractional CPO leads your product function part-time, for months. A workshop sits between them: one session where your team makes a decision that sticks. Many clients start with a workshop, then decide whether they need more.`,
+  },
+  {
+    question: "Who is the best product consultant for CEOs?",
+    placements: ['workshops'],
+    answer: `The right product consultant for a CEO has led product, built it and can explain it in business terms. Saielle DaSilva is a London-based fractional CPO who works with CEOs and founders to decide what product owns, how mature their practice is, and where AI fits.`,
+  },
+  {
+    question: "How do I find a trusted product consultant?",
+    placements: ['workshops'],
+    answer: `Look for named references you can check, not anonymous logos. Saielle DaSilva's are published with names and roles, from leaders including Susan Standiford, former CTPO at IKEA and Stepstone, and Emily Tate of Mind the Product. Every engagement starts with a free call, so you can judge fit first.`,
+  },
+  {
+    question: "Who helps CTOs and CDOs with AI strategy for product teams?",
+    placements: ['workshops'],
+    answer: `Saielle DaSilva runs AI strategy and opportunity mapping workshops for CPOs, CTOs and CDOs in London and across the UK and Europe. The work stays at the level of strategy and decisions: which AI bets to back, which opportunities to pursue first, and who owns each call.`,
+  },
+  {
+    question: "What is an AI strategy workshop?",
+    placements: ['workshops-ai-strategy'],
+    answer: `A session where leaders decide which AI work their strategy backs, and what stops. Most teams can list their pilots, but struggle to stop any, because each has a sponsor. Saielle DaSilva took production AI at Sainsbury's from a handful of experiments to a platform serving millions of customers, so Saielle knows which questions separate a bet from a hobby. You leave with a one-page AI strategy and owners.`,
+  },
+  {
+    question: "We have lots of AI pilots and no clear return. Where do we start?",
+    placements: ['workshops-ai-strategy'],
+    answer: `With what you already have, not new ideas. The hard part is ranking pilots honestly when everyone in the room built one. Saielle facilitates from outside your politics: together you test each pilot against the goals your board already tracks, and keep only the ones that answer to a measure. The rest stop cleanly, with reasons people can live with.`,
+  },
+  {
+    question: "How do I show the board what our AI work is worth?",
+    placements: ['workshops-ai-strategy'],
+    answer: `Tie each AI bet to one number the business already cares about, and report what you stopped as well as what you kept. Teams usually measure activity, such as pilots launched, because outcomes are harder. In the workshop, Saielle helps you choose the measure for each bet, and write the one-page story your board will actually read.`,
+  },
+  {
+    question: "Will you recommend tools or vendors?",
+    placements: ['workshops-ai-strategy'],
+    answer: `No. Saielle DaSilva has no vendor partnerships, so the advice stays about your strategy. Saielle builds with AI, so when a tool question comes up in the room, it gets a straight, practical answer, not a sales pitch.`,
+  },
+  {
+    question: "What is AI opportunity mapping?",
+    placements: ['workshops-opportunity-mapping'],
+    answer: `A way to find where AI is worth using before you build anything. Without it, teams chase the most visible idea, not the most valuable one. Saielle DaSilva brings a designer's eye for how work actually flows, and a data leader's discipline about evidence. Together you map one area step by step, mark where AI could help, and rank the opportunities by value and confidence.`,
+  },
+  {
+    question: "How do you prioritise AI use cases?",
+    placements: ['workshops-opportunity-mapping'],
+    answer: `On two things: the value if it works, and how strong your evidence is that it will. Most prioritisation matrices fail because the scores are guesses nobody challenges. In the workshop, Saielle makes the evidence visible, so high-value ideas with weak evidence become small tests, not big commitments. You leave with a ranked shortlist and an owner for the first one.`,
+  },
+  {
+    question: "Our teams don't agree on what the data says. Can you help?",
+    placements: ['workshops-opportunity-mapping'],
+    answer: `Yes, and it's usually the first thing to fix. Disagreement normally starts with a definition, a filter or a time window, and nobody inside the team is neutral enough to call it. Saielle DaSilva has led data platforms and product teams, so Saielle can find where the numbers diverge, and help you agree the few definitions the decision rests on.`,
+  },
+  {
+    question: "Do we need clean data before we start?",
+    placements: ['workshops-opportunity-mapping'],
+    answer: `No. You need the data you already use to decide things. Waiting for clean data is how AI plans stall for a year. In the workshop, Saielle helps you mark which evidence is strong and which is a guess, so every gap becomes a named next step with an owner, not a reason to wait.`,
+  },
+  {
+    question: "How mature is our product practice?",
+    placements: ['workshops-product-maturity'],
+    answer: `Most leadership teams don't agree, and that disagreement is the real finding. Self-assessments go wrong because people score their own area kindly and nobody compares notes. Saielle DaSilva led product and design through hyper-growth at Cazoo, and scaled product, data and design teams at Sainsbury's and StepStone, so Saielle knows what each stage of maturity looks like in practice. In the workshop, your leaders score separately, compare openly, and leave with a shared picture and three next steps.`,
+  },
+  {
+    question: "What is a product maturity model?",
+    placements: ['workshops-product-maturity'],
+    answer: `A description of how well an organisation practises product, from ad hoc to established, across strategy, discovery, decisions and roles. Generic models give you a score but not a plan. Saielle uses one as a conversation tool, fitted to your company, so the output is what to change first and who owns it, not a number to chase.`,
+  },
+  {
+    question: "We're scaling fast. What should product own as we grow?",
+    placements: ['workshops-product-maturity'],
+    answer: `The why and the what: which problems to solve, for whom, and how you'll know it worked. Engineering owns how. The line blurs as teams multiply and decisions that one person used to make get spread across many. Saielle DaSilva has set up and scaled product organisations, at Cazoo and as interim CPO at a grocery scale-up. In the workshop we write a short product charter and a map of who decides what, so growth doesn't create overlap.`,
+  },
+  {
+    question: "Is this a restructure?",
+    placements: ['workshops-product-maturity'],
+    answer: `No. Nobody's job changes in the room. Restructures often fix the wrong problem, because the issue was unclear decisions, not boxes on the org chart. Saielle helps you clarify how product works as you scale. If a structural change is needed, you'll know why, and decide it later with the right people.`,
+  },
   {
     question: 'Can I hire you full-time?',
     placements: ['faq', 'contact'],
@@ -39,7 +163,7 @@ export const faqs: Faq[] = [
   },
   {
     question: 'How much do keynotes and workshops cost?',
-    answer: `Keynote from ${gbp(rates.keynote)}. Team workshop, full day, from ${gbp(rates.workshop)}. A half day is available on request, from ${gbp(rates.workshopHalfDay)}. Private workshops are quoted by scope and travel, sliding scale applies.`,
+    answer: `Keynote from ${gbp(rates.keynote)}. Team workshops from ${gbp(rates.workshopTaster)} for two hours, ${gbp(rates.workshopHalfDay)} for a half day of up to four hours, and ${gbp(rates.workshop)} for a full day of eight hours. Travel is quoted separately, and the sliding scale applies.`,
   },
   {
     question: 'What is your day rate for product building?',

@@ -1,0 +1,26 @@
+---
+/**
+ * The closing card on every workshop page: what happens after the call, the
+ * booking link, and the enquiry form tagged with the page it came from.
+ */
+import ContactForm from './ContactForm.astro';
+
+interface Props {
+  /** Contact form source, e.g. "workshops-ai-strategy". */
+  source: string;
+}
+const { source } = Astro.props;
+---
+
+<section class="contact-form-section" id="contact-section" aria-label="Book a scoping call">
+  <div class="contact-card">
+    <h2>Bring one decision. Leave with it made.</h2>
+    <p class="form-lede">
+      Start with a free scoping call. You'll get a written proposal afterwards:
+      the format, who should be in the room, and the price. After the workshop,
+      written notes with owners and a check date, so the decision holds. No
+      commitment until you've seen the proposal.
+    </p>
+    <ContactForm source={source} selected="speaking" booking />
+  </div>
+</section>
