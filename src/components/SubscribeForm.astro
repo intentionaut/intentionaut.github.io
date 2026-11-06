@@ -276,6 +276,16 @@ const {
         };
 
         if (res.ok) {
+          const placement = form.dataset.subscribe || 'unknown';
+          const variant = form.closest('.subscribe--full') ? 'full' : 'inline';
+          (window as any).posthog?.capture('newsletter_subscription_started', {
+            placement,
+            variant,
+          });
+          (window as any).posthog?.logger?.info('newsletter subscription accepted', {
+            placement,
+            variant,
+          });
           form.hidden = true;
           if (note) note.hidden = true;
           if (done) {
