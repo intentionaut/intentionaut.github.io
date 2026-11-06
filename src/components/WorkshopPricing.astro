@@ -1,8 +1,8 @@
 ---
 /**
  * Formats and prices for every workshop page, as talk rows from the design
- * system. Prices and hours come from rates.ts, never typed here. The half day
- * leads: it is the usual format, and the others are there when they fit better.
+ * system. Prices and hours come from rates.ts, never typed here. Ordered by
+ * length; two hours is its own format (alignment, inspiration, Q&A), not a taster.
  */
 import { rates, gbp, workshopHours, workshopGroup, workshopExtraPerson } from '../data/rates';
 
@@ -12,9 +12,9 @@ interface Props {
 const { id = 'formats' } = Astro.props;
 
 const formats = [
-  { name: `Half day · up to ${workshopHours.halfDay} hours`, price: rates.workshopHalfDay },
-  { name: `Taster · ${workshopHours.taster} hours`, price: rates.workshopTaster },
-  { name: `Full day · ${workshopHours.fullDay} hours`, price: rates.workshop },
+  { name: `${workshopHours.taster} hours`, price: rates.workshopTaster, what: 'Alignment, inspiration and Q&A.' },
+  { name: `Half day · up to ${workshopHours.halfDay} hours`, price: rates.workshopHalfDay, what: 'Your team works its own decision through.' },
+  { name: `Full day · ${workshopHours.fullDay} hours`, price: rates.workshop, what: 'A second decision, or a hands-on rehearsal.' },
 ];
 const terms = [
   { label: 'Group', text: `Up to ${workshopGroup.included} people included` },
@@ -26,12 +26,12 @@ const terms = [
 
 <section class="rates-section workshop-pricing" id={id} aria-label="Formats and prices">
   <h2>Formats and prices</h2>
-  <p class="rates-intro">Most workshops run as a half day. A taster or a full day is there when it fits better.</p>
+  <p class="rates-intro">Choose by what your team needs, not by length.</p>
   <ul class="talk-list workshop-formats">
     {formats.map((f) => (
       <li class="talk-row">
         <span class="talk-date">From {gbp(f.price)}</span>
-        <div><span class="talk-title">{f.name}</span></div>
+        <div><span class="talk-title">{f.name}</span><p class="talk-meta">{f.what}</p></div>
       </li>
     ))}
   </ul>

@@ -109,7 +109,7 @@ export const faqs: Faq[] = [
   {
     question: "How much does a workshop cost?",
     placements: ['workshops'],
-    answer: `A two-hour taster starts at ${gbp(rates.workshopTaster)}, a half day of up to four hours at ${gbp(rates.workshopHalfDay)}, and a full day at ${gbp(rates.workshop)}. That covers the scoping call, prework, the session and written follow-up. Each price covers up to ${workshopGroup.included} people, and each extra person is ${gbp(workshopExtraPerson)}, up to ${workshopGroup.max}. Travel outside London is charged at cost, and tailoring is quoted after the scoping call, before you commit to anything.`,
+    answer: `A two-hour workshop starts at ${gbp(rates.workshopTaster)}, a half day of up to four hours at ${gbp(rates.workshopHalfDay)}, and a full day at ${gbp(rates.workshop)}. That covers the scoping call, prework, the session and written follow-up. Each price covers up to ${workshopGroup.included} people, and each extra person is ${gbp(workshopExtraPerson)}, up to ${workshopGroup.max}. Travel outside London is charged at cost, and tailoring is quoted after the scoping call, before you commit to anything.`,
   },
   {
     question: "What will we actually leave with?",
