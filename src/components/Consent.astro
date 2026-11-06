@@ -45,8 +45,33 @@ const enabled = import.meta.env.PROD && !disabled;
 
         function strip(u) { return typeof u === 'string' ? u.split('#')[0] : u; }
 
+        // Survey cap: at most 3 showings in 30 days, never after an answer.
+        // The PostHog survey has a selector condition on #survey-ok and a
+        // 7-day wait, so PostHog itself keeps showings 7 days apart.
+        var SKEY = 'survey-shown';
+        function shown() { try { return JSON.parse(localStorage.getItem(SKEY) || '[]'); } catch (e) { return []; } }
+        function surveyAllowed(now) {
+          var s = shown();
+          if (s.indexOf('sent') !== -1) return false;
+          return s.filter(function (t) { return typeof t === 'number' && now - t < 30 * 864e5; }).length < 3;
+        }
+        function noteSurvey(ev) {
+          if (!ev || (ev.event !== 'survey shown' && ev.event !== 'survey sent')) return;
+          var s = shown();
+          s.push(ev.event === 'survey sent' ? 'sent' : Date.now());
+          try { localStorage.setItem(SKEY, JSON.stringify(s.slice(-10))); } catch (e) {}
+        }
+        function markSurvey() {
+          if (!surveyAllowed(Date.now()) || document.getElementById('survey-ok')) return;
+          var m = document.createElement('div');
+          m.id = 'survey-ok';
+          m.hidden = true;
+          document.body.appendChild(m);
+        }
+
         function load() {
           if (window.posthog && window.posthog.__loaded) return;
+          markSurvey();
           // PostHog's loader snippet; only the asset URL changes, to load array.js through the proxy (e.intentionaut.com, PostHog's EU managed proxy) so ad blockers that block posthog.com by name still count consenting visitors.
           !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags onFeatureFlags identify setPersonProperties".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
           window.posthog.init(POSTHOG_KEY, {
@@ -56,6 +81,7 @@ const enabled = import.meta.env.PROD && !disabled;
             disable_session_recording: true,
             // Case-study keys live in the fragment: never let one leave the page.
             before_send: function (ev) {
+              noteSurvey(ev);
               if (ev && ev.properties) {
                 ['$current_url', '$referrer', '$initial_current_url'].forEach(function (k) {
                   if (ev.properties[k]) ev.properties[k] = strip(ev.properties[k]);
