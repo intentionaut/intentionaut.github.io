@@ -12,9 +12,9 @@ interface Props {
 const { id = 'formats' } = Astro.props;
 
 const formats = [
-  { name: `${workshopHours.taster} hours`, price: rates.workshopTaster, what: 'Alignment, inspiration and Q&A.' },
-  { name: `Half day · up to ${workshopHours.halfDay} hours`, price: rates.workshopHalfDay, what: 'Your team works its own decision through.' },
-  { name: `Full day · ${workshopHours.fullDay} hours`, price: rates.workshop, what: 'A second decision, or a hands-on rehearsal.' },
+  { name: `${workshopHours.taster} hours`, price: rates.workshopTaster, what: 'For leaders who need a shared view of one problem area before committing more time. You leave aligned on what matters, with options to pursue and your hardest questions answered.' },
+  { name: `Half day · up to ${workshopHours.halfDay} hours`, price: rates.workshopHalfDay, what: "For working one problem area through. You leave with the workshop's outputs, from a one-page strategy to a maturity charter, with owners named and next steps dated." },
+  { name: `Full day · ${workshopHours.fullDay} hours`, price: rates.workshop, what: 'For a whole domain, or one problem area worked through and then rehearsed hands-on. You leave with the outputs, owners and dates, and a plan your team has already tried.' },
 ];
 ---
 
@@ -41,6 +41,10 @@ const formats = [
 <style>
   .workshop-formats {
     padding-bottom: var(--space-6);
+  }
+  /* The price leads; the format name steps back to regular weight. */
+  .workshop-formats .talk-title {
+    font-weight: 400;
   }
   .workshop-terms {
     max-width: 40rem;
