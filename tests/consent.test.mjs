@@ -18,8 +18,9 @@ test('Decline is offered beside Accept', () => {
   assert.match(consent, /data-consent="no">Decline</);
 });
 
-test('PostHog is EU-hosted, with session recording off', () => {
-  assert.match(consent, /api_host: 'https:\/\/eu\.i\.posthog\.com'/);
+test('PostHog goes through the EU managed proxy on our domain, with session recording off', () => {
+  assert.match(consent, /api_host: 'https:\/\/e\.intentionaut\.com'/);
+  assert.match(consent, /ui_host: 'https:\/\/eu\.posthog\.com'/);
   assert.match(consent, /disable_session_recording: true/);
 });
 
