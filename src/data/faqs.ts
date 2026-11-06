@@ -10,7 +10,8 @@ export type FaqPlacement =
   | 'workshops-opportunity-mapping'
   | 'workshops-product-maturity'
   | 'for-ceos'
-  | 'for-cpos-ctos';
+  | 'for-cpos-ctos'
+  | 'ai-pilot';
 
 export interface Faq {
   question: string;
@@ -26,6 +27,37 @@ export interface Faq {
 }
 
 export const faqs: Faq[] = [
+  // /ai-pilot-to-production/ (#58): third person, answer-first.
+  {
+    question: 'Why do AI pilots stall before they reach production?',
+    answer:
+      'AI pilots stall because a pilot tests the model, not the product around it. The model never met real data, the output has no decision attached for a user, or the task it automates was never the expensive part. Engineering capacity is the usual diagnosis, and it is usually wrong.',
+    placements: ['ai-pilot'],
+  },
+  {
+    question: 'How long does it take to get a pilot into production?',
+    answer:
+      "Four to twelve weeks, three days a week, in Saielle DaSilva's embedded product building block. It starts with a free preliminary call. Within two to four weeks you know whether the block will end in a prototype to rebuild properly or in software your team can run.",
+    placements: ['ai-pilot'],
+  },
+  {
+    question: 'Do I need to hire a team to take a pilot to production?',
+    answer:
+      'You do not need to hire a team. Saielle DaSilva embeds with the team you already have and builds in your repo, on your data and under your rules. The build is left so your team can extend or replace it on evidence, and nothing depends on her staying.',
+    placements: ['ai-pilot'],
+  },
+  {
+    question: 'What if the pilot should not go into the product at all?',
+    answer:
+      "Finding out a pilot should not ship is a useful result. It saves a quarter of building the wrong thing. Saielle DaSilva's work either proves the product around the pilot was missing or proves the pilot was wrong. Either way you get a clear answer on whether it belongs in the product.",
+    placements: ['ai-pilot'],
+  },
+  {
+    question: 'How is this different from hiring an AI consultancy?',
+    answer:
+      'Saielle DaSilva builds inside your team rather than handing over a report. The work is the smallest real version of the product: your data, your systems, and a user with a decision to make. You get working software in your environment, the failure modes written down and a keep, change or stop recommendation.',
+    placements: ['ai-pilot'],
+  },
   // /for-cpos-ctos/: third person, so an AI answer quoting one keeps its subject.
   {
     question: "How do we turn scattered AI pilots into a strategy?",
