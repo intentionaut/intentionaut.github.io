@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import RelatedReading from '../../components/RelatedReading.astro';
 import FaqList from '../../components/FaqList.astro';
 import TestimonialCarousel from '../../components/TestimonialCarousel.astro';
 import WorkshopPricing from '../../components/WorkshopPricing.astro';
@@ -18,6 +19,11 @@ export function getStaticPaths() {
 const { w } = Astro.props as { w: Workshop };
 const faqs = faqsFor(w.placement);
 const url = `https://intentionaut.com/workshops/${w.slug}/`;
+// #79: one related essay where it fits; the AI strategy page has none yet.
+const related = {
+  'product-maturity-model': { href: '/writing/impact-cant-bypass-politics/', title: "Impact can't bypass politics", summary: 'Impact is decided by people before it is delivered by software.' },
+  'ai-opportunity-mapping': { href: '/writing/insights-to-actions/', title: 'Getting the most out of product discovery', summary: 'What to do and why it matters, before the features you ship.' },
+}[w.slug];
 
 const serviceSchema = {
   '@type': 'Service',
@@ -96,6 +102,8 @@ const faqSchema = {
     </ul>
 
     <TestimonialCarousel testimonials={testimonialsFor('workshops')} heading="What people say" />
+
+    {related && <RelatedReading {...related} />}
 
     <FaqList items={faqs} heading={w.faqHeading} sub={w.faqSub} />
 

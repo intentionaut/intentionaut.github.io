@@ -5,6 +5,7 @@ import ContactForm from '../components/ContactForm.astro';
 import { rates, gbp, fractionalMonthly1Day, fractionalMonthly2Day } from '../data/rates';
 import { testimonialsFor } from '../data/testimonials';
 import { faqsFor } from '../data/faqs';
+import RelatedReading from '../components/RelatedReading.astro';
 import FaqList from '../components/FaqList.astro';
 import { PRIMARY_PHRASE } from '../data/positioning';
 
@@ -153,10 +154,12 @@ const faqSchema = {
       </p>
       <p>
         Need a second opinion rather than a leader? That is the
-        {' '}<a href="/contact/">strategy session</a>: {gbp(rates.strategySession)},
+        {' '}<a href="/strategic-direction/">strategy session</a>: {gbp(rates.strategySession)},
         90 minutes, on its own, separate from fractional work.
       </p>
     </div>
+
+    <RelatedReading href="/writing/impact-cant-bypass-politics/" title="Impact can't bypass politics" summary="Impact is decided by people before it is delivered by software." />
 
     <section class="contact-form-section" aria-label="Get in touch">
       <div class="contact-card">
