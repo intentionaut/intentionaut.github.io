@@ -22,6 +22,7 @@ export interface Workshop {
   metaTitle: string;
   metaDescription: string;
   faqSub: string;
+  faqHeading: string;
 }
 
 export const workshops: Workshop[] = [
@@ -52,7 +53,8 @@ export const workshops: Workshop[] = [
     "audience": "CPOs, CTOs and CDOs",
     "metaTitle": "AI strategy workshop for CPOs and CTOs | Saielle DaSilva",
     "metaDescription": "For CPOs, CTOs and CDOs with too many AI pilots: decide which AI bets to keep, merge or stop, each with one measure and an owner.",
-    "faqSub": "What CPOs and CTOs ask before an AI strategy workshop."
+    "faqSub": "What CPOs and CTOs ask before an AI strategy workshop.",
+    "faqHeading": "FAQ: AI strategy workshop"
   },
   {
     "slug": "ai-opportunity-mapping",
@@ -81,7 +83,8 @@ export const workshops: Workshop[] = [
     "audience": "CPOs, CDOs and CTOs",
     "metaTitle": "AI opportunity mapping for CPOs and CDOs | Saielle DaSilva",
     "metaDescription": "For CPOs, CDOs and CTOs unsure where AI is worth adopting: map opportunities, agree the evidence when numbers disagree, and choose the first.",
-    "faqSub": "What leaders ask before mapping AI opportunities."
+    "faqSub": "What leaders ask before mapping AI opportunities.",
+    "faqHeading": "FAQ: AI opportunity mapping workshop"
   },
   {
     "slug": "product-maturity-model",
@@ -110,7 +113,8 @@ export const workshops: Workshop[] = [
     "audience": "CEOs and CPOs",
     "metaTitle": "Product maturity for CEOs and CPOs | Saielle DaSilva",
     "metaDescription": "Product maturity assessment for CEOs and CPOs scaling a product organisation. Agree what product owns as you grow, and the next three steps.",
-    "faqSub": "What CEOs and CPOs ask before a maturity workshop."
+    "faqSub": "What CEOs and CPOs ask before a maturity workshop.",
+    "faqHeading": "FAQ: Product maturity modelling workshop"
   }
 ];
 
