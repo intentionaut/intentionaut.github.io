@@ -112,16 +112,6 @@ export const faqs: Faq[] = [
     answer: `A two-hour taster starts at ${gbp(rates.workshopTaster)}, a half day of up to four hours at ${gbp(rates.workshopHalfDay)}, and a full day at ${gbp(rates.workshop)}. That covers the scoping call, prework, the session and written follow-up. Each price covers up to ${workshopGroup.included} people, and each extra person is ${gbp(workshopExtraPerson)}, up to ${workshopGroup.max}. Travel outside London is charged at cost, and tailoring is quoted after the scoping call, before you commit to anything.`,
   },
   {
-    question: "How many people can attend?",
-    placements: ['workshops'],
-    answer: `Up to ${workshopGroup.included} people are included in every price. Saielle DaSilva runs groups of up to ${workshopGroup.max}, at ${gbp(workshopExtraPerson)} for each person above ${workshopGroup.included}. Past ${workshopGroup.max}, a decision stops being made in the room, so larger teams split into two sessions.`,
-  },
-  {
-    question: "Do you charge for travel?",
-    placements: ['workshops'],
-    answer: `Not for remote sessions or in-person sessions in London. Elsewhere in the UK and Europe, travel and accommodation are charged at cost, with no markup, and agreed in writing before you book. Workshop materials are always included.`,
-  },
-  {
     question: "What will we actually leave with?",
     placements: ['workshops'],
     answer: `A decision, written down, with an owner and a date to check it. Each workshop also produces its own artefact: a one-page AI strategy, an opportunity map, or a product maturity assessment and charter. If the honest answer on the day is "not yet", you leave knowing exactly what would settle it.`,

@@ -23,37 +23,81 @@ const priced = rows.map((r) => ({ ...r, best: r.price / r.hours === bestHourly }
 
 <section class="rates-section workshop-pricing" id={id} aria-label="Formats and prices">
   <h2>Formats and prices</h2>
-  <p class="rates-intro">
-    Every workshop runs remote or in person and includes a scoping call,
-    materials and written follow-up. Each price covers up to
-    {workshopGroup.included} people; each extra person is
-    {gbp(workshopExtraPerson)}, up to {workshopGroup.max}.
-  </p>
-  <div class="prose">
-    <table>
-      <thead>
-        <tr><th>Format</th><th>Price</th><th>Per hour</th></tr>
-      </thead>
-      <tbody>
-        {priced.map((r) => (
-          <tr>
-            <td>{r.name}{r.best && <strong> · Best value</strong>}</td>
-            <td>From {gbp(r.price)}</td>
-            <td>{perHour(r.price, r.hours)}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
+  <ul class="tiers">
+    {priced.map((r) => (
+      <li class:list={['tier', { best: r.best }]}>
+        {r.best && <span class="flag">Best value</span>}
+        <p class="tier-name">{r.name}</p>
+        <p class="tier-price">{gbp(r.price)}</p>
+        <p class="tier-hour">from · {perHour(r.price, r.hours)} an hour</p>
+      </li>
+    ))}
+  </ul>
+  <ul class="terms">
+    <li>Up to {workshopGroup.included} people included</li>
+    <li>{gbp(workshopExtraPerson)} per extra person, up to {workshopGroup.max}</li>
+    <li>Travel at cost outside London</li>
+    <li>Materials included</li>
+  </ul>
 </section>
 
 <style>
-  .workshop-pricing .prose {
-    max-width: 52rem;
-    padding-bottom: 0;
+  .tiers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: var(--space-5);
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-5);
   }
-  .workshop-pricing td:nth-child(n + 2),
-  .workshop-pricing th {
-    white-space: nowrap;
+  .tier {
+    position: relative;
+    border: 1px solid var(--slate);
+    border-radius: var(--radius-l);
+    padding: var(--space-6) var(--space-5) var(--space-5);
+  }
+  .tier.best {
+    border: 2px solid var(--accent);
+  }
+  .flag {
+    position: absolute;
+    top: -0.7rem;
+    left: var(--space-5);
+    background: var(--accent);
+    color: var(--paper);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.1rem var(--space-2);
+    border-radius: var(--radius-s);
+  }
+  .tier p {
+    margin: 0;
+  }
+  .tier-price {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    line-height: 1.1;
+    margin: var(--space-2) 0 var(--space-1) !important;
+  }
+  .tier-hour {
+    font-size: var(--text-sm);
+    color: var(--muted);
+  }
+  .terms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--muted);
+  }
+  .terms li::before {
+    content: '·';
+    color: var(--accent-text);
+    margin-right: var(--space-2);
   }
 </style>
