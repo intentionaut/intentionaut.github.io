@@ -227,6 +227,11 @@ export const faqs: Faq[] = [
     answer: `A half day where a product leadership team takes one decision the numbers haven't settled, and makes it. Saielle DaSilva gets product, data and design to agree what each number means and who owns it, then the team writes one recommendation with its trade-off and a 90-day owner. At Sainsbury's, Saielle's work on observability, data quality and shared data definitions cut maintenance load by 35 per cent.`,
   },
   {
+    question: "What does a stalled decision cost?",
+    placements: ['workshops-data-decision'],
+    answer: `Time the market doesn't give back. While leaders argue about what the numbers mean, the decision waits, and a competitor who decides sooner moves first. The fix starts upstream: agree what each number means and who owns it, so the numbers stop holding the decision up. Disputed numbers also cost twice, because they get rebuilt, rechecked and maintained by each team. At Sainsbury's, Saielle DaSilva's work on data quality and shared data definitions cut maintenance load by 35 per cent.`,
+  },
+  {
     question: "Our dashboards are fine, but decisions still stall. Why?",
     placements: ['workshops-data-decision'],
     answer: `Usually because nobody has agreed what the numbers mean, or who decides. Each function reads the same figure its own way, so every meeting reopens the definition before it reaches the decision. Agreeing the definitions and the owner is what lets the decision move.`,
