@@ -36,3 +36,11 @@ test('pages that opt out of analytics opt out of PostHog too', () => {
 test('the footer can reopen the choice', () => {
   assert.match(footer, /data-cookie-settings>Cookie settings</);
 });
+
+test('survey is capped: selector marker, 3 showings in 30 days, none after an answer', () => {
+  assert.match(consent, /m\.id = 'survey-ok'/);
+  assert.match(consent, /< 3;/);
+  assert.match(consent, /30 \* 864e5/);
+  assert.match(consent, /indexOf\('sent'\) !== -1\) return false/);
+  assert.match(consent, /noteSurvey\(ev\);/);
+});
