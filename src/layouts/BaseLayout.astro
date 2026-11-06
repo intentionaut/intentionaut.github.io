@@ -5,6 +5,8 @@ import '@fontsource-variable/jost';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import PostHog from '../components/posthog.astro';
+import { BOOKING_URL } from '../data/links';
 import { JOB_TITLE } from '../data/positioning';
 
 interface Props {
@@ -178,6 +180,7 @@ const graph = {
       is:inline
       set:html={JSON.stringify(graph).replace(/</g, '\\u003c')}
     />
+    <PostHog />
     {/*
       First-touch campaign capture.
 
@@ -243,7 +246,19 @@ const graph = {
     <Footer />
     {/* Every contact form on the site posts its FormData as-is, so hidden
         fields added here reach the worker without touching ten page scripts. */}
-    <script is:inline>
+    <script is:inline define:vars={{ bookingUrl: BOOKING_URL }}>
+      document.addEventListener('click', function (event) {
+        var link = event.target.closest('a[href]');
+        if (link && link.href === bookingUrl) {
+          window.posthog?.capture('booking_call_started', {
+            page_path: location.pathname,
+          });
+          window.posthog?.logger?.info('booking call started', {
+            page_path: location.pathname,
+          });
+        }
+      });
+
       (function () {
         var form = document.getElementById('contact-form');
         if (!form) return;

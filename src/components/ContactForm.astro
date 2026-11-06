@@ -158,6 +158,13 @@ const topics: [string, string][] = [
       });
       const result = (await res.json().catch(() => ({}))) as { message?: string; error?: string };
       if (res.ok) {
+        const topic = String(data.topic ?? 'other');
+        const source = String(data.source ?? 'contact');
+        (window as any).posthog?.capture('contact_message_sent', { topic, source });
+        (window as any).posthog?.logger?.info('contact message accepted', {
+          topic,
+          source,
+        });
         // First name only, capitalised. The email address is deliberately not
         // echoed back: the screen may be shared or screenshotted.
         const first = String(data.name ?? '').trim().split(/\s+/)[0] ?? '';
