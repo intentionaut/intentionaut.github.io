@@ -34,7 +34,7 @@ export const faqs: Faq[] = [
   {
     question: "What will we actually leave with?",
     placements: ['workshops'],
-    answer: `A decision, written down, with an owner and a date to check it. Each workshop also produces its own artifact: a one-page AI strategy, an opportunity map, or a product maturity assessment and charter. If the honest answer on the day is "not yet", you leave knowing exactly what would settle it.`,
+    answer: `A decision, written down, with an owner and a date to check it. Each workshop also produces its own artefact: a one-page AI strategy, an opportunity map, or a product maturity assessment and charter. If the honest answer on the day is "not yet", you leave knowing exactly what would settle it.`,
   },
   {
     question: "Who should be in the room?",
@@ -44,7 +44,7 @@ export const faqs: Faq[] = [
   {
     question: "Do we need a technical background?",
     placements: ['workshops'],
-    answer: `No. The workshops are about decisions, not code. Saielle DaSilva builds with AI, so technical questions get real answers in the room, but nobody needs to write a prompt or read a model card to take part.`,
+    answer: `No. The workshops are about decisions. Code can be needed to get the right level of visibility, but it isn't the default assumption. Saielle DaSilva builds with AI, so technical questions get real answers in the room, and nobody needs to write a prompt or read a model card to take part.`,
   },
   {
     question: "Can you run it remotely?",
@@ -74,7 +74,7 @@ export const faqs: Faq[] = [
   {
     question: "How do I find a trusted product consultant?",
     placements: ['workshops'],
-    answer: `Look for named references you can check, not anonymous logos. Saielle DaSilva's are published with names and roles, from leaders including Susan Standiford, former CTPO at IKEA and Stepstone, and Emily Tate of Mind the Product. Every engagement starts with a free call, so you can judge fit first.`,
+    answer: `Look for named references you can check, with names and roles you can look up. Saielle DaSilva's are published with names and roles, from leaders including Susan Standiford, former CTPO at IKEA and Stepstone, and Emily Tate of Mind the Product. Every engagement starts with a free call, so you can judge fit first.`,
   },
   {
     question: "Who helps CTOs and CDOs with AI strategy for product teams?",
@@ -89,7 +89,7 @@ export const faqs: Faq[] = [
   {
     question: "We have lots of AI pilots and no clear return. Where do we start?",
     placements: ['workshops-ai-strategy'],
-    answer: `With what you already have, not new ideas. The hard part is ranking pilots honestly when everyone in the room built one. Saielle facilitates from outside your politics: together you test each pilot against the goals your board already tracks, and keep only the ones that answer to a measure. The rest stop cleanly, with reasons people can live with.`,
+    answer: `Start with what you have, and find the gaps that keep you from production readiness. Saielle facilitates from outside your politics: together you test each pilot against the goals your board already tracks, and keep only the ones that answer to a measure. The rest stop cleanly, with reasons people can live with.`,
   },
   {
     question: "How do I show the board what our AI work is worth?",
@@ -99,12 +99,12 @@ export const faqs: Faq[] = [
   {
     question: "Will you recommend tools or vendors?",
     placements: ['workshops-ai-strategy'],
-    answer: `No. Saielle DaSilva has no vendor partnerships, so the advice stays about your strategy. Saielle builds with AI, so when a tool question comes up in the room, it gets a straight, practical answer, not a sales pitch.`,
+    answer: `Where it helps, Saielle DaSilva may recommend tools, support, external third parties or frameworks to consider. Saielle has no vendor partnerships, so the advice stays about your strategy, and builds with AI, so a tool question in the room gets a straight, practical answer.`,
   },
   {
     question: "What is AI opportunity mapping?",
     placements: ['workshops-opportunity-mapping'],
-    answer: `A way to find where AI is worth using before you build anything. Without it, teams chase the most visible idea, not the most valuable one. Saielle DaSilva brings a designer's eye for how work actually flows, and a data leader's discipline about evidence. Together you map one area step by step, mark where AI could help, and rank the opportunities by value and confidence.`,
+    answer: `A way to find where AI is worth using before you build anything. Without it, teams chase the most visible idea instead of the one worth most. Saielle DaSilva brings a designer's eye for how work flows, and a data leader's discipline about evidence. Together you map one area step by step, mark where AI could help, and rank the opportunities by value and confidence.`,
   },
   {
     question: "How do you prioritise AI use cases?",
@@ -119,17 +119,17 @@ export const faqs: Faq[] = [
   {
     question: "Do we need clean data before we start?",
     placements: ['workshops-opportunity-mapping'],
-    answer: `No. You need the data you already use to decide things. Waiting for clean data is how AI plans stall for a year. In the workshop, Saielle helps you mark which evidence is strong and which is a guess, so every gap becomes a named next step with an owner, not a reason to wait.`,
+    answer: `No. You need the data you already use to decide things. Waiting for clean data is how AI plans stall for a year. In the workshop, Saielle helps you mark which evidence is strong and which is a guess, so every gap becomes a named next step with an owner.`,
   },
   {
     question: "How mature is our product practice?",
     placements: ['workshops-product-maturity'],
-    answer: `Most leadership teams don't agree, and that disagreement is the real finding. Self-assessments go wrong because people score their own area kindly and nobody compares notes. Saielle DaSilva led product and design through hyper-growth at Cazoo, and scaled product, data and design teams at Sainsbury's and StepStone, so Saielle knows what each stage of maturity looks like in practice. In the workshop, your leaders score separately, compare openly, and leave with a shared picture and three next steps.`,
+    answer: `Most leadership teams don't agree, and the workshop starts from where they differ. Self-assessments go wrong because people score their own area kindly and nobody compares notes. Saielle DaSilva led product and design through hyper-growth at Cazoo, and scaled product, data and design teams at Sainsbury's and StepStone, so Saielle has seen what each stage of maturity looks like in practice. In the workshop, your leaders score separately, compare openly, and leave with a shared picture and three next steps.`,
   },
   {
     question: "What is a product maturity model?",
     placements: ['workshops-product-maturity'],
-    answer: `A description of how well an organisation practises product, from ad hoc to established, across strategy, discovery, decisions and roles. Generic models give you a score but not a plan. Saielle uses one as a conversation tool, fitted to your company, so the output is what to change first and who owns it, not a number to chase.`,
+    answer: `A description of how well an organisation practises product, from ad hoc to established, across strategy, discovery, decisions and roles. Generic models give you a score. Saielle uses one as a conversation tool, fitted to your company, so the output is what to change first and who owns it.`,
   },
   {
     question: "We're scaling fast. What should product own as we grow?",
@@ -139,7 +139,7 @@ export const faqs: Faq[] = [
   {
     question: "Is this a restructure?",
     placements: ['workshops-product-maturity'],
-    answer: `No. Nobody's job changes in the room. Restructures often fix the wrong problem, because the issue was unclear decisions, not boxes on the org chart. Saielle helps you clarify how product works as you scale. If a structural change is needed, you'll know why, and decide it later with the right people.`,
+    answer: `No. Nobody's job changes in the room. Restructures often fix the wrong problem, because the issue was unclear decisions. Saielle helps you clarify how product works as you scale. If a structural change is needed, you'll know why, and decide it later with the right people.`,
   },
   {
     question: 'Can I hire you full-time?',

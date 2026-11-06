@@ -47,7 +47,7 @@ export const workshops: Workshop[] = [
       "We close with a date to review the bets, and what would make you stop one."
     ],
     "leaveWith": "A one-page AI strategy, a list of kept and stopped bets with a measure each, and named owners.",
-    "isnt": "This isn't a tool selection exercise. It decides where AI earns its place in your strategy.",
+    "isnt": "It decides where AI belongs in your strategy, whichever tools you use.",
     "card": "Turn scattered AI work into a few bets your strategy backs, each with a measure and an owner.",
     "audience": "CPOs, CTOs and CDOs",
     "metaTitle": "AI strategy workshop for CPOs and CTOs | Saielle DaSilva",
@@ -58,7 +58,7 @@ export const workshops: Workshop[] = [
     "slug": "ai-opportunity-mapping",
     "placement": "workshops-opportunity-mapping",
     "eyebrow": "Workshop · AI adoption",
-    "title": "Opportunity Mapping for AI Adoption",
+    "title": "Opportunity mapping for AI adoption",
     "lede": "Agree where AI is worth adopting, and on what evidence.",
     "problems": [
       "Too many AI ideas, and no fair way to choose between them.",
@@ -76,7 +76,7 @@ export const workshops: Workshop[] = [
       "We close with the first opportunity, an owner, and who can decide the next steps without escalating."
     ],
     "leaveWith": "An opportunity map, shared definitions, an evidence ledger, and the first opportunity with an owner.",
-    "isnt": "This isn't a brainstorm. It ends with one opportunity chosen, on evidence.",
+    "isnt": "It ends with one opportunity chosen on evidence.",
     "card": "Agree where AI is worth adopting, on evidence everyone trusts, and who decides.",
     "audience": "CPOs, CDOs and CTOs",
     "metaTitle": "AI opportunity mapping for CPOs and CDOs | Saielle DaSilva",
@@ -87,7 +87,7 @@ export const workshops: Workshop[] = [
     "slug": "product-maturity-model",
     "placement": "workshops-product-maturity",
     "eyebrow": "Workshop · Organisational development",
-    "title": "Product Maturity Modelling",
+    "title": "Product maturity modelling",
     "lede": "Scale your product organisation without losing clarity.",
     "problems": [
       "What worked at 20 people stops working at 200.",
@@ -105,7 +105,7 @@ export const workshops: Workshop[] = [
       "We close with the next three development steps, each with an owner."
     ],
     "leaveWith": "A maturity assessment, a product charter, a responsibilities map, and the next three development steps.",
-    "isnt": "This isn't a restructure. It's about how product works as you scale.",
+    "isnt": "This workshop is about how product works as you scale, with everyone in the roles they hold today.",
     "card": "For scaling product organisations: see where practice is today, where it needs to get to, and what product owns as you grow.",
     "audience": "CEOs and CPOs",
     "metaTitle": "Product maturity for CEOs and CPOs | Saielle DaSilva",
