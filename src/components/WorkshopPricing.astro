@@ -4,7 +4,7 @@
  * system. Prices and hours come from rates.ts, never typed here. Ordered by
  * length; two hours is its own format (alignment, inspiration, Q&A), not a taster.
  */
-import { rates, gbp, workshopHours, workshopGroup, workshopExtraPerson } from '../data/rates';
+import { rates, gbp, workshopHours, workshopGroup, workshopExtraPerson, workshopGroupCeiling } from '../data/rates';
 
 interface Props {
   id?: string;
@@ -18,7 +18,7 @@ const formats = [
 ];
 const terms = [
   { label: 'Group', text: `Up to ${workshopGroup.included} people included` },
-  { label: 'Extra people', text: `${gbp(workshopExtraPerson)} each, up to ${workshopGroup.max}` },
+  { label: 'Extra people', text: `${gbp(workshopExtraPerson)} each, up to ${workshopGroup.max} people, and never more than ${gbp(workshopGroupCeiling)} in total` },
   { label: 'Travel', text: 'None for remote or London; at cost elsewhere, agreed before booking' },
   { label: 'Materials', text: 'Included' },
 ];

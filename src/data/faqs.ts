@@ -1,4 +1,4 @@
-import { rates, gbp, fractionalMonthly1Day, fractionalMonthly2Day, buildingWeekly, workshopGroup, workshopExtraPerson } from './rates';
+import { rates, gbp, fractionalMonthly1Day, fractionalMonthly2Day, buildingWeekly, workshopGroup, workshopExtraPerson, workshopGroupCeiling } from './rates';
 
 /** Where a question may appear. Add to this as pages need them. */
 export type FaqPlacement =
@@ -109,7 +109,7 @@ export const faqs: Faq[] = [
   {
     question: "How much does a product workshop in London cost?",
     placements: ['workshops'],
-    answer: `A two-hour product workshop with Saielle DaSilva starts at ${gbp(rates.workshopTaster)}, a half day of up to four hours at ${gbp(rates.workshopHalfDay)}, and a full day at ${gbp(rates.workshop)}. That covers the scoping call, prework, the session and written follow-up. Each price covers up to ${workshopGroup.included} people, and each extra person is ${gbp(workshopExtraPerson)}, up to ${workshopGroup.max}. Travel outside London is charged at cost, and tailoring is quoted after the scoping call, before you commit to anything.`,
+    answer: `A two-hour product workshop with Saielle DaSilva starts at ${gbp(rates.workshopTaster)}, a half day of up to four hours at ${gbp(rates.workshopHalfDay)}, and a full day at ${gbp(rates.workshop)}. That covers the scoping call, prework, the session and written follow-up. Each price covers up to ${workshopGroup.included} people, and each extra person is ${gbp(workshopExtraPerson)}, up to ${workshopGroup.max} people. No workshop costs more than ${gbp(workshopGroupCeiling)} in total, so a full day for ${workshopGroup.max} people is ${gbp(workshopGroupCeiling)}. Travel outside London is charged at cost, and tailoring is quoted after the scoping call, before you commit to anything.`,
   },
   {
     question: "Who runs product workshops in London?",
