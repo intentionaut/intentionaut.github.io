@@ -35,17 +35,17 @@ export const faqs: Faq[] = [
   {
     question: "How do we show the board what our AI spend is worth?",
     placements: ['for-cpos-ctos'],
-    answer: `Tie each AI bet to a number the board already reads, such as cost to serve, revenue or time on a named task, and report what was stopped as well as what was kept. Saielle DaSilva took production AI at Sainsbury's from a handful of experiments to a platform serving over 100 million customers, and helps teams write that one-page story.`,
+    answer: `Tie each AI bet to a number the board already reads, such as cost to serve, revenue or time on a named task, and report what was stopped as well as what was kept. Saielle DaSilva took production AI at Sainsbury's from a handful of experiments to a platform serving over 100 million customers, and helps teams write a one-page story for executive stakeholders.`,
   },
   {
     question: "Our AI pilot works but never reaches production. Who can help?",
     placements: ['for-cpos-ctos'],
-    answer: `Someone who can lead the product decision and build in your environment. Saielle DaSilva does both: product building embeds three days a week to take a pilot to a working version, and fractional leadership holds the direction while your team ships it.`,
+    answer: `Someone who can lead the product decision and build in your environment. Saielle DaSilva does both: through product building, Saielle embeds three days a week to take a pilot to a working version, and as a fractional leader holds the direction while your team ships it.`,
   },
   {
     question: "Which AI opportunities should we pursue first?",
     placements: ['for-cpos-ctos'],
-    answer: `Rank them on two things: the value if it works, and how strong the evidence is that it will. High value with weak evidence becomes a small test. Opportunity mapping for AI adoption, a workshop Saielle DaSilva runs with product and engineering leads, builds that ranking from your own numbers.`,
+    answer: `Start with the opportunities where the value is clear and the evidence is strongest, and turn the rest into small tests. Opportunity mapping for AI adoption, a workshop Saielle DaSilva runs with product and engineering leads, builds that ranking from your own numbers.`,
   },
 
   // /for-ceos/: third person, so an AI answer quoting one keeps its subject.
