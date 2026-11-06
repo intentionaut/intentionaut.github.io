@@ -48,7 +48,7 @@ test('every workshop page tags its enquiries with its own source', () => {
   assert.match(read('pages/workshops/index.astro'), /<WorkshopClose source="workshops" \/>/);
   assert.match(read('pages/workshops/[slug].astro'), /<WorkshopClose source=\{w\.placement\} \/>/);
   const data = read('data/workshops.ts');
-  for (const p of ['workshops-ai-strategy', 'workshops-opportunity-mapping', 'workshops-product-maturity']) {
+  for (const p of ['workshops-ai-strategy', 'workshops-opportunity-mapping', 'workshops-product-maturity', 'workshops-data-decision', 'workshops-data-culture']) {
     assert.ok(data.includes(`"placement": "${p}"`), `${p} is a workshop source`);
   }
 });
@@ -80,4 +80,9 @@ test('every FAQ list names its topic, so agents keep the context', () => {
     }
     assert.ok(!src.includes('Fair questions'), `${f} still says "Fair questions"`);
   }
+});
+
+test('a framing variant gets a page but no card on /workshops/', () => {
+  assert.match(read('pages/workshops/index.astro'), /workshops\.filter\(\(w\) => !w\.variantOf\)\.map/);
+  assert.match(read('data/workshops.ts'), /"variantOf": "data-informed-decisions"/);
 });

@@ -53,11 +53,11 @@ const catalogSchema = {
       <WorkshopTopCta />
     </header>
 
-    <section class="rates-section" aria-label="Three workshops">
-      <h2>Three workshops</h2>
+    <section class="rates-section" aria-label="Four workshops">
+      <h2>Four workshops</h2>
       <p class="rates-intro">Every workshop starts with a free scoping call.</p>
       <div class="rates">
-        {workshops.map((w) => (
+        {workshops.filter((w) => !w.variantOf).map((w) => (
           <a class="rate-row rate-card" href={`/workshops/${w.slug}/`}>
             <p class="rate-name">{w.title}</p>
             <p class="rate-price">From {gbp(rates.workshopTaster)}</p>

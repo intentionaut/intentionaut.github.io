@@ -9,6 +9,8 @@ export type FaqPlacement =
   | 'workshops-ai-strategy'
   | 'workshops-opportunity-mapping'
   | 'workshops-product-maturity'
+  | 'workshops-data-decision'
+  | 'workshops-data-culture'
   | 'for-ceos'
   | 'for-cpos-ctos'
   | 'ai-pilot';
@@ -218,6 +220,51 @@ export const faqs: Faq[] = [
     question: "Is this a restructure?",
     placements: ['workshops-product-maturity'],
     answer: `No. Nobody's job changes in the room. Restructures often fix the wrong problem, because the issue was unclear decisions. Saielle helps you clarify how product works as you scale. If a structural change is needed, you'll know why, and decide it later with the right people.`,
+  },
+  {
+    question: "What is a data-informed decision workshop?",
+    placements: ['workshops-data-decision'],
+    answer: `A half day where a product leadership team takes one decision the numbers haven't settled, and makes it. Saielle DaSilva gets product, data and design to agree what each number means and who owns it, then the team writes one recommendation with its trade-off and a 90-day owner. At Sainsbury's, Saielle's work on observability, data quality and shared data definitions cut maintenance load by 35 per cent.`,
+  },
+  {
+    question: "What does a stalled decision cost?",
+    placements: ['workshops-data-decision'],
+    answer: `Time the market doesn't give back. While leaders argue about what the numbers mean, the decision waits, and a competitor who decides sooner moves first. The fix starts upstream: agree what each number means and who owns it, so the numbers stop holding the decision up. Disputed numbers also cost twice, because they get rebuilt, rechecked and maintained by each team. At Sainsbury's, Saielle DaSilva's work on data quality and shared data definitions cut maintenance load by 35 per cent.`,
+  },
+  {
+    question: "Our dashboards are fine, but decisions still stall. Why?",
+    placements: ['workshops-data-decision'],
+    answer: `Usually because nobody has agreed what the numbers mean, or who decides. Each function reads the same figure its own way, so every meeting reopens the definition before it reaches the decision. Agreeing the definitions and the owner is what lets the decision move.`,
+  },
+  {
+    question: "Who needs to be in the room?",
+    placements: ['workshops-data-decision'],
+    answer: `The leaders who own the decision and the numbers behind it, across product, data and design. The workshop works because all three agree the definitions together.`,
+  },
+  {
+    question: "How is this different from data literacy training?",
+    placements: ['workshops-data-decision'],
+    answer: `Data literacy courses teach one function at a time to read data. This workshop puts product, data and design together on a decision you actually have, and ends with that decision made.`,
+  },
+  {
+    question: "What is a data culture?",
+    placements: ['workshops-data-culture'],
+    answer: `A data culture is how an organisation uses numbers to make decisions: which figures people trust, who owns them, and whether the numbers settle arguments or start them. Saielle DaSilva's data culture workshop gets product, data and design to agree what their numbers mean, then makes one live decision on them. At Sainsbury's, Saielle's work on observability, data quality and shared data definitions cut maintenance load by 35 per cent.`,
+  },
+  {
+    question: "How do you build a data culture across product, data and design?",
+    placements: ['workshops-data-culture'],
+    answer: `Start with the numbers the teams argue about, not with training. Agree what each one means and who owns it, then use them on a real decision. The habit changes when people see the agreed numbers settle something.`,
+  },
+  {
+    question: "Where do we start with data culture?",
+    placements: ['workshops-data-culture'],
+    answer: `With one live decision and the three or four numbers it rests on. That is small enough to finish in an afternoon, and real enough that the definitions get used the next day.`,
+  },
+  {
+    question: "Is a data culture workshop the same as data literacy training?",
+    placements: ['workshops-data-culture'],
+    answer: `No. Data literacy training teaches people to read data. This workshop changes how leaders agree and own the numbers, so decisions stop stalling on them.`,
   },
   {
     question: 'Can I hire you full-time?',

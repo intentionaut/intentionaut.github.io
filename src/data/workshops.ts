@@ -1,5 +1,5 @@
 /**
- * The three workshops. Each page under /workshops/ and the cards on the
+ * The workshops. Each page under /workshops/ and the cards on the
  * overview read from here, so a title or promise is written once.
  * Copy is pending the voice pass (#160).
  */
@@ -7,6 +7,11 @@ import type { FaqPlacement } from './faqs';
 
 export interface Workshop {
   slug: string;
+  /**
+   * Set on a page that tests a second framing of another workshop (#hypothesis
+   * Intentionaut-Workshop-Framing). It gets its own page but no card on /workshops/.
+   */
+  variantOf?: string;
   placement: FaqPlacement;
   eyebrow: string;
   title: string;
@@ -115,7 +120,68 @@ export const workshops: Workshop[] = [
     "metaDescription": "Product maturity assessment for CEOs and CPOs scaling a product organisation. Agree what product owns as you grow, and the next three steps.",
     "faqSub": "What CEOs and CPOs ask before a maturity workshop.",
     "faqHeading": "FAQ: Product maturity modelling workshop"
-  }
+  },
+  {
+    "slug": "data-informed-decisions",
+    "placement": "workshops-data-decision",
+    "eyebrow": "Workshop · Data-informed decisions",
+    "title": "Data-informed decisions for product teams",
+    "lede": "Take one decision your team is stuck on, and leave with it made.",
+    "problems": [
+      "The dashboard exists, but product, data and design each read it differently.",
+      "Meetings start by arguing about what a number means.",
+      "The call goes to whoever argues hardest, or it never gets made."
+    ],
+    "forWhom": "Product leadership teams with the data in place and a decision that still won't move.",
+    "decision": "The decision you bring: one written recommendation, the numbers behind it agreed, and a named owner for what happens next.",
+    "steps": [
+      "Before the day, your sponsor picks one decision the numbers haven't settled, and your data lead shares how each number is defined today.",
+      "Each leader names a recent call the numbers didn't settle, and the room works out what got in the way.",
+      "The team writes one definition for each number the decision rests on, tests it, and signs it across product, data and design.",
+      "We name who owns each number, and who makes the call.",
+      "The team reads your real results against those definitions, and makes the case on one page for a sceptical executive to test.",
+      "We close with one written recommendation: what it delays, and who acts in the next 90 days."
+    ],
+    "leaveWith": "A written recommendation with its trade-off and a 90-day owner, a signed definition for each number it rests on, and a named person who makes the call.",
+    "isnt": "It works with the numbers you have today, so nothing needs cleaning up first.",
+    "card": "Take one stalled product decision, agree the numbers behind it, and leave with it made.",
+    "audience": "product, data and design leaders",
+    "metaTitle": "Data-informed decision workshop for product leaders | Saielle DaSilva",
+    "metaDescription": "For product, data and design leaders: agree what your numbers mean, and leave with one stalled decision made and owned.",
+    "faqSub": "What product leaders ask before a data-informed decision workshop.",
+    "faqHeading": "FAQ: data-informed decision workshop"
+  },
+  {
+    "slug": "data-culture",
+    "placement": "workshops-data-culture",
+    "variantOf": "data-informed-decisions",
+    "eyebrow": "Workshop · Data culture",
+    "title": "Data culture for product and data leaders",
+    "lede": "Get product, data and design reading the same numbers the same way.",
+    "problems": [
+      "The dashboard exists, but product, data and design each read it differently.",
+      "Meetings start by arguing about what a number means.",
+      "The call goes to whoever argues hardest, or it never gets made."
+    ],
+    "forWhom": "Leadership teams whose product, data and design functions read the same numbers differently.",
+    "decision": "What each number your teams argue about means, who owns it, and one live decision made on those numbers.",
+    "steps": [
+      "Before the day, your sponsor picks one decision the numbers haven't settled, and your data lead shares how each number is defined today.",
+      "Each leader names a recent call the numbers didn't settle, and the room works out what got in the way.",
+      "The team writes one definition for each number the decision rests on, tests it, and signs it across product, data and design.",
+      "We name who owns each number, and who makes the call.",
+      "The team reads your real results against those definitions, and makes the case on one page for a sceptical executive to test.",
+      "We close with one written recommendation: what it delays, and who acts in the next 90 days."
+    ],
+    "leaveWith": "A signed definition for each number your teams argue about, an owner for each, and one live decision made on them.",
+    "isnt": "It works with the numbers you have today, so nothing needs cleaning up first.",
+    "card": "Agree what your numbers mean and who owns them, then make one live decision on them.",
+    "audience": "product, data and design leaders",
+    "metaTitle": "Data culture workshop for product and data leaders | Saielle DaSilva",
+    "metaDescription": "A data culture workshop for product, data and design leaders: agree what the numbers mean, who owns them, and make one live decision on them.",
+    "faqSub": "What leaders ask before a data culture workshop.",
+    "faqHeading": "FAQ: data culture workshop"
+  },
 ];
 
 export function workshopBySlug(slug: string): Workshop {
