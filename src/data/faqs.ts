@@ -229,12 +229,12 @@ export const faqs: Faq[] = [
   {
     question: "What does a stalled decision cost?",
     placements: ['workshops-data-decision'],
-    answer: `Time the market doesn't give back. While leaders argue about what the numbers mean, the decision waits, and a competitor who decides sooner moves first. The fix starts upstream: agree what each number means and who owns it, so the numbers stop holding the decision up. Disputed numbers also cost twice, because they get rebuilt, rechecked and maintained by each team. At Sainsbury's, Saielle DaSilva's work on data quality and shared data definitions cut maintenance load by 35 per cent.`,
+    answer: `It costs time the market doesn't give back. While leaders argue about what the numbers mean, the decision waits, and a competitor who decides sooner moves first. Agree what each number means and who owns it, and the numbers stop holding the decision up. Disputed numbers also cost twice, because each team rebuilds and checks its own version. At Sainsbury's, Saielle DaSilva's work on data quality and shared data definitions cut maintenance load by 35 per cent.`,
   },
   {
     question: "Our dashboards are fine, but decisions still stall. Why?",
     placements: ['workshops-data-decision'],
-    answer: `Usually because nobody has agreed what the numbers mean, or who decides. Each function reads the same figure its own way, so every meeting reopens the definition before it reaches the decision. Agreeing the definitions and the owner is what lets the decision move.`,
+    answer: `It is usually because nobody has agreed what the numbers mean, or who decides. Each function reads the same figure its own way, so every meeting reopens the definition before it reaches the decision. Once the definitions and the owner are agreed, the decision can move.`,
   },
   {
     question: "Who needs to be in the room?",
@@ -254,7 +254,7 @@ export const faqs: Faq[] = [
   {
     question: "How do you build a data culture across product, data and design?",
     placements: ['workshops-data-culture'],
-    answer: `Start with the numbers the teams argue about, not with training. Agree what each one means and who owns it, then use them on a real decision. The habit changes when people see the agreed numbers settle something.`,
+    answer: `Start with the numbers the teams argue about. Agree what each one means and who owns it, then use them on a real decision. The habit changes when people see the agreed numbers settle something.`,
   },
   {
     question: "Where do we start with data culture?",
