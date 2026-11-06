@@ -9,14 +9,14 @@
 // floor beneath which nothing is booked — is deliberately not in this repo,
 // which is public. That lives in the private vault, not here.
 export const rates = {
-  strategySession: 500, // per 90-minute session
+  strategySession: 750, // per 90-minute session
   fractional: 1500, // per day
   keynote: 3500, // per event, from
   // Team workshops (/workshops/). Hours sit beside each price so the per-hour
   // figures and the full-day saving on the page are derived, never typed.
-  workshopTaster: 1000, // 2 hours, from
-  workshopHalfDay: 1500, // up to 4 hours, from
-  workshop: 2500, // full day, 8 hours, from
+  workshopTaster: 1500, // 2 hours, from
+  workshopHalfDay: 2000, // up to 4 hours, from
+  workshop: 3500, // full day, 8 hours, from
   // Forward Deployed Product Builder. Quoted NET: where an advisor or
   // recruiter introduces the work, their margin sits on top of this, not
   // inside it. See docs/forward-deployed-positioning.md.
@@ -34,8 +34,6 @@ export const workshopHours = { taster: 2, halfDay: 4, fullDay: 8 } as const;
 export const workshopGroup = { included: 12, max: 20 } as const;
 /** Per person above workshopGroup.included, up to workshopGroup.max. */
 export const workshopExtraPerson = 150;
-/** What a full day saves against booking two half days. */
-export const workshopFullDaySaving = rates.workshopHalfDay * 2 - rates.workshop;
 
 /** Formats a GBP amount with thousands separators, e.g. gbp(1500) -> "£1,500" */
 export function gbp(amount: number): string {

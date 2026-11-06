@@ -38,10 +38,10 @@ test('workshop FAQ answers read prices from rates.ts', () => {
   for (const price of WORKSHOP_PRICES) assert.ok(!block.includes(price), `workshop FAQs type ${price}`);
 });
 
-test('full-day saving is derived, so the page cannot drift from the rates', () => {
-  const rates = read('data/rates.ts');
-  assert.match(rates, /workshopFullDaySaving = rates\.workshopHalfDay \* 2 - rates\.workshop/);
-  assert.match(read('components/WorkshopPricing.astro'), /gbp\(workshopFullDaySaving\)/);
+test('"Best value" is derived from price per hour, never typed on a row', () => {
+  const src = read('components/WorkshopPricing.astro');
+  assert.match(src, /Math\.min\(\.\.\.rows\.map\(\(r\) => r\.price \/ r\.hours\)\)/);
+  assert.ok(!/best: true/.test(src), 'a row hard-codes best: true');
 });
 
 test('every workshop page tags its enquiries with its own source', () => {

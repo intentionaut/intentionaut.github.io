@@ -3,7 +3,7 @@
  * Formats and prices for every workshop page. Prices, hours, per-hour figures
  * and the full-day saving all come from rates.ts, never typed here.
  */
-import { rates, gbp, workshopHours, workshopFullDaySaving, workshopGroup, workshopExtraPerson } from '../data/rates';
+import { rates, gbp, workshopHours, workshopGroup, workshopExtraPerson } from '../data/rates';
 
 interface Props {
   id?: string;
@@ -14,8 +14,11 @@ const perHour = (price: number, hours: number) => gbp(Math.round(price / hours))
 const rows = [
   { name: `Taster · ${workshopHours.taster} hours`, price: rates.workshopTaster, hours: workshopHours.taster, what: 'A first look at one decision, using a prepared case.' },
   { name: `Half day · up to ${workshopHours.halfDay} hours`, price: rates.workshopHalfDay, hours: workshopHours.halfDay, what: 'Your team works its own decision through.' },
-  { name: `Full day · ${workshopHours.fullDay} hours`, price: rates.workshop, hours: workshopHours.fullDay, best: true, what: `Two half days' work for ${gbp(workshopFullDaySaving)} less, with a hands-on rehearsal or a second decision.` },
+  { name: `Full day · ${workshopHours.fullDay} hours`, price: rates.workshop, hours: workshopHours.fullDay, what: 'Two decisions, or one decision with a hands-on rehearsal.' },
 ];
+// "Best value" goes to the lowest price per hour, so the label cannot drift from the rates.
+const bestHourly = Math.min(...rows.map((r) => r.price / r.hours));
+const priced = rows.map((r) => ({ ...r, best: r.price / r.hours === bestHourly }));
 ---
 
 <section class="rates-section workshop-pricing" id={id} aria-label="Formats and prices">
@@ -32,7 +35,7 @@ const rows = [
         <tr><th>Format</th><th>Price</th><th>Per hour</th><th>What you get</th></tr>
       </thead>
       <tbody>
-        {rows.map((r) => (
+        {priced.map((r) => (
           <tr>
             <td>{r.name}</td>
             <td>From {gbp(r.price)}</td>
