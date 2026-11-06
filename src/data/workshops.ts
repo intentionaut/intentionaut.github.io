@@ -34,8 +34,8 @@ export const workshops: Workshop[] = [
   {
     "slug": "ai-strategy",
     "placement": "workshops-ai-strategy",
-    "eyebrow": "Workshop · AI strategy",
-    "title": "Get your AI strategy under control",
+    "eyebrow": "Workshop · AI product strategy",
+    "title": "Get your AI product strategy under control",
     "lede": "From scattered AI work to a few bets that add up.",
     "problems": [
       "AI pilots everywhere, and nobody can say what they add up to.",
@@ -52,14 +52,14 @@ export const workshops: Workshop[] = [
       "Each kept bet gets the one measure it answers to, and an owner.",
       "We close with a date to review the bets, and what would make you stop one."
     ],
-    "leaveWith": "A one-page AI strategy, a list of kept and stopped bets with a measure each, and named owners.",
+    "leaveWith": "A one-page AI product strategy, a list of kept and stopped bets with a measure each, and named owners.",
     "isnt": "It decides where AI belongs in your strategy, whichever tools you use.",
     "card": "Turn scattered AI work into a few bets your strategy backs, each with a measure and an owner.",
     "audience": "CPOs, CTOs and CDOs",
-    "metaTitle": "AI strategy workshop for CPOs and CTOs | Saielle DaSilva",
+    "metaTitle": "AI product strategy workshop for CPOs and CTOs | Saielle DaSilva",
     "metaDescription": "For CPOs, CTOs and CDOs with too many AI pilots: decide which AI bets to keep, merge or stop, each with one measure and an owner.",
-    "faqSub": "What CPOs and CTOs ask before an AI strategy workshop.",
-    "faqHeading": "FAQ: AI strategy workshop"
+    "faqSub": "What CPOs and CTOs ask before an AI product strategy workshop.",
+    "faqHeading": "FAQ: AI product strategy workshop"
   },
   {
     "slug": "ai-opportunity-mapping",

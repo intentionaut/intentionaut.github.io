@@ -119,12 +119,12 @@ export const faqs: Faq[] = [
   {
     question: "What will we actually leave with?",
     placements: ['workshops'],
-    answer: `A decision, written down, with an owner and a date to check it. Each of Saielle DaSilva's workshops also produces its own artefact: a one-page AI strategy, an opportunity map, or a product maturity assessment and charter. If the honest answer on the day is "not yet", you leave knowing exactly what would settle it.`,
+    answer: `A decision, written down, with an owner and a date to check it. Each of Saielle DaSilva's workshops also produces its own artefact: a one-page AI product strategy, an opportunity map, or a product maturity assessment and charter. If the honest answer on the day is "not yet", you leave knowing exactly what would settle it.`,
   },
   {
     question: "Who should be in the room?",
     placements: ['workshops'],
-    answer: `The people who own the decision and the people who will carry it out, usually six to twelve. For AI strategy, that's the CPO or CTO with product, design and engineering leads. For product maturity, the CEO and leadership team. Saielle DaSilva agrees the list with you on the scoping call.`,
+    answer: `The people who own the decision and the people who will carry it out, usually six to twelve. For AI product strategy, that's the CPO or CTO with product, design and engineering leads. For product maturity, the CEO and leadership team. Saielle DaSilva agrees the list with you on the scoping call.`,
   },
   {
     question: "Do we need a technical background?",
@@ -162,14 +162,14 @@ export const faqs: Faq[] = [
     answer: `Look for named references you can check, with names and roles you can look up. Saielle DaSilva's are published with names and roles, from leaders including Susan Standiford, former CTPO at IKEA and Stepstone, and Emily Tate of Mind the Product. Every engagement starts with a free call, so you can judge fit first.`,
   },
   {
-    question: "Who helps CTOs and CDOs with AI strategy for product teams?",
+    question: "Who helps CTOs and CDOs with AI product strategy?",
     placements: ['workshops'],
-    answer: `Saielle DaSilva runs AI strategy and opportunity mapping workshops for CPOs, CTOs and CDOs in London and across the UK and Europe. The work stays at the level of strategy and decisions: which AI bets to back, which opportunities to pursue first, and who owns each call.`,
+    answer: `Saielle DaSilva runs AI product strategy and opportunity mapping workshops for CPOs, CTOs and CDOs in London and across the UK and Europe. The work stays at the level of strategy and decisions: which AI bets to back, which opportunities to pursue first, and who owns each call.`,
   },
   {
-    question: "What is an AI strategy workshop?",
+    question: "What is an AI product strategy workshop?",
     placements: ['workshops-ai-strategy'],
-    answer: `A session where leaders decide which AI work their strategy backs, and what stops. Most teams can list their pilots, but struggle to stop any, because each has a sponsor. Saielle DaSilva took production AI at Sainsbury's from a handful of experiments to a platform serving millions of customers, so Saielle knows which questions separate a bet from a hobby. You leave with a one-page AI strategy and owners.`,
+    answer: `A session where leaders decide which AI work their strategy backs, and what stops. Most teams can list their pilots, but struggle to stop any, because each has a sponsor. Saielle DaSilva took production AI at Sainsbury's from a handful of experiments to a platform serving millions of customers, so Saielle knows which questions separate a bet from a hobby. You leave with a one-page AI product strategy and owners.`,
   },
   {
     question: "We have lots of AI pilots and no clear return. Where do we start?",
