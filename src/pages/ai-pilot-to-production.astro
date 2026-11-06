@@ -16,6 +16,11 @@ import ContactForm from '../components/ContactForm.astro';
       <p class="lede">
         For teams with a model that proves something in a notebook and nothing anywhere else.
       </p>
+      {/* One action above the fold: the form, because it records the arrival
+          source (BaseLayout's first_* fields). The booking link sits inside it. */}
+      <div class="cta-row">
+        <a class="btn-primary" href="#contact-section">Tell me where it stalled</a>
+      </div>
     </header>
 
     <div class="prose">
@@ -92,7 +97,7 @@ import ContactForm from '../components/ContactForm.astro';
       </p>
     </div>
 
-    <section class="contact-form-section" aria-label="Get in touch">
+    <section class="contact-form-section" id="contact-section" aria-label="Get in touch">
       <div class="contact-card">
         <h2>Let's talk.</h2>
         <p class="form-lede">
