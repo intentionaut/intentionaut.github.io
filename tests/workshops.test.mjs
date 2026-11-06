@@ -38,10 +38,8 @@ test('workshop FAQ answers read prices from rates.ts', () => {
   for (const price of WORKSHOP_PRICES) assert.ok(!block.includes(price), `workshop FAQs type ${price}`);
 });
 
-test('"Best value" is derived from price per hour, never typed on a row', () => {
-  const src = read('components/WorkshopPricing.astro');
-  assert.match(src, /Math\.min\(\.\.\.rows\.map\(\(r\) => r\.price \/ r\.hours\)\)/);
-  assert.ok(!/best: true/.test(src), 'a row hard-codes best: true');
+test('no "Best value" label on workshop formats', () => {
+  assert.ok(!/Best value/.test(read('components/WorkshopPricing.astro')));
 });
 
 test('every workshop page tags its enquiries with its own source', () => {

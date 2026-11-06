@@ -1,7 +1,8 @@
 ---
 /**
- * Formats and prices for every workshop page. Prices, hours, per-hour figures
- * and the full-day saving all come from rates.ts, never typed here.
+ * Formats and prices for every workshop page, as talk rows from the design
+ * system. Prices and hours come from rates.ts, never typed here. Ordered by
+ * length; two hours is its own format (alignment, inspiration, Q&A), not a taster.
  */
 import { rates, gbp, workshopHours, workshopGroup, workshopExtraPerson } from '../data/rates';
 
@@ -10,50 +11,42 @@ interface Props {
 }
 const { id = 'formats' } = Astro.props;
 
-const perHour = (price: number, hours: number) => gbp(Math.round(price / hours));
-const rows = [
-  { name: `Taster · ${workshopHours.taster} hours`, price: rates.workshopTaster, hours: workshopHours.taster },
-  { name: `Half day · up to ${workshopHours.halfDay} hours`, price: rates.workshopHalfDay, hours: workshopHours.halfDay },
-  { name: `Full day · ${workshopHours.fullDay} hours`, price: rates.workshop, hours: workshopHours.fullDay },
+const formats = [
+  { name: `${workshopHours.taster} hours`, price: rates.workshopTaster, what: 'Alignment, inspiration and Q&A.' },
+  { name: `Half day · up to ${workshopHours.halfDay} hours`, price: rates.workshopHalfDay, what: 'Your team works its own decision through.' },
+  { name: `Full day · ${workshopHours.fullDay} hours`, price: rates.workshop, what: 'A second decision, or a hands-on rehearsal.' },
 ];
-// "Best value" goes to the lowest price per hour, so the label cannot drift from the rates.
-const bestHourly = Math.min(...rows.map((r) => r.price / r.hours));
-const priced = rows.map((r) => ({ ...r, best: r.price / r.hours === bestHourly }));
+const terms = [
+  { label: 'Group', text: `Up to ${workshopGroup.included} people included` },
+  { label: 'Extra people', text: `${gbp(workshopExtraPerson)} each, up to ${workshopGroup.max}` },
+  { label: 'Travel', text: 'None for remote or London; at cost elsewhere, agreed before booking' },
+  { label: 'Materials', text: 'Included' },
+];
 ---
 
 <section class="rates-section workshop-pricing" id={id} aria-label="Formats and prices">
   <h2>Formats and prices</h2>
-  <p class="rates-intro">
-    Every workshop runs remote or in person and includes a scoping call,
-    materials and written follow-up. Each price covers up to
-    {workshopGroup.included} people; each extra person is
-    {gbp(workshopExtraPerson)}, up to {workshopGroup.max}.
-  </p>
-  <div class="prose">
-    <table>
-      <thead>
-        <tr><th>Format</th><th>Price</th><th>Per hour</th></tr>
-      </thead>
-      <tbody>
-        {priced.map((r) => (
-          <tr>
-            <td>{r.name}{r.best && <strong> · Best value</strong>}</td>
-            <td>From {gbp(r.price)}</td>
-            <td>{perHour(r.price, r.hours)}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
+  <p class="rates-intro">Most workshops run as a half-day format for best fit.</p>
+  <ul class="talk-list workshop-formats">
+    {formats.map((f) => (
+      <li class="talk-row">
+        <span class="talk-date">From {gbp(f.price)}</span>
+        <div><span class="talk-title">{f.name}</span><p class="talk-meta">{f.what}</p></div>
+      </li>
+    ))}
+  </ul>
+  <ul class="talk-list">
+    {terms.map((t) => (
+      <li class="talk-row">
+        <span class="talk-date">{t.label}</span>
+        <div><p class="talk-meta">{t.text}</p></div>
+      </li>
+    ))}
+  </ul>
 </section>
 
 <style>
-  .workshop-pricing .prose {
-    max-width: 52rem;
-    padding-bottom: 0;
-  }
-  .workshop-pricing td:nth-child(n + 2),
-  .workshop-pricing th {
-    white-space: nowrap;
+  .workshop-formats {
+    padding-bottom: var(--space-7);
   }
 </style>
