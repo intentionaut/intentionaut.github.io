@@ -7,6 +7,7 @@ import { testimonialsFor } from '../data/testimonials';
 import { faqsFor } from '../data/faqs';
 import RelatedReading from '../components/RelatedReading.astro';
 import FaqList from '../components/FaqList.astro';
+import WhoFor from '../components/WhoFor.astro';
 import { PRIMARY_PHRASE } from '../data/positioning';
 
 
@@ -69,6 +70,19 @@ const faqSchema = {
         <li>Designers with nobody senior leading them.</li>
         <li>AI features where nobody can yet say what good looks like.</li>
       </ul>
+      <WhoFor
+        fit={[
+          'Founders and CEOs who need Director-level product leadership now, before a permanent hire.',
+          'Teams with a product that works and no agreement on why it is not landing.',
+          'Designers and product managers with nobody senior leading them.',
+          'Companies shipping AI features without an agreed view of what good looks like.',
+        ]}
+        notFit={[
+          'You are ready to hire a permanent head of product now. A search is the better route, and a fractional leader can help shape the role.',
+          'You need one decision made or one plan reviewed, not ongoing leadership. A 90-minute <a href="/strategic-direction/">strategy session</a> covers that, and it can also be the first step into fractional work.',
+          'You need something built rather than led. <a href="/forward-deployed/">Product building</a> embeds for four to twelve weeks and ends in a prototype or in software your team can run.',
+        ]}
+      />
     </header>
 
     <div class="prose">
