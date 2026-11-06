@@ -2,12 +2,29 @@
 import '@fontsource-variable/roboto-serif';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.astro';
+import { LOCATION_LINE } from '../data/positioning';
 
+const description =
+  'For teams whose AI pilot proves something in a notebook and nothing in production: embedded product building that gets a working version running against your real data and your real constraints.';
+
+// No offers or price here on purpose: the rates live on /forward-deployed/.
+const serviceSchema = {
+  '@type': 'Service',
+  '@id': 'https://intentionaut.com/ai-pilot-to-production/#service',
+  name: 'From an AI Pilot to a Working Product',
+  description,
+  provider: { '@id': 'https://intentionaut.com/#person' },
+  areaServed: [
+    { '@type': 'City', name: 'London' },
+    { '@type': 'Country', name: 'United Kingdom' },
+  ],
+};
 ---
 
 <BaseLayout
   title="From an AI Pilot to a Working Product | Saielle DaSilva"
-  description="For teams whose AI pilot proves something in a notebook and nothing in production: embedded product building that gets a working version running against your real data and your real constraints."
+  description={description}
+  jsonLd={serviceSchema}
 >
   <section class="wrap">
     <header class="page-head">
@@ -93,7 +110,7 @@ import ContactForm from '../components/ContactForm.astro';
         A free preliminary call first, then a block of four to twelve weeks at
         three days a week. The full shape and the rates are on the
         {' '}<a href="/forward-deployed/">product building</a>
-        {' '}page.
+        {' '}page. {LOCATION_LINE}
       </p>
       <p>
         If what you need is someone senior to own AI product direction
