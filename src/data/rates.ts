@@ -14,9 +14,9 @@ export const rates = {
   keynote: 3500, // per event, from
   // Team workshops (/workshops/). Hours sit beside each price so the per-hour
   // figures and the full-day saving on the page are derived, never typed.
-  workshopTaster: 1500, // 2 hours, from
-  workshopHalfDay: 2000, // up to 4 hours, from
-  workshop: 3500, // full day, 8 hours, from
+  workshopTaster: 2000, // 2 hours, from
+  workshopHalfDay: 3500, // up to 4 hours, from
+  workshop: 6000, // full day, 8 hours, from
   // Forward Deployed Product Builder. Quoted NET: where an advisor or
   // recruiter introduces the work, their margin sits on top of this, not
   // inside it. See docs/forward-deployed-positioning.md.
@@ -34,8 +34,6 @@ export const workshopHours = { taster: 2, halfDay: 4, fullDay: 8 } as const;
 export const workshopGroup = { included: 6, max: 25 } as const;
 /** Per person above workshopGroup.included, up to workshopGroup.max. */
 export const workshopExtraPerson = 500;
-/** Most any workshop costs in total, whatever the group size: a full day for 25 lands here. */
-export const workshopGroupCeiling = 10000;
 
 /** Formats a GBP amount with thousands separators, e.g. gbp(1500) -> "£1,500" */
 export function gbp(amount: number): string {

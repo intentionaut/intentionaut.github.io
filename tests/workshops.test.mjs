@@ -13,7 +13,7 @@ const walk = (dir) =>
     return statSync(p).isDirectory() ? walk(p) : [p];
   });
 
-const WORKSHOP_PRICES = ['£1,000', '£1,500', '£2,500', '£3,000', '£1,850'];
+const WORKSHOP_PRICES = ['£2,000', '£3,500', '£6,000'];
 
 test('workshop pages and components never hard-code a workshop price', () => {
   const files = [
@@ -85,13 +85,3 @@ test('a framing variant gets a page but no card on /workshops/', () => {
   assert.match(read('data/workshops.ts'), /"variantOf": "data-informed-decisions"/);
 });
 
-test('a full day at the group cap reaches the ceiling, so "a full day for 25 is £10,000" stays true', () => {
-  const r = read('data/rates.ts');
-  const n = (re) => Number(r.match(re)[1]);
-  const fullDay = n(/workshop: (\d+),/);
-  const included = n(/included: (\d+)/);
-  const max = n(/max: (\d+)/);
-  const extra = n(/workshopExtraPerson = (\d+)/);
-  const ceiling = n(/workshopGroupCeiling = (\d+)/);
-  assert.ok(fullDay + (max - included) * extra >= ceiling);
-});
