@@ -13,7 +13,7 @@ const walk = (dir) =>
     return statSync(p).isDirectory() ? walk(p) : [p];
   });
 
-const WORKSHOP_PRICES = ['£3,500', '£4,500', '£7,500'];
+const WORKSHOP_PRICES = ['£3,000', '£4,500', '£6,000'];
 
 test('workshop pages and components never hard-code a workshop price', () => {
   const files = [
