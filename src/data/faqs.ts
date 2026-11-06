@@ -1,4 +1,4 @@
-import { rates, gbp, fractionalMonthly1Day, fractionalMonthly2Day, buildingWeekly } from './rates';
+import { rates, gbp, fractionalMonthly1Day, fractionalMonthly2Day, buildingWeekly, workshopGroup, workshopExtraPerson } from './rates';
 
 /** Where a question may appear. Add to this as pages need them. */
 export type FaqPlacement =
@@ -109,7 +109,17 @@ export const faqs: Faq[] = [
   {
     question: "How much does a workshop cost?",
     placements: ['workshops'],
-    answer: `A two-hour taster starts at ${gbp(rates.workshopTaster)}, a half day of up to four hours at ${gbp(rates.workshopHalfDay)}, and a full day at ${gbp(rates.workshop)}. That covers the scoping call, prework, the session and written follow-up. Larger groups, tailoring and travel are quoted after the scoping call, before you commit to anything.`,
+    answer: `A two-hour taster starts at ${gbp(rates.workshopTaster)}, a half day of up to four hours at ${gbp(rates.workshopHalfDay)}, and a full day at ${gbp(rates.workshop)}. That covers the scoping call, prework, the session and written follow-up. Each price covers up to ${workshopGroup.included} people, and each extra person is ${gbp(workshopExtraPerson)}, up to ${workshopGroup.max}. Travel outside London is charged at cost, and tailoring is quoted after the scoping call, before you commit to anything.`,
+  },
+  {
+    question: "How many people can attend?",
+    placements: ['workshops'],
+    answer: `Up to ${workshopGroup.included} people are included in every price. Saielle DaSilva runs groups of up to ${workshopGroup.max}, at ${gbp(workshopExtraPerson)} for each person above ${workshopGroup.included}. Past ${workshopGroup.max}, a decision stops being made in the room, so larger teams split into two sessions.`,
+  },
+  {
+    question: "Do you charge for travel?",
+    placements: ['workshops'],
+    answer: `Not for remote sessions or in-person sessions in London. Elsewhere in the UK and Europe, travel and accommodation are charged at cost, with no markup, and agreed in writing before you book. Workshop materials are always included.`,
   },
   {
     question: "What will we actually leave with?",
@@ -119,7 +129,7 @@ export const faqs: Faq[] = [
   {
     question: "Who should be in the room?",
     placements: ['workshops'],
-    answer: `The people who own the decision and the people who will carry it out, usually six to twelve. For AI strategy, that's the CPO or CTO with product, design and engineering leads. For product maturity, the CEO and leadership team. We agree the list on the scoping call.`,
+    answer: `The people who own the decision and the people who will carry it out, usually six to ${workshopGroup.included}. For AI strategy, that's the CPO or CTO with product, design and engineering leads. For product maturity, the CEO and leadership team. We agree the list on the scoping call.`,
   },
   {
     question: "Do we need a technical background?",

@@ -9,7 +9,7 @@ import { workshops } from '../../data/workshops';
 import { faqsFor } from '../../data/faqs';
 import { testimonialsFor } from '../../data/testimonials';
 import { results } from '../../data/results';
-import { rates, gbp } from '../../data/rates';
+import { rates, gbp, workshopGroup, workshopExtraPerson } from '../../data/rates';
 
 const faqs = faqsFor('workshops');
 // The first six answer the buyer's doubts; the rest sit under "More questions".
@@ -69,6 +69,19 @@ const catalogSchema = {
     </section>
 
     <WorkshopPricing />
+
+    <section class="rates-section" aria-label="Group size and travel">
+      <h2>Group size and travel</h2>
+      <div class="prose">
+        <ul>
+          <li>Up to {workshopGroup.included} people are included in every price.</li>
+          <li>Each extra person is {gbp(workshopExtraPerson)}, up to {workshopGroup.max} in the room. Larger teams split into two sessions.</li>
+          <li>Remote sessions and in-person sessions in London carry no travel charge.</li>
+          <li>Elsewhere in the UK and Europe, travel and accommodation are charged at cost, agreed in writing before you book.</li>
+          <li>Materials are always included.</li>
+        </ul>
+      </div>
+    </section>
 
     <div class="prose workshop-id">
       <p>
