@@ -1,0 +1,117 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FaqList from '../components/FaqList.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { rates, gbp, fractionalMonthly1Day } from '../data/rates';
+import { results } from '../data/results';
+import { faqsFor } from '../data/faqs';
+import { testimonialsFor } from '../data/testimonials';
+import { BOOKING_URL } from '../data/links';
+
+const faqs = faqsFor('for-ceos');
+const quotes = testimonialsFor('for-ceos');
+const offers = [
+  {
+    title: 'Product maturity modelling',
+    price: `From ${gbp(rates.workshopTaster)}`,
+    desc: 'A workshop with your leadership team: where product practice is today, where it needs to be, and what product owns as you grow.',
+    shape: 'Taster, half day or full day.',
+    href: '/workshops/product-maturity-model/',
+  },
+  {
+    title: 'Fractional leadership',
+    price: `From ${gbp(fractionalMonthly1Day)} a month`,
+    desc: 'A senior product leader for a defined period, with executive access and accountability for delivery.',
+    shape: 'One or two days a week, three months and up.',
+    href: '/fractional/',
+  },
+  {
+    title: 'Strategy session',
+    price: `${gbp(rates.strategySession)} · 90 min`,
+    desc: 'A sounding board on a roadmap, a hire or a structure question, before you commit to anything bigger.',
+    shape: 'One session, sliding scale available.',
+    href: '/strategic-direction/',
+  },
+];
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer.replace(/\s+/g, ' ').trim() },
+  })),
+};
+---
+
+<BaseLayout
+  title="Fractional CPO for CEOs scaling product | Saielle DaSilva"
+  description="For CEOs and founders scaling a product organisation: a fractional CPO, a product maturity workshop or a strategy session, across the UK and Europe."
+  jsonLd={[faqSchema]}
+>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">For CEOs and founders</p>
+      <h1>Scale your product organisation with clear ownership.</h1>
+      <p class="lede">
+        Saielle DaSilva helps CEOs set up and scale product, so product decisions
+        stop waiting on the CEO and start moving the numbers the business already tracks.
+      </p>
+      <ul class="problem-lines">
+        <li>What worked at 20 people stops working at 200.</li>
+        <li>Product, design and engineering unsure who decides what.</li>
+        <li>A product team that grew faster than its role was defined.</li>
+      </ul>
+      <div class="cta-row">
+        <a class="btn-primary" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a free call</a>
+        <a class="link-arrow" href="#ways-in"><span>Three ways in</span></a>
+      </div>
+    </header>
+
+    <section class="rates-section" id="ways-in" aria-label="Three ways in">
+      <h2>Three ways in</h2>
+      <p class="rates-intro">Every option starts with a free call.</p>
+      <div class="rates">
+        {offers.map((o) => (
+          <a class="rate-row rate-card" href={o.href}>
+            <p class="rate-name">{o.title}</p>
+            <p class="rate-price">{o.price}</p>
+            <p class="rate-desc">{o.desc}</p>
+            <p class="rate-shape">{o.shape}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <ul class="stat-strip ceo-stats">
+      {results.map((r) => (
+        <li><span class="stat-num">{r.num}</span><span class="stat-label">{r.label}</span></li>
+      ))}
+    </ul>
+
+    {quotes.map((t) => (
+      <figure class="pull-quote">
+        <blockquote><p>{t.quote}</p></blockquote>
+        <figcaption>{t.name}, {t.role}, {t.org}</figcaption>
+      </figure>
+    ))}
+
+    <FaqList items={faqs} sub="What CEOs ask before bringing in product help." />
+
+    <section class="contact-form-section" id="contact-section" aria-label="Get in touch">
+      <div class="contact-card">
+        <h2>Tell Saielle where it hurts.</h2>
+        <p class="form-lede">
+          A few lines about your company and what is not working. You get a
+          reply, a short call and, if it fits, a written proposal.
+        </p>
+        <ContactForm source="for-ceos" selected="fractional" booking />
+      </div>
+    </section>
+  </section>
+</BaseLayout>
+
+<style>
+  .ceo-stats {
+    margin-bottom: clamp(3rem, 6vw, 5rem);
+  }
+</style>

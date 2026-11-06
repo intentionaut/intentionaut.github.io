@@ -19,7 +19,7 @@
  */
 
 /** Where a testimonial may appear. Add to this as pages need them. */
-export type Placement = 'contact' | 'home' | 'speaking' | 'fractional' | 'workshops';
+export type Placement = 'contact' | 'home' | 'speaking' | 'fractional' | 'workshops' | 'for-ceos';
 
 export interface Testimonial {
   /** Stable, human-readable. Used as a key and to talk about one in a commit. */
@@ -67,7 +67,7 @@ export const testimonials: Testimonial[] = [
     org: 'IKEA, Stepstone',
     url: 'https://www.linkedin.com/in/susanstandiford/',
     enabled: true,
-    placements: ['contact', 'fractional', 'workshops'],
+    placements: ['contact', 'fractional', 'workshops', 'for-ceos'],
     source: 'LinkedIn recommendation',
     receivedAt: '2024-01-01',
   },
