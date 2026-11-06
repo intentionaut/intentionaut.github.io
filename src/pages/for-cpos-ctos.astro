@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import RelatedReading from '../components/RelatedReading.astro';
 import FaqList from '../components/FaqList.astro';
 import ContactForm from '../components/ContactForm.astro';
 import { rates, gbp, buildingWeekly } from '../data/rates';
@@ -32,6 +33,13 @@ const offers = [
     shape: 'Three days a week, four to twelve weeks.',
     href: '/ai-pilot-to-production/',
   },
+  {
+    title: 'Strategy session',
+    price: `${gbp(rates.strategySession)} · 90 min`,
+    desc: 'A sounding board on an AI roadmap or a build-or-buy call, before you commit to anything bigger.',
+    shape: 'One session, sliding scale available.',
+    href: '/strategic-direction/',
+  },
 ];
 const faqSchema = {
   '@type': 'FAQPage',
@@ -63,12 +71,12 @@ const faqSchema = {
       </ul>
       <div class="cta-row">
         <a class="btn-primary" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a free call</a>
-        <a class="link-arrow" href="#ways-in"><span>Three ways in</span></a>
+        <a class="link-arrow" href="#ways-in"><span>Four ways in</span></a>
       </div>
     </header>
 
-    <section class="rates-section" id="ways-in" aria-label="Three ways in">
-      <h2>Three ways in</h2>
+    <section class="rates-section" id="ways-in" aria-label="Four ways in">
+      <h2>Four ways in</h2>
       <p class="rates-intro">Every option starts with a free call.</p>
       <div class="rates">
         {offers.map((o) => (
@@ -94,6 +102,8 @@ const faqSchema = {
         <figcaption>{t.name}, {t.role}, {t.org}</figcaption>
       </figure>
     ))}
+
+    <RelatedReading href="/writing/insights-to-actions/" title="Getting the most out of product discovery" summary="Clarity about what to do and why it matters, not the features you ship." />
 
     <FaqList items={faqs} heading="FAQ: AI product leadership for CPOs and CTOs" sub="What CPOs and CTOs ask before bringing in help with AI." />
 

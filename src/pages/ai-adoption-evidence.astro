@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import RelatedReading from '../components/RelatedReading.astro';
 import data from '../data/ai-adoption-evidence.json';
 import { TOPICS, SOURCE_TYPES, REGIONS, isStale, sortNewestFirst, validate } from '../lib/evidence.mjs';
 
@@ -87,6 +88,7 @@ const jsonLd = {
     </ol>
 
     <p class="ev-none" id="ev-none" hidden>No figures match these filters.</p>
+    <RelatedReading href="/writing/insights-to-actions/" title="Getting the most out of product discovery" summary="Clarity about what to do and why it matters, not the features you ship." />
   </section>
 </BaseLayout>
 
