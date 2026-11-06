@@ -16,12 +16,6 @@ const formats = [
   { name: `Half day · up to ${workshopHours.halfDay} hours`, price: rates.workshopHalfDay, what: 'Your team works its own decision through.' },
   { name: `Full day · ${workshopHours.fullDay} hours`, price: rates.workshop, what: 'A second decision, or a hands-on rehearsal.' },
 ];
-const terms = [
-  { label: 'Group', text: `Up to ${workshopGroup.included} people included` },
-  { label: 'Extra people', text: `${gbp(workshopExtraPerson)} each, up to ${workshopGroup.max} people` },
-  { label: 'Travel', text: 'None for remote or London; at cost elsewhere, agreed before booking' },
-  { label: 'Materials', text: 'Included' },
-];
 ---
 
 <section class="rates-section workshop-pricing" id={id} aria-label="Formats and prices">
@@ -30,23 +24,48 @@ const terms = [
   <ul class="talk-list workshop-formats">
     {formats.map((f) => (
       <li class="talk-row">
-        <span class="talk-date">From {gbp(f.price)}</span>
+        <span class="talk-date"><span class="from">From</span><span class="price">{gbp(f.price)}</span></span>
         <div><span class="talk-title">{f.name}</span><p class="talk-meta">{f.what}</p></div>
       </li>
     ))}
   </ul>
-  <ul class="talk-list">
-    {terms.map((t) => (
-      <li class="talk-row">
-        <span class="talk-date">{t.label}</span>
-        <div><p class="talk-meta">{t.text}</p></div>
-      </li>
-    ))}
-  </ul>
+  <p class="workshop-terms">
+    Every price includes up to {workshopGroup.included} people, materials, a
+    scoping call and written follow-up. Extra people are
+    {gbp(workshopExtraPerson)} each, up to {workshopGroup.max}. There's no
+    travel charge for remote sessions or London; elsewhere it's at cost,
+    agreed before you book.
+  </p>
 </section>
 
 <style>
   .workshop-formats {
-    padding-bottom: var(--space-7);
+    padding-bottom: var(--space-6);
+  }
+  .workshop-terms {
+    max-width: 40rem;
+    font-size: var(--text-sm);
+  }
+  /* Prices read as the answer: ink, display face, a step up from body. */
+  .workshop-formats .talk-date {
+    padding-top: 0;
+    color: var(--ink);
+    letter-spacing: normal;
+    text-transform: none;
+  }
+  .workshop-formats .from {
+    display: block;
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .workshop-formats .price {
+    display: block;
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: 500;
+    line-height: 1.2;
   }
 </style>

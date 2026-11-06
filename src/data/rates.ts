@@ -14,9 +14,9 @@ export const rates = {
   keynote: 3500, // per event, from
   // Team workshops (/workshops/). Hours sit beside each price so the per-hour
   // figures and the full-day saving on the page are derived, never typed.
-  workshopTaster: 3500, // 2 hours, from
+  workshopTaster: 3000, // 2 hours, from
   workshopHalfDay: 4500, // up to 4 hours, from
-  workshop: 7500, // full day, 8 hours, from
+  workshop: 6000, // full day, 8 hours, from
   // Forward Deployed Product Builder. Quoted NET: where an advisor or
   // recruiter introduces the work, their margin sits on top of this, not
   // inside it. See docs/forward-deployed-positioning.md.
