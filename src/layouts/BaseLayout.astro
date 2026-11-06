@@ -5,6 +5,7 @@ import '@fontsource-variable/jost';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Consent from '../components/Consent.astro';
 import { JOB_TITLE } from '../data/positioning';
 
 interface Props {
@@ -241,6 +242,7 @@ const graph = {
       <slot />
     </main>
     <Footer />
+    <Consent disabled={noAnalytics} />
     {/* Every contact form on the site posts its FormData as-is, so hidden
         fields added here reach the worker without touching ten page scripts. */}
     <script is:inline>

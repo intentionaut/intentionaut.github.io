@@ -46,7 +46,20 @@ const homeTestimonials = testimonialsFor('home');
 >
   <section class="wrap hero">
     <p class="eyebrow">Saielle DaSilva · Product leader</p>
-    <h1>I speak <em>four</em> languages: design, product, data&nbsp;&amp;&nbsp;AI.</h1>
+    <h1 id="hero-h1">I speak <em>four</em> languages: design, product, data&nbsp;&amp;&nbsp;AI.</h1>
+    {/* Headline A/B test (PostHog flag "hero-headline"). Crawlers and anyone
+        who declines cookies always get the headline above; only readers who
+        accepted can be shown the variant. */}
+    <script is:inline>
+      document.addEventListener('posthog:ready', function () {
+        window.posthog.onFeatureFlags(function () {
+          if (window.posthog.getFeatureFlag('hero-headline') === 'building') {
+            var h = document.getElementById('hero-h1');
+            if (h) h.textContent = 'The product leader for teams building with AI.';
+          }
+        });
+      });
+    </script>
     <p class="lede">
       Saielle DaSilva is a fractional Chief Product Officer for teams
       working across AI, data and design. Founders bring her in when
