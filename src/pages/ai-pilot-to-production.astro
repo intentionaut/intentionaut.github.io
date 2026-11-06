@@ -4,6 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.astro';
 import { LOCATION_LINE } from '../data/positioning';
 import FaqList from '../components/FaqList.astro';
+import WhoFor from '../components/WhoFor.astro';
 import { faqsFor } from '../data/faqs';
 
 const pilotFaqs = faqsFor('ai-pilot');
@@ -57,6 +58,18 @@ const serviceSchema = {
         <a class="btn-primary" href="#contact-section">Tell me where it stalled</a>
       </div>
     </header>
+
+    <WhoFor
+      fit={[
+        'Teams with an AI pilot that works in a notebook and nowhere else.',
+        'Product and engineering leads who need it running against real data and real users.',
+        'Companies that want a straight answer on whether it belongs in the product.',
+      ]}
+      notFit={[
+        'Nobody senior owns AI product direction. Building first gets you a good demo and the same argument, so start with <a href="/fractional/">fractional leadership</a>.',
+        'You want a more accurate model. This work builds the product around the model you have: the data, the decision and the user.',
+      ]}
+    />
 
     <div class="prose">
       <p>
