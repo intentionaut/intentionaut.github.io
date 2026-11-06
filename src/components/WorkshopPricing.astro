@@ -52,4 +52,31 @@ const rows = [
   .workshop-pricing th {
     white-space: nowrap;
   }
+  /* On phones the fourth column sat off-screen with no hint it was there.
+     Each row becomes format, price, per hour, then what you get underneath. */
+  @media (max-width: 560px) {
+    .workshop-pricing thead th:nth-child(4) {
+      display: none;
+    }
+    .workshop-pricing tr {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 6rem 4.75rem;
+      column-gap: var(--space-4);
+      border-bottom: 1px solid var(--slate);
+    }
+    .workshop-pricing thead tr {
+      border-bottom-color: var(--ink);
+    }
+    .workshop-pricing td,
+    .workshop-pricing th {
+      border-bottom: 0;
+    }
+    .workshop-pricing td:first-child {
+      white-space: normal;
+    }
+    .workshop-pricing td:nth-child(4) {
+      grid-column: 1 / -1;
+      padding-top: 0;
+    }
+  }
 </style>
