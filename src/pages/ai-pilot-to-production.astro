@@ -3,6 +3,18 @@ import '@fontsource-variable/roboto-serif';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.astro';
 import { LOCATION_LINE } from '../data/positioning';
+import FaqList from '../components/FaqList.astro';
+import { faqsFor } from '../data/faqs';
+
+const pilotFaqs = faqsFor('ai-pilot');
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: pilotFaqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer },
+  })),
+};
 
 const description =
   'For teams whose AI pilot proves something in a notebook and nothing in production: embedded product building that gets a working version running against your real data and your real constraints.';
@@ -24,7 +36,7 @@ const serviceSchema = {
 <BaseLayout
   title="From an AI Pilot to a Working Product | Saielle DaSilva"
   description={description}
-  jsonLd={serviceSchema}
+  jsonLd={[serviceSchema, faqSchema]}
 >
   <section class="wrap">
     <header class="page-head">
@@ -132,6 +144,12 @@ const serviceSchema = {
         Questions first? <a href="/faq/">Read the FAQ.</a>
       </p>
     </section>
+
+    <FaqList
+      heading="FAQ: Taking an AI pilot to production"
+      items={pilotFaqs}
+      sub="What teams ask when a pilot works and the product does not exist."
+    />
   </section>
 
 </BaseLayout>
