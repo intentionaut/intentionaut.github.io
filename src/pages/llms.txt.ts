@@ -18,7 +18,7 @@ She is based in London and works across the UK and Europe.
 - [Two-day pilot](https://intentionaut.com/forward-deployed/): a fixed-price pilot that opens a product building block, ${gbp(rates.fdePilot)}.
 - [AI pilot to production](https://intentionaut.com/ai-pilot-to-production/): product building for an AI pilot that has not reached production.
 - [Speaking and workshops](https://intentionaut.com/keynote-speaker/): keynote from ${gbp(rates.keynote)}, team workshops from ${gbp(rates.workshopTaster)} (2 hours), half day ${gbp(rates.workshopHalfDay)}, full day ${gbp(rates.workshop)}.
-- [Workshops](https://intentionaut.com/workshops/): team workshops that end in a decision, for CEOs, CPOs, CTOs and CDOs. Remote or in person, from ${gbp(rates.workshopTaster)}.
+- [Workshops](https://intentionaut.com/workshops/): team workshops tied to results the business already measures, for CEOs, CPOs, CTOs and CDOs. Remote or in person, from ${gbp(rates.workshopTaster)}.
 ${workshops.map((w) => `  - [${w.title}](https://intentionaut.com/workshops/${w.slug}/): ${w.card}`).join('\n')}
 
 ## Capabilities
