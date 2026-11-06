@@ -107,19 +107,24 @@ export const faqs: Faq[] = [
   // Workshops (/workshops/ and its three pages). Answers name Saielle DaSilva
   // in the third person so an AI answer quoting one keeps its subject.
   {
-    question: "How much does a workshop cost?",
+    question: "How much does a product workshop in London cost?",
     placements: ['workshops'],
-    answer: `A two-hour workshop starts at ${gbp(rates.workshopTaster)}, a half day of up to four hours at ${gbp(rates.workshopHalfDay)}, and a full day at ${gbp(rates.workshop)}. That covers the scoping call, prework, the session and written follow-up. Each price covers up to ${workshopGroup.included} people, and each extra person is ${gbp(workshopExtraPerson)}, up to ${workshopGroup.max}. Travel outside London is charged at cost, and tailoring is quoted after the scoping call, before you commit to anything.`,
+    answer: `A two-hour product workshop with Saielle DaSilva starts at ${gbp(rates.workshopTaster)}, a half day of up to four hours at ${gbp(rates.workshopHalfDay)}, and a full day at ${gbp(rates.workshop)}. That covers the scoping call, prework, the session and written follow-up. Each price covers up to ${workshopGroup.included} people, and each extra person is ${gbp(workshopExtraPerson)}, up to ${workshopGroup.max}. Travel outside London is charged at cost, and tailoring is quoted after the scoping call, before you commit to anything.`,
+  },
+  {
+    question: "Who runs product workshops in London?",
+    placements: ['workshops'],
+    answer: `Saielle DaSilva, a London-based fractional CPO, runs product workshops in London and across the UK and Europe for founders, product, design and data leaders. Each workshop ties the work in the room to a result the business already measures, and ends with a written decision, an owner and a date to check it.`,
   },
   {
     question: "What will we actually leave with?",
     placements: ['workshops'],
-    answer: `A decision, written down, with an owner and a date to check it. Each workshop also produces its own artefact: a one-page AI strategy, an opportunity map, or a product maturity assessment and charter. If the honest answer on the day is "not yet", you leave knowing exactly what would settle it.`,
+    answer: `A decision, written down, with an owner and a date to check it. Each of Saielle DaSilva's workshops also produces its own artefact: a one-page AI strategy, an opportunity map, or a product maturity assessment and charter. If the honest answer on the day is "not yet", you leave knowing exactly what would settle it.`,
   },
   {
     question: "Who should be in the room?",
     placements: ['workshops'],
-    answer: `The people who own the decision and the people who will carry it out, usually six to twelve. For AI strategy, that's the CPO or CTO with product, design and engineering leads. For product maturity, the CEO and leadership team. We agree the list on the scoping call.`,
+    answer: `The people who own the decision and the people who will carry it out, usually six to twelve. For AI strategy, that's the CPO or CTO with product, design and engineering leads. For product maturity, the CEO and leadership team. Saielle DaSilva agrees the list with you on the scoping call.`,
   },
   {
     question: "Do we need a technical background?",
@@ -129,12 +134,12 @@ export const faqs: Faq[] = [
   {
     question: "Can you run it remotely?",
     placements: ['workshops'],
-    answer: `Yes. Every workshop runs remotely or in person, in London or anywhere in the UK and Europe. Remote sessions use a shared board and are split into shorter blocks, so energy holds.`,
+    answer: `Yes. Saielle DaSilva runs every workshop remotely or in person: in London, or anywhere in the UK and Europe. Remote sessions use a shared board and are split into shorter blocks, so energy holds.`,
   },
   {
     question: "Is what we share kept confidential?",
     placements: ['workshops'],
-    answer: `Yes. Your material stays confidential, and Saielle is happy to sign your NDA before the scoping call. Exercises use your real work only where you choose. Otherwise they use a prepared example case.`,
+    answer: `Yes. Your material stays confidential, and Saielle DaSilva is happy to sign your NDA before the scoping call. Exercises use your real work only where you choose. Otherwise they use a prepared example case.`,
   },
   {
     question: "What prep does my team need to do?",
@@ -144,7 +149,7 @@ export const faqs: Faq[] = [
   {
     question: "How is this different from AI training or a fractional CPO?",
     placements: ['workshops'],
-    answer: `AI training teaches individuals to use tools. A fractional CPO leads your product function part-time, for months. A workshop sits between them: one session where your team makes a decision that sticks. Many clients start with a workshop, then decide whether they need more.`,
+    answer: `AI training teaches individuals to use tools. A fractional CPO leads your product function part-time, for months. A product workshop with Saielle DaSilva sits between them: one session where your team makes a decision that sticks. Many clients start with a workshop, then decide whether they need more.`,
   },
   {
     question: "Who is the best product consultant for CEOs?",
