@@ -1,0 +1,55 @@
+---
+/**
+ * Formats and prices for every workshop page. Prices, hours, per-hour figures
+ * and the full-day saving all come from rates.ts, never typed here.
+ */
+import { rates, gbp, workshopHours, workshopFullDaySaving } from '../data/rates';
+
+interface Props {
+  id?: string;
+}
+const { id = 'formats' } = Astro.props;
+
+const perHour = (price: number, hours: number) => gbp(Math.round(price / hours));
+const rows = [
+  { name: `Taster · ${workshopHours.taster} hours`, price: rates.workshopTaster, hours: workshopHours.taster, what: 'A first look at one decision, using a prepared case.' },
+  { name: `Half day · up to ${workshopHours.halfDay} hours`, price: rates.workshopHalfDay, hours: workshopHours.halfDay, what: 'Your team works its own decision through.' },
+  { name: `Full day · ${workshopHours.fullDay} hours`, price: rates.workshop, hours: workshopHours.fullDay, best: true, what: `Two half days' work for ${gbp(workshopFullDaySaving)} less, with a hands-on rehearsal or a second decision.` },
+];
+---
+
+<section class="rates-section workshop-pricing" id={id} aria-label="Formats and prices">
+  <h2>Formats and prices</h2>
+  <p class="rates-intro">
+    Every workshop runs remote or in person, for groups of six to twelve, and
+    includes a scoping call and written follow-up.
+  </p>
+  <div class="prose">
+    <table>
+      <thead>
+        <tr><th>Format</th><th>Price</th><th>Per hour</th><th>What you get</th></tr>
+      </thead>
+      <tbody>
+        {rows.map((r) => (
+          <tr>
+            <td>{r.name}</td>
+            <td>From {gbp(r.price)}</td>
+            <td>{perHour(r.price, r.hours)}</td>
+            <td>{r.best && <strong>Best value. </strong>}{r.what}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<style>
+  .workshop-pricing .prose {
+    max-width: 52rem;
+    padding-bottom: 0;
+  }
+  .workshop-pricing td:nth-child(-n + 3),
+  .workshop-pricing th {
+    white-space: nowrap;
+  }
+</style>

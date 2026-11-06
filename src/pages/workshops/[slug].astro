@@ -1,0 +1,110 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqList from '../../components/FaqList.astro';
+import TestimonialCarousel from '../../components/TestimonialCarousel.astro';
+import WorkshopPricing from '../../components/WorkshopPricing.astro';
+import WorkshopClose from '../../components/WorkshopClose.astro';
+import WorkshopTopCta from '../../components/WorkshopTopCta.astro';
+import { workshops, type Workshop } from '../../data/workshops';
+import { faqsFor } from '../../data/faqs';
+import { testimonialsFor } from '../../data/testimonials';
+import { results } from '../../data/results';
+import { rates } from '../../data/rates';
+
+export function getStaticPaths() {
+  return workshops.map((w) => ({ params: { slug: w.slug }, props: { w } }));
+}
+
+const { w } = Astro.props as { w: Workshop };
+const faqs = faqsFor(w.placement);
+const url = `https://intentionaut.com/workshops/${w.slug}/`;
+
+const serviceSchema = {
+  '@type': 'Service',
+  '@id': `${url}#service`,
+  name: w.title,
+  serviceType: 'Workshop',
+  description: w.metaDescription,
+  provider: { '@id': 'https://intentionaut.com/#person' },
+  audience: { '@type': 'BusinessAudience', audienceType: w.audience },
+  areaServed: [
+    { '@type': 'City', name: 'London' },
+    { '@type': 'Country', name: 'United Kingdom' },
+    'Europe',
+  ],
+  offers: {
+    '@type': 'Offer',
+    priceCurrency: 'GBP',
+    price: rates.workshopTaster,
+    priceSpecification: [
+      { '@type': 'UnitPriceSpecification', price: rates.workshopTaster, priceCurrency: 'GBP', unitText: '2-hour taster' },
+      { '@type': 'UnitPriceSpecification', price: rates.workshopHalfDay, priceCurrency: 'GBP', unitText: 'half day' },
+      { '@type': 'UnitPriceSpecification', price: rates.workshop, priceCurrency: 'GBP', unitText: 'full day' },
+    ],
+  },
+};
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer.replace(/\s+/g, ' ').trim() },
+  })),
+};
+---
+
+<BaseLayout title={w.metaTitle} description={w.metaDescription} jsonLd={[serviceSchema, faqSchema]}>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">{w.eyebrow}</p>
+      <h1>{w.title}</h1>
+      <p class="lede">{w.lede}</p>
+      <ul class="problem-lines">
+        {w.problems.map((p) => <li>{p}</li>)}
+      </ul>
+      <WorkshopTopCta />
+    </header>
+
+    <div class="case-meta">
+      <dl>
+        <dt class="meta-label">For</dt>
+        <dd class="meta-value">{w.forWhom}</dd>
+      </dl>
+      <div class="case-meta-cta">
+        <a class="link-arrow link-arrow--back" href="/workshops/">All workshops</a>
+      </div>
+    </div>
+
+    <article class="prose">
+      <h2>The decision your team makes</h2>
+      <p>{w.decision}</p>
+      <h2>How is the workshop run?</h2>
+      <ol>
+        {w.steps.map((s) => <li>{s}</li>)}
+      </ol>
+      <h2>What does your team leave with?</h2>
+      <p>{w.leaveWith}</p>
+      <p>{w.isnt}</p>
+    </article>
+
+    <WorkshopPricing />
+
+    <ul class="stat-strip workshop-stats">
+      {results.map((r) => (
+        <li><span class="stat-num">{r.num}</span><span class="stat-label">{r.label}</span></li>
+      ))}
+    </ul>
+
+    <TestimonialCarousel testimonials={testimonialsFor('workshops')} heading="What people say" />
+
+    <FaqList items={faqs} sub={w.faqSub} />
+
+    <WorkshopClose source={w.placement} />
+  </section>
+</BaseLayout>
+
+<style>
+  .workshop-stats {
+    margin-bottom: clamp(3rem, 6vw, 5rem);
+  }
+</style>

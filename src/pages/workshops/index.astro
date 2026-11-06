@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqList from '../../components/FaqList.astro';
+import TestimonialCarousel from '../../components/TestimonialCarousel.astro';
+import WorkshopPricing from '../../components/WorkshopPricing.astro';
+import WorkshopClose from '../../components/WorkshopClose.astro';
+import WorkshopTopCta from '../../components/WorkshopTopCta.astro';
+import { workshops } from '../../data/workshops';
+import { faqsFor } from '../../data/faqs';
+import { testimonialsFor } from '../../data/testimonials';
+import { results } from '../../data/results';
+import { rates, gbp } from '../../data/rates';
+
+const faqs = faqsFor('workshops');
+// The first six answer the buyer's doubts; the rest sit under "More questions".
+const mainFaqs = faqs.slice(0, 6);
+const moreFaqs = faqs.slice(6);
+
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer.replace(/\s+/g, ' ').trim() },
+  })),
+};
+const catalogSchema = {
+  '@type': 'OfferCatalog',
+  '@id': 'https://intentionaut.com/workshops/#catalog',
+  name: 'Workshops',
+  itemListElement: workshops.map((w) => ({
+    '@type': 'Offer',
+    priceCurrency: 'GBP',
+    price: rates.workshopTaster,
+    itemOffered: { '@id': `https://intentionaut.com/workshops/${w.slug}/#service` },
+  })),
+};
+---
+
+<BaseLayout
+  title="AI workshops for CPOs, CTOs and CDOs | Saielle DaSilva"
+  description="Workshops for CPOs, CTOs, CDOs and their product and design teams: AI strategy, opportunity mapping and product maturity. Each ends in a decision."
+  jsonLd={[catalogSchema, faqSchema]}
+>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Workshops</p>
+      <h1>Workshops that end in a decision.</h1>
+      <p class="lede">
+        Your team brings one real problem. We work it through together, in the
+        room. Everyone leaves with the decision made, written down, and a named
+        owner for it.
+      </p>
+      <WorkshopTopCta />
+    </header>
+
+    <section class="rates-section" aria-label="Three workshops">
+      <h2>Three workshops</h2>
+      <p class="rates-intro">Every workshop starts with a free scoping call.</p>
+      <div class="rates">
+        {workshops.map((w) => (
+          <a class="rate-row rate-card" href={`/workshops/${w.slug}/`}>
+            <p class="rate-name">{w.title}</p>
+            <p class="rate-price">From {gbp(rates.workshopTaster)}</p>
+            <p class="rate-desc">{w.card}</p>
+            <p class="rate-shape">For {w.audience}. Taster, half day or full day.</p>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <WorkshopPricing />
+
+    <div class="prose workshop-id">
+      <p>
+        Saielle DaSilva is a London-based fractional CPO and design leader
+        turned product leader who builds with AI. Saielle runs workshops for
+        founders, product, design and data leaders across the UK and Europe.
+      </p>
+    </div>
+    <ul class="stat-strip workshop-stats">
+      {results.map((r) => (
+        <li><span class="stat-num">{r.num}</span><span class="stat-label">{r.label}</span></li>
+      ))}
+    </ul>
+
+    <TestimonialCarousel testimonials={testimonialsFor('workshops')} heading="What people say" />
+
+    <FaqList items={mainFaqs} sub="What leaders ask before booking a workshop." />
+    <FaqList items={moreFaqs} heading="More questions" />
+
+    <WorkshopClose source="workshops" />
+  </section>
+</BaseLayout>
+
+<style>
+  .workshop-id {
+    padding-bottom: var(--space-6);
+  }
+  .workshop-stats {
+    margin-bottom: clamp(3rem, 6vw, 5rem);
+  }
+</style>
