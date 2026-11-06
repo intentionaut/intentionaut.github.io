@@ -3,7 +3,7 @@
  * Formats and prices for every workshop page. Prices, hours, per-hour figures
  * and the full-day saving all come from rates.ts, never typed here.
  */
-import { rates, gbp, workshopHours, workshopFullDaySaving } from '../data/rates';
+import { rates, gbp, workshopHours, workshopFullDaySaving, workshopGroup, workshopExtraPerson } from '../data/rates';
 
 interface Props {
   id?: string;
@@ -21,8 +21,10 @@ const rows = [
 <section class="rates-section workshop-pricing" id={id} aria-label="Formats and prices">
   <h2>Formats and prices</h2>
   <p class="rates-intro">
-    Every workshop runs remote or in person, for groups of six to twelve, and
-    includes a scoping call and written follow-up.
+    Every workshop runs remote or in person and includes a scoping call,
+    materials and written follow-up. Each price covers up to
+    {workshopGroup.included} people; each extra person is
+    {gbp(workshopExtraPerson)}, up to {workshopGroup.max}.
   </p>
   <div class="prose">
     <table>

@@ -30,6 +30,10 @@ export const fractionalMonthly2Day = rates.fractional * 8; // 2 days a week, 8 d
 export const buildingWeekly = rates.forwardDeployed * 3; // 3 days a week
 
 export const workshopHours = { taster: 2, halfDay: 4, fullDay: 8 } as const;
+/** Group size each workshop price covers, and the most one facilitator runs. */
+export const workshopGroup = { included: 12, max: 20 } as const;
+/** Per person above workshopGroup.included, up to workshopGroup.max. */
+export const workshopExtraPerson = 150;
 /** What a full day saves against booking two half days. */
 export const workshopFullDaySaving = rates.workshopHalfDay * 2 - rates.workshop;
 
