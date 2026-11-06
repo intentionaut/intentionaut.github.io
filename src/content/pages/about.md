@@ -26,4 +26,4 @@ I have spoken about some of this on stage, including at <a href="https://www.min
 
 Design taught me delight. Data taught me discipline. Product gave me somewhere to put both.
 
-If any of that sounds like the teammate you've been missing, [say hello](/contact).
+If any of that sounds like the teammate you've been missing, [say hello](/contact/).
