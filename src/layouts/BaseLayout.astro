@@ -223,6 +223,36 @@ const graph = {
       })();
     </script>
     <slot name="head" />
+    {/*
+      Novus by Pendo: install snippet, then one anonymous initialize.
+
+      Skipped wherever the Cloudflare beacon is skipped (noAnalytics), so it
+      never loads on a page that can hold a case-study key.
+
+      The hash transform is the backstop for every other page. A private link
+      carries its key after the # (/case-studies/<slug>/#k=<key>, see
+      src/lib/case-lock.js), and the SDK records the URL it sees. This site
+      never routes on the hash (each page is its own path; # is only ever an
+      in-page anchor), so clearing it costs no page identity.
+    */}
+    {
+      !noAnalytics && (
+        <script is:inline>
+          (function(apiKey){
+              (function(p,e,n,d,o){var v,w,x,y,z;o=p[d]=p[d]||{};o._q=o._q||[];
+              v=['initialize','identify','updateOptions','pageLoad','track', 'trackAgent'];for(w=0,x=v.length;w<x;++w)(function(m){
+              o[m]=o[m]||function(){o._q[m===v[0]?'unshift':'push']([m].concat([].slice.call(arguments,0)));};})(v[w]);
+              y=e.createElement(n);y.async=!0;y.src='https://cdn.pendo.io/agent/static/'+apiKey+'/pendo.js';
+              z=e.getElementsByTagName(n)[0];z.parentNode.insertBefore(y,z);})(window,document,'script','pendo');
+          })('1aa2cec7-ac47-43ce-8b5c-1f396b553619');
+
+          pendo.initialize({
+            visitor: { id: '' },
+            location: { transforms: [{ attr: 'hash', action: 'Clear' }] },
+          });
+        </script>
+      )
+    }
     {
       showAnalytics && !noAnalytics && (
         <script
