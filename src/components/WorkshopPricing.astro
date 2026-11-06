@@ -1,7 +1,8 @@
 ---
 /**
- * Formats and prices for every workshop page. Prices, hours, per-hour figures
- * and the full-day saving all come from rates.ts, never typed here.
+ * Formats and prices for every workshop page, as talk rows from the design
+ * system. Prices and hours come from rates.ts, never typed here. The half day
+ * leads: it is the usual format, and the others are there when they fit better.
  */
 import { rates, gbp, workshopHours, workshopGroup, workshopExtraPerson } from '../data/rates';
 
@@ -10,94 +11,42 @@ interface Props {
 }
 const { id = 'formats' } = Astro.props;
 
-const perHour = (price: number, hours: number) => gbp(Math.round(price / hours));
-const rows = [
-  { name: `Taster · ${workshopHours.taster} hours`, price: rates.workshopTaster, hours: workshopHours.taster },
-  { name: `Half day · up to ${workshopHours.halfDay} hours`, price: rates.workshopHalfDay, hours: workshopHours.halfDay },
-  { name: `Full day · ${workshopHours.fullDay} hours`, price: rates.workshop, hours: workshopHours.fullDay },
+const formats = [
+  { name: `Half day · up to ${workshopHours.halfDay} hours`, price: rates.workshopHalfDay },
+  { name: `Taster · ${workshopHours.taster} hours`, price: rates.workshopTaster },
+  { name: `Full day · ${workshopHours.fullDay} hours`, price: rates.workshop },
 ];
-// "Best value" goes to the lowest price per hour, so the label cannot drift from the rates.
-const bestHourly = Math.min(...rows.map((r) => r.price / r.hours));
-const priced = rows.map((r) => ({ ...r, best: r.price / r.hours === bestHourly }));
+const terms = [
+  { label: 'Group', text: `Up to ${workshopGroup.included} people included` },
+  { label: 'Extra people', text: `${gbp(workshopExtraPerson)} each, up to ${workshopGroup.max}` },
+  { label: 'Travel', text: 'None for remote or London; at cost elsewhere, agreed before booking' },
+  { label: 'Materials', text: 'Included' },
+];
 ---
 
 <section class="rates-section workshop-pricing" id={id} aria-label="Formats and prices">
   <h2>Formats and prices</h2>
-  <ul class="tiers">
-    {priced.map((r) => (
-      <li class:list={['tier', { best: r.best }]}>
-        {r.best && <span class="flag">Best value</span>}
-        <p class="tier-name">{r.name}</p>
-        <p class="tier-price">{gbp(r.price)}</p>
-        <p class="tier-hour">from · {perHour(r.price, r.hours)} an hour</p>
+  <p class="rates-intro">Most workshops run as a half day. A taster or a full day is there when it fits better.</p>
+  <ul class="talk-list workshop-formats">
+    {formats.map((f) => (
+      <li class="talk-row">
+        <span class="talk-date">From {gbp(f.price)}</span>
+        <div><span class="talk-title">{f.name}</span></div>
       </li>
     ))}
   </ul>
-  <ul class="terms">
-    <li>Up to {workshopGroup.included} people included</li>
-    <li>{gbp(workshopExtraPerson)} per extra person, up to {workshopGroup.max}</li>
-    <li>Travel at cost outside London</li>
-    <li>Materials included</li>
+  <ul class="talk-list">
+    {terms.map((t) => (
+      <li class="talk-row">
+        <span class="talk-date">{t.label}</span>
+        <div><p class="talk-meta">{t.text}</p></div>
+      </li>
+    ))}
   </ul>
 </section>
 
 <style>
-  .tiers {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
-    gap: var(--space-5);
-    list-style: none;
-    padding: 0;
-    margin: 0 0 var(--space-5);
-  }
-  .tier {
-    position: relative;
-    border: 1px solid var(--slate);
-    border-radius: var(--radius-l);
-    padding: var(--space-6) var(--space-5) var(--space-5);
-  }
-  .tier.best {
-    border: 2px solid var(--accent);
-  }
-  .flag {
-    position: absolute;
-    top: -0.7rem;
-    left: var(--space-5);
-    background: var(--accent);
-    color: var(--paper);
-    font-size: var(--text-xs);
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    padding: 0.1rem var(--space-2);
-    border-radius: var(--radius-s);
-  }
-  .tier p {
-    margin: 0;
-  }
-  .tier-price {
-    font-family: var(--font-display);
-    font-size: var(--text-xl);
-    line-height: 1.1;
-    margin: var(--space-2) 0 var(--space-1) !important;
-  }
-  .tier-hour {
-    font-size: var(--text-sm);
-    color: var(--muted);
-  }
-  .terms {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2) var(--space-5);
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    font-size: var(--text-sm);
-    color: var(--muted);
-  }
-  .terms li::before {
-    content: '·';
-    color: var(--accent-text);
-    margin-right: var(--space-2);
+  .workshop-formats {
+    padding-bottom: var(--space-7);
   }
 </style>

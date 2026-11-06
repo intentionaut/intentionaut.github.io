@@ -82,11 +82,18 @@ const catalogSchema = {
 
     <section class="rates-section workshop-steps" aria-label="How it works">
       <h2>How it works</h2>
-      <ol>
-        <li>A free scoping call to agree the decision and who is in the room.</li>
-        <li>About 20 minutes of prework each, a few days before.</li>
-        <li>The session, remote or in person.</li>
-        <li>Written follow-up, with owners and dates.</li>
+      <ol class="talk-list">
+        {[
+          ['A free scoping call', 'We agree the decision and who should be in the room.'],
+          ['About 20 minutes of prework each', 'A few days before, usually one example from your own work.'],
+          ['The session', 'Remote or in person, in London or across the UK and Europe.'],
+          ['Written follow-up', 'The decision, its owner and a date to check it.'],
+        ].map(([title, meta], i) => (
+          <li class="talk-row">
+            <span class="talk-date">Step {i + 1}</span>
+            <div><span class="talk-title">{title}</span><p class="talk-meta">{meta}</p></div>
+          </li>
+        ))}
       </ol>
     </section>
 
@@ -105,25 +112,5 @@ const catalogSchema = {
   .workshop-stats {
     margin-bottom: var(--space-7);
   }
-  .workshop-steps ol {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-    gap: var(--space-6);
-    list-style: none;
-    counter-reset: step;
-    padding: 0;
-    margin: 0;
-  }
-  .workshop-steps li {
-    counter-increment: step;
-  }
-  .workshop-steps li::before {
-    content: counter(step);
-    display: block;
-    font-family: var(--font-display);
-    font-size: var(--text-xl);
-    line-height: 1;
-    color: var(--accent-text);
-    margin-bottom: var(--space-2);
-  }
+
 </style>
