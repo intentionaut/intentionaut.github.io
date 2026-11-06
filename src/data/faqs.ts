@@ -129,7 +129,7 @@ export const faqs: Faq[] = [
   {
     question: "Who should be in the room?",
     placements: ['workshops'],
-    answer: `The people who own the decision and the people who will carry it out, usually six to ${workshopGroup.included}. For AI strategy, that's the CPO or CTO with product, design and engineering leads. For product maturity, the CEO and leadership team. We agree the list on the scoping call.`,
+    answer: `The people who own the decision and the people who will carry it out, usually six to twelve. For AI strategy, that's the CPO or CTO with product, design and engineering leads. For product maturity, the CEO and leadership team. We agree the list on the scoping call.`,
   },
   {
     question: "Do we need a technical background?",

@@ -12,9 +12,9 @@ const { id = 'formats' } = Astro.props;
 
 const perHour = (price: number, hours: number) => gbp(Math.round(price / hours));
 const rows = [
-  { name: `Taster · ${workshopHours.taster} hours`, price: rates.workshopTaster, hours: workshopHours.taster, what: 'A first look at one decision, using a prepared case.' },
-  { name: `Half day · up to ${workshopHours.halfDay} hours`, price: rates.workshopHalfDay, hours: workshopHours.halfDay, what: 'Your team works its own decision through.' },
-  { name: `Full day · ${workshopHours.fullDay} hours`, price: rates.workshop, hours: workshopHours.fullDay, what: 'Two decisions, or one decision with a hands-on rehearsal.' },
+  { name: `Taster · ${workshopHours.taster} hours`, price: rates.workshopTaster, hours: workshopHours.taster },
+  { name: `Half day · up to ${workshopHours.halfDay} hours`, price: rates.workshopHalfDay, hours: workshopHours.halfDay },
+  { name: `Full day · ${workshopHours.fullDay} hours`, price: rates.workshop, hours: workshopHours.fullDay },
 ];
 // "Best value" goes to the lowest price per hour, so the label cannot drift from the rates.
 const bestHourly = Math.min(...rows.map((r) => r.price / r.hours));
@@ -32,15 +32,14 @@ const priced = rows.map((r) => ({ ...r, best: r.price / r.hours === bestHourly }
   <div class="prose">
     <table>
       <thead>
-        <tr><th>Format</th><th>Price</th><th>Per hour</th><th>What you get</th></tr>
+        <tr><th>Format</th><th>Price</th><th>Per hour</th></tr>
       </thead>
       <tbody>
         {priced.map((r) => (
           <tr>
-            <td>{r.name}</td>
+            <td>{r.name}{r.best && <strong> · Best value</strong>}</td>
             <td>From {gbp(r.price)}</td>
             <td>{perHour(r.price, r.hours)}</td>
-            <td>{r.best && <strong>Best value. </strong>}{r.what}</td>
           </tr>
         ))}
       </tbody>
@@ -53,35 +52,8 @@ const priced = rows.map((r) => ({ ...r, best: r.price / r.hours === bestHourly }
     max-width: 52rem;
     padding-bottom: 0;
   }
-  .workshop-pricing td:nth-child(-n + 3),
+  .workshop-pricing td:nth-child(n + 2),
   .workshop-pricing th {
     white-space: nowrap;
-  }
-  /* On phones the fourth column sat off-screen with no hint it was there.
-     Each row becomes format, price, per hour, then what you get underneath. */
-  @media (max-width: 560px) {
-    .workshop-pricing thead th:nth-child(4) {
-      display: none;
-    }
-    .workshop-pricing tr {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 6rem 4.75rem;
-      column-gap: var(--space-4);
-      border-bottom: 1px solid var(--slate);
-    }
-    .workshop-pricing thead tr {
-      border-bottom-color: var(--ink);
-    }
-    .workshop-pricing td,
-    .workshop-pricing th {
-      border-bottom: 0;
-    }
-    .workshop-pricing td:first-child {
-      white-space: normal;
-    }
-    .workshop-pricing td:nth-child(4) {
-      grid-column: 1 / -1;
-      padding-top: 0;
-    }
   }
 </style>
