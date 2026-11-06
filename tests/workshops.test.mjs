@@ -70,3 +70,14 @@ test('Workshops sits in the header and footer', () => {
   assert.match(read('components/Header.astro'), /href: '\/workshops\/', label: 'Workshops'/);
   assert.match(read('components/Footer.astro'), /<a href="\/workshops\/">Workshops<\/a>/);
 });
+
+test('every FAQ list names its topic, so agents keep the context', () => {
+  const pages = walk(join(root, 'pages')).filter((f) => f.endsWith('.astro'));
+  for (const f of pages) {
+    const src = readFileSync(f, 'utf8');
+    for (const m of src.matchAll(/<FaqList[\s\S]*?\/>/g)) {
+      assert.match(m[0], /heading=/, `${f} has a FaqList with no heading`);
+    }
+    assert.ok(!src.includes('Fair questions'), `${f} still says "Fair questions"`);
+  }
+});

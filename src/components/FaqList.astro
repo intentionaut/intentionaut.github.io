@@ -8,11 +8,13 @@ import type { Faq } from '../data/faqs';
 
 interface Props {
   items: Faq[];
-  heading?: string;
+  /** Name the topic ("FAQ: Fractional and interim CPO"), so an AI answer that
+      quotes the list without the page around it keeps its context. */
+  heading: string;
   sub?: string;
 }
 
-const { items, heading = 'Fair questions.', sub } = Astro.props;
+const { items, heading, sub } = Astro.props;
 ---
 
 {
