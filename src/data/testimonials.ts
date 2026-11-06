@@ -19,7 +19,7 @@
  */
 
 /** Where a testimonial may appear. Add to this as pages need them. */
-export type Placement = 'contact' | 'home' | 'speaking' | 'fractional' | 'workshops' | 'for-ceos';
+export type Placement = 'contact' | 'home' | 'speaking' | 'fractional' | 'workshops' | 'for-ceos' | 'for-cpos-ctos';
 
 export interface Testimonial {
   /** Stable, human-readable. Used as a key and to talk about one in a commit. */
@@ -159,7 +159,7 @@ export const testimonials: Testimonial[] = [
     org: "former Head of Delivery, Sainsbury's",
     url: 'https://www.linkedin.com/in/jon-cockle-75a78867/',
     enabled: true,
-    placements: ['contact', 'fractional', 'home', 'workshops'],
+    placements: ['contact', 'fractional', 'home', 'workshops', 'for-cpos-ctos'],
     source: 'LinkedIn recommendation',
     receivedAt: '2026-08-28',
     note: 'Excerpt, trimmed further 2026-09-27 at Saielle\'s request: it opened "She is also particularly strong at framing choices and trade-offs for senior leaders. Rather than allowing discussions to become lost in detail," which read oddly out of context. The full recommendation is on his LinkedIn.',
