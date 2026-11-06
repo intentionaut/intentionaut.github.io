@@ -29,12 +29,12 @@ export const faqs: Faq[] = [
   {
     question: "When does a scaling company need a CPO?",
     placements: ['for-ceos'],
-    answer: `When product decisions start waiting for the CEO. That usually shows up as roadmaps that change with whoever spoke last, engineering asking what to build, and a product team that grew faster than its role was defined. Saielle DaSilva helps CEOs decide whether that needs a full-time hire, a fractional leader for a defined period, or a clearer charter for the team already in place.`,
+    answer: `When product decisions start waiting for the CEO. That usually shows up as roadmaps that change with whoever spoke last, engineering asking what to build, and a team that outgrew its job description. Saielle DaSilva helps CEOs decide whether that needs a full-time hire, a fractional leader for a defined period, or a clearer charter for the team already in place.`,
   },
   {
     question: "Should we hire a full-time CPO or bring in a fractional one?",
     placements: ['for-ceos'],
-    answer: `A fractional CPO fits when you need senior direction now but the role is still changing, or you want to test the shape before you commit. Saielle DaSilva works one or two days a week, three months and up, with executive access and accountability for delivery, and leaves a handover that a permanent hire can pick up.`,
+    answer: `A fractional CPO fits when you need senior direction now but the role is still changing, or you want to test the shape before you commit. Saielle DaSilva works one or two days a week, one month and up, with executive access and accountability for delivery. Each engagement ends with a handover a permanent hire can pick up.`,
   },
   {
     question: "What should product own as we scale?",
