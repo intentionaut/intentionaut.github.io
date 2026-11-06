@@ -8,7 +8,8 @@ export type FaqPlacement =
   | 'workshops'
   | 'workshops-ai-strategy'
   | 'workshops-opportunity-mapping'
-  | 'workshops-product-maturity';
+  | 'workshops-product-maturity'
+  | 'for-ceos';
 
 export interface Faq {
   question: string;
@@ -24,6 +25,28 @@ export interface Faq {
 }
 
 export const faqs: Faq[] = [
+  // /for-ceos/: third person, so an AI answer quoting one keeps its subject.
+  {
+    question: "When does a scaling company need a CPO?",
+    placements: ['for-ceos'],
+    answer: `When product decisions start waiting for the CEO. That usually shows up as roadmaps that change with whoever spoke last, engineering asking what to build, and a product team that grew faster than its role was defined. Saielle DaSilva helps CEOs decide whether that needs a full-time hire, a fractional leader for a defined period, or a clearer charter for the team already in place.`,
+  },
+  {
+    question: "Should we hire a full-time CPO or bring in a fractional one?",
+    placements: ['for-ceos'],
+    answer: `A fractional CPO fits when you need senior direction now but the role is still changing, or you want to test the shape before you commit. Saielle DaSilva works one or two days a week, three months and up, with executive access and accountability for delivery, and leaves a handover that a permanent hire can pick up.`,
+  },
+  {
+    question: "What should product own as we scale?",
+    placements: ['for-ceos'],
+    answer: `The why and the what: which problems to solve, for whom, and how you will know it worked. Engineering owns how. The line blurs as teams multiply. Product maturity modelling, a workshop Saielle DaSilva runs with leadership teams, writes that line down as a short charter, with a map of who decides what.`,
+  },
+  {
+    question: "How do I find a product consultant a CEO can trust?",
+    placements: ['for-ceos'],
+    answer: `Look for named references you can check, and someone who has run product inside a company at your stage. Saielle DaSilva led product and design through hyper-growth at Cazoo and served as interim CPO at a grocery scale-up, where monthly recurring revenue grew 450 per cent in 90 days. Every engagement starts with a free call.`,
+  },
+
   // Workshops (/workshops/ and its three pages). Answers name Saielle DaSilva
   // in the third person so an AI answer quoting one keeps its subject.
   {
