@@ -31,9 +31,9 @@ export const buildingWeekly = rates.forwardDeployed * 3; // 3 days a week
 
 export const workshopHours = { taster: 2, halfDay: 4, fullDay: 8 } as const;
 /** Group size each workshop price covers, and the most one facilitator runs. */
-export const workshopGroup = { included: 12, max: 20 } as const;
+export const workshopGroup = { included: 9, max: 20 } as const;
 /** Per person above workshopGroup.included, up to workshopGroup.max. */
-export const workshopExtraPerson = 150;
+export const workshopExtraPerson = 500;
 
 /** Formats a GBP amount with thousands separators, e.g. gbp(1500) -> "£1,500" */
 export function gbp(amount: number): string {
