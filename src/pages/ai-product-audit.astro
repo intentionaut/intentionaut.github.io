@@ -2,30 +2,79 @@
 import '@fontsource-variable/roboto-serif';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.astro';
+import WhoFor from '../components/WhoFor.astro';
 import { rates, gbp, offerDays } from '../data/rates';
 ---
 
 <BaseLayout
   title="AI Product Audit | Saielle DaSilva"
-  description={`A fixed-price AI product audit from Saielle DaSilva, fractional CPO for AI products: ${offerDays.aiAudit} days across one week, ending in a readout workshop and a written plan. ${gbp(rates.aiAudit)}.`}
+  description={`A fixed-price AI product audit from Saielle DaSilva, fractional CPO for AI products. In ${offerDays.aiAudit} days across one week, every AI feature shipped or planned gets a keep, change or stop call, agreed with the leadership team. ${gbp(rates.aiAudit)}.`}
 >
   <section class="wrap">
     <header class="page-head">
-      <p class="eyebrow">Fixed scope · {gbp(rates.aiAudit)}</p>
-      <h1>AI product audit</h1>
+      <p class="eyebrow">Fixed scope · {offerDays.aiAudit} days · {gbp(rates.aiAudit)}</p>
+      <h1>Know which AI work to keep, change or stop. In one week.</h1>
       <p class="lede">
-        Two days of Saielle DaSilva's time across one week, for teams with an
-        AI pilot, a product plan or a data investment they need an outside
-        read on.
+        Saielle DaSilva reviews every AI feature you have shipped or planned,
+        and your leadership team leaves agreeing what to fund next and what to
+        stop.
       </p>
     </header>
 
+    <WhoFor
+      fit={[
+        'Leadership teams with several AI pilots or features and no shared view of which ones matter.',
+        'Companies about to commit budget to AI work and wanting an outside read first.',
+        'CEOs and CTOs who need a straight answer they can take to the board.',
+      ]}
+      notFit={[
+        'You already know what to build and need it built. Start with forward-deployed work.',
+        'You need someone to lead product week to week. Start with fractional leadership.',
+      ]}
+    />
+
     <div class="prose">
-      <h2>How it works</h2>
+      <h2>Sound familiar?</h2>
       <ul>
-        <li><strong>Day one.</strong> Saielle reviews the product, the data and the AI plans with your team.</li>
-        <li><strong>Day two.</strong> A half-day readout workshop with your leadership team, and a written plan.</li>
+        <li>Several AI pilots are running, and nobody can say which one the business depends on.</li>
+        <li>The demo looks good. Nobody can say what a user is supposed to do with the output.</li>
+        <li>The board asks about AI every quarter, and the answer changes every quarter.</li>
       </ul>
+
+      <h2>What Saielle looks at</h2>
+      <p>Every AI feature, shipped or planned, against the same questions:</p>
+      <ul>
+        <li><strong>The decision.</strong> What does a user do differently because of the output?</li>
+        <li><strong>The value.</strong> Is the thing it automates the expensive part of the job?</li>
+        <li><strong>The data.</strong> Has the model met real data, including the messy half?</li>
+        <li><strong>The risk.</strong> What happens when it is confidently wrong, and who is accountable?</li>
+        <li><strong>The cost.</strong> What each answer costs to run, and whether that holds at scale.</li>
+        <li><strong>The evidence.</strong> Can you tell whether it is working, and from what?</li>
+      </ul>
+
+      <h2>What you leave with</h2>
+      <ul>
+        <li>A ranked list of your AI work: keep, change or stop, with the reason for each.</li>
+        <li>The one or two bets worth funding next, and the evidence that would prove them.</li>
+        <li>The failure modes written down, before a customer finds them.</li>
+        <li>A leadership team that agrees, because it made the calls together in the readout.</li>
+        <li>A plain recommendation on what happens next, including when the answer is nothing.</li>
+      </ul>
+
+      <h2>How the week runs</h2>
+      <ul>
+        <li><strong>Day one.</strong> Saielle reviews the product, the data and the AI plans with the people who own them.</li>
+        <li><strong>Day two.</strong> A half-day readout workshop where your leadership team makes the keep, change and stop calls, then the written plan.</li>
+      </ul>
+
+      <h2>Why Saielle DaSilva</h2>
+      <p>
+        At Sainsbury's, Saielle DaSilva ran product for AI, data platforms and
+        machine learning, and took production AI from a handful of experiments
+        to a platform serving over 100 million customers. She was on the
+        founding team at <a href="/case-studies/cazoo/">Cazoo</a>, through to a
+        $7B IPO.
+      </p>
 
       <h2>What it costs</h2>
       <p>
