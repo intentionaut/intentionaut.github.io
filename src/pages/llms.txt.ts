@@ -15,7 +15,7 @@ She is based in London and works across the UK and Europe.
 - [Strategy session](https://intentionaut.com/strategic-direction/): ${gbp(rates.strategySession)} for a 90-minute session.
 - [AI product audit](https://intentionaut.com/ai-product-audit/): ${offerDays.aiAudit} days across one week, a keep, change or stop recommendation for each piece of AI work, ${gbp(rates.aiAudit)} fixed.
 - [Product strategy sprint](https://intentionaut.com/product-strategy-sprint/): ${offerDays.strategySprint} days across two weeks, including a full-day workshop, ${gbp(rates.strategySprint)} fixed.
-- [Fractional leadership](https://intentionaut.com/fractional/): product leadership one or two days a week, from ${gbp(fractionalMonthly1Day)} a month for one day a week or ${gbp(fractionalMonthly2Day)} a month for two; day rate ${gbp(rates.fractional)}.
+- [Fractional leadership](https://intentionaut.com/fractional/): senior product leadership, from ${gbp(fractionalMonthly1Day)} a month for one day a week or ${gbp(fractionalMonthly2Day)} a month for two; day rate ${gbp(rates.fractional)}.
 - [Product building](https://intentionaut.com/forward-deployed/): embedded work to make a product idea tangible, ${gbp(buildingWeekly)} a week.
 - [Two-day pilot](https://intentionaut.com/forward-deployed/): a fixed-price pilot that opens a product building block, ${gbp(rates.fdePilot)}.
 - [AI pilot to production](https://intentionaut.com/ai-pilot-to-production/): product building for an AI pilot that has not reached production.
