@@ -22,11 +22,17 @@ export const rates = {
   // inside it. See docs/forward-deployed-positioning.md.
   forwardDeployed: 2250, // per day
   fdePilot: 4000, // fixed price for the two-day pilot that opens a block
+  // Fixed-scope entry offers, priced at the unretained day rate so a retained
+  // month (fractional) stays the cheaper way to buy the same days.
+  aiAudit: 4500, // two days across one week
+  strategySprint: 9000, // four days across two weeks, includes a full-day workshop
 } as const;
 
 // Derived totals, so the day rates stay the one source.
 export const fractionalMonthly1Day = rates.fractional * 4; // 1 day a week, 4 days
 export const fractionalMonthly2Day = rates.fractional * 8; // 2 days a week, 8 days
+/** Days of Saielle's time in each fixed-scope offer. */
+export const offerDays = { aiAudit: 2, strategySprint: 4 } as const;
 export const buildingWeekly = rates.forwardDeployed * 3; // 3 days a week
 
 export const workshopHours = { taster: 2, halfDay: 4, fullDay: 8 } as const;
