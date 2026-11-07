@@ -3,17 +3,14 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FrameSubscribe from '../components/FrameSubscribe.astro';
 import { testimonialsFor } from '../data/testimonials';
+import TestimonialCarousel from '../components/TestimonialCarousel.astro';
 import { BOOKING_URL } from '../data/links';
+import { results } from '../data/results';
 
 // The story, top to bottom: who she is and who brings her in, proof, the two
-// offers, what she has built, what someone said, then ways to follow along.
+// offers, the case studies, what people said, what she has built, then ways
+// to follow along.
 // Every figure below is already published on /for-advisors/ and /fractional/.
-const results = [
-  { num: '+450%', label: 'MRR in 90 days as interim CPO' },
-  { num: '3.2x', label: 'Return on investment, StepStone’s satellite portfolio' },
-  { num: '100M+', label: 'Customers on Sainsbury’s AI platform' },
-  { num: '$7B', label: 'Cazoo IPO, from the founding team' },
-];
 
 const offers = [
   {
@@ -40,7 +37,7 @@ const studies = (await getCollection('caseStudies'))
   .sort((a, b) => studyOrder.indexOf(a.id) - studyOrder.indexOf(b.id));
 if (studies.length !== studyOrder.length) throw new Error('A homepage case study is missing');
 
-const [quote] = testimonialsFor('home');
+const homeTestimonials = testimonialsFor('home');
 ---
 
 <BaseLayout
@@ -49,11 +46,26 @@ const [quote] = testimonialsFor('home');
 >
   <section class="wrap hero">
     <p class="eyebrow">Saielle DaSilva · Product leader</p>
-    <h1>I speak <em>four</em> languages: design, product, data&nbsp;&amp;&nbsp;AI.</h1>
+    <h1 id="hero-h1">I speak <em>four</em> languages: design, product, data&nbsp;&amp;&nbsp;AI.</h1>
+    {/* Headline A/B test (PostHog flag "hero-headline"). Crawlers and anyone
+        who declines cookies always get the headline above; only readers who
+        accepted can be shown the variant. */}
+    <script is:inline>
+      document.addEventListener('posthog:ready', function () {
+        window.posthog.onFeatureFlags(function () {
+          if (window.posthog.getFeatureFlag('hero-headline') === 'building') {
+            var h = document.getElementById('hero-h1');
+            if (h) h.textContent = 'The product leader for teams building with AI.';
+          }
+        });
+      });
+    </script>
     <p class="lede">
-      Hi, I'm Saielle. Founders and product leaders bring me in when
-      direction is the bottleneck. I turn design, data and AI into
-      deliberate choices, aligned teams and shipped results.
+      Saielle DaSilva is a fractional Chief Product Officer for teams
+      working across AI, data and design. Founders bring her in when
+      product leadership is missing, an AI pilot won't reach production,
+      or the strategy hasn't reached the roadmap. She turns that friction
+      into aligned teams and the high-impact business results they produce.
     </p>
     <div class="cta-row">
       <a class="btn-primary" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a free call</a>
@@ -106,6 +118,10 @@ const [quote] = testimonialsFor('home');
     <a class="link-arrow" href="/case-studies/"><span>All case studies</span></a>
   </section>
 
+  <div class="wrap home-section">
+    <TestimonialCarousel testimonials={homeTestimonials} heading="What people say" />
+  </div>
+
   <section class="wrap home-section" aria-labelledby="built-h">
     <h2 id="built-h" class="home-h2">What I've built lately.</h2>
     <ol class="project-list">
@@ -121,17 +137,6 @@ const [quote] = testimonialsFor('home');
     <a class="link-arrow" href="/projects/"><span>All projects</span></a>
   </section>
 
-  {quote && (
-    <section class="wrap home-section" aria-label="What people say">
-      <figure class="pull-quote">
-        <blockquote><p>{quote.quote}</p></blockquote>
-        <figcaption>
-          {quote.url ? <a href={quote.url} target="_blank" rel="noopener noreferrer">{quote.name}</a> : quote.name},
-          {' '}{quote.role}, {quote.org}
-        </figcaption>
-      </figure>
-    </section>
-  )}
 
   <section class="wrap lanes home-follow" aria-label="Follow the thinking">
     <ol>
@@ -188,11 +193,6 @@ const [quote] = testimonialsFor('home');
     margin: var(--space-6) 0 0;
     font-size: 0.95rem;
     color: var(--muted);
-  }
-
-
-  .home-section .pull-quote {
-    margin: 0;
   }
 
 

@@ -1,13 +1,23 @@
 ---
 const { pathname } = Astro.url;
-const links = [
-  { href: '/about/', label: 'About' },
-  { href: '/projects/', label: 'Projects' },
-  { href: '/speaking/', label: 'Speaking' },
-  { href: '/writing/', label: 'Writing' },
-  { href: '/case-studies/', label: 'Case studies' },
-  { href: '/contact/', label: 'Work with me' },
+
+// The paid offers, grouped under one disclosure so the header stays short.
+// Mentoring has no price, so it stays in the footer.
+const services = [
+  { href: '/fractional/', label: 'Fractional leadership', desc: 'A part-time head of product, one or two days a week' },
+  { href: '/forward-deployed/', label: 'Product building', desc: 'Working software, built inside your team' },
+  { href: '/workshops/', label: 'Workshops', desc: 'Two hours to a full day with your team' },
+  { href: '/keynote-speaker/', label: 'Speaking', desc: 'Keynotes for conferences and company events' },
+  { href: '/strategic-direction/', label: 'Strategy session', desc: '90 minutes on one decision or plan' },
 ];
+const links = [
+  { href: '/case-studies/', label: 'Case studies' },
+  { href: '/writing/', label: 'Writing' },
+  { href: '/projects/', label: 'Projects' },
+  { href: '/about/', label: 'About' },
+];
+const here = (href: string) => pathname.startsWith(href);
+const inServices = services.some((s) => here(s.href));
 ---
 
 <header class="site-header">
@@ -25,37 +35,359 @@ const links = [
       <span class="nav-toggle-bar"></span>
     </button>
     <nav class="site-nav" id="site-menu" aria-label="Main">
-      <ul>
+      <ul class="nav-list">
+        <li class="nav-services">
+          {/* Disclosure, not an ARIA menu: a list of links behind one button. */}
+          <button
+            class="nav-services-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="nav-services-panel"
+            data-current={inServices ? 'true' : undefined}
+          >
+            Services
+            <svg class="nav-chev" viewBox="0 0 12 12" aria-hidden="true">
+              <path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" />
+            </svg>
+          </button>
+          <ul class="nav-pop" id="nav-services-panel">
+            {
+              services.map((s) => (
+                <li>
+                  <a href={s.href} aria-current={here(s.href) ? 'page' : undefined}>
+                    <span class="nav-pop-title">{s.label}</span>
+                    <span class="nav-pop-desc">{s.desc}</span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </li>
         {
           links.map((link) => (
             <li>
-              <a
-                href={link.href}
-                aria-current={pathname.startsWith(link.href) ? 'page' : undefined}
-              >
+              <a href={link.href} aria-current={here(link.href) ? 'page' : undefined}>
                 {link.label}
               </a>
             </li>
           ))
         }
+        <li class="nav-cta-item">
+          <a class="btn-primary nav-cta" href="/contact/" aria-current={here('/contact/') ? 'page' : undefined}>
+            Work with me
+          </a>
+        </li>
       </ul>
+      <span class="nav-glide" aria-hidden="true"></span>
     </nav>
   </div>
 </header>
 
+<style>
+  .site-nav {
+    position: relative;
+  }
+
+  .nav-list {
+    align-items: center;
+  }
+
+  /* The Services button reads as one of the links beside it. */
+  .nav-services {
+    position: relative;
+  }
+
+  .nav-services-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    padding: 0;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    transition: color var(--dur-fast) ease;
+  }
+
+  .nav-services-toggle:hover,
+  .nav-services-toggle[aria-expanded='true'],
+  .nav-services-toggle[data-current] {
+    color: var(--ink);
+  }
+
+  .nav-chev {
+    width: 0.7em;
+    height: 0.7em;
+    transition: transform var(--dur-med) var(--ease-out);
+  }
+
+  .nav-services-toggle[aria-expanded='true'] .nav-chev {
+    transform: rotate(180deg);
+  }
+
+  /* The panel: fades and drops in, items follow a beat apart. */
+  .nav-pop {
+    position: absolute;
+    top: calc(100% + var(--space-4));
+    left: calc(-1 * var(--space-4));
+    z-index: var(--z-tip);
+    display: grid;
+    gap: 0;
+    min-width: 21rem;
+    margin: 0;
+    padding: var(--space-2);
+    list-style: none;
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    border-radius: var(--radius-l);
+    box-shadow: 0 12px 32px -18px rgba(56, 35, 74, 0.45);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+    transform-origin: top left;
+    transition:
+      opacity var(--dur-base) ease,
+      transform var(--dur-med) var(--ease-out),
+      visibility 0s linear var(--dur-med);
+  }
+
+  .nav-services.is-open .nav-pop {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    transition-delay: 0s;
+  }
+
+  .nav-pop li {
+    opacity: 0;
+    transform: translateY(4px);
+    transition:
+      opacity var(--dur-base) ease,
+      transform var(--dur-med) var(--ease-out);
+  }
+
+  .nav-services.is-open .nav-pop li {
+    opacity: 1;
+    transform: none;
+  }
+
+  .nav-services.is-open .nav-pop li:nth-child(1) { transition-delay: 20ms; }
+  .nav-services.is-open .nav-pop li:nth-child(2) { transition-delay: 45ms; }
+  .nav-services.is-open .nav-pop li:nth-child(3) { transition-delay: 70ms; }
+  .nav-services.is-open .nav-pop li:nth-child(4) { transition-delay: 95ms; }
+  .nav-services.is-open .nav-pop li:nth-child(5) { transition-delay: 120ms; }
+
+  /* Overrides the uppercase header-link style for the panel's links. */
+  .site-nav .nav-pop a {
+    display: grid;
+    gap: 2px;
+    padding: var(--space-3) var(--space-4) var(--space-3) calc(var(--space-4) + 6px);
+    border-radius: var(--radius-m);
+    font-size: inherit;
+    letter-spacing: 0;
+    text-transform: none;
+    transition: background var(--dur-fast) ease;
+  }
+
+  .site-nav .nav-pop a::after {
+    left: var(--space-2);
+    right: auto;
+    top: var(--space-3);
+    bottom: var(--space-3);
+    width: 2px;
+    height: auto;
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+
+  .site-nav .nav-pop a:hover,
+  .site-nav .nav-pop a:focus-visible {
+    background: var(--slate);
+  }
+
+  .site-nav .nav-pop a:hover::after,
+  .site-nav .nav-pop a:focus-visible::after,
+  .site-nav .nav-pop a[aria-current='page']::after {
+    transform: scaleY(1);
+  }
+
+  .nav-pop-title {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-weight: 560;
+    font-size: 1rem;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+
+  .nav-pop-desc {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: var(--muted);
+  }
+
+  /* The house button keeps its own look; the link underline is not for it. */
+  .site-nav .nav-cta {
+    padding: 0.85em 1.6em;
+    color: var(--ink);
+  }
+
+  .site-nav .nav-cta::after {
+    position: absolute;
+    left: auto;
+    bottom: auto;
+    inset: 3px;
+    width: auto;
+    height: auto;
+    background: none;
+    transform: none;
+  }
+
+  /* One underline that glides to the link you point at, then back. */
+  .nav-glide {
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    height: 2px;
+    width: 0;
+    background: var(--accent);
+    border-radius: 2px;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      transform var(--dur-slow) var(--ease-out),
+      width var(--dur-slow) var(--ease-out),
+      opacity var(--dur-base) ease;
+  }
+
+  .site-nav.has-glide > .nav-list > li > a:not(.nav-cta)::after {
+    display: none;
+  }
+
+  /* Phone: Services opens in place, as a list under its heading. */
+  @media (max-width: 720px) {
+    .nav-list {
+      align-items: stretch;
+    }
+
+    .nav-pop {
+      position: static;
+      min-width: 0;
+      margin-top: var(--space-2);
+      padding: 0;
+      border: 0;
+      box-shadow: none;
+      background: none;
+      display: none;
+      gap: 0;
+      transform: none;
+    }
+
+    .nav-services.is-open .nav-pop {
+      display: grid;
+    }
+
+    .site-nav .nav-pop a {
+      padding: var(--space-2) var(--space-3) var(--space-2) calc(var(--space-3) + 6px);
+    }
+
+    .nav-glide {
+      display: none;
+    }
+
+    .nav-cta-item {
+      padding-top: var(--space-2);
+    }
+  }
+</style>
+
 <script>
   const toggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
   const nav = document.getElementById('site-menu');
+  const services = document.querySelector<HTMLElement>('.nav-services');
+  const servicesBtn = services?.querySelector<HTMLButtonElement>('.nav-services-toggle');
+
+  const closeMenu = () => {
+    document.body.classList.remove('menu-open');
+    toggle?.setAttribute('aria-expanded', 'false');
+  };
+
+  const setServices = (open: boolean) => {
+    services?.classList.toggle('is-open', open);
+    servicesBtn?.setAttribute('aria-expanded', String(open));
+  };
 
   toggle?.addEventListener('click', () => {
     const open = document.body.classList.toggle('menu-open');
     toggle.setAttribute('aria-expanded', String(open));
   });
 
+  servicesBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setServices(servicesBtn.getAttribute('aria-expanded') !== 'true');
+  });
+
   nav?.querySelectorAll('a').forEach((a) =>
     a.addEventListener('click', () => {
-      document.body.classList.remove('menu-open');
-      toggle?.setAttribute('aria-expanded', 'false');
+      closeMenu();
+      setServices(false);
     })
   );
+
+  // A click outside or Escape closes the panel; Escape returns focus to it.
+  document.addEventListener('click', (e) => {
+    if (services && !services.contains(e.target as Node)) setServices(false);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && services?.classList.contains('is-open')) {
+      setServices(false);
+      servicesBtn?.focus();
+    }
+  });
+  // Tabbing out of the panel closes it.
+  services?.addEventListener('focusout', (e) => {
+    if (!services.contains(e.relatedTarget as Node)) setServices(false);
+  });
+
+  // The gliding underline, on wide screens only.
+  const glide = nav?.querySelector<HTMLElement>('.nav-glide');
+  const wide = window.matchMedia('(min-width: 721px)');
+  const items = nav
+    ? [...nav.querySelectorAll<HTMLElement>('.nav-list > li > a:not(.nav-cta), .nav-services-toggle')]
+    : [];
+  const current = () =>
+    items.find((el) => el.getAttribute('aria-current') === 'page' || el.hasAttribute('data-current')) ?? null;
+  const moveTo = (el: HTMLElement | null) => {
+    if (!glide || !nav) return;
+    if (!el || !wide.matches) {
+      glide.style.opacity = '0';
+      return;
+    }
+    const r = el.getBoundingClientRect();
+    const n = nav.getBoundingClientRect();
+    glide.style.width = `${r.width}px`;
+    glide.style.transform = `translate(${r.left - n.left}px, ${r.bottom - n.bottom}px)`;
+    glide.style.opacity = '1';
+  };
+  if (glide && nav) {
+    nav.classList.add('has-glide');
+    items.forEach((el) => {
+      el.addEventListener('mouseenter', () => moveTo(el));
+      el.addEventListener('focus', () => moveTo(el));
+    });
+    nav.addEventListener('mouseleave', () => moveTo(current()));
+    nav.addEventListener('focusout', (e) => {
+      if (!nav.contains(e.relatedTarget as Node)) moveTo(current());
+    });
+    const settle = () => moveTo(current());
+    window.addEventListener('resize', settle);
+    wide.addEventListener('change', settle);
+    document.fonts?.ready.then(settle);
+    settle();
+  }
 </script>

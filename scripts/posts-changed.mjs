@@ -12,7 +12,17 @@ const key = process.env.BEEHIIV_API_KEY;
 if (!key) throw new Error('BEEHIIV_API_KEY is not set');
 
 const now = Date.now() / 1000;
-const current = fingerprint((await fetchRawPosts(key)).filter((p) => isOnSite(p, now)));
+// A beehiiv answer we cannot read counts as changed, like an unreadable live
+// fingerprint below: the build then runs, and fails closed itself if beehiiv
+// is still down, so the previous deploy stays live either way.
+let current = '';
+try {
+  current = fingerprint((await fetchRawPosts(key)).filter((p) => isOnSite(p, now)));
+} catch (err) {
+  console.log(`posts: changed (beehiiv unreadable: ${err.message})`);
+  if (process.env.GITHUB_OUTPUT) appendFileSync(process.env.GITHUB_OUTPUT, 'changed=true\n');
+  process.exit(0);
+}
 
 let live = '';
 try {

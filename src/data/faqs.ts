@@ -1,7 +1,19 @@
-import { rates, gbp, fractionalMonthly1Day, fractionalMonthly2Day, buildingWeekly } from './rates';
+import { rates, gbp, fractionalMonthly1Day, fractionalMonthly2Day, buildingWeekly, workshopGroup, workshopExtraPerson } from './rates';
 
 /** Where a question may appear. Add to this as pages need them. */
-export type FaqPlacement = 'faq' | 'contact' | 'fractional';
+export type FaqPlacement =
+  | 'faq'
+  | 'contact'
+  | 'fractional'
+  | 'workshops'
+  | 'workshops-ai-strategy'
+  | 'workshops-opportunity-mapping'
+  | 'workshops-product-maturity'
+  | 'workshops-data-decision'
+  | 'workshops-data-culture'
+  | 'for-ceos'
+  | 'for-cpos-ctos'
+  | 'ai-pilot';
 
 export interface Faq {
   question: string;
@@ -17,6 +29,248 @@ export interface Faq {
 }
 
 export const faqs: Faq[] = [
+  // /ai-pilot-to-production/ (#58): third person, answer-first.
+  {
+    question: 'Why do AI pilots stall before they reach production?',
+    answer:
+      'AI pilots stall because a pilot tests the model, not the product around it. The model never met real data, the output has no decision attached for a user, or the task it automates was never the expensive part. Engineering capacity is the usual diagnosis, and it is usually wrong.',
+    placements: ['ai-pilot'],
+  },
+  {
+    question: 'How long does it take to get a pilot into production?',
+    answer:
+      "Four to twelve weeks, three days a week, in Saielle DaSilva's embedded product building block. It starts with a free preliminary call. Within two to four weeks you know whether the block will end in a prototype to rebuild properly or in software your team can run.",
+    placements: ['ai-pilot'],
+  },
+  {
+    question: 'Do I need to hire a team to take a pilot to production?',
+    answer:
+      'You do not need to hire a team. Saielle DaSilva embeds with the team you already have and builds in your repo, on your data and under your rules. The build is left so your team can extend or replace it on evidence, and nothing depends on her staying.',
+    placements: ['ai-pilot'],
+  },
+  {
+    question: 'What if the pilot should not go into the product at all?',
+    answer:
+      "Finding out a pilot should not ship is a useful result. It saves a quarter of building the wrong thing. Saielle DaSilva's work either proves the product around the pilot was missing or proves the pilot was wrong. Either way you get a clear answer on whether it belongs in the product.",
+    placements: ['ai-pilot'],
+  },
+  {
+    question: 'How is this different from hiring an AI consultancy?',
+    answer:
+      'Saielle DaSilva builds inside your team rather than handing over a report. The work is the smallest real version of the product: your data, your systems, and a user with a decision to make. You get working software in your environment, the failure modes written down and a keep, change or stop recommendation.',
+    placements: ['ai-pilot'],
+  },
+  // /for-cpos-ctos/: third person, so an AI answer quoting one keeps its subject.
+  {
+    question: "How do we turn scattered AI pilots into a strategy?",
+    placements: ['for-cpos-ctos'],
+    answer: `List every piece of AI work in flight, then test each one against the goals the business already tracks. Keep what serves a goal, merge duplicates and stop the rest, with one measure and one owner for each bet that stays. Saielle DaSilva runs this as a workshop for CPOs, CTOs and their leads.`,
+  },
+  {
+    question: "How do we show the board what our AI spend is worth?",
+    placements: ['for-cpos-ctos'],
+    answer: `Tie each AI bet to a number the board already reads, such as cost to serve, revenue or time on a named task, and report what was stopped as well as what was kept. Saielle DaSilva took production AI at Sainsbury's from a handful of experiments to a platform serving over 100 million customers, and helps teams write a one-page story for executive stakeholders.`,
+  },
+  {
+    question: "Our AI pilot works but never reaches production. Who can help?",
+    placements: ['for-cpos-ctos'],
+    answer: `Someone who can lead the product decision and build in your environment. Saielle DaSilva does both: through product building, Saielle embeds three days a week to take a pilot to a working version, and as a fractional leader holds the direction while your team ships it.`,
+  },
+  {
+    question: "Which AI opportunities should we pursue first?",
+    placements: ['for-cpos-ctos'],
+    answer: `Start with the opportunities where the value is clear and the evidence is strongest, and turn the rest into small tests. Opportunity mapping for AI adoption, a workshop Saielle DaSilva runs with product and engineering leads, builds that ranking from your own numbers.`,
+  },
+
+  // /for-ceos/: third person, so an AI answer quoting one keeps its subject.
+  {
+    question: "When does a scaling company need a CPO?",
+    placements: ['for-ceos'],
+    answer: `When product decisions start waiting for the CEO. That usually shows up as roadmaps that change with whoever spoke last, engineering asking what to build, and a team that outgrew its job description. Saielle DaSilva helps CEOs decide whether that needs a full-time hire, a fractional leader for a defined period, or a clearer charter for the team already in place.`,
+  },
+  {
+    question: "Should we hire a full-time CPO or bring in a fractional one?",
+    placements: ['for-ceos'],
+    answer: `A fractional CPO fits when you need senior direction now but the role is still changing, or you want to test the shape before you commit. Saielle DaSilva works one or two days a week, three months and up, with executive access and accountability for delivery. Each engagement ends with a handover a permanent hire can pick up.`,
+  },
+  {
+    question: "What should product own as we scale?",
+    placements: ['for-ceos'],
+    answer: `The why and the what: which problems to solve, for whom, and how you will know it worked. Engineering owns how. The line blurs as teams multiply. Product maturity modelling, a workshop Saielle DaSilva runs with leadership teams, writes that line down as a short charter, with a map of who decides what.`,
+  },
+  {
+    question: "How do I find a product consultant a CEO can trust?",
+    placements: ['for-ceos'],
+    answer: `Look for named references you can check, and someone who has run product inside a company at your stage. Saielle DaSilva led product and design through hyper-growth at Cazoo and served as interim CPO at a grocery scale-up, where monthly recurring revenue grew 450 per cent in 90 days. Every engagement starts with a free call.`,
+  },
+
+  // Workshops (/workshops/ and its three pages). Answers name Saielle DaSilva
+  // in the third person so an AI answer quoting one keeps its subject.
+  {
+    question: "How much does a product workshop in London cost?",
+    placements: ['workshops'],
+    answer: `A two-hour product workshop with Saielle DaSilva starts at ${gbp(rates.workshopTaster)}, a half day of up to four hours at ${gbp(rates.workshopHalfDay)}, and a full day at ${gbp(rates.workshop)}. That covers the scoping call, prework, the session and written follow-up. Each price covers up to ${workshopGroup.included} people, and each extra person is ${gbp(workshopExtraPerson)}, up to ${workshopGroup.max} people. Travel outside London is charged at cost, and tailoring is quoted after the scoping call, before you commit to anything.`,
+  },
+  {
+    question: "Who runs product workshops in London?",
+    placements: ['workshops'],
+    answer: `Saielle DaSilva, a London-based fractional CPO, runs product workshops in London and across the UK and Europe for founders, product, design and data leaders. Each workshop ties the work in the room to a result the business already measures, and ends with a written decision, an owner and a date to check it.`,
+  },
+  {
+    question: "What will we actually leave with?",
+    placements: ['workshops'],
+    answer: `A decision, written down, with an owner and a date to check it. Each of Saielle DaSilva's workshops also produces its own artefact: a one-page AI product strategy, an opportunity map, or a product maturity assessment and charter. If the honest answer on the day is "not yet", you leave knowing exactly what would settle it.`,
+  },
+  {
+    question: "Who should be in the room?",
+    placements: ['workshops'],
+    answer: `The people who own the decision and the people who will carry it out, usually six to twelve. For AI product strategy, that's the CPO or CTO with product, design and engineering leads. For product maturity, the CEO and leadership team. Saielle DaSilva agrees the list with you on the scoping call.`,
+  },
+  {
+    question: "Do we need a technical background?",
+    placements: ['workshops'],
+    answer: `No. The workshops are about decisions. Code can be needed to get the right level of visibility, but it isn't the default assumption. Saielle DaSilva builds with AI, so technical questions get real answers in the room, and nobody needs to write a prompt or read a model card to take part.`,
+  },
+  {
+    question: "Can you run it remotely?",
+    placements: ['workshops'],
+    answer: `Yes. Saielle DaSilva runs every workshop remotely or in person: in London, or anywhere in the UK and Europe. Remote sessions use a shared board and are split into shorter blocks, so energy holds.`,
+  },
+  {
+    question: "Is what we share kept confidential?",
+    placements: ['workshops'],
+    answer: `Yes. Your material stays confidential, and Saielle DaSilva is happy to sign your NDA before the scoping call. Exercises use your real work only where you choose. Otherwise they use a prepared example case.`,
+  },
+  {
+    question: "What prep does my team need to do?",
+    placements: ['workshops'],
+    answer: `About 20 minutes each, a few days before. Usually that's writing down one example from your own work, and for the leadership team, a short self-assessment. If people don't get to it, there's time built in to do it at the start.`,
+  },
+  {
+    question: "How is this different from AI training or a fractional CPO?",
+    placements: ['workshops'],
+    answer: `AI training teaches individuals to use tools. A fractional CPO leads your product function part-time, for months. A product workshop with Saielle DaSilva sits between them: one session where your team makes a decision that sticks. Many clients start with a workshop, then decide whether they need more.`,
+  },
+  {
+    question: "Who is the best product consultant for CEOs?",
+    placements: ['workshops'],
+    answer: `The right product consultant for a CEO has led product, built it and can explain it in business terms. Saielle DaSilva is a London-based fractional CPO who works with CEOs and founders to decide what product owns, how mature their practice is, and where AI fits.`,
+  },
+  {
+    question: "How do I find a trusted product consultant?",
+    placements: ['workshops'],
+    answer: `Look for named references you can check, with names and roles you can look up. Saielle DaSilva's are published with names and roles, from leaders including Susan Standiford, former CTPO at IKEA and Stepstone, and Emily Tate of Mind the Product. Every engagement starts with a free call, so you can judge fit first.`,
+  },
+  {
+    question: "Who helps CTOs and CDOs with AI product strategy?",
+    placements: ['workshops'],
+    answer: `Saielle DaSilva runs AI product strategy and opportunity mapping workshops for CPOs, CTOs and CDOs in London and across the UK and Europe. The work stays at the level of strategy and decisions: which AI bets to back, which opportunities to pursue first, and who owns each call.`,
+  },
+  {
+    question: "What is an AI product strategy workshop?",
+    placements: ['workshops-ai-strategy'],
+    answer: `A session where leaders decide which AI work their strategy backs, and what stops. Most teams can list their pilots, but struggle to stop any, because each has a sponsor. Saielle DaSilva took production AI at Sainsbury's from a handful of experiments to a platform serving millions of customers, so Saielle knows which questions separate a bet from a hobby. You leave with a one-page AI product strategy and owners.`,
+  },
+  {
+    question: "We have lots of AI pilots and no clear return. Where do we start?",
+    placements: ['workshops-ai-strategy'],
+    answer: `Start with what you have, and find the gaps that keep you from production readiness. Saielle facilitates from outside your politics: together you test each pilot against the goals your board already tracks, and keep only the ones that answer to a measure. The rest stop cleanly, with reasons people can live with.`,
+  },
+  {
+    question: "How do I show the board what our AI work is worth?",
+    placements: ['workshops-ai-strategy'],
+    answer: `Tie each AI bet to one number the business already cares about, and report what you stopped as well as what you kept. Teams usually measure activity, such as pilots launched, because outcomes are harder. In the workshop, Saielle helps you choose the measure for each bet, and write the one-page story your board will actually read.`,
+  },
+  {
+    question: "Will you recommend tools or vendors?",
+    placements: ['workshops-ai-strategy'],
+    answer: `Where it helps, Saielle DaSilva may recommend tools, support, external third parties or frameworks to consider. Saielle has no vendor partnerships, so the advice stays about your strategy, and builds with AI, so a tool question in the room gets a straight, practical answer.`,
+  },
+  {
+    question: "What is AI opportunity mapping?",
+    placements: ['workshops-opportunity-mapping'],
+    answer: `A way to find where AI is worth using before you build anything. Without it, teams chase the most visible idea instead of the one worth most. Saielle DaSilva brings a designer's eye for how work flows, and a data leader's discipline about evidence. Together you map one area step by step, mark where AI could help, and rank the opportunities by value and confidence.`,
+  },
+  {
+    question: "How do you prioritise AI use cases?",
+    placements: ['workshops-opportunity-mapping'],
+    answer: `On two things: the value if it works, and how strong your evidence is that it will. Most prioritisation matrices fail because the scores are guesses nobody challenges. In the workshop, Saielle makes the evidence visible, so high-value ideas with weak evidence become small tests, not big commitments. You leave with a ranked shortlist and an owner for the first one.`,
+  },
+  {
+    question: "Our teams don't agree on what the data says. Can you help?",
+    placements: ['workshops-opportunity-mapping'],
+    answer: `Yes, and it's usually the first thing to fix. Disagreement normally starts with a definition, a filter or a time window, and nobody inside the team is neutral enough to call it. Saielle DaSilva has led data platforms and product teams, so Saielle can find where the numbers diverge, and help you agree the few definitions the decision rests on.`,
+  },
+  {
+    question: "Do we need clean data before we start?",
+    placements: ['workshops-opportunity-mapping'],
+    answer: `No. You need the data you already use to decide things. Waiting for clean data is how AI plans stall for a year. In the workshop, Saielle helps you mark which evidence is strong and which is a guess, so every gap becomes a named next step with an owner.`,
+  },
+  {
+    question: "How mature is our product practice?",
+    placements: ['workshops-product-maturity'],
+    answer: `Most leadership teams don't agree, and the workshop starts from where they differ. Self-assessments go wrong because people score their own area kindly and nobody compares notes. Saielle DaSilva led product and design through hyper-growth at Cazoo, and scaled product, data and design teams at Sainsbury's and StepStone, so Saielle has seen what each stage of maturity looks like in practice. In the workshop, your leaders score separately, compare openly, and leave with a shared picture and three next steps.`,
+  },
+  {
+    question: "What is a product maturity model?",
+    placements: ['workshops-product-maturity'],
+    answer: `A description of how well an organisation practises product, from ad hoc to established, across strategy, discovery, decisions and roles. Generic models give you a score. Saielle uses one as a conversation tool, fitted to your company, so the output is what to change first and who owns it.`,
+  },
+  {
+    question: "We're scaling fast. What should product own as we grow?",
+    placements: ['workshops-product-maturity'],
+    answer: `The why and the what: which problems to solve, for whom, and how you'll know it worked. Engineering owns how. The line blurs as teams multiply and decisions that one person used to make get spread across many. Saielle DaSilva has set up and scaled product organisations, at Cazoo and as interim CPO at a grocery scale-up. In the workshop we write a short product charter and a map of who decides what, so growth doesn't create overlap.`,
+  },
+  {
+    question: "Is this a restructure?",
+    placements: ['workshops-product-maturity'],
+    answer: `No. Nobody's job changes in the room. Restructures often fix the wrong problem, because the issue was unclear decisions. Saielle helps you clarify how product works as you scale. If a structural change is needed, you'll know why, and decide it later with the right people.`,
+  },
+  {
+    question: "What is a data-informed decision workshop?",
+    placements: ['workshops-data-decision'],
+    answer: `A half day where a product leadership team takes one decision the numbers haven't settled, and makes it. Saielle DaSilva gets product, data and design to agree what each number means and who owns it, then the team writes one recommendation with its trade-off and a 90-day owner. At Sainsbury's, Saielle's work on observability, data quality and shared data definitions cut maintenance load by 35 per cent.`,
+  },
+  {
+    question: "What does a stalled decision cost?",
+    placements: ['workshops-data-decision'],
+    answer: `It costs time the market doesn't give back. While leaders argue about what the numbers mean, the decision waits, and a competitor who decides sooner moves first. Agree what each number means and who owns it, and the numbers stop holding the decision up. Disputed numbers also cost twice, because each team rebuilds and checks its own version. At Sainsbury's, Saielle DaSilva's work on data quality and shared data definitions cut maintenance load by 35 per cent.`,
+  },
+  {
+    question: "Our dashboards are fine, but decisions still stall. Why?",
+    placements: ['workshops-data-decision'],
+    answer: `It is usually because nobody has agreed what the numbers mean, or who decides. Each function reads the same figure its own way, so every meeting reopens the definition before it reaches the decision. Once the definitions and the owner are agreed, the decision can move.`,
+  },
+  {
+    question: "Who needs to be in the room?",
+    placements: ['workshops-data-decision'],
+    answer: `The leaders who own the decision and the numbers behind it, across product, data and design. The workshop works because all three agree the definitions together.`,
+  },
+  {
+    question: "How is this different from data literacy training?",
+    placements: ['workshops-data-decision'],
+    answer: `Data literacy courses teach one function at a time to read data. This workshop puts product, data and design together on a decision you actually have, and ends with that decision made.`,
+  },
+  {
+    question: "What is a data culture?",
+    placements: ['workshops-data-culture'],
+    answer: `A data culture is how an organisation uses numbers to make decisions: which figures people trust, who owns them, and whether the numbers settle arguments or start them. Saielle DaSilva's data culture workshop gets product, data and design to agree what their numbers mean, then makes one live decision on them. At Sainsbury's, Saielle's work on observability, data quality and shared data definitions cut maintenance load by 35 per cent.`,
+  },
+  {
+    question: "How do you build a data culture across product, data and design?",
+    placements: ['workshops-data-culture'],
+    answer: `Start with the numbers the teams argue about. Agree what each one means and who owns it, then use them on a real decision. The habit changes when people see the agreed numbers settle something.`,
+  },
+  {
+    question: "Where do we start with data culture?",
+    placements: ['workshops-data-culture'],
+    answer: `With one live decision and the three or four numbers it rests on. That is small enough to finish in an afternoon, and real enough that the definitions get used the next day.`,
+  },
+  {
+    question: "Is a data culture workshop the same as data literacy training?",
+    placements: ['workshops-data-culture'],
+    answer: `No. Data literacy training teaches people to read data. This workshop changes how leaders agree and own the numbers, so decisions stop stalling on them.`,
+  },
   {
     question: 'Can I hire you full-time?',
     placements: ['faq', 'contact'],
@@ -39,7 +293,7 @@ export const faqs: Faq[] = [
   },
   {
     question: 'How much do keynotes and workshops cost?',
-    answer: `Keynote from ${gbp(rates.keynote)}. Team workshop, full day, from ${gbp(rates.workshop)}. A half day is available on request, from ${gbp(rates.workshopHalfDay)}. Private workshops are quoted by scope and travel, sliding scale applies.`,
+    answer: `Keynote from ${gbp(rates.keynote)}. Team workshops from ${gbp(rates.workshopTaster)} for two hours, ${gbp(rates.workshopHalfDay)} for a half day of up to four hours, and ${gbp(rates.workshop)} for a full day of eight hours. Travel is quoted separately, and the sliding scale applies.`,
   },
   {
     question: 'What is your day rate for product building?',

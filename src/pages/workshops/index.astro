@@ -1,0 +1,116 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqList from '../../components/FaqList.astro';
+import TestimonialCarousel from '../../components/TestimonialCarousel.astro';
+import WorkshopPricing from '../../components/WorkshopPricing.astro';
+import WorkshopClose from '../../components/WorkshopClose.astro';
+import WorkshopTopCta from '../../components/WorkshopTopCta.astro';
+import { workshops } from '../../data/workshops';
+import { faqsFor } from '../../data/faqs';
+import { testimonialsFor } from '../../data/testimonials';
+import { results } from '../../data/results';
+import { rates } from '../../data/rates';
+
+const faqs = faqsFor('workshops');
+
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer.replace(/\s+/g, ' ').trim() },
+  })),
+};
+const catalogSchema = {
+  '@type': 'OfferCatalog',
+  '@id': 'https://intentionaut.com/workshops/#catalog',
+  name: 'Workshops',
+  itemListElement: workshops.map((w) => ({
+    '@type': 'Offer',
+    priceCurrency: 'GBP',
+    price: rates.workshopTaster,
+    itemOffered: { '@id': `https://intentionaut.com/workshops/${w.slug}/#service` },
+  })),
+};
+---
+
+<BaseLayout
+  title="AI workshops for CPOs, CTOs and CDOs | Saielle DaSilva"
+  description="Workshops for CPOs, CTOs, CDOs and their teams: AI product strategy, opportunity mapping and product maturity, tied to results your business already measures."
+  jsonLd={[catalogSchema, faqSchema]}
+>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Workshops</p>
+      <h1>Product workshops that lead to real bottom line impact.</h1>
+      <p class="lede">
+        Each workshop ties the work in the room to a result your business
+        already measures, and ends with written next steps and named owners.
+      </p>
+      <WorkshopTopCta />
+    </header>
+
+    <section class="rates-section" aria-label="Workshops">
+      <h2>Choose a workshop</h2>
+      <div class="rates">
+        {workshops.filter((w) => !w.variantOf).map((w) => (
+          <a class="rate-row rate-card" href={`/workshops/${w.slug}/`}>
+            <p class="rate-name">{w.title}</p>
+            <p class="rate-desc">{w.card}</p>
+            <p class="rate-shape">For {w.audience}.</p>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="rates-section workshop-proof" aria-label="Who runs them">
+      <h2>Who runs them</h2>
+      <div class="prose workshop-id">
+        <p>
+          Saielle DaSilva is a London-based fractional CPO and design leader
+          turned product leader who builds with AI. Saielle runs workshops for
+          founders, product, design and data leaders across the UK and Europe.
+        </p>
+      </div>
+      <ul class="stat-strip workshop-stats">
+        {results.map((r) => (
+          <li><span class="stat-num">{r.num}</span><span class="stat-label">{r.label}</span></li>
+        ))}
+      </ul>
+      <TestimonialCarousel testimonials={testimonialsFor('workshops')} heading="What people say" />
+    </section>
+
+    <section class="rates-section workshop-steps" aria-label="How it works">
+      <h2>How it works</h2>
+      <ol class="talk-list">
+        {[
+          ['A free scoping call', 'We agree the decision and who should be in the room.'],
+          ['About 20 minutes of prework each', 'A few days before, usually one example from your own work.'],
+          ['The session', 'Remote or in person, in London or across the UK and Europe.'],
+          ['Written follow-up', 'The decision, its owner and a date to check it.'],
+        ].map(([title, meta], i) => (
+          <li class="talk-row">
+            <span class="talk-date">Step {i + 1}</span>
+            <div><span class="talk-title">{title}</span><p class="talk-meta">{meta}</p></div>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <WorkshopPricing />
+
+    <FaqList items={faqs} heading="FAQ: Product workshops in London" sub="What leaders ask before booking a workshop." />
+
+    <WorkshopClose source="workshops" />
+  </section>
+</BaseLayout>
+
+<style>
+  .workshop-id {
+    padding-bottom: var(--space-6);
+  }
+  .workshop-stats {
+    margin-bottom: var(--space-7);
+  }
+
+</style>

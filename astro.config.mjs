@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import { readFile, writeFile } from 'node:fs/promises';
 import { readdirSync, readFileSync } from 'node:fs';
+import { lastmodFor, isShallow } from './scripts/lastmod.mjs';
 
 // Old paths kept alive by src/layouts/RedirectLayout.astro. They forward, so
 // they must never appear in the sitemap competing with where they forward to.
@@ -66,6 +67,13 @@ export default defineConfig({
         !/\/thank-you\/?$/.test(page) &&
         !LEGACY_REDIRECTS.has(new URL(page).pathname) &&
         !LOCKED_CASE_STUDIES.has(new URL(page).pathname),
+      // lastmod from git history (#78). Pages with no known source file
+      // (beehiiv posts) get none rather than a made-up date.
+      serialize(item) {
+        const d = lastmodFor(new URL(item.url).pathname);
+        if (d) item.lastmod = d;
+        return item;
+      },
     }),
     flatSitemap,
   ],

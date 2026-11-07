@@ -22,6 +22,14 @@ export async function fetchRawPosts(apiKey) {
       );
     }
     const body = await res.json();
+    // beehiiv has answered 200 with no post list (5 Nov 2026). Say so plainly
+    // instead of crashing on the spread below.
+    if (!Array.isArray(body?.data)) {
+      throw new Error(
+        `beehiiv API returned no post list on page ${page}. Refusing to build ` +
+          'with an empty /writing archive; the previous deploy stays live.'
+      );
+    }
     all.push(...body.data);
     if (!body.total_pages || page >= body.total_pages) return all;
   }

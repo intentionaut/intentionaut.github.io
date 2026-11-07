@@ -1,0 +1,35 @@
+---
+/**
+ * One related essay at the end of a page's prose (#79): an eyebrow, the title
+ * as a text link with arrow, and its one-line summary. Existing parts only.
+ */
+interface Props {
+  href: string;
+  title: string;
+  summary: string;
+}
+const { href, title, summary } = Astro.props;
+---
+
+<aside class="related-reading" aria-label="Related reading">
+  <p class="eyebrow">Related reading</p>
+  <a class="link-arrow" href={href}><span>{title}</span></a>
+  <p class="related-summary">{summary}</p>
+</aside>
+
+<style>
+  .related-reading {
+    max-width: 46rem;
+    border-top: 1px solid var(--slate);
+    padding-top: var(--space-5);
+    margin-bottom: clamp(3rem, 6vw, 5rem);
+  }
+  .related-reading .eyebrow {
+    margin-bottom: var(--space-3);
+  }
+  .related-summary {
+    margin: var(--space-2) 0 0;
+    font-size: var(--text-sm);
+    color: var(--muted);
+  }
+</style>

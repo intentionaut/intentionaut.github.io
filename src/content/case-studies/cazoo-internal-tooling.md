@@ -1,5 +1,5 @@
 ---
-title: "Cazoo logistics: last mile delivery to drive customer satisfaction"
+title: "Platforms and Data for Vehicle Delivery"
 summary: Delivery was failing customers, so Cazoo took logistics in-house. Average days to sale went from 34 to 21, and cost per sale fell by more than £900.
 company: Cazoo
 role: Director of User Experience, leading the design team

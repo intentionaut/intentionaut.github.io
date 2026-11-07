@@ -5,7 +5,9 @@ import ContactForm from '../components/ContactForm.astro';
 import { rates, gbp, fractionalMonthly1Day, fractionalMonthly2Day } from '../data/rates';
 import { testimonialsFor } from '../data/testimonials';
 import { faqsFor } from '../data/faqs';
+import RelatedReading from '../components/RelatedReading.astro';
 import FaqList from '../components/FaqList.astro';
+import WhoFor from '../components/WhoFor.astro';
 import { PRIMARY_PHRASE } from '../data/positioning';
 import { BOOKING_URL } from '../data/links';
 
@@ -72,6 +74,19 @@ const faqSchema = {
         <li>Designers with nobody senior leading them.</li>
         <li>AI features where nobody can yet say what good looks like.</li>
       </ul>
+      <WhoFor
+        fit={[
+          'Founders and CEOs who need Director-level product leadership now, before a permanent hire.',
+          'Teams with a product that works and no agreement on why it is not landing.',
+          'Designers and product managers with nobody senior leading them.',
+          'Companies shipping AI features without an agreed view of what good looks like.',
+        ]}
+        notFit={[
+          'You are ready to hire a permanent head of product now. A search is the better route, and a fractional leader can help shape the role.',
+          'You need one decision made or one plan reviewed, not ongoing leadership. A 90-minute <a href="/strategic-direction/">strategy session</a> covers that, and it can also be the first step into fractional work.',
+          'You need something built rather than led. <a href="/forward-deployed/">Product building</a> embeds for four to twelve weeks and ends in a prototype or in software your team can run.',
+        ]}
+      />
     </header>
 
     <div class="prose">
@@ -86,7 +101,7 @@ const faqSchema = {
         need someone senior while you figure out the permanent answer.
       </p>
 
-      <h2>What I do</h2>
+      <h2>What does a fractional product leader do?</h2>
       <p>
         I become your senior product leader for a defined period. Typically
         one or two days a week, over three to six months. I have executive
@@ -98,8 +113,15 @@ const faqSchema = {
         inside the organisation, with the same authority and accountability
         as a permanent Director.
       </p>
+      <p>
+        You can check how that works. Each engagement agrees a small set of
+        product KPIs at the start, and you review them together on a set
+        rhythm. Saielle DaSilva works directly with your team's data, not a
+        summary of it. She leads the team day to day and has access to your
+        executive stakeholders.
+      </p>
 
-      <h2>What you get</h2>
+      <h2>What do you get?</h2>
       <ul>
         <li>Strategic decisions and product direction</li>
         <li>Team leadership and coaching</li>
@@ -108,7 +130,7 @@ const faqSchema = {
         <li>Delivery accountability and outcomes</li>
       </ul>
 
-      <h2>How it works</h2>
+      <h2>How does it work?</h2>
       <p>
         A minimum commitment of three months. One or two days a week. Enough
         time to build context, lead with authority and create real momentum.
@@ -131,16 +153,13 @@ const faqSchema = {
         rather than leading.
       </p>
 
-      <h2>Where I have done this</h2>
-      <p>
-        As interim CPO at a direct-to-consumer grocery scaleup, monthly
-        recurring revenue grew 450 per cent in 90 days. I led the product and
-        design organisation at StepStone, where the satellite portfolio
-        delivered a 3.2x return on investment. At Sainsbury's I ran product for AI, data platforms and
-        machine learning, and took production AI from a handful of experiments
-        to a platform serving over 100 million customers. I was on the founding
-        team at <a href="/case-studies/cazoo/">Cazoo</a>, through to a $7B IPO.
-      </p>
+      <h2>Where has this been done before?</h2>
+      <ul>
+        <li>As interim CPO at a direct-to-consumer grocery scaleup, monthly recurring revenue grew 450 per cent in 90 days.</li>
+        <li>I led the product and design organisation at StepStone, with a 3.2x return on investment.</li>
+        <li>At Sainsbury's I ran product for AI, data platforms and machine learning, and took production AI from a handful of experiments to a platform serving over 100 million customers.</li>
+        <li>I was on the founding team at <a href="/case-studies/cazoo/">Cazoo</a>, through to a $7B IPO.</li>
+      </ul>
       {testimonials.map((t) => (
         <figure class="pull-quote">
           <blockquote><p>{t.quote}</p></blockquote>
@@ -151,17 +170,20 @@ const faqSchema = {
         </figure>
       ))}
 
-      <h2>How to start</h2>
+      <h2>How do you start?</h2>
       <p>
         A free preliminary call. We check it is a fit. If it is, you get a
         written proposal: what we would do, when, and what it costs.
       </p>
       <p>
-        Need a second opinion rather than a leader? That is the
-        {' '}<a href="/contact/">strategy session</a>: {gbp(rates.strategySession)},
-        90 minutes, on its own, separate from fractional work.
+        Want to test the fit before you commit? Start with a
+        {' '}<a href="/strategic-direction/">strategy session</a>: {gbp(rates.strategySession)},
+        90 minutes on your hardest product question. It works on its own, and
+        it is also the first step into fractional work.
       </p>
     </div>
+
+    <RelatedReading href="/writing/impact-cant-bypass-politics/" title="Impact can't bypass politics" summary="Impact is decided by people before it is delivered by software." />
 
     <section class="contact-form-section" aria-label="Get in touch">
       <div class="contact-card">
@@ -175,6 +197,7 @@ const faqSchema = {
     </section>
 
     <FaqList
+      heading="FAQ: Fractional and interim CPO"
       items={fractionalFaqs}
       sub="What founders ask before bringing in a part-time leader."
     />

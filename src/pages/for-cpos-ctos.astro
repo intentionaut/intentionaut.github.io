@@ -1,0 +1,127 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import RelatedReading from '../components/RelatedReading.astro';
+import FaqList from '../components/FaqList.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { rates, gbp, buildingWeekly } from '../data/rates';
+import { results } from '../data/results';
+import { faqsFor } from '../data/faqs';
+import { testimonialsFor } from '../data/testimonials';
+import { BOOKING_URL } from '../data/links';
+
+const faqs = faqsFor('for-cpos-ctos');
+const quotes = testimonialsFor('for-cpos-ctos');
+const offers = [
+  {
+    title: 'Get your AI product strategy under control',
+    price: `From ${gbp(rates.workshopTaster)}`,
+    desc: 'A workshop that sorts the AI work in flight into the bets your strategy backs, each with a measure and an owner.',
+    shape: 'Two hours, half day or full day.',
+    href: '/workshops/ai-strategy/',
+  },
+  {
+    title: 'Opportunity mapping for AI adoption',
+    price: `From ${gbp(rates.workshopTaster)}`,
+    desc: 'A workshop that ranks where AI is worth adopting, on evidence product and engineering both trust.',
+    shape: 'Two hours, half day or full day.',
+    href: '/workshops/ai-opportunity-mapping/',
+  },
+  {
+    title: 'AI pilot to production',
+    price: `${gbp(buildingWeekly)} a week`,
+    desc: 'Embedded product building that takes a pilot from demo to a working version in your environment.',
+    shape: 'Three days a week, four to twelve weeks.',
+    href: '/ai-pilot-to-production/',
+  },
+  {
+    title: 'Strategy session',
+    price: `${gbp(rates.strategySession)} · 90 min`,
+    desc: 'A sounding board on an AI roadmap or a build-or-buy call, before you commit to anything bigger.',
+    shape: 'One session, sliding scale available.',
+    href: '/strategic-direction/',
+  },
+];
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer.replace(/\s+/g, ' ').trim() },
+  })),
+};
+---
+
+<BaseLayout
+  title="AI product leadership for CPOs and CTOs | Saielle DaSilva"
+  description="For CPOs and CTOs with AI work spreading across teams: an AI product strategy workshop, opportunity mapping, or a pilot taken to production. UK and Europe."
+  jsonLd={[faqSchema]}
+>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">For CPOs and CTOs</p>
+      <h1>Make your AI work add up to a strategy.</h1>
+      <p class="lede">
+        Saielle DaSilva helps CPOs and CTOs turn scattered AI work into a few
+        bets the business can measure, and take the ones that matter to production.
+      </p>
+      <ul class="problem-lines">
+        <li>AI pilots everywhere, and nobody can say what they add up to.</li>
+        <li>A board asking for the return on AI spend.</li>
+        <li>A pilot that works in a demo and never reaches production.</li>
+      </ul>
+      <div class="cta-row">
+        <a class="btn-primary" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a free call</a>
+        <a class="link-arrow" href="#ways-in"><span>Four ways in</span></a>
+      </div>
+    </header>
+
+    <section class="rates-section" id="ways-in" aria-label="Four ways in">
+      <h2>Four ways in</h2>
+      <p class="rates-intro">Every option starts with a free call.</p>
+      <div class="rates">
+        {offers.map((o) => (
+          <a class="rate-row rate-card" href={o.href}>
+            <p class="rate-name">{o.title}</p>
+            <p class="rate-price">{o.price}</p>
+            <p class="rate-desc">{o.desc}</p>
+            <p class="rate-shape">{o.shape}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <ul class="stat-strip cpo-stats">
+      {results.map((r) => (
+        <li><span class="stat-num">{r.num}</span><span class="stat-label">{r.label}</span></li>
+      ))}
+    </ul>
+
+    {quotes.map((t) => (
+      <figure class="pull-quote">
+        <blockquote><p>{t.quote}</p></blockquote>
+        <figcaption>{t.name}, {t.role}, {t.org}</figcaption>
+      </figure>
+    ))}
+
+    <RelatedReading href="/writing/insights-to-actions/" title="Getting the most out of product discovery" summary="What to do and why it matters, before the features you ship." />
+
+    <FaqList items={faqs} heading="FAQ: AI product leadership for CPOs and CTOs" sub="What CPOs and CTOs ask before bringing in help with AI." />
+
+    <section class="contact-form-section" id="contact-section" aria-label="Get in touch">
+      <div class="contact-card">
+        <h2>Tell Saielle what is in flight.</h2>
+        <p class="form-lede">
+          A few lines about the AI work you have and what it needs to show. You get a
+          reply, a short call and, if it fits, a written proposal.
+        </p>
+        <ContactForm source="for-cpos-ctos" selected="strategic-direction" booking />
+      </div>
+    </section>
+  </section>
+</BaseLayout>
+
+<style>
+  .cpo-stats {
+    margin-bottom: clamp(3rem, 6vw, 5rem);
+  }
+</style>

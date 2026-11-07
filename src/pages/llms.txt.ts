@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import { workshops } from '../data/workshops';
 import { rates, gbp, fractionalMonthly1Day, fractionalMonthly2Day, buildingWeekly } from '../data/rates';
 
 // Built, not hand-written, so every price here is the one the pages show:
@@ -16,13 +17,15 @@ She is based in London and works across the UK and Europe.
 - [Product building](https://intentionaut.com/forward-deployed/): embedded work to make a product idea tangible, ${gbp(buildingWeekly)} a week.
 - [Two-day pilot](https://intentionaut.com/forward-deployed/): a fixed-price pilot that opens a product building block, ${gbp(rates.fdePilot)}.
 - [AI pilot to production](https://intentionaut.com/ai-pilot-to-production/): product building for an AI pilot that has not reached production.
-- [Speaking and workshops](https://intentionaut.com/keynote-speaker/): keynote from ${gbp(rates.keynote)}, full-day team workshop from ${gbp(rates.workshop)}, half day on request from ${gbp(rates.workshopHalfDay)}.
+- [Speaking and workshops](https://intentionaut.com/keynote-speaker/): keynote from ${gbp(rates.keynote)}, team workshops from ${gbp(rates.workshopTaster)} (2 hours), half day ${gbp(rates.workshopHalfDay)}, full day ${gbp(rates.workshop)}.
+- [Workshops](https://intentionaut.com/workshops/): team workshops tied to results the business already measures, for CEOs, CPOs, CTOs and CDOs. Remote or in person, from ${gbp(rates.workshopTaster)}.
+${workshops.map((w) => `  - [${w.title}](https://intentionaut.com/workshops/${w.slug}/): ${w.card}`).join('\n')}
 
 ## Capabilities
 
 - Saielle DaSilva is an interim and fractional Chief Product Officer for AI and data products, with more than 15 years of product leadership on both sides of the bridge between the people who build and the boards who fund.
 - At Sainsbury's she ran product for AI, data platforms and machine learning, and took production AI from a handful of experiments to a platform serving over 100 million customers. She brought all 26 data engineering teams onto one platform.
-- At StepStone she led the product and design organisation, where the satellite portfolio delivered a 3.2x return on investment, and co-authored the group strategy. Three AI products shipped using LLMs.
+- At StepStone she led the product and design organisation, with a 3.2x return on investment, and co-authored the group strategy. Three AI products shipped using LLMs.
 - She was on the founding team at Cazoo, through to a $7B IPO.
 - [Capabilities](https://intentionaut.com/capabilities/): these facts and more, with sources on the pages they come from.
 
