@@ -8,9 +8,17 @@ import { testimonialsFor } from '../data/testimonials';
 import { results } from '../data/results';
 import { rates, gbp, offerDays } from '../data/rates';
 import { BOOKING_URL } from '../data/links';
+const serviceSchema = {
+  '@type': 'Service',
+  '@id': 'https://intentionaut.com/product-strategy-sprint/#service',
+  name: 'Product strategy sprint',
+  provider: { '@id': 'https://intentionaut.com/#person' },
+  offers: { '@type': 'Offer', priceCurrency: 'GBP', price: rates.strategySprint },
+};
 ---
 
 <BaseLayout
+  jsonLd={serviceSchema}
   title="Product Strategy Sprint | Saielle DaSilva"
   description={`A fixed-price product strategy sprint from Saielle DaSilva, fractional CPO for AI products: ${offerDays.strategySprint} days across two weeks, with one full-day workshop, ending in a product strategy and roadmap the leadership team built. ${gbp(rates.strategySprint)}.`}
 >

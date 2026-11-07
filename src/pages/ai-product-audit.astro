@@ -10,9 +10,17 @@ import { testimonialsFor } from '../data/testimonials';
 import { results } from '../data/results';
 import { rates, gbp, offerDays } from '../data/rates';
 import { BOOKING_URL } from '../data/links';
+const serviceSchema = {
+  '@type': 'Service',
+  '@id': 'https://intentionaut.com/ai-product-audit/#service',
+  name: 'AI product audit',
+  provider: { '@id': 'https://intentionaut.com/#person' },
+  offers: { '@type': 'Offer', priceCurrency: 'GBP', price: rates.aiAudit },
+};
 ---
 
 <BaseLayout
+  jsonLd={serviceSchema}
   title="AI Product Audit | Saielle DaSilva"
   description={`A fixed-price AI product audit from Saielle DaSilva, fractional CPO for AI products. In ${offerDays.aiAudit} days across one week, every AI feature shipped or planned gets a keep, change or stop recommendation, reviewed with the leadership team. ${gbp(rates.aiAudit)}.`}
 >

@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import { workshops } from '../data/workshops';
-import { rates, gbp, fractionalMonthly1Day, fractionalMonthly2Day, buildingWeekly } from '../data/rates';
+import { rates, gbp, fractionalMonthly1Day, fractionalMonthly2Day, buildingWeekly, offerDays } from '../data/rates';
 
 // Built, not hand-written, so every price here is the one the pages show:
 // both read rates.ts. Only published offers and public pages belong in it.
@@ -13,6 +13,8 @@ She is based in London and works across the UK and Europe.
 ## Services and rates
 
 - [Strategy session](https://intentionaut.com/strategic-direction/): ${gbp(rates.strategySession)} for a 90-minute session.
+- [AI product audit](https://intentionaut.com/ai-product-audit/): ${offerDays.aiAudit} days across one week, a keep, change or stop recommendation for each piece of AI work, ${gbp(rates.aiAudit)} fixed.
+- [Product strategy sprint](https://intentionaut.com/product-strategy-sprint/): ${offerDays.strategySprint} days across two weeks, including a full-day workshop, ${gbp(rates.strategySprint)} fixed.
 - [Fractional leadership](https://intentionaut.com/fractional/): part-time product leadership, from ${gbp(fractionalMonthly1Day)} a month for one day a week or ${gbp(fractionalMonthly2Day)} a month for two; day rate ${gbp(rates.fractional)}.
 - [Product building](https://intentionaut.com/forward-deployed/): embedded work to make a product idea tangible, ${gbp(buildingWeekly)} a week.
 - [Two-day pilot](https://intentionaut.com/forward-deployed/): a fixed-price pilot that opens a product building block, ${gbp(rates.fdePilot)}.
