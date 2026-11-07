@@ -9,7 +9,7 @@ const hrefs = (block) => [...block.matchAll(/href: '([^']+)'/g)].map((m) => m[1]
 
 test('Services groups the five paid offers, in order', () => {
   const block = src.slice(src.indexOf('const services'), src.indexOf('const links'));
-  assert.deepEqual(hrefs(block), ['/fractional/', '/forward-deployed/', '/workshops/', '/keynote-speaker/', '/strategic-direction/']);
+  assert.deepEqual(hrefs(block), ['/fractional/', '/forward-deployed/', '/workshops/', '/keynote-speaker/', '/office-hours/']);
 });
 
 test('the header links are Case studies, Writing, Projects, About', () => {

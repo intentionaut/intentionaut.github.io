@@ -12,6 +12,7 @@ import { lastmodFor, isShallow } from './scripts/lastmod.mjs';
 // regex on the URL silently drops those real pages from the sitemap.
 const LEGACY_REDIRECTS = new Set([
   '/speaker/',
+  '/strategic-direction/',
   '/familiar/',
   '/releases/',
   '/releases/familiar/',
