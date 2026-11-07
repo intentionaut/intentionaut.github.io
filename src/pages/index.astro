@@ -7,6 +7,8 @@ import TestimonialCarousel from '../components/TestimonialCarousel.astro';
 import { BOOKING_URL } from '../data/links';
 import { rates, gbp } from '../data/rates';
 import { results } from '../data/results';
+import FaqList from '../components/FaqList.astro';
+import { faqsFor } from '../data/faqs';
 
 // The story, top to bottom: who she is and who brings her in, proof, the
 // offers, the case studies, what people said, what she has built, then ways
@@ -57,11 +59,21 @@ const studies = (await getCollection('caseStudies'))
 if (studies.length !== studyOrder.length) throw new Error('A homepage case study is missing');
 
 const homeTestimonials = testimonialsFor('home');
+const homeFaqs = faqsFor('home');
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: homeFaqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer.replace(/\s+/g, ' ').trim() },
+  })),
+};
 ---
 
 <BaseLayout
   title="Fractional & Interim CPO | Saielle DaSilva"
   description="Fractional CPO for AI products. Saielle DaSilva leads product, data and design for teams building with AI. London, working across the UK and Europe."
+  jsonLd={faqSchema}
 >
   <section class="wrap hero">
     <p class="eyebrow">Saielle DaSilva · Fractional CPO for AI products</p>
@@ -177,6 +189,14 @@ const homeTestimonials = testimonialsFor('home');
         <a class="link-arrow" href="/writing/"><span>Read along</span></a>
       </li>
     </ol>
+  </section>
+
+  <section class="wrap home-section">
+    <FaqList heading="How to get value from AI" items={homeFaqs} />
+    <p class="home-note">
+      Figures from Gartner and DSIT, with their sources, on
+      {' '}<a href="/ai-adoption-evidence/">what the data says about AI in business</a>.
+    </p>
   </section>
 
   <section class="wrap signup" aria-label="Newsletter signup">

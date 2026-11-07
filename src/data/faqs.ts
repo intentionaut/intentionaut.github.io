@@ -14,7 +14,8 @@ export type FaqPlacement =
   | 'for-ceos'
   | 'for-cpos-ctos'
   | 'ai-pilot'
-  | 'strategy-sprint';
+  | 'strategy-sprint'
+  | 'home';
 
 export interface Faq {
   question: string;
@@ -329,14 +330,26 @@ export const faqs: Faq[] = [
       "A fractional CPO does the chief product officer's job one or two days a week, from a one-month minimum: setting product direction, making the strategic calls, leading and coaching the team, and managing executive stakeholders, with the same accountability for delivery as a permanent hire. It works when the team is strong enough to keep running on the other days, and it ends with a handover, not a dependency.",
   },
   {
+    question: 'How do I know our AI tools are paying off?',
+    placements: ['faq', 'home'],
+    answer:
+      "Tie each AI bet to a number the business already tracks, such as cost to serve, revenue or time on a named task. Only 13% of CIOs say their enterprise has seen significant value from AI so far (Gartner, October 2026). Saielle DaSilva's AI product audit reviews every AI feature you have shipped or planned and says which to keep, change or stop.",
+  },
+  {
+    question: 'What does my team need to be able to do with AI?',
+    placements: ['faq', 'home'],
+    answer:
+      "Make decisions about AI, not only use the tools. Among UK businesses planning to use AI, 34% feel ready to implement it (DSIT, January 2026). Saielle DaSilva's workshops end with a written decision, an owner and a date to check it.",
+  },
+  {
     question: 'We bought AI tools and our team is not using them. Can a fractional product leader help?',
-    placements: ['faq', 'fractional'],
+    placements: ['faq', 'fractional', 'home'],
     answer:
       "Yes, if the tools arrived before anyone decided which work they should change. A fractional CPO leads the team one or two days a week. Saielle DaSilva picks the few places where AI matters, gives each one an owner and a measure, and stays accountable for delivery. In a previous role she took production generative AI from fewer than 5 systems to over 20, and moved 44% of data engineering time from maintenance to customer-facing work.",
   },
   {
     question: 'How does a fractional CPO help a team keep up with AI?',
-    placements: ['faq', 'fractional'],
+    placements: ['faq', 'fractional', 'home'],
     answer:
       'It depends on whether the team needs direction or training. AI training teaches people to use tools. A fractional CPO decides which AI work the product backs and what stops, and coaches the team to make those calls themselves. Saielle DaSilva works one or two days a week, and each engagement ends with a handover, not a dependency.',
   },
