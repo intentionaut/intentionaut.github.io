@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import RelatedReading from '../components/RelatedReading.astro';
 import data from '../data/ai-adoption-evidence.json';
+import { BOOKING_URL } from '../data/links';
 import { TOPICS, SOURCE_TYPES, REGIONS, isStale, sortNewestFirst, validate } from '../lib/evidence.mjs';
 
 // Fail the build on bad data; warn on cards not reviewed for six months.
@@ -89,6 +90,16 @@ const jsonLd = {
 
     <p class="ev-none" id="ev-none" hidden>No figures match these filters.</p>
     <RelatedReading href="/writing/insights-to-actions/" title="Getting the most out of product discovery" summary="What to do and why it matters, before the features you ship." />
+
+    <!-- COPY FOR APPROVAL (site owner): closing block. -->
+    <section class="ev-closing" aria-labelledby="ev-closing-h">
+      <h2 id="ev-closing-h">Want help turning this into a plan?</h2>
+      <p>
+        I work with teams as a <a href="/fractional/">fractional product leader</a>, helping them decide where AI fits and
+        what to build. A free call is a good place to start.
+      </p>
+      <p><a class="btn-primary" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a free call <span class="sr-only">(opens in a new tab)</span></a></p>
+    </section>
   </section>
 </BaseLayout>
 
@@ -118,6 +129,7 @@ const jsonLd = {
   .ev-meta dd { margin: 0; }
   .ev-source { margin-top: auto; font-size: var(--text-sm); color: var(--accent-text); overflow-wrap: anywhere; }
   .ev-none { color: var(--muted); }
+  .ev-closing { margin-top: var(--space-8); }
 </style>
 
 <script>
