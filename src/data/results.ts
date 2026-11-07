@@ -3,6 +3,6 @@
 export const results = [
   { num: '+450%', label: 'MRR in 90 days as interim CPO' },
   { num: '3.2x', label: 'Return on investment' },
-  { num: '100M+', label: 'Customers on Sainsbury’s AI platform' },
+  { num: '100M+', label: 'Customers served across her products' },
   { num: '$7B', label: 'Cazoo IPO, from the founding team' },
 ];

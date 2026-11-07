@@ -77,7 +77,7 @@ export const faqs: Faq[] = [
   {
     question: "How do we show the board what our AI spend is worth?",
     placements: ['for-cpos-ctos'],
-    answer: `Tie each AI bet to a number the board already reads, such as cost to serve, revenue or time on a named task, and report what was stopped as well as what was kept. Saielle DaSilva took production AI at Sainsbury's from a handful of experiments to a platform serving over 100 million customers, and helps teams write a one-page story for executive stakeholders.`,
+    answer: `Tie each AI bet to a number the board already reads, such as cost to serve, revenue or time on a named task, and report what was stopped as well as what was kept. Saielle DaSilva took production AI at Sainsbury's from a handful of experiments to over 20 systems in supply chain, pricing and logistics, and helps teams write a one-page story for executive stakeholders.`,
   },
   {
     question: "Our AI pilot works but never reaches production. Who can help?",
@@ -349,7 +349,7 @@ export const faqs: Faq[] = [
   {
     question: 'Who can do fractional CPO work for AI and data products?',
     placements: ['faq', 'fractional'],
-    answer: `Saielle DaSilva is a London-based fractional CPO for AI products. At Sainsbury's she ran product for AI, data platforms and machine learning, and took production AI from a handful of experiments to a platform serving over 100 million customers. She works one or two days a week, from ${gbp(fractionalMonthly1Day)} a month, with a one-month minimum and then 30 days' notice.`,
+    answer: `Saielle DaSilva is a London-based fractional CPO for AI products. At Sainsbury's she ran product for AI, data platforms and machine learning, and took production AI from a handful of experiments to over 20 systems in supply chain, pricing and logistics. She works one or two days a week, from ${gbp(fractionalMonthly1Day)} a month, with a one-month minimum and then 30 days' notice.`,
   },
   {
     question: 'How is a product leader different from a coach or consultant?',
@@ -408,7 +408,7 @@ export const forwardDeployedFaqs: Faq[] = [
   {
     question: 'What is the most complex thing you have personally built, not advised on?',
     answer:
-      'Friday, a CV and career coaching SaaS, went from concept to private beta in a week and is in use. Familiar, an agent trained to help you write about your coding work, was built, documented and released in a day. Both are on the projects page with what they bet on and how they were built. Earlier than that, I led the product and design work that took production AI at Sainsbury\'s from a handful of experiments to a platform serving over 100 million customers, though on that one I was leading rather than building.',
+      'Friday, a CV and career coaching SaaS, went from concept to private beta in a week and is in use. Familiar, an agent trained to help you write about your coding work, was built, documented and released in a day. Both are on the projects page with what they bet on and how they were built. Earlier than that, I led the product and design work that took production AI at Sainsbury\'s from a handful of experiments to over 20 systems in supply chain, pricing and logistics, though on that one I was leading rather than building.',
   },
   {
     question: 'Is what you build production software?',
