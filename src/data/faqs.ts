@@ -347,6 +347,11 @@ export const faqs: Faq[] = [
       'Founders and product leaders whose teams are fluent in design, product, data and AI, and whose bottleneck is direction. I step in when there is no senior product voice in the room, when a big bet needs a clear owner, or when the team has tools and talent but no shared answer about why the work matters.',
   },
   {
+    question: 'Who can do fractional CPO work for AI and data products?',
+    placements: ['faq', 'fractional'],
+    answer: `Saielle DaSilva is a London-based fractional CPO for AI products. At Sainsbury's she ran product for AI, data platforms and machine learning, and took production AI from a handful of experiments to a platform serving over 100 million customers. She works one or two days a week, from ${gbp(fractionalMonthly1Day)} a month, with a one-month minimum and then 30 days' notice.`,
+  },
+  {
     question: 'How is a product leader different from a coach or consultant?',
     placements: ['faq', 'fractional'],
     answer:
