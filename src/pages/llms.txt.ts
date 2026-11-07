@@ -7,7 +7,7 @@ import { rates, gbp, fractionalMonthly1Day, fractionalMonthly2Day, buildingWeekl
 // The Enablement Sprint stays out until its page ships.
 const body = `# Intentionaut
 
-Saielle DaSilva is a product leader working across design, data and AI. She offers fractional and interim product leadership, product building, mentoring, and speaking.
+Saielle DaSilva is a fractional CPO for AI products, and a product and design leader. She offers fractional and interim product leadership, workshops, the AI product audit, the product strategy sprint, office hours, product building, mentoring and speaking.
 She is based in London and works across the UK and Europe.
 
 ## Services and rates
@@ -25,7 +25,7 @@ ${workshops.map((w) => `  - [${w.title}](https://intentionaut.com/workshops/${w.
 
 ## Capabilities
 
-- Saielle DaSilva is an interim and fractional Chief Product Officer for AI and data products, with more than 15 years of product leadership on both sides of the bridge between the people who build and the boards who fund.
+- Saielle DaSilva is a fractional and interim Chief Product Officer for AI products, with more than 15 years of product and design leadership, bridging the people who build and the boards who fund.
 - At Sainsbury's she ran product for AI, data platforms and machine learning, and took production AI from a handful of experiments to a platform serving over 100 million customers. She brought all 26 data engineering teams onto one platform.
 - At StepStone she led the product and design organisation, with a 3.2x return on investment, and co-authored the group strategy. Three AI products shipped using LLMs.
 - She was on the founding team at Cazoo, through to a $7B IPO.
