@@ -25,7 +25,14 @@ const title = 'What the data says about AI in business | Saielle DaSilva';
 // COPY FOR APPROVAL (site owner): description, intro and the "last checked" line.
 const description = 'Published figures on AI in business, each with who measured it, the base, the date and a link to the original document.';
 
-const lastChecked = new Date(data.lastChecked + 'T00:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+// COPY FOR APPROVAL (site owner): closing block.
+const closing = {
+  heading: 'What this means for your team',
+  body: 'These figures show what is happening across many companies. They cannot tell you what good looks like in yours. As a fractional CPO, I help teams work that out for their own product.',
+  link: 'See how fractional work runs',
+};
+
+const lastChecked =new Date(data.lastChecked + 'T00:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
 
 const jsonLd = {
   '@type': 'ItemList',
@@ -91,14 +98,13 @@ const jsonLd = {
     <p class="ev-none" id="ev-none" hidden>No figures match these filters.</p>
     <RelatedReading href="/writing/insights-to-actions/" title="Getting the most out of product discovery" summary="What to do and why it matters, before the features you ship." />
 
-    <!-- COPY FOR APPROVAL (site owner): closing block. -->
-    <section class="ev-closing" aria-labelledby="ev-closing-h">
-      <h2 id="ev-closing-h">Want help turning this into a plan?</h2>
-      <p>
-        I work with teams as a <a href="/fractional/">fractional product leader</a>, helping them decide where AI fits and
-        what to build. A free call is a good place to start.
-      </p>
-      <p><a class="btn-primary" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a free call <span class="sr-only">(opens in a new tab)</span></a></p>
+    <section class="ev-close" aria-labelledby="ev-close-h">
+      <h2 id="ev-close-h">{closing.heading}</h2>
+      <p>{closing.body}</p>
+      <div class="cta-row">
+        <a class="link-arrow" href="/fractional/"><span>{closing.link}</span></a>
+        <a class="btn-primary" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a free call <span class="sr-only">(opens in a new tab)</span></a>
+      </div>
     </section>
   </section>
 </BaseLayout>
@@ -129,7 +135,8 @@ const jsonLd = {
   .ev-meta dd { margin: 0; }
   .ev-source { margin-top: auto; font-size: var(--text-sm); color: var(--accent-text); overflow-wrap: anywhere; }
   .ev-none { color: var(--muted); }
-  .ev-closing { margin-top: var(--space-8); }
+  .ev-close { margin-top: var(--space-8); border-top: 1px solid var(--slate); padding-top: var(--space-6); }
+  .ev-close p { max-width: 40rem; }
 </style>
 
 <script>
