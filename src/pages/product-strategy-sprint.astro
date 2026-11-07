@@ -1,0 +1,48 @@
+---
+import '@fontsource-variable/roboto-serif';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { rates, gbp, offerDays } from '../data/rates';
+---
+
+<BaseLayout
+  title="Product Strategy Sprint | Saielle DaSilva"
+  description={`A fixed-price product strategy sprint from Saielle DaSilva, fractional CPO for AI products: ${offerDays.strategySprint} days across two weeks, including a full-day workshop, ending in a strategy and roadmap the team owns. ${gbp(rates.strategySprint)}.`}
+>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Fixed scope · {gbp(rates.strategySprint)}</p>
+      <h1>Product strategy sprint</h1>
+      <p class="lede">
+        Four days of Saielle DaSilva's time across two weeks, for leadership
+        teams that need a product strategy and a roadmap they own.
+      </p>
+    </header>
+
+    <div class="prose">
+      <h2>How it works</h2>
+      <ul>
+        <li>Four days across two weeks, including one full-day workshop with your team.</li>
+        <li>It ends with a product strategy and a roadmap your team owns.</li>
+      </ul>
+
+      <h2>What it costs</h2>
+      <p>
+        {gbp(rates.strategySprint)}, fixed. A full-day workshop on its own is
+        {' '}{gbp(rates.workshop)}. The fee is credited against a
+        <a href="/fractional/">fractional engagement</a> that starts within
+        30 days.
+      </p>
+    </div>
+
+    <section class="contact-form-section" aria-label="Get in touch">
+      <div class="contact-card">
+        <h2>Book a sprint.</h2>
+        <ContactForm source="product-strategy-sprint" selected="strategic-direction" booking />
+      </div>
+      <p class="faq-link">
+        Questions first? <a href="/faq/">Read the FAQ.</a>
+      </p>
+    </section>
+  </section>
+</BaseLayout>

@@ -1,0 +1,48 @@
+---
+import '@fontsource-variable/roboto-serif';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { rates, gbp, offerDays } from '../data/rates';
+---
+
+<BaseLayout
+  title="AI Product Audit | Saielle DaSilva"
+  description={`A fixed-price AI product audit from Saielle DaSilva, fractional CPO for AI products: ${offerDays.aiAudit} days across one week, ending in a readout workshop and a written plan. ${gbp(rates.aiAudit)}.`}
+>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Fixed scope · {gbp(rates.aiAudit)}</p>
+      <h1>AI product audit</h1>
+      <p class="lede">
+        Two days of Saielle DaSilva's time across one week, for teams with an
+        AI pilot, a product plan or a data investment they need an outside
+        read on.
+      </p>
+    </header>
+
+    <div class="prose">
+      <h2>How it works</h2>
+      <ul>
+        <li><strong>Day one.</strong> Saielle reviews the product, the data and the AI plans with your team.</li>
+        <li><strong>Day two.</strong> A half-day readout workshop with your leadership team, and a written plan.</li>
+      </ul>
+
+      <h2>What it costs</h2>
+      <p>
+        {gbp(rates.aiAudit)}, fixed. The fee is credited against a
+        <a href="/fractional/">fractional engagement</a> that starts within
+        30 days.
+      </p>
+    </div>
+
+    <section class="contact-form-section" aria-label="Get in touch">
+      <div class="contact-card">
+        <h2>Book an audit.</h2>
+        <ContactForm source="ai-product-audit" selected="strategic-direction" booking />
+      </div>
+      <p class="faq-link">
+        Questions first? <a href="/faq/">Read the FAQ.</a>
+      </p>
+    </section>
+  </section>
+</BaseLayout>
