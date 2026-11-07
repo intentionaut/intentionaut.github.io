@@ -332,7 +332,7 @@ export const faqs: Faq[] = [
     question: "Fractional vs interim CPO: what's the difference?",
     placements: ['faq', 'fractional'],
     answer:
-      "The difference is how much of the week the job needs. An interim CPO takes the role full time for a fixed spell, usually to cover a vacancy, a transition or a turnaround. A fractional CPO holds the same senior role part time over months, which works when the team underneath is strong enough to run on the days they're not there. If your product would stall without a leader in the room every day, hire interim.",
+      "The difference is how much of the week the job needs. An interim CPO takes the role full time for a fixed spell, usually to cover a vacancy, a transition or a turnaround. A fractional CPO holds the same senior role one or two days a week, over months, which works when the team underneath is strong enough to run on the days they're not there. If your product would stall without a leader in the room every day, hire interim.",
   },
   {
     question: 'Is fractional leadership a real commitment?',
