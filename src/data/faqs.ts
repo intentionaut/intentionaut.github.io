@@ -98,7 +98,7 @@ export const faqs: Faq[] = [
   },
   {
     question: "Should we hire a full-time CPO or bring in a fractional one?",
-    placements: ['for-ceos'],
+    placements: ['for-ceos', 'fractional'],
     answer: `A fractional CPO fits when you need senior product direction now, from someone who has led it at scale. Saielle DaSilva works one or two days a week, with a one-month minimum and 30 days' notice either side after that, with executive access and accountability for delivery. Each engagement ends with a handover a permanent hire can pick up.`,
   },
   {
@@ -327,6 +327,24 @@ export const faqs: Faq[] = [
     placements: ['faq', 'fractional'],
     answer:
       "A fractional CPO does the chief product officer's job one or two days a week, from a one-month minimum: setting product direction, making the strategic calls, leading and coaching the team, and managing executive stakeholders, with the same accountability for delivery as a permanent hire. It works when the team is strong enough to keep running on the other days, and it ends with a handover, not a dependency.",
+  },
+  {
+    question: 'We bought AI tools and our team is not using them. Can a fractional product leader help?',
+    placements: ['faq', 'fractional'],
+    answer:
+      "Yes, if the tools arrived before anyone decided which work they should change. A fractional CPO leads the team one or two days a week. Saielle DaSilva picks the few places where AI matters, gives each one an owner and a measure, and stays accountable for delivery. In a previous role she took production generative AI from fewer than 5 systems to over 20, and moved 44% of data engineering time from maintenance to customer-facing work.",
+  },
+  {
+    question: 'How does a fractional CPO help a team keep up with AI?',
+    placements: ['faq', 'fractional'],
+    answer:
+      'It depends on whether the team needs direction or training. AI training teaches people to use tools. A fractional CPO decides which AI work the product backs and what stops, and coaches the team to make those calls themselves. Saielle DaSilva works one or two days a week, and each engagement ends with a handover, not a dependency.',
+  },
+  {
+    question: 'How do you know a fractional CPO is working?',
+    placements: ['faq', 'fractional'],
+    answer:
+      "You agree a small set of product KPIs at the start and review them together on a set rhythm. Saielle DaSilva works directly with your team's data, not a summary of it, leads the team day to day and has access to your executive stakeholders.",
   },
   {
     question: "Fractional vs interim CPO: what's the difference?",
