@@ -91,7 +91,7 @@ export const faqs: Faq[] = [
   {
     question: "Should we hire a full-time CPO or bring in a fractional one?",
     placements: ['for-ceos'],
-    answer: `A fractional CPO fits when you need senior direction now but the role is still changing, or you want to test the shape before you commit. Saielle DaSilva works one or two days a week, three months and up, with executive access and accountability for delivery. Each engagement ends with a handover a permanent hire can pick up.`,
+    answer: `A fractional CPO fits when you need senior direction now but the role is still changing, or you want to test the shape before you commit. Saielle DaSilva works one or two days a week, with a one-month minimum and 30 days' notice either side after that, with executive access and accountability for delivery. Each engagement ends with a handover a permanent hire can pick up.`,
   },
   {
     question: "What should product own as we scale?",
@@ -289,7 +289,7 @@ export const faqs: Faq[] = [
   },
   {
     question: 'What is your day rate for fractional leadership?',
-    answer: `From ${gbp(fractionalMonthly1Day)} a month for one day a week (four days), or ${gbp(fractionalMonthly2Day)} a month for two days a week (eight days), on the agreed rhythm we set together. Three months and up. The day rate is ${gbp(rates.fractional)}.`,
+    answer: `From ${gbp(fractionalMonthly1Day)} a month for one day a week (four days), or ${gbp(fractionalMonthly2Day)} a month for two days a week (eight days), on the agreed rhythm we set together. One month minimum, then 30 days' notice either side. The day rate is ${gbp(rates.fractional)}.`,
   },
   {
     question: 'How much do keynotes and workshops cost?',
@@ -318,7 +318,7 @@ export const faqs: Faq[] = [
     question: 'What does a fractional CPO do?',
     placements: ['faq', 'fractional'],
     answer:
-      "A fractional CPO does the chief product officer's job part time. In practice that means one or two days a week, for three months or more: setting product direction, making the strategic calls, leading and coaching the team, and managing executive stakeholders, with the same accountability for delivery as a permanent hire. It works when the team is strong enough to keep running on the other days, and it ends with a handover, not a dependency.",
+      "A fractional CPO does the chief product officer's job part time. In practice that means one or two days a week, from a one-month minimum: setting product direction, making the strategic calls, leading and coaching the team, and managing executive stakeholders, with the same accountability for delivery as a permanent hire. It works when the team is strong enough to keep running on the other days, and it ends with a handover, not a dependency.",
   },
   {
     question: "Fractional vs interim CPO: what's the difference?",
