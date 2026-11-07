@@ -64,9 +64,9 @@ test('StepStone figure never names the satellite portfolio', () => {
   }
 });
 
-test('Workshops sits in the header and footer', () => {
+// The footer dropped Workshops on 7 Nov 2026 (Elle): the header carries it.
+test('Workshops sits in the header', () => {
   assert.match(read('components/Header.astro'), /href: '\/workshops\/', label: 'Workshops'/);
-  assert.match(read('components/Footer.astro'), /<a href="\/workshops\/">Workshops<\/a>/);
 });
 
 test('every FAQ list names its topic, so agents keep the context', () => {
