@@ -13,7 +13,8 @@ export type FaqPlacement =
   | 'workshops-data-culture'
   | 'for-ceos'
   | 'for-cpos-ctos'
-  | 'ai-pilot';
+  | 'ai-pilot'
+  | 'strategy-sprint';
 
 export interface Faq {
   question: string;
@@ -29,6 +30,13 @@ export interface Faq {
 }
 
 export const faqs: Faq[] = [
+  // /product-strategy-sprint/: wording from Elle, 7 Nov 2026.
+  {
+    question: 'How far ahead does the roadmap from the product strategy sprint go?',
+    answer:
+      "It depends on your needs, your customers and your tech stack. Most teams leave Saielle DaSilva's product strategy sprint with a strategy and roadmap for up to a year.",
+    placements: ['strategy-sprint', 'faq'],
+  },
   // /ai-pilot-to-production/ (#58): third person, answer-first.
   {
     question: 'Why do AI pilots stall before they reach production?',
