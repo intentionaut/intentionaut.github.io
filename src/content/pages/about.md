@@ -1,5 +1,5 @@
 ---
-title: A product leader who finds the signals, sets direction, and gets things moving.
+title: A product and design leader for AI products. I find the signals, set direction and get things moving.
 seoTitle: Saielle DaSilva | Interim & Fractional CPO, Product Leadership in AI & Data
 description: "The career behind intentionaut: product leadership across design, data and AI, from Pivotal, Cazoo and StepStone to Sainsbury's and independent practice."
 ---
