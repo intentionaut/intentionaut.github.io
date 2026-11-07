@@ -6,6 +6,7 @@ import KeepReading from '../../components/KeepReading.astro';
 import { relatedFor } from '../../lib/archive';
 import { getCollection, render } from 'astro:content';
 import { fetchPosts, hasWebBody } from '../../lib/beehiiv';
+import { trimDescription } from '../../lib/meta-description.mjs';
 
 export async function getStaticPaths() {
   const [posts, essays] = await Promise.all([
@@ -51,11 +52,18 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 
 const related = await relatedFor(Astro.url.pathname);
 
+// "A personal note" keeps its full subtitle, at Elle's request.
+const postDescription = post
+  ? post.slug === 'a-personal-note'
+    ? post.subtitle || post.title
+    : trimDescription(post.subtitle || post.title)
+  : '';
+
 const meta =
   type === 'beehiiv' && post
     ? {
         headline: post.title,
-        description: post.subtitle || post.title,
+        description: postDescription,
         published: new Date(post.publish_date * 1000).toISOString(),
         image: post.thumbnail_url || `${origin}/og.png`,
       }
@@ -108,7 +116,7 @@ const articleLd = meta
 {type === 'beehiiv' && post && (
   <BaseLayout
     title={`${post.title} | Saielle DaSilva`}
-    description={post.subtitle || post.title}
+    description={postDescription}
     ogType="article"
     publishedTime={meta?.published}
     jsonLd={articleLd}
