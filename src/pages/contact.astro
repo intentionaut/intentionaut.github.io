@@ -32,7 +32,7 @@ const offerCatalog = {
   name: 'Services and rates',
   itemListElement: [
     offer(
-      { '@type': 'Service', name: 'Strategy session', provider: { '@id': 'https://intentionaut.com/#person' }, url: 'https://intentionaut.com/strategic-direction/' },
+      { '@type': 'Service', name: 'Office hours', provider: { '@id': 'https://intentionaut.com/#person' }, url: 'https://intentionaut.com/office-hours/' },
       rates.strategySession,
       '90-minute session'
     ),
@@ -87,8 +87,8 @@ const faqSchema = {
       <h2>Which one fits?</h2>
       <p class="rates-intro">Every option starts with a free preliminary call.</p>
       <div class="rates">
-        <a class="rate-row rate-card" href="/strategic-direction/">
-          <p class="rate-name">Strategy session</p>
+        <a class="rate-row rate-card" href="/office-hours/">
+          <p class="rate-name">Office hours</p>
           <p class="rate-price">{gbp(rates.strategySession)} · 90 min</p>
           <p class="rate-desc">
             A sounding board for founders and product leaders: strategy

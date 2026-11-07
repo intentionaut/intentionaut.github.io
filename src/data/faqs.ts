@@ -292,7 +292,7 @@ export const faqs: Faq[] = [
       'Ask. If cost is the thing standing between you and booking, say so in your note. It counts if you are paying yourself rather than an employer, if your company is bootstrapped or unfunded, if the work is for a charity, nonprofit or the public sector, or if the full rate simply means you would not book at all. There is no proof to send, no essay to write and no negotiation. I will confirm an adjusted rate when we book. A few reduced slots each month keeps this honest; if the month is full, I will tell you and we will find another way.',
   },
   {
-    question: 'How much does a strategy session cost?',
+    question: 'How much do office hours cost?',
     answer: `${gbp(rates.strategySession)} for 90 minutes. Sliding scale applies, see above.`,
   },
   {
@@ -318,7 +318,7 @@ export const faqs: Faq[] = [
       'I reply to every serious note, usually within a couple of working days. We book a short call to scope things. If it looks like a fit, you get a brief written proposal: what we would do, when, and what it costs.',
   },
   {
-    question: 'What happens in a strategy session?',
+    question: 'What happens in office hours?',
     answer:
       'Beforehand you answer a few questions, so the clock starts on substance rather than introductions. Then ninety minutes working your actual problem. Afterwards you get written notes: decisions made, next steps, who owns what.',
   },
@@ -338,7 +338,7 @@ export const faqs: Faq[] = [
     question: 'Is fractional leadership a real commitment?',
     placements: ['faq', 'contact', 'fractional'],
     answer:
-      'Yes, and that is the point. Fractional work runs on an agreed rhythm over months, not days. Quick rescue thoughts are exactly what strategy sessions are for; fractional leadership is for teams that want direction held steady while they build.',
+      'Yes, and that is the point. Fractional work runs on an agreed rhythm over months, not days. Quick rescue thoughts are exactly what office hours are for; fractional leadership is for teams that want direction held steady while they build.',
   },
   {
     question: 'Who do you work with as a fractional product leader?',
