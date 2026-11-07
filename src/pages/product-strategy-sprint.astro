@@ -4,6 +4,8 @@ import '@fontsource-variable/roboto-serif';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.astro';
 import TestimonialCarousel from '../components/TestimonialCarousel.astro';
+import FaqList from '../components/FaqList.astro';
+import { faqsFor } from '../data/faqs';
 import { testimonialsFor } from '../data/testimonials';
 import { results } from '../data/results';
 import { rates, gbp, offerDays } from '../data/rates';
@@ -15,10 +17,19 @@ const serviceSchema = {
   provider: { '@id': 'https://intentionaut.com/#person' },
   offers: { '@type': 'Offer', priceCurrency: 'GBP', price: rates.strategySprint },
 };
+const faqs = faqsFor('strategy-sprint');
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer.replace(/\s+/g, ' ').trim() },
+  })),
+};
 ---
 
 <BaseLayout
-  jsonLd={serviceSchema}
+  jsonLd={[serviceSchema, faqSchema]}
   title="Product Strategy Sprint | Saielle DaSilva"
   description={`A fixed-price product strategy sprint from Saielle DaSilva, fractional CPO for AI products: ${offerDays.strategySprint} days across two weeks, with one full-day workshop, ending in a product strategy and roadmap the leadership team built. ${gbp(rates.strategySprint)}.`}
 >
@@ -84,6 +95,8 @@ const serviceSchema = {
     </ul>
 
     <TestimonialCarousel testimonials={testimonialsFor('fractional')} heading="What people say" />
+
+    <FaqList items={faqs} heading="Questions about the sprint" />
 
     <section class="contact-form-section" id="contact-section" aria-label="Book a sprint">
       <div class="contact-card">
