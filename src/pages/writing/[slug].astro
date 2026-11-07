@@ -59,6 +59,12 @@ const postDescription = post
     : trimDescription(post.subtitle || post.title)
   : '';
 
+const essayDescription = essay
+  ? essay.id === 'a-personal-note'
+    ? essay.data.description
+    : trimDescription(essay.data.description)
+  : '';
+
 const meta =
   type === 'beehiiv' && post
     ? {
@@ -70,7 +76,7 @@ const meta =
     : type === 'essay' && essay
       ? {
           headline: essay.data.title,
-          description: essay.data.description,
+          description: essayDescription,
           published: essay.data.date.toISOString(),
           image: `${origin}/og.png`,
         }
@@ -159,7 +165,7 @@ const articleLd = meta
 {type === 'essay' && essay && essayContent && (
   <BaseLayout
     title={`${essay.data.title} | Saielle DaSilva`}
-    description={essay.data.description}
+    description={essayDescription}
     ogType="article"
     publishedTime={meta?.published}
     jsonLd={articleLd}
