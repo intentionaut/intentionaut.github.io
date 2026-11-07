@@ -290,10 +290,14 @@ const graph = {
         }, { rootMargin: '0px 0px -10% 0px' });
         els.forEach(function (el) { io.observe(el); });
         if (m === 'drafting') {
-          var em = document.querySelector('.hero h1 em');
-          if (em) em.insertAdjacentHTML('beforeend',
-            '<svg class="motion-stroke" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true">' +
-            '<path pathLength="1" d="M2 6.5 C 20 3.5, 38 8, 55 5.2 S 86 3.8, 98 6"/></svg>');
+          var tick = false;
+          addEventListener('scroll', function () {
+            if (tick) return; tick = true;
+            requestAnimationFrame(function () {
+              document.documentElement.style.setProperty('--scroll', Math.min(scrollY, 800));
+              tick = false;
+            });
+          }, { passive: true });
         }
       })();
     </script>
