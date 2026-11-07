@@ -1,5 +1,6 @@
-/* Motion experiment. Off unless <html data-motion="minimal|drafting|quality">,
-   set from ?motion= by BaseLayout. Same layout; motion only. */
+/* Site motion ("drafting"): lines are drawn in as sections enter.
+   BaseLayout sets <html data-motion="drafting"> and the .reveal / .is-in classes,
+   so without JS the page renders exactly as before. */
 
 /* ---------- Shared: sections rise as they enter ---------- */
 
@@ -15,8 +16,6 @@
   opacity: 1;
   transform: none;
 }
-
-/* Minimal is the shared rule alone: one fade-rise per section, nothing else. */
 
 /* ---------- Drafting: lines are drawn, as if by pen ---------- */
 
@@ -66,24 +65,7 @@
   transform: translateY(calc(var(--scroll, 0) * -0.06px));
 }
 
-/* ---------- Quality: precise, staggered, settled ---------- */
-
-[data-motion='quality'] .reveal :is(.stat-strip > li, .rate-card, .project-row) {
-  opacity: 0;
-  transform: translateY(12px);
-  transition:
-    opacity 0.6s var(--ease-out) calc(var(--i, 0) * 90ms + 0.15s),
-    transform 0.6s var(--ease-out) calc(var(--i, 0) * 90ms + 0.15s),
-    background-color var(--dur-base) ease;
-}
-
-[data-motion='quality'] .reveal.is-in :is(.stat-strip > li, .rate-card, .project-row) {
-  opacity: 1;
-  transform: none;
-}
-
 /* The rose italic word settles in after the headline. */
-[data-motion='quality'] .hero h1 em,
 [data-motion='drafting'] .hero h1 em {
   display: inline-block;
   animation: motion-em 1.1s var(--ease-out) 0.55s backwards;
@@ -95,22 +77,6 @@
     transform: translateY(0.25em) skewX(-6deg);
     color: var(--ink);
   }
-}
-
-/* Double outlines open out on hover, like a mount around a print. */
-[data-motion='quality'] .btn-primary::after,
-[data-motion='quality'] .rate-card::after {
-  transition:
-    inset var(--dur-med) var(--ease-out),
-    border-color var(--dur-med) ease;
-}
-
-[data-motion='quality'] .btn-primary:hover::after {
-  inset: 5px;
-}
-
-[data-motion='quality'] .rate-card:hover::after {
-  inset: 6px;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -271,10 +271,11 @@ const graph = {
       })();
     </script>
     <script is:inline>
-      /* Motion experiment: ?motion=minimal|drafting|quality. Off by default. */
+      /* Site motion (styles/motion.css). ?motion=off previews the still page. */
       (function () {
-        var m = new URLSearchParams(location.search).get('motion');
-        if (!/^(minimal|drafting|quality)$/.test(m || '')) return;
+        if (new URLSearchParams(location.search).get('motion') === 'off') return;
+        if (!('IntersectionObserver' in window)) return;
+        var m = 'drafting';
         document.documentElement.dataset.motion = m;
         var els = document.querySelectorAll('main .home-section, main .lanes, main .signup');
         els.forEach(function (el) {
@@ -289,7 +290,7 @@ const graph = {
           });
         }, { rootMargin: '0px 0px -10% 0px' });
         els.forEach(function (el) { io.observe(el); });
-        if (m === 'drafting') {
+        {
           var tick = false;
           addEventListener('scroll', function () {
             if (tick) return; tick = true;
