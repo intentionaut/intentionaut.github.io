@@ -5,17 +5,36 @@ import FrameSubscribe from '../components/FrameSubscribe.astro';
 import { testimonialsFor } from '../data/testimonials';
 import TestimonialCarousel from '../components/TestimonialCarousel.astro';
 import { BOOKING_URL } from '../data/links';
+import { rates, gbp } from '../data/rates';
 import { results } from '../data/results';
 
-// The story, top to bottom: who she is and who brings her in, proof, the two
+// The story, top to bottom: who she is and who brings her in, proof, the
 // offers, the case studies, what people said, what she has built, then ways
 // to follow along.
 // Every figure below is already published on /for-advisors/ and /fractional/.
 
 const offers = [
   {
+    title: 'Workshops',
+    who: 'For CPOs, CTOs, CDOs and their teams who need one decision made and owned. AI product strategy, opportunity mapping and product maturity.',
+    shape: `Two hours to a full day, from ${gbp(rates.workshopTaster)}.`,
+    href: '/workshops/',
+  },
+  {
+    title: 'AI product audit',
+    who: 'For leadership teams with AI work underway and no shared view of which of it matters.',
+    shape: `Two days across one week, ${gbp(rates.aiAudit)} fixed.`,
+    href: '/ai-product-audit/',
+  },
+  {
+    title: 'Product strategy sprint',
+    who: 'For teams with an opportunity and no shared view of what to build.',
+    shape: `Four days across two weeks, ${gbp(rates.strategySprint)} fixed.`,
+    href: '/product-strategy-sprint/',
+  },
+  {
     title: 'Fractional leadership',
-    who: 'For teams building AI products who need Director-level product and design leadership, one or two days a week.',
+    who: 'For teams building AI products who need Director-level product and design leadership.',
     shape: 'One or two days a week, one month minimum, then 30 days\' notice.',
     href: '/fractional/',
   },
@@ -87,8 +106,8 @@ const homeTestimonials = testimonialsFor('home');
   </section>
 
   <section class="wrap home-section" aria-labelledby="offers-h">
-    <h2 id="offers-h" class="home-h2">Two ways to work together.</h2>
-    <div class="rates rates-pair">
+    <h2 id="offers-h" class="home-h2">Five ways to work together.</h2>
+    <div class="rates rates-pair home-offers">
       {offers.map((o) => (
         <a class="rate-row rate-card" href={o.href}>
           <p class="rate-name">{o.title}</p>
@@ -195,6 +214,12 @@ const homeTestimonials = testimonialsFor('home');
     color: var(--muted);
   }
 
+
+  @media (min-width: 1000px) {
+    .home-offers {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
 
   @media (max-width: 720px) {
     .home-stats {
