@@ -1,0 +1,102 @@
+/* Site motion ("drafting"): lines are drawn in as sections enter.
+   BaseLayout sets <html data-motion="drafting"> and the .reveal / .is-in classes,
+   so without JS the page renders exactly as before. */
+
+/* ---------- Shared: sections rise as they enter ---------- */
+
+[data-motion] .reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.7s var(--ease-out),
+    transform 0.7s var(--ease-out);
+}
+
+[data-motion] .reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- Drafting: lines are drawn, as if by pen ---------- */
+
+/* Rules above the figures draw left to right. */
+[data-motion='drafting'] .reveal .stat-strip li {
+  border-top-color: transparent;
+  background: linear-gradient(var(--ink), var(--ink)) top left / 0% 1px no-repeat;
+  transition: background-size 0.9s cubic-bezier(0.6, 0, 0.3, 1) calc(var(--i, 0) * 160ms + 0.2s);
+}
+
+[data-motion='drafting'] .reveal.is-in .stat-strip li {
+  background-size: 100% 1px;
+}
+
+/* Card outlines are traced: top, right, bottom, left, then the inner line inks in. */
+[data-motion='drafting'] .reveal .rate-card {
+  border-color: transparent;
+  background:
+    linear-gradient(var(--ink), var(--ink)) top left / 0% 1px no-repeat,
+    linear-gradient(var(--ink), var(--ink)) top right / 1px 0% no-repeat,
+    linear-gradient(var(--ink), var(--ink)) bottom right / 0% 1px no-repeat,
+    linear-gradient(var(--ink), var(--ink)) bottom left / 1px 0% no-repeat;
+  --d: calc(var(--i, 0) * 140ms + 0.2s);
+  transition: background-size 1.2s cubic-bezier(0.6, 0, 0.3, 1) var(--d);
+}
+
+[data-motion='drafting'] .reveal.is-in .rate-card {
+  background-size: 100% 1px, 1px 100%, 100% 1px, 1px 100%;
+}
+
+[data-motion='drafting'] .reveal .rate-card::after {
+  opacity: 0;
+  transition: opacity 0.6s ease calc(var(--d) + 1s);
+}
+
+[data-motion='drafting'] .reveal.is-in .rate-card::after {
+  opacity: 1;
+}
+
+/* Hero, from the earlier "expressive" round: the rose word settles in,
+   then headline and lede drift apart slightly as you scroll. */
+[data-motion='drafting'] .hero h1 {
+  transform: translateY(calc(var(--scroll, 0) * -0.12px));
+}
+
+[data-motion='drafting'] .hero .lede {
+  transform: translateY(calc(var(--scroll, 0) * -0.06px));
+}
+
+/* The rose italic word settles in after the headline. */
+[data-motion='drafting'] .hero h1 em {
+  display: inline-block;
+  animation: motion-em 1.1s var(--ease-out) 0.55s backwards;
+}
+
+@keyframes motion-em {
+  from {
+    opacity: 0;
+    transform: translateY(0.25em) skewX(-6deg);
+    color: var(--ink);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-motion] .reveal,
+  [data-motion] .reveal * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  [data-motion='drafting'] .reveal .stat-strip li {
+    border-top-color: var(--ink);
+    background: none;
+  }
+
+  [data-motion='drafting'] .reveal .rate-card {
+    border-color: var(--ink);
+    background: none;
+  }
+
+  [data-motion='drafting'] .hero :is(h1, .lede) {
+    transform: none;
+  }
+}
