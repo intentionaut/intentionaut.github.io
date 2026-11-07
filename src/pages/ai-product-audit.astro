@@ -1,6 +1,6 @@
 ---
 // Laid out on the workshop page template (src/pages/workshops/[slug].astro):
-// problem lines and one CTA in the head, then decision, steps, leave-with,
+// problem lines and one CTA in the head, then recommendation, steps, leave-with,
 // proof, close.
 import '@fontsource-variable/roboto-serif';
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -14,7 +14,7 @@ import { BOOKING_URL } from '../data/links';
 
 <BaseLayout
   title="AI Product Audit | Saielle DaSilva"
-  description={`A fixed-price AI product audit from Saielle DaSilva, fractional CPO for AI products. In ${offerDays.aiAudit} days across one week, every AI feature shipped or planned gets a keep, change or stop call, agreed with the leadership team. ${gbp(rates.aiAudit)}.`}
+  description={`A fixed-price AI product audit from Saielle DaSilva, fractional CPO for AI products. In ${offerDays.aiAudit} days across one week, every AI feature shipped or planned gets a keep, change or stop recommendation, reviewed with the leadership team. ${gbp(rates.aiAudit)}.`}
 >
   <section class="wrap">
     <header class="page-head">
@@ -22,7 +22,8 @@ import { BOOKING_URL } from '../data/links';
       <h1>Know which AI work to keep, change or stop. In one week.</h1>
       <p class="lede">
         Saielle DaSilva reviews every AI feature you have shipped or planned.
-        Your leadership team leaves agreeing what to fund next and what to stop.
+        Then she takes your leadership team through what to fund next, what to
+        stop, and what it means for your AI strategy.
       </p>
       <ul class="problem-lines">
         <li>Several AI pilots are running, and nobody can say which one the business depends on.</li>
@@ -43,17 +44,16 @@ import { BOOKING_URL } from '../data/links';
     </div>
 
     <article class="prose">
-      <h2>The decision your team makes</h2>
+      <h2>What Saielle recommends</h2>
       <p>
-        Keep, change or stop, for each piece of AI work. Each call rests on
+        Keep, change or stop, for each piece of AI work. Each recommendation rests on
         what a user does differently because of the output, whether the model
         has met real data, and what happens when it is confidently wrong.
       </p>
       <h2>How does the week run?</h2>
       <ol>
         <li>Day one: short sessions with the people who own each piece of AI work, and a review of the product and the data.</li>
-        <li>Day two: Saielle writes the ranked recommendation, without your team in the room.</li>
-        <li>A 90-minute decision session: your leadership team reads the plan beforehand and spends the time making the calls.</li>
+        <li>Day two: Saielle writes up her findings, without your team in the room. The day ends with a review of the findings and your AI strategy overall, which she facilitates with your leadership team.</li>
       </ol>
       <h2>What does your team leave with?</h2>
       <p>
