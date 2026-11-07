@@ -1,9 +1,15 @@
 ---
+// Laid out on the workshop page template (src/pages/workshops/[slug].astro):
+// problem lines and one CTA in the head, then decision, steps, leave-with,
+// proof, close.
 import '@fontsource-variable/roboto-serif';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.astro';
-import WhoFor from '../components/WhoFor.astro';
+import TestimonialCarousel from '../components/TestimonialCarousel.astro';
+import { testimonialsFor } from '../data/testimonials';
+import { results } from '../data/results';
 import { rates, gbp, offerDays } from '../data/rates';
+import { BOOKING_URL } from '../data/links';
 ---
 
 <BaseLayout
@@ -12,86 +18,79 @@ import { rates, gbp, offerDays } from '../data/rates';
 >
   <section class="wrap">
     <header class="page-head">
-      <p class="eyebrow">Fixed scope · {offerDays.aiAudit} days · {gbp(rates.aiAudit)}</p>
+      <p class="eyebrow">AI product audit · {offerDays.aiAudit} days · {gbp(rates.aiAudit)}</p>
       <h1>Know which AI work to keep, change or stop. In one week.</h1>
       <p class="lede">
-        Saielle DaSilva reviews every AI feature you have shipped or planned,
-        and your leadership team leaves agreeing what to fund next and what to
-        stop.
+        Saielle DaSilva reviews every AI feature you have shipped or planned.
+        Your leadership team leaves agreeing what to fund next and what to stop.
       </p>
-    </header>
-
-    <WhoFor
-      fit={[
-        'Leadership teams with several AI pilots or features and no shared view of which ones matter.',
-        'Companies about to commit budget to AI work and wanting an outside read first.',
-        'CEOs and CTOs who need a straight answer they can take to the board.',
-      ]}
-      notFit={[
-        'You already know what to build and need it built. Start with forward-deployed work.',
-        'You need someone to lead product week to week. Start with fractional leadership.',
-      ]}
-    />
-
-    <div class="prose">
-      <h2>Sound familiar?</h2>
-      <ul>
+      <ul class="problem-lines">
         <li>Several AI pilots are running, and nobody can say which one the business depends on.</li>
-        <li>The demo looks good. Nobody can say what a user is supposed to do with the output.</li>
+        <li>The demo looks good. Nobody can say what a user does with the output.</li>
         <li>The board asks about AI every quarter, and the answer changes every quarter.</li>
       </ul>
+      <div class="cta-row">
+        <a class="btn-primary" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a free call</a>
+        <a class="link-arrow" href="#contact-section"><span>{gbp(rates.aiAudit)} fixed · book an audit</span></a>
+      </div>
+    </header>
 
-      <h2>What Saielle looks at</h2>
-      <p>Every AI feature, shipped or planned, against the same questions:</p>
-      <ul>
-        <li><strong>The decision.</strong> What does a user do differently because of the output?</li>
-        <li><strong>The value.</strong> Is the thing it automates the expensive part of the job?</li>
-        <li><strong>The data.</strong> Has the model met real data, including the messy half?</li>
-        <li><strong>The risk.</strong> What happens when it is confidently wrong, and who is accountable?</li>
-        <li><strong>The cost.</strong> What each answer costs to run, and whether that holds at scale.</li>
-        <li><strong>The evidence.</strong> Can you tell whether it is working, and from what?</li>
-      </ul>
-
-      <h2>What you leave with</h2>
-      <ul>
-        <li>A ranked list of your AI work: keep, change or stop, with the reason for each.</li>
-        <li>The one or two bets worth funding next, and the evidence that would prove them.</li>
-        <li>The failure modes written down, before a customer finds them.</li>
-        <li>A leadership team that agrees, because it made the calls together in the readout.</li>
-        <li>A plain recommendation on what happens next, including when the answer is nothing.</li>
-      </ul>
-
-      <h2>How the week runs</h2>
-      <ul>
-        <li><strong>Day one.</strong> Saielle reviews the product, the data and the AI plans with the people who own them.</li>
-        <li><strong>Day two.</strong> A half-day readout workshop where your leadership team makes the keep, change and stop calls, then the written plan.</li>
-      </ul>
-
-      <h2>Why Saielle DaSilva</h2>
-      <p>
-        At Sainsbury's, Saielle DaSilva ran product for AI, data platforms and
-        machine learning, and took production AI from a handful of experiments
-        to a platform serving over 100 million customers. She was on the
-        founding team at <a href="/case-studies/cazoo/">Cazoo</a>, through to a
-        $7B IPO.
-      </p>
-
-      <h2>What it costs</h2>
-      <p>
-        {gbp(rates.aiAudit)}, fixed. The fee is credited against a
-        <a href="/fractional/">fractional engagement</a> that starts within
-        30 days.
-      </p>
+    <div class="case-meta">
+      <dl>
+        <dt class="meta-label">For</dt>
+        <dd class="meta-value">Leadership teams with AI work underway and no shared view of which of it matters.</dd>
+      </dl>
     </div>
 
-    <section class="contact-form-section" aria-label="Get in touch">
+    <article class="prose">
+      <h2>The decision your team makes</h2>
+      <p>
+        Keep, change or stop, for each piece of AI work. Each call rests on
+        what a user does differently because of the output, whether the model
+        has met real data, and what happens when it is confidently wrong.
+      </p>
+      <h2>How does the week run?</h2>
+      <ol>
+        <li>Day one: Saielle reviews the product, the data and the AI plans with the people who own them.</li>
+        <li>Day two: a half-day readout where your leadership team makes the calls, then the written plan.</li>
+      </ol>
+      <h2>What does your team leave with?</h2>
+      <p>
+        A ranked list of your AI work with a reason for each call, the one or
+        two bets worth funding next and the evidence that would prove them, and
+        the failure modes written down before a customer finds them.
+      </p>
+      <p>
+        It isn't a build. If the next step is building, that is
+        <a href="/ai-pilot-to-production/">forward-deployed work</a>; if it is
+        leadership, the fee is credited against a
+        <a href="/fractional/">fractional engagement</a> that starts within 30 days.
+      </p>
+    </article>
+
+    <ul class="stat-strip audit-stats">
+      {results.map((r) => (
+        <li><span class="stat-num">{r.num}</span><span class="stat-label">{r.label}</span></li>
+      ))}
+    </ul>
+
+    <TestimonialCarousel testimonials={testimonialsFor('fractional')} heading="What people say" />
+
+    <section class="contact-form-section" id="contact-section" aria-label="Book an audit">
       <div class="contact-card">
         <h2>Book an audit.</h2>
+        <p class="form-lede">
+          {gbp(rates.aiAudit)}, fixed, {offerDays.aiAudit} days across one week.
+          Start with a free call to check it fits.
+        </p>
         <ContactForm source="ai-product-audit" selected="strategic-direction" booking />
       </div>
-      <p class="faq-link">
-        Questions first? <a href="/faq/">Read the FAQ.</a>
-      </p>
     </section>
   </section>
 </BaseLayout>
+
+<style>
+  .audit-stats {
+    margin-bottom: clamp(3rem, 6vw, 5rem);
+  }
+</style>
