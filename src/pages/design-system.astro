@@ -5,6 +5,30 @@ import '@fontsource-variable/jost';
 import '@fontsource-variable/roboto-serif';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { rates, gbp } from '../data/rates';
+import Plate from '../components/Plate.astro';
+
+// Placement beyond the homepage offer cards is decided per page, by Elle.
+const iconSet = [
+  { name: 'strategy', label: 'Workshops' },
+  { name: 'magnifying-glass', label: 'AI product audit' },
+  { name: 'compass', label: 'Strategy sprint' },
+  { name: 'lighthouse', label: 'Fractional' },
+  { name: 'hammer', label: 'Product building' },
+  { name: 'coffee', label: 'Office hours' },
+  { name: 'plant', label: 'Mentoring' },
+  { name: 'path', label: 'AI product strategy' },
+  { name: 'map-trifold', label: 'Opportunity mapping' },
+  { name: 'stairs', label: 'Product maturity' },
+  { name: 'chart-line', label: 'Data-informed decisions' },
+  { name: 'users-three', label: 'Data culture' },
+  { name: 'envelope-simple', label: 'You write in' },
+  { name: 'chats-circle', label: 'We scope it' },
+  { name: 'signpost', label: 'Clear direction' },
+  { name: 'calendar-blank', label: 'Book a call' },
+  { name: 'microphone-stage', label: 'Speaking' },
+  { name: 'pen-nib', label: 'Writing' },
+  { name: 'book-open-text', label: 'Case studies' },
+];
 
 const updated = '27 September 2026';
 
@@ -480,6 +504,26 @@ const zindex = [
         </p>
       </section>
 
+      <section class="ds-section" aria-labelledby="ds-icons">
+        <h2 id="ds-icons">Icons</h2>
+        <p class="ds-note">
+          Phosphor duotone icons (MIT) set in a Plate: a 64px double-ruled
+          frame like the buttons. The duotone layer takes pink or blue, and
+          neighbours alternate. Use <code>&lt;Plate name="compass" tone="blue" /&gt;</code>.
+          Never an icon made of the letters "AI". Placement is chosen per page;
+          so far only the homepage offer cards carry them.
+        </p>
+        <ul class="ds-icons">
+          {iconSet.map((ic, i) => (
+            <li>
+              <Plate name={ic.name} tone={i % 2 ? 'blue' : 'pink'} />
+              <span>{ic.label}</span>
+              <code>{ic.name}</code>
+            </li>
+          ))}
+        </ul>
+      </section>
+
       <div class="ds-close">
         <h2>That is most of it.</h2>
         <p>
@@ -871,5 +915,20 @@ const zindex = [
     .ds-space-meta {
       grid-column: 2;
     }
+  }
+  .ds-icons {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));
+    gap: var(--space-6) var(--space-4);
+  }
+  .ds-icons li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
   }
 </style>

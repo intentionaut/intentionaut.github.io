@@ -1,0 +1,53 @@
+---
+/**
+ * An icon in a small double-ruled frame, the site's "plate". Icons are
+ * Phosphor duotone (MIT, src/assets/icons/LICENSE-phosphor.txt); the duotone
+ * layer is filled pink or blue, and callers alternate the two.
+ * Never use an icon made of the letters "AI".
+ */
+interface Props {
+  /** A file name in src/assets/icons/, without .svg. The set is shown on /design-system/. */
+  name: string;
+  tone?: 'pink' | 'blue';
+}
+const { name, tone = 'pink' } = Astro.props;
+const icons = import.meta.glob('../assets/icons/*.svg', { query: '?raw', import: 'default', eager: true });
+const raw = icons[`../assets/icons/${name}.svg`] as string | undefined;
+if (!raw) throw new Error(`Plate: no icon named "${name}"`);
+const svg = raw.replace('opacity="0.2"', 'class="tone"');
+---
+
+<span class:list={['plate', tone]} aria-hidden="true" set:html={svg} />
+
+<style>
+  .plate {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    border: 1px solid var(--ink);
+    display: inline-grid;
+    place-items: center;
+    background: var(--card);
+    flex: none;
+  }
+  .plate::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border: 1px solid var(--slate);
+    pointer-events: none;
+  }
+  .plate :global(svg) {
+    width: 32px;
+    height: 32px;
+    color: var(--ink);
+  }
+  .plate.pink :global(.tone) {
+    fill: #c85060;
+    opacity: 0.45;
+  }
+  .plate.blue :global(.tone) {
+    fill: #a9cbd0;
+    opacity: 0.9;
+  }
+</style>
