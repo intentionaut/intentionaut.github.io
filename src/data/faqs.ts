@@ -131,7 +131,7 @@ export const faqs: Faq[] = [
   {
     question: "How much does a product workshop in London cost?",
     placements: ['workshops'],
-    answer: `A two-hour product workshop with Saielle DaSilva starts at ${gbp(rates.workshopTaster)}, a half day of up to four hours at ${gbp(rates.workshopHalfDay)}, and a full day at ${gbp(rates.workshop)}. That covers the scoping call, prework, the session and written follow-up. Each price covers up to ${workshopGroup.included} people, and each extra person is ${gbp(workshopExtraPerson)}, up to ${workshopGroup.max} people. Travel outside London is charged at cost, and tailoring is quoted after the scoping call, before you commit to anything.`,
+    answer: `The two-hour Impact First AI: Strategy & Alignment session with Saielle DaSilva is ${gbp(rates.workshopTaster)}, a fixed agenda on which AI work to back; a half day of up to four hours at ${gbp(rates.workshopHalfDay)}, and a full day at ${gbp(rates.workshop)}. That covers the scoping call, prework, the session and written follow-up. Each price covers up to ${workshopGroup.included} people, and each extra person is ${gbp(workshopExtraPerson)}, up to ${workshopGroup.max} people. Travel outside London is charged at cost, and tailoring is quoted after the scoping call, before you commit to anything.`,
   },
   {
     question: "Who runs product workshops in London?",
