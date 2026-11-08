@@ -7,6 +7,7 @@ import { rates, gbp, fractionalMonthly1Day } from '../data/rates';
 import { results } from '../data/results';
 import { faqsFor } from '../data/faqs';
 import { testimonialsFor } from '../data/testimonials';
+import TestimonialCarousel from '../components/TestimonialCarousel.astro';
 import { BOOKING_URL } from '../data/links';
 
 const faqs = faqsFor('for-ceos');
@@ -89,12 +90,7 @@ const faqSchema = {
       ))}
     </ul>
 
-    {quotes.map((t) => (
-      <figure class="pull-quote">
-        <blockquote><p>{t.quote}</p></blockquote>
-        <figcaption>{t.name}, {t.role}, {t.org}</figcaption>
-      </figure>
-    ))}
+    <TestimonialCarousel testimonials={quotes} heading="What people say" />
 
     <RelatedReading href="/writing/impact-cant-bypass-politics/" title="Impact can't bypass politics" summary="Impact is decided by people before it is delivered by software." />
 

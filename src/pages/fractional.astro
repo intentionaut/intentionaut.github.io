@@ -4,6 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.astro';
 import { rates, gbp, fractionalMonthly1Day, fractionalMonthly2Day } from '../data/rates';
 import { testimonialsFor } from '../data/testimonials';
+import TestimonialCarousel from '../components/TestimonialCarousel.astro';
 import { faqsFor } from '../data/faqs';
 import RelatedReading from '../components/RelatedReading.astro';
 import FaqList from '../components/FaqList.astro';
@@ -156,15 +157,7 @@ const faqSchema = {
         <li>At Sainsbury's I ran product for AI, data platforms and machine learning, and took production AI from a handful of experiments to dozens of generative AI systems.</li>
         <li>I was on the founding team at <a href="/case-studies/cazoo/">Cazoo</a>, through to a $7B IPO.</li>
       </ul>
-      {testimonials.map((t) => (
-        <figure class="pull-quote">
-          <blockquote><p>{t.quote}</p></blockquote>
-          <figcaption>
-            {t.url ? <a href={t.url} target="_blank" rel="noopener noreferrer">{t.name}</a> : t.name},
-            {' '}{t.role}, {t.org}
-          </figcaption>
-        </figure>
-      ))}
+      <TestimonialCarousel testimonials={testimonials} heading="What people say" />
 
       <h2>How do you start?</h2>
       <p>

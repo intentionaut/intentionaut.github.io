@@ -7,6 +7,7 @@ import { rates, gbp, buildingWeekly } from '../data/rates';
 import { results } from '../data/results';
 import { faqsFor } from '../data/faqs';
 import { testimonialsFor } from '../data/testimonials';
+import TestimonialCarousel from '../components/TestimonialCarousel.astro';
 import { BOOKING_URL } from '../data/links';
 
 const faqs = faqsFor('for-cpos-ctos');
@@ -96,12 +97,7 @@ const faqSchema = {
       ))}
     </ul>
 
-    {quotes.map((t) => (
-      <figure class="pull-quote">
-        <blockquote><p>{t.quote}</p></blockquote>
-        <figcaption>{t.name}, {t.role}, {t.org}</figcaption>
-      </figure>
-    ))}
+    <TestimonialCarousel testimonials={quotes} heading="What people say" />
 
     <RelatedReading href="/writing/insights-to-actions/" title="Getting the most out of product discovery" summary="What to do and why it matters, before the features you ship." />
 

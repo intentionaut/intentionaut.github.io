@@ -23,7 +23,7 @@
 [data-motion='drafting'] .stat-strip.draw li {
   border-top-color: transparent;
   background: linear-gradient(var(--ink), var(--ink)) top left / 0% 1px no-repeat;
-  transition: background-size 0.9s cubic-bezier(0.6, 0, 0.3, 1) calc(var(--i, 0) * 160ms + 0.2s);
+  transition: background-size 0.55s cubic-bezier(0.6, 0, 0.3, 1) calc(var(--i, 0) * 90ms + 0.1s);
 }
 
 [data-motion='drafting'] .stat-strip.draw.is-in li {
@@ -34,7 +34,7 @@
 [data-motion='drafting'] .cs-stats.draw li {
   border-top-color: transparent;
   background: linear-gradient(var(--accent), var(--accent)) top left / 0% 2px no-repeat;
-  transition: background-size 0.9s cubic-bezier(0.6, 0, 0.3, 1) calc(var(--i, 0) * 160ms + 0.2s);
+  transition: background-size 0.55s cubic-bezier(0.6, 0, 0.3, 1) calc(var(--i, 0) * 90ms + 0.1s);
 }
 
 [data-motion='drafting'] .cs-stats.draw.is-in li {
@@ -44,7 +44,7 @@
 [data-motion='drafting'] .project-list.draw {
   border-top-color: transparent;
   background: linear-gradient(var(--ink), var(--ink)) top left / 0% 1px no-repeat;
-  transition: background-size 1.1s cubic-bezier(0.6, 0, 0.3, 1) 0.2s;
+  transition: background-size 0.65s cubic-bezier(0.6, 0, 0.3, 1) 0.1s;
 }
 
 [data-motion='drafting'] .project-list.draw.is-in {
@@ -59,8 +59,12 @@
     linear-gradient(var(--ink), var(--ink)) top right / 1px 0% no-repeat,
     linear-gradient(var(--ink), var(--ink)) bottom right / 0% 1px no-repeat,
     linear-gradient(var(--ink), var(--ink)) bottom left / 1px 0% no-repeat;
-  --d: calc(var(--i, 0) * 140ms + 0.2s);
-  transition: background-size 1.2s cubic-bezier(0.6, 0, 0.3, 1) var(--d);
+  background-color: var(--card);
+  --d: calc(var(--i, 0) * 80ms + 0.1s);
+  transition:
+    background-size 0.7s cubic-bezier(0.6, 0, 0.3, 1) var(--d),
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
 }
 
 [data-motion='drafting'] .rate-card.draw.is-in {
@@ -69,7 +73,7 @@
 
 [data-motion='drafting'] .rate-card.draw::after {
   opacity: 0;
-  transition: opacity 0.6s ease calc(var(--d) + 1s);
+  transition: opacity 0.4s ease calc(var(--d) + 0.55s);
 }
 
 [data-motion='drafting'] .rate-card.draw.is-in::after {
@@ -120,7 +124,7 @@
 
   [data-motion='drafting'] .rate-card.draw {
     border-color: var(--ink);
-    background: none;
+    background: var(--card);
   }
 
   [data-motion='drafting'] .rate-card.draw::after {
