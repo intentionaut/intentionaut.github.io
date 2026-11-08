@@ -50,19 +50,6 @@ const catalogSchema = {
       <WorkshopTopCta />
     </header>
 
-    <section class="rates-section" aria-label="Workshops">
-      <h2>Choose a workshop</h2>
-      <div class="rates">
-        {workshops.filter((w) => !w.variantOf).map((w) => (
-          <a class="rate-row rate-card" href={`/workshops/${w.slug}/`}>
-            <p class="rate-name">{w.title}</p>
-            <p class="rate-desc">{w.card}</p>
-            <p class="rate-shape">For {w.audience}.</p>
-          </a>
-        ))}
-      </div>
-    </section>
-
     <section class="rates-section workshop-proof" aria-label="Who runs them">
       <h2>Who runs them</h2>
       <div class="prose workshop-id">
@@ -77,8 +64,23 @@ const catalogSchema = {
           <li><span class="stat-num">{r.num}</span><span class="stat-label">{r.label}</span></li>
         ))}
       </ul>
-      <TestimonialCarousel testimonials={testimonialsFor('workshops')} heading="What people say" />
+      <p><a class="link-arrow" href="/case-studies/"><span>See the case studies</span></a></p>
+      <TestimonialCarousel testimonials={testimonialsFor('workshops')} heading="What people say" compact />
     </section>
+
+    <section class="rates-section" aria-label="Workshops">
+      <h2>Choose a workshop</h2>
+      <div class="rates">
+        {workshops.filter((w) => !w.variantOf).map((w) => (
+          <a class="rate-row rate-card" href={`/workshops/${w.slug}/`}>
+            <p class="rate-name">{w.title}</p>
+            <p class="rate-desc">{w.card}</p>
+            <p class="rate-shape">For {w.audience}.</p>
+          </a>
+        ))}
+      </div>
+    </section>
+
 
     <section class="rates-section workshop-steps" aria-label="How it works">
       <h2>How it works</h2>
