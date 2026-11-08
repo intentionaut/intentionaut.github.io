@@ -47,7 +47,18 @@ const { testimonials, heading = 'Testimonials', sub, compact = false } = Astro.p
           overflow-x: auto;
           scroll-snap-type: x mandatory;
           scrollbar-width: none;
-          padding: var(--space-1);
+          /* No side padding, so cards line up with the heading; room below for the shadow. */
+          padding: var(--space-1) 0 var(--space-5);
+          margin-bottom: calc(-1 * var(--space-5));
+        }
+        /* Two cards or fewer share the row instead of leaving a gap for a third. */
+        @media (min-width: 720px) {
+          .carousel-track:not(:has(> :nth-child(3))) {
+            grid-auto-columns: 1fr;
+          }
+        }
+        .carousel-controls[hidden] {
+          display: none;
         }
         .carousel-track::-webkit-scrollbar {
           display: none;
@@ -60,7 +71,8 @@ const { testimonials, heading = 'Testimonials', sub, compact = false } = Astro.p
         .tcard {
           position: relative;
           border: 1px solid var(--ink);
-          background: var(--paper);
+          background: var(--card);
+          box-shadow: var(--lift);
           padding: var(--space-6) var(--space-7);
           display: flex;
           flex-direction: column;
@@ -268,6 +280,9 @@ const { testimonials, heading = 'Testimonials', sub, compact = false } = Astro.p
         const max = track.scrollWidth - track.clientWidth;
         if (prev) prev.disabled = track.scrollLeft <= 0;
         if (next) next.disabled = track.scrollLeft >= max - 1;
+        // Nothing to scroll: hide the arrows and hint rather than show dead controls.
+        const controls = prev?.closest<HTMLElement>('.carousel-controls');
+        if (controls) controls.hidden = max <= 1;
       };
 
       const step = () => {

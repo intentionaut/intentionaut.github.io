@@ -41,6 +41,10 @@
 :root {
   /* Palette */
   --paper: #f7e9e0;
+  /* Cards sit on the page as a lighter cream sheet with a soft shadow. */
+  --card: #faf0e6;
+  --lift: 0 1px 2px rgb(90 50 60 / 0.06), 0 8px 24px -8px rgb(90 50 60 / 0.14);
+  --lift-hover: 0 2px 4px rgb(90 50 60 / 0.06), 0 16px 32px -10px rgb(90 50 60 / 0.22);
   --ink: #38234a;
   --muted: #74607b;
   --slate: #e0d2cb;
@@ -1417,7 +1421,6 @@ a.talk-title:hover {
   margin-bottom: var(--space-4);
   text-decoration: none;
   color: inherit;
-  transition: background-color var(--dur-base) ease;
 }
 
 .rate-card::after {
@@ -1428,9 +1431,47 @@ a.talk-title:hover {
   pointer-events: none;
 }
 
-.rate-card:hover {
-  background: rgba(169, 203, 208, 0.18);
+/* Cream sheets: cards, forms, quotes and the portrait mat. Only links lift on hover. */
+.rate-card,
+.project-card,
+.contact-card,
+.img-card {
+  background-color: var(--card);
+  box-shadow: var(--lift);
 }
+
+.project-card {
+  padding: var(--space-4) var(--space-5);
+}
+
+.rate-card,
+.project-card {
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+
+.rate-card:hover,
+.project-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--lift-hover);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rate-card:hover,
+  .project-card:hover {
+    transform: none;
+  }
+}
+
+/* Testimonials break out of the 62ch reading column to the full page width.
+   .prose sits at the left edge of .wrap, so widening to the right is enough. */
+.prose .testimonials-section {
+  width: calc(min(var(--wrap), 100vw) - 2 * clamp(1.25rem, 4vw, 2.5rem));
+  overflow-wrap: normal;
+  margin-top: var(--space-8);
+}
+
 
 .rate-row > p {
   margin: 0;
