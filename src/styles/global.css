@@ -108,7 +108,15 @@ html {
 
 body {
   margin: 0;
-  background: var(--paper);
+  /* Vellum light: the sheet is lit, never shaded. Every layer is lighter than
+     --paper, so --accent-text keeps its 4.5:1 everywhere (brown shading took it to 4.0). */
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgb(255 255 255 / 0.45), transparent 60%),
+    radial-gradient(40% 30% at 80% 35%, rgb(255 255 255 / 0.25), transparent 70%),
+    radial-gradient(35% 25% at 20% 75%, rgb(255 255 255 / 0.2), transparent 70%),
+    radial-gradient(90% 70% at 50% 45%, rgb(255 255 255 / 0.18), transparent 75%),
+    var(--paper);
+  background-attachment: fixed;
   color: var(--ink);
   font-family: var(--font-body);
   font-size: 1.0625rem;
