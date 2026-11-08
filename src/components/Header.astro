@@ -10,14 +10,20 @@ const services = [
   { href: '/keynote-speaker/', label: 'Speaking', desc: 'Keynotes for conferences and company events' },
   { href: '/office-hours/', label: 'Office hours', desc: '90 minutes of advisory, any topic' },
 ];
+// Reading material. Guides join this list when the first one ships.
+const resources = [
+  { href: '/case-studies/', label: 'Case studies', desc: 'Organisations built, products shipped' },
+];
+const groups = [
+  { id: 'services', label: 'Services', items: services },
+  { id: 'resources', label: 'Resources', items: resources },
+];
 const links = [
-  { href: '/case-studies/', label: 'Case studies' },
   { href: '/writing/', label: 'Writing' },
   { href: '/projects/', label: 'Projects' },
   { href: '/about/', label: 'About' },
 ];
 const here = (href: string) => pathname.startsWith(href);
-const inServices = services.some((s) => here(s.href));
 ---
 
 <header class="site-header">
@@ -36,33 +42,35 @@ const inServices = services.some((s) => here(s.href));
     </button>
     <nav class="site-nav" id="site-menu" aria-label="Main">
       <ul class="nav-list">
-        <li class="nav-services">
-          {/* Disclosure, not an ARIA menu: a list of links behind one button. */}
-          <button
-            class="nav-services-toggle"
-            type="button"
-            aria-expanded="false"
-            aria-controls="nav-services-panel"
-            data-current={inServices ? 'true' : undefined}
-          >
-            Services
-            <svg class="nav-chev" viewBox="0 0 12 12" aria-hidden="true">
-              <path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" />
-            </svg>
-          </button>
-          <ul class="nav-pop" id="nav-services-panel">
-            {
-              services.map((s) => (
-                <li>
-                  <a href={s.href} aria-current={here(s.href) ? 'page' : undefined}>
-                    <span class="nav-pop-title">{s.label}</span>
-                    <span class="nav-pop-desc">{s.desc}</span>
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </li>
+        {
+          groups.map((g) => (
+            <li class="nav-services">
+              {/* Disclosure, not an ARIA menu: a list of links behind one button. */}
+              <button
+                class="nav-services-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls={`nav-${g.id}-panel`}
+                data-current={g.items.some((s) => here(s.href)) ? 'true' : undefined}
+              >
+                {g.label}
+                <svg class="nav-chev" viewBox="0 0 12 12" aria-hidden="true">
+                  <path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" />
+                </svg>
+              </button>
+              <ul class="nav-pop" id={`nav-${g.id}-panel`}>
+                {g.items.map((s) => (
+                  <li>
+                    <a href={s.href} aria-current={here(s.href) ? 'page' : undefined}>
+                      <span class="nav-pop-title">{s.label}</span>
+                      <span class="nav-pop-desc">{s.desc}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))
+        }
         {
           links.map((link) => (
             <li>
@@ -130,7 +138,7 @@ const inServices = services.some((s) => here(s.href));
     transform: rotate(180deg);
   }
 
-  /* The panel: fades and drops in, items follow a beat apart. */
+  /* The panel: a square card with the plates' double rule. Quick fade, no stagger. */
   .nav-pop {
     position: absolute;
     top: calc(100% + var(--space-4));
@@ -142,18 +150,24 @@ const inServices = services.some((s) => here(s.href));
     margin: 0;
     padding: var(--space-2);
     list-style: none;
-    background: var(--paper);
+    background: var(--card);
     border: 1px solid var(--ink);
-    border-radius: var(--radius-l);
-    box-shadow: 0 12px 32px -18px rgba(56, 35, 74, 0.45);
+    box-shadow: var(--lift-hover);
     visibility: hidden;
     opacity: 0;
-    transform: translateY(-6px) scale(0.98);
-    transform-origin: top left;
+    transform: translateY(-4px);
     transition:
-      opacity var(--dur-base) ease,
-      transform var(--dur-med) var(--ease-out),
-      visibility 0s linear var(--dur-med);
+      opacity 0.12s ease,
+      transform 0.12s var(--ease-out),
+      visibility 0s linear 0.12s;
+  }
+
+  .nav-pop::before {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border: 1px solid var(--slate);
+    pointer-events: none;
   }
 
   .nav-services.is-open .nav-pop {
@@ -163,31 +177,11 @@ const inServices = services.some((s) => here(s.href));
     transition-delay: 0s;
   }
 
-  .nav-pop li {
-    opacity: 0;
-    transform: translateY(4px);
-    transition:
-      opacity var(--dur-base) ease,
-      transform var(--dur-med) var(--ease-out);
-  }
-
-  .nav-services.is-open .nav-pop li {
-    opacity: 1;
-    transform: none;
-  }
-
-  .nav-services.is-open .nav-pop li:nth-child(1) { transition-delay: 20ms; }
-  .nav-services.is-open .nav-pop li:nth-child(2) { transition-delay: 45ms; }
-  .nav-services.is-open .nav-pop li:nth-child(3) { transition-delay: 70ms; }
-  .nav-services.is-open .nav-pop li:nth-child(4) { transition-delay: 95ms; }
-  .nav-services.is-open .nav-pop li:nth-child(5) { transition-delay: 120ms; }
-
   /* Overrides the uppercase header-link style for the panel's links. */
   .site-nav .nav-pop a {
     display: grid;
     gap: 2px;
     padding: var(--space-3) var(--space-4) var(--space-3) calc(var(--space-4) + 6px);
-    border-radius: var(--radius-m);
     font-size: inherit;
     letter-spacing: 0;
     text-transform: none;
@@ -292,6 +286,10 @@ const inServices = services.some((s) => here(s.href));
       display: grid;
     }
 
+    .nav-pop::before {
+      display: none;
+    }
+
     .site-nav .nav-pop a {
       padding: var(--space-2) var(--space-3) var(--space-2) calc(var(--space-3) + 6px);
     }
@@ -309,49 +307,59 @@ const inServices = services.some((s) => here(s.href));
 <script>
   const toggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
   const nav = document.getElementById('site-menu');
-  const services = document.querySelector<HTMLElement>('.nav-services');
-  const servicesBtn = services?.querySelector<HTMLButtonElement>('.nav-services-toggle');
+  const groups = [...document.querySelectorAll<HTMLElement>('.nav-services')];
+  const btnOf = (g: HTMLElement) => g.querySelector<HTMLButtonElement>('.nav-services-toggle');
 
   const closeMenu = () => {
     document.body.classList.remove('menu-open');
     toggle?.setAttribute('aria-expanded', 'false');
   };
 
-  const setServices = (open: boolean) => {
-    services?.classList.toggle('is-open', open);
-    servicesBtn?.setAttribute('aria-expanded', String(open));
+  const setGroup = (g: HTMLElement, open: boolean) => {
+    g.classList.toggle('is-open', open);
+    btnOf(g)?.setAttribute('aria-expanded', String(open));
   };
+  const closeAll = () => groups.forEach((g) => setGroup(g, false));
 
   toggle?.addEventListener('click', () => {
     const open = document.body.classList.toggle('menu-open');
     toggle.setAttribute('aria-expanded', String(open));
   });
 
-  servicesBtn?.addEventListener('click', (e) => {
-    e.stopPropagation();
-    setServices(servicesBtn.getAttribute('aria-expanded') !== 'true');
+  groups.forEach((g) => {
+    const btn = btnOf(g);
+    btn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = btn.getAttribute('aria-expanded') !== 'true';
+      closeAll(); // one panel at a time
+      setGroup(g, open);
+    });
+    // Tabbing out of the panel closes it.
+    g.addEventListener('focusout', (e) => {
+      if (!g.contains(e.relatedTarget as Node)) setGroup(g, false);
+    });
   });
 
   nav?.querySelectorAll('a').forEach((a) =>
     a.addEventListener('click', () => {
       closeMenu();
-      setServices(false);
+      closeAll();
     })
   );
 
   // A click outside or Escape closes the panel; Escape returns focus to it.
   document.addEventListener('click', (e) => {
-    if (services && !services.contains(e.target as Node)) setServices(false);
+    groups.forEach((g) => {
+      if (!g.contains(e.target as Node)) setGroup(g, false);
+    });
   });
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && services?.classList.contains('is-open')) {
-      setServices(false);
-      servicesBtn?.focus();
+    if (e.key !== 'Escape') return;
+    const open = groups.find((g) => g.classList.contains('is-open'));
+    if (open) {
+      setGroup(open, false);
+      btnOf(open)?.focus();
     }
-  });
-  // Tabbing out of the panel closes it.
-  services?.addEventListener('focusout', (e) => {
-    if (!services.contains(e.relatedTarget as Node)) setServices(false);
   });
 
   // The gliding underline, on wide screens only.
