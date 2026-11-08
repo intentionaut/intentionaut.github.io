@@ -194,20 +194,23 @@ const faqSchema = {
       </div>
     </section>
 
-    <WhoFor
-      fit={[
-        'Founders and CEOs who need Director-level product leadership now.',
-        'Scale-ups whose product leader has left, or whose growth has outrun the team. <a href="/for-scale-ups/">Product leadership for scale-ups</a>.',
-        'Teams with a product that works and no agreement on why it is not landing.',
-        'Designers and product managers with nobody senior leading them.',
-        'Companies shipping AI features without an agreed view of what good looks like.',
-      ]}
-      notFit={[
-        'You are ready to hire a permanent head of product now. A search is the better route, and a fractional leader can help shape the role.',
-        'You need one decision made or one plan reviewed, not ongoing leadership. 90 minutes of <a href="/office-hours/">office hours</a> covers that, and it can also be the first step into fractional work.',
-        'You need something built rather than led. <a href="/forward-deployed/">Product building</a> embeds for four to twelve weeks and ends in a prototype or in software your team can run.',
-      ]}
-    />
+    {/* After the form, before the FAQ: match the gap the FAQ and form use. */}
+    <div class="fit-before-faq">
+      <WhoFor
+        fit={[
+          'Founders and CEOs who need Director-level product leadership now.',
+          'Scale-ups whose product leader has left, or whose growth has outrun the team. <a href="/for-scale-ups/">Product leadership for scale-ups</a>.',
+          'Teams with a product that works and no agreement on why it is not landing.',
+          'Designers and product managers with nobody senior leading them.',
+          'Companies shipping AI features without an agreed view of what good looks like.',
+        ]}
+        notFit={[
+          'You are ready to hire a permanent head of product now. A search is the better route, and a fractional leader can help shape the role.',
+          'You need one decision made or one plan reviewed, not ongoing leadership. 90 minutes of <a href="/office-hours/">office hours</a> covers that, and it can also be the first step into fractional work.',
+          'You need something built rather than led. <a href="/forward-deployed/">Product building</a> embeds for four to twelve weeks and ends in a prototype or in software your team can run.',
+        ]}
+      />
+    </div>
 
     <FaqList
       heading="FAQ: Fractional and interim CPO"
@@ -218,3 +221,11 @@ const faqSchema = {
 
 </BaseLayout>
 
+<style>
+  .fit-before-faq {
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+  }
+  .fit-before-faq :global(.who-for) {
+    margin-top: 0;
+  }
+</style>
