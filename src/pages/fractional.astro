@@ -76,20 +76,6 @@ const faqSchema = {
         <li>AI features where nobody can yet say what good looks like.</li>
         <li>AI tools haven't changed the team's ways of working, or its maturity.</li>
       </ul>
-      <WhoFor
-        fit={[
-          'Founders and CEOs who need Director-level product leadership now.',
-          'Scale-ups whose product leader has left, or whose growth has outrun the team. <a href="/for-scale-ups/">Product leadership for scale-ups</a>.',
-          'Teams with a product that works and no agreement on why it is not landing.',
-          'Designers and product managers with nobody senior leading them.',
-          'Companies shipping AI features without an agreed view of what good looks like.',
-        ]}
-        notFit={[
-          'You are ready to hire a permanent head of product now. A search is the better route, and a fractional leader can help shape the role.',
-          'You need one decision made or one plan reviewed, not ongoing leadership. 90 minutes of <a href="/office-hours/">office hours</a> covers that, and it can also be the first step into fractional work.',
-          'You need something built rather than led. <a href="/forward-deployed/">Product building</a> embeds for four to twelve weeks and ends in a prototype or in software your team can run.',
-        ]}
-      />
     </header>
 
     <div class="prose">
@@ -207,6 +193,21 @@ const faqSchema = {
         <ContactForm source="fractional" selected="fractional" booking referral />
       </div>
     </section>
+
+    <WhoFor
+      fit={[
+        'Founders and CEOs who need Director-level product leadership now.',
+        'Scale-ups whose product leader has left, or whose growth has outrun the team. <a href="/for-scale-ups/">Product leadership for scale-ups</a>.',
+        'Teams with a product that works and no agreement on why it is not landing.',
+        'Designers and product managers with nobody senior leading them.',
+        'Companies shipping AI features without an agreed view of what good looks like.',
+      ]}
+      notFit={[
+        'You are ready to hire a permanent head of product now. A search is the better route, and a fractional leader can help shape the role.',
+        'You need one decision made or one plan reviewed, not ongoing leadership. 90 minutes of <a href="/office-hours/">office hours</a> covers that, and it can also be the first step into fractional work.',
+        'You need something built rather than led. <a href="/forward-deployed/">Product building</a> embeds for four to twelve weeks and ends in a prototype or in software your team can run.',
+      ]}
+    />
 
     <FaqList
       heading="FAQ: Fractional and interim CPO"
