@@ -1,10 +1,17 @@
 // Share cards for pages made at build time (writing pages), in the same frame
 // as public/og.png. Text is set in Fraunces, the site's display font, from the
 // bundled TTF so CI renders the same card as a laptop does.
-import sharp from 'sharp';
-import { fileURLToPath } from 'node:url';
+import { resolve } from 'node:path';
+import { existsSync } from 'node:fs';
 
-const FONT = fileURLToPath(new URL('../assets/fonts/Fraunces.ttf', import.meta.url));
+// From the repo root, not import.meta.url: the build bundles this file into
+// dist/chunks, where a relative URL pointed at nothing and CI fell back to
+// DejaVu Sans. Linux CI also has no fontconfig setup, hence fonts.conf.
+const FONTS = resolve(process.cwd(), 'src/assets/fonts');
+const FONT = resolve(FONTS, 'Fraunces.ttf');
+if (!existsSync(FONT)) throw new Error(`Share card font missing: ${FONT}`);
+process.env.FONTCONFIG_FILE = resolve(FONTS, 'fonts.conf');
+const { default: sharp } = await import('sharp');
 const PAPER = '#f7e9e0';
 const INK = '#38234a';
 const SLATE = '#e0d2cb';
