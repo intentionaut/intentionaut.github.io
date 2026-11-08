@@ -7,28 +7,34 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { rates, gbp } from '../data/rates';
 import Plate from '../components/Plate.astro';
 
-// Placement beyond the homepage offer cards is decided per page, by Elle.
-const iconSet = [
-  { name: 'strategy', label: 'Workshops' },
-  { name: 'magnifying-glass', label: 'AI product audit' },
-  { name: 'compass', label: 'Strategy sprint' },
-  { name: 'lighthouse', label: 'Fractional' },
-  { name: 'hammer', label: 'Product building' },
-  { name: 'coffee', label: 'Office hours' },
-  { name: 'plant', label: 'Mentoring' },
-  { name: 'path', label: 'AI product strategy' },
-  { name: 'map-trifold', label: 'Opportunity mapping' },
-  { name: 'stairs', label: 'Product maturity' },
-  { name: 'chart-line', label: 'Data-informed decisions' },
-  { name: 'users-three', label: 'Data culture' },
-  { name: 'envelope-simple', label: 'You write in' },
-  { name: 'chats-circle', label: 'We scope it' },
-  { name: 'signpost', label: 'Clear direction' },
-  { name: 'calendar-blank', label: 'Book a call' },
-  { name: 'microphone-stage', label: 'Speaking' },
-  { name: 'pen-nib', label: 'Writing' },
-  { name: 'book-open-text', label: 'Case studies' },
-];
+// Every icon in src/assets/icons/ is listed, so the set here can't drift from
+// the files. Labels say what each one marks; placement is Elle's call per page.
+const iconLabels: Record<string, string> = {
+  'strategy': 'Workshops',
+  'magnifying-glass': 'AI product audit',
+  'compass': 'Strategy sprint',
+  'lighthouse': 'Fractional',
+  'hammer': 'Product building',
+  'coffee': 'Office hours',
+  'plant': 'Mentoring',
+  'path': 'AI product strategy',
+  'map-trifold': 'Opportunity mapping',
+  'stairs': 'Product maturity',
+  'chart-line': 'Data-informed decisions',
+  'users-three': 'Data culture',
+  'envelope-simple': 'You write in',
+  'chats-circle': 'We scope it',
+  'signpost': 'Clear direction',
+  'calendar-blank': 'Book a call',
+  'microphone-stage': 'Speaking',
+  'pen-nib': 'Writing',
+  'book-open-text': 'Case studies',
+  'airplane-takeoff': 'AI pilot to production',
+};
+const iconSet = Object.keys(import.meta.glob('../assets/icons/*.svg'))
+  .map((path) => path.split('/').pop()!.replace('.svg', ''))
+  .sort((a, b) => (iconLabels[a] ? 0 : 1) - (iconLabels[b] ? 0 : 1))
+  .map((name) => ({ name, label: iconLabels[name] ?? name }));
 
 const updated = '27 September 2026';
 
@@ -510,8 +516,9 @@ const zindex = [
           Phosphor duotone icons (MIT) set in a Plate: a 64px double-ruled
           frame like the buttons. The duotone layer takes pink or blue, and
           neighbours alternate. Use <code>&lt;Plate name="compass" tone="blue" /&gt;</code>.
-          Never an icon made of the letters "AI". Placement is chosen per page;
-          so far only the homepage offer cards carry them.
+          Never an icon made of the letters "AI". Placement is chosen per page. Each offer's icon is set once in
+          <code>src/data/icons.ts</code>; wide lists use the envelope layout
+          (plate on the left), square cards the centred one.
         </p>
         <ul class="ds-icons">
           {iconSet.map((ic, i) => (
