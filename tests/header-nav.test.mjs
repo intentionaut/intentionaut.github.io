@@ -8,20 +8,27 @@ const src = readFileSync(new URL('../src/components/Header.astro', import.meta.u
 const hrefs = (block) => [...block.matchAll(/href: '([^']+)'/g)].map((m) => m[1]);
 
 test('Services groups the five paid offers, in order', () => {
-  const block = src.slice(src.indexOf('const services'), src.indexOf('const links'));
+  const block = src.slice(src.indexOf('const services'), src.indexOf('const resources'));
   assert.deepEqual(hrefs(block), ['/fractional/', '/forward-deployed/', '/workshops/', '/keynote-speaker/', '/office-hours/']);
 });
 
-test('the header links are Case studies, Writing, Projects, About', () => {
+test('Resources groups the case studies', () => {
+  const block = src.slice(src.indexOf('const resources'), src.indexOf('const groups'));
+  assert.deepEqual(hrefs(block), ['/case-studies/']);
+});
+
+test('the header links are Writing, Projects, About', () => {
   const block = src.slice(src.indexOf('const links'), src.indexOf('const here'));
-  assert.deepEqual(hrefs(block), ['/case-studies/', '/writing/', '/projects/', '/about/']);
+  assert.deepEqual(hrefs(block), ['/writing/', '/projects/', '/about/']);
 });
 
 test('Work with me stays as the house button to /contact/', () => {
   assert.match(src, /<a class="btn-primary nav-cta" href="\/contact\/"/);
 });
 
-test('Services is a disclosure button wired to its panel', () => {
-  assert.match(src, /class="nav-services-toggle"[\s\S]*?aria-expanded="false"[\s\S]*?aria-controls="nav-services-panel"/);
-  assert.match(src, /id="nav-services-panel"/);
+test('each group is a disclosure button wired to its own panel', () => {
+  assert.match(src, /\{ id: 'services', label: 'Services'/);
+  assert.match(src, /\{ id: 'resources', label: 'Resources'/);
+  assert.match(src, /class="nav-services-toggle"[\s\S]*?aria-expanded="false"[\s\S]*?aria-controls=\{`nav-\$\{g\.id\}-panel`\}/);
+  assert.match(src, /id=\{`nav-\$\{g\.id\}-panel`\}/);
 });
