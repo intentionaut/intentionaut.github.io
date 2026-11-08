@@ -36,7 +36,10 @@ async function text(markup, pt, opts = {}) {
 
 /** One 1200x630 PNG: eyebrow, headline, domain. Long titles step down in size. */
 export async function renderCard({ eyebrow, title }) {
-  const words = esc(keepLastPair(title));
+  // <i>…</i> survives escaping: it marks the one italic accent word.
+  const words = esc(keepLastPair(title)).replace(/&lt;(\/?)i&gt;/g, '<$1i>')
+    // and wraps as one unit, so "100 million" never splits across lines.
+    .replace(/<i>(.*?)<\/i>/g, (_, w) => `<i>${w.replace(/ /g, '\u00a0')}</i>`);
   let head;
   for (const pt of [60, 52, 46, 40]) {
     head = await text(`<span foreground="${INK}">${words}</span>`, pt, { spacing: Math.round(pt * 0.15) });
