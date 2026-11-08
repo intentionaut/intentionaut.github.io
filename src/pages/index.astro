@@ -5,7 +5,6 @@ import FrameSubscribe from '../components/FrameSubscribe.astro';
 import { testimonialsFor } from '../data/testimonials';
 import TestimonialCarousel from '../components/TestimonialCarousel.astro';
 import { BOOKING_URL } from '../data/links';
-import { rates, gbp } from '../data/rates';
 import { results } from '../data/results';
 import Plate from '../components/Plate.astro';
 import FaqList from '../components/FaqList.astro';
@@ -21,21 +20,21 @@ const offers = [
     title: 'Workshops',
     icon: 'strategy' as const,
     who: 'For CPOs, CTOs, CDOs and their teams who need one decision made and owned. AI product strategy, opportunity mapping and product maturity.',
-    shape: `Two hours to a full day, from ${gbp(rates.workshopTaster)}.`,
+    shape: 'Two hours to a full day.',
     href: '/workshops/',
   },
   {
     title: 'AI product audit',
     icon: 'magnifying-glass' as const,
     who: 'For leadership teams with AI work underway and no shared view of which of it matters.',
-    shape: `Two days across one week, ${gbp(rates.aiAudit)} fixed.`,
+    shape: 'Two days across one week, fixed scope.',
     href: '/ai-product-audit/',
   },
   {
     title: 'Product strategy sprint',
     icon: 'compass' as const,
     who: 'For teams with an opportunity and no shared view of what to build.',
-    shape: `Four days across two weeks, ${gbp(rates.strategySprint)} fixed.`,
+    shape: 'Four days across two weeks, fixed scope.',
     href: '/product-strategy-sprint/',
   },
   {
