@@ -732,7 +732,7 @@ h3 {
   margin: 2em 0;
   padding: var(--space-5) var(--space-6);
   border: 1px solid var(--slate);
-  border-radius: var(--radius-l);
+  border-radius: 0;
   color: var(--ink);
 }
 
