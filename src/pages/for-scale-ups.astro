@@ -1,0 +1,130 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import RelatedReading from '../components/RelatedReading.astro';
+import FaqList from '../components/FaqList.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { rates, gbp, fractionalMonthly1Day } from '../data/rates';
+import { results } from '../data/results';
+import { faqsFor } from '../data/faqs';
+import { testimonialsFor } from '../data/testimonials';
+import TestimonialCarousel from '../components/TestimonialCarousel.astro';
+import { BOOKING_URL } from '../data/links';
+
+// Landing page for scale-ups. Like /for-ceos/, it is reached from search and
+// from one line on /fractional/, not the nav. Every figure is already
+// published on /fractional/ and in results.ts.
+const faqs = faqsFor('for-scale-ups');
+const quotes = testimonialsFor('for-scale-ups');
+const offers = [
+  {
+    title: 'Fractional or interim CPO',
+    price: `From ${gbp(fractionalMonthly1Day)} a month`,
+    desc: 'Leads product while you hire, or until the team can run it. Ends with a handover a permanent hire can pick up.',
+    shape: 'Fractional: one or two days a week. Interim: full time for a fixed spell.',
+    href: '/fractional/',
+  },
+  {
+    title: 'Product strategy sprint',
+    price: `${gbp(rates.strategySprint)} fixed`,
+    desc: 'For a team with the next growth bet in view and no shared plan for what to build.',
+    shape: 'Four days across two weeks.',
+    href: '/product-strategy-sprint/',
+  },
+  {
+    title: 'AI product audit',
+    price: `${gbp(rates.aiAudit)} fixed`,
+    desc: 'For leadership with AI work underway and no shared view of which of it matters.',
+    shape: 'Two days across one week.',
+    href: '/ai-product-audit/',
+  },
+];
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer.replace(/\s+/g, ' ').trim() },
+  })),
+};
+---
+
+<BaseLayout
+  title="Product leader for scale-ups: fractional & interim CPO | Saielle DaSilva"
+  description="Fractional and interim CPO for scale-ups. Saielle DaSilva was on the founding team at Cazoo through hyper-growth to IPO, and grew MRR 450% in 90 days as interim CPO."
+  jsonLd={[faqSchema]}
+>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">For scale-ups</p>
+      <h1>Product leadership for scale-ups, from someone who has scaled them before.</h1>
+      <p class="lede">
+        Saielle DaSilva is a fractional and interim CPO for scale-ups. She was on
+        the founding team at Cazoo through hyper-growth to a $7B IPO. As interim
+        CPO at a grocery scale-up, monthly recurring revenue grew 450 per cent in 90 days.
+      </p>
+      <ul class="problem-lines">
+        <li>Your product leader has left, and the roadmap can't wait for the search.</li>
+        <li>The board wants growth the product can't yet deliver.</li>
+        <li>The team doubled, and nobody agrees who decides what.</li>
+        <li>AI is on every roadmap, and nobody owns what good looks like.</li>
+      </ul>
+      <div class="cta-row">
+        <a class="btn-primary" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a free call <span class="sr-only">(opens in a new tab)</span></a>
+        <a class="link-arrow" href="#ways-in"><span>Three ways in</span></a>
+      </div>
+    </header>
+
+    <section class="rates-section" id="ways-in" aria-label="Three ways in">
+      <h2>Three ways in</h2>
+      <p class="rates-intro">Every option starts with a free call.</p>
+      <div class="rates">
+        {offers.map((o) => (
+          <a class="rate-row rate-card" href={o.href}>
+            <p class="rate-name">{o.title}</p>
+            <p class="rate-price">{o.price}</p>
+            <p class="rate-desc">{o.desc}</p>
+            <p class="rate-shape">{o.shape}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <ul class="stat-strip scale-stats">
+      {results.map((r) => (
+        <li><span class="stat-num">{r.num}</span><span class="stat-label">{r.label}</span></li>
+      ))}
+    </ul>
+
+    <div class="prose">
+      <h2>Where has she done this?</h2>
+      <ul>
+        <li>On the founding team at <a href="/case-studies/cazoo/">Cazoo</a>, the first design hire, through hyper-growth to a $7B IPO.</li>
+        <li>At Cazoo, <a href="/case-studies/cazoo-purchase/">one promised price for car sellers</a>, paid in over 97% of cases.</li>
+        <li>As interim CPO at a direct-to-consumer grocery scale-up, monthly recurring revenue grew 450 per cent in 90 days.</li>
+        <li>She led the product and design organisation at StepStone, with a 3.2x return on investment.</li>
+      </ul>
+      <TestimonialCarousel testimonials={quotes} heading="What people say" />
+    </div>
+
+    <RelatedReading href="/writing/org-design-for-product-orgs/" title="Org design for product orgs" summary="An org chart is a bet on how you bring products to market. Here is how to place it." />
+
+    <FaqList items={faqs} heading="FAQ: Product leadership for scale-ups" sub="What scale-up leaders ask before bringing in a CPO." />
+
+    <section class="contact-form-section" id="contact-section" aria-label="Get in touch">
+      <div class="contact-card">
+        <h2>Tell Saielle where growth is stuck.</h2>
+        <p class="form-lede">
+          A few lines about your company and what is not working. You get a
+          reply, a short call and, if it fits, a written proposal.
+        </p>
+        <ContactForm source="for-scale-ups" selected="fractional" booking />
+      </div>
+    </section>
+  </section>
+</BaseLayout>
+
+<style>
+  .scale-stats {
+    margin-bottom: clamp(3rem, 6vw, 5rem);
+  }
+</style>

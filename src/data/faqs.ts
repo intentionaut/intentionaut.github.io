@@ -13,6 +13,7 @@ export type FaqPlacement =
   | 'workshops-data-culture'
   | 'for-ceos'
   | 'for-cpos-ctos'
+  | 'for-scale-ups'
   | 'ai-pilot'
   | 'strategy-sprint'
   | 'home';
@@ -99,7 +100,7 @@ export const faqs: Faq[] = [
   },
   {
     question: "Should we hire a full-time CPO or bring in a fractional one?",
-    placements: ['for-ceos', 'fractional'],
+    placements: ['for-ceos', 'fractional', 'for-scale-ups'],
     answer: `A fractional CPO fits when you need senior product direction now, from someone who has led it at scale. Saielle DaSilva works one or two days a week, with a one-month minimum and 30 days' notice either side after that, with executive access and accountability for delivery. Each engagement ends with a handover a permanent hire can pick up.`,
   },
   {
@@ -111,6 +112,18 @@ export const faqs: Faq[] = [
     question: "How do I find a product consultant a CEO can trust?",
     placements: ['for-ceos'],
     answer: `Look for named references you can check, and someone who has run product inside a company at your stage. Saielle DaSilva led product and design through hyper-growth at Cazoo and served as interim CPO at a grocery scale-up, where monthly recurring revenue grew 450 per cent in 90 days. Every engagement starts with a free call.`,
+  },
+
+  // /for-scale-ups/: third person, so an AI answer quoting one keeps its subject.
+  {
+    question: "When does a scale-up need an interim CPO?",
+    placements: ['for-scale-ups'],
+    answer: `When the product leader leaves mid-plan, or growth outruns how product decisions get made. An interim CPO keeps the roadmap moving and the team led while you hire. Saielle DaSilva was interim CPO at a grocery scale-up, where monthly recurring revenue grew 450 per cent in 90 days, and every engagement ends with a handover a permanent hire can pick up.`,
+  },
+  {
+    question: "Who is a good product leader for a scale-up?",
+    placements: ['for-scale-ups'],
+    answer: `Someone who has run product inside a company at your stage, with results you can check. Saielle DaSilva was the first design hire at Cazoo and stayed through hyper-growth to a $7B IPO. She set one rubric for hiring and development, so the standard lived in the team and not in one person.`,
   },
 
   // Workshops (/workshops/ and its three pages). Answers name Saielle DaSilva
@@ -361,7 +374,7 @@ export const faqs: Faq[] = [
   },
   {
     question: "Fractional vs interim CPO: what's the difference?",
-    placements: ['faq', 'fractional'],
+    placements: ['faq', 'fractional', 'for-scale-ups'],
     answer:
       "The difference is how much of the week the job needs. An interim CPO takes the role full time for a fixed spell, usually to cover a vacancy, a transition or a turnaround. A fractional CPO holds the same senior role one or two days a week, over months, which works when the team underneath is strong enough to run on the days they're not there. If your product would stall without a leader in the room every day, hire interim.",
   },
