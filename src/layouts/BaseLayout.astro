@@ -278,11 +278,13 @@ const graph = {
         var m = 'drafting';
         document.documentElement.dataset.motion = m;
         var els = document.querySelectorAll('main .home-section, main .lanes, main .signup');
-        els.forEach(function (el) {
-          el.classList.add('reveal');
-          el.querySelectorAll('.stat-strip > li, .rate-card, .project-row').forEach(function (c, i) {
-            c.style.setProperty('--i', i);
-          });
+        els.forEach(function (el) { el.classList.add('reveal'); });
+        var draws = document.querySelectorAll('main .stat-strip, main .cs-stats, main .project-list, main .rate-card');
+        draws.forEach(function (el) {
+          el.classList.add('draw');
+          var i = Array.prototype.indexOf.call(el.parentNode.children, el);
+          el.style.setProperty('--i', i);
+          el.querySelectorAll(':scope > li').forEach(function (c, j) { c.style.setProperty('--i', j); });
         });
         var io = new IntersectionObserver(function (es) {
           es.forEach(function (e) {
@@ -290,6 +292,7 @@ const graph = {
           });
         }, { rootMargin: '0px 0px -10% 0px' });
         els.forEach(function (el) { io.observe(el); });
+        draws.forEach(function (el) { io.observe(el); });
         {
           var tick = false;
           addEventListener('scroll', function () {
