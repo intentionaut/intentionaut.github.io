@@ -934,37 +934,14 @@ h3 {
   border-top: 1px solid var(--ink);
   list-style: none;
   margin: 0;
-  padding: 0 0 clamp(3rem, 6vw, 5rem);
+  padding: var(--space-6) 0 clamp(3rem, 6vw, 5rem);
+  display: grid;
+  gap: var(--space-5);
 }
 
+/* The card is the frame: rows carry no rules or padding of their own. */
 .project-row {
   position: relative;
-  padding-block: var(--space-7);
-  padding-left: var(--space-3);
-  padding-right: var(--space-5);
-  border-bottom: 1px solid var(--slate);
-  transition: background-color var(--dur-base) ease;
-}
-
-.project-row:hover {
-  background: rgba(169, 203, 208, 0.08);
-}
-
-.project-row::after {
-  content: '';
-  position: absolute;
-  top: var(--space-6);
-  bottom: var(--space-6);
-  right: 0;
-  width: 3px;
-  background: #a9cbd0;
-  transform: scaleY(0);
-  transform-origin: center;
-  transition: transform var(--dur-base) var(--ease-out);
-}
-
-.project-row:hover::after {
-  transform: scaleY(1);
 }
 
 .project-card {
