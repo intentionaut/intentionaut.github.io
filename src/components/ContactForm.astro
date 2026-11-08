@@ -66,7 +66,7 @@ const topics: [string, string][] = [
   {/* Honeypot: hidden from people, filled by bots. The Worker drops any
       message that has it. */}
   <input class="hp-field" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
-  <div class="cf-turnstile" data-sitekey={TURNSTILE_SITEKEY} data-theme="light"></div>
+  <div class="cf-turnstile" data-sitekey={TURNSTILE_SITEKEY} data-theme="light" data-appearance="interaction-only"></div>
   <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <p class="form-promise">
     I reply to every note, usually within a couple of working days.
