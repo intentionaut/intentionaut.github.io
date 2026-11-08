@@ -131,13 +131,27 @@ const faqSchema = {
       <h2>How does it work?</h2>
       <p>
         A minimum commitment of one month, then 30 days' notice either side.
-        One or two days a week.
+        Day rate {gbp(rates.fractional)}.
       </p>
       <p>
-        {gbp(fractionalMonthly1Day)} a month for one day a week (four days),
-        or {gbp(fractionalMonthly2Day)} a month for two days a week (eight
-        days). One month minimum, then 30 days' notice. Day rate {gbp(rates.fractional)}.
+        <strong>One day a week, {gbp(fractionalMonthly1Day)} a month.</strong>
+        Saielle DaSilva advises, challenges and guides. Your team leads the work.
       </p>
+      <ul>
+        <li>Monthly strategy review with leadership</li>
+        <li>Fortnightly coaching for your product lead</li>
+        <li>Roadmap challenge before each planning cycle</li>
+      </ul>
+      <p>
+        <strong>Two days a week, {gbp(fractionalMonthly2Day)} a month.</strong>
+        Saielle DaSilva leads the work alongside your team, setting new ways of
+        working and scaling them.
+      </p>
+      <ul>
+        <li>Owns the roadmap and the planning rhythm</li>
+        <li>Weekly product reviews</li>
+        <li>Hiring and coaching your PMs</li>
+      </ul>
       <p>
         The engagement ends with a clear handover: a functioning team, an
         operating model that runs without me, and decisions that do not need
