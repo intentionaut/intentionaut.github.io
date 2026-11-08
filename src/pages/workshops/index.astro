@@ -1,5 +1,6 @@
 ---
 import Plate from '../../components/Plate.astro';
+import { iconFor } from '../../data/icons';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FaqList from '../../components/FaqList.astro';
 import TestimonialCarousel from '../../components/TestimonialCarousel.astro';
@@ -32,14 +33,6 @@ const catalogSchema = {
     price: rates.workshopTaster,
     itemOffered: { '@id': `https://intentionaut.com/workshops/${w.slug}/#service` },
   })),
-};
-// One icon per topic, from the design system set.
-const workshopIcon: Record<string, string> = {
-  'ai-strategy': 'path',
-  'ai-opportunity-mapping': 'map-trifold',
-  'product-maturity-model': 'stairs',
-  'data-informed-decisions': 'chart-line',
-  'data-culture': 'users-three',
 };
 ---
 
@@ -91,7 +84,7 @@ const workshopIcon: Record<string, string> = {
       <div class="rates">
         {workshops.filter((w) => !w.variantOf).map((w, i) => (
           <a class="rate-row rate-card envelope" href={`/workshops/${w.slug}/`}>
-            <Plate name={workshopIcon[w.slug] ?? 'strategy'} tone={i % 2 ? 'blue' : 'pink'} />
+            <Plate name={iconFor(`/workshops/${w.slug}/`)} tone={i % 2 ? 'blue' : 'pink'} />
             <p class="rate-name">{w.title}</p>
             <p class="rate-desc">{w.card}</p>
             <p class="rate-shape">For {w.audience}.</p>
