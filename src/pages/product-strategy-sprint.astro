@@ -96,8 +96,6 @@ const faqSchema = {
 
     <TestimonialCarousel testimonials={testimonialsFor('fractional')} heading="What people say" />
 
-    <FaqList items={faqs} heading="Questions about the sprint" />
-
     <section class="contact-form-section" id="contact-section" aria-label="Book a sprint">
       <div class="contact-card">
         <h2>Book a sprint.</h2>
@@ -108,6 +106,8 @@ const faqSchema = {
         <ContactForm source="product-strategy-sprint" selected="strategic-direction" booking referral />
       </div>
     </section>
+
+    <FaqList items={faqs} heading="Questions about the sprint" />
   </section>
 </BaseLayout>
 
