@@ -10,13 +10,15 @@ interface Props {
   testimonials: Testimonial[];
   heading?: string;
   sub?: string;
+  /** Smaller cards, three to a row, where quotes sit beside other content. */
+  compact?: boolean;
 }
 
-const { testimonials, heading = 'Testimonials', sub } = Astro.props;
+const { testimonials, heading = 'Testimonials', sub, compact = false } = Astro.props;
 ---
 
 {testimonials.length > 0 && (
-    <section class="testimonials-section" aria-label="Testimonials">
+    <section class:list={['testimonials-section', { compact }]} aria-label="Testimonials">
       <style>
         :root {
           --acc-blue: #a9cbd0;
@@ -65,6 +67,26 @@ const { testimonials, heading = 'Testimonials', sub } = Astro.props;
           scroll-snap-align: start;
           /* Grows with the quote; the carousel row stretches every card to the tallest. */
           min-height: 460px;
+        }
+        .compact .tcard {
+          min-height: 0;
+          padding: var(--space-4) var(--space-6);
+        }
+        .compact .tcard .q {
+          font-size: 0.95rem;
+          line-height: 1.45;
+          margin-bottom: var(--space-3);
+        }
+        .compact .tcard .a {
+          min-height: 0;
+        }
+        .compact .tcard .a .name {
+          padding-top: var(--space-2);
+        }
+        @media (min-width: 720px) {
+          .compact .carousel-track {
+            grid-auto-columns: calc(100% / 1.6 - var(--space-6));
+          }
         }
         .tcard::after {
           content: '';
