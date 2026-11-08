@@ -1,4 +1,6 @@
 ---
+import Plate from '../components/Plate.astro';
+import { iconFor } from '../data/icons';
 import '@fontsource-variable/roboto-serif';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.astro';
@@ -87,7 +89,8 @@ const faqSchema = {
       <h2>Which one fits?</h2>
       <p class="rates-intro">Every option starts with a free preliminary call.</p>
       <div class="rates">
-        <a class="rate-row rate-card" href="/office-hours/">
+        <a class="rate-row rate-card envelope" href="/office-hours/">
+          <Plate name={iconFor('/office-hours/')} tone="pink" />
           <p class="rate-name">Office hours</p>
           <p class="rate-price">{gbp(rates.strategySession)} · 90 min</p>
           <p class="rate-desc">
@@ -97,7 +100,8 @@ const faqSchema = {
           <p class="rate-shape">Also the first step into fractional leadership.</p>
           <p class="rate-scale">Sliding scale · Yes</p>
         </a>
-        <a class="rate-row rate-card" href="/fractional/">
+        <a class="rate-row rate-card envelope" href="/fractional/">
+          <Plate name={iconFor('/fractional/')} tone="blue" />
           <p class="rate-name">Fractional leadership</p>
           <p class="rate-price">From {gbp(fractionalMonthly1Day)} a month</p>
           <p class="rate-desc">
@@ -106,7 +110,8 @@ const faqSchema = {
           </p>
           <p class="rate-shape">One day a week ({gbp(fractionalMonthly1Day)} a month) or two ({gbp(fractionalMonthly2Day)} a month). One month minimum, then 30 days' notice. Day rate {gbp(rates.fractional)}.</p>
         </a>
-        <a class="rate-row rate-card" href="/forward-deployed/">
+        <a class="rate-row rate-card envelope" href="/forward-deployed/">
+          <Plate name={iconFor('/forward-deployed/')} tone="pink" />
           <p class="rate-name">Product building</p>
           <p class="rate-price">{gbp(buildingWeekly)} / week</p>
           <p class="rate-desc">
@@ -115,7 +120,8 @@ const faqSchema = {
           </p>
           <p class="rate-shape">Three days a week, four to twelve weeks.</p>
         </a>
-        <a class="rate-row rate-card" href="/keynote-speaker/">
+        <a class="rate-row rate-card envelope" href="/keynote-speaker/">
+          <Plate name={iconFor('/keynote-speaker/')} tone="blue" />
           <p class="rate-name">Speaking &amp; workshops</p>
           <p class="rate-price">Keynote from {gbp(rates.keynote)}</p>
           <p class="rate-desc">
@@ -125,7 +131,8 @@ const faqSchema = {
           <p class="rate-shape">Team workshops from {gbp(rates.workshopTaster)}: half day {gbp(rates.workshopHalfDay)}, full day {gbp(rates.workshop)}.</p>
           <p class="rate-scale">Sliding scale · Yes</p>
         </a>
-        <a class="rate-row rate-card" href="/mentoring/">
+        <a class="rate-row rate-card envelope" href="/mentoring/">
+          <Plate name={iconFor('/mentoring/')} tone="pink" />
           <p class="rate-name">Mentoring</p>
           <p class="rate-price">Get in touch</p>
           <p class="rate-desc">

@@ -1,4 +1,6 @@
 ---
+import Plate from '../components/Plate.astro';
+import { iconFor } from '../data/icons';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import RelatedReading from '../components/RelatedReading.astro';
 import FaqList from '../components/FaqList.astro';
@@ -71,8 +73,9 @@ const faqSchema = {
       <h2>Three ways in</h2>
       <p class="rates-intro">Every option starts with a free call.</p>
       <div class="rates">
-        {offers.map((o) => (
-          <a class="rate-row rate-card" href={o.href}>
+        {offers.map((o, i) => (
+          <a class="rate-row rate-card envelope" href={o.href}>
+            <Plate name={iconFor(o.href)} tone={i % 2 ? 'blue' : 'pink'} />
             <p class="rate-name">{o.title}</p>
             <p class="rate-desc">{o.desc}</p>
             <p class="rate-shape">{o.shape}</p>

@@ -1951,18 +1951,16 @@ a.talk-title:hover {
 }
 
 /* Envelope: a Plate on the left like a stamp, text beside it, left-aligned.
-   For wide, long-form lists; square cards use the centred plated layout. */
+   For wide, long-form lists; square cards use the centred plated layout.
+   The plate sits in the card's left padding, so the card keeps its own grid
+   however many lines it has (Contact cards carry price and scale rows). */
 .rate-card.envelope {
-  grid-template-columns: 64px minmax(0, 1fr);
-  column-gap: var(--space-6);
-  row-gap: var(--space-2);
-  align-items: start;
+  padding-left: calc(var(--space-6) * 2 + 64px);
 }
 .rate-card.envelope > .plate {
-  grid-row: 1 / span 4;
-}
-.rate-card.envelope > p {
-  grid-column: 2;
+  position: absolute;
+  top: var(--space-6);
+  left: var(--space-6);
 }
 .rate-card.envelope .rate-name {
   letter-spacing: 0.12em;
@@ -1970,15 +1968,10 @@ a.talk-title:hover {
   font-size: 0.95rem;
   padding-top: 4px;
 }
+/* Phones: the plate moves above the text, still out of the card's grid. */
 @media (max-width: 520px) {
   .rate-card.envelope {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .rate-card.envelope > .plate {
-    grid-row: auto;
-    margin-bottom: var(--space-2);
-  }
-  .rate-card.envelope > p {
-    grid-column: 1;
+    padding-left: var(--space-6);
+    padding-top: calc(var(--space-6) + 64px + var(--space-4));
   }
 }
