@@ -1449,7 +1449,18 @@ a.talk-title:hover {
 }
 
 .project-card {
+  position: relative;
   padding: var(--space-4) var(--space-5);
+  border: 1px solid var(--ink);
+}
+
+/* The rate cards' double rule: a slate line 3px inside the ink one. */
+.project-card::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border: 1px solid var(--slate);
+  pointer-events: none;
 }
 
 .rate-card,
