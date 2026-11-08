@@ -107,9 +107,9 @@ const faqSchema = {
 
     {related && <RelatedReading {...related} />}
 
-    <FaqList items={faqs} heading={w.faqHeading} sub={w.faqSub} />
-
     <WorkshopClose source={w.placement} />
+
+    <FaqList items={faqs} heading={w.faqHeading} sub={w.faqSub} />
   </section>
 </BaseLayout>
 
