@@ -7,6 +7,7 @@ import TestimonialCarousel from '../components/TestimonialCarousel.astro';
 import { BOOKING_URL } from '../data/links';
 import { rates, gbp } from '../data/rates';
 import { results } from '../data/results';
+import Plate from '../components/Plate.astro';
 import FaqList from '../components/FaqList.astro';
 import { faqsFor } from '../data/faqs';
 
@@ -18,30 +19,35 @@ import { faqsFor } from '../data/faqs';
 const offers = [
   {
     title: 'Workshops',
+    icon: 'strategy' as const,
     who: 'For CPOs, CTOs, CDOs and their teams who need one decision made and owned. AI product strategy, opportunity mapping and product maturity.',
     shape: `Two hours to a full day, from ${gbp(rates.workshopTaster)}.`,
     href: '/workshops/',
   },
   {
     title: 'AI product audit',
+    icon: 'magnifying-glass' as const,
     who: 'For leadership teams with AI work underway and no shared view of which of it matters.',
     shape: `Two days across one week, ${gbp(rates.aiAudit)} fixed.`,
     href: '/ai-product-audit/',
   },
   {
     title: 'Product strategy sprint',
+    icon: 'compass' as const,
     who: 'For teams with an opportunity and no shared view of what to build.',
     shape: `Four days across two weeks, ${gbp(rates.strategySprint)} fixed.`,
     href: '/product-strategy-sprint/',
   },
   {
     title: 'Fractional leadership',
+    icon: 'lighthouse' as const,
     who: 'For teams building AI products who need Director-level product and design leadership.',
     shape: 'One or two days a week, one month minimum, then 30 days\' notice.',
     href: '/fractional/',
   },
   {
     title: 'Product building',
+    icon: 'hammer' as const,
     who: 'For teams with a real problem, a rough idea of the answer, and nobody free to build it.',
     shape: 'Three days a week in your environment, four to twelve weeks.',
     href: '/forward-deployed/',
@@ -121,8 +127,9 @@ const faqSchema = {
   <section class="wrap home-section" aria-labelledby="offers-h">
     <h2 id="offers-h" class="home-h2">Five ways to work together.</h2>
     <div class="rates rates-pair home-offers">
-      {offers.map((o) => (
-        <a class="rate-row rate-card" href={o.href}>
+      {offers.map((o, i) => (
+        <a class="rate-row rate-card plated" href={o.href}>
+          <Plate name={o.icon} tone={i % 2 ? 'blue' : 'pink'} />
           <p class="rate-name">{o.title}</p>
           <p class="rate-desc">{o.who}</p>
           <p class="rate-shape">{o.shape}</p>
@@ -235,6 +242,27 @@ const faqSchema = {
     color: var(--muted);
   }
 
+
+  /* Plated offer cards: centred, like a label, with signage-style titles. */
+  .plated {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-3);
+  }
+  .plated .rate-name {
+    margin-top: var(--space-2);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+  }
+  .plated .rate-shape {
+    margin-top: auto;
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--slate);
+    align-self: stretch;
+  }
 
   @media (min-width: 1000px) {
     .home-offers {
