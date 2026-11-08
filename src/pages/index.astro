@@ -5,7 +5,6 @@ import FrameSubscribe from '../components/FrameSubscribe.astro';
 import { testimonialsFor } from '../data/testimonials';
 import TestimonialCarousel from '../components/TestimonialCarousel.astro';
 import { BOOKING_URL } from '../data/links';
-import { rates, gbp } from '../data/rates';
 import { results } from '../data/results';
 import Plate from '../components/Plate.astro';
 import FaqList from '../components/FaqList.astro';
@@ -20,36 +19,31 @@ const offers = [
   {
     title: 'Workshops',
     icon: 'strategy' as const,
-    who: 'For CPOs, CTOs, CDOs and their teams who need one decision made and owned. AI product strategy, opportunity mapping and product maturity.',
-    shape: `Two hours to a full day, from ${gbp(rates.workshopTaster)}.`,
+    who: 'For CPOs, CTOs, CDOs and their teams. Work through AI strategy, product maturity or your data, and leave with owners named.',
     href: '/workshops/',
   },
   {
     title: 'AI product audit',
     icon: 'magnifying-glass' as const,
     who: 'For leadership teams with AI work underway and no shared view of which of it matters.',
-    shape: `Two days across one week, ${gbp(rates.aiAudit)} fixed.`,
     href: '/ai-product-audit/',
   },
   {
     title: 'Product strategy sprint',
     icon: 'compass' as const,
     who: 'For teams with an opportunity and no shared view of what to build.',
-    shape: `Four days across two weeks, ${gbp(rates.strategySprint)} fixed.`,
     href: '/product-strategy-sprint/',
   },
   {
     title: 'Fractional leadership',
     icon: 'lighthouse' as const,
     who: 'For teams building AI products who need Director-level product and design leadership.',
-    shape: 'One or two days a week, one month minimum, then 30 days\' notice.',
     href: '/fractional/',
   },
   {
     title: 'Product building',
     icon: 'hammer' as const,
     who: 'For teams with a real problem, a rough idea of the answer, and nobody free to build it.',
-    shape: 'Three days a week in your environment, four to twelve weeks.',
     href: '/forward-deployed/',
   },
 ];
@@ -132,7 +126,6 @@ const faqSchema = {
           <Plate name={o.icon} tone={i % 2 ? 'blue' : 'pink'} />
           <p class="rate-name">{o.title}</p>
           <p class="rate-desc">{o.who}</p>
-          <p class="rate-shape">{o.shape}</p>
         </a>
       ))}
     </div>
@@ -249,22 +242,31 @@ const faqSchema = {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: var(--space-3);
+    gap: 0;
+  }
+  /* One rhythm: plate, title, text. Duration and price live on each offer page. */
+  .plated > * {
+    margin: 0;
   }
   .plated .rate-name {
-    margin-top: var(--space-2);
+    margin-top: var(--space-4);
     letter-spacing: 0.14em;
     text-transform: uppercase;
     font-size: 0.95rem;
+    line-height: 1.35;
+    /* Room for two lines, so descriptions start level across a row. */
+    min-height: 2.7em;
+    display: flex;
+    align-items: center;
   }
-  .plated .rate-shape {
-    margin-top: auto;
-    padding-top: var(--space-3);
-    border-top: 1px solid var(--slate);
-    align-self: stretch;
+  .plated .rate-desc {
+    margin: var(--space-2) 0 0;
   }
 
-  @media (min-width: 1000px) {
+
+  /* Three columns only once a card is wide enough to hold the longest
+     description (Workshops) in three lines; below that, two columns. */
+  @media (min-width: 1160px) {
     .home-offers {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }

@@ -1949,3 +1949,36 @@ a.talk-title:hover {
   text-decoration-thickness: 1.5px;
   text-underline-offset: 3px;
 }
+
+/* Envelope: a Plate on the left like a stamp, text beside it, left-aligned.
+   For wide, long-form lists; square cards use the centred plated layout. */
+.rate-card.envelope {
+  grid-template-columns: 64px minmax(0, 1fr);
+  column-gap: var(--space-6);
+  row-gap: var(--space-2);
+  align-items: start;
+}
+.rate-card.envelope > .plate {
+  grid-row: 1 / span 4;
+}
+.rate-card.envelope > p {
+  grid-column: 2;
+}
+.rate-card.envelope .rate-name {
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  padding-top: 4px;
+}
+@media (max-width: 520px) {
+  .rate-card.envelope {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .rate-card.envelope > .plate {
+    grid-row: auto;
+    margin-bottom: var(--space-2);
+  }
+  .rate-card.envelope > p {
+    grid-column: 1;
+  }
+}
