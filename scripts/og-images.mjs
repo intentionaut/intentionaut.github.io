@@ -14,7 +14,17 @@ const pages = [
   {
     slug: 'fractional',
     eyebrow: 'Saielle DaSilva · Fractional leadership',
-    lines: ['A senior product leader', 'without the <i>permanent</i>', 'commitment.'],
+    lines: ['Product leadership from', 'someone whose products have', 'served over <i>100 million</i>', 'customers.'],
+  },
+  {
+    slug: 'for-ceos',
+    eyebrow: 'Saielle DaSilva · For CEOs and founders',
+    lines: ['Scale your product', 'organisation with', '<i>clear</i> ownership.'],
+  },
+  {
+    slug: 'for-cpos-ctos',
+    eyebrow: 'Saielle DaSilva · For CPOs and CTOs',
+    lines: ['Make your AI work add', 'up to a <i>strategy</i>.'],
   },
   {
     slug: 'forward-deployed',
@@ -45,9 +55,9 @@ const tspans = (line) =>
     .join('');
 
 function svg({ eyebrow, lines }) {
-  const size = lines.length > 2 ? 76 : 70;
+  const size = lines.length > 3 ? 64 : lines.length > 2 ? 76 : 70;
   const lead = size * 1.12;
-  const top = lines.length > 2 ? 290 : 320;
+  const top = lines.length > 3 ? 262 : lines.length > 2 ? 290 : 320;
   const text = lines
     .map((l, i) => `<text xml:space="preserve" x="95" y="${top + i * lead}" font-size="${size}">${tspans(l)}</text>`)
     .join('');
