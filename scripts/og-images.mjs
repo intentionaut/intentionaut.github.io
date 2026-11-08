@@ -14,12 +14,12 @@ const pages = [
   {
     slug: 'fractional',
     eyebrow: 'Saielle DaSilva · Fractional leadership',
-    lines: ['Product leadership from', 'someone whose products have', 'served over <i>100 million</i>', 'customers.'],
+    lines: ['Product leadership from someone', 'whose products have served over', '<i>100 million</i> customers.'],
   },
   {
     slug: 'for-ceos',
     eyebrow: 'Saielle DaSilva · For CEOs and founders',
-    lines: ['Scale your product', 'organisation with', '<i>clear</i> ownership.'],
+    lines: ['Scale your product organisation', 'with <i>clear</i> ownership.'],
   },
   {
     slug: 'for-cpos-ctos',
@@ -29,12 +29,12 @@ const pages = [
   {
     slug: 'forward-deployed',
     eyebrow: 'Saielle DaSilva · Product builder',
-    lines: ['The prototype has been', '<i>two sprints</i> away', 'for four months.'],
+    lines: ['The prototype has been <i>two sprints</i>', 'away for four months.'],
   },
   {
     slug: 'for-scale-ups',
     eyebrow: 'Saielle DaSilva · For scale-ups',
-    lines: ['Product leadership for', 'scale-ups, from someone who', 'has scaled them <i>before</i>.'],
+    lines: ['Product leadership for scale-ups,', 'from someone who has scaled', 'them <i>before</i>.'],
   },
   {
     slug: 'for-advisors',
@@ -55,9 +55,10 @@ const tspans = (line) =>
     .join('');
 
 function svg({ eyebrow, lines }) {
-  const size = lines.length > 3 ? 64 : lines.length > 2 ? 76 : 70;
-  const lead = size * 1.12;
-  const top = lines.length > 3 ? 262 : lines.length > 2 ? 290 : 320;
+  // One size for every card, so no line is left holding a single word.
+  const size = 60;
+  const lead = size * 1.15;
+  const top = 330 - ((lines.length - 1) * lead) / 2;
   const text = lines
     .map((l, i) => `<text xml:space="preserve" x="95" y="${top + i * lead}" font-size="${size}">${tspans(l)}</text>`)
     .join('');
