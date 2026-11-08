@@ -276,13 +276,12 @@ const { testimonials, heading = 'Testimonials', sub, compact = false } = Astro.p
       const prev = document.getElementById('testi-prev') as HTMLButtonElement | null;
       const next = document.getElementById('testi-next') as HTMLButtonElement | null;
 
+      const max = () => track.scrollWidth - track.clientWidth;
       const update = () => {
-        const max = track.scrollWidth - track.clientWidth;
-        if (prev) prev.disabled = track.scrollLeft <= 0;
-        if (next) next.disabled = track.scrollLeft >= max - 1;
+        // The carousel loops, so the arrows never go dead at either end.
         // Nothing to scroll: hide the arrows and hint rather than show dead controls.
         const controls = prev?.closest<HTMLElement>('.carousel-controls');
-        if (controls) controls.hidden = max <= 1;
+        if (controls) controls.hidden = max() <= 1;
       };
 
       const step = () => {
@@ -292,11 +291,14 @@ const { testimonials, heading = 'Testimonials', sub, compact = false } = Astro.p
         return cardWidth * 2;
       };
 
+      // At the last card, next goes back to the first; at the first, prev goes to the last.
       next?.addEventListener('click', () => {
-        track.scrollBy({ left: step(), behavior: 'smooth' });
+        if (track.scrollLeft >= max() - 1) track.scrollTo({ left: 0, behavior: 'smooth' });
+        else track.scrollBy({ left: step(), behavior: 'smooth' });
       });
       prev?.addEventListener('click', () => {
-        track.scrollBy({ left: -step(), behavior: 'smooth' });
+        if (track.scrollLeft <= 0) track.scrollTo({ left: max(), behavior: 'smooth' });
+        else track.scrollBy({ left: -step(), behavior: 'smooth' });
       });
 
       track.addEventListener('scroll', update, { passive: true });
