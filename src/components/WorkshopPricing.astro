@@ -12,9 +12,9 @@ interface Props {
 const { id = 'formats' } = Astro.props;
 
 const formats = [
-  { name: `${workshopHours.taster} hours`, price: rates.workshopTaster, what: 'For leaders who need a shared view of one problem area before committing more time. You leave aligned on what matters, with options to pursue and your hardest questions answered.' },
-  { name: `Half day · up to ${workshopHours.halfDay} hours`, price: rates.workshopHalfDay, what: "For working one problem area through. You leave with the workshop's outputs, from a one-page strategy to a maturity charter, with owners named and next steps dated." },
-  { name: `Full day · ${workshopHours.fullDay} hours`, price: rates.workshop, what: "For a whole domain, or one problem area with room to go further: testing an idea together, or working through what's holding the team back. You leave with the outputs, owners and dates." },
+  { name: 'Sense-check', length: `${workshopHours.taster} hours`, price: rates.workshopTaster, what: 'A second view on one problem area before you commit more time. Your leaders leave aligned on what matters, with options to pursue and their hardest questions answered.' },
+  { name: 'Team workshop', length: `Half day, up to ${workshopHours.halfDay} hours`, price: rates.workshopHalfDay, what: 'One problem area worked through with your team or one leader. You leave with a one-page strategy or a maturity charter, owners named and next steps dated.' },
+  { name: 'Leadership day', length: `Full day, ${workshopHours.fullDay} hours`, price: rates.workshop, what: "A whole domain with your leadership team, with room to test an idea together or work through what's holding the team back. You leave with a strategy everyone is moving on, owners and dates." },
 ];
 ---
 
@@ -25,7 +25,7 @@ const formats = [
     {formats.map((f) => (
       <li class="talk-row">
         <span class="talk-date"><span class="from">From</span><span class="price">{gbp(f.price)}</span></span>
-        <div><span class="talk-title">{f.name}</span><p class="talk-meta">{f.what}</p></div>
+        <div><span class="talk-title">{f.name}</span><p class="talk-meta">{f.length}</p><p class="talk-meta">{f.what}</p></div>
       </li>
     ))}
   </ul>
