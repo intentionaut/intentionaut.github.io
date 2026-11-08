@@ -268,9 +268,23 @@ const faqSchema = {
     margin-bottom: var(--space-4);
   }
 
+  /* Five cards, no empty slot: two columns end on one full-width card;
+     three columns become a row of three over a row of two. */
+  @media (min-width: 721px) {
+    .home-offers > :global(:last-child:nth-child(odd)) {
+      grid-column: 1 / -1;
+    }
+  }
   @media (min-width: 1160px) {
     .home-offers {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+    .home-offers > :global(*) {
+      grid-column: span 2;
+    }
+    .home-offers > :global(:nth-last-child(-n + 2):nth-child(3n + 1)),
+    .home-offers > :global(:nth-last-child(-n + 2):nth-child(3n + 1) ~ *) {
+      grid-column: span 3;
     }
   }
 
