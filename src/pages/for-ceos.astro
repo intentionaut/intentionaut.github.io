@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import RelatedReading from '../components/RelatedReading.astro';
 import FaqList from '../components/FaqList.astro';
 import ContactForm from '../components/ContactForm.astro';
-import { rates, gbp, fractionalMonthly1Day } from '../data/rates';
+import { rates } from '../data/rates';
 import { results } from '../data/results';
 import { faqsFor } from '../data/faqs';
 import { testimonialsFor } from '../data/testimonials';
@@ -15,21 +15,18 @@ const quotes = testimonialsFor('for-ceos');
 const offers = [
   {
     title: 'Product maturity modelling',
-    price: `From ${gbp(rates.workshopTaster)}`,
     desc: 'A workshop with your leadership team: where product practice is today, where it needs to be, and what product owns as you grow.',
     shape: 'Two hours, half day or full day.',
     href: '/workshops/product-maturity-model/',
   },
   {
     title: 'Fractional leadership',
-    price: `From ${gbp(fractionalMonthly1Day)} a month`,
     desc: 'A senior product leader for a defined period, with executive access and accountability for delivery.',
     shape: 'One or two days a week, one month minimum, then 30 days\' notice.',
     href: '/fractional/',
   },
   {
     title: 'Office hours',
-    price: `${gbp(rates.strategySession)} · 90 min`,
     desc: 'A sounding board on a roadmap, a hire or a structure question, before you commit to anything bigger.',
     shape: 'One session, sliding scale available.',
     href: '/office-hours/',
@@ -77,7 +74,6 @@ const faqSchema = {
         {offers.map((o) => (
           <a class="rate-row rate-card" href={o.href}>
             <p class="rate-name">{o.title}</p>
-            <p class="rate-price">{o.price}</p>
             <p class="rate-desc">{o.desc}</p>
             <p class="rate-shape">{o.shape}</p>
           </a>
