@@ -14,7 +14,7 @@ export const rates = {
   keynote: 3500, // per event, from
   // Team workshops (/workshops/). Hours sit beside each price so the per-hour
   // figures and the full-day saving on the page are derived, never typed.
-  workshopTaster: 3000, // 2 hours, from
+  workshopTaster: 3000, // 2 hours, fixed format (Impact First AI: Strategy & Alignment)
   workshopHalfDay: 4500, // up to 4 hours, from
   workshop: 6000, // full day, 8 hours, from
   // Forward Deployed Product Builder. Quoted NET: where an advisor or
