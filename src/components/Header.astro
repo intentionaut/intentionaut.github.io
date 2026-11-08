@@ -138,7 +138,7 @@ const here = (href: string) => pathname.startsWith(href);
     transform: rotate(180deg);
   }
 
-  /* The panel: fades and drops in, items follow a beat apart. */
+  /* The panel: a square card with the plates' double rule. Quick fade, no stagger. */
   .nav-pop {
     position: absolute;
     top: calc(100% + var(--space-4));
@@ -150,18 +150,24 @@ const here = (href: string) => pathname.startsWith(href);
     margin: 0;
     padding: var(--space-2);
     list-style: none;
-    background: var(--paper);
+    background: var(--card);
     border: 1px solid var(--ink);
-    border-radius: var(--radius-l);
-    box-shadow: 0 12px 32px -18px rgba(56, 35, 74, 0.45);
+    box-shadow: var(--lift-hover);
     visibility: hidden;
     opacity: 0;
-    transform: translateY(-6px) scale(0.98);
-    transform-origin: top left;
+    transform: translateY(-4px);
     transition:
-      opacity var(--dur-base) ease,
-      transform var(--dur-med) var(--ease-out),
-      visibility 0s linear var(--dur-med);
+      opacity 0.12s ease,
+      transform 0.12s var(--ease-out),
+      visibility 0s linear 0.12s;
+  }
+
+  .nav-pop::before {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border: 1px solid var(--slate);
+    pointer-events: none;
   }
 
   .nav-services.is-open .nav-pop {
@@ -171,31 +177,11 @@ const here = (href: string) => pathname.startsWith(href);
     transition-delay: 0s;
   }
 
-  .nav-pop li {
-    opacity: 0;
-    transform: translateY(4px);
-    transition:
-      opacity var(--dur-base) ease,
-      transform var(--dur-med) var(--ease-out);
-  }
-
-  .nav-services.is-open .nav-pop li {
-    opacity: 1;
-    transform: none;
-  }
-
-  .nav-services.is-open .nav-pop li:nth-child(1) { transition-delay: 20ms; }
-  .nav-services.is-open .nav-pop li:nth-child(2) { transition-delay: 45ms; }
-  .nav-services.is-open .nav-pop li:nth-child(3) { transition-delay: 70ms; }
-  .nav-services.is-open .nav-pop li:nth-child(4) { transition-delay: 95ms; }
-  .nav-services.is-open .nav-pop li:nth-child(5) { transition-delay: 120ms; }
-
   /* Overrides the uppercase header-link style for the panel's links. */
   .site-nav .nav-pop a {
     display: grid;
     gap: 2px;
     padding: var(--space-3) var(--space-4) var(--space-3) calc(var(--space-4) + 6px);
-    border-radius: var(--radius-m);
     font-size: inherit;
     letter-spacing: 0;
     text-transform: none;
@@ -298,6 +284,10 @@ const here = (href: string) => pathname.startsWith(href);
 
     .nav-services.is-open .nav-pop {
       display: grid;
+    }
+
+    .nav-pop::before {
+      display: none;
     }
 
     .site-nav .nav-pop a {
