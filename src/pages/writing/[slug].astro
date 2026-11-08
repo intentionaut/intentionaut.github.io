@@ -124,6 +124,7 @@ const articleLd = meta
     title={`${post.title} | Saielle DaSilva`}
     description={postDescription}
     ogType="article"
+    ogImage={`/share/${Astro.params.slug}.png`}
     publishedTime={meta?.published}
     jsonLd={articleLd}
   >
@@ -167,6 +168,7 @@ const articleLd = meta
     title={`${essay.data.title} | Saielle DaSilva`}
     description={essayDescription}
     ogType="article"
+    ogImage={`/share/${Astro.params.slug}.png`}
     publishedTime={meta?.published}
     jsonLd={articleLd}
   >
