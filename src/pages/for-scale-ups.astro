@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import RelatedReading from '../components/RelatedReading.astro';
 import FaqList from '../components/FaqList.astro';
 import ContactForm from '../components/ContactForm.astro';
-import { rates, gbp, fractionalMonthly1Day } from '../data/rates';
+import { rates } from '../data/rates';
 import { results } from '../data/results';
 import { faqsFor } from '../data/faqs';
 import { testimonialsFor } from '../data/testimonials';
@@ -18,21 +18,18 @@ const quotes = testimonialsFor('for-scale-ups');
 const offers = [
   {
     title: 'Fractional or interim CPO',
-    price: `From ${gbp(fractionalMonthly1Day)} a month`,
     desc: 'Leads product while you hire, or until the team can run it. Ends with a handover a permanent hire can pick up.',
     shape: 'Fractional: one or two days a week. Interim: full time for a fixed spell.',
     href: '/fractional/',
   },
   {
     title: 'Product strategy sprint',
-    price: `${gbp(rates.strategySprint)} fixed`,
     desc: 'For a team with the next growth bet in view and no shared plan for what to build.',
     shape: 'Four days across two weeks.',
     href: '/product-strategy-sprint/',
   },
   {
     title: 'AI product audit',
-    price: `${gbp(rates.aiAudit)} fixed`,
     desc: 'For leadership with AI work underway and no shared view of which of it matters.',
     shape: 'Two days across one week.',
     href: '/ai-product-audit/',
@@ -82,7 +79,6 @@ const faqSchema = {
         {offers.map((o) => (
           <a class="rate-row rate-card" href={o.href}>
             <p class="rate-name">{o.title}</p>
-            <p class="rate-price">{o.price}</p>
             <p class="rate-desc">{o.desc}</p>
             <p class="rate-shape">{o.shape}</p>
           </a>
