@@ -22,6 +22,11 @@ const pages = [
     lines: ['The prototype has been', '<i>two sprints</i> away', 'for four months.'],
   },
   {
+    slug: 'for-scale-ups',
+    eyebrow: 'Saielle DaSilva · For scale-ups',
+    lines: ['Product leadership for', 'scale-ups, from someone who', 'has scaled them <i>before</i>.'],
+  },
+  {
     slug: 'for-advisors',
     eyebrow: 'Saielle DaSilva · For advisors & recruiters',
     lines: ['If you place product people,', 'here is the <i>short</i> version.'],
