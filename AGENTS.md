@@ -35,9 +35,14 @@
 
 - Changing a tag (h1, p, h2) changes its look when CSS styles by tag. #361
   made the home headline a `<p>` and it lost its typeface and spacing.
-- Before merging any PR that changes tags or headings on a page, compare that
-  page before and after at 1000px and 1440px: screenshot, plus the computed
-  font-family, line-height and top offset of each changed element.
+- `tests/type-guard.test.mjs` pins the computed type and spacing of every
+  page's header block (.hero, .page-head) at 1000px and 1440px, in real
+  Chrome, keyed by position, not tag. It runs in `npm test`, the required
+  `test` check.
+- If it fails, fix the CSS so the page looks as before. Run
+  `npm run type-baseline` only when Elle asked for the look to change, and
+  put a before/after table in the PR.
 - Style by class, not by tag, so tags can change for search without moving
   the design.
-- Enforcement: instruction only. Nothing in CI checks this yet.
+- Enforcement: CI blocks accidental drift. Updating the baseline is
+  instruction only.
