@@ -46,8 +46,8 @@ const svg = raw.replaceAll('opacity="0.2"', 'class="tone"').replaceAll('PLATEID'
   }
   /* A breeze: when the linked card or lane around a plate is hovered or
      focused, the icon sways gently like grass. Still for reduced motion. */
-  :global(:is(a, .lane):hover) > .plate:not(.icon-compass, .icon-magnifying-glass, .icon-lighthouse, .icon-coffee, .icon-hammer, .icon-plant, .icon-microphone-ribbon, .icon-airplane-takeoff, .icon-path) :global(svg),
-  :global(:is(a, .lane):focus-within) > .plate:not(.icon-compass, .icon-magnifying-glass, .icon-lighthouse, .icon-coffee, .icon-hammer, .icon-plant, .icon-microphone-ribbon, .icon-airplane-takeoff, .icon-path) :global(svg) {
+  :global(:is(a, .lane):hover) > .plate:not(.icon-compass, .icon-magnifying-glass, .icon-lighthouse, .icon-coffee, .icon-hammer, .icon-plant, .icon-microphone-ribbon, .icon-airplane-takeoff, .icon-path, .icon-squares-choose) :global(svg),
+  :global(:is(a, .lane):focus-within) > .plate:not(.icon-compass, .icon-magnifying-glass, .icon-lighthouse, .icon-coffee, .icon-hammer, .icon-plant, .icon-microphone-ribbon, .icon-airplane-takeoff, .icon-path, .icon-squares-choose) :global(svg) {
     animation: plate-breeze 1.6s ease-in-out infinite;
     transform-origin: 50% 85%;
   }
@@ -103,7 +103,8 @@ const svg = raw.replaceAll('opacity="0.2"', 'class="tone"').replaceAll('PLATEID'
   .plate.icon-lighthouse :global(svg),
   .plate.icon-microphone-ribbon :global(svg),
   .plate.icon-airplane-takeoff :global(svg),
-  .plate.icon-path :global(svg) {
+  .plate.icon-path :global(svg),
+  .plate.icon-squares-choose :global(svg) {
     overflow: visible;
   }
   .plate :global(.tower-fill) {
@@ -252,12 +253,52 @@ const svg = raw.replaceAll('opacity="0.2"', 'class="tone"').replaceAll('PLATEID'
     to { stroke-dashoffset: 0; }
   }
   @keyframes plate-ride{0%{transform:translateX(-104px);opacity:0;animation-timing-function:linear}6%{opacity:1;animation-timing-function:cubic-bezier(.25,.1,.25,1)}55%{transform:translateX(0);animation-timing-function:cubic-bezier(.3,0,.3,1)}75%{transform:translateX(-6px);animation-timing-function:cubic-bezier(.4,0,.2,1)}100%{transform:translateX(0);opacity:1}}
+  /* Squares (opportunity mapping): the top-right square is chosen. It deepens
+     to coral, then grows from its corner to fill the grid with a soft bounce
+     (dips under full size, never over) as the others fade. On leave it shrinks
+     back and the others return. Transitions, so it reverses cleanly. */
+  .plate :global(.sq) {
+    transition: opacity 0.2s 0.2s;
+  }
+  .plate :global(.sq .tone) {
+    transition: opacity 0.25s 0.2s, fill 0.25s 0.2s;
+  }
+  .plate :global(.one) {
+    transform-box: view-box;
+    transform-origin: 208px 48px;
+    transform: scale(0.4);
+    opacity: 0;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.6, 1), opacity 0s 0.3s;
+  }
+  .plate :global(.one-fill) {
+    fill: var(--accent);
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.q1 .tone) {
+    fill: var(--accent);
+    opacity: 1;
+    transition: opacity 0.2s, fill 0.2s;
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.sq:not(.q1)) {
+    opacity: 0;
+    transition: opacity 0.25s 0.25s;
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.q1) {
+    opacity: 0;
+    transition: opacity 0s 0.25s;
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.one) {
+    opacity: 1;
+    transform: scale(1);
+    transition:
+      transform 0.6s linear(0, 0.35 15%, 0.75 30%, 1 45%, 0.9 60%, 0.883 70%, 0.95 85%, 1) 0.25s,
+      opacity 0s 0.25s;
+  }
   @media (prefers-reduced-motion: reduce) {
     :global(:is(a, .lane):hover) > .plate :global(svg),
     :global(:is(a, .lane):focus-within) > .plate :global(svg) {
       animation: none;
     }
-    .plate :global(:is(.needle, .mic-rig, .mic-stem, .plane)) {
+    .plate :global(:is(.needle, .mic-rig, .mic-stem, .plane, .sq, .sq .tone, .one)) {
       transition: none;
     }
     :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(:is(.glass, .lens-clip, .beam, .wisp, .hammer, .leaf-l, .leaf-r, .route, .goal)) {
