@@ -881,6 +881,20 @@ h3 {
   margin: 0;
 }
 
+/* A typed memo: labels in a fixed column, values beside them. */
+.case-meta > dl.memo {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+  align-items: baseline;
+  gap: var(--space-2) var(--space-4);
+}
+.memo .meta-label {
+  color: var(--muted);
+}
+.memo .meta-label::after {
+  content: ':';
+}
+
 .meta-label {
   font-family: var(--font-body);
   font-size: var(--text-xs);
