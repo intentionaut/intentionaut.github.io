@@ -37,6 +37,10 @@ const { fit, notFit } = Astro.props;
     padding-left: 1.1em;
     font-size: 0.95rem;
     line-height: 1.55;
+    list-style-type: square;
+  }
+  .who-for li::marker {
+    color: var(--accent-text);
   }
   .who-for li + li {
     margin-top: var(--space-2);
