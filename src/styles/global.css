@@ -1330,11 +1330,6 @@ a.talk-title:hover {
   opacity: 0.85;
 }
 
-/* Plain --muted: faded with opacity it fell under 4.5:1. */
-.row-themes {
-  color: var(--muted);
-}
-
 .ledger-row.is-hidden {
   display: none;
 }

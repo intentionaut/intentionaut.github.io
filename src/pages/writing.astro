@@ -90,19 +90,16 @@ const fmtDate = (e: (typeof entries)[number]) =>
                 ) : (
                   <span class="talk-title">{e.title}</span>
                 )}
-                <p class="talk-meta">
-                  {e.source}
-                  {e.themes.length > 0 && (
-                    <span class="row-themes">
-                      {' · '}
-                      {e.themes.map((t) => themeLabels[t]).join(' · ')}
-                    </span>
-                  )}
-                </p>
+                <p class="talk-meta">{e.source}</p>
                 {e.description && (
                   <p class="talk-desc">{e.description}</p>
                 )}
               </div>
+              {e.themes.length > 0 && (
+                <span class="board-tags">
+                  {e.themes.map((t) => <span class="board-tag">{themeLabels[t]}</span>)}
+                </span>
+              )}
             </li>
           ))
         }
@@ -191,3 +188,40 @@ const fmtDate = (e: (typeof entries)[number]) =>
     checkScroll();
   </script>
 </BaseLayout>
+
+<style>
+  /* Departures board: date column, title, then each theme as a platform tag. */
+  #ledger .talk-row {
+    grid-template-columns: 7.5rem minmax(0, 1fr) auto;
+  }
+  #ledger .talk-date {
+    font-variant-numeric: tabular-nums;
+  }
+  .board-tags {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--space-1);
+    padding-top: var(--space-2);
+  }
+  .board-tag {
+    font: 500 0.62rem var(--font-body);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent-text);
+    border: 1px solid var(--accent-text);
+    padding: 1px 7px;
+    white-space: nowrap;
+  }
+  @media (max-width: 720px) {
+    #ledger .talk-row {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .board-tags {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      padding-top: 0;
+    }
+  }
+</style>
