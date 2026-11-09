@@ -19,6 +19,12 @@ const LEGACY_REDIRECTS = new Set([
   '/releases/kernic/',
 ]);
 
+// Pages whose canonical points to another domain. Listing them here made the
+// sitemap submit a URL that itself says "index the other one instead".
+const CROSS_DOMAIN_CANONICAL = new Set([
+  '/open-source/familiar/', // canonical: https://familiar.intentionaut.com/
+]);
+
 // Password-locked case studies are noindex'd, so they stay out of the sitemap
 // too (listing them made Search Console report "Submitted URL marked noindex"
 // for /thank-you/). Read from the front matter, so locking a page is one flag.
@@ -67,6 +73,7 @@ export default defineConfig({
         // noindex'd: listing it made Search Console report "Submitted URL marked noindex".
         !/\/thank-you\/?$/.test(page) &&
         !LEGACY_REDIRECTS.has(new URL(page).pathname) &&
+        !CROSS_DOMAIN_CANONICAL.has(new URL(page).pathname) &&
         !LOCKED_CASE_STUDIES.has(new URL(page).pathname),
       // lastmod from git history (#78). Pages with no known source file
       // (beehiiv posts) get none rather than a made-up date.
