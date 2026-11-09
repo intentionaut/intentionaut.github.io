@@ -36,12 +36,14 @@ const serviceSchema = {
 
     <article class="prose">
       <h2>How does it work?</h2>
-      <p>
-        Beforehand you answer a few questions, so the clock starts on substance
-        rather than introductions. Then ninety minutes working your actual
-        problem. Afterwards you get written notes: decisions made, next steps,
-        who owns what.
-      </p>
+      <div class="house-rules">
+        <p class="house-rules-label">Office hours</p>
+        <ol>
+          <li>Beforehand, you answer a few questions, so the clock starts on substance rather than introductions.</li>
+          <li>Ninety minutes working your actual problem.</li>
+          <li>Afterwards, written notes: decisions made, next steps, who owns what.</li>
+        </ol>
+      </div>
       <p>
         It works on its own, and it is also the first step into
         <a href="/fractional/">fractional work</a>. Need more than one question
@@ -62,3 +64,47 @@ const serviceSchema = {
     </section>
   </section>
 </BaseLayout>
+
+<style>
+  /* House rules: a small framed plaque, Roman numerals, double rule like the cards. */
+  .house-rules {
+    position: relative;
+    margin: var(--space-5) 0 var(--space-6);
+    padding: var(--space-5) var(--space-6);
+    border: 1px solid var(--ink);
+    background: var(--card);
+    box-shadow: var(--lift);
+    text-align: center;
+  }
+  .house-rules::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border: 1px solid var(--slate);
+    pointer-events: none;
+  }
+  .house-rules-label {
+    margin: 0 0 var(--space-3);
+    font: 500 0.7rem var(--font-body);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .house-rules ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: rule;
+    display: grid;
+    gap: var(--space-3);
+  }
+  .house-rules li {
+    counter-increment: rule;
+  }
+  .house-rules li::before {
+    content: counter(rule, upper-roman) '. ';
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--accent-text);
+  }
+</style>
