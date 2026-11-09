@@ -1,4 +1,5 @@
 ---
+import { projectHref } from '../lib/projectHref';
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FrameSubscribe from '../components/FrameSubscribe.astro';
@@ -67,7 +68,7 @@ const faqSchema = {
 ---
 
 <BaseLayout
-  title="Fractional & Interim CPO | Saielle DaSilva"
+  title="Saielle DaSilva | Fractional & Interim CPO"
   description="Fractional CPO for AI products. Saielle DaSilva leads product, data and design for teams building with AI. London, working across the UK and Europe."
   jsonLd={faqSchema}
 >
@@ -155,7 +156,7 @@ const faqSchema = {
     <ol class="project-list">
       {built.map((p) => (
         <li class="project-row">
-          <a class="project-card" href={`/projects/${p.id}/`}>
+          <a class="project-card" href={projectHref(p.id)}>
             <span class="talk-title">{p.data.title}</span>
             <span class="project-summary">{p.data.summary}</span>
           </a>

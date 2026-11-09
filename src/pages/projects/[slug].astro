@@ -1,10 +1,11 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { OPEN_SOURCE_HOME } from '../../lib/projectHref';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
-  return projects.map((project) => ({
+  return projects.filter((p) => !(p.id in OPEN_SOURCE_HOME)).map((project) => ({
     params: { slug: project.id },
     props: { project },
   }));

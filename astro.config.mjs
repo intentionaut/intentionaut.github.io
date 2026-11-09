@@ -17,6 +17,8 @@ const LEGACY_REDIRECTS = new Set([
   '/releases/',
   '/releases/familiar/',
   '/releases/kernic/',
+  '/projects/kernic/',
+  '/projects/familiar/',
 ]);
 
 // Password-locked case studies are noindex'd, so they stay out of the sitemap
