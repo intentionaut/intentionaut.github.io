@@ -19,7 +19,7 @@ const uid = `p${Math.random().toString(36).slice(2, 8)}`;
 const svg = raw.replaceAll('opacity="0.2"', 'class="tone"').replaceAll('PLATEID', uid);
 // One-shot motions (a strike, a sway) play to the end even if the pointer
 // leaves early, so they never snap back mid-move. The script below runs them.
-const ONESHOT = ['users-three', 'plant', 'hammer', 'magnifying-glass'];
+const ONESHOT = ['pen-nib', 'users-three', 'plant', 'hammer', 'magnifying-glass'];
 ---
 
 <span class:list={['plate', tone, `icon-${name}`, { oneshot: ONESHOT.includes(name) }]} aria-hidden="true" set:html={svg} />
@@ -417,11 +417,13 @@ const ONESHOT = ['users-three', 'plant', 'hammer', 'magnifying-glass'];
   .plate :global(.ink) {
     stroke-dasharray: 1 1;
     stroke-dashoffset: 1;
+    transition: stroke-dashoffset 0.2s ease-in;
   }
   :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.ink) {
-    animation: plate-walk 0.6s var(--wait) cubic-bezier(0.4, 0, 0.6, 1) forwards;
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 0.6s cubic-bezier(0.4, 0, 0.6, 1) var(--wait);
   }
-  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.pen) {
+  .plate.play :global(.pen) {
     animation: plate-write 0.95s var(--wait) forwards;
   }
   @keyframes plate-write {
@@ -471,10 +473,10 @@ const ONESHOT = ['users-three', 'plant', 'hammer', 'magnifying-glass'];
     :global(:is(a, .lane):focus-within) > .plate :global(svg) {
       animation: none;
     }
-    .plate :global(:is(.lv, .needle, .mic-rig, .mic-stem, .plane, .sq, .sq .tone, .one, .tb, .wire, .hot, .arc, .head, .arc-hot, .head-hot, .route, .goal, .route-hot, .goal-hot, .line, .line-hot, .wisp, .wisp-hot)) {
+    .plate :global(:is(.lv, .needle, .mic-rig, .mic-stem, .plane, .sq, .sq .tone, .one, .tb, .wire, .hot, .arc, .head, .arc-hot, .head-hot, .route, .goal, .route-hot, .goal-hot, .line, .line-hot, .wisp, .wisp-hot, .ink)) {
       transition: none;
     }
-    :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(:is(.beam, .hammer, .leaf-l, .leaf-r, .u-l, .u-r, .u-m, .pen, .ink)) {
+    :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(:is(.beam, .hammer, .leaf-l, .leaf-r, .u-l, .u-r, .u-m, .pen)) {
       animation: none;
     }
   }
