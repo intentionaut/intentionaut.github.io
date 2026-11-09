@@ -46,8 +46,8 @@ const svg = raw.replace('opacity="0.2"', 'class="tone"').replaceAll('PLATEID', u
   }
   /* A breeze: when the linked card or lane around a plate is hovered or
      focused, the icon sways gently like grass. Still for reduced motion. */
-  :global(:is(a, .lane):hover) > .plate:not(.icon-compass, .icon-magnifying-glass) :global(svg),
-  :global(:is(a, .lane):focus-within) > .plate:not(.icon-compass, .icon-magnifying-glass) :global(svg) {
+  :global(:is(a, .lane):hover) > .plate:not(.icon-compass, .icon-magnifying-glass, .icon-lighthouse) :global(svg),
+  :global(:is(a, .lane):focus-within) > .plate:not(.icon-compass, .icon-magnifying-glass, .icon-lighthouse) :global(svg) {
     animation: plate-breeze 1.6s ease-in-out infinite;
     transform-origin: 50% 85%;
   }
@@ -96,6 +96,53 @@ const svg = raw.replace('opacity="0.2"', 'class="tone"').replaceAll('PLATEID', u
     from { transform: translateX(-56px); }
     to { transform: translateX(0); }
   }
+  /* Lighthouse: one turn of the light per hover, then it fades. A single
+     amber beam seen side-on, its length following cos(angle), so it reaches
+     right, passes behind the tower and reaches left. The tower is filled
+     solid (.tower-fill) so it hides the beam as it passes. */
+  .plate.icon-lighthouse :global(svg) {
+    overflow: visible;
+  }
+  .plate :global(.tower-fill) {
+    fill: var(--card);
+  }
+  .plate :global(.beam) {
+    transform-origin: 128px 84px;
+    transform-box: view-box;
+    opacity: 0;
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.beam) {
+    opacity: 1;
+    animation:
+      plate-beam 3.6s linear both,
+      plate-beam-out 0.4s ease-out 3.6s both;
+  }
+  @keyframes plate-beam {
+    0%{transform:scaleX(1.000)}
+    5%{transform:scaleX(0.951)}
+    10%{transform:scaleX(0.809)}
+    15%{transform:scaleX(0.588)}
+    20%{transform:scaleX(0.309)}
+    25%{transform:scaleX(0.000)}
+    30%{transform:scaleX(-0.309)}
+    35%{transform:scaleX(-0.588)}
+    40%{transform:scaleX(-0.809)}
+    45%{transform:scaleX(-0.951)}
+    50%{transform:scaleX(-1.000)}
+    55%{transform:scaleX(-0.951)}
+    60%{transform:scaleX(-0.809)}
+    65%{transform:scaleX(-0.588)}
+    70%{transform:scaleX(-0.309)}
+    75%{transform:scaleX(-0.000)}
+    80%{transform:scaleX(0.309)}
+    85%{transform:scaleX(0.588)}
+    90%{transform:scaleX(0.809)}
+    95%{transform:scaleX(0.951)}
+    100%{transform:scaleX(1.000)}
+  }
+  @keyframes plate-beam-out {
+    to { opacity: 0; }
+  }
   @media (prefers-reduced-motion: reduce) {
     :global(:is(a, .lane):hover) > .plate :global(svg),
     :global(:is(a, .lane):focus-within) > .plate :global(svg) {
@@ -104,7 +151,7 @@ const svg = raw.replace('opacity="0.2"', 'class="tone"').replaceAll('PLATEID', u
     .plate :global(.needle) {
       transition: none;
     }
-    :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(:is(.glass, .lens-clip)) {
+    :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(:is(.glass, .lens-clip, .beam)) {
       animation: none;
     }
   }
