@@ -1,17 +1,25 @@
 ---
 import Plate from '../../../components/Plate.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import FaqList from '../../../components/FaqList.astro';
+import { faqsFor, type FaqPlacement } from '../../../data/faqs';
 import { families, toolHref, type Family } from '../../../data/tools';
 
 export function getStaticPaths() {
   return families.map((f) => ({ params: { family: f.slug }, props: { f } }));
 }
 const { f } = Astro.props as { f: Family };
+const faqs = faqsFor(`tools-${f.slug}` as FaqPlacement);
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((q) => ({ '@type': 'Question', name: q.question, acceptedAnswer: { '@type': 'Answer', text: q.answer } })),
+};
 ---
 
 <BaseLayout
   title={`${f.name}: free tools | Saielle DaSilva`}
-  description={`${f.lede} Free tools by Saielle DaSilva, CC BY 4.0.`}
+  description={`${f.definition} Free under CC BY 4.0.`}
+  jsonLd={faqs.length ? [faqSchema] : []}
 >
   <section class="wrap">
     <header class="page-head">
@@ -22,7 +30,7 @@ const { f } = Astro.props as { f: Family };
 
     <section class="rates-section" aria-labelledby="idea-h">
       <h2 id="idea-h">The idea</h2>
-      <div class="prose">{f.idea.map((p) => <p>{p}</p>)}</div>
+      <div class="prose"><p>{f.definition}</p>{f.idea.map((p) => <p>{p}</p>)}</div>
     </section>
 
     <section class="rates-section" aria-labelledby="tools-h">
@@ -52,5 +60,7 @@ const { f } = Astro.props as { f: Family };
       </ol>
       {f.workshop && <p><a class="link-arrow" href={f.workshop.href}><span>{f.workshop.label}</span></a></p>}
     </section>
+
+    <FaqList items={faqs} heading={`FAQ: ${f.name}`} sub="What people ask about the tools." />
   </section>
 </BaseLayout>

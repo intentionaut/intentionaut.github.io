@@ -98,6 +98,8 @@ export interface Family {
   /** One line for cards and the hub. */
   card: string;
   lede: string;
+  /** One third-person sentence naming the family and its author, so answer engines can quote and attribute it. */
+  definition: string;
   /** The idea behind the family, a few short paragraphs. */
   idea: string[];
   /** How the tools fit together, in order. */
@@ -113,6 +115,7 @@ export const families: Family[] = [
     name: 'Impact First AI',
     card: 'Start from the impact AI work should make, then work back to the work.',
     lede: 'Start from the impact the work should make, then work back to the work.',
+    definition: 'Impact First AI is a set of free tools by Saielle DaSilva for showing the value of AI work, one practice at a time.',
     idea: [
       'Most teams have turned AI on. People have accounts, a few have built something clever, and someone senior is asking: now what?',
       'Impact First AI is a way to answer that one practice at a time. You don’t need a transformation first. Pick one way of working, change it with AI on purpose, and name the number that change should move.',
