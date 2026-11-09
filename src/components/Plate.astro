@@ -311,12 +311,24 @@ const svg = raw.replaceAll('opacity="0.2"', 'class="tone"').replaceAll('PLATEID'
   }
   :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.lv2) { transition-delay: calc(var(--wait) + 0.16s); }
   :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.lv3) { transition-delay: calc(var(--wait) + 0.32s); }
-  /* Chart: the line draws itself left to right, like data arriving. */
+  /* Chart: the line draws itself left to right, like data arriving. It
+     dims to a pale track and a black line draws over it. Transitions, so a
+     quick hover reverses cleanly. */
   .plate :global(.line) {
+    transition: opacity 0.15s;
+  }
+  .plate :global(.line-hot) {
     stroke-dasharray: 1 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 0.2s ease-in;
   }
   :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.line) {
-    animation: plate-walk 0.7s var(--wait) cubic-bezier(0.45, 0, 0.25, 1) forwards;
+    opacity: 0.2;
+    transition: opacity 0.1s var(--wait);
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.line-hot) {
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 0.6s cubic-bezier(0.45, 0, 0.25, 1) var(--wait);
   }
   /* Team: a huddle. The outer people lean in, the middle one lifts a touch,
      then all settle. Once per hover. */
@@ -424,10 +436,10 @@ const svg = raw.replaceAll('opacity="0.2"', 'class="tone"').replaceAll('PLATEID'
     :global(:is(a, .lane):focus-within) > .plate :global(svg) {
       animation: none;
     }
-    .plate :global(:is(.lv, .needle, .mic-rig, .mic-stem, .plane, .sq, .sq .tone, .one, .tb, .wire, .hot, .arc, .head, .arc-hot, .head-hot, .route, .goal, .route-hot, .goal-hot)) {
+    .plate :global(:is(.lv, .needle, .mic-rig, .mic-stem, .plane, .sq, .sq .tone, .one, .tb, .wire, .hot, .arc, .head, .arc-hot, .head-hot, .route, .goal, .route-hot, .goal-hot, .line, .line-hot)) {
       transition: none;
     }
-    :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(:is(.glass, .lens-clip, .beam, .wisp, .hammer, .leaf-l, .leaf-r, .line, .u-l, .u-r, .u-m, .pen, .ink)) {
+    :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(:is(.glass, .lens-clip, .beam, .wisp, .hammer, .leaf-l, .leaf-r, .u-l, .u-r, .u-m, .pen, .ink)) {
       animation: none;
     }
   }
