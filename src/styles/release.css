@@ -232,7 +232,7 @@
   .rel-close {
     margin: var(--space-10) 0;
     padding: var(--space-9);
-    border-radius: var(--radius-l);
+    border-radius: 0;
     background: var(--ink);
     color: var(--paper);
     display: grid;

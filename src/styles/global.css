@@ -258,7 +258,7 @@ body::before {
   padding: 0 9px;
   background: none;
   border: 1px solid var(--slate);
-  border-radius: var(--radius-s);
+  border-radius: 0;
   cursor: pointer;
 }
 
@@ -361,7 +361,7 @@ h3 {
   text-transform: uppercase;
   text-decoration: none;
   padding: 1em 2em;
-  border-radius: var(--radius-l);
+  border-radius: 0;
   transition: color var(--dur-med) ease;
 }
 
@@ -381,7 +381,7 @@ h3 {
   position: absolute;
   inset: 3px;
   border: 1px solid var(--ink);
-  border-radius: var(--radius-m);
+  border-radius: 0;
   pointer-events: none;
   transition: border-color var(--dur-med) ease;
 }
@@ -990,7 +990,7 @@ h3 {
   font-size: 0.85rem;
   padding: 0.55rem 0.9rem;
   border: 1px solid var(--slate);
-  border-radius: var(--radius-l);
+  border-radius: 0;
   background: rgba(255, 255, 255, 0.45);
   color: var(--ink);
   white-space: nowrap;
@@ -1285,7 +1285,7 @@ a.talk-title:hover {
   color: var(--muted);
   background: var(--paper);
   border: 1px solid var(--slate);
-  border-radius: var(--radius-s);
+  border-radius: 0;
   padding: 0.6em 1.1em;
   cursor: pointer;
   transition: color var(--dur-fast) ease, border-color var(--dur-fast) ease,
@@ -1612,7 +1612,7 @@ a.talk-title:hover {
   text-transform: uppercase;
   text-decoration: none;
   padding: 0.8em 1.5em;
-  border-radius: var(--radius-l);
+  border-radius: 0;
   cursor: pointer;
   transition: color var(--dur-fast) ease;
 }
@@ -1633,7 +1633,7 @@ a.talk-title:hover {
   position: absolute;
   inset: 3px;
   border: 1px solid var(--ink);
-  border-radius: var(--radius-m);
+  border-radius: 0;
   pointer-events: none;
   transition: border-color var(--dur-fast) ease;
 }
