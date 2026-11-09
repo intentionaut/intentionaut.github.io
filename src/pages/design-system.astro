@@ -799,6 +799,23 @@ const zindex = [
     gap: var(--space-5);
   }
 
+  /* Phones: the alphabet samples and the long command wrap instead of
+     pushing the page sideways. */
+  @media (max-width: 520px) {
+    .ds-face-sample {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+    .ds-demo-block {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .ds-demo .pill {
+      max-width: 100%;
+      white-space: normal;
+      overflow-wrap: anywhere;
+    }
+  }
+
   .ds-demo-row {
     display: flex;
     flex-wrap: wrap;
