@@ -30,3 +30,14 @@
 - Follow the template in `src/content/projects/_template.md`: The Problem, The Bet, Under the Hood, Outcomes, Why it Matters.
 - Files starting with `_` are templates; the content glob excludes them (see `src/content.config.ts`).
 - Executive summary register: show the levels the work spans; never claim solo heroics.
+
+## SEO and markup changes
+
+- Changing a tag (h1, p, h2) changes its look when CSS styles by tag. #361
+  made the home headline a `<p>` and it lost its typeface and spacing.
+- Before merging any PR that changes tags or headings on a page, compare that
+  page before and after at 1000px and 1440px: screenshot, plus the computed
+  font-family, line-height and top offset of each changed element.
+- Style by class, not by tag, so tags can change for search without moving
+  the design.
+- Enforcement: instruction only. Nothing in CI checks this yet.
