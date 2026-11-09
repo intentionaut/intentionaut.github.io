@@ -46,8 +46,8 @@ const svg = raw.replaceAll('opacity="0.2"', 'class="tone"').replaceAll('PLATEID'
   }
   /* A breeze: when the linked card or lane around a plate is hovered or
      focused, the icon sways gently like grass. Still for reduced motion. */
-  :global(:is(a, .lane):hover) > .plate:not(.icon-compass, .icon-magnifying-glass, .icon-lighthouse, .icon-coffee, .icon-hammer, .icon-plant, .icon-microphone-ribbon, .icon-airplane-takeoff, .icon-path, .icon-squares-choose, .icon-stairs, .icon-chart-line) :global(svg),
-  :global(:is(a, .lane):focus-within) > .plate:not(.icon-compass, .icon-magnifying-glass, .icon-lighthouse, .icon-coffee, .icon-hammer, .icon-plant, .icon-microphone-ribbon, .icon-airplane-takeoff, .icon-path, .icon-squares-choose, .icon-stairs, .icon-chart-line) :global(svg) {
+  :global(:is(a, .lane):hover) > .plate:not(.icon-compass, .icon-magnifying-glass, .icon-lighthouse, .icon-coffee, .icon-hammer, .icon-plant, .icon-microphone-ribbon, .icon-airplane-takeoff, .icon-path, .icon-squares-choose, .icon-stairs, .icon-chart-line, .icon-users-three) :global(svg),
+  :global(:is(a, .lane):focus-within) > .plate:not(.icon-compass, .icon-magnifying-glass, .icon-lighthouse, .icon-coffee, .icon-hammer, .icon-plant, .icon-microphone-ribbon, .icon-airplane-takeoff, .icon-path, .icon-squares-choose, .icon-stairs, .icon-chart-line, .icon-users-three) :global(svg) {
     animation: plate-breeze 1.6s ease-in-out infinite;
     transform-origin: 50% 85%;
   }
@@ -313,6 +313,25 @@ const svg = raw.replaceAll('opacity="0.2"', 'class="tone"').replaceAll('PLATEID'
   :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.line) {
     animation: plate-walk 0.7s cubic-bezier(0.45, 0, 0.25, 1) both;
   }
+  /* Team: a huddle. The outer people lean in, the middle one lifts a touch,
+     then all settle. Once per hover. */
+  .plate :global(:is(.u-l, .u-r, .u-m)) {
+    transform-box: view-box;
+  }
+  .plate :global(.u-l) { transform-origin: 40px 150px; }
+  .plate :global(.u-r) { transform-origin: 216px 150px; }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.u-l) {
+    animation: plate-lean-l 0.6s cubic-bezier(0.34, 1.3, 0.64, 1) both;
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.u-r) {
+    animation: plate-lean-r 0.6s cubic-bezier(0.34, 1.3, 0.64, 1) both;
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.u-m) {
+    animation: plate-lift 0.6s cubic-bezier(0.34, 1.3, 0.64, 1) both;
+  }
+  @keyframes plate-lean-l { 40% { transform: rotate(10deg); } }
+  @keyframes plate-lean-r { 40% { transform: rotate(-10deg); } }
+  @keyframes plate-lift { 40% { transform: translateY(-8px); } }
   @media (prefers-reduced-motion: reduce) {
     :global(:is(a, .lane):hover) > .plate :global(svg),
     :global(:is(a, .lane):focus-within) > .plate :global(svg) {
@@ -321,7 +340,7 @@ const svg = raw.replaceAll('opacity="0.2"', 'class="tone"').replaceAll('PLATEID'
     .plate :global(:is(.lv, .needle, .mic-rig, .mic-stem, .plane, .sq, .sq .tone, .one)) {
       transition: none;
     }
-    :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(:is(.glass, .lens-clip, .beam, .wisp, .hammer, .leaf-l, .leaf-r, .route, .goal, .line)) {
+    :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(:is(.glass, .lens-clip, .beam, .wisp, .hammer, .leaf-l, .leaf-r, .route, .goal, .line, .u-l, .u-r, .u-m)) {
       animation: none;
     }
   }
