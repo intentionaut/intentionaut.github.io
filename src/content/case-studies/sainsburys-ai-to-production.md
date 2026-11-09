@@ -37,7 +37,9 @@ Then we built what every team needed once, and shared it:
 - **The first AI playground**, so developers could experiment with LLMs safely, before production.
 - **Data lineage**, which brought the cost of triage down and cut the time to recover from incidents.
 
-[What you deliberately left to each team, and the order the 26 teams moved onto the platform.]
+The 50 ML models already in production came across too. We migrated 33, consolidated or deprecated 12, and retired 5 that newer models did better.
+
+[What you deliberately left to each team.]
 
 ## A product on the platform: Nectar360 Pollen
 
@@ -53,7 +55,7 @@ We put AI only where there was a bottleneck. Creative generation was rejected be
 | Mid-sprint changes | Reduce 40% | Reduced 45% |
 | Outage hours | Reduce 20% | Reduced 58% |
 
-Generative AI in production went from fewer than 5 systems to over 20. The capacity freed from maintenance moved to customer-facing product. Teams managed to ship critical fixes, increase uptime and deply value directly into supply chain, logistics and retail media.
+Generative AI in production went from fewer than 5 systems to over 20. The capacity freed from maintenance moved to customer-facing product. Teams managed to ship critical fixes, increase uptime and deploy value directly into supply chain, logistics and retail media.
 
 ## Why it matters
 
