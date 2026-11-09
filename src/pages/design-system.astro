@@ -442,6 +442,38 @@ const zindex = [
           <code>--accent-text</code> label at <code>--text-xs</code> over an ink
           value, and "All projects" on the right edge. The page's button row
           follows the prose on its section gap, with none of its own.
+          On case studies the facts are a <code>dl.memo</code>: muted labels
+          with a colon in a 6.5rem column, values beside them, like the head
+          of a memo. Company, Role and When, from frontmatter only.
+        </p>
+
+        <h3 class="ds-sub">Lists</h3>
+        <p class="ds-note">
+          Plain lists in prose, rate cards and Who it is for use square
+          markers in <code>--accent-text</code>, to match the square buttons.
+          Lists with a class of their own set their own markers.
+        </p>
+
+        <h3 class="ds-sub">Plaque</h3>
+        <p class="ds-note">
+          <code>.house-rules</code> on /office-hours/: the double-rule frame
+          around a short numbered list, counted in upper-case Roman numerals.
+          For a few steps someone should read in order. One per page.
+        </p>
+
+        <h3 class="ds-sub">Jacket flap</h3>
+        <p class="ds-note">
+          <code>.flap</code> at the top of an essay: a small "In this piece"
+          label, then the lede in Fraunces italic behind a 3px double rule on
+          the left. The lede is the beehiiv subtitle or the essay description.
+        </p>
+
+        <h3 class="ds-sub">Platform tags</h3>
+        <p class="ds-note">
+          <code>.board-tag</code> on /writing/: each row's themes as small
+          uppercase tags in a third column, like platforms on a departures
+          board. Dates use tabular figures so they line up. Below 720px the
+          tags wrap under the title.
         </p>
 
         <h3 class="ds-sub">Results strip</h3>
@@ -499,7 +531,10 @@ const zindex = [
           the homepage, and the top and foot of /writing/ (a short italic
           heading with the promise as its sub-line), and through
           <code>ReleaseSubscribe</code> on /open-source/ and the tool pages,
-          and at the close of every essay and post, naming the piece.
+          and at the close of every essay and post, naming the piece. When it
+          has an eyebrow, a masthead line pairs it with "Latest" and the month
+          of the newest letter, linked to it (<code>.fs-latest</code>). It is
+          read from beehiiv at build time.
         </p>
 
         <h3 class="ds-sub">Ledger</h3>
@@ -525,6 +560,27 @@ const zindex = [
           some air without a large empty band. A fixed height clipped long quotes
           on phones.
         </p>
+
+        <h3 class="ds-sub">Received stamp</h3>
+        <p class="ds-note">
+          After a contact form sends, a rotated "Received" stamp with the date
+          presses onto the card. Decorative, so <code>aria-hidden</code>; the
+          status line says the same in words. No press under reduced motion.
+        </p>
+
+        <h3 class="ds-sub">Consent bar</h3>
+        <p class="ds-note">
+          <code>Consent.astro</code>: a card on the right from 1280px. Below
+          that, a slim bar across the foot of the screen with a double rule on
+          top. Under 720px it wraps and drops its heading.
+        </p>
+
+        <h3 class="ds-sub">One quiet joke</h3>
+        <p class="ds-note">
+          Hold Shift over a "Book a free call" button and it reads "Let's
+          rock" until Shift is released. Visual only: the accessible name stays
+          as written. In <code>BaseLayout.astro</code>. Keep it to one.
+        </p>
       </section>
 
       <section class="ds-section" aria-labelledby="ds-icons">
@@ -535,7 +591,9 @@ const zindex = [
           neighbours alternate. Use <code>&lt;Plate name="compass" tone="blue" /&gt;</code>.
           Never an icon made of the letters "AI". Placement is chosen per page. Each offer's icon is set once in
           <code>src/data/icons.ts</code>; wide lists use the envelope layout
-          (plate on the left), square cards the centred one.
+          (plate on the left), square cards the centred one. When a link
+          or lane holding a plate is hovered or focused, the duotone icon
+          sways gently, like a breeze; it stays still under reduced motion.
         </p>
         <ul class="ds-icons">
           {iconSet.map((ic, i) => (
