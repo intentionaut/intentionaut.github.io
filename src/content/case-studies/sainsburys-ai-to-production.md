@@ -8,7 +8,7 @@ depth: in-depth
 order: 1.4
 ---
 
-When I joined Sainsbury's data platforms, nobody knew how many AI systems were in production, because there was no register. There were multiple roadmaps pulling in different directions, and no sense of strategy. [One concrete example of a pilot that worked in a demo and stalled.]
+When I joined Sainsbury's data platforms, nobody knew how many AI systems were in production, because there was no register. There were multiple roadmaps pulling in different directions, and no sense of strategy. There had been several attempts to deploy AI, and pilots were stalling. A store operations chatbot worked in a local demo and went no further, because the data feeding it wasn't reliable enough to trust. I reframed the work around data quality, and got the teams who owned that data aligned on the standard it needed. Other pilots had stalled for the same reason: unreliable data going into agentic workflows.
 
 <ul class="cs-stats">
   <li><strong>&lt;5 to 20+</strong>generative AI systems in production, alongside more than 50 ML models</li>
@@ -51,7 +51,7 @@ We put AI only where there was a bottleneck. Creative generation was rejected be
 | Mid-sprint changes | Reduce 40% | Reduced 45% |
 | Outage hours | Reduce 20% | Reduced 58% |
 
-Generative AI in production went from fewer than 5 systems to over 20. The capacity freed from maintenance moved to customer-facing product. [One example of what a team built with it.]
+Generative AI in production went from fewer than 5 systems to over 20. The capacity freed from maintenance moved to customer-facing product. Teams managed to ship critical fixes, increase uptime and deply value directly into supply chain, logistics and retail media.
 
 ## Why it matters
 
