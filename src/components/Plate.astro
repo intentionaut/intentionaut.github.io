@@ -46,8 +46,8 @@ const svg = raw.replaceAll('opacity="0.2"', 'class="tone"').replaceAll('PLATEID'
   }
   /* A breeze: when the linked card or lane around a plate is hovered or
      focused, the icon sways gently like grass. Still for reduced motion. */
-  :global(:is(a, .lane):hover) > .plate:not(.icon-compass, .icon-magnifying-glass, .icon-lighthouse, .icon-coffee, .icon-hammer, .icon-plant, .icon-microphone-ribbon) :global(svg),
-  :global(:is(a, .lane):focus-within) > .plate:not(.icon-compass, .icon-magnifying-glass, .icon-lighthouse, .icon-coffee, .icon-hammer, .icon-plant, .icon-microphone-ribbon) :global(svg) {
+  :global(:is(a, .lane):hover) > .plate:not(.icon-compass, .icon-magnifying-glass, .icon-lighthouse, .icon-coffee, .icon-hammer, .icon-plant, .icon-microphone-ribbon, .icon-airplane-takeoff) :global(svg),
+  :global(:is(a, .lane):focus-within) > .plate:not(.icon-compass, .icon-magnifying-glass, .icon-lighthouse, .icon-coffee, .icon-hammer, .icon-plant, .icon-microphone-ribbon, .icon-airplane-takeoff) :global(svg) {
     animation: plate-breeze 1.6s ease-in-out infinite;
     transform-origin: 50% 85%;
   }
@@ -101,7 +101,8 @@ const svg = raw.replaceAll('opacity="0.2"', 'class="tone"').replaceAll('PLATEID'
      right, passes behind the tower and reaches left. The tower is filled
      solid (.tower-fill) so it hides the beam as it passes. */
   .plate.icon-lighthouse :global(svg),
-  .plate.icon-microphone-ribbon :global(svg) {
+  .plate.icon-microphone-ribbon :global(svg),
+  .plate.icon-airplane-takeoff :global(svg) {
     overflow: visible;
   }
   .plate :global(.tower-fill) {
@@ -218,12 +219,24 @@ const svg = raw.replaceAll('opacity="0.2"', 'class="tone"').replaceAll('PLATEID'
   :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.mic-stem) {
     transform: scaleY(1.5);
   }
+  /* Plane: wheels up. The runway stays put; the plane pitches its nose up
+     about its tail and climbs along its heading with a small spring. Holds
+     while hovered, lands on leave. */
+  .plate :global(.plane) {
+    transform-box: view-box;
+    transform-origin: 40px 150px;
+    transition: transform 0.45s cubic-bezier(0.3, 0, 0.2, 1);
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.plane) {
+    transform: translate(14px, -20px) rotate(-7deg);
+    transition: transform 0.6s cubic-bezier(0.34, 1.4, 0.64, 1);
+  }
   @media (prefers-reduced-motion: reduce) {
     :global(:is(a, .lane):hover) > .plate :global(svg),
     :global(:is(a, .lane):focus-within) > .plate :global(svg) {
       animation: none;
     }
-    .plate :global(:is(.needle, .mic-rig, .mic-stem)) {
+    .plate :global(:is(.needle, .mic-rig, .mic-stem, .plane)) {
       transition: none;
     }
     :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(:is(.glass, .lens-clip, .beam, .wisp, .hammer, .leaf-l, .leaf-r)) {
