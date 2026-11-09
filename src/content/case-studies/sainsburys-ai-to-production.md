@@ -37,9 +37,9 @@ Then we built what every team needed once, and shared it:
 - **The first AI playground**, so developers could experiment with LLMs safely, before production.
 - **Data lineage**, which brought the cost of triage down and cut the time to recover from incidents.
 
-The 50 ML models already in production came across too. We migrated 33, consolidated or deprecated 12, and retired 5 that newer models did better.
+The ML models already in production came across too. Some moved as they were; others were folded together or retired where something newer did the job better.
 
-[What you deliberately left to each team.]
+The teams wanted reliability. They knew their data and their customers, and they already had models worth running, but they had no dependable way to get those models into production or to trust the data underneath them. We built that with them, and kept operations steady as more teams came on.
 
 ## A product on the platform: Nectar360 Pollen
 
