@@ -51,7 +51,8 @@
   --accent: #c85060;
   /* Accent for text: --accent is 3.7:1 on --paper, under the 4.5:1 small text needs. */
   --accent-text: #b8404f;
-  --mendl: rgba(169, 203, 208, 0.55);
+  --teal: #a9cbd0;
+  --mendl: color-mix(in srgb, var(--teal) 55%, transparent);
 
   /* Type */
   --font-display: 'Fraunces Variable', 'Fraunces Variable Fallback', Georgia,
@@ -89,9 +90,6 @@
   --space-11: 5rem;    /* 80 */
 
   /* Radius */
-  --radius-s: 3px;
-  --radius-m: 5px;
-  --radius-l: 8px;
 
   /* Motion */
   --dur-fast: 0.15s;
@@ -395,7 +393,7 @@ h3 {
 }
 
 .btn-primary:hover::after {
-  border-color: rgba(247, 233, 224, 0.55);
+  border-color: color-mix(in srgb, var(--paper) 55%, transparent);
 }
 
 .link-arrow {
@@ -1062,7 +1060,7 @@ h3 {
    row that holds one gets them. The ledger on /about/ and an unlinked talk
    stay still. */
 .talk-row:has(a):hover {
-  background: rgba(169, 203, 208, 0.08);
+  background: color-mix(in srgb, var(--teal) 8%, transparent);
 }
 
 .talk-row::after {
@@ -1072,7 +1070,7 @@ h3 {
   bottom: var(--space-5);
   right: 0;
   width: 3px;
-  background: #a9cbd0;
+  background: var(--teal);
   transform: scaleY(0);
   transform-origin: center;
   transition: transform var(--dur-base) var(--ease-out);
@@ -1663,7 +1661,7 @@ a.talk-title:hover {
 }
 
 .btn-plain:hover::after {
-  border-color: rgba(247, 233, 224, 0.55);
+  border-color: color-mix(in srgb, var(--paper) 55%, transparent);
 }
 
 .contact-form-section h2 {

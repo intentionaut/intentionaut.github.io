@@ -20,9 +20,6 @@ const { testimonials, heading = 'Testimonials', sub, compact = false } = Astro.p
 {testimonials.length > 0 && (
     <section class:list={['testimonials-section', { compact }]} aria-label="Testimonials">
       <style>
-        :root {
-          --acc-blue: #a9cbd0;
-        }
         .testimonials-section {
           padding-bottom: clamp(3rem, 6vw, 5rem);
         }
@@ -196,7 +193,7 @@ const { testimonials, heading = 'Testimonials', sub, compact = false } = Astro.p
           position: absolute;
           inset: 0;
           z-index: -1;
-          background: var(--acc-blue);
+          background: var(--teal);
           transform: scaleX(0);
           transform-origin: center;
           transition: transform var(--dur-med) ease;
