@@ -124,10 +124,11 @@ const faqSchema = {
       </ul>
 
       <h2>How does it work?</h2>
-      <p>
-        A minimum commitment of one month, then 30 days' notice either side.
-        Day rate {gbp(rates.fractional)}.
-      </p>
+      <dl class="ledger">
+        <div><dt>Minimum commitment</dt><dd>One month</dd></div>
+        <div><dt>Notice</dt><dd>30 days, either side</dd></div>
+        <div><dt>Day rate</dt><dd>{gbp(rates.fractional)}</dd></div>
+      </dl>
       <div class="rates rates-pair fractional-tiers">
         <div class="rate-card">
           <p class="rate-price">{gbp(fractionalMonthly1Day)} a month</p>
