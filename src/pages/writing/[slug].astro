@@ -132,7 +132,12 @@ const articleLd = meta
       <header class="page-head">
         <p class="eyebrow">Intentionaut</p>
         <h1>{post.title}</h1>
-        {post.subtitle && <p class="lede">{post.subtitle}</p>}
+        {post.subtitle && (
+          <div class="flap">
+            <p class="flap-label">In this piece</p>
+            <p class="lede">{post.subtitle}</p>
+          </div>
+        )}
         <p class="article-meta">
           {fmtDate(post.publish_date * 1000)} · {post.authors.join(', ')}
         </p>
@@ -176,6 +181,10 @@ const articleLd = meta
       <header class="page-head">
         <p class="eyebrow">{essay.data.source}</p>
         <h1>{essay.data.title}</h1>
+        <div class="flap">
+          <p class="flap-label">In this piece</p>
+          <p class="lede">{essay.data.description}</p>
+        </div>
         <p class="article-meta">{fmtDate(essay.data.date.toString())}</p>
       </header>
 
@@ -219,6 +228,25 @@ const articleLd = meta
 )}
 
 <style>
+  /* Jacket flap: the standfirst behind a double rule, like a book's inside flap. */
+  .flap {
+    border-left: 3px double var(--ink);
+    padding: var(--space-1) 0 var(--space-1) var(--space-4);
+    margin-top: var(--space-4);
+    max-width: 62ch;
+  }
+  .flap-label {
+    margin: 0 0 var(--space-1);
+    font: 500 0.66rem var(--font-body);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .flap .lede {
+    margin: 0;
+    font-family: var(--font-display);
+    font-style: italic;
+  }
   .article-meta {
     margin-top: var(--space-3);
     font-size: var(--text-sm);
