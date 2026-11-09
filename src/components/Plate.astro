@@ -19,7 +19,7 @@ const uid = `p${Math.random().toString(36).slice(2, 8)}`;
 const svg = raw.replaceAll('opacity="0.2"', 'class="tone"').replaceAll('PLATEID', uid);
 // One-shot motions (a strike, a sway) play to the end even if the pointer
 // leaves early, so they never snap back mid-move. The script below runs them.
-const ONESHOT = ['magnifying-glass'];
+const ONESHOT = ['hammer', 'magnifying-glass'];
 ---
 
 <span class:list={['plate', tone, `icon-${name}`, { oneshot: ONESHOT.includes(name) }]} aria-hidden="true" set:html={svg} />
@@ -197,7 +197,7 @@ const ONESHOT = ['magnifying-glass'];
     transform-box: view-box;
     transform-origin: 50px 206px;
   }
-  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.hammer) {
+  .plate.play :global(.hammer) {
     animation: plate-strike 0.6s var(--wait) forwards;
   }
   @keyframes plate-strike {
