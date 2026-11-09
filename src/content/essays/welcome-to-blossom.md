@@ -1,6 +1,6 @@
 ---
 title: "Welcome to Blossom"
-description: "I hope you flourish. Software is hard work"
+description: "Putting the soft back in software: hard conversations, leading teams, fair hiring and growing influence for software leaders."
 date: 2021-03-31
 themes: ["career"]
 source: Blossom
