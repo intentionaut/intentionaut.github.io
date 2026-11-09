@@ -128,25 +128,28 @@ const faqSchema = {
         A minimum commitment of one month, then 30 days' notice either side.
         Day rate {gbp(rates.fractional)}.
       </p>
-      <p>
-        <strong>One day a week, {gbp(fractionalMonthly1Day)} a month.</strong>
-        Saielle DaSilva advises, challenges and guides. Your team leads the work.
-      </p>
-      <ul>
-        <li>Monthly strategy review with leadership</li>
-        <li>Fortnightly coaching for your product lead</li>
-        <li>Roadmap challenge before each planning cycle</li>
-      </ul>
-      <p>
-        <strong>Two days a week, {gbp(fractionalMonthly2Day)} a month.</strong>
-        Saielle DaSilva leads the work alongside your team, setting new ways of
-        working and scaling them.
-      </p>
-      <ul>
-        <li>Owns the roadmap and the planning rhythm</li>
-        <li>Weekly product reviews</li>
-        <li>Coaching your PMs, and help with hiring</li>
-      </ul>
+      <div class="rates rates-pair fractional-tiers">
+        <div class="rate-card">
+          <p class="rate-price">{gbp(fractionalMonthly1Day)} a month</p>
+          <p class="rate-name">One day a week</p>
+          <p class="rate-desc">Saielle DaSilva advises, challenges and guides. Your team leads the work.</p>
+          <ul>
+            <li>Monthly strategy review with leadership</li>
+            <li>Fortnightly coaching for your product lead</li>
+            <li>Roadmap challenge before each planning cycle</li>
+          </ul>
+        </div>
+        <div class="rate-card">
+          <p class="rate-price">{gbp(fractionalMonthly2Day)} a month</p>
+          <p class="rate-name">Two days a week</p>
+          <p class="rate-desc">Saielle DaSilva leads the work alongside your team, setting new ways of working and scaling them.</p>
+          <ul>
+            <li>Owns the roadmap and the planning rhythm</li>
+            <li>Weekly product reviews</li>
+            <li>Coaching your PMs, and help with hiring</li>
+          </ul>
+        </div>
+      </div>
       <p>
         The engagement ends with a clear handover: a functioning team, an
         operating model that runs without me, and decisions that do not need
@@ -226,5 +229,26 @@ const faqSchema = {
   }
   .fit-before-faq :global(.who-for) {
     margin-top: 0;
+  }
+  /* Two price cards inside the reading column. */
+  .fractional-tiers {
+    margin: var(--space-5) 0 var(--space-6);
+  }
+  .fractional-tiers p {
+    margin: 0 0 var(--space-2);
+  }
+  /* Titles match the contact page's offer cards. */
+  .fractional-tiers .rate-name {
+    font-family: var(--font-display);
+    font-weight: 560;
+    font-size: 0.95rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-3);
+  }
+  .fractional-tiers ul {
+    margin: var(--space-3) 0 0;
+    padding-left: 1.1em;
+    font-size: 0.95rem;
   }
 </style>
