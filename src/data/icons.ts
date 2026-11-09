@@ -12,7 +12,7 @@ export const offerIcon: Record<string, string> = {
   '/keynote-speaker/': 'microphone-ribbon',
   '/ai-pilot-to-production/': 'airplane-takeoff',
   '/workshops/ai-strategy/': 'path',
-  '/workshops/ai-opportunity-mapping/': 'map-trifold',
+  '/workshops/ai-opportunity-mapping/': 'squares-choose',
   '/workshops/product-maturity-model/': 'stairs',
   '/workshops/data-informed-decisions/': 'chart-line',
   '/workshops/data-culture/': 'users-three',
