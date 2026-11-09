@@ -232,9 +232,10 @@ const zindex = [
         <p class="ds-kicker">Foundations</p>
         <h2>Radius</h2>
         <p class="ds-note">
-          Square is part of the identity. Cards, panels, banners and images are
-          square. Only buttons, pills and chips still round a little, and never
-          far.
+          Square is part of the identity: cards, panels, banners, images,
+          buttons, pills and chips all have square corners. Only focus rings and
+          loading skeletons round 2px, so they read as temporary. No component
+          uses the tokens below; they stay for reference.
         </p>
         <div class="ds-radii">
           {radii.map((r) => (
@@ -646,7 +647,7 @@ const zindex = [
     width: 4.5rem;
     height: 4.5rem;
     border: 1px solid var(--slate);
-    border-radius: var(--radius-m);
+    border-radius: 0;
   }
 
   .ds-swatch-meta {
@@ -789,7 +790,7 @@ const zindex = [
   .ds-demo {
     padding: var(--space-6);
     border: 1px solid var(--slate);
-    border-radius: var(--radius-l);
+    border-radius: 0;
     background: rgba(247, 233, 224, 0.5);
   }
 
@@ -852,7 +853,7 @@ const zindex = [
     gap: var(--space-4);
     padding: var(--space-5) var(--space-6);
     border: 1px solid var(--slate);
-    border-radius: var(--radius-l);
+    border-radius: 0;
   }
 
   .ds-haircard > div {
@@ -882,7 +883,7 @@ const zindex = [
     line-height: 1.55;
     white-space: pre;
     overflow-x: auto;
-    border-radius: var(--radius-l);
+    border-radius: 0;
     background: var(--slate);
     color: var(--ink);
   }
