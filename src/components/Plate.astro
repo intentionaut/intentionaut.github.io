@@ -358,15 +358,38 @@ const svg = raw.replaceAll('opacity="0.2"', 'class="tone"').replaceAll('PLATEID'
     75% { transform: translate(80px, -10px); animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
     100% { transform: translate(0, 0); }
   }
+  /* Tree structure (Impact Chain): the chain fills. The root box lights
+     coral, the connectors draw outward, then the top and bottom boxes light
+     in turn. Holds while hovered; fades on leave. */
+  .plate :global(.tb) {
+    transition: fill 0.3s, opacity 0.3s;
+  }
+  .plate :global(.wire) {
+    stroke-dasharray: 1 1;
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.tb) {
+    fill: var(--accent);
+    opacity: 1;
+    transition: fill 0.2s var(--wait), opacity 0.2s var(--wait);
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.tb1) { transition-delay: calc(var(--wait) + 0.58s); }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.tb2) { transition-delay: calc(var(--wait) + 0.7s); }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.wire) {
+    animation: plate-walk 0.25s cubic-bezier(0.45, 0, 0.25, 1) calc(var(--wait) + 0.1s) forwards;
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.w2) {
+    animation-duration: 0.3s;
+    animation-delay: calc(var(--wait) + 0.32s);
+  }
   @media (prefers-reduced-motion: reduce) {
     :global(:is(a, .lane):hover) > .plate :global(svg),
     :global(:is(a, .lane):focus-within) > .plate :global(svg) {
       animation: none;
     }
-    .plate :global(:is(.lv, .needle, .mic-rig, .mic-stem, .plane, .sq, .sq .tone, .one)) {
+    .plate :global(:is(.lv, .needle, .mic-rig, .mic-stem, .plane, .sq, .sq .tone, .one, .tb)) {
       transition: none;
     }
-    :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(:is(.glass, .lens-clip, .beam, .wisp, .hammer, .leaf-l, .leaf-r, .route, .goal, .line, .u-l, .u-r, .u-m, .arc, .head, .pen, .ink)) {
+    :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(:is(.glass, .lens-clip, .beam, .wisp, .hammer, .leaf-l, .leaf-r, .route, .goal, .line, .u-l, .u-r, .u-m, .arc, .head, .pen, .ink, .wire)) {
       animation: none;
     }
   }
