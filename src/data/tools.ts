@@ -1,10 +1,11 @@
-// Free templates (CC BY 4.0). Each gets a card on /templates/ and a page at /templates/<slug>/.
-// Wording comes from the printed sheets themselves; the PDFs live in public/templates/.
-export interface Template {
+// Free tools (CC BY 4.0), grouped into families. /tools/ lists every family;
+// each family has a page at /tools/<family>/ and each tool a page at
+// /tools/<family>/<slug>/. Tool wording comes from the printed sheets; PDFs live
+// in public/tools/<family>/ and page-one previews in public/images/tools/<family>/.
+export interface Tool {
   slug: string;
   file: string;
   icon: string;
-  family: 'Impact First AI';
   question: string;
   /** Words an acronym title stands for; shown first so the caps read as an acronym. */
   expand?: string[];
@@ -21,12 +22,11 @@ export interface Template {
   tips: string[];
 }
 
-export const templates: Template[] = [
+const impactFirstAiTools: Tool[] = [
   {
     slug: 'first-ai-maturity-model',
     file: 'first-ai-maturity-model.pdf',
     icon: 'stairs',
-    family: 'Impact First AI',
     question: 'Where are we?',
     expand: ['Faster', 'Improved', 'Reshaped', 'Scaled', 'Transformed'],
     title: 'FIRST AI Maturity Model',
@@ -62,7 +62,6 @@ export const templates: Template[] = [
     slug: 'impact-chain',
     file: 'impact-chain.pdf',
     icon: 'tree-structure',
-    family: 'Impact First AI',
     question: 'What has to be true?',
     title: 'The Impact Chain',
     card: 'Ten boxes from the job the AI takes on to the payoff. The first box you can’t fill with evidence is the weak link.',
@@ -92,3 +91,43 @@ export const templates: Template[] = [
     tips: ['Write the evidence, not the hope.'],
   },
 ];
+
+export interface Family {
+  slug: string;
+  name: string;
+  /** One line for cards and the hub. */
+  card: string;
+  lede: string;
+  /** The idea behind the family, a few short paragraphs. */
+  idea: string[];
+  /** How the tools fit together, in order. */
+  path: string[];
+  /** Paid help for running it, if any. */
+  workshop?: { href: string; label: string };
+  tools: Tool[];
+}
+
+export const families: Family[] = [
+  {
+    slug: 'impact-first-ai',
+    name: 'Impact First AI',
+    card: 'Start from the impact AI work should make, then work back to the work.',
+    lede: 'Start from the impact the work should make, then work back to the work.',
+    idea: [
+      'Most teams have turned AI on. People have accounts, a few have built something clever, and someone senior is asking: now what?',
+      'Impact First AI is a way to answer that one practice at a time. You don’t need a transformation first. Pick one way of working, change it with AI on purpose, and name the number that change should move.',
+      'Name the number before you build. Building is cheap now, so it’s easy to ship a lot and never find out what any of it did. If nobody can name a number the business already tracks, that’s the finding.',
+    ],
+    path: [
+      'Rate where each practice is today with the FIRST AI Maturity Model.',
+      'Pick one to climb, and test it as a bet on the Impact Chain.',
+      'Check in every two to four weeks, and move up a rung only when the evidence is true.',
+    ],
+    workshop: { href: '/workshops/ai-strategy/', label: 'Want someone outside the team to run it with you?' },
+    tools: impactFirstAiTools,
+  },
+];
+
+export const toolHref = (f: Family, t: Tool) => `/tools/${f.slug}/${t.slug}/`;
+export const toolPdf = (f: Family, t: Tool) => `/tools/${f.slug}/${t.file}`;
+export const toolPreview = (f: Family, t: Tool) => `/images/tools/${f.slug}/${t.slug}.png`;
