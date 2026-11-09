@@ -206,16 +206,54 @@ const enabled = import.meta.env.PROD && !disabled;
       animation: none;
     }
   }
-  @media (max-width: 719px) {
+  /* Below 1280px the corner box would cover the hero copy: a slim bar along
+     the bottom instead, double-ruled on top like the cards. */
+  @media (max-width: 1279px) {
     .consent {
-      right: 0.75rem;
-      bottom: 0.75rem;
-      width: calc(100% - 1.5rem);
-      padding: 0.9rem 1rem 0.85rem;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: auto;
+      border: 0;
+      border-top: 1px solid var(--ink);
+      padding: 0.7rem max(1rem, calc((100% - 72rem) / 2));
+      display: flex;
+      align-items: center;
+      gap: 0.4rem 1.5rem;
+      box-shadow: 0 -10px 30px -22px rgba(42, 24, 56, 0.55);
+    }
+    .consent::before {
+      inset: 3px 0 auto;
+      border: 0;
+      border-top: 1px solid var(--slate);
+    }
+    .consent h2 {
+      margin: 0;
+      flex-shrink: 0;
     }
     .consent p {
-      margin-bottom: 0.7rem;
-      font-size: 0.88rem;
+      margin: 0;
+      flex: 1;
+      font-size: 0.9rem;
+    }
+    .consent-row {
+      flex-shrink: 0;
+    }
+    .consent-btn {
+      padding: 0.7em 1.2em;
+    }
+  }
+  /* Phones: text over the buttons. */
+  @media (max-width: 719px) {
+    .consent {
+      flex-wrap: wrap;
+    }
+    .consent h2 {
+      display: none;
+    }
+    .consent p {
+      flex-basis: 100%;
+      font-size: 0.86rem;
     }
   }
 </style>
