@@ -131,7 +131,7 @@
     opacity: 1;
   }
 
-  [data-motion='drafting'] .hero :is(h1, .lede) {
+  [data-motion='drafting'] .hero :is(.hero-title, .lede) {
     transform: none;
   }
 }

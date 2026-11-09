@@ -276,7 +276,8 @@ body::before {
 
 h1,
 h2,
-h3 {
+h3,
+.hero-title {
   font-family: var(--font-display);
   font-optical-sizing: auto;
   font-weight: 480;
@@ -449,7 +450,7 @@ h3 {
   animation: rise 0.7s var(--ease-out) 0.05s backwards;
 }
 
-.hero h1 {
+.hero .hero-title {
   animation: rise 0.7s var(--ease-out) 0.16s backwards;
 }
 
