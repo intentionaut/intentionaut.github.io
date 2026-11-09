@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { BOOKING_URL } from '../data/links';
+import { PRIMARY_PHRASE } from '../data/positioning';
 
 const entry = (await getCollection('pages')).find((p) => p.id === 'about');
 if (!entry) throw new Error('About page content is missing (src/content/pages/about.md)');
@@ -111,6 +112,10 @@ const stats = [
         The word is invented, but intention captures the arc of my work.
       </p>
       <Content />
+      <p>
+        I work with teams in two ways. I can step in as a <a href="/fractional/">{PRIMARY_PHRASE}</a>, or build
+        alongside you through <a href="/forward-deployed/">Product building</a>.
+      </p>
     </div>
 
     <section class="arc-section" aria-labelledby="arc-title">
