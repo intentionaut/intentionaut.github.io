@@ -11,6 +11,9 @@ test('static, dynamic and content routes map to their source files', () => {
   assert.deepEqual(sourcesFor('/workshops/'), ['src/pages/workshops/index.astro']);
   assert.deepEqual(sourcesFor('/workshops/ai-strategy/'), ['src/pages/workshops/[slug].astro', 'src/data/workshops.ts']);
   assert.deepEqual(sourcesFor('/case-studies/cazoo/'), ['src/pages/case-studies/[slug].astro', 'src/content/case-studies/cazoo.md']);
+  assert.deepEqual(sourcesFor('/tools/impact-first-ai/'), ['src/pages/tools/[family]/index.astro', 'src/data/tools.ts']);
+  assert.deepEqual(sourcesFor('/tools/impact-first-ai/impact-chain/'), ['src/pages/tools/[family]/[slug].astro', 'src/data/tools.ts']);
+  assert.deepEqual(sourcesFor('/writing/bias-in-hiring/'), ['src/content/essays/bias-in-hiring.md']);
 });
 
 test('a page with no source file gets no date, never the build date', () => {

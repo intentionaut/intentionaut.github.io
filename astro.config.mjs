@@ -48,7 +48,17 @@ const flatSitemap = {
       const index = await readFile(new URL('sitemap-index.xml', dir), 'utf8');
       const chunks = [...index.matchAll(/<loc>[^<]*\/(sitemap-\d+\.xml)<\/loc>/g)].map((m) => m[1]);
       const xmls = await Promise.all(chunks.map((c) => readFile(new URL(c, dir), 'utf8')));
-      const urls = xmls.flatMap((x) => x.match(/<url>[\s\S]*?<\/url>/g) ?? []);
+      // beehiiv posts have no source file for git to date, so take the
+      // dateModified the page already publishes in its JSON-LD.
+      const urls = await Promise.all(
+        xmls.flatMap((x) => x.match(/<url>[\s\S]*?<\/url>/g) ?? []).map(async (u) => {
+          if (u.includes('<lastmod>')) return u;
+          const path = new URL(u.match(/<loc>([^<]*)<\/loc>/)[1]).pathname;
+          const html = await readFile(new URL(`.${path}index.html`, dir), 'utf8').catch(() => '');
+          const d = html.match(/"dateModified":"([^"]+)"/)?.[1];
+          return d ? u.replace('</loc>', `</loc><lastmod>${d}</lastmod>`) : u;
+        }),
+      );
       if (!urls.length) throw new Error('flat-sitemap: no URLs found in ' + chunks.join(', '));
       const head = xmls[0].slice(0, xmls[0].indexOf('<url>'));
       await writeFile(new URL('sitemap.xml', dir), head + urls.join('') + '</urlset>');
@@ -74,6 +84,8 @@ export default defineConfig({
         !/\/preview(\/|$)/.test(page) &&
         // noindex'd: listing it made Search Console report "Submitted URL marked noindex".
         !/\/thank-you\/?$/.test(page) &&
+        // noindex'd: a page of UI tokens, not something to rank for.
+        !/\/design-system\/?$/.test(page) &&
         !LEGACY_REDIRECTS.has(new URL(page).pathname) &&
         !CROSS_DOMAIN_CANONICAL.has(new URL(page).pathname) &&
         !LOCKED_CASE_STUDIES.has(new URL(page).pathname),
