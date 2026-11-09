@@ -29,7 +29,12 @@ export function sourcesFor(pathname) {
       const content = { 'case-studies': 'case-studies', projects: 'projects' }[dir];
       if (content && existsSync(`src/content/${content}/${slug}.md`)) files.push(dyn, `src/content/${content}/${slug}.md`);
       else if (dir === 'workshops' && existsSync(dyn)) files.push(dyn, 'src/data/workshops.ts');
+      else if (dir === 'tools') files.push(page('tools/[family]/index.astro'), 'src/data/tools.ts');
     }
+    if (!files.length && parts.length === 3 && parts[0] === 'tools') files.push(page('tools/[family]/[slug].astro'), 'src/data/tools.ts');
+    // Essays are local markdown; beehiiv posts have no source file and get their
+    // date from the page itself after the build (see flat-sitemap in astro.config.mjs).
+    if (!files.length && parts.length === 2 && parts[0] === 'writing') files.push(`src/content/essays/${parts[1]}.md`);
   }
   return files.filter(existsSync);
 }
