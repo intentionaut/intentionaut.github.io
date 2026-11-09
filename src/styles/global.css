@@ -422,7 +422,7 @@ h3 {
 /* Ends on the section gap (design system Layout); it is bigger than a
    .page-head, so it doesn't take the page-intro gap. */
 .hero {
-  padding-block: clamp(4.5rem, 10vw, 8.5rem) clamp(3rem, 6vw, 5rem);
+  padding-block: clamp(3rem, 6vw, 5rem);
 }
 
 .hero .hero-title {
