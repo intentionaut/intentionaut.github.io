@@ -100,7 +100,8 @@ const svg = raw.replaceAll('opacity="0.2"', 'class="tone"').replaceAll('PLATEID'
      amber beam seen side-on, its length following cos(angle), so it reaches
      right, passes behind the tower and reaches left. The tower is filled
      solid (.tower-fill) so it hides the beam as it passes. */
-  .plate.icon-lighthouse :global(svg) {
+  .plate.icon-lighthouse :global(svg),
+  .plate.icon-microphone-ribbon :global(svg) {
     overflow: visible;
   }
   .plate :global(.tower-fill) {
