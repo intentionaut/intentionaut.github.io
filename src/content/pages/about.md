@@ -1,5 +1,5 @@
 ---
-title: A product and design leader for AI products. I find the signals, set direction and get things moving.
+title: A product and design leader for AI products.
 seoTitle: Saielle DaSilva | Fractional CPO for AI Products
 description: "The career behind intentionaut: product and design leadership for AI products, from Pivotal, Cazoo and StepStone to Sainsbury's and independent practice."
 ---
