@@ -44,18 +44,6 @@ const svg = raw.replaceAll('opacity="0.2"', 'class="tone"').replaceAll('PLATEID'
     height: 32px;
     color: var(--ink);
   }
-  /* A breeze: when the linked card or lane around a plate is hovered or
-     focused, the icon sways gently like grass. Still for reduced motion. */
-  :global(:is(a, .lane):hover) > .plate:not(.icon-compass, .icon-magnifying-glass, .icon-lighthouse, .icon-coffee, .icon-hammer, .icon-plant, .icon-microphone-ribbon, .icon-airplane-takeoff, .icon-path, .icon-squares-choose, .icon-stairs, .icon-chart-line, .icon-users-three, .icon-strategy) :global(svg),
-  :global(:is(a, .lane):focus-within) > .plate:not(.icon-compass, .icon-magnifying-glass, .icon-lighthouse, .icon-coffee, .icon-hammer, .icon-plant, .icon-microphone-ribbon, .icon-airplane-takeoff, .icon-path, .icon-squares-choose, .icon-stairs, .icon-chart-line, .icon-users-three, .icon-strategy) :global(svg) {
-    animation: plate-breeze 1.6s ease-in-out infinite;
-    transform-origin: 50% 85%;
-  }
-  @keyframes plate-breeze {
-    0%, 100% { transform: rotate(0); }
-    30% { transform: rotate(6deg); }
-    70% { transform: rotate(-4deg); }
-  }
   /* Compass: the needle turns on its pivot to point north and holds while
      hovered; the dial stays still. The pivot is built into compass.svg (the
      needle is drawn around 0,0 in a group at the dial centre), so it turns on
@@ -105,7 +93,8 @@ const svg = raw.replaceAll('opacity="0.2"', 'class="tone"').replaceAll('PLATEID'
   .plate.icon-airplane-takeoff :global(svg),
   .plate.icon-path :global(svg),
   .plate.icon-squares-choose :global(svg),
-  .plate.icon-strategy :global(svg) {
+  .plate.icon-strategy :global(svg),
+  .plate.icon-pen-nib :global(svg) {
     overflow: visible;
   }
   .plate :global(.tower-fill) {
@@ -352,6 +341,24 @@ const svg = raw.replaceAll('opacity="0.2"', 'class="tone"').replaceAll('PLATEID'
     from { transform: scale(0); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
   }
+  /* Pen nib: it underlines. The nib travels right drawing a straight ink
+     line behind its tip, lifts and glides back. The line goes on leave. */
+  .plate :global(.ink) {
+    stroke-dasharray: 1 1;
+    stroke-dashoffset: 1;
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.ink) {
+    animation: plate-walk 0.6s cubic-bezier(0.4, 0, 0.6, 1) both;
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.pen) {
+    animation: plate-write 0.95s both;
+  }
+  @keyframes plate-write {
+    0% { transform: translate(0, 0); animation-timing-function: cubic-bezier(0.4, 0, 0.6, 1); }
+    63.2% { transform: translate(80px, 0); animation-timing-function: cubic-bezier(0.3, 0, 0.2, 1); }
+    75% { transform: translate(80px, -10px); animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
+    100% { transform: translate(0, 0); }
+  }
   @media (prefers-reduced-motion: reduce) {
     :global(:is(a, .lane):hover) > .plate :global(svg),
     :global(:is(a, .lane):focus-within) > .plate :global(svg) {
@@ -360,7 +367,7 @@ const svg = raw.replaceAll('opacity="0.2"', 'class="tone"').replaceAll('PLATEID'
     .plate :global(:is(.lv, .needle, .mic-rig, .mic-stem, .plane, .sq, .sq .tone, .one)) {
       transition: none;
     }
-    :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(:is(.glass, .lens-clip, .beam, .wisp, .hammer, .leaf-l, .leaf-r, .route, .goal, .line, .u-l, .u-r, .u-m, .arc, .head)) {
+    :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(:is(.glass, .lens-clip, .beam, .wisp, .hammer, .leaf-l, .leaf-r, .route, .goal, .line, .u-l, .u-r, .u-m, .arc, .head, .pen, .ink)) {
       animation: none;
     }
   }
