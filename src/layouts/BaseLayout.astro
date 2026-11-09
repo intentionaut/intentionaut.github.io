@@ -305,5 +305,34 @@ const graph = {
         }
       })();
     </script>
+    <script is:inline>
+      /* Easter egg: hold Shift over a "Book a free call" button and it reads "Let's rock".
+         Visual only: the accessible name stays as written. */
+      (function () {
+        var sel = 'a.btn-primary[href*="calendar.app.google"]';
+        var on = null, saved = null;
+        function swap(a) {
+          var t = a.firstChild;
+          if (!t || t.nodeType !== 3) return;
+          on = a; saved = t.nodeValue;
+          a.setAttribute('aria-label', a.textContent.trim());
+          t.nodeValue = "Let's rock ";
+          a.addEventListener('mouseleave', restore, { once: true });
+        }
+        function restore() {
+          if (!on) return;
+          on.firstChild.nodeValue = saved;
+          on.removeAttribute('aria-label');
+          on = null;
+        }
+        addEventListener('keydown', function (e) {
+          if (e.key !== 'Shift' || on) return;
+          var a = document.querySelector(sel + ':hover');
+          if (a) swap(a);
+        });
+        addEventListener('keyup', function (e) { if (e.key === 'Shift') restore(); });
+        addEventListener('blur', restore);
+      })();
+    </script>
   </body>
 </html>
