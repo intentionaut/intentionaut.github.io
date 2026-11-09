@@ -174,16 +174,16 @@ const catalogSchema = {
     height: auto;
     aspect-ratio: 4 / 5;
     object-fit: cover;
-    background: #fdfaf4;
+    background: var(--card);
     padding: 7px 7px 22px;
-    border: 1px solid #e6ddd0;
+    border: 1px solid var(--slate);
     /* Deterrent only: no long-press save menu or text selection. */
     -webkit-touch-callout: none;
     user-select: none;
     box-shadow:
-      0 1px 1px rgb(56 35 74 / 0.08),
-      0 3px 6px -1px rgb(56 35 74 / 0.12),
-      0 12px 20px -8px rgb(56 35 74 / 0.22);
+      0 1px 1px color-mix(in srgb, var(--ink) 8%, transparent),
+      0 3px 6px -1px color-mix(in srgb, var(--ink) 12%, transparent),
+      0 12px 20px -8px color-mix(in srgb, var(--ink) 22%, transparent);
   }
   .workshop-prints img:nth-child(1) { rotate: -3deg; }
   .workshop-prints img:nth-child(2) { rotate: 2deg; }

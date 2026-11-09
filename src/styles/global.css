@@ -28,16 +28,6 @@
   line-gap-override: 0%;
 }
 
-@font-face {
-  font-family: 'Roboto Serif Variable Fallback';
-  font-display: swap;
-  src: local('Georgia'), local('Times New Roman');
-  size-adjust: 116.9%;
-  ascent-override: 79.3%;
-  descent-override: 20.9%;
-  line-gap-override: 0%;
-}
-
 :root {
   /* Palette */
   --paper: #f7e9e0;
@@ -1699,8 +1689,7 @@ a.talk-title:hover {
 .contact-form-section input,
 .contact-form-section select,
 .contact-form-section textarea {
-  font-family: 'Roboto Serif Variable', 'Roboto Serif Variable Fallback',
-    Georgia, 'Times New Roman', serif;
+  font-family: var(--font-body);
   font-size: 0.98rem;
   color: var(--ink);
   background: transparent;
