@@ -62,7 +62,7 @@ const stats = [
       <div class="page-head-intro">
         <div class="page-head-text">
           <p class="eyebrow">About</p>
-          <h1>{entry.data.title}</h1>
+          <h1>{entry.data.title.split(/(?<=\.) /).map((sentence) => <span>{sentence} </span>)}</h1>
         </div>
         <figure class="portrait">
           <div class="img-card">
@@ -143,18 +143,22 @@ const stats = [
      centred so they read as a pair. Everything else - the "career highlights"
      line, the stat ribbon, the prose - is full width below. Below the tablet
      width (40rem) the portrait is hidden entirely, leaving just the headline. */
-  /* The about heading is a full sentence: smaller than other long titles so it
-     sits in four lines on desktop, five on small laptops. */
+  /* The about heading is two sentences: smaller than other long titles, each
+     sentence starts its own line, and lines are balanced so none is a
+     single word. */
   .page-head.long-title h1 {
     font-size: clamp(2.1rem, 4.4vw, 2.4rem);
-    /* Even lines, so no line is a single word. */
+  }
+  .page-head.long-title h1 span {
+    display: block;
     text-wrap: balance;
   }
   .page-head-intro {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-8);
-    align-items: center;
+    /* The heading lines up with the top of the portrait, not its middle. */
+    align-items: start;
   }
 
   .page-head-intro .portrait {
