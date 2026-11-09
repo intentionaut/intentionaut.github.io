@@ -60,7 +60,8 @@ const palette = [
   { token: '--slate', name: 'Slate', hex: '#e0d2cb', use: 'Borders, dividers, code blocks' },
   { token: '--accent', name: 'Accent', hex: '#c85060', use: 'Rules, borders, underlines, focus rings, and any text 24px and up (numerals, the italic word in a headline): 3.71:1 passes for large text' },
   { token: '--accent-text', name: 'Accent text', hex: '#b8404f', use: 'Accent-coloured text at small sizes: eyebrows, links, open questions. 4.55:1 on paper, the closest shade to --accent that passes' },
-  { token: '--mendl', name: 'Teal wash', hex: 'rgba(169, 203, 208, 0.55)', use: 'Highlights, selection, washes' },
+  { token: '--teal', name: 'Teal', hex: '#a9cbd0', use: 'Plate tones, carousel and talk-row bars. Never text' },
+  { token: '--mendl', name: 'Teal wash', hex: '--teal at 55%', use: 'Highlights, selection, washes' },
 ];
 
 const typeScale = [
@@ -77,12 +78,6 @@ const spacing = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((i) => ({
   token: `--space-${i}`,
   px: 4 * i,
 }));
-
-const radii = [
-  { token: '--radius-s', value: '3px' },
-  { token: '--radius-m', value: '5px' },
-  { token: '--radius-l', value: '8px' },
-];
 
 const motion = [
   { token: '--dur-fast', value: '0.15s' },
@@ -234,21 +229,8 @@ const zindex = [
         <p class="ds-note">
           Square is part of the identity: cards, panels, banners, images,
           buttons, pills and chips all have square corners. Only focus rings and
-          loading skeletons round 2px, so they read as temporary. No component
-          uses the tokens below; they stay for reference.
+          loading skeletons round 2px, so they read as temporary.
         </p>
-        <div class="ds-radii">
-          {radii.map((r) => (
-            <div class="ds-radius">
-              <span
-                class="ds-radius-shape"
-                style={`border-radius: var(${r.token})`}
-              ></span>
-              <code>{r.token}</code>
-              <span class="ds-muted">{r.value}</span>
-            </div>
-          ))}
-        </div>
       </section>
 
       <section class="ds-section" id="motion">
@@ -347,7 +329,7 @@ const zindex = [
 
         <h3 class="ds-sub">Command pill</h3>
         <div class="ds-demo ds-demo-block">
-          <span class="pill pill-light"><span class="pill-prompt">$</span> git clone https://github.com/intentionaut/familiar.git</span>
+          <span class="pill"><span class="pill-prompt">$</span> git clone https://github.com/intentionaut/familiar.git</span>
           <p class="ds-demo-caption">
             Monospace, a prompt marker in <code>--accent-text</code>, and a
             slate chip behind it. <code>.pill</code> in global.css;
@@ -628,7 +610,7 @@ const zindex = [
     color: var(--ink);
     background: rgba(56, 35, 74, 0.06);
     padding: 0.05em 0.35em;
-    border-radius: 3px;
+    border-radius: 0;
   }
 
   .ds-index code {
@@ -764,26 +746,6 @@ const zindex = [
   }
 
   /* Radius */
-  .ds-radii {
-    display: flex;
-    gap: var(--space-8);
-    margin-top: var(--space-7);
-  }
-
-  .ds-radius {
-    display: grid;
-    gap: var(--space-3);
-    justify-items: start;
-  }
-
-  .ds-radius-shape {
-    display: block;
-    width: 5rem;
-    height: 5rem;
-    border: 1px solid var(--ink);
-    background: var(--paper);
-  }
-
   /* Motion + layer */
   .ds-tokens {
     margin-top: var(--space-6);
