@@ -15,5 +15,5 @@ test('the case-study row sits between the offers and the projects', () => {
 
 test('the homepage headline is unchanged', () => {
   // The id is the headline test's hook; the served text (what crawlers read) stays this.
-  assert.match(src, /<h1 id="hero-h1">I speak <em>four<\/em> languages: design, product, data&nbsp;&amp;&nbsp;AI\.<\/h1>/);
+  assert.match(src, /<p id="hero-h1" class="hero-title">I speak <em>four<\/em> languages: design, product, data&nbsp;&amp;&nbsp;AI\.<\/p>/);
 });

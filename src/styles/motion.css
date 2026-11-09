@@ -82,7 +82,7 @@
 
 /* Hero, from the earlier "expressive" round: the rose word settles in,
    then headline and lede drift apart slightly as you scroll. */
-[data-motion='drafting'] .hero h1 {
+[data-motion='drafting'] .hero .hero-title {
   transform: translateY(calc(var(--scroll, 0) * -0.12px));
 }
 
@@ -91,7 +91,7 @@
 }
 
 /* The rose italic word settles in after the headline. */
-[data-motion='drafting'] .hero h1 em {
+[data-motion='drafting'] .hero .hero-title em {
   display: inline-block;
   animation: motion-em 1.1s var(--ease-out) 0.55s backwards;
 }

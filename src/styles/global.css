@@ -423,12 +423,12 @@ h3 {
   padding-block: clamp(4.5rem, 10vw, 8.5rem) clamp(3rem, 6vw, 5rem);
 }
 
-.hero h1 {
+.hero .hero-title {
   max-width: 18ch;
   font-size: var(--text-display);
 }
 
-.hero h1 em {
+.hero .hero-title em {
   /* Large text (24px and up) only needs 3:1: the original coral, 3.71:1 on paper. */
   font-style: italic;
   color: var(--accent);
