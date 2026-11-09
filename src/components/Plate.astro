@@ -207,7 +207,7 @@ const svg = raw.replaceAll('opacity="0.2"', 'class="tone"').replaceAll('PLATEID'
     transform-box: view-box;
     transition: transform 0.35s cubic-bezier(0.3, 0, 0.2, 1);
   }
-  .plate :global(.mic-stem) { transform-origin: 128px 232px; }
+  .plate :global(.mic-stem) { transform-origin: 128px 224px; }
   :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(:is(.mic-rig, .mic-stem)) {
     transition: transform 0.55s cubic-bezier(0.34, 1.45, 0.64, 1);
   }
@@ -215,7 +215,7 @@ const svg = raw.replaceAll('opacity="0.2"', 'class="tone"').replaceAll('PLATEID'
     transform: translateY(-14px);
   }
   :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.mic-stem) {
-    transform: scaleY(1.39);
+    transform: scaleY(1.5);
   }
   @media (prefers-reduced-motion: reduce) {
     :global(:is(a, .lane):hover) > .plate :global(svg),
