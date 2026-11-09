@@ -147,6 +147,8 @@ const stats = [
      sits in four lines on desktop, five on small laptops. */
   .page-head.long-title h1 {
     font-size: clamp(2.1rem, 4.4vw, 2.4rem);
+    /* Even lines, so no line is a single word. */
+    text-wrap: balance;
   }
   .page-head-intro {
     display: grid;
