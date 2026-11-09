@@ -9,7 +9,7 @@ export const offerIcon: Record<string, string> = {
   '/forward-deployed/': 'hammer',
   '/office-hours/': 'coffee',
   '/mentoring/': 'plant',
-  '/keynote-speaker/': 'microphone-stage',
+  '/keynote-speaker/': 'microphone-ribbon',
   '/ai-pilot-to-production/': 'airplane-takeoff',
   '/workshops/ai-strategy/': 'path',
   '/workshops/ai-opportunity-mapping/': 'map-trifold',

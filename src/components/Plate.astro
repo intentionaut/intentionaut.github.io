@@ -46,8 +46,8 @@ const svg = raw.replaceAll('opacity="0.2"', 'class="tone"').replaceAll('PLATEID'
   }
   /* A breeze: when the linked card or lane around a plate is hovered or
      focused, the icon sways gently like grass. Still for reduced motion. */
-  :global(:is(a, .lane):hover) > .plate:not(.icon-compass, .icon-magnifying-glass, .icon-lighthouse, .icon-coffee, .icon-hammer, .icon-plant) :global(svg),
-  :global(:is(a, .lane):focus-within) > .plate:not(.icon-compass, .icon-magnifying-glass, .icon-lighthouse, .icon-coffee, .icon-hammer, .icon-plant) :global(svg) {
+  :global(:is(a, .lane):hover) > .plate:not(.icon-compass, .icon-magnifying-glass, .icon-lighthouse, .icon-coffee, .icon-hammer, .icon-plant, .icon-microphone-ribbon) :global(svg),
+  :global(:is(a, .lane):focus-within) > .plate:not(.icon-compass, .icon-magnifying-glass, .icon-lighthouse, .icon-coffee, .icon-hammer, .icon-plant, .icon-microphone-ribbon) :global(svg) {
     animation: plate-breeze 1.6s ease-in-out infinite;
     transform-origin: 50% 85%;
   }
@@ -200,12 +200,29 @@ const svg = raw.replaceAll('opacity="0.2"', 'class="tone"').replaceAll('PLATEID'
   @keyframes plate-leaf-l {
     30% { transform: rotate(-10deg); }
   }
+  /* Ribbon mic: raised to speaking height. Head and fork rise up the stand
+     with a small settle while the stem stretches to meet them; the base stays
+     put. 0.55s, holds while hovered. */
+  .plate :global(:is(.mic-rig, .mic-stem)) {
+    transform-box: view-box;
+    transition: transform 0.35s cubic-bezier(0.3, 0, 0.2, 1);
+  }
+  .plate :global(.mic-stem) { transform-origin: 128px 232px; }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(:is(.mic-rig, .mic-stem)) {
+    transition: transform 0.55s cubic-bezier(0.34, 1.45, 0.64, 1);
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.mic-rig) {
+    transform: translateY(-14px);
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.mic-stem) {
+    transform: scaleY(1.39);
+  }
   @media (prefers-reduced-motion: reduce) {
     :global(:is(a, .lane):hover) > .plate :global(svg),
     :global(:is(a, .lane):focus-within) > .plate :global(svg) {
       animation: none;
     }
-    .plate :global(.needle) {
+    .plate :global(:is(.needle, .mic-rig, .mic-stem)) {
       transition: none;
     }
     :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(:is(.glass, .lens-clip, .beam, .wisp, .hammer, .leaf-l, .leaf-r)) {
