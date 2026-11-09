@@ -25,7 +25,7 @@ const iconLabels: Record<string, string> = {
   'chats-circle': 'We scope it',
   'signpost': 'Clear direction',
   'calendar-blank': 'Book a call',
-  'microphone-stage': 'Speaking',
+  'microphone-ribbon': 'Speaking',
   'pen-nib': 'Writing',
   'book-open-text': 'Case studies',
   'airplane-takeoff': 'AI pilot to production',
@@ -578,7 +578,8 @@ const zindex = [
           Phosphor duotone icons (MIT) set in a Plate: a 64px double-ruled
           frame like the buttons. The duotone layer takes pink or blue, and
           neighbours alternate. Use <code>&lt;Plate name="compass" tone="blue" /&gt;</code>.
-          Never an icon made of the letters "AI". Placement is chosen per page. Each offer's icon is set once in
+          Never an icon made of the letters "AI". The ribbon mic is drawn in-house to the same rules (16-unit
+          strokes, round ends, one duotone layer), since Phosphor has none. Placement is chosen per page. Each offer's icon is set once in
           <code>src/data/icons.ts</code>; wide lists use the envelope layout
           (plate on the left), square cards the centred one. When a link
           or lane holding a plate is hovered or focused, the duotone icon
@@ -588,7 +589,8 @@ const zindex = [
           the magnifying glass slides in and finds a £ inside its lens; the
           lighthouse beam makes one turn behind the tower; the coffee's steam
           draws up one line at a time; the hammer makes one strike;
-          the plant's leaves dip and spring open.
+          the plant's leaves dip and spring open; the ribbon mic is raised
+          to speaking height.
         </p>
         <ul class="ds-icons">
           {iconSet.map((ic, i) => (
