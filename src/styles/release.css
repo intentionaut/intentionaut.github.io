@@ -212,7 +212,7 @@
   .file {
     font-family: var(--font-mono);
     font-size: 0.85rem;
-    padding: 0.8rem 1rem;
+    padding: 0.8rem var(--space-4);
     border: 1px solid var(--slate);
     border-left: 3px solid var(--accent);
     border-radius: 0;
@@ -287,12 +287,12 @@
   color: var(--muted);
   font: inherit;
   font-size: 0.95rem;
-  padding: 0.5rem 0.85rem;
+  padding: var(--space-2) 0.85rem;
   border-radius: 0;
   cursor: pointer;
   display: inline-flex;
   align-items: baseline;
-  gap: 0.5rem;
+  gap: var(--space-2);
   transition: background var(--dur-base), color var(--dur-base);
 }
 .stab:hover {
