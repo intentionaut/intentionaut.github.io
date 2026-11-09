@@ -309,6 +309,7 @@ h3 {
 
 .eyebrow {
   margin: 0 0 var(--space-6);
+  line-height: inherit; /* the home eyebrow is an h1; keep body leading, not heading leading */
   font-family: var(--font-body);
   font-size: 0.78rem;
   font-weight: 600;
