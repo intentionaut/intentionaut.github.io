@@ -1,19 +1,19 @@
 ---
-import Plate from '../../components/Plate.astro';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { templates, type Template } from '../../data/templates';
+import Plate from '../../../components/Plate.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { families, toolHref, toolPdf, toolPreview, type Family, type Tool } from '../../../data/tools';
 
 export function getStaticPaths() {
-  return templates.map((t) => ({ params: { slug: t.slug }, props: { t } }));
+  return families.flatMap((f) => f.tools.map((t) => ({ params: { family: f.slug, slug: t.slug }, props: { f, t } })));
 }
-const { t } = Astro.props as { t: Template };
-const others = templates.filter((o) => o.slug !== t.slug);
-const pdf = `/templates/${t.file}`;
+const { f, t } = Astro.props as { f: Family; t: Tool };
+const others = f.tools.filter((o) => o.slug !== t.slug);
+const pdf = toolPdf(f, t);
 const schema = {
   '@type': 'CreativeWork',
   name: t.title,
   description: t.lede,
-  url: `https://intentionaut.com/templates/${t.slug}/`,
+  url: `https://intentionaut.com${toolHref(f, t)}`,
   license: 'https://creativecommons.org/licenses/by/4.0/',
   isAccessibleForFree: true,
   author: { '@id': 'https://intentionaut.com/#person' },
@@ -21,20 +21,20 @@ const schema = {
 ---
 
 <BaseLayout
-  title={`${t.title}: free template | Saielle DaSilva`}
-  description={`${t.lede} A free ${t.family} template by Saielle DaSilva, CC BY 4.0.`}
+  title={`${t.title}: free tool | Saielle DaSilva`}
+  description={`${t.lede} A free ${f.name} tool by Saielle DaSilva, CC BY 4.0.`}
   jsonLd={[schema]}
 >
   <section class="wrap">
     <header class="page-head">
-      <p class="eyebrow"><a href="/templates/#impact-first-ai">{t.family}</a> · {t.question}</p>
+      <p class="eyebrow"><a href="/tools/">Tools</a> · <a href={`/tools/${f.slug}/`}>{f.name}</a></p>
       <h1>{t.title}</h1>
       <p class="lede">{t.expand && <><span class="expand">{t.expand.map((w, k) => <>{k > 0 && ', '}<strong>{w[0]}</strong>{w.slice(1)}</>)}.</span>{' '}</>}{t.lede}</p>
       <p><a class="btn" href={pdf} target="_blank" rel="noopener">Open the PDF</a> <span class="rate-shape">{t.pages}, CC BY 4.0</span></p>
     </header>
 
     <a class="sheet-preview" href={pdf} target="_blank" rel="noopener" aria-label={`Open ${t.title} (PDF) in a new tab`}>
-      <img src={`/images/templates/${t.slug}.png`} alt={`Page one of ${t.title}`} width="1400" />
+      <img src={toolPreview(f, t)} alt={`Page one of ${t.title}`} width="1400" />
     </a>
 
     <section class="rates-section" aria-labelledby="what-h">
@@ -79,10 +79,10 @@ const schema = {
     </section>
 
     <section class="rates-section" aria-labelledby="more-h">
-      <h2 id="more-h">The other {t.family} tools</h2>
+      <h2 id="more-h">The other {f.name} tools</h2>
       <div class="rates">
         {others.map((o, i) => (
-          <a class="rate-row rate-card envelope" href={`/templates/${o.slug}/`}>
+          <a class="rate-row rate-card envelope" href={toolHref(f, o)}>
             <Plate name={o.icon} tone={i % 2 ? 'blue' : 'pink'} />
             <p class="eyebrow">{o.question}</p>
             <p class="rate-name">{o.title}</p>
@@ -91,7 +91,7 @@ const schema = {
         ))}
       </div>
       <p>
-        <a class="link-arrow" href="/workshops/ai-strategy/"><span>Want someone outside the team to run it with you?</span></a>
+        {f.workshop && <a class="link-arrow" href={f.workshop.href}><span>{f.workshop.label}</span></a>}
       </p>
     </section>
   </section>
