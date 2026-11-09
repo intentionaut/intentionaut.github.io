@@ -16,6 +16,7 @@ export type FaqPlacement =
   | 'for-scale-ups'
   | 'ai-pilot'
   | 'strategy-sprint'
+  | 'tools-impact-first-ai'
   | 'home';
 
 export interface Faq {
@@ -32,6 +33,37 @@ export interface Faq {
 }
 
 export const faqs: Faq[] = [
+  // /tools/impact-first-ai/: third person so answer engines can attribute the tools (9 Nov 2026).
+  {
+    question: 'What is Impact First AI?',
+    answer:
+      'Impact First AI is a set of free tools by Saielle DaSilva for showing the value of AI work, one practice at a time. Teams start from the business number a change should move, then work back to the work.',
+    placements: ['tools-impact-first-ai'],
+  },
+  {
+    question: 'What is the FIRST AI Maturity Model?',
+    answer:
+      "The FIRST AI Maturity Model is a two-page worksheet by Saielle DaSilva. It rates one way of working, such as discovery or build and testing, on five rungs, each with its own evidence. The back page tracks one practice over time.",
+    placements: ['tools-impact-first-ai'],
+  },
+  {
+    question: 'What does FIRST stand for?',
+    answer:
+      'Faster, Improved, Reshaped, Scaled and Transformed: five kinds of change AI can make to how a team works, from saving time on a task to redesigning decisions, roles and what customers get.',
+    placements: ['tools-impact-first-ai'],
+  },
+  {
+    question: 'What is the Impact Chain?',
+    answer:
+      "The Impact Chain is a one-page canvas by Saielle DaSilva for shaping AI product strategy. Ten boxes run from the job the AI takes on, through proof, trust and habit, to the number it moves and the payoff, with cost to serve and price underneath. The first box a team can't fill with evidence is the weak link.",
+    placements: ['tools-impact-first-ai'],
+  },
+  {
+    question: 'Are the Impact First AI tools free to use?',
+    answer:
+      'Yes. Both are free under CC BY 4.0, so anyone can share and adapt them with credit to Saielle DaSilva, intentionaut.com. Saielle also runs them with teams as an AI strategy workshop.',
+    placements: ['tools-impact-first-ai'],
+  },
   // /product-strategy-sprint/: wording from Elle, 7 Nov 2026.
   {
     question: 'How far ahead does the roadmap from the product strategy sprint go?',
