@@ -8,7 +8,6 @@ import { faqsFor } from '../data/faqs';
 import RelatedReading from '../components/RelatedReading.astro';
 import FaqList from '../components/FaqList.astro';
 import WhoFor from '../components/WhoFor.astro';
-import { PRIMARY_PHRASE } from '../data/positioning';
 import { BOOKING_URL } from '../data/links';
 
 
@@ -53,8 +52,8 @@ const faqSchema = {
 ---
 
 <BaseLayout
-  title={`${PRIMARY_PHRASE}, London | Saielle DaSilva`}
-  description="Fractional CPO for AI products, from Saielle DaSilva. Her products have served over 100 million customers, at Amazon, Sainsbury's and Cazoo. Based in London."
+  title="Fractional CPO London, UK & Europe | Saielle DaSilva"
+  description="Fractional CPO for scale-ups building AI products. Saielle DaSilva's products have served 100 million customers. London-based, working across Europe."
   jsonLd={[serviceSchema, faqSchema]}
   ogImage="/og/fractional.png"
 >
