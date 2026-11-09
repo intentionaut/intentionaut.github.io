@@ -16,7 +16,7 @@ const raw = icons[`../assets/icons/${name}.svg`] as string | undefined;
 if (!raw) throw new Error(`Plate: no icon named "${name}"`);
 // Icons with a clipPath use PLATEID so each plate on a page gets its own id.
 const uid = `p${Math.random().toString(36).slice(2, 8)}`;
-const svg = raw.replace('opacity="0.2"', 'class="tone"').replaceAll('PLATEID', uid);
+const svg = raw.replaceAll('opacity="0.2"', 'class="tone"').replaceAll('PLATEID', uid);
 ---
 
 <span class:list={['plate', tone, `icon-${name}`]} aria-hidden="true" set:html={svg} />
@@ -46,8 +46,8 @@ const svg = raw.replace('opacity="0.2"', 'class="tone"').replaceAll('PLATEID', u
   }
   /* A breeze: when the linked card or lane around a plate is hovered or
      focused, the icon sways gently like grass. Still for reduced motion. */
-  :global(:is(a, .lane):hover) > .plate:not(.icon-compass, .icon-magnifying-glass, .icon-lighthouse, .icon-coffee, .icon-hammer) :global(svg),
-  :global(:is(a, .lane):focus-within) > .plate:not(.icon-compass, .icon-magnifying-glass, .icon-lighthouse, .icon-coffee, .icon-hammer) :global(svg) {
+  :global(:is(a, .lane):hover) > .plate:not(.icon-compass, .icon-magnifying-glass, .icon-lighthouse, .icon-coffee, .icon-hammer, .icon-plant) :global(svg),
+  :global(:is(a, .lane):focus-within) > .plate:not(.icon-compass, .icon-magnifying-glass, .icon-lighthouse, .icon-coffee, .icon-hammer, .icon-plant) :global(svg) {
     animation: plate-breeze 1.6s ease-in-out infinite;
     transform-origin: 50% 85%;
   }
@@ -180,6 +180,26 @@ const svg = raw.replace('opacity="0.2"', 'class="tone"').replaceAll('PLATEID', u
     80% { transform: rotate(-3deg); animation-timing-function: ease-in; }
     100% { transform: rotate(0); }
   }
+  /* Plant: drawn in parts (stem, two leaves) so each leaf turns on the round
+     end of its own branch with no gap. Each dips 10 degrees and springs open,
+     right then left. About 0.7s, once per hover. */
+  .plate :global(:is(.leaf-l, .leaf-r)) {
+    transform-box: view-box;
+  }
+  .plate :global(.leaf-l) { transform-origin: 88.5px 160.5px; }
+  .plate :global(.leaf-r) { transform-origin: 138.5px 149.5px; }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.leaf-r) {
+    animation: plate-leaf-r 0.6s cubic-bezier(0.34, 1.3, 0.64, 1) both;
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.leaf-l) {
+    animation: plate-leaf-l 0.6s cubic-bezier(0.34, 1.3, 0.64, 1) 0.12s both;
+  }
+  @keyframes plate-leaf-r {
+    30% { transform: rotate(10deg); }
+  }
+  @keyframes plate-leaf-l {
+    30% { transform: rotate(-10deg); }
+  }
   @media (prefers-reduced-motion: reduce) {
     :global(:is(a, .lane):hover) > .plate :global(svg),
     :global(:is(a, .lane):focus-within) > .plate :global(svg) {
@@ -188,7 +208,7 @@ const svg = raw.replace('opacity="0.2"', 'class="tone"').replaceAll('PLATEID', u
     .plate :global(.needle) {
       transition: none;
     }
-    :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(:is(.glass, .lens-clip, .beam, .wisp, .hammer)) {
+    :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(:is(.glass, .lens-clip, .beam, .wisp, .hammer, .leaf-l, .leaf-r)) {
       animation: none;
     }
   }
