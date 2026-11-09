@@ -798,12 +798,14 @@ h3 {
   margin-bottom: 0.75em;
 }
 
-.prose li::marker {
+.prose li::marker,
+.rate-card li::marker {
   color: var(--accent-text);
 }
 
 /* Square bullets, to match the square buttons. Plain lists only. */
-.prose ul:not([class]) {
+.prose ul:not([class]),
+.rate-card ul:not([class]) {
   list-style-type: square;
 }
 
