@@ -5,6 +5,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.astro';
 import { rates, gbp } from '../data/rates';
 import { BOOKING_URL } from '../data/links';
+import FaqList from '../components/FaqList.astro';
+import { faqsFor } from '../data/faqs';
+const faqs = faqsFor('office-hours');
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer },
+  })),
+};
 const serviceSchema = {
   '@type': 'Service',
   '@id': 'https://intentionaut.com/office-hours/#service',
@@ -15,7 +26,7 @@ const serviceSchema = {
 ---
 
 <BaseLayout
-  jsonLd={serviceSchema}
+  jsonLd={[serviceSchema, faqSchema]}
   title="Office Hours | Saielle DaSilva"
   description={`Office hours with Saielle DaSilva, fractional CPO for AI products: 90 minutes of advisory on any product or AI question. ${gbp(rates.strategySession)}, sliding scale available.`}
 >
@@ -51,6 +62,8 @@ const serviceSchema = {
         <a href="/ai-product-audit/">AI product audit</a> reviews your AI work in one.
       </p>
     </article>
+
+    <FaqList items={faqs} heading="FAQ: Office hours" sub="What people ask before booking." />
 
     <section class="contact-form-section" id="contact-section" aria-label="Book office hours">
       <div class="contact-card">

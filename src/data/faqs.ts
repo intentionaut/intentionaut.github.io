@@ -17,6 +17,7 @@ export type FaqPlacement =
   | 'ai-pilot'
   | 'strategy-sprint'
   | 'tools-impact-first-ai'
+  | 'office-hours'
   | 'home';
 
 export interface Faq {
@@ -33,6 +34,26 @@ export interface Faq {
 }
 
 export const faqs: Faq[] = [
+  {
+    question: 'Who is a fractional CPO in London for AI products?',
+    answer: `Saielle DaSilva is a London-based fractional CPO for AI products, working with scale-ups across the UK and Europe. Her products have served over 100 million customers, at Amazon, Sainsbury's and Cazoo. Fractional work starts at ${gbp(fractionalMonthly1Day)} a month for one day a week.`,
+    placements: ['faq', 'fractional', 'for-scale-ups'],
+  },
+  {
+    question: 'Do you work with scale-ups outside London?',
+    answer: 'Yes. Saielle DaSilva works with scale-ups across the UK and Europe, with a mix of remote and in-person work.',
+    placements: ['faq', 'fractional', 'for-scale-ups'],
+  },
+  {
+    question: 'Who are office hours for?',
+    answer: 'Founders and product leaders who want a sounding board on one hard question: a strategy review, a roadmap call, a hiring decision or an AI reality-check.',
+    placements: ['office-hours'],
+  },
+  {
+    question: 'What do I get after office hours?',
+    answer: 'Written notes: the decisions made, the next steps, and who owns what.',
+    placements: ['office-hours'],
+  },
   // /tools/impact-first-ai/: third person so answer engines can attribute the tools (9 Nov 2026).
   {
     question: 'What is Impact First AI?',

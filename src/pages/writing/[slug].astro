@@ -73,6 +73,15 @@ const DESCRIPTION_OVERRIDES: Record<string, string> = {
     "Uptime and bug counts can't measure AI. A new quality framework for software that has to handle ambiguity, context and emergence.",
 };
 
+// Search titles for posts whose own title runs past ~60 characters.
+// Title tag only: the headline on the page is unchanged.
+const TITLE_OVERRIDES: Record<string, string> = {
+  'the-ai-agent-reality-check': 'AI Agent Reality Check: Why 40% Will Fail',
+  'the-610m-browser-bet-how-atlassian-plans-to-own-the-future-of-work': "Atlassian's $610M Browser Bet",
+  'depression-and-work': 'Depression, Anxiety and Product Leadership',
+  'execution-vs-data-moats': 'When Everyone Has AI: Execution Beats Data',
+};
+
 // "A personal note" keeps its full subtitle, at Elle's request.
 const postDescription = post
   ? DESCRIPTION_OVERRIDES[post.slug] ??
@@ -143,7 +152,7 @@ const articleLd = meta
 
 {type === 'beehiiv' && post && (
   <BaseLayout
-    title={`${post.title} | Saielle DaSilva`}
+    title={`${TITLE_OVERRIDES[post.slug] ?? post.title} | Saielle DaSilva`}
     description={postDescription}
     ogType="article"
     ogImage={`/share/${Astro.params.slug}.png`}
@@ -192,7 +201,7 @@ const articleLd = meta
 
 {type === 'essay' && essay && essayContent && (
   <BaseLayout
-    title={`${essay.data.title} | Saielle DaSilva`}
+    title={`${TITLE_OVERRIDES[essay.id] ?? essay.data.title} | Saielle DaSilva`}
     description={essayDescription}
     ogType="article"
     ogImage={`/share/${Astro.params.slug}.png`}
