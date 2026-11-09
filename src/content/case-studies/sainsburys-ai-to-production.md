@@ -31,6 +31,8 @@ Then we built what every team needed once, and shared it:
 
 - **A platform for getting agentic products into production**, so a working pilot had somewhere to go.
 - **A compliance and governance platform, with observability**, so a live system had an owner and could be watched.
+- **A GenAI gateway with shared policies** for reuse, safety, resilience and cost control, so every team didn't solve them again.
+- **AI governance with an owner**: I hired a product manager for it, and worked with Legal and InfoSec on our rules and on compliance with EU and UK AI regulation.
 - **An AI register, a governance council and a community of practice**, so we knew what was running and who answered for it.
 - **The first AI playground**, so developers could experiment with LLMs safely, before production.
 - **Data lineage**, which brought the cost of triage down and cut the time to recover from incidents.
