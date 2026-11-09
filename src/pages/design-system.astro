@@ -2,7 +2,6 @@
 import '@fontsource-variable/fraunces';
 import '@fontsource-variable/fraunces/wght-italic.css';
 import '@fontsource-variable/jost';
-import '@fontsource-variable/roboto-serif';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { rates, gbp } from '../data/rates';
 import Plate from '../components/Plate.astro';
@@ -168,18 +167,6 @@ const zindex = [
           </div>
         </div>
 
-        <div class="ds-type-face">
-          <div class="ds-face-sample ds-face-form">
-            Abcdefghijklmnopqrstuvwxyz
-            <br />ABCDEFGHIJKLMNOPQRSTUVWXYZ
-          </div>
-          <div class="ds-face-meta">
-            <strong>Roboto Serif</strong>
-            <code>form fields only</code>
-            <span class="ds-muted">What a reader types into the contact form, and the topic menu. Nowhere else</span>
-          </div>
-        </div>
-
         <h3 class="ds-sub">Type scale</h3>
         <div class="ds-scale">
           {typeScale.map((s) => (
@@ -230,6 +217,8 @@ const zindex = [
           Square is part of the identity: cards, panels, banners, images,
           buttons, pills and chips all have square corners. Only focus rings and
           loading skeletons round 2px, so they read as temporary.
+          One exception: the terminal window on release pages keeps its round
+          window dots and white washes, because it imitates a real window.
         </p>
       </section>
 
@@ -411,7 +400,7 @@ const zindex = [
         <p class="ds-note">
           <code>ContactForm.astro</code>, always inside a Card at the reading
           width. Heading at <code>--text-lg</code>, a one-line intro in ink,
-          uppercase muted field labels, fields in Roboto Serif on a slate
+          uppercase muted field labels, fields in Jost on a slate
           underline, one full-width button, and "Rather talk first? Book a free
           call." under it. While sending, the button reads "Sending…". Once
           sent, the card keeps its height and shows only "Message sent.",
@@ -672,7 +661,7 @@ const zindex = [
   }
 
   .ds-index code {
-    font-family: 'SFMono-Regular', ui-monospace, 'Roboto Mono', Menlo, monospace;
+    font-family: var(--font-mono);
     font-size: 0.78rem;
   }
 
@@ -958,12 +947,6 @@ const zindex = [
 
   .ds-close a {
     color: var(--accent-text);
-  }
-
-  .ds-face-form {
-    font-family: 'Roboto Serif Variable', Georgia, serif;
-    font-weight: 400;
-    color: var(--ink);
   }
 
   .ds-rates {
