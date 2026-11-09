@@ -802,6 +802,11 @@ h3 {
   color: var(--accent-text);
 }
 
+/* Square bullets, to match the square buttons. Plain lists only. */
+.prose ul:not([class]) {
+  list-style-type: square;
+}
+
 .img-wrap {
   max-width: 85%;
   margin: var(--space-8) auto;
