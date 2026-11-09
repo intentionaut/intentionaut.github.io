@@ -21,9 +21,9 @@ const groups = [
   { key: 'region', label: 'Region', options: REGIONS },
 ].map((g) => ({ ...g, options: Object.entries(g.options).filter(([v]) => used(g.key as any).has(v)) }));
 
-const title = 'What the data says about AI in business | Saielle DaSilva';
+const title = 'AI adoption statistics: Gartner CIO survey and more | Saielle DaSilva';
 // COPY FOR APPROVAL (site owner): description, intro and the "last checked" line.
-const description = 'Published figures on AI in business, each with who measured it, the base, the date and a link to the original document.';
+const description = 'Only 13% of CIOs say AI has delivered significant value (Gartner, 2026). Published AI adoption figures, each with its source, sample and date.';
 
 // COPY FOR APPROVAL (site owner): closing block.
 const closing = {
