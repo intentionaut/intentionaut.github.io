@@ -1950,8 +1950,14 @@ a.talk-title:hover {
 }
 .rate-card.envelope > .plate {
   position: absolute;
-  top: var(--space-6);
+  top: 50%;
   left: var(--space-6);
+  transform: translateY(-50%);
+}
+/* Optional eyebrow slot above the title: spans the whole card, not the first grid column. */
+.rate-card > .eyebrow {
+  grid-column: 1 / -1;
+  margin: 0;
 }
 .rate-card.envelope .rate-name {
   letter-spacing: 0.12em;
