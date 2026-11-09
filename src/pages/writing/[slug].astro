@@ -52,11 +52,33 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 
 const related = await relatedFor(Astro.url.pathname);
 
+// Search descriptions for beehiiv posts whose subtitle reads poorly as one.
+// Meta only: the subtitle in beehiiv, email and on the page is unchanged.
+const DESCRIPTION_OVERRIDES: Record<string, string> = {
+  'building-ai-that-actually-helps':
+    "Why AI is getting human again: the features that make a day easier, a decision clearer, and what product teams should build next.",
+  'execution-vs-data-moats':
+    "Proprietary data used to be the moat. Now APIs and general models match it. Why speed and execution now decide who wins with AI.",
+  'impact-cant-bypass-politics':
+    "A team shipping well still lost the room. How a feature and an outcome got folded into one, and how to reopen the conversation.",
+  'leading-data-transformation-in-the-age-of-ai':
+    "AI needs data that flows differently. The human factors, stewardship and team habits that turn a data strategy into changed decisions.",
+  'the-ai-agent-reality-check':
+    "Enterprise AI agents will fail on workflows, not models. Three anti-patterns, starting with agent washing, and how to avoid them.",
+  'the-ai-opportunity-you-re-missing':
+    "From my ProductTank Oxford talk: 42% of companies scrapped most AI work in 2025. Where real user needs meet reliable AI.",
+  'the-enterprise-guide-to-ai-economics':
+    "Why AI budgets spiral when last year's estimates meet this year's projects, and how product leaders can budget AI work sustainably.",
+  'the-new-architecture-of-software-quality':
+    "Uptime and bug counts can't measure AI. A new quality framework for software that has to handle ambiguity, context and emergence.",
+};
+
 // "A personal note" keeps its full subtitle, at Elle's request.
 const postDescription = post
-  ? post.slug === 'a-personal-note'
+  ? DESCRIPTION_OVERRIDES[post.slug] ??
+    (post.slug === 'a-personal-note'
     ? post.subtitle || post.title
-    : trimDescription(post.subtitle || post.title)
+    : trimDescription(post.subtitle || post.title))
   : '';
 
 const essayDescription = essay
