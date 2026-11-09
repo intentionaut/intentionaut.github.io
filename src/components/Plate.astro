@@ -42,6 +42,24 @@ const svg = raw.replace('opacity="0.2"', 'class="tone"');
     height: 32px;
     color: var(--ink);
   }
+  /* A breeze: when the linked card or lane around a plate is hovered or
+     focused, the icon sways gently like grass. Still for reduced motion. */
+  :global(:is(a, .lane):hover) > .plate :global(svg),
+  :global(:is(a, .lane):focus-within) > .plate :global(svg) {
+    animation: plate-breeze 1.6s ease-in-out infinite;
+    transform-origin: 50% 85%;
+  }
+  @keyframes plate-breeze {
+    0%, 100% { transform: rotate(0); }
+    30% { transform: rotate(6deg); }
+    70% { transform: rotate(-4deg); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    :global(:is(a, .lane):hover) > .plate :global(svg),
+    :global(:is(a, .lane):focus-within) > .plate :global(svg) {
+      animation: none;
+    }
+  }
   .plate.pink :global(.tone) {
     fill: #c85060;
     opacity: 0.45;
