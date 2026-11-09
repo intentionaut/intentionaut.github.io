@@ -46,8 +46,8 @@ const svg = raw.replaceAll('opacity="0.2"', 'class="tone"').replaceAll('PLATEID'
   }
   /* A breeze: when the linked card or lane around a plate is hovered or
      focused, the icon sways gently like grass. Still for reduced motion. */
-  :global(:is(a, .lane):hover) > .plate:not(.icon-compass, .icon-magnifying-glass, .icon-lighthouse, .icon-coffee, .icon-hammer, .icon-plant, .icon-microphone-ribbon, .icon-airplane-takeoff, .icon-path, .icon-squares-choose, .icon-stairs) :global(svg),
-  :global(:is(a, .lane):focus-within) > .plate:not(.icon-compass, .icon-magnifying-glass, .icon-lighthouse, .icon-coffee, .icon-hammer, .icon-plant, .icon-microphone-ribbon, .icon-airplane-takeoff, .icon-path, .icon-squares-choose, .icon-stairs) :global(svg) {
+  :global(:is(a, .lane):hover) > .plate:not(.icon-compass, .icon-magnifying-glass, .icon-lighthouse, .icon-coffee, .icon-hammer, .icon-plant, .icon-microphone-ribbon, .icon-airplane-takeoff, .icon-path, .icon-squares-choose, .icon-stairs, .icon-chart-line) :global(svg),
+  :global(:is(a, .lane):focus-within) > .plate:not(.icon-compass, .icon-magnifying-glass, .icon-lighthouse, .icon-coffee, .icon-hammer, .icon-plant, .icon-microphone-ribbon, .icon-airplane-takeoff, .icon-path, .icon-squares-choose, .icon-stairs, .icon-chart-line) :global(svg) {
     animation: plate-breeze 1.6s ease-in-out infinite;
     transform-origin: 50% 85%;
   }
@@ -306,6 +306,13 @@ const svg = raw.replaceAll('opacity="0.2"', 'class="tone"').replaceAll('PLATEID'
   }
   :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.lv2) { transition-delay: 0.16s; }
   :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.lv3) { transition-delay: 0.32s; }
+  /* Chart: the line draws itself left to right, like data arriving. */
+  .plate :global(.line) {
+    stroke-dasharray: 1 1;
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.line) {
+    animation: plate-walk 0.7s cubic-bezier(0.45, 0, 0.25, 1) both;
+  }
   @media (prefers-reduced-motion: reduce) {
     :global(:is(a, .lane):hover) > .plate :global(svg),
     :global(:is(a, .lane):focus-within) > .plate :global(svg) {
@@ -314,7 +321,7 @@ const svg = raw.replaceAll('opacity="0.2"', 'class="tone"').replaceAll('PLATEID'
     .plate :global(:is(.lv, .needle, .mic-rig, .mic-stem, .plane, .sq, .sq .tone, .one)) {
       transition: none;
     }
-    :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(:is(.glass, .lens-clip, .beam, .wisp, .hammer, .leaf-l, .leaf-r, .route, .goal)) {
+    :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(:is(.glass, .lens-clip, .beam, .wisp, .hammer, .leaf-l, .leaf-r, .route, .goal, .line)) {
       animation: none;
     }
   }
