@@ -12,7 +12,7 @@ She is based in London and works across the UK and Europe.
 
 ## Services and rates
 
-- [Office hours](https://intentionaut.com/office-hours/): ${gbp(rates.strategySession)} for 90 minutes of advisory, any topic.
+- [Office hours](https://intentionaut.com/office-hours/): ${gbp(rates.strategySession)} for 90 minutes on your hardest product question.
 - [AI product audit](https://intentionaut.com/ai-product-audit/): ${offerDays.aiAudit} days across one week, a keep, change or stop recommendation for each piece of AI work, ${gbp(rates.aiAudit)} fixed.
 - [Product strategy sprint](https://intentionaut.com/product-strategy-sprint/): ${offerDays.strategySprint} days across two weeks, including a full-day workshop, ${gbp(rates.strategySprint)} fixed.
 - [Fractional leadership](https://intentionaut.com/fractional/): senior product leadership, from ${gbp(fractionalMonthly1Day)} a month for one day a week or ${gbp(fractionalMonthly2Day)} a month for two; day rate ${gbp(rates.fractional)}.
