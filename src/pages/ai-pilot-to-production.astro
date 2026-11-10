@@ -1,13 +1,42 @@
 ---
-import '@fontsource-variable/roboto-serif';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.astro';
+import { LOCATION_LINE } from '../data/positioning';
+import FaqList from '../components/FaqList.astro';
+import WhoFor from '../components/WhoFor.astro';
+import { faqsFor } from '../data/faqs';
 
+const pilotFaqs = faqsFor('ai-pilot');
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: pilotFaqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer },
+  })),
+};
+
+const description =
+  'When an AI pilot works in a notebook but not in production: embedded product building that ships a working version on your real data and constraints.';
+
+// No offers or price here on purpose: the rates live on /forward-deployed/.
+const serviceSchema = {
+  '@type': 'Service',
+  '@id': 'https://intentionaut.com/ai-pilot-to-production/#service',
+  name: 'From an AI Pilot to a Working Product',
+  description,
+  provider: { '@id': 'https://intentionaut.com/#person' },
+  areaServed: [
+    { '@type': 'City', name: 'London' },
+    { '@type': 'Country', name: 'United Kingdom' },
+  ],
+};
 ---
 
 <BaseLayout
   title="From an AI Pilot to a Working Product | Saielle DaSilva"
-  description="For teams whose AI pilot proves something in a notebook and nothing in production: embedded product building that gets a working version running against your real data and your real constraints."
+  description={description}
+  jsonLd={[serviceSchema, faqSchema]}
 >
   <section class="wrap">
     <header class="page-head">
@@ -16,7 +45,30 @@ import ContactForm from '../components/ContactForm.astro';
       <p class="lede">
         For teams with a model that proves something in a notebook and nothing anywhere else.
       </p>
+      <p>
+        Four to twelve weeks, three days a week, in your repo and against your
+        real constraints. You leave with a working path from model output to a
+        user decision, the failure modes written down, and a keep, change or
+        stop recommendation.
+      </p>
+      {/* One action above the fold: the form, because it records the arrival
+          source (BaseLayout's first_* fields). The booking link sits inside it. */}
+      <div class="cta-row">
+        <a class="btn-primary" href="#contact-section">Tell me where it stalled</a>
+      </div>
     </header>
+
+    <WhoFor
+      fit={[
+        'Teams with an AI pilot that works in a notebook and nowhere else.',
+        'Product and engineering leads who need it running against real data and real users.',
+        'Companies that want a straight answer on whether it belongs in the product.',
+      ]}
+      notFit={[
+        'Nobody senior owns AI product direction. Building first gets you a good demo and the same argument, so start with <a href="/fractional/">fractional leadership</a>.',
+        'You want a more accurate model. This work builds the product around the model you have: the data, the decision and the user.',
+      ]}
+    />
 
     <div class="prose">
       <p>
@@ -47,13 +99,6 @@ import ContactForm from '../components/ContactForm.astro';
         decision attached to it, so there is nothing for a user to do next.
         Or the thing it automates was never the expensive part of the job.
       </p>
-      <p>
-        IDC put numbers on this in the Lenovo CIO Playbook 2025. Of the proofs
-        of concept it observed, 88 per cent never reached widescale
-        deployment. For every thirty-three a company started, four made it to
-        production. The pilot is not the hard part and has not been for a
-        while.
-      </p>
 
       <h2>What I do about it</h2>
       <p>
@@ -66,6 +111,13 @@ import ContactForm from '../components/ContactForm.astro';
         Sometimes that proves the pilot was right and the product around it was
         missing. Sometimes it proves the opposite, and you have saved a
         quarter. Both are useful results and I will tell you which one you got.
+      </p>
+      <p>
+        Saielle DaSilva ran product for AI, data platforms and machine learning
+        at Sainsbury's. For something she built herself, see
+        <a href="/open-source/familiar/">Familiar</a>: a writing workflow where
+        the writer makes each choice and checks the output before anything is
+        published. It is an example workflow, not a client case study.
       </p>
 
       <h2>What you get</h2>
@@ -82,7 +134,7 @@ import ContactForm from '../components/ContactForm.astro';
         A free preliminary call first, then a block of four to twelve weeks at
         three days a week. The full shape and the rates are on the
         {' '}<a href="/forward-deployed/">product building</a>
-        {' '}page.
+        {' '}page. {LOCATION_LINE}
       </p>
       <p>
         If what you need is someone senior to own AI product direction
@@ -92,18 +144,24 @@ import ContactForm from '../components/ContactForm.astro';
       </p>
     </div>
 
-    <section class="contact-form-section" aria-label="Get in touch">
+    <section class="contact-form-section" id="contact-section" aria-label="Get in touch">
       <div class="contact-card">
         <h2>Let's talk.</h2>
         <p class="form-lede">
           If you have a pilot that works and a product that does not exist, tell me where it stalled.
         </p>
-        <ContactForm source="ai-pilot-to-production" selected="forward-deployed" booking />
+        <ContactForm source="ai-pilot-to-production" selected="forward-deployed" booking referral />
       </div>
       <p class="faq-link">
         Questions first? <a href="/faq/">Read the FAQ.</a>
       </p>
     </section>
+
+    <FaqList
+      heading="FAQ: Taking an AI pilot to production"
+      items={pilotFaqs}
+      sub="What teams ask when a pilot works and the product does not exist."
+    />
   </section>
 
 </BaseLayout>

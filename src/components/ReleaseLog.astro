@@ -8,6 +8,7 @@
  * the section says so calmly instead of pretending there is nothing.
  */
 import { marked } from 'marked';
+import { sanitise } from '../lib/sanitise.mjs';
 
 interface Props {
   /** GitHub owner/repo, e.g. "intentionaut/kernic". */
@@ -45,7 +46,7 @@ try {
       const body = part.slice(nl + 1).trim();
       const m = heading.match(/^(.+?)\s*\((\d{4}-\d{2}-\d{2})\)/);
       if (!m) continue;
-      entries.push({ version: m[1], date: m[2], html: await marked.parse(body) });
+      entries.push({ version: m[1], date: m[2], html: sanitise(await marked.parse(body)) });
     }
   }
 } catch {

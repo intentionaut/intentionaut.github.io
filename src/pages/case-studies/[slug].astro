@@ -1,0 +1,176 @@
+---
+import { existsSync } from 'node:fs';
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { lastmodFor } from '../../../scripts/lastmod.mjs';
+import FrameSubscribe from '../../components/FrameSubscribe.astro';
+import { BOOKING_URL } from '../../data/links';
+import '../../styles/case-studies.css';
+
+export async function getStaticPaths() {
+  const studies = (await getCollection('caseStudies')).sort((a, b) => a.data.order - b.data.order);
+  // A locked study's text lives only in its ciphertext. These two checks fail
+  // the build, so a readable body can never ship on a locked page and a locked
+  // page can never ship without its ciphertext.
+  for (const s of studies.filter((s) => s.data.locked)) {
+    if (s.body?.trim()) {
+      throw new Error(`case study "${s.id}" is locked but its .md has a body. Locked text belongs only in the ciphertext.`);
+    }
+    if (!existsSync(`public/case-studies/${s.id}/locked.json`)) {
+      throw new Error(`case study "${s.id}" is locked but public/case-studies/${s.id}/locked.json is missing.`);
+    }
+  }
+  return studies.map((study) => ({
+    params: { slug: study.id },
+    props: { study },
+  }));
+}
+
+const { study } = Astro.props;
+const { locked } = study.data;
+const { Content } = await render(study);
+// Asking for access is an email, not the contact form: one tap, subject filled.
+// Article + breadcrumb for answer engines; a locked study is noindex'd and gets none.
+const origin = Astro.site!.origin;
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+const modified = lastmodFor(Astro.url.pathname);
+const studyLd = locked
+  ? undefined
+  : [
+      {
+        '@type': 'Article',
+        '@id': `${canonical}#article`,
+        headline: study.data.title,
+        description: study.data.summary,
+        ...(modified && { dateModified: modified }),
+        about: { '@type': 'Organization', name: study.data.company },
+        author: { '@id': `${origin}/#person` },
+        publisher: { '@id': `${origin}/#organization` },
+        mainEntityOfPage: { '@id': `${canonical}#webpage` },
+        isPartOf: { '@id': `${origin}/#website` },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${origin}/` },
+          { '@type': 'ListItem', position: 2, name: 'Case studies', item: `${origin}/case-studies/` },
+          { '@type': 'ListItem', position: 3, name: study.data.title, item: canonical },
+        ],
+      },
+    ];
+const accessMail = 'mailto:hello@intentionaut.com?subject=Case%20study%20access%20request';
+---
+
+<BaseLayout title={`${study.data.title} | Saielle DaSilva`} description={study.data.summary} noindex={locked} noAnalytics={locked} jsonLd={studyLd}>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Case study · {study.data.company}</p>
+      <h1>{study.data.title}</h1>
+      <p class="lede">{study.data.summary}</p>
+    </header>
+
+    <div class="case-meta">
+      <dl class="memo">
+        <dt class="meta-label">Company</dt>
+        <dd class="meta-value">{study.data.company}</dd>
+        <dt class="meta-label">Role</dt>
+        <dd class="meta-value">{study.data.role}</dd>
+        <dt class="meta-label">When</dt>
+        <dd class="meta-value">{study.data.years}</dd>
+      </dl>
+      <div class="case-meta-cta">
+        <a class="link-arrow link-arrow--back" href="/case-studies/">All case studies</a>
+      </div>
+    </div>
+
+    {
+      locked ? (
+        <div class="cs-lock" data-lock={`/case-studies/${study.id}/locked.json`} data-slug={study.id}>
+          <section class="cs-lock-card contact-card" aria-labelledby="cs-lock-title">
+            <h2 id="cs-lock-title">This case study is private</h2>
+            <p class="cs-lock-note" role="status" aria-live="polite">
+              The full story, with results, opens from the private link Saielle DaSilva shares. If you have the link, open it from there.
+            </p>
+            <div class="cta-row">
+              <a class="btn-primary" href={accessMail}>Request access</a>
+              <a class="link-arrow" href={BOOKING_URL} target="_blank" rel="noopener noreferrer"><span>Book a free call</span></a>
+            </div>
+            <p class="cs-lock-mail">Request access opens an email to hello@intentionaut.com.</p>
+          </section>
+          <article class="prose cs-prose" hidden />
+        </div>
+      ) : (
+        <>
+          <article class="prose cs-prose">
+            <Content />
+          </article>
+          <section class="cs-subscribe" aria-label="Subscribe">
+            <FrameSubscribe
+              heading="Results start as decisions"
+              sub="Follow the reasoning behind them, one letter at a time."
+              source="case-study"
+              campaign={study.id}
+              emailId="case-study-email"
+              buttonLabel="Follow along"
+            />
+          </section>
+        </>
+      )
+    }
+  </section>
+</BaseLayout>
+
+<style>
+  .cs-subscribe {
+    margin-top: clamp(3rem, 6vw, 5rem);
+  }
+</style>
+
+<script>
+  import { forgetKey, keyFromLink, openWith, saveKey, savedKey } from '../../lib/case-lock.js';
+
+  const box = document.querySelector<HTMLElement>('.cs-lock');
+  if (box) {
+    const card = box.querySelector<HTMLElement>('.cs-lock-card')!;
+    const note = box.querySelector('.cs-lock-note')!;
+    const article = box.querySelector('article')!;
+
+    const open = async () => {
+      const fromLink = keyFromLink(location.hash);
+      const saved = savedKey();
+      const keys = [fromLink, saved].filter(Boolean);
+      if (!keys.length) return;
+      let locked;
+      try {
+        const res = await fetch(box.dataset.lock!);
+        if (!res.ok) throw new Error(String(res.status));
+        locked = await res.json();
+      } catch {
+        // A failed load says nothing about the key, so keep it.
+        card.hidden = false;
+        note.textContent = 'This case study did not load. Refresh to try again.';
+        return;
+      }
+      const opened = await openWith(locked, keys);
+      if (opened) {
+        article.innerHTML = opened.html;
+        article.hidden = false;
+        card.hidden = true;
+        saveKey(opened.key);
+        // The key is saved, so it needn't stay in the address bar or history.
+        history.replaceState(null, '', location.pathname + location.search);
+      } else {
+        // No key opens it, so the saved one is stale too.
+        forgetKey();
+        article.hidden = true;
+        card.hidden = false;
+        // The Request access button below covers asking for a new link.
+        note.textContent = 'This link no longer opens the case study. Request a new one below.';
+      }
+    };
+    open();
+    // A link pasted while already on the page only changes the hash, which
+    // doesn't reload it.
+    window.addEventListener('hashchange', open);
+  }
+</script>

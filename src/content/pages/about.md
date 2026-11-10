@@ -1,7 +1,7 @@
 ---
-title: A product leader who finds the signals, sets direction, and gets things moving.
-seoTitle: Saielle DaSilva | Interim & Fractional CPO, Product Leadership in AI & Data
-description: "The career behind intentionaut: product leadership across design, data and AI, from Pivotal, Cazoo and StepStone to Sainsbury's and independent practice."
+title: A product and design leader for AI products.
+seoTitle: Saielle DaSilva | Fractional CPO for AI Products
+description: "The career behind intentionaut: product and design leadership for AI products, from Pivotal, Cazoo and StepStone to Sainsbury's and independent practice."
 ---
 
 I learned early in my career that business decisions have real impact. Organising volunteers after Hurricane Sandy taught me that organisations, like products, can be designed around the way people actually move through them.
@@ -26,4 +26,4 @@ I have spoken about some of this on stage, including at <a href="https://www.min
 
 Design taught me delight. Data taught me discipline. Product gave me somewhere to put both.
 
-If any of that sounds like the teammate you've been missing, [say hello](/contact).
+If any of that sounds like the teammate you've been missing, [say hello](/contact/).

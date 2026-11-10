@@ -1,0 +1,65 @@
+{
+  "lastChecked": "2026-10-21",
+  "cards": [
+    {
+      "id": "gartner-cio-value-2026-10",
+      "topic": "value",
+      "sourceType": "analyst",
+      "region": "unstated",
+      "kind": "Survey",
+      "figure": "13% of CIOs reported their enterprise has realized significant or transformational value from AI so far.",
+      "base": "Gartner 2027 CIO and Technology Executive Agenda survey: 2,002 CIOs and technology executives, May to July 2026.",
+      "publisher": "Gartner",
+      "title": "Gartner Survey Finds Only 13% of CIOs Say Their Enterprise Has Realized Significant or Transformational Value from AI",
+      "published": "2026-10-19",
+      "publishedLabel": "19 October 2026",
+      "reviewed": "2026-10-21",
+      "url": "https://www.gartner.com/en/newsroom/press-releases/2026-10-19-gartner-survey-finds-only-13-percent-of-cios-say-their-enterprise-has-realized-significant-or-transformational-value-from-ai"
+    },
+    {
+      "id": "ons-ai-uk-businesses-2026-07",
+      "topic": "depth",
+      "sourceType": "government",
+      "region": "uk",
+      "kind": "Official statistics",
+      "figure": "Among businesses that report using at least one AI technology, only 10% report using AI extensively.",
+      "base": "UK businesses with 10 or more employees that use at least one AI technology. Business Insights and Conditions Survey, most recent wave at publication. ONS calls these early indications from official statistics in development.",
+      "publisher": "Office for National Statistics",
+      "title": "Artificial intelligence in UK businesses: 2023 to 2026",
+      "published": "2026-07-20",
+      "publishedLabel": "20 July 2026",
+      "reviewed": "2026-10-21",
+      "url": "https://www.ons.gov.uk/businessindustryandtrade/business/businessservices/articles/artificialintelligenceinukbusinesses/2023to2026"
+    },
+    {
+      "id": "dsit-ai-adoption-2026-01",
+      "topic": "readiness",
+      "sourceType": "government",
+      "region": "uk",
+      "kind": "Survey",
+      "figure": "Among businesses planning to use AI, 34% feel ready to implement it, 33% are unsure and 32% are not ready.",
+      "base": "219 UK businesses planning to adopt AI, from a telephone survey of 3,500 businesses run between 12 February and 2 May 2025.",
+      "publisher": "Department for Science, Innovation and Technology",
+      "title": "Artificial Intelligence Adoption Research",
+      "published": "2026-01",
+      "publishedLabel": "January 2026",
+      "reviewed": "2026-10-21",
+      "url": "https://assets.publishing.service.gov.uk/media/6960f3924343a0da370869ba/AI_Adoption_Research_Report.pdf"
+    },
+    {
+      "id": "gartner-agentic-cancel-2025-06",
+      "topic": "failure",
+      "sourceType": "analyst",
+      "region": "unstated",
+      "kind": "Prediction",
+      "figure": "Over 40% of agentic AI projects will be canceled by the end of 2027, due to escalating costs, unclear business value or inadequate risk controls.",
+      "base": "A Gartner prediction, not a measurement. The press release gives no sample or method for this figure.",
+      "publisher": "Gartner",
+      "title": "Gartner Predicts Over 40% of Agentic AI Projects Will Be Canceled by End of 2027",
+      "published": "2025-06-25",
+      "publishedLabel": "25 June 2025",
+      "reviewed": "2026-10-21",
+      "url": "https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-predicts-over-40-percent-of-agentic-ai-projects-will-be-canceled-by-end-of-2027"
+    }
+  ]
+}

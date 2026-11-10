@@ -19,7 +19,7 @@
  */
 
 /** Where a testimonial may appear. Add to this as pages need them. */
-export type Placement = 'contact' | 'home' | 'speaking' | 'fractional';
+export type Placement = 'contact' | 'home' | 'speaking' | 'fractional' | 'workshops' | 'for-ceos' | 'for-cpos-ctos' | 'for-scale-ups';
 
 export interface Testimonial {
   /** Stable, human-readable. Used as a key and to talk about one in a commit. */
@@ -67,7 +67,7 @@ export const testimonials: Testimonial[] = [
     org: 'IKEA, Stepstone',
     url: 'https://www.linkedin.com/in/susanstandiford/',
     enabled: true,
-    placements: ['contact', 'fractional'],
+    placements: ['contact', 'home', 'fractional', 'workshops', 'for-ceos', 'for-scale-ups'],
     source: 'LinkedIn recommendation',
     receivedAt: '2024-01-01',
   },
@@ -80,7 +80,7 @@ export const testimonials: Testimonial[] = [
     org: 'Product Roadmaps Relaunched',
     url: 'https://www.goroadmaps.com/',
     enabled: true,
-    placements: ['contact'],
+    placements: ['contact', 'home', 'workshops'],
     source: 'LinkedIn recommendation',
     receivedAt: '2024-01-01',
   },
@@ -93,7 +93,7 @@ export const testimonials: Testimonial[] = [
     org: 'Ford Motor Company',
     url: 'https://www.linkedin.com/in/scott-erkkila/',
     enabled: false,
-    placements: ['contact'],
+    placements: ['contact', 'workshops'],
     source: 'LinkedIn recommendation',
     receivedAt: '2024-01-01',
     note: 'Temporarily off at Saielle\'s request, 2026-08-27. Expected back — not removed for any problem with the quote.',
@@ -107,7 +107,7 @@ export const testimonials: Testimonial[] = [
     org: 'Mind the Product',
     url: 'https://www.linkedin.com/in/thedailyem/',
     enabled: true,
-    placements: ['contact'],
+    placements: ['contact', 'home', 'workshops'],
     source: 'LinkedIn recommendation',
     receivedAt: '2024-01-01',
   },
@@ -120,7 +120,7 @@ export const testimonials: Testimonial[] = [
     org: 'The Product Experience Podcast',
     url: 'https://www.linkedin.com/in/randysilver/',
     enabled: true,
-    placements: ['contact'],
+    placements: ['contact', 'home', 'workshops'],
     source: 'LinkedIn recommendation',
     receivedAt: '2024-01-01',
   },
@@ -133,7 +133,7 @@ export const testimonials: Testimonial[] = [
     org: 'Weave',
     url: 'https://www.linkedin.com/in/wesgalliher/',
     enabled: true,
-    placements: ['contact'],
+    placements: ['contact', 'workshops'],
     source: 'LinkedIn recommendation',
     receivedAt: '2024-01-01',
   },
@@ -146,7 +146,7 @@ export const testimonials: Testimonial[] = [
     org: 'Mega',
     url: 'https://www.linkedin.com/in/alessandracanella/',
     enabled: true,
-    placements: ['contact'],
+    placements: ['contact', 'workshops'],
     source: 'LinkedIn recommendation',
     receivedAt: '2024-01-01',
   },
@@ -159,7 +159,7 @@ export const testimonials: Testimonial[] = [
     org: "former Head of Delivery, Sainsbury's",
     url: 'https://www.linkedin.com/in/jon-cockle-75a78867/',
     enabled: true,
-    placements: ['contact', 'fractional', 'home'],
+    placements: ['contact', 'fractional', 'home', 'workshops', 'for-cpos-ctos', 'for-scale-ups'],
     source: 'LinkedIn recommendation',
     receivedAt: '2026-08-28',
     note: 'Excerpt, trimmed further 2026-09-27 at Saielle\'s request: it opened "She is also particularly strong at framing choices and trade-offs for senior leaders. Rather than allowing discussions to become lost in detail," which read oddly out of context. The full recommendation is on his LinkedIn.',

@@ -1,0 +1,72 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../styles/case-studies.css';
+import { PRIMARY_PHRASE } from '../../data/positioning';
+
+const studies = (await getCollection('caseStudies')).sort((a, b) => a.data.order - b.data.order);
+const probe = studies.find((s) => s.data.locked);
+---
+
+<BaseLayout
+  noAnalytics
+  title="Case studies | Saielle DaSilva"
+  description="Case studies from Saielle DaSilva, fractional CPO: Cazoo through hyper-growth to IPO, and AI at Sainsbury's taken from pilot to production."
+>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Case studies</p>
+      <h1>Work, in depth.</h1>
+      <p class="lede">
+        Organisations built, products shipped, and the decisions behind them, from design leadership to product
+        leadership.
+      </p>
+    </header>
+
+    <ol class="project-list">
+      {
+        studies.map((s) => (
+          <li class="project-row">
+            <a class="project-card" href={`/case-studies/${s.id}/`}>
+              <span class="talk-title">{s.data.title}</span>
+              <span class="project-summary">{s.data.summary}</span>
+              <span class="talk-meta">
+                {s.data.company} · {s.data.years}
+                {s.data.locked && ' · Private link'}
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+
+    <p>
+      Want this kind of work on your team? See <a href="/fractional/">{PRIMARY_PHRASE}</a> or
+      <a href="/forward-deployed/">Product building</a>.
+    </p>
+  </section>
+  {probe && <div id="lock-probe" hidden data-lock={`/case-studies/${probe.id}/locked.json`} />}
+</BaseLayout>
+
+<script>
+  // The private link can point here (/case-studies/#k=...). Keep the key, so
+  // every locked page in the list opens from it, but only once it has opened
+  // one: a wrong link must not replace a good saved key.
+  import { keyFromLink, openWith, saveKey } from '../../lib/case-lock.js';
+
+  const keep = async () => {
+    const key = keyFromLink(location.hash);
+    const lock = document.getElementById('lock-probe')?.dataset.lock;
+    if (!key || !lock) return;
+    try {
+      const res = await fetch(lock);
+      if (!res.ok || !(await openWith(await res.json(), [key]))) return;
+    } catch {
+      return;
+    }
+    saveKey(key);
+    history.replaceState(null, '', location.pathname + location.search);
+  };
+  keep();
+  window.addEventListener('hashchange', keep);
+</script>

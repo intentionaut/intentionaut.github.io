@@ -1,5 +1,8 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import { readFile, writeFile } from 'node:fs/promises';
+import { readdirSync, readFileSync } from 'node:fs';
+import { lastmodFor, isShallow } from './scripts/lastmod.mjs';
 
 // Old paths kept alive by src/layouts/RedirectLayout.astro. They forward, so
 // they must never appear in the sitemap competing with where they forward to.
@@ -9,11 +12,59 @@ import sitemap from '@astrojs/sitemap';
 // regex on the URL silently drops those real pages from the sitemap.
 const LEGACY_REDIRECTS = new Set([
   '/speaker/',
+  '/strategic-direction/',
   '/familiar/',
   '/releases/',
   '/releases/familiar/',
   '/releases/kernic/',
+  '/projects/kernic/',
+  '/projects/familiar/',
 ]);
+
+// Pages whose canonical points to another domain. Listing them here made the
+// sitemap submit a URL that itself says "index the other one instead".
+const CROSS_DOMAIN_CANONICAL = new Set([
+  '/open-source/familiar/', // canonical: https://familiar.intentionaut.com/
+]);
+
+// Password-locked case studies are noindex'd, so they stay out of the sitemap
+// too (listing them made Search Console report "Submitted URL marked noindex"
+// for /thank-you/). Read from the front matter, so locking a page is one flag.
+const LOCKED_CASE_STUDIES = new Set(
+  readdirSync('src/content/case-studies')
+    .filter((f) => f.endsWith('.md') && !f.startsWith('_'))
+    .filter((f) => /^locked:\s*true\s*$/m.test(readFileSync(`src/content/case-studies/${f}`, 'utf8').split(/^---$/m)[1] ?? ''))
+    .map((f) => `/case-studies/${f.replace(/\.md$/, '')}/`),
+);
+
+// Agent scanners look for /sitemap.xml; @astrojs/sitemap only writes an index
+// and numbered chunks. After the build, fold every chunk into one flat urlset at
+// /sitemap.xml, so both paths list the same URLs and the filter above applies
+// to both. Fails the build rather than ship an empty sitemap.
+const flatSitemap = {
+  name: 'flat-sitemap',
+  hooks: {
+    'astro:build:done': async ({ dir }) => {
+      const index = await readFile(new URL('sitemap-index.xml', dir), 'utf8');
+      const chunks = [...index.matchAll(/<loc>[^<]*\/(sitemap-\d+\.xml)<\/loc>/g)].map((m) => m[1]);
+      const xmls = await Promise.all(chunks.map((c) => readFile(new URL(c, dir), 'utf8')));
+      // beehiiv posts have no source file for git to date, so take the
+      // dateModified the page already publishes in its JSON-LD.
+      const urls = await Promise.all(
+        xmls.flatMap((x) => x.match(/<url>[\s\S]*?<\/url>/g) ?? []).map(async (u) => {
+          if (u.includes('<lastmod>')) return u;
+          const path = new URL(u.match(/<loc>([^<]*)<\/loc>/)[1]).pathname;
+          const html = await readFile(new URL(`.${path}index.html`, dir), 'utf8').catch(() => '');
+          const d = html.match(/"dateModified":"([^"]+)"/)?.[1];
+          return d ? u.replace('</loc>', `</loc><lastmod>${d}</lastmod>`) : u;
+        }),
+      );
+      if (!urls.length) throw new Error('flat-sitemap: no URLs found in ' + chunks.join(', '));
+      const head = xmls[0].slice(0, xmls[0].indexOf('<url>'));
+      await writeFile(new URL('sitemap.xml', dir), head + urls.join('') + '</urlset>');
+    },
+  },
+};
 
 export default defineConfig({
   site: 'https://intentionaut.com',
@@ -33,8 +84,20 @@ export default defineConfig({
         !/\/preview(\/|$)/.test(page) &&
         // noindex'd: listing it made Search Console report "Submitted URL marked noindex".
         !/\/thank-you\/?$/.test(page) &&
-        !LEGACY_REDIRECTS.has(new URL(page).pathname),
+        // noindex'd: a page of UI tokens, not something to rank for.
+        !/\/design-system\/?$/.test(page) &&
+        !LEGACY_REDIRECTS.has(new URL(page).pathname) &&
+        !CROSS_DOMAIN_CANONICAL.has(new URL(page).pathname) &&
+        !LOCKED_CASE_STUDIES.has(new URL(page).pathname),
+      // lastmod from git history (#78). Pages with no known source file
+      // (beehiiv posts) get none rather than a made-up date.
+      serialize(item) {
+        const d = lastmodFor(new URL(item.url).pathname);
+        if (d) item.lastmod = d;
+        return item;
+      },
     }),
+    flatSitemap,
   ],
   build: {
     inlineStylesheets: 'always',

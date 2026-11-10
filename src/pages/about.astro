@@ -1,6 +1,8 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { BOOKING_URL } from '../data/links';
+import { PRIMARY_PHRASE } from '../data/positioning';
 
 const entry = (await getCollection('pages')).find((p) => p.id === 'about');
 if (!entry) throw new Error('About page content is missing (src/content/pages/about.md)');
@@ -9,21 +11,25 @@ const { Content } = await render(entry);
 const arc = [
   {
     org: "Sainsbury's",
+    years: 'Nov 2024 to Mar 2026',
     role: 'Senior Head of Product – AI, Data Platforms, & Machine Learning',
-    note: 'Production AI taken from a handful of experiments to a platform serving millions of customers.',
+    note: 'Production AI from first experiments to dozens of systems in use, serving millions of customers.',
   },
   {
-    org: 'Direct-to-consumer grocery scaleup',
+    org: 'Pesky Fish (Herd Market)',
+    years: 'Jan to Jun 2024',
     role: 'Interim CPO',
     note: '+450% MRR in 90 days.',
   },
   {
     org: 'StepStone',
+    years: 'Sep 2022 to Dec 2023',
     role: 'Global VP of Experience Design',
-    note: 'Some of the earliest LLM-powered products in European recruitment; a 3.2x ROI improvement across the satellite product portfolio.',
+    note: 'Some of the earliest LLM-powered products in European recruitment; a 3.2x return on investment.',
   },
   {
     org: 'Cazoo',
+    years: 'Aug 2019 to Jul 2022',
     role: 'Founding team',
     note: "The UK's first fully digital car-buying experience; through hyper-growth to a $7B IPO.",
   },
@@ -43,7 +49,7 @@ const stats = [
   { num: '$7B', label: 'IPO valuation' },
   { num: '100M+', label: 'Customers served' },
   { num: '£165M+', label: 'Savings delivered' },
-  { num: '26', label: 'Global job markets' },
+  { num: '26', label: 'Data engineering teams' },
 ];
 ---
 
@@ -57,7 +63,7 @@ const stats = [
       <div class="page-head-intro">
         <div class="page-head-text">
           <p class="eyebrow">About</p>
-          <h1>{entry.data.title}</h1>
+          <h1>{entry.data.title.split(/(?<=\.) /).map((sentence) => <span>{sentence} </span>)}</h1>
         </div>
         <figure class="portrait">
           <div class="img-card">
@@ -106,6 +112,10 @@ const stats = [
         The word is invented, but intention captures the arc of my work.
       </p>
       <Content />
+      <p>
+        I work with teams in two ways. I can step in as a <a href="/fractional/">{PRIMARY_PHRASE}</a>, or build
+        alongside you through <a href="/forward-deployed/">Product building</a>.
+      </p>
     </div>
 
     <section class="arc-section" aria-labelledby="arc-title">
@@ -114,7 +124,7 @@ const stats = [
         {
           arc.map((a) => (
             <li class="talk-row">
-              <span class="talk-date">{a.org}</span>
+              <span class="talk-date">{a.org}{a.years && <><br />{a.years}</>}</span>
               <div>
                 <span class="talk-title">{a.role}</span>
                 <p class="talk-desc">{a.note}</p>
@@ -124,6 +134,11 @@ const stats = [
         }
       </ol>
     </section>
+
+    <div class="cta-row about-cta">
+      <a class="btn-primary" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a free call</a>
+      <a class="link-arrow" href="/contact/#contact-section"><span>Send a message</span></a>
+    </div>
   </section>
 </BaseLayout>
 
@@ -133,11 +148,22 @@ const stats = [
      centred so they read as a pair. Everything else - the "career highlights"
      line, the stat ribbon, the prose - is full width below. Below the tablet
      width (40rem) the portrait is hidden entirely, leaving just the headline. */
+  /* The about heading is two sentences: smaller than other long titles, each
+     sentence starts its own line, and lines are balanced so none is a
+     single word. */
+  .page-head.long-title h1 {
+    font-size: clamp(2.1rem, 4.4vw, 2.4rem);
+  }
+  .page-head.long-title h1 span {
+    display: block;
+    text-wrap: balance;
+  }
   .page-head-intro {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-8);
-    align-items: center;
+    /* The heading lines up with the top of the portrait, not its middle. */
+    align-items: start;
   }
 
   .page-head-intro .portrait {
@@ -180,6 +206,10 @@ const stats = [
     margin-top: clamp(3rem, 6vw, 5rem);
     padding-top: var(--space-7);
     border-top: 1px solid var(--slate);
+  }
+
+  .about-cta {
+    margin-top: clamp(3rem, 6vw, 5rem);
   }
 
   .arc-section h2 {

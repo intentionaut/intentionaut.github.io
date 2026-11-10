@@ -12,6 +12,11 @@ const talks = defineCollection({
     // page on this site (e.g. a write-up under /writing).
     url: z.union([z.string().url(), z.string().startsWith('/')]).optional(),
     description: z.string().optional(),
+    // Anonymised audience feedback, shown under the talk on /speaking/.
+    // Attribution is a broad role, never a name or employer.
+    quotes: z
+      .array(z.object({ text: z.string(), attribution: z.string() }))
+      .optional(),
   }),
 });
 
@@ -76,4 +81,21 @@ const projects = defineCollection({
   }),
 });
 
-export const collections = { talks, pages, projects, essays, drafts, stubs };
+const caseStudies = defineCollection({
+  loader: glob({ pattern: ['**/*.md', '!**/_*.md'], base: './src/content/case-studies' }),
+  schema: z.object({
+    title: z.string(),
+    summary: z.string(),
+    company: z.string(),
+    role: z.string(),
+    years: z.string(),
+    depth: z.enum(['in-depth', 'outline']),
+    order: z.number(),
+    sources: z.array(z.string()).default([]),
+    // Body is encrypted in public/case-studies/<slug>/locked.json and the .md
+    // body stays empty. Written by scripts/lock-case-study.mjs, never by hand.
+    locked: z.boolean().default(false),
+  }),
+});
+
+export const collections = { talks, pages, projects, essays, drafts, stubs, caseStudies };

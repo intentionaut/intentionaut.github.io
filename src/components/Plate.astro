@@ -1,0 +1,487 @@
+---
+/**
+ * An icon in a small double-ruled frame, the site's "plate". Icons are
+ * Phosphor duotone (MIT, src/assets/icons/LICENSE-phosphor.txt); the duotone
+ * layer is filled pink or blue, and callers alternate the two.
+ * Never use an icon made of the letters "AI".
+ */
+interface Props {
+  /** A file name in src/assets/icons/, without .svg. The set is shown on /design-system/. */
+  name: string;
+  tone?: 'pink' | 'blue';
+}
+const { name, tone = 'pink' } = Astro.props;
+const icons = import.meta.glob('../assets/icons/*.svg', { query: '?raw', import: 'default', eager: true });
+const raw = icons[`../assets/icons/${name}.svg`] as string | undefined;
+if (!raw) throw new Error(`Plate: no icon named "${name}"`);
+// Icons with a clipPath use PLATEID so each plate on a page gets its own id.
+const uid = `p${Math.random().toString(36).slice(2, 8)}`;
+const svg = raw.replaceAll('opacity="0.2"', 'class="tone"').replaceAll('PLATEID', uid);
+// One-shot motions (a strike, a sway) play to the end even if the pointer
+// leaves early, so they never snap back mid-move. The script below runs them.
+const ONESHOT = ['lighthouse', 'pen-nib', 'users-three', 'plant', 'hammer', 'magnifying-glass'];
+---
+
+<span class:list={['plate', tone, `icon-${name}`, { oneshot: ONESHOT.includes(name) }]} aria-hidden="true" set:html={svg} />
+
+<script>
+  // Hover or focus adds .play; leaving removes it only once any motion that
+  // has started has finished. Leaving before the motion starts cancels it.
+  for (const plate of document.querySelectorAll<HTMLElement>('.plate.oneshot')) {
+    const host = plate.parentElement;
+    if (!host) continue;
+    const on = () => plate.classList.add('play');
+    const off = async () => {
+      const anims = plate.getAnimations({ subtree: true }).filter((a) => a instanceof CSSAnimation);
+      const started = anims.some((a) => Number(a.currentTime ?? 0) > Number(a.effect?.getTiming().delay ?? 0));
+      if (started) await Promise.allSettled(anims.map((a) => a.finished));
+      if (!host.matches(':hover, :focus-within')) plate.classList.remove('play');
+    };
+    host.addEventListener('pointerenter', on);
+    host.addEventListener('focusin', on);
+    host.addEventListener('pointerleave', off);
+    host.addEventListener('focusout', off);
+  }
+</script>
+
+<style>
+  .plate {
+    /* Icons move after the card has lifted: its hover lift, then a beat. */
+    --wait: calc(var(--dur-base) + 0.25s);
+    position: relative;
+    width: 64px;
+    height: 64px;
+    border: 1px solid var(--ink);
+    display: inline-grid;
+    place-items: center;
+    background: var(--card);
+    flex: none;
+  }
+  .plate::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border: 1px solid var(--slate);
+    pointer-events: none;
+  }
+  .plate :global(svg) {
+    width: 32px;
+    height: 32px;
+    color: var(--ink);
+  }
+  /* Compass: the needle turns on its pivot to point north and holds while
+     hovered; the dial stays still. The pivot is built into compass.svg (the
+     needle is drawn around 0,0 in a group at the dial centre), so it turns on
+     the spot in every browser. The settle is a spring (stiffness 170,
+     damping 14) written as linear(). */
+  .plate :global(.needle) {
+    transform-origin: 0 0;
+    transition: transform 0.5s cubic-bezier(0.3, 0, 0.2, 1);
+  }
+  .plate :global(.needle-fill) {
+    fill: var(--card);
+  }
+  :global(:is(a, .lane):hover) > .plate :global(.needle),
+  :global(:is(a, .lane):focus-within) > .plate :global(.needle) {
+    transform: rotate(-45deg);
+    transition: transform 0.9s linear(0.000, 0.039, 0.137, 0.272, 0.424, 0.578, 0.720, 0.845, 0.947, 1.026, 1.081, 1.116, 1.132, 1.135, 1.127, 1.112, 1.092, 1.072, 1.051, 1.032, 1.016, 1.004, 0.994, 0.987, 0.983, 0.982, 0.982, 0.983, 0.986, 0.988, 0.991, 0.994, 0.996, 0.998, 1.000, 1.001, 1.002, 1.002, 1.002, 1.002, 1.002);
+  }
+  /* Magnifying glass: the glass draws back to the left, then springs in
+     and settles over a plum £ that shows only inside the lens, as if found.
+     The clip moves with the glass. Same spring as the compass. One-shot:
+     it plays to the end, then the £ fades on leave. */
+  .plate :global(:is(.glass, .lens-clip)) {
+    transform-box: view-box;
+  }
+  .plate :global(.cash) {
+    font: 600 104px var(--font-body);
+    fill: var(--ink);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .plate.play :global(:is(.glass, .lens-clip)) {
+    animation: plate-sweep 1.4s var(--wait) forwards;
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.cash) {
+    opacity: 1;
+    transition-delay: calc(var(--wait) + 0.45s);
+  }
+  @keyframes plate-sweep {
+    0% { transform: translateX(0); animation-timing-function: cubic-bezier(0.4, 0, 0.6, 1); }
+    22% { transform: translateX(-56px); animation-timing-function: linear(0.000, 0.039, 0.137, 0.272, 0.424, 0.578, 0.720, 0.845, 0.947, 1.026, 1.081, 1.116, 1.132, 1.135, 1.127, 1.112, 1.092, 1.072, 1.051, 1.032, 1.016, 1.004, 0.994, 0.987, 0.983, 0.982, 0.982, 0.983, 0.986, 0.988, 0.991, 0.994, 0.996, 0.998, 1.000, 1.001, 1.002, 1.002, 1.002, 1.002, 1.002); }
+    100% { transform: translateX(0); }
+  }
+  /* Lighthouse: one turn of the light per hover, then it fades. One-shot:
+     the turn finishes even if the pointer leaves. A single
+     amber beam seen side-on, its length following cos(angle), so it reaches
+     right, passes behind the tower and reaches left. The tower is filled
+     solid (.tower-fill) so it hides the beam as it passes. */
+  .plate.icon-lighthouse :global(svg),
+  .plate.icon-microphone-ribbon :global(svg),
+  .plate.icon-airplane-takeoff :global(svg),
+  .plate.icon-path :global(svg),
+  .plate.icon-squares-choose :global(svg),
+  .plate.icon-strategy :global(svg),
+  .plate.icon-pen-nib :global(svg),
+  .plate.icon-magnifying-glass :global(svg),
+  .plate.icon-hammer :global(svg) {
+    overflow: visible;
+  }
+  .plate :global(.tower-fill) {
+    fill: var(--card);
+  }
+  .plate :global(.beam) {
+    transform-origin: 128px 84px;
+    transform-box: view-box;
+    opacity: 0;
+  }
+  .plate.play :global(.beam) {
+    opacity: 1;
+    transition: opacity 0s var(--wait);
+    animation: plate-beam 3.6s var(--wait) linear forwards, plate-beam-out 0.4s ease-out calc(var(--wait) + 3.6s) forwards;
+  }
+  @keyframes plate-beam {
+    0%{transform:scaleX(1.000)}
+    5%{transform:scaleX(0.951)}
+    10%{transform:scaleX(0.809)}
+    15%{transform:scaleX(0.588)}
+    20%{transform:scaleX(0.309)}
+    25%{transform:scaleX(0.000)}
+    30%{transform:scaleX(-0.309)}
+    35%{transform:scaleX(-0.588)}
+    40%{transform:scaleX(-0.809)}
+    45%{transform:scaleX(-0.951)}
+    50%{transform:scaleX(-1.000)}
+    55%{transform:scaleX(-0.951)}
+    60%{transform:scaleX(-0.809)}
+    65%{transform:scaleX(-0.588)}
+    70%{transform:scaleX(-0.309)}
+    75%{transform:scaleX(-0.000)}
+    80%{transform:scaleX(0.309)}
+    85%{transform:scaleX(0.588)}
+    90%{transform:scaleX(0.809)}
+    95%{transform:scaleX(0.951)}
+    100%{transform:scaleX(1.000)}
+  }
+  @keyframes plate-beam-out {
+    to { opacity: 0; }
+  }
+  /* Coffee: the cup stays as drawn; the steam dims to a pale trace and
+     three black lines draw up out of it one at a time with a small bounce.
+     Transitions, so a quick hover reverses cleanly. */
+  .plate :global(.wisp) {
+    transition: opacity 0.15s;
+  }
+  .plate :global(.wisp-hot) {
+    transform-box: view-box;
+    transform: scaleY(0);
+    transition: transform 0.15s ease-in;
+  }
+  .plate :global(.w0) { transform-origin: 88px 56px; }
+  .plate :global(.w1) { transform-origin: 120px 56px; }
+  .plate :global(.w2) { transform-origin: 152px 56px; }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.wisp) {
+    opacity: 0.2;
+    transition: opacity 0.1s var(--wait);
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.wisp-hot) {
+    transform: scaleY(1);
+    transition: transform 0.38s cubic-bezier(0.34, 1.45, 0.64, 1) var(--wait);
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.wisp-hot.w1) {
+    transition-delay: calc(var(--wait) + 0.16s);
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.wisp-hot.w2) {
+    transition-delay: calc(var(--wait) + 0.32s);
+  }
+  /* Hammer: one strike, pivoting at the grip. Back 18 degrees slowly, down
+     fast, stops dead at rest, a 3 degree recoil. 0.6s, once per hover. */
+  .plate :global(.hammer) {
+    transform-box: view-box;
+    transform-origin: 50px 206px;
+  }
+  .plate.play :global(.hammer) {
+    animation: plate-strike 0.6s var(--wait) forwards;
+  }
+  @keyframes plate-strike {
+    0% { transform: rotate(0); animation-timing-function: cubic-bezier(0.3, 0, 0.2, 1); }
+    45% { transform: rotate(-18deg); animation-timing-function: cubic-bezier(0.6, 0, 1, 1); }
+    68% { transform: rotate(0); animation-timing-function: ease-out; }
+    80% { transform: rotate(-3deg); animation-timing-function: ease-in; }
+    100% { transform: rotate(0); }
+  }
+  /* Plant: drawn in parts (stem, two leaves) so each leaf turns on the round
+     end of its own branch with no gap. Each dips 10 degrees and springs open,
+     right then left. About 0.7s, once per hover. */
+  .plate :global(:is(.leaf-l, .leaf-r)) {
+    transform-box: view-box;
+  }
+  .plate :global(.leaf-l) { transform-origin: 88.5px 160.5px; }
+  .plate :global(.leaf-r) { transform-origin: 138.5px 149.5px; }
+  .plate.play :global(.leaf-r) {
+    animation: plate-leaf-r 0.6s var(--wait) cubic-bezier(0.34, 1.3, 0.64, 1) forwards;
+  }
+  .plate.play :global(.leaf-l) {
+    animation: plate-leaf-l 0.6s cubic-bezier(0.34, 1.3, 0.64, 1) calc(var(--wait) + 0.12s) forwards;
+  }
+  @keyframes plate-leaf-r {
+    30% { transform: rotate(10deg); }
+  }
+  @keyframes plate-leaf-l {
+    30% { transform: rotate(-10deg); }
+  }
+  /* Ribbon mic: raised to speaking height. Head and fork rise up the stand
+     with a small settle while the stem stretches to meet them; the base stays
+     put. 0.55s, holds while hovered. */
+  .plate :global(:is(.mic-rig, .mic-stem)) {
+    transform-box: view-box;
+    transition: transform 0.35s cubic-bezier(0.3, 0, 0.2, 1);
+  }
+  .plate :global(.mic-stem) { transform-origin: 128px 224px; }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(:is(.mic-rig, .mic-stem)) {
+    transition: transform 0.55s var(--wait) cubic-bezier(0.34, 1.45, 0.64, 1);
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.mic-rig) {
+    transform: translateY(-14px);
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.mic-stem) {
+    transform: scaleY(1.5);
+  }
+  /* Plane: wheels up. The runway stays put; the plane pitches its nose up
+     about its tail and climbs along its heading with a small spring. Holds
+     while hovered, lands on leave. */
+  .plate :global(.plane) {
+    transform-box: view-box;
+    transform-origin: 40px 150px;
+    transition: transform 0.45s cubic-bezier(0.3, 0, 0.2, 1);
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.plane) {
+    transform: translate(14px, -20px) rotate(-7deg);
+    transition: transform 0.6s var(--wait) cubic-bezier(0.34, 1.4, 0.64, 1);
+  }
+  /* Path: route and ball dim to a pale track; a black route draws over it
+     and the ball rolls in along the last straight, settling with one soft
+     rebound. Transitions, so a quick hover reverses cleanly. */
+  .plate :global(.goal-fill) {
+    fill: var(--card);
+  }
+  .plate :global(:is(.route, .goal)) {
+    transition: opacity 0.15s;
+  }
+  .plate :global(.route-hot) {
+    stroke-dasharray: 1 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 0.2s ease-in;
+  }
+  .plate :global(.goal-hot) {
+    transform: translateX(-104px);
+    opacity: 0;
+    transition: transform 0.2s ease-in, opacity 0.1s 0.1s;
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(:is(.route, .goal)) {
+    opacity: 0.2;
+    transition: opacity 0.1s var(--wait);
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.route-hot) {
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 0.5s cubic-bezier(0.4, 0, 0.4, 1) var(--wait);
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.goal-hot) {
+    transform: none;
+    opacity: 1;
+    transition: transform 0.45s linear(0, 0.18 12%, 0.42 25%, 0.7 38%, 0.92 50%, 1 58%, 0.975 70%, 0.968 76%, 0.985 88%, 1) calc(var(--wait) + 0.3s), opacity 0.06s calc(var(--wait) + 0.3s);
+  }
+  /* Squares (opportunity mapping): the top-right square is chosen. It deepens
+     to coral, then grows from its corner to fill the grid with a soft bounce
+     (dips under full size, never over) as the others fade. On leave it shrinks
+     back and the others return. Transitions, so it reverses cleanly. */
+  .plate :global(.sq) {
+    transition: opacity 0.2s 0.2s;
+  }
+  .plate :global(.sq .tone) {
+    transition: opacity 0.25s 0.2s, fill 0.25s 0.2s;
+  }
+  .plate :global(.one) {
+    transform-box: view-box;
+    transform-origin: 208px 48px;
+    transform: scale(0.4);
+    opacity: 0;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.6, 1), opacity 0s 0.3s;
+  }
+  .plate :global(.one-fill) {
+    fill: var(--accent);
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.q1 .tone) {
+    fill: var(--accent);
+    opacity: 1;
+    transition: opacity 0.2s var(--wait), fill 0.2s var(--wait);
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.sq:not(.q1)) {
+    opacity: 0;
+    transition: opacity 0.25s calc(var(--wait) + 0.25s);
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.q1) {
+    opacity: 0;
+    transition: opacity 0s calc(var(--wait) + 0.25s);
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.one) {
+    opacity: 1;
+    transform: scale(1);
+    transition: transform 0.6s linear(0, 0.35 15%, 0.75 30%, 1 45%, 0.9 60%, 0.883 70%, 0.95 85%, 1) calc(var(--wait) + 0.25s), opacity 0s calc(var(--wait) + 0.25s);
+  }
+  /* Stairs: the levels light coral from the bottom step up and hold;
+     they fade on leave. */
+  .plate :global(.lv) {
+    fill: var(--accent);
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.lv) {
+    opacity: 1;
+    transition: opacity 0.18s var(--wait);
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.lv2) { transition-delay: calc(var(--wait) + 0.16s); }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.lv3) { transition-delay: calc(var(--wait) + 0.32s); }
+  /* Chart: the line draws itself left to right, like data arriving. It
+     dims to a pale track and a black line draws over it. Transitions, so a
+     quick hover reverses cleanly. */
+  .plate :global(.line) {
+    transition: opacity 0.15s;
+  }
+  .plate :global(.line-hot) {
+    stroke-dasharray: 1 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 0.2s ease-in;
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.line) {
+    opacity: 0.2;
+    transition: opacity 0.1s var(--wait);
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.line-hot) {
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 0.6s cubic-bezier(0.45, 0, 0.25, 1) var(--wait);
+  }
+  /* Team: a huddle. The outer people lean in, the middle one lifts a touch,
+     then all settle. Once per hover. */
+  .plate :global(:is(.u-l, .u-r, .u-m)) {
+    transform-box: view-box;
+  }
+  .plate :global(.u-l) { transform-origin: 40px 150px; }
+  .plate :global(.u-r) { transform-origin: 216px 150px; }
+  .plate.play :global(.u-l) {
+    animation: plate-lean-l 0.6s var(--wait) cubic-bezier(0.34, 1.3, 0.64, 1) forwards;
+  }
+  .plate.play :global(.u-r) {
+    animation: plate-lean-r 0.6s var(--wait) cubic-bezier(0.34, 1.3, 0.64, 1) forwards;
+  }
+  .plate.play :global(.u-m) {
+    animation: plate-lift 0.6s var(--wait) cubic-bezier(0.34, 1.3, 0.64, 1) forwards;
+  }
+  @keyframes plate-lean-l { 40% { transform: rotate(10deg); } }
+  @keyframes plate-lean-r { 40% { transform: rotate(-10deg); } }
+  @keyframes plate-lift { 40% { transform: translateY(-8px); } }
+  /* Strategy: the play is drawn. The arrow traces its curve up from beside
+     the O, then the arrowhead snaps on with a small bounce. Drawn over a
+     pale track with transitions, so a quick hover reverses cleanly. */
+  .plate :global(:is(.arc, .head)) {
+    transition: opacity 0.15s;
+  }
+  .plate :global(.arc-hot) {
+    stroke-dasharray: 1 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 0.2s ease-in;
+  }
+  .plate :global(.head-hot) {
+    transform-box: view-box;
+    transform-origin: 144px 40px;
+    transform: scale(0);
+    opacity: 0;
+    transition: transform 0.15s ease-in, opacity 0s 0.15s;
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(:is(.arc, .head)) {
+    opacity: 0.2;
+    transition: opacity 0.1s var(--wait);
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.arc-hot) {
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 0.4s cubic-bezier(0.45, 0, 0.25, 1) var(--wait);
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.head-hot) {
+    transform: scale(1);
+    opacity: 1;
+    transition: transform 0.35s cubic-bezier(0.34, 1.6, 0.64, 1) calc(var(--wait) + 0.36s), opacity 0s calc(var(--wait) + 0.36s);
+  }
+  /* Pen nib: it underlines. The nib travels right drawing a straight ink
+     line behind its tip, lifts and glides back. The line goes on leave. */
+  .plate :global(.ink) {
+    stroke-dasharray: 1 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 0.2s ease-in;
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.ink) {
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 0.6s cubic-bezier(0.4, 0, 0.6, 1) var(--wait);
+  }
+  .plate.play :global(.pen) {
+    animation: plate-write 0.95s var(--wait) forwards;
+  }
+  @keyframes plate-write {
+    0% { transform: translate(0, 0); animation-timing-function: cubic-bezier(0.4, 0, 0.6, 1); }
+    63.2% { transform: translate(80px, 0); animation-timing-function: cubic-bezier(0.3, 0, 0.2, 1); }
+    75% { transform: translate(80px, -10px); animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
+    100% { transform: translate(0, 0); }
+  }
+  /* Tree structure (Impact Chain): the chain fills. The lines dim to a pale
+     track and a black line draws back over them from the root box; the root,
+     then the top and bottom boxes light coral. Transitions, so leaving runs
+     it back without a jump. */
+  .plate :global(.tb) {
+    transition: fill 0.2s, opacity 0.2s;
+  }
+  .plate :global(.wire) {
+    transition: opacity 0.15s;
+  }
+  .plate :global(.hot) {
+    stroke-dasharray: 1 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 0.2s ease-in;
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.tb) {
+    fill: var(--accent);
+    opacity: 1;
+    transition: fill 0.15s var(--wait), opacity 0.15s var(--wait);
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.tb1) { transition-delay: calc(var(--wait) + 0.3s); }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.tb2) { transition-delay: calc(var(--wait) + 0.36s); }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.wire) {
+    opacity: 0.2;
+    transition: opacity 0.1s var(--wait);
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.hot) {
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 0.12s linear calc(var(--wait) + 0.05s);
+  }
+  :global(:is(a, .lane):is(:hover, :focus-within)) > .plate :global(.h2) {
+    transition: stroke-dashoffset 0.16s cubic-bezier(0, 0, 0.3, 1) calc(var(--wait) + 0.17s);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .plate.play :global(*) {
+      animation: none;
+    }
+    :global(:is(a, .lane):hover) > .plate :global(svg),
+    :global(:is(a, .lane):focus-within) > .plate :global(svg) {
+      animation: none;
+    }
+    .plate :global(:is(.lv, .needle, .mic-rig, .mic-stem, .plane, .sq, .sq .tone, .one, .tb, .wire, .hot, .arc, .head, .arc-hot, .head-hot, .route, .goal, .route-hot, .goal-hot, .line, .line-hot, .wisp, .wisp-hot, .ink)) {
+      transition: none;
+    }
+  }
+  .plate.pink :global(.tone) {
+    fill: var(--accent);
+    opacity: 0.45;
+  }
+  .plate.blue :global(.tone) {
+    fill: var(--teal);
+    opacity: 0.9;
+  }
+</style>

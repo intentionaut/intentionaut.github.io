@@ -1,0 +1,104 @@
+---
+import Plate from '../../../components/Plate.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { families, toolHref, toolPdf, toolPreview, type Family, type Tool } from '../../../data/tools';
+
+export function getStaticPaths() {
+  return families.flatMap((f) => f.tools.map((t) => ({ params: { family: f.slug, slug: t.slug }, props: { f, t } })));
+}
+const { f, t } = Astro.props as { f: Family; t: Tool };
+const others = f.tools.filter((o) => o.slug !== t.slug);
+const pdf = toolPdf(f, t);
+const schema = {
+  '@type': 'CreativeWork',
+  name: t.title,
+  description: t.lede,
+  url: `https://intentionaut.com${toolHref(f, t)}`,
+  license: 'https://creativecommons.org/licenses/by/4.0/',
+  isAccessibleForFree: true,
+  author: { '@id': 'https://intentionaut.com/#person' },
+};
+---
+
+<BaseLayout
+  title={`${t.title}: free tool | Saielle DaSilva`}
+  description={`${t.lede} A free ${f.name} tool by Saielle DaSilva, CC BY 4.0.`}
+  jsonLd={[schema]}
+>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow"><a href="/tools/">Tools</a> · <a href={`/tools/${f.slug}/`}>{f.name}</a></p>
+      <h1>{t.title}</h1>
+      <p class="lede">{t.expand && <><span class="expand">{t.expand.map((w, k) => <>{k > 0 && ', '}<strong>{w[0]}</strong>{w.slice(1)}</>)}.</span>{' '}</>}{t.lede}</p>
+      <p><a class="btn" href={pdf} target="_blank" rel="noopener">Open the PDF</a> <span class="rate-shape">{t.pages}, CC BY 4.0</span></p>
+    </header>
+
+    <a class="sheet-preview" href={pdf} target="_blank" rel="noopener" aria-label={`Open ${t.title} (PDF) in a new tab`}>
+      <img src={toolPreview(f, t)} alt={`Page one of ${t.title}`} width="1400" />
+    </a>
+
+    <section class="rates-section" aria-labelledby="what-h">
+      <h2 id="what-h">What it is</h2>
+      <div class="prose">{t.whatItIs.map((p) => <p>{p}</p>)}</div>
+    </section>
+
+    <section class="rates-section" aria-labelledby="when-h">
+      <h2 id="when-h">Use it when</h2>
+      <ul class="prose">{t.useWhen.map((x) => <li>{x}</li>)}</ul>
+    </section>
+
+    {t.room && (
+      <section class="rates-section" aria-labelledby="room-h">
+        <h2 id="room-h">Who should be in the room</h2>
+        <ul class="prose">{t.room.map((x) => <li>{x}</li>)}</ul>
+        {t.bring && <><h3>Bring</h3><ul class="prose">{t.bring.map((x) => <li>{x}</li>)}</ul></>}
+      </section>
+    )}
+
+    <section class="rates-section" aria-labelledby="how-h">
+      <h2 id="how-h">How to use it</h2>
+      <ol class="talk-list">
+        {t.steps.map(([title, meta], i) => (
+          <li class="talk-row">
+            <span class="talk-date">Step {i + 1}</span>
+            <div><span class="talk-title">{title}</span><p class="talk-meta">{meta}</p></div>
+          </li>
+        ))}
+      </ol>
+      <ul class="prose">{t.tips.map((x) => <li>{x}</li>)}</ul>
+    </section>
+
+    <section class="rates-section" aria-labelledby="leave-h">
+      <h2 id="leave-h">You leave with</h2>
+      <ul class="prose">{t.leaveWith.map((x) => <li>{x}</li>)}</ul>
+      <p><a class="btn" href={pdf} target="_blank" rel="noopener">Open the PDF</a></p>
+      <p class="rate-shape">
+        CC BY 4.0. Share and adapt freely. Credit: Saielle DaSilva, intentionaut.com.
+        <a href="https://creativecommons.org/licenses/by/4.0/">Licence</a>
+      </p>
+    </section>
+
+    <section class="rates-section" aria-labelledby="more-h">
+      <h2 id="more-h">The other {f.name} tools</h2>
+      <div class="rates">
+        {others.map((o, i) => (
+          <a class="rate-row rate-card envelope" href={toolHref(f, o)}>
+            <Plate name={o.icon} tone={i % 2 ? 'blue' : 'pink'} />
+            <p class="eyebrow">{o.question}</p>
+            <p class="rate-name">{o.title}</p>
+            <p class="rate-desc">{o.expand && <><span class="expand">{o.expand.map((w, k) => <>{k > 0 && ', '}<strong>{w[0]}</strong>{w.slice(1)}</>)}.</span>{' '}</>}{o.card}</p>
+          </a>
+        ))}
+      </div>
+      <p>
+        {f.workshop && <a class="link-arrow" href={f.workshop.href}><span>{f.workshop.label}</span></a>}
+      </p>
+    </section>
+  </section>
+</BaseLayout>
+
+<style>
+  .sheet-preview { display: block; max-width: 56rem; margin-bottom: var(--space-10); border: 1px solid var(--ink); box-shadow: var(--lift); background: #fff; }
+  .sheet-preview img { display: block; width: 100%; height: auto; }
+  .sheet-preview:hover, .sheet-preview:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+</style>

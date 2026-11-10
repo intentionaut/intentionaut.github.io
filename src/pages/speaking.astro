@@ -55,6 +55,18 @@ const fmt = (d: Date) =>
                 {talk.data.description && (
                   <p class="talk-desc">{talk.data.description}</p>
                 )}
+                {talk.data.quotes && (
+                  <div class="talk-quotes">
+                    {talk.data.quotes.map((q) => (
+                      <figure class="pull-quote">
+                        <blockquote>
+                          <p>{q.text}</p>
+                        </blockquote>
+                        <figcaption>{q.attribution}</figcaption>
+                      </figure>
+                    ))}
+                  </div>
+                )}
               </div>
             </li>
           ))}

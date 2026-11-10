@@ -1,6 +1,6 @@
 ---
 title: Familiar
-summary: A companion for your newsletter. Open source prompts that interview you, propose structures, draft in your voice and hand back editor's reports instead of rewrites. Every stage waits for you.
+summary: "A companion for your newsletter: open source prompts that interview you, draft in your voice and return editor's reports, not rewrites."
 url: https://intentionaut.com/open-source/familiar/?utm_source=intentionaut.com&utm_medium=referral&utm_campaign=projects
 linkLabel: intentionaut.com/open-source/familiar
 ctaLabel: Read the full story

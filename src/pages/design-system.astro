@@ -2,9 +2,53 @@
 import '@fontsource-variable/fraunces';
 import '@fontsource-variable/fraunces/wght-italic.css';
 import '@fontsource-variable/jost';
-import '@fontsource-variable/roboto-serif';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { rates, gbp } from '../data/rates';
+import Plate from '../components/Plate.astro';
+
+// Every icon in src/assets/icons/ is listed, so the set here can't drift from
+// the files. Labels say what each one marks; placement is Elle's call per page.
+const iconLabels: Record<string, string> = {
+  'strategy': 'Workshops',
+  'magnifying-glass': 'AI product audit',
+  'compass': 'Strategy sprint',
+  'lighthouse': 'Fractional',
+  'hammer': 'Product building',
+  'coffee': 'Office hours',
+  'plant': 'Mentoring',
+  'path': 'AI product strategy',
+  'squares-choose': 'Opportunity mapping',
+  'stairs': 'Product maturity',
+  'chart-line': 'Data-informed decisions',
+  'users-three': 'Data culture',
+  'envelope-simple': 'You write in',
+  'chats-circle': 'We scope it',
+  'signpost': 'Clear direction',
+  'calendar-blank': 'Book a call',
+  'microphone-ribbon': 'Speaking',
+  'pen-nib': 'Writing',
+  'book-open-text': 'Case studies',
+  'airplane-takeoff': 'AI pilot to production',
+  // Not placed yet: noun labels so a page can pick one.
+  'newspaper': 'Newsletter',
+  'book-bookmark': 'Book',
+  'clipboard-text': 'Template',
+  'headphones': 'Podcast',
+  'video-camera': 'Video',
+  'quotes': 'Testimonial',
+  'tree-structure': 'Organisation',
+  'handshake': 'Hiring',
+  'binoculars': 'Research',
+  'scales': 'Decision',
+  'database': 'Data',
+  'gauge': 'Metrics',
+  'funnel': 'Priority',
+  'gear-six': 'Operations',
+};
+const iconSet = Object.keys(import.meta.glob('../assets/icons/*.svg'))
+  .map((path) => path.split('/').pop()!.replace('.svg', ''))
+  .sort((a, b) => (iconLabels[a] ? 0 : 1) - (iconLabels[b] ? 0 : 1))
+  .map((name) => ({ name, label: iconLabels[name] ?? name }));
 
 const updated = '27 September 2026';
 
@@ -15,7 +59,8 @@ const palette = [
   { token: '--slate', name: 'Slate', hex: '#e0d2cb', use: 'Borders, dividers, code blocks' },
   { token: '--accent', name: 'Accent', hex: '#c85060', use: 'Rules, borders, underlines, focus rings, and any text 24px and up (numerals, the italic word in a headline): 3.71:1 passes for large text' },
   { token: '--accent-text', name: 'Accent text', hex: '#b8404f', use: 'Accent-coloured text at small sizes: eyebrows, links, open questions. 4.55:1 on paper, the closest shade to --accent that passes' },
-  { token: '--mendl', name: 'Teal wash', hex: 'rgba(169, 203, 208, 0.55)', use: 'Highlights, selection, washes' },
+  { token: '--teal', name: 'Teal', hex: '#a9cbd0', use: 'Plate tones, carousel and talk-row bars. Never text' },
+  { token: '--mendl', name: 'Teal wash', hex: '--teal at 55%', use: 'Highlights, selection, washes' },
 ];
 
 const typeScale = [
@@ -32,12 +77,6 @@ const spacing = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((i) => ({
   token: `--space-${i}`,
   px: 4 * i,
 }));
-
-const radii = [
-  { token: '--radius-s', value: '3px' },
-  { token: '--radius-m', value: '5px' },
-  { token: '--radius-l', value: '8px' },
-];
 
 const motion = [
   { token: '--dur-fast', value: '0.15s' },
@@ -56,6 +95,7 @@ const zindex = [
 
 <BaseLayout
   title="Design system | Saielle DaSilva"
+  noindex
   description="The design system behind intentionaut.com: colour, type, spacing, radius, motion, and the components they compose."
 >
   <section class="wrap">
@@ -128,18 +168,6 @@ const zindex = [
           </div>
         </div>
 
-        <div class="ds-type-face">
-          <div class="ds-face-sample ds-face-form">
-            Abcdefghijklmnopqrstuvwxyz
-            <br />ABCDEFGHIJKLMNOPQRSTUVWXYZ
-          </div>
-          <div class="ds-face-meta">
-            <strong>Roboto Serif</strong>
-            <code>form fields only</code>
-            <span class="ds-muted">What a reader types into the contact form, and the topic menu. Nowhere else</span>
-          </div>
-        </div>
-
         <h3 class="ds-sub">Type scale</h3>
         <div class="ds-scale">
           {typeScale.map((s) => (
@@ -187,21 +215,12 @@ const zindex = [
         <p class="ds-kicker">Foundations</p>
         <h2>Radius</h2>
         <p class="ds-note">
-          Square is part of the identity. The few corners that round do so a
-          little, and never far.
+          Square is part of the identity: cards, panels, banners, images,
+          buttons, pills and chips all have square corners. Only focus rings and
+          loading skeletons round 2px, so they read as temporary.
+          One exception: the terminal window on release pages keeps its round
+          window dots and white washes, because it imitates a real window.
         </p>
-        <div class="ds-radii">
-          {radii.map((r) => (
-            <div class="ds-radius">
-              <span
-                class="ds-radius-shape"
-                style={`border-radius: var(${r.token})`}
-              ></span>
-              <code>{r.token}</code>
-              <span class="ds-muted">{r.value}</span>
-            </div>
-          ))}
-        </div>
       </section>
 
       <section class="ds-section" id="motion">
@@ -300,7 +319,7 @@ const zindex = [
 
         <h3 class="ds-sub">Command pill</h3>
         <div class="ds-demo ds-demo-block">
-          <span class="pill pill-light"><span class="pill-prompt">$</span> git clone https://github.com/intentionaut/familiar.git</span>
+          <span class="pill"><span class="pill-prompt">$</span> git clone https://github.com/intentionaut/familiar.git</span>
           <p class="ds-demo-caption">
             Monospace, a prompt marker in <code>--accent-text</code>, and a
             slate chip behind it. <code>.pill</code> in global.css;
@@ -361,10 +380,10 @@ const zindex = [
               <p class="rate-name">Fractional leadership</p>
               <p class="rate-price">{gbp(rates.fractional)} / day</p>
               <p class="rate-desc">
-                Part-time head of product for early teams that need direction
-                now, before they're ready for a full-time hire.
+                Head of product for teams that need direction now, one or two
+                days a week.
               </p>
-              <p class="rate-shape">One or two days a week, three months and up.</p>
+              <p class="rate-shape">One or two days a week, one month minimum, then 30 days' notice.</p>
             </div>
           </div>
           <p class="ds-demo-caption">
@@ -382,7 +401,7 @@ const zindex = [
         <p class="ds-note">
           <code>ContactForm.astro</code>, always inside a Card at the reading
           width. Heading at <code>--text-lg</code>, a one-line intro in ink,
-          uppercase muted field labels, fields in Roboto Serif on a slate
+          uppercase muted field labels, fields in Jost on a slate
           underline, one full-width button, and "Rather talk first? Book a free
           call." under it. While sending, the button reads "Sending…". Once
           sent, the card keeps its height and shows only "Message sent.",
@@ -413,13 +432,45 @@ const zindex = [
           <code>--accent-text</code> label at <code>--text-xs</code> over an ink
           value, and "All projects" on the right edge. The page's button row
           follows the prose on its section gap, with none of its own.
+          On case studies the facts are a <code>dl.memo</code>: muted labels
+          with a colon in a 6.5rem column, values beside them, like the head
+          of a memo. Company, Role and When, from frontmatter only.
+        </p>
+
+        <h3 class="ds-sub">Lists</h3>
+        <p class="ds-note">
+          Plain lists in prose, rate cards and Who it is for use square
+          markers in <code>--accent-text</code>, to match the square buttons.
+          Lists with a class of their own set their own markers.
+        </p>
+
+        <h3 class="ds-sub">Plaque</h3>
+        <p class="ds-note">
+          <code>.house-rules</code> on /office-hours/: the double-rule frame
+          around a short numbered list, counted in upper-case Roman numerals.
+          For a few steps someone should read in order. One per page.
+        </p>
+
+        <h3 class="ds-sub">Jacket flap</h3>
+        <p class="ds-note">
+          <code>.flap</code> at the top of an essay: a small "In this piece"
+          label, then the lede in Fraunces italic behind a 3px double rule on
+          the left. The lede is the beehiiv subtitle or the essay description.
+        </p>
+
+        <h3 class="ds-sub">Platform tags</h3>
+        <p class="ds-note">
+          <code>.board-tag</code> on /writing/: each row's themes as small
+          uppercase tags in a third column, like platforms on a departures
+          board. Dates use tabular figures so they line up. Below 720px the
+          tags wrap under the title.
         </p>
 
         <h3 class="ds-sub">Results strip</h3>
         <div class="ds-demo ds-demo-block">
           <ul class="stat-strip ds-flush">
             <li><span class="stat-num">+450%</span><span class="stat-label">MRR in 90 days</span></li>
-            <li><span class="stat-num">3.2x</span><span class="stat-label">Satellite portfolio</span></li>
+            <li><span class="stat-num">3.2x</span><span class="stat-label">Return on investment</span></li>
             <li><span class="stat-num">100M+</span><span class="stat-label">Customers served</span></li>
             <li><span class="stat-num">$7B</span><span class="stat-label">IPO</span></li>
           </ul>
@@ -433,12 +484,14 @@ const zindex = [
 
         <h3 class="ds-sub">List rows</h3>
         <p class="ds-note">
-          <code>.project-row</code> and <code>.talk-row</code>: an ink rule above
-          the list, a slate rule under each row, the title in Fraunces 500 at
-          <code>--text-md</code> and a muted line beneath. Rows are inset 12px. A
-          row that links takes a faint teal wash on hover, so it reads as one
-          tappable unit; a row with no link stays still.
-          Projects, writing, speaking, the career ledger on /about/ and the homepage's
+          <code>.talk-row</code>: an ink rule above the list, a slate rule under
+          each row, the title in Fraunces 500 at <code>--text-md</code> and a muted
+          line beneath. Rows are inset 12px. A row that links takes a faint teal
+          wash on hover, so it reads as one tappable unit; a row with no link stays
+          still. Writing, speaking and the career ledger on /about/ use it.
+          <code>.project-row</code> holds a <code>.project-card</code>: an ink rule
+          above the list, then cards with an even gap and no rules of their own,
+          aligned to the rule. Projects, case studies and the homepage's
           "What I've built lately".
         </p>
 
@@ -468,16 +521,89 @@ const zindex = [
           the homepage, and the top and foot of /writing/ (a short italic
           heading with the promise as its sub-line), and through
           <code>ReleaseSubscribe</code> on /open-source/ and the tool pages,
-          and at the close of every essay and post, naming the piece.
+          and at the close of every essay and post, naming the piece. When it
+          has an eyebrow, a masthead line pairs it with "Latest" and the month
+          of the newest letter, linked to it (<code>.fs-latest</code>). It is
+          read from beehiiv at build time.
         </p>
+
+        <h3 class="ds-sub">Ledger</h3>
+        <div class="ds-demo">
+          <dl class="ledger">
+            <div><dt>Minimum commitment</dt><dd>One month</dd></div>
+            <div><dt>Day rate</dt><dd>£1,500</dd></div>
+          </dl>
+          <p class="ds-demo-caption">
+            Terms and prices as label, dotted leader, value, like an accounts
+            page. <code>&lt;dl class="ledger"&gt;</code> with one
+            <code>&lt;div&gt;</code> per row. Use it for short lists of terms;
+            prices that need a sentence stay in prose.
+          </p>
+        </div>
 
         <h3 class="ds-sub">Testimonial card</h3>
         <p class="ds-note">
           A Card holding a quote in Fraunces, then the name in Jost 600 and the
           role in italic, both ink at <code>--text-sm</code>. Cards grow to fit
-          their quote and the carousel row evens them to the tallest; a fixed
-          height clipped long quotes on phones.
+          their quote from a 380px floor, and the carousel row evens them to the
+          tallest. The quote sits centred in the space left, so short quotes keep
+          some air without a large empty band. A fixed height clipped long quotes
+          on phones.
         </p>
+
+        <h3 class="ds-sub">Received stamp</h3>
+        <p class="ds-note">
+          After a contact form sends, a rotated "Received" stamp with the date
+          presses onto the card. Decorative, so <code>aria-hidden</code>; the
+          status line says the same in words. No press under reduced motion.
+        </p>
+
+        <h3 class="ds-sub">Consent bar</h3>
+        <p class="ds-note">
+          <code>Consent.astro</code>: a card on the right from 1280px. Below
+          that, a slim bar across the foot of the screen with a double rule on
+          top. Under 720px it wraps and drops its heading.
+        </p>
+
+        <h3 class="ds-sub">One quiet joke</h3>
+        <p class="ds-note">
+          Hold Shift over a "Book a free call" button and it reads "Let's
+          rock" until Shift is released. Visual only: the accessible name stays
+          as written. In <code>BaseLayout.astro</code>. Keep it to one.
+        </p>
+      </section>
+
+      <section class="ds-section" aria-labelledby="ds-icons">
+        <h2 id="ds-icons">Icons</h2>
+        <p class="ds-note">
+          Phosphor duotone icons (MIT) set in a Plate: a 64px double-ruled
+          frame like the buttons. The duotone layer takes pink or blue, and
+          neighbours alternate. Use <code>&lt;Plate name="compass" tone="blue" /&gt;</code>.
+          Never an icon made of the letters "AI". The ribbon mic is drawn in-house to the same rules (16-unit
+          strokes, round ends, one duotone layer), since Phosphor has none. Placement is chosen per page. Each offer's icon is set once in
+          <code>src/data/icons.ts</code>; wide lists use the envelope layout
+          (plate on the left), square cards the centred one. When a link
+          or lane holding a plate is hovered or focused, each icon acts out
+          its own meaning; all stay still under reduced motion. The compass
+          needle turns on its pivot to point north and holds while hovered;
+          the magnifying glass slides in and finds a £ inside its lens; the
+          lighthouse beam makes one turn behind the tower; the coffee's steam
+          draws up one line at a time; the hammer makes one strike;
+          the plant's leaves dip and spring open; the ribbon mic is raised
+          to speaking height; the plane climbs off the runway; the path draws
+          itself and its ball rides in; one of four squares is chosen and
+          grows to fill the grid; the stairs light up level by level; the chart line draws itself;
+          the team huddles; the strategy play's arrow draws itself; the pen nib underlines.
+        </p>
+        <ul class="ds-icons">
+          {iconSet.map((ic, i) => (
+            <li>
+              <Plate name={ic.name} tone={i % 2 ? 'blue' : 'pink'} />
+              <span>{ic.label}</span>
+              <code>{ic.name}</code>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <div class="ds-close">
@@ -542,11 +668,11 @@ const zindex = [
     color: var(--ink);
     background: rgba(56, 35, 74, 0.06);
     padding: 0.05em 0.35em;
-    border-radius: 3px;
+    border-radius: 0;
   }
 
   .ds-index code {
-    font-family: 'SFMono-Regular', ui-monospace, 'Roboto Mono', Menlo, monospace;
+    font-family: var(--font-mono);
     font-size: 0.78rem;
   }
 
@@ -575,7 +701,7 @@ const zindex = [
     width: 4.5rem;
     height: 4.5rem;
     border: 1px solid var(--slate);
-    border-radius: var(--radius-m);
+    border-radius: 0;
   }
 
   .ds-swatch-meta {
@@ -678,26 +804,6 @@ const zindex = [
   }
 
   /* Radius */
-  .ds-radii {
-    display: flex;
-    gap: var(--space-8);
-    margin-top: var(--space-7);
-  }
-
-  .ds-radius {
-    display: grid;
-    gap: var(--space-3);
-    justify-items: start;
-  }
-
-  .ds-radius-shape {
-    display: block;
-    width: 5rem;
-    height: 5rem;
-    border: 1px solid var(--ink);
-    background: var(--paper);
-  }
-
   /* Motion + layer */
   .ds-tokens {
     margin-top: var(--space-6);
@@ -718,13 +824,30 @@ const zindex = [
   .ds-demo {
     padding: var(--space-6);
     border: 1px solid var(--slate);
-    border-radius: var(--radius-l);
+    border-radius: 0;
     background: rgba(247, 233, 224, 0.5);
   }
 
   .ds-demo-block {
     display: grid;
     gap: var(--space-5);
+  }
+
+  /* Phones: the alphabet samples and the long command wrap instead of
+     pushing the page sideways. */
+  @media (max-width: 520px) {
+    .ds-face-sample {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+    .ds-demo-block {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .ds-demo .pill {
+      max-width: 100%;
+      white-space: normal;
+      overflow-wrap: anywhere;
+    }
   }
 
   .ds-demo-row {
@@ -781,7 +904,7 @@ const zindex = [
     gap: var(--space-4);
     padding: var(--space-5) var(--space-6);
     border: 1px solid var(--slate);
-    border-radius: var(--radius-l);
+    border-radius: 0;
   }
 
   .ds-haircard > div {
@@ -811,7 +934,7 @@ const zindex = [
     line-height: 1.55;
     white-space: pre;
     overflow-x: auto;
-    border-radius: var(--radius-l);
+    border-radius: 0;
     background: var(--slate);
     color: var(--ink);
   }
@@ -835,12 +958,6 @@ const zindex = [
 
   .ds-close a {
     color: var(--accent-text);
-  }
-
-  .ds-face-form {
-    font-family: 'Roboto Serif Variable', Georgia, serif;
-    font-weight: 400;
-    color: var(--ink);
   }
 
   .ds-rates {
@@ -871,5 +988,20 @@ const zindex = [
     .ds-space-meta {
       grid-column: 2;
     }
+  }
+  .ds-icons {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));
+    gap: var(--space-6) var(--space-4);
+  }
+  .ds-icons li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
   }
 </style>
