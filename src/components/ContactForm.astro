@@ -172,6 +172,8 @@ const topics: [string, string][] = [
 </style>
 
 <script>
+  import { trackEvent } from '../lib/pendo';
+
   const ENDPOINT = 'https://contact-form.intentionaut.workers.dev/contact';
   const form = document.getElementById('contact-form') as HTMLFormElement | null;
   const statusEl = document.getElementById('form-status');
@@ -194,8 +196,24 @@ const topics: [string, string][] = [
     }
     say('');
 
+    const data = Object.fromEntries(new FormData(form));
+    const field = (key: string) => {
+      const value = data[key];
+      return typeof value === 'string' ? value : undefined;
+    };
+    // Topic, sending page and first-touch arrival only. Never the name, email
+    // or message. /contact/ itself sends no source field.
+    const attribution = {
+      topic: field('topic'),
+      source: field('source') || 'contact',
+      first_source: field('first_source'),
+      first_medium: field('first_medium'),
+      first_campaign: field('first_campaign'),
+      first_landing: field('first_landing'),
+      first_referrer: field('first_referrer'),
+    };
+
     try {
-      const data = Object.fromEntries(new FormData(form));
       const res = await fetch(ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -203,6 +221,7 @@ const topics: [string, string][] = [
       });
       const result = (await res.json().catch(() => ({}))) as { message?: string; error?: string };
       if (res.ok) {
+        trackEvent('contact_enquiry_sent', attribution);
         // First name only, capitalised. The email address is deliberately not
         // echoed back: the screen may be shared or screenshotted.
         const first = String(data.name ?? '').trim().split(/\s+/)[0] ?? '';
@@ -229,9 +248,24 @@ const topics: [string, string][] = [
           say(result.message || "Thank you; I'll reply soon.");
         }
       } else {
+        trackEvent('contact_enquiry_failed', {
+          topic: attribution.topic,
+          source: attribution.source,
+          http_status: res.status,
+          error_type: 'http_error',
+          first_source: attribution.first_source,
+          first_campaign: attribution.first_campaign,
+        });
         say(result.error || 'Something went wrong; please email me directly.');
       }
     } catch {
+      trackEvent('contact_enquiry_failed', {
+        topic: attribution.topic,
+        source: attribution.source,
+        error_type: 'network_error',
+        first_source: attribution.first_source,
+        first_campaign: attribution.first_campaign,
+      });
       say('Something went wrong; please email me directly.');
     } finally {
       // A Turnstile token is single-use; a retry needs a fresh one.
