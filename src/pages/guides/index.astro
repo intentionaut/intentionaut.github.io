@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { guides, guideHref } from '../../data/guides';
+
+const schema = {
+  '@type': 'CollectionPage',
+  '@id': 'https://intentionaut.com/guides/#page',
+  name: 'Guides',
+  description: 'Plain answers to common AI and product questions.',
+  author: { '@id': 'https://intentionaut.com/#person' },
+  hasPart: guides.map((g) => ({ '@type': 'Article', headline: g.title, url: `https://intentionaut.com${guideHref(g)}` })),
+};
+---
+
+<BaseLayout
+  title="Product and AI guides | Saielle DaSilva"
+  description="Plain answers to common product and AI leadership questions, from Saielle DaSilva, starting with how to judge product decisions. Free to read."
+  jsonLd={[schema]}
+>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Guides</p>
+      <h1>Plain answers to common AI and product questions.</h1>
+      <p class="lede">Each guide answers one question a product or company leader asks. Free to read, no email needed.</p>
+    </header>
+
+    <div class="rates">
+      {guides.map((g) => (
+        <a class="rate-row rate-card envelope" href={guideHref(g)}>
+          <p class="rate-name">{g.title}</p>
+          <p class="rate-desc">{g.summary}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

@@ -18,6 +18,7 @@ export type FaqPlacement =
   | 'strategy-sprint'
   | 'tools-impact-first-ai'
   | 'office-hours'
+  | 'guide-decision-quality'
   | 'home';
 
 export interface Faq {
@@ -475,6 +476,31 @@ export const faqs: Faq[] = [
     question: 'Something else?',
     answer:
       'Ask me directly: hello@intentionaut.com.',
+  },
+  {
+    question: 'Should you judge a product decision by its outcome?',
+    answer: 'Judge the quality of a decision first, then the quality of its outcome. A good call can start with poor results, and a bad one can get lucky.',
+    placements: ['guide-decision-quality'],
+  },
+  {
+    question: 'What is decision quality?',
+    answer: 'Decision quality looks different in every organisation. It is made of the inputs, the outputs and how decisions flow, for both people and machines.',
+    placements: ['guide-decision-quality'],
+  },
+  {
+    question: 'How much information do you need to make a product decision?',
+    answer: 'Most decisions need about 70% of the information you wish you had. Jeff Bezos wrote that waiting for 90% usually means being slow.',
+    placements: ['guide-decision-quality'],
+  },
+  {
+    question: 'What slows product decisions down?',
+    answer: 'Common barriers are needing "all the data", deciding by influence rather than customer and business needs, leaving out the right stakeholders, and deciding by committee.',
+    placements: ['guide-decision-quality'],
+  },
+  {
+    question: 'What is decision velocity?',
+    answer: 'Many companies think about developer velocity and story points, but never focus on decision velocity. The less important a decision, the faster you should get to it.',
+    placements: ['guide-decision-quality'],
   },
 ];
 

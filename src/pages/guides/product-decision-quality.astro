@@ -1,0 +1,185 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ContactForm from '../../components/ContactForm.astro';
+import FaqList from '../../components/FaqList.astro';
+import { faqsFor } from '../../data/faqs';
+import { BOOKING_URL } from '../../data/links';
+import { guides, guideHref } from '../../data/guides';
+
+const slug = 'product-decision-quality';
+const guide = guides.find((g) => g.slug === slug)!;
+const others = guides.filter((g) => g.slug !== slug);
+const faqs = faqsFor('guide-decision-quality');
+const url = `https://intentionaut.com${guideHref(guide)}`;
+
+const article = {
+  '@type': 'Article',
+  '@id': `${url}#article`,
+  headline: guide.title,
+  description: guide.summary,
+  datePublished: guide.published,
+  author: { '@id': 'https://intentionaut.com/#person' },
+  isPartOf: { '@id': 'https://intentionaut.com/guides/#page' },
+  mainEntityOfPage: url,
+};
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer.replace(/\s+/g, ' ').trim() },
+  })),
+};
+---
+
+<BaseLayout
+  title="How to judge product decisions | Saielle DaSilva"
+  description="How to know if your product decisions are good: judge the decision before the outcome. Four signs of a good decision and five questions to test one."
+  jsonLd={[article, faqSchema]}
+>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow"><a href="/guides/">Guides</a></p>
+      <h1>How do you know if your product decisions are good?</h1>
+      <p class="lede">
+        Judge the decision before you judge the outcome. A good call can start
+        with poor results, and a bad one can get lucky.
+      </p>
+    </header>
+
+    <div class="prose">
+      <h2>The short answer</h2>
+      <p>
+        Judge the quality of a decision first, then the quality of its outcome.
+        Good product decisions share four signs. Principles shape them. Few
+        barriers slow them. Input is structured around a small set of risks.
+        And the team can tell the right call was made, even when early results
+        are modest. Most decisions need about 70% of the information you wish
+        you had.
+      </p>
+
+      <h2>Why decision quality matters</h2>
+      <p>
+        In <a href="https://hbr.org/2010/06/the-decision-driven-organization" target="_blank" rel="noopener noreferrer">one study</a>,
+        decision effectiveness and financial results correlated at a 95%
+        confidence level in companies earning over $1 billion.
+      </p>
+      <p>
+        Many companies think about developer velocity and story points, but
+        never focus on decision velocity. Slow decisions are one of the
+        barriers that make a workplace culture stagnant.
+      </p>
+      <p>
+        AI makes this more pressing. Teams track AI feature usage and task
+        completion times while missing whether decisions got better. Instead of
+        tracking AI feature usage, <a href="/writing/the-case-for-measuring-decision-quality/">measure decision quality</a>.
+      </p>
+
+      <h2>Sign 1: principles shape decisions</h2>
+      <p>
+        Alignment on problems without clarity about how to make good decisions
+        is where many teams get stuck. Principles give stakeholders a common
+        language for tradeoffs.
+      </p>
+      <p>
+        <a href="https://medium.com/the-ready/even-overs-the-prioritization-tool-that-brings-your-strategy-to-life-e4f28f2949ac" target="_blank" rel="noopener noreferrer">Even-over statements</a>
+        are one way to do this. Each one names two good things and says which wins:
+      </p>
+      <ul>
+        <li>Premium quality even over mass market adoption</li>
+        <li>Revenue growth even over user growth</li>
+        <li>Customer service even over expansion</li>
+      </ul>
+      <p>
+        The best principles are reversible. A different strategy flips them.
+        When a discussion reaches a dead end, bring it back to the principles.
+      </p>
+
+      <h2>Sign 2: barriers are few</h2>
+      <p>The less important a decision, the faster you should get to it. Common barriers:</p>
+      <ul>
+        <li>Needing "all the data" to decide</li>
+        <li>Decisions based on influence rather than customer and business needs</li>
+        <li>Decisions with long-lasting consequences made without the right stakeholders</li>
+        <li>Too many cooks, so decisions happen by committee</li>
+      </ul>
+      <p>Ask your team where they struggle to get to the next step. Then investigate.</p>
+
+      <h2>Sign 3: input is structured</h2>
+      <p>
+        Teams often start with clarity about what matters. Over time, risks pile
+        up until they are juggling a dozen opinions and an approval process that
+        takes months.
+      </p>
+      <p>
+        Structured input fixes this. Stakeholders weigh in on the few risks that
+        matter most, and the team decides the rest.
+        <a href="https://www.svpg.com/four-big-risks/" target="_blank" rel="noopener noreferrer">Marty Cagan's four risks</a>
+        are a good set: value, usability, feasibility and business viability.
+      </p>
+      <p>
+        Most decisions leaders weigh in on are not important enough to warrant
+        the meetings they generate. Define the major decision milestones up
+        front, and say who supports, who influences and who decides. Everyone
+        commits once the call is made.
+      </p>
+
+      <h2>Sign 4: you can judge the call, not just the result</h2>
+      <p>
+        Decision quality looks different in every organisation. It is made of
+        the inputs, the outputs and how decisions flow, for both people and
+        machines. Five questions test it:
+      </p>
+      <ol>
+        <li>What is your context?</li>
+        <li>How do you and others know what is important?</li>
+        <li>How do you and your teams act on it?</li>
+        <li>How do you measure success?</li>
+        <li>How do you know the right decision was made, even if the results were not great to start?</li>
+      </ol>
+      <p>If a team can answer the last question, it is judging decisions, not just outcomes.</p>
+
+      <h2>When to bring someone in</h2>
+      <p>
+        If decisions keep stalling at the same barriers, or nobody senior owns
+        how product decisions get made, that is a product leadership gap. A
+        <a href="/fractional/">fractional product leader</a> can set the
+        principles, the decision milestones and the measures, then hand them to
+        the team.
+      </p>
+
+      <h2>Sources</h2>
+      <ul>
+        <li><a href="https://hbr.org/2010/06/the-decision-driven-organization" target="_blank" rel="noopener noreferrer">HBR, The Decision-Driven Organization (2010)</a></li>
+        <li><a href="https://www.aboutamazon.com/news/company-news/2016-letter-to-shareholders" target="_blank" rel="noopener noreferrer">Jeff Bezos, 2016 letter to shareholders</a></li>
+        <li><a href="https://www.mckinsey.com/capabilities/people-and-organizational-performance/our-insights/untangling-your-organizations-decision-making" target="_blank" rel="noopener noreferrer">McKinsey, Untangling your organisation's decision making</a></li>
+        <li><a href="https://www.bain.com/insights/decision-insights-7-create-a-decision-focused-culture/" target="_blank" rel="noopener noreferrer">Bain, Create a decision-focused culture</a></li>
+        <li><a href="https://www.svpg.com/four-big-risks/" target="_blank" rel="noopener noreferrer">SVPG, The four big risks</a></li>
+        <li><a href="https://medium.com/the-ready/even-overs-the-prioritization-tool-that-brings-your-strategy-to-life-e4f28f2949ac" target="_blank" rel="noopener noreferrer">The Ready, Even-overs</a></li>
+      </ul>
+
+      {others.length > 0 && (
+        <>
+          <h2>More guides</h2>
+          <ul>{others.map((g) => <li><a href={guideHref(g)}>{g.title}</a></li>)}</ul>
+        </>
+      )}
+    </div>
+
+    <section class="contact-form-section" aria-label="Get in touch">
+      <div class="contact-card">
+        <h2>Talk it through.</h2>
+        <p class="form-lede">
+          Tell me where your decisions stall. <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a free call<span class="sr-only"> (opens in a new tab)</span></a>, or write below.
+        </p>
+        <ContactForm source={`guides-${slug}`} selected="fractional" booking />
+      </div>
+    </section>
+
+    <FaqList
+      heading="FAQ: Judging product decisions"
+      items={faqs}
+      sub="What product and company leaders ask about decision quality."
+    />
+  </section>
+</BaseLayout>
