@@ -31,6 +31,13 @@
 - Files starting with `_` are templates; the content glob excludes them (see `src/content.config.ts`).
 - Executive summary register: show the levels the work spans; never claim solo heroics.
 
+## Writing in public
+
+Release notes, pull request titles and descriptions, and comments in this repo
+follow `docs/public-writing.md`. Read it before writing any of them.
+`scripts/public-notes-check.py` runs on every pull request and refuses what it
+can catch.
+
 ## SEO and markup changes
 
 - Changing a tag (h1, p, h2) changes its look when CSS styles by tag. #361
