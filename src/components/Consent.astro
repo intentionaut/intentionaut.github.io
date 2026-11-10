@@ -72,6 +72,7 @@ const enabled = import.meta.env.PROD && !disabled;
         }
 
         function load() {
+          loadPendo();
           if (window.posthog && window.posthog.__loaded) return;
           markSurvey();
           // PostHog's loader snippet; only the asset URL changes, to load array.js through the proxy (e.intentionaut.com, PostHog's EU managed proxy) so ad blockers that block posthog.com by name still count consenting visitors.
@@ -123,7 +124,7 @@ const enabled = import.meta.env.PROD && !disabled;
         function choose(v) {
           set(v);
           box.hidden = true;
-          if (v === 'yes') { load(); loadPendo(); }
+          if (v === 'yes') load();
           else {
             if (window.posthog && window.posthog.opt_out_capturing) window.posthog.opt_out_capturing();
             stopPendo();
@@ -139,7 +140,7 @@ const enabled = import.meta.env.PROD && !disabled;
         });
 
         var c = get();
-        if (c === 'yes') { load(); loadPendo(); }
+        if (c === 'yes') load();
         else if (c !== 'no') box.hidden = false;
 
         // Named events the experiment and dashboard read. Autocapture sees the

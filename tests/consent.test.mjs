@@ -48,7 +48,7 @@ test('survey is capped: selector marker, 3 showings in 30 days, none after an an
 // Analytics that sets a cookie or stores an id loads only from Consent.astro,
 // after Accept (AGENTS.md, "Analytics and consent"). #147 and #197 each tried
 // to load a tracker on page load. Add a new tool's loader to this list too.
-const TRACKER = /posthog\.init|\/static\/array\.js|pendo\.(initialize|io)|googletagmanager|gtag\(|hotjar|clarity\.ms|mixpanel|amplitude|fullstory|cdn\.segment|['"](posthog-js|@amplitude|mixpanel-browser)['"]/i;
+const TRACKER = /posthog\.init|\/static\/array\.js|pendo\.initialize|cdn\.(eu\.)?pendo\.io|googletagmanager|gtag\(|hotjar|clarity\.ms|mixpanel|amplitude|fullstory|cdn\.segment|['"](posthog-js|@amplitude|mixpanel-browser)['"]/i;
 const ALLOWED = new Set(['src/components/Consent.astro']);
 
 function files(dir) {
@@ -66,4 +66,12 @@ test('no analytics loader outside Consent.astro', () => {
       .map((line, i) => (TRACKER.test(line) ? `${f}:${i + 1}: ${line.trim().slice(0, 80)}` : null))
       .filter(Boolean));
   assert.deepEqual(hits, [], 'Analytics must load from Consent.astro after Accept, with a privacy page line:\n' + hits.join('\n'));
+});
+
+test('Pendo loads only inside load(), and Decline stops it and clears its ids', () => {
+  assert.match(consent, /function load\(\) \{\n\s+loadPendo\(\);/);
+  assert.equal((consent.match(/\bloadPendo\(\);/g) || []).length, 1);
+  assert.match(consent, /stopSendingEvents/);
+  assert.match(consent, /indexOf\('_pendo_'\) === 0/);
+  assert.match(consent, /attr: 'hash', action: 'Clear'/);
 });
