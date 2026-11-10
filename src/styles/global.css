@@ -28,26 +28,21 @@
   line-gap-override: 0%;
 }
 
-@font-face {
-  font-family: 'Roboto Serif Variable Fallback';
-  font-display: swap;
-  src: local('Georgia'), local('Times New Roman');
-  size-adjust: 116.9%;
-  ascent-override: 79.3%;
-  descent-override: 20.9%;
-  line-gap-override: 0%;
-}
-
 :root {
   /* Palette */
   --paper: #f7e9e0;
+  /* Cards sit on the page as a lighter cream sheet with a soft shadow. */
+  --card: #faf0e6;
+  --lift: 0 1px 2px rgb(90 50 60 / 0.06), 0 8px 24px -8px rgb(90 50 60 / 0.14);
+  --lift-hover: 0 2px 4px rgb(90 50 60 / 0.06), 0 16px 32px -10px rgb(90 50 60 / 0.22);
   --ink: #38234a;
   --muted: #74607b;
   --slate: #e0d2cb;
   --accent: #c85060;
   /* Accent for text: --accent is 3.7:1 on --paper, under the 4.5:1 small text needs. */
   --accent-text: #b8404f;
-  --mendl: rgba(169, 203, 208, 0.55);
+  --teal: #a9cbd0;
+  --mendl: color-mix(in srgb, var(--teal) 55%, transparent);
 
   /* Type */
   --font-display: 'Fraunces Variable', 'Fraunces Variable Fallback', Georgia,
@@ -85,9 +80,6 @@
   --space-11: 5rem;    /* 80 */
 
   /* Radius */
-  --radius-s: 3px;
-  --radius-m: 5px;
-  --radius-l: 8px;
 
   /* Motion */
   --dur-fast: 0.15s;
@@ -108,7 +100,15 @@ html {
 
 body {
   margin: 0;
-  background: var(--paper);
+  /* Vellum light: the sheet is lit, never shaded. Every layer is lighter than
+     --paper, so --accent-text keeps its 4.5:1 everywhere (brown shading took it to 4.0). */
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgb(255 255 255 / 0.45), transparent 60%),
+    radial-gradient(40% 30% at 80% 35%, rgb(255 255 255 / 0.25), transparent 70%),
+    radial-gradient(35% 25% at 20% 75%, rgb(255 255 255 / 0.2), transparent 70%),
+    radial-gradient(90% 70% at 50% 45%, rgb(255 255 255 / 0.18), transparent 75%),
+    var(--paper);
+  background-attachment: fixed;
   color: var(--ink);
   font-family: var(--font-body);
   font-size: 1.0625rem;
@@ -246,7 +246,7 @@ body::before {
   padding: 0 9px;
   background: none;
   border: 1px solid var(--slate);
-  border-radius: var(--radius-s);
+  border-radius: 0;
   cursor: pointer;
 }
 
@@ -276,7 +276,8 @@ body::before {
 
 h1,
 h2,
-h3 {
+h3,
+.hero-title {
   font-family: var(--font-display);
   font-optical-sizing: auto;
   font-weight: 480;
@@ -308,6 +309,7 @@ h3 {
 
 .eyebrow {
   margin: 0 0 var(--space-6);
+  line-height: inherit; /* the home eyebrow is an h1; keep body leading, not heading leading */
   font-family: var(--font-body);
   font-size: 0.78rem;
   font-weight: 600;
@@ -349,7 +351,7 @@ h3 {
   text-transform: uppercase;
   text-decoration: none;
   padding: 1em 2em;
-  border-radius: var(--radius-l);
+  border-radius: 0;
   transition: color var(--dur-med) ease;
 }
 
@@ -369,7 +371,7 @@ h3 {
   position: absolute;
   inset: 3px;
   border: 1px solid var(--ink);
-  border-radius: var(--radius-m);
+  border-radius: 0;
   pointer-events: none;
   transition: border-color var(--dur-med) ease;
 }
@@ -383,7 +385,7 @@ h3 {
 }
 
 .btn-primary:hover::after {
-  border-color: rgba(247, 233, 224, 0.55);
+  border-color: color-mix(in srgb, var(--paper) 55%, transparent);
 }
 
 .link-arrow {
@@ -420,15 +422,15 @@ h3 {
 /* Ends on the section gap (design system Layout); it is bigger than a
    .page-head, so it doesn't take the page-intro gap. */
 .hero {
-  padding-block: clamp(4.5rem, 10vw, 8.5rem) clamp(3rem, 6vw, 5rem);
+  padding-block: clamp(3rem, 6vw, 5rem);
 }
 
-.hero h1 {
+.hero .hero-title {
   max-width: 18ch;
   font-size: var(--text-display);
 }
 
-.hero h1 em {
+.hero .hero-title em {
   /* Large text (24px and up) only needs 3:1: the original coral, 3.71:1 on paper. */
   font-style: italic;
   color: var(--accent);
@@ -449,7 +451,7 @@ h3 {
   animation: rise 0.7s var(--ease-out) 0.05s backwards;
 }
 
-.hero h1 {
+.hero .hero-title {
   animation: rise 0.7s var(--ease-out) 0.16s backwards;
 }
 
@@ -720,7 +722,7 @@ h3 {
   margin: 2em 0;
   padding: var(--space-5) var(--space-6);
   border: 1px solid var(--slate);
-  border-radius: var(--radius-l);
+  border-radius: 0;
   color: var(--ink);
 }
 
@@ -786,8 +788,15 @@ h3 {
   margin-bottom: 0.75em;
 }
 
-.prose li::marker {
+.prose li::marker,
+.rate-card li::marker {
   color: var(--accent-text);
+}
+
+/* Square bullets, to match the square buttons. Plain lists only. */
+.prose ul:not([class]),
+.rate-card ul:not([class]) {
+  list-style-type: square;
 }
 
 .img-wrap {
@@ -800,7 +809,7 @@ h3 {
   display: block;
   position: relative;
   border: 1px solid var(--ink);
-  padding: 12px;
+  padding: var(--space-3);
   margin: 0;
 }
 
@@ -869,6 +878,20 @@ h3 {
   margin: 0;
 }
 
+/* A typed memo: labels in a fixed column, values beside them. */
+.case-meta > dl.memo {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+  align-items: baseline;
+  gap: var(--space-2) var(--space-4);
+}
+.memo .meta-label {
+  color: var(--muted);
+}
+.memo .meta-label::after {
+  content: ':';
+}
+
 .meta-label {
   font-family: var(--font-body);
   font-size: var(--text-xs);
@@ -922,37 +945,14 @@ h3 {
   border-top: 1px solid var(--ink);
   list-style: none;
   margin: 0;
-  padding: 0 0 clamp(3rem, 6vw, 5rem);
+  padding: var(--space-6) 0 clamp(3rem, 6vw, 5rem);
+  display: grid;
+  gap: var(--space-5);
 }
 
+/* The card is the frame: rows carry no rules or padding of their own. */
 .project-row {
   position: relative;
-  padding-block: var(--space-7);
-  padding-left: var(--space-3);
-  padding-right: var(--space-5);
-  border-bottom: 1px solid var(--slate);
-  transition: background-color var(--dur-base) ease;
-}
-
-.project-row:hover {
-  background: rgba(169, 203, 208, 0.08);
-}
-
-.project-row::after {
-  content: '';
-  position: absolute;
-  top: var(--space-6);
-  bottom: var(--space-6);
-  right: 0;
-  width: 3px;
-  background: #a9cbd0;
-  transform: scaleY(0);
-  transform-origin: center;
-  transition: transform var(--dur-base) var(--ease-out);
-}
-
-.project-row:hover::after {
-  transform: scaleY(1);
 }
 
 .project-card {
@@ -1001,7 +1001,7 @@ h3 {
   font-size: 0.85rem;
   padding: 0.55rem 0.9rem;
   border: 1px solid var(--slate);
-  border-radius: var(--radius-l);
+  border-radius: 0;
   background: rgba(255, 255, 255, 0.45);
   color: var(--ink);
   white-space: nowrap;
@@ -1052,7 +1052,7 @@ h3 {
    row that holds one gets them. The ledger on /about/ and an unlinked talk
    stay still. */
 .talk-row:has(a):hover {
-  background: rgba(169, 203, 208, 0.08);
+  background: color-mix(in srgb, var(--teal) 8%, transparent);
 }
 
 .talk-row::after {
@@ -1062,7 +1062,7 @@ h3 {
   bottom: var(--space-5);
   right: 0;
   width: 3px;
-  background: #a9cbd0;
+  background: var(--teal);
   transform: scaleY(0);
   transform-origin: center;
   transition: transform var(--dur-base) var(--ease-out);
@@ -1296,7 +1296,7 @@ a.talk-title:hover {
   color: var(--muted);
   background: var(--paper);
   border: 1px solid var(--slate);
-  border-radius: var(--radius-s);
+  border-radius: 0;
   padding: 0.6em 1.1em;
   cursor: pointer;
   transition: color var(--dur-fast) ease, border-color var(--dur-fast) ease,
@@ -1325,11 +1325,6 @@ a.talk-title:hover {
 
 .chip.is-active sup {
   opacity: 0.85;
-}
-
-/* Plain --muted: faded with opacity it fell under 4.5:1. */
-.row-themes {
-  color: var(--muted);
 }
 
 .ledger-row.is-hidden {
@@ -1417,7 +1412,6 @@ a.talk-title:hover {
   margin-bottom: var(--space-4);
   text-decoration: none;
   color: inherit;
-  transition: background-color var(--dur-base) ease;
 }
 
 .rate-card::after {
@@ -1428,9 +1422,58 @@ a.talk-title:hover {
   pointer-events: none;
 }
 
-.rate-card:hover {
-  background: rgba(169, 203, 208, 0.18);
+/* Cream sheets: cards, forms, quotes and the portrait mat. Only links lift on hover. */
+.rate-card,
+.project-card,
+.contact-card,
+.img-card {
+  background-color: var(--card);
+  box-shadow: var(--lift);
 }
+
+.project-card {
+  position: relative;
+  padding: var(--space-4) var(--space-5);
+  border: 1px solid var(--ink);
+}
+
+/* The rate cards' double rule: a slate line 3px inside the ink one. */
+.project-card::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border: 1px solid var(--slate);
+  pointer-events: none;
+}
+
+.rate-card,
+.project-card {
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+
+.rate-card:hover,
+.project-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--lift-hover);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rate-card:hover,
+  .project-card:hover {
+    transform: none;
+  }
+}
+
+/* Testimonials break out of the 62ch reading column to the full page width.
+   .prose sits at the left edge of .wrap, so widening to the right is enough. */
+.prose .testimonials-section {
+  width: calc(min(var(--wrap), 100vw) - 2 * clamp(1.25rem, 4vw, 2.5rem));
+  overflow-wrap: normal;
+  margin-top: var(--space-8);
+}
+
 
 .rate-row > p {
   margin: 0;
@@ -1575,7 +1618,7 @@ a.talk-title:hover {
   text-transform: uppercase;
   text-decoration: none;
   padding: 0.8em 1.5em;
-  border-radius: var(--radius-l);
+  border-radius: 0;
   cursor: pointer;
   transition: color var(--dur-fast) ease;
 }
@@ -1596,7 +1639,7 @@ a.talk-title:hover {
   position: absolute;
   inset: 3px;
   border: 1px solid var(--ink);
-  border-radius: var(--radius-m);
+  border-radius: 0;
   pointer-events: none;
   transition: border-color var(--dur-fast) ease;
 }
@@ -1610,7 +1653,7 @@ a.talk-title:hover {
 }
 
 .btn-plain:hover::after {
-  border-color: rgba(247, 233, 224, 0.55);
+  border-color: color-mix(in srgb, var(--paper) 55%, transparent);
 }
 
 .contact-form-section h2 {
@@ -1648,8 +1691,7 @@ a.talk-title:hover {
 .contact-form-section input,
 .contact-form-section select,
 .contact-form-section textarea {
-  font-family: 'Roboto Serif Variable', 'Roboto Serif Variable Fallback',
-    Georgia, 'Times New Roman', serif;
+  font-family: var(--font-body);
   font-size: 0.98rem;
   color: var(--ink);
   background: transparent;
@@ -1899,4 +1941,87 @@ a.talk-title:hover {
   text-decoration-color: var(--accent);
   text-decoration-thickness: 1.5px;
   text-underline-offset: 3px;
+}
+
+/* Envelope: a Plate on the left like a stamp, text beside it, left-aligned.
+   For wide, long-form lists; square cards use the centred plated layout.
+   The plate sits in the card's left padding, so the card keeps its own grid
+   however many lines it has (Contact cards carry price and scale rows). */
+.rate-card.envelope {
+  padding-left: calc(var(--space-6) * 2 + 64px);
+}
+.rate-card.envelope > .plate {
+  position: absolute;
+  top: 50%;
+  left: var(--space-6);
+  transform: translateY(-50%);
+}
+/* Optional eyebrow slot above the title: spans the whole card, not the first grid column. */
+.rate-card > .eyebrow {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+.rate-card.envelope .rate-name {
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  padding-top: var(--space-1);
+}
+/* Phones: a smaller stamp in the top-right corner, so the card does not
+   spend a row on it; the first lines keep clear of it. */
+@media (max-width: 520px) {
+  .rate-card.envelope {
+    padding: var(--space-5);
+  }
+  .rate-card.envelope > .plate {
+    top: var(--space-5);
+    left: auto;
+    right: var(--space-5);
+    transform: scale(0.625);
+    transform-origin: top right;
+  }
+  .rate-card.envelope > .plate ~ :nth-child(-n + 3) {
+    padding-right: calc(40px + var(--space-3));
+  }
+}
+
+/* Card stock: a faint fibre on cards, tinted from the paper. An overlay, not a background: .draw cards use background-image for their line animation. */
+:is(.tcard, .rate-card)::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.35 0.9' numOctaves='3' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 0.72 0 0 0 0 0.59 0 0 0 0 0.55 0 0 0 0.07 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23f)'/%3E%3C/svg%3E");
+}
+
+/* Ledger: terms and prices as label, dotted leader, value. Scoped to dl:
+   the writing archive's <ol class="ledger"> is a different component. */
+dl.ledger {
+  display: grid;
+  gap: var(--space-2);
+  margin: var(--space-4) 0 var(--space-5);
+  max-width: 34rem;
+}
+dl.ledger > div {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+dl.ledger > div::after {
+  content: '';
+  order: 1;
+  flex: 1;
+  min-width: 1.5rem;
+  border-bottom: 2px dotted color-mix(in srgb, var(--muted) 45%, transparent);
+}
+dl.ledger dt {
+  order: 0;
+}
+dl.ledger dd {
+  order: 2;
+  margin: 0;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
 }

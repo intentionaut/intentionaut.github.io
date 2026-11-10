@@ -1,0 +1,20 @@
+Copyright (c) 2025-2026 Saielle DaSilva. All rights reserved.
+
+This repository is public so people can read how intentionaut.com is built.
+Being able to see it does not give you the right to use it.
+
+No licence is granted to copy, modify, distribute, host or reuse any part of
+this repository, in whole or in part, for any purpose, without written
+permission from Saielle DaSilva. That covers the code, the design, the
+writing, the images and the brand.
+
+Testimonials are the words of the people quoted and are shown with their
+permission. They are not licensed to anyone else.
+
+Third-party material keeps its own licence:
+
+- Phosphor icons, MIT: src/assets/icons/LICENSE-phosphor.txt
+- Fraunces font, SIL Open Font License 1.1: src/assets/fonts/OFL.txt
+- npm dependencies: the licence in each package
+
+To ask about using something, write via https://intentionaut.com/contact/

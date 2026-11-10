@@ -1,31 +1,46 @@
 ---
+import { projectHref } from '../lib/projectHref';
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FrameSubscribe from '../components/FrameSubscribe.astro';
 import { testimonialsFor } from '../data/testimonials';
+import TestimonialCarousel from '../components/TestimonialCarousel.astro';
 import { BOOKING_URL } from '../data/links';
+import { results } from '../data/results';
+import Plate from '../components/Plate.astro';
+import { iconFor } from '../data/icons';
+import FaqList from '../components/FaqList.astro';
+import { faqsFor } from '../data/faqs';
 
-// The story, top to bottom: who she is and who brings her in, proof, the two
-// offers, what she has built, what someone said, then ways to follow along.
+// The story, top to bottom: who she is and who brings her in, proof, the
+// offers, the case studies, what people said, what she has built, then ways
+// to follow along.
 // Every figure below is already published on /for-advisors/ and /fractional/.
-const results = [
-  { num: '+450%', label: 'MRR in 90 days as interim CPO' },
-  { num: '3.2x', label: 'Return on investment, StepStone’s satellite portfolio' },
-  { num: '100M+', label: 'Customers on Sainsbury’s AI platform' },
-  { num: '$7B', label: 'Cazoo IPO, from the founding team' },
-];
 
 const offers = [
   {
+    title: 'Workshops',
+    who: 'For CPOs, CTOs, CDOs and their teams. Work through AI strategy, product maturity or your data, and leave with owners named.',
+    href: '/workshops/',
+  },
+  {
+    title: 'AI product audit',
+    who: 'For leadership teams with AI work underway and no shared view of which of it matters.',
+    href: '/ai-product-audit/',
+  },
+  {
+    title: 'Product strategy sprint',
+    who: 'For teams with an opportunity and no shared view of what to build.',
+    href: '/product-strategy-sprint/',
+  },
+  {
     title: 'Fractional leadership',
-    who: 'For teams that need Director-level leadership, but are not ready for a permanent hire.',
-    shape: 'One or two days a week, three months and up.',
+    who: 'For teams building AI products who need Director-level product and design leadership.',
     href: '/fractional/',
   },
   {
     title: 'Product building',
     who: 'For teams with a real problem, a rough idea of the answer, and nobody free to build it.',
-    shape: 'Three days a week in your environment, four to twelve weeks.',
     href: '/forward-deployed/',
   },
 ];
@@ -40,20 +55,46 @@ const studies = (await getCollection('caseStudies'))
   .sort((a, b) => studyOrder.indexOf(a.id) - studyOrder.indexOf(b.id));
 if (studies.length !== studyOrder.length) throw new Error('A homepage case study is missing');
 
-const [quote] = testimonialsFor('home');
+const homeTestimonials = testimonialsFor('home');
+const homeFaqs = faqsFor('home');
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: homeFaqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer.replace(/\s+/g, ' ').trim() },
+  })),
+};
 ---
 
 <BaseLayout
-  title="Fractional & Interim CPO | Saielle DaSilva"
-  description="Fractional and interim Chief Product Officer for teams working across AI, data and design. Based in London, working across the UK and Europe. Founders and product leaders bring Saielle DaSilva in when direction is the bottleneck."
+  title="Fractional CPO, London & Europe | Saielle DaSilva"
+  description="Fractional and interim CPO for scale-ups building with AI. Saielle DaSilva leads product, data and design from London, across the UK and Europe."
+  jsonLd={faqSchema}
 >
   <section class="wrap hero">
-    <p class="eyebrow">Saielle DaSilva · Product leader</p>
-    <h1>I speak <em>four</em> languages: design, product, data&nbsp;&amp;&nbsp;AI.</h1>
+    <h1 class="eyebrow">Fractional CPO for AI products, in London and Europe</h1>
+    <p id="hero-h1" class="hero-title">I speak <em>four</em> languages: design, product, data&nbsp;&amp;&nbsp;AI.</p>
+    {/* Headline A/B test (PostHog flag "hero-headline"). Crawlers and anyone
+        who declines cookies always get the headline above; only readers who
+        accepted can be shown the variant. */}
+    <script is:inline>
+      document.addEventListener('posthog:ready', function () {
+        window.posthog.onFeatureFlags(function () {
+          if (window.posthog.getFeatureFlag('hero-headline') === 'building') {
+            var h = document.getElementById('hero-h1');
+            if (h) h.textContent = 'The product leader for teams building with AI.';
+          }
+        });
+      });
+    </script>
     <p class="lede">
-      Hi, I'm Saielle. Founders and product leaders bring me in when
-      direction is the bottleneck. I turn design, data and AI into
-      deliberate choices, aligned teams and shipped results.
+      Saielle DaSilva is a fractional Chief Product Officer for teams
+      working across AI, data and design. She led product and design at
+      StepStone, ran product for AI, data platforms and machine learning
+      at Sainsbury's, and was the first design hire at Cazoo. Founders bring her
+      in when product leadership is missing, an AI pilot won't reach
+      production, or the strategy isn't turning into business impact.
     </p>
     <div class="cta-row">
       <a class="btn-primary" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a free call</a>
@@ -75,13 +116,13 @@ const [quote] = testimonialsFor('home');
   </section>
 
   <section class="wrap home-section" aria-labelledby="offers-h">
-    <h2 id="offers-h" class="home-h2">Two ways to work together.</h2>
-    <div class="rates rates-pair">
-      {offers.map((o) => (
-        <a class="rate-row rate-card" href={o.href}>
+    <h2 id="offers-h" class="home-h2">Five ways to work together.</h2>
+    <div class="rates rates-pair home-offers">
+      {offers.map((o, i) => (
+        <a class="rate-row rate-card plated" href={o.href}>
+          <Plate name={iconFor(o.href)} tone={i % 2 ? 'blue' : 'pink'} />
           <p class="rate-name">{o.title}</p>
           <p class="rate-desc">{o.who}</p>
-          <p class="rate-shape">{o.shape}</p>
         </a>
       ))}
     </div>
@@ -106,12 +147,16 @@ const [quote] = testimonialsFor('home');
     <a class="link-arrow" href="/case-studies/"><span>All case studies</span></a>
   </section>
 
+  <div class="wrap home-section">
+    <TestimonialCarousel testimonials={homeTestimonials} heading="What people say" />
+  </div>
+
   <section class="wrap home-section" aria-labelledby="built-h">
     <h2 id="built-h" class="home-h2">What I've built lately.</h2>
     <ol class="project-list">
       {built.map((p) => (
         <li class="project-row">
-          <a class="project-card" href={`/projects/${p.id}/`}>
+          <a class="project-card" href={projectHref(p.id)}>
             <span class="talk-title">{p.data.title}</span>
             <span class="project-summary">{p.data.summary}</span>
           </a>
@@ -121,21 +166,11 @@ const [quote] = testimonialsFor('home');
     <a class="link-arrow" href="/projects/"><span>All projects</span></a>
   </section>
 
-  {quote && (
-    <section class="wrap home-section" aria-label="What people say">
-      <figure class="pull-quote">
-        <blockquote><p>{quote.quote}</p></blockquote>
-        <figcaption>
-          {quote.url ? <a href={quote.url} target="_blank" rel="noopener noreferrer">{quote.name}</a> : quote.name},
-          {' '}{quote.role}, {quote.org}
-        </figcaption>
-      </figure>
-    </section>
-  )}
 
   <section class="wrap lanes home-follow" aria-label="Follow the thinking">
     <ol>
       <li class="lane">
+        <Plate name="microphone-ribbon" tone="pink" />
         <h2>Speaking</h2>
         <p>
           Talks and workshops on building intentional products in the age of
@@ -144,6 +179,7 @@ const [quote] = testimonialsFor('home');
         <a class="link-arrow" href="/speaking/"><span>See talks</span></a>
       </li>
       <li class="lane">
+        <Plate name="pen-nib" tone="blue" />
         <h2>Writing</h2>
         <p>
           Notes on craft, leadership and learning in public. New essays land
@@ -152,6 +188,14 @@ const [quote] = testimonialsFor('home');
         <a class="link-arrow" href="/writing/"><span>Read along</span></a>
       </li>
     </ol>
+  </section>
+
+  <section class="wrap home-section">
+    <FaqList heading="How to get value from AI" items={homeFaqs} />
+    <p class="home-note">
+      Figures from Gartner and DSIT, with their sources, on
+      {' '}<a href="/ai-adoption-evidence/">what the data says about AI in business</a>.
+    </p>
   </section>
 
   <section class="wrap signup" aria-label="Newsletter signup">
@@ -191,10 +235,59 @@ const [quote] = testimonialsFor('home');
   }
 
 
-  .home-section .pull-quote {
+  /* Plated offer cards: centred, like a label, with signage-style titles. */
+  .plated {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0;
+  }
+  /* One rhythm: plate, title, text. Duration and price live on each offer page. */
+  .plated > * {
     margin: 0;
   }
+  .plated .rate-name {
+    margin-top: var(--space-4);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+    line-height: 1.35;
+    /* Room for two lines, so descriptions start level across a row. */
+    min-height: 2.7em;
+    display: flex;
+    align-items: center;
+  }
+  .plated .rate-desc {
+    margin: var(--space-2) 0 0;
+  }
 
+
+  /* Three columns only once a card is wide enough to hold the longest
+     description (Workshops) in three lines; below that, two columns. */
+  .home-follow .lane > :global(.plate) {
+    margin-bottom: var(--space-4);
+  }
+
+  /* Five cards, no empty slot: two columns end on one full-width card;
+     three columns become a row of three over a row of two. */
+  @media (min-width: 721px) {
+    .home-offers > :global(:last-child:nth-child(odd)) {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (min-width: 1160px) {
+    .home-offers {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+    .home-offers > :global(*) {
+      grid-column: span 2;
+    }
+    .home-offers > :global(:nth-last-child(-n + 2):nth-child(3n + 1)),
+    .home-offers > :global(:nth-last-child(-n + 2):nth-child(3n + 1) ~ *) {
+      grid-column: span 3;
+    }
+  }
 
   @media (max-width: 720px) {
     .home-stats {

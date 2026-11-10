@@ -1,0 +1,122 @@
+---
+// Single 90-minute advisory session, any topic. Replaces /strategic-direction/,
+// which now forwards here (7 Nov 2026).
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { rates, gbp } from '../data/rates';
+import { BOOKING_URL } from '../data/links';
+import FaqList from '../components/FaqList.astro';
+import { faqsFor } from '../data/faqs';
+const faqs = faqsFor('office-hours');
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer },
+  })),
+};
+const serviceSchema = {
+  '@type': 'Service',
+  '@id': 'https://intentionaut.com/office-hours/#service',
+  name: 'Office hours',
+  provider: { '@id': 'https://intentionaut.com/#person' },
+  offers: { '@type': 'Offer', priceCurrency: 'GBP', price: rates.strategySession },
+};
+---
+
+<BaseLayout
+  jsonLd={[serviceSchema, faqSchema]}
+  title="Office Hours | Saielle DaSilva"
+  description={`Office hours with Saielle DaSilva, fractional CPO for AI products: 90 minutes of advisory on any product or AI question. ${gbp(rates.strategySession)}, sliding scale available.`}
+>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Office hours · 90 minutes · {gbp(rates.strategySession)}</p>
+      <h1>90 minutes on your hardest product question.</h1>
+      <p class="lede">
+        Any topic. A sounding board for founders and product leaders: strategy
+        reviews, roadmap calls, hiring help, AI reality-checks.
+      </p>
+      <div class="cta-row">
+        <a class="btn-primary" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a free call</a>
+        <a class="link-arrow" href="#contact-section"><span>{gbp(rates.strategySession)} · book office hours</span></a>
+      </div>
+    </header>
+
+    <article class="prose">
+      <h2>How does it work?</h2>
+      <div class="house-rules">
+        <p class="house-rules-label">Office hours</p>
+        <ol>
+          <li>Beforehand, you answer a few questions, so the clock starts on substance rather than introductions.</li>
+          <li>Ninety minutes working your actual problem.</li>
+          <li>Afterwards, written notes: decisions made, next steps, who owns what.</li>
+        </ol>
+      </div>
+      <p>
+        It works on its own, and it is also the first step into
+        <a href="/fractional/">fractional work</a>. Need more than one question
+        answered? The <a href="/product-strategy-sprint/">product strategy sprint</a>
+        gives you a strategy and roadmap in two weeks, and the
+        <a href="/ai-product-audit/">AI product audit</a> reviews your AI work in one.
+      </p>
+    </article>
+
+    <FaqList items={faqs} heading="FAQ: Office hours" sub="What people ask before booking." />
+
+    <section class="contact-form-section" id="contact-section" aria-label="Book office hours">
+      <div class="contact-card">
+        <h2>Book office hours.</h2>
+        <p class="form-lede">
+          {gbp(rates.strategySession)} for 90 minutes. Sliding scale available.
+        </p>
+        <ContactForm source="office-hours" selected="strategic-direction" booking />
+      </div>
+    </section>
+  </section>
+</BaseLayout>
+
+<style>
+  /* House rules: a small framed plaque, Roman numerals, double rule like the cards. */
+  .house-rules {
+    position: relative;
+    margin: var(--space-5) 0 var(--space-6);
+    padding: var(--space-5) var(--space-6);
+    border: 1px solid var(--ink);
+    background: var(--card);
+    box-shadow: var(--lift);
+    text-align: center;
+  }
+  .house-rules::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border: 1px solid var(--slate);
+    pointer-events: none;
+  }
+  .house-rules-label {
+    margin: 0 0 var(--space-3);
+    font: 500 0.7rem var(--font-body);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .house-rules ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: rule;
+    display: grid;
+    gap: var(--space-3);
+  }
+  .house-rules li {
+    counter-increment: rule;
+  }
+  .house-rules li::before {
+    content: counter(rule, upper-roman) '. ';
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--accent-text);
+  }
+</style>

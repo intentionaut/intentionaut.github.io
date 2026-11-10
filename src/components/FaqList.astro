@@ -8,11 +8,13 @@ import type { Faq } from '../data/faqs';
 
 interface Props {
   items: Faq[];
-  heading?: string;
+  /** Name the topic ("FAQ: Fractional and interim CPO"), so an AI answer that
+      quotes the list without the page around it keeps its context. */
+  heading: string;
   sub?: string;
 }
 
-const { items, heading = 'Fair questions.', sub } = Astro.props;
+const { items, heading, sub } = Astro.props;
 ---
 
 {
@@ -67,8 +69,8 @@ const { items, heading = 'Fair questions.', sub } = Astro.props;
     font-family: var(--font-display);
     font-optical-sizing: auto;
     font-weight: 500;
-    font-size: var(--text-md);
-    line-height: 1.25;
+    font-size: 1.125rem;
+    line-height: 1.3;
     color: var(--ink);
   }
   .faq-item summary::-webkit-details-marker {

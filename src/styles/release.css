@@ -27,10 +27,10 @@
   .term {
     background: var(--ink);
     color: var(--paper);
-    border-radius: var(--radius-l);
+    border-radius: 0;
     box-shadow: 0 30px 60px -30px rgba(56, 35, 74, 0.6);
     overflow: hidden;
-    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-family: var(--font-mono);
   }
   .term-bar {
     display: flex;
@@ -61,7 +61,7 @@
   }
   .t-p { color: var(--accent); }
   .t-c { color: #f2c9a7; }
-  .t-f { color: #a9cbd0; font-weight: 600; }
+  .t-f { color: var(--teal); font-weight: 600; }
   .t-y { color: #f2c9a7; font-weight: 600; }
   .t-d { color: rgba(247, 233, 224, 0.55); }
   .t-cursor::after {
@@ -151,12 +151,12 @@
   }
   .stage-cmd {
     display: inline-block;
-    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-family: var(--font-mono);
     font-size: 0.8rem;
     color: var(--ink);
     background: var(--slate);
     border: 1px solid var(--slate);
-    border-radius: var(--radius-m);
+    border-radius: 0;
     padding: 0.2rem 0.55rem;
     margin-bottom: var(--space-4);
   }
@@ -196,7 +196,7 @@
   .refuse-card {
     padding: var(--space-6);
     border: 1px solid var(--slate);
-    border-radius: var(--radius-l);
+    border-radius: 0;
     background: rgba(255, 255, 255, 0.4);
   }
   .refuse-card h3 {
@@ -210,12 +210,12 @@
   }
 
   .file {
-    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-family: var(--font-mono);
     font-size: 0.85rem;
-    padding: 0.8rem 1rem;
+    padding: 0.8rem var(--space-4);
     border: 1px solid var(--slate);
     border-left: 3px solid var(--accent);
-    border-radius: var(--radius-m);
+    border-radius: 0;
     background: rgba(255, 255, 255, 0.5);
   }
   .file span {
@@ -232,7 +232,7 @@
   .rel-close {
     margin: var(--space-10) 0;
     padding: var(--space-9);
-    border-radius: var(--radius-l);
+    border-radius: 0;
     background: var(--ink);
     color: var(--paper);
     display: grid;
@@ -287,12 +287,12 @@
   color: var(--muted);
   font: inherit;
   font-size: 0.95rem;
-  padding: 0.5rem 0.85rem;
-  border-radius: var(--radius-l);
+  padding: var(--space-2) 0.85rem;
+  border-radius: 0;
   cursor: pointer;
   display: inline-flex;
   align-items: baseline;
-  gap: 0.5rem;
+  gap: var(--space-2);
   transition: background var(--dur-base), color var(--dur-base);
 }
 .stab:hover {
@@ -339,7 +339,7 @@
 .rlog {
   margin-top: var(--space-7);
   border: 1px solid var(--slate);
-  border-radius: var(--radius-l);
+  border-radius: 0;
   background: rgba(255, 255, 255, 0.4);
 }
 .rlog > summary {
@@ -419,5 +419,5 @@
   font-size: 0.9rem;
 }
 .rlog-note code {
-  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-family: var(--font-mono);
 }

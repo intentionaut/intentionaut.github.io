@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Local hooksPath shadows the global hooks; hand off to the global commit-msg.
+G="$HOME/.config/git/hooks/commit-msg"; [ -x "$G" ] && exec "$G" "$@"; exit 0

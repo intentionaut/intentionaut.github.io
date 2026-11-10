@@ -1,6 +1,6 @@
 ---
 title: Snug
-summary: A small Mac app that tidies the menu bar icons and keeps them snug for when you need them. Snug gives you the ability to play with your menu bar layout and keep things tidy.
+summary: A small Mac app that tidies your menu bar icons, so you can arrange the layout and keep it neat.
 url: https://github.com/intentionaut/snug?utm_source=intentionaut.com&utm_medium=referral&utm_campaign=projects
 linkLabel: github.com/intentionaut/snug
 ctaLabel: Read the code on GitHub

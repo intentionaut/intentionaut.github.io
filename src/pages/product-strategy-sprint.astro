@@ -1,0 +1,117 @@
+---
+// Same shape as /ai-product-audit/, on the workshop page template.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
+import TestimonialCarousel from '../components/TestimonialCarousel.astro';
+import FaqList from '../components/FaqList.astro';
+import { faqsFor } from '../data/faqs';
+import { testimonialsFor } from '../data/testimonials';
+import { results } from '../data/results';
+import { rates, gbp, offerDays } from '../data/rates';
+import { BOOKING_URL } from '../data/links';
+const serviceSchema = {
+  '@type': 'Service',
+  '@id': 'https://intentionaut.com/product-strategy-sprint/#service',
+  name: 'Product strategy sprint',
+  provider: { '@id': 'https://intentionaut.com/#person' },
+  offers: { '@type': 'Offer', priceCurrency: 'GBP', price: rates.strategySprint },
+};
+const faqs = faqsFor('strategy-sprint');
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer.replace(/\s+/g, ' ').trim() },
+  })),
+};
+---
+
+<BaseLayout
+  jsonLd={[serviceSchema, faqSchema]}
+  title="Product Strategy Sprint, London | Saielle DaSilva"
+  description={`Fixed-price product strategy sprint for scale-ups: ${offerDays.strategySprint} days over two weeks, ending in a roadmap your leaders built. London and Europe. ${gbp(rates.strategySprint)}.`}
+>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Product strategy sprint · {offerDays.strategySprint} days · {gbp(rates.strategySprint)}</p>
+      <h1>A product strategy and roadmap your team can run on. In two weeks.</h1>
+      <p class="lede">
+        Saielle DaSilva works with your leadership team to shape one product
+        strategy, then reviews how well strategy and execution line up across
+        the organisation.
+      </p>
+      <ul class="problem-lines">
+        <li>Three teams, three strategies, no shared answer to "what are we building and why?"</li>
+        <li>The board wants a roadmap. You do not have a thesis.</li>
+        <li>Technology is moving faster than the organisation can decide.</li>
+      </ul>
+      <div class="cta-row">
+        <a class="btn-primary" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a free call</a>
+        <a class="link-arrow" href="#contact-section"><span>{gbp(rates.strategySprint)} fixed · book a sprint</span></a>
+      </div>
+    </header>
+
+    <div class="case-meta">
+      <dl>
+        <dt class="meta-label">For</dt>
+        <dd class="meta-value">Leadership teams with an opportunity in front of them and no shared direction.</dd>
+      </dl>
+    </div>
+
+    <article class="prose">
+      <h2>What Saielle brings</h2>
+      <p>
+        The problem framed clearly, a strategic thesis to test, and the
+        assumptions behind each team's plan made explicit, so the workshop
+        starts from the real disagreement.
+      </p>
+      <h2>How do the two weeks run?</h2>
+      <ol>
+        <li>Day one: sessions with your leadership team and the owners of each plan, and a review of the product, the data and the current roadmap.</li>
+        <li>Day two: Saielle drafts the strategic options, with your team or on her own.</li>
+        <li>Day three: a full-day workshop where your leadership team works through the options and shapes the strategy.</li>
+        <li>Day four: Saielle writes up the strategy and roadmap. The day ends with a review of both, and of how well strategy and execution line up across the organisation.</li>
+      </ol>
+      <h2>What does your team leave with?</h2>
+      <p>
+        A product strategy and roadmap your leadership team shaped together,
+        the priorities behind them and what they mean you stop, and measures
+        of progress you can track.
+      </p>
+      <p>
+        It isn't ongoing leadership. If you need that next, the fee is credited
+        against a <a href="/fractional/">fractional engagement</a> that starts
+        within 30 days. If you need a narrower read on your AI work first, start
+        with the <a href="/ai-product-audit/">AI product audit</a>.
+      </p>
+    </article>
+
+    <ul class="stat-strip sprint-stats">
+      {results.map((r) => (
+        <li><span class="stat-num">{r.num}</span><span class="stat-label">{r.label}</span></li>
+      ))}
+    </ul>
+
+    <TestimonialCarousel testimonials={testimonialsFor('fractional')} heading="What people say" />
+
+    <section class="contact-form-section" id="contact-section" aria-label="Book a sprint">
+      <div class="contact-card">
+        <h2>Book a sprint.</h2>
+        <p class="form-lede">
+          {gbp(rates.strategySprint)}, fixed, {offerDays.strategySprint} days across two weeks.
+          Start with a free call to check it fits.
+        </p>
+        <ContactForm source="product-strategy-sprint" selected="strategic-direction" booking referral />
+      </div>
+    </section>
+
+    <FaqList items={faqs} heading="Questions about the sprint" />
+  </section>
+</BaseLayout>
+
+<style>
+  .sprint-stats {
+    margin-bottom: clamp(3rem, 6vw, 5rem);
+  }
+</style>

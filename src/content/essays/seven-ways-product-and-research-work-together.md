@@ -1,6 +1,6 @@
 ---
 title: "7 ways a product leader needs to advocate for user research"
-description: "We can make design suck less by choosing to value insight over ideas. Insight culture means people are trading in data, facts, anecdotes and observations over ideas"
+description: "Seven lessons on raising the impact of research in a product team, from framing decisions as bets to valuing insight over ideas."
 date: 2021-03-31
 themes: ["research", "leadership"]
 source: Blossom

@@ -1,0 +1,306 @@
+---
+/**
+ * Testimonial carousel, moved out of /contact/ so the workshop pages use the
+ * same one. Hidden entirely when the list is empty, rather than leaving a
+ * heading over an empty carousel.
+ */
+import type { Testimonial } from '../data/testimonials';
+
+interface Props {
+  testimonials: Testimonial[];
+  heading?: string;
+  sub?: string;
+  /** Smaller cards, three to a row, where quotes sit beside other content. */
+  compact?: boolean;
+}
+
+const { testimonials, heading = 'Testimonials', sub, compact = false } = Astro.props;
+---
+
+{testimonials.length > 0 && (
+    <section class:list={['testimonials-section', { compact }]} aria-label="Testimonials">
+      <style>
+        .testimonials-section {
+          padding-bottom: clamp(3rem, 6vw, 5rem);
+        }
+        .testimonials-section h2 {
+          font-size: var(--text-lg);
+          margin: 0 0 var(--space-2);
+        }
+        .testi-sub {
+          margin: 0 0 var(--space-7);
+          max-width: 52ch;
+          font-size: 1.05rem;
+          color: var(--muted);
+        }
+        .carousel {
+          position: relative;
+        }
+        .carousel-track {
+          display: grid;
+          grid-auto-flow: column;
+          grid-auto-columns: 88%;
+          gap: var(--space-6);
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          scrollbar-width: none;
+          /* No side padding, so cards line up with the heading; room below for the shadow. */
+          padding: var(--space-1) 0 var(--space-5);
+          margin-bottom: calc(-1 * var(--space-5));
+        }
+        /* Two cards or fewer share the row instead of leaving a gap for a third. */
+        @media (min-width: 720px) {
+          .carousel-track:not(:has(> :nth-child(3))) {
+            grid-auto-columns: 1fr;
+          }
+        }
+        .carousel-controls[hidden] {
+          display: none;
+        }
+        .carousel-track::-webkit-scrollbar {
+          display: none;
+        }
+        @media (min-width: 720px) {
+          .carousel-track {
+            grid-auto-columns: calc(100% / 2.2 - var(--space-6));
+          }
+        }
+        .tcard {
+          position: relative;
+          border: 1px solid var(--ink);
+          background: var(--card);
+          box-shadow: var(--lift);
+          padding: var(--space-6) var(--space-7);
+          display: flex;
+          flex-direction: column;
+          scroll-snap-align: start;
+          /* Grows with the quote; the carousel row stretches every card to the tallest. */
+          min-height: 380px;
+        }
+        .compact .tcard {
+          min-height: 0;
+          padding: var(--space-4) var(--space-6);
+        }
+        .compact .tcard .q {
+          font-size: 0.95rem;
+          line-height: 1.45;
+          margin-bottom: var(--space-3);
+        }
+        .compact .tcard .a {
+          min-height: 0;
+        }
+        .compact .tcard .a .name {
+          padding-top: var(--space-2);
+        }
+        @media (min-width: 720px) {
+          .compact .carousel-track {
+            grid-auto-columns: calc(100% / 1.6 - var(--space-6));
+          }
+        }
+        .tcard::after {
+          content: '';
+          position: absolute;
+          inset: 3px;
+          border: 1px solid var(--slate);
+          pointer-events: none;
+        }
+        .tcard .q {
+          font-family: var(--font-display);
+          font-optical-sizing: auto;
+          font-size: 1.12rem;
+          line-height: 1.55;
+          margin: 0 0 var(--space-4);
+          flex: 1 1 auto;
+          min-height: 0;
+          display: flex;
+          flex-direction: column;
+          justify-content: safe center;
+        }
+        .tcard .a {
+          margin: 0;
+          flex-shrink: 0;
+          min-height: calc(var(--space-9) + var(--space-6));
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          font-family: var(--font-body);
+          font-size: var(--text-sm);
+          color: var(--ink);
+        }
+        .tcard .a .name {
+          display: block;
+          color: var(--ink);
+          font-weight: 600;
+          font-size: 0.95rem;
+          margin-bottom: 0.15em;
+          border-top: 1px solid var(--slate);
+          padding-top: var(--space-4);
+        }
+        .tcard .a .name a {
+          color: inherit;
+          text-decoration: none;
+        }
+        .tcard .a .name a:hover,
+        .tcard .a .role a:hover {
+          text-decoration: underline;
+          text-decoration-color: var(--accent);
+        }
+        .tcard .a .role {
+          display: block;
+          font-style: italic;
+        }
+        .tcard .a .role a {
+          color: var(--ink);
+          text-decoration: none;
+        }
+        .carousel-controls {
+          display: flex;
+          align-items: center;
+          gap: var(--space-3);
+          margin-top: var(--space-6);
+        }
+        .car-arrow {
+          position: relative;
+          z-index: 0;
+          appearance: none;
+          background: var(--paper);
+          border: 1px solid var(--ink);
+          color: var(--ink);
+          font-family: var(--font-body);
+          font-size: 0.78rem;
+          font-weight: 600;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+          min-width: 3rem;
+          height: 3rem;
+          padding: 0 var(--space-4);
+          cursor: pointer;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          transition: color var(--dur-med) ease;
+        }
+        .car-arrow::after {
+          content: '';
+          position: absolute;
+          inset: 3px;
+          border: 1px solid var(--slate);
+          pointer-events: none;
+          transition: border-color var(--dur-med) ease;
+        }
+        .car-arrow::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          z-index: -1;
+          background: var(--teal);
+          transform: scaleX(0);
+          transform-origin: center;
+          transition: transform var(--dur-med) ease;
+        }
+        .car-arrow:hover {
+          color: var(--ink);
+        }
+        .car-arrow:hover::before {
+          transform: scaleX(1);
+        }
+        .car-arrow:hover::after {
+          border-color: var(--ink);
+        }
+        .car-arrow:disabled {
+          opacity: 0.45;
+          cursor: default;
+          color: var(--muted);
+        }
+        .car-arrow:disabled::before {
+          transform: scaleX(0);
+        }
+        .car-arrow:disabled::after {
+          border-color: var(--slate);
+        }
+        .car-hint {
+          font-family: var(--font-body);
+          font-size: 0.8rem;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: var(--muted);
+        }
+      </style>
+
+      <h2>{heading}</h2>
+      {sub && <p class="testi-sub">{sub}</p>}
+
+      <div class="carousel" id="testi-carousel">
+        <div class="carousel-track" id="testi-track">
+          {testimonials.map((t) => (
+            <div class="tcard">
+              <p class="q">{t.quote}</p>
+              <p class="a">
+                <span class="name">
+                  {t.url ? (
+                    <a href={t.url} target="_blank" rel="noopener noreferrer">{t.name}</a>
+                  ) : (
+                    t.name
+                  )}
+                </span>
+                <span class="role">
+                  {t.role},{' '}
+                  {t.url ? (
+                    <a href={t.url} target="_blank" rel="noopener noreferrer">{t.org}</a>
+                  ) : (
+                    t.org
+                  )}
+                </span>
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <div class="carousel-controls">
+          <button class="car-arrow" type="button" id="testi-prev" aria-label="Previous testimonials">‹</button>
+          <button class="car-arrow" type="button" id="testi-next" aria-label="Next testimonials">›</button>
+          <span class="car-hint">Scroll or use the arrows</span>
+        </div>
+      </div>
+    </section>
+)}
+
+<script>
+    // The carousel is left out when no testimonials are enabled; without this
+    // guard the script threw and the FAQ below never got its handler.
+    const track = document.getElementById('testi-track');
+    if (track) {
+      const prev = document.getElementById('testi-prev') as HTMLButtonElement | null;
+      const next = document.getElementById('testi-next') as HTMLButtonElement | null;
+
+      const max = () => track.scrollWidth - track.clientWidth;
+      const update = () => {
+        // The carousel loops, so the arrows never go dead at either end.
+        // Nothing to scroll: hide the arrows and hint rather than show dead controls.
+        const controls = prev?.closest<HTMLElement>('.carousel-controls');
+        if (controls) controls.hidden = max() <= 1;
+      };
+
+      const step = () => {
+        const card = track.querySelector<HTMLElement>('.tcard');
+        if (!card) return 0;
+        const cardWidth = card.getBoundingClientRect().width + 20;
+        return cardWidth * 2;
+      };
+
+      // At the last card, next goes back to the first; at the first, prev goes to the last.
+      next?.addEventListener('click', () => {
+        if (track.scrollLeft >= max() - 1) track.scrollTo({ left: 0, behavior: 'smooth' });
+        else track.scrollBy({ left: step(), behavior: 'smooth' });
+      });
+      prev?.addEventListener('click', () => {
+        if (track.scrollLeft <= 0) track.scrollTo({ left: max(), behavior: 'smooth' });
+        else track.scrollBy({ left: -step(), behavior: 'smooth' });
+      });
+
+      track.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    }
+
+</script>
