@@ -111,6 +111,21 @@ class Case(unittest.TestCase):
         code, out = self.run_check({"README.md": "# Thing\nBuilt for TUI.\n"})
         self.assertEqual(1, code); self.assertIn("terms: README.md:2", out)
 
+    def test_term_in_site_content_passes(self):
+        code, out = self.run_check({"src/pages/a.astro": "<title>Guides | Quexley Partners</title>\n",
+                                    "public/llms.txt": "By Zorblatt.\n"})
+        self.assertEqual((0, "clean"), (code, out.strip()))
+
+    def test_term_in_description_is_still_refused_when_site_changes(self):
+        code, out = self.run_check({"src/pages/a.astro": "<title>Guides | Zorblatt</title>\n"},
+                                   body="Adds a page for Zorblatt.")
+        self.assertEqual(1, code); self.assertIn("terms: PR description line 1", out)
+        self.assertNotIn("src/pages/a.astro", out)
+
+    def test_site_email_is_still_checked(self):
+        code, out = self.run_check({"src/pages/a.astro": "Mail jo.bloggs" + "@" + "oldcorp.io\n"})
+        self.assertEqual(1, code); self.assertIn("pii: src/pages/a.astro:1", out)
+
     def test_two_word_term_is_refused(self):
         self.assertEqual(1, self.run_check({"docs/a.md": "For Quexley Partners.\n"})[0])
 
