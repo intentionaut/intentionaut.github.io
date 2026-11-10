@@ -481,52 +481,52 @@ export const faqs: Faq[] = [
   },
   {
     question: 'Should you judge a product decision by its outcome?',
-    answer: 'Judge the quality of a decision first, then the quality of its outcome. A good call can start with poor results, and a bad one can get lucky.',
+    answer: 'Grade the decision first and the result second. Good calls sometimes start badly, and bad ones sometimes get lucky.',
     placements: ['guide-decision-quality'],
   },
   {
     question: 'What is decision quality?',
-    answer: 'Decision quality looks different in every organisation. It is made of the inputs, the outputs and how decisions flow, for both people and machines.',
+    answer: 'What good looks like differs from one organisation to the next. It comes down to the inputs, the outputs and the way decisions move between people and, now, machines.',
     placements: ['guide-decision-quality'],
   },
   {
     question: 'How much information do you need to make a product decision?',
-    answer: 'Most decisions need about 70% of the information you wish you had. Jeff Bezos wrote that waiting for 90% usually means being slow.',
+    answer: "Most of the time, you only need about 70% of the information you'd like. Waiting for more usually means deciding too slowly.",
     placements: ['guide-decision-quality'],
   },
   {
     question: 'What slows product decisions down?',
-    answer: 'Common barriers are needing "all the data", deciding by influence rather than customer and business needs, leaving out the right stakeholders, and deciding by committee.',
+    answer: 'Waiting for all the data, letting influence win over the customer and the business, leaving out the people a decision affects, and deciding by committee so nobody owns it.',
     placements: ['guide-decision-quality'],
   },
   {
     question: 'What is decision velocity?',
-    answer: 'Many companies think about developer velocity and story points, but never focus on decision velocity. The less important a decision, the faster you should get to it.',
+    answer: 'How fast an organisation decides. Plenty of companies measure engineering speed down to the story point, but very few measure how fast they decide. Small decisions should be quick.',
     placements: ['guide-decision-quality'],
   },
   {
     question: 'What should drive how a product org is structured?',
-    answer: 'Start with the outcome, not the chart. Find the friction between your teams and customer value, and organise around removing it.',
+    answer: 'Begin with the result you want, then draw the chart. Find where work gets stuck on its way to customers, and organise to unstick it.',
     placements: ['guide-product-org'],
   },
   {
     question: 'Why do reorgs often fail?',
-    answer: "The forces behind a reorg are often cost savings or mergers and acquisitions, and those forces aren't neutral. Reorgs end up as exercises in political posturing, or short-term bets instead of long-term outcomes.",
+    answer: 'Most reorgs are triggered by cost cutting or a merger, and neither is a neutral starting point. The reorg turns into a power play, or a quick fix that ignores the long term.',
     placements: ['guide-product-org'],
   },
   {
     question: 'What should a reorg goal statement say?',
-    answer: 'Something like: we are better able to deliver value internally and externally than before, and in more sustainable ways, with clearer communication, a better shared clarity of purpose at all levels, and a more effective way of sharing context and results across teams.',
+    answer: 'Something like: after this change, we deliver value to customers and to each other better than before, and we can keep it up, through clearer communication, a shared sense of purpose and better ways of sharing context across teams.',
     placements: ['guide-product-org'],
   },
   {
     question: 'What questions should you ask before a reorg?',
-    answer: 'What are we optimising for by moving people around? What are the outcomes and goals of the reorg? Who and what is involved in getting value into the hands of customers? What are we clearly not touching or doing right now?',
+    answer: 'What are we trying to improve by moving people, and why? What should be true once it is done? Who and what does it take to get value to customers? What are we deliberately leaving alone?',
     placements: ['guide-product-org'],
   },
   {
     question: 'Who belongs in a product org beyond product, design and engineering?',
-    answer: 'A product org at scale needs a lot more than the trio: user research, product operations, research operations, data and analytics, product marketing, and people and talent.',
+    answer: 'A product org at scale leans on many more people: user research, product operations, research operations, data and analytics, product marketing, and people and talent.',
     placements: ['guide-product-org'],
   },
   {

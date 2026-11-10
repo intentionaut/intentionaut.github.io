@@ -20,7 +20,7 @@ export const guides: Guide[] = [
   {
     slug: 'product-org-structure',
     title: 'How should you structure a product org?',
-    summary: 'An org chart is a bet: organise around customer value, start any reorg with a goal statement, and look beyond the trio.',
+    summary: 'Every org chart is a bet: organise around customer value, start any reorg with a goal statement, and look beyond the trio.',
     published: '2026-11-10',
   },
   {
