@@ -20,6 +20,7 @@ export type FaqPlacement =
   | 'office-hours'
   | 'guide-decision-quality'
   | 'guide-product-org'
+  | 'guide-research'
   | 'home';
 
 export interface Faq {
@@ -527,6 +528,31 @@ export const faqs: Faq[] = [
     question: 'Who belongs in a product org beyond product, design and engineering?',
     answer: 'A product org at scale needs a lot more than the trio: user research, product operations, research operations, data and analytics, product marketing, and people and talent.',
     placements: ['guide-product-org'],
+  },
+  {
+    question: "Why doesn't research change what we build?",
+    answer: "It's rarely that nobody cares. More often, acting on the research is harder than ignoring it. Research moves the roadmap when it feeds a decision someone is already making.",
+    placements: ['guide-research'],
+  },
+  {
+    question: 'What makes a research insight easy to act on?',
+    answer: 'The insights that get used are relevant, significant, outcome oriented, timely, unbiased, contextual and specific. They link to a current goal, say why now, and show the evidence.',
+    placements: ['guide-research'],
+  },
+  {
+    question: 'Does research make product decisions certain?',
+    answer: "It won't make anyone certain. What it does is make us a bit less wrong, and since most of our bets start out wrong, being less wrong is worth a lot.",
+    placements: ['guide-research'],
+  },
+  {
+    question: 'How can a product leader show that research matters?',
+    answer: "Sit in on research interviews, make time for researchers and help clear what's blocking them. When research shaped a decision, say so, out loud and by name.",
+    placements: ['guide-research'],
+  },
+  {
+    question: 'How do politics affect product research?',
+    answer: "Evidence can influence politics. It can't skip them. Get agreement on the problem before anyone debates the fix, and walk through any assumed link between a feature and the outcome.",
+    placements: ['guide-research'],
   },
 ];
 

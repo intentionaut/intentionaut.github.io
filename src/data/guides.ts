@@ -23,6 +23,12 @@ export const guides: Guide[] = [
     summary: 'An org chart is a bet: organise around customer value, start any reorg with a goal statement, and look beyond the trio.',
     published: '2026-11-10',
   },
+  {
+    slug: 'research-to-roadmap',
+    title: "Why doesn't our research change what we build?",
+    summary: 'Shape insights so they are easy to act on, reward evidence over ideas, and plan for the politics around every finding.',
+    published: '2026-11-10',
+  },
 ];
 
 export const guideHref = (g: Guide) => `/guides/${g.slug}/`;
