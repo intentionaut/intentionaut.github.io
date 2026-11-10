@@ -22,13 +22,23 @@ const PROPS = ['fontFamily', 'fontSize', 'fontWeight', 'fontStyle', 'lineHeight'
   'letterSpacing', 'textTransform', 'marginTop', 'marginBottom'];
 const BLOCK_PROPS = ['paddingTop', 'paddingBottom'];
 
+const HEADER = /class="[^"]*\b(page-head|hero)\b/;
+// A page has a header if its source, or a component it imports, has one
+// (guides render theirs from GuidePage.astro).
+function hasHeader(p) {
+  const src = readFileSync(p, 'utf8');
+  if (HEADER.test(src)) return true;
+  return [...src.matchAll(/from '((?:\.\.\/)+components\/[\w-]+\.astro)'/g)]
+    .some(([, rel]) => HEADER.test(readFileSync(join(p, '..', rel), 'utf8')));
+}
+
 // Every static page whose source has a header block. Dynamic routes are skipped.
 function pages(dir = 'src/pages') {
   return readdirSync(dir).flatMap((f) => {
     const p = join(dir, f);
     if (statSync(p).isDirectory()) return pages(p);
     if (!f.endsWith('.astro') || p.includes('[')) return [];
-    if (!/class="[^"]*\b(page-head|hero)\b/.test(readFileSync(p, 'utf8'))) return [];
+    if (!hasHeader(p)) return [];
     const route = '/' + relative('src/pages', p).replace(/(index)?\.astro$/, '');
     return [route.endsWith('/') ? route : route + '/'];
   }).sort();

@@ -17,6 +17,12 @@ export const guides: Guide[] = [
     summary: 'Judge the decision before the outcome: four signs of a good product decision, and five questions to test one.',
     published: '2026-11-10',
   },
+  {
+    slug: 'product-org-structure',
+    title: 'How should you structure a product org?',
+    summary: 'An org chart is a bet: organise around customer value, start any reorg with a goal statement, and look beyond the trio.',
+    published: '2026-11-10',
+  },
 ];
 
 export const guideHref = (g: Guide) => `/guides/${g.slug}/`;

@@ -1,53 +1,25 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import ContactForm from '../../components/ContactForm.astro';
-import FaqList from '../../components/FaqList.astro';
-import { faqsFor } from '../../data/faqs';
-import { BOOKING_URL } from '../../data/links';
-import { guides, guideHref } from '../../data/guides';
-
-const slug = 'product-decision-quality';
-const guide = guides.find((g) => g.slug === slug)!;
-const others = guides.filter((g) => g.slug !== slug);
-const faqs = faqsFor('guide-decision-quality');
-const url = `https://intentionaut.com${guideHref(guide)}`;
-
-const article = {
-  '@type': 'Article',
-  '@id': `${url}#article`,
-  headline: guide.title,
-  description: guide.summary,
-  datePublished: guide.published,
-  author: { '@id': 'https://intentionaut.com/#person' },
-  isPartOf: { '@id': 'https://intentionaut.com/guides/#page' },
-  mainEntityOfPage: url,
-};
-const faqSchema = {
-  '@type': 'FAQPage',
-  mainEntity: faqs.map((f) => ({
-    '@type': 'Question',
-    name: f.question,
-    acceptedAnswer: { '@type': 'Answer', text: f.answer.replace(/\s+/g, ' ').trim() },
-  })),
-};
+import GuidePage from '../../components/GuidePage.astro';
 ---
 
-<BaseLayout
+<GuidePage
+  slug="product-decision-quality"
   title="How to judge product decisions | Saielle DaSilva"
   description="How to know if your product decisions are good: judge the decision before the outcome. Four signs of a good decision and five questions to test one."
-  jsonLd={[article, faqSchema]}
+  faq="guide-decision-quality"
+  faqHeading="FAQ: Judging product decisions"
+  faqSub="What product and company leaders ask about decision quality."
+  ask="Tell me where your decisions stall."
+  sources={[
+    ['HBR, The Decision-Driven Organization (2010)', 'https://hbr.org/2010/06/the-decision-driven-organization'],
+    ['Jeff Bezos, 2016 letter to shareholders', 'https://www.aboutamazon.com/news/company-news/2016-letter-to-shareholders'],
+    ["McKinsey, Untangling your organisation's decision making", 'https://www.mckinsey.com/capabilities/people-and-organizational-performance/our-insights/untangling-your-organizations-decision-making'],
+    ['Bain, Create a decision-focused culture', 'https://www.bain.com/insights/decision-insights-7-create-a-decision-focused-culture/'],
+    ['SVPG, The four big risks', 'https://www.svpg.com/four-big-risks/'],
+    ['The Ready, Even-overs', 'https://medium.com/the-ready/even-overs-the-prioritization-tool-that-brings-your-strategy-to-life-e4f28f2949ac'],
+  ]}
 >
-  <section class="wrap">
-    <header class="page-head">
-      <p class="eyebrow"><a href="/guides/">Guides</a></p>
-      <h1>How do you know if your product decisions are good?</h1>
-      <p class="lede">
-        Judge the decision before you judge the outcome. A good call can start
-        with poor results, and a bad one can get lucky.
-      </p>
-    </header>
-
-    <div class="prose">
+  <Fragment slot="lede">Judge the decision before you judge the outcome. A good call can start with poor results, and a bad one can get lucky.</Fragment>
       <h2>The short answer</h2>
       <p>
         Judge the quality of a decision first, then the quality of its outcome.
@@ -147,39 +119,4 @@ const faqSchema = {
         principles, the decision milestones and the measures, then hand them to
         the team.
       </p>
-
-      <h2>Sources</h2>
-      <ul>
-        <li><a href="https://hbr.org/2010/06/the-decision-driven-organization" target="_blank" rel="noopener noreferrer">HBR, The Decision-Driven Organization (2010)</a></li>
-        <li><a href="https://www.aboutamazon.com/news/company-news/2016-letter-to-shareholders" target="_blank" rel="noopener noreferrer">Jeff Bezos, 2016 letter to shareholders</a></li>
-        <li><a href="https://www.mckinsey.com/capabilities/people-and-organizational-performance/our-insights/untangling-your-organizations-decision-making" target="_blank" rel="noopener noreferrer">McKinsey, Untangling your organisation's decision making</a></li>
-        <li><a href="https://www.bain.com/insights/decision-insights-7-create-a-decision-focused-culture/" target="_blank" rel="noopener noreferrer">Bain, Create a decision-focused culture</a></li>
-        <li><a href="https://www.svpg.com/four-big-risks/" target="_blank" rel="noopener noreferrer">SVPG, The four big risks</a></li>
-        <li><a href="https://medium.com/the-ready/even-overs-the-prioritization-tool-that-brings-your-strategy-to-life-e4f28f2949ac" target="_blank" rel="noopener noreferrer">The Ready, Even-overs</a></li>
-      </ul>
-
-      {others.length > 0 && (
-        <>
-          <h2>More guides</h2>
-          <ul>{others.map((g) => <li><a href={guideHref(g)}>{g.title}</a></li>)}</ul>
-        </>
-      )}
-    </div>
-
-    <section class="contact-form-section" aria-label="Get in touch">
-      <div class="contact-card">
-        <h2>Talk it through.</h2>
-        <p class="form-lede">
-          Tell me where your decisions stall. <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a free call<span class="sr-only"> (opens in a new tab)</span></a>, or write below.
-        </p>
-        <ContactForm source={`guides-${slug}`} selected="fractional" booking />
-      </div>
-    </section>
-
-    <FaqList
-      heading="FAQ: Judging product decisions"
-      items={faqs}
-      sub="What product and company leaders ask about decision quality."
-    />
-  </section>
-</BaseLayout>
+</GuidePage>

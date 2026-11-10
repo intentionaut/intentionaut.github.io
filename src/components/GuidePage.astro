@@ -1,0 +1,85 @@
+---
+/**
+ * Shell for one guide: Article + FAQPage schema, header, prose slot, sources,
+ * more guides, contact card, FAQ. Copy lives in the page; data in guides.ts.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from './ContactForm.astro';
+import FaqList from './FaqList.astro';
+import { faqsFor, type FaqPlacement } from '../data/faqs';
+import { BOOKING_URL } from '../data/links';
+import { guides, guideHref } from '../data/guides';
+
+interface Props {
+  slug: string;
+  title: string;
+  description: string;
+  faq: FaqPlacement;
+  faqHeading: string;
+  faqSub: string;
+  /** One line under "Talk it through." */
+  ask: string;
+  sources: [string, string][];
+}
+const { slug, title, description, faq, faqHeading, faqSub, ask, sources } = Astro.props;
+const guide = guides.find((g) => g.slug === slug)!;
+const others = guides.filter((g) => g.slug !== slug);
+const faqs = faqsFor(faq);
+const url = `https://intentionaut.com${guideHref(guide)}`;
+const blank = { target: '_blank', rel: 'noopener noreferrer' };
+
+const article = {
+  '@type': 'Article',
+  '@id': `${url}#article`,
+  headline: guide.title,
+  description: guide.summary,
+  datePublished: guide.published,
+  author: { '@id': 'https://intentionaut.com/#person' },
+  isPartOf: { '@id': 'https://intentionaut.com/guides/#page' },
+  mainEntityOfPage: url,
+};
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer.replace(/\s+/g, ' ').trim() },
+  })),
+};
+---
+
+<BaseLayout {title} {description} jsonLd={[article, faqSchema]}>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow"><a href="/guides/">Guides</a></p>
+      <h1>{guide.title}</h1>
+      <p class="lede"><slot name="lede" /></p>
+    </header>
+
+    <div class="prose">
+      <slot />
+
+      <h2>Sources</h2>
+      <ul>{sources.map(([label, href]) => <li><a href={href} {...blank}>{label}</a></li>)}</ul>
+
+      {others.length > 0 && (
+        <>
+          <h2>More guides</h2>
+          <ul>{others.map((g) => <li><a href={guideHref(g)}>{g.title}</a></li>)}</ul>
+        </>
+      )}
+    </div>
+
+    <section class="contact-form-section" aria-label="Get in touch">
+      <div class="contact-card">
+        <h2>Talk it through.</h2>
+        <p class="form-lede">
+          {ask} <a href={BOOKING_URL} {...blank}>Book a free call<span class="sr-only"> (opens in a new tab)</span></a>, or write below.
+        </p>
+        <ContactForm source={`guides-${slug}`} selected="fractional" booking />
+      </div>
+    </section>
+
+    <FaqList heading={faqHeading} items={faqs} sub={faqSub} />
+  </section>
+</BaseLayout>
