@@ -9,8 +9,11 @@ Five checks:
 
   pii      no email address, phone number or private key in an added line, the
            PR title or the PR description. `.piiallow` holds known-safe regexes.
-  terms    no private term in the same places. Terms come from PRIVATE_TERMS
-           (an Actions secret), one per line. Matched as whole words.
+  terms    no private term in the release text: the PR title, the PR description,
+           the changelog and every file outside the public site. Terms come from
+           PRIVATE_TERMS (an Actions secret), one per line. Matched as whole words.
+           Site content (src/, public/) is skipped: it is the published site,
+           where the owner's name belongs, not a release log.
   traces   no link to a shared chat or agent session, the kind anyone can open.
   dashes   no em dash in the title, the description or an added changelog line.
   shape    no changelog entry touched by this change has more than five bullets.
@@ -42,6 +45,8 @@ TRACES = re.compile(r"claude\.ai/share/|opencode\.ai/s/|chatgpt\.com/share/|chat
 DASHES = re.compile("[—―]")
 # Lock files, the allowlist, and this check's own tests, which have to name what they refuse.
 SKIP_FILES = re.compile(r"(^|/)(package-lock\.json|pnpm-lock\.yaml|yarn\.lock|.*\.lock|\.piiallow|test_public_notes_check\.py)$")
+# The published site. Release-log rules (terms) do not apply to what visitors read.
+SITE_FILES = re.compile(r"^(src|public)/")
 MAX_BULLETS = 5
 
 
@@ -111,7 +116,7 @@ def check(base, title, body, raw_terms, root, changelog="CHANGELOG.md"):
                     continue
                 refused.append("pii: " + place)
                 break
-            if terms and any(t.search(text) for t in terms):
+            if terms and not SITE_FILES.search(place) and any(t.search(text) for t in terms):
                 refused.append("terms: " + place)
             if TRACES.search(text):
                 refused.append("traces: " + place)
