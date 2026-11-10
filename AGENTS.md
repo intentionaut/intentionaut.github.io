@@ -61,3 +61,5 @@ can catch.
   on Accept; any new tool (Pendo, Novus) loads from the same place.
 - A new tool also needs a line on the privacy page, approved by Elle, in the
   same PR.
+- Enforcement: `tests/consent.test.mjs` fails any tracker loader outside
+  Consent.astro (required `test` check). The privacy line is instruction only.
