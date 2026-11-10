@@ -1,0 +1,104 @@
+---
+// Laid out on the workshop page template (src/pages/workshops/[slug].astro):
+// problem lines and one CTA in the head, then recommendation, steps, leave-with,
+// proof, close.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
+import TestimonialCarousel from '../components/TestimonialCarousel.astro';
+import { testimonialsFor } from '../data/testimonials';
+import { results } from '../data/results';
+import { rates, gbp, offerDays } from '../data/rates';
+import { BOOKING_URL } from '../data/links';
+const serviceSchema = {
+  '@type': 'Service',
+  '@id': 'https://intentionaut.com/ai-product-audit/#service',
+  name: 'AI product audit',
+  provider: { '@id': 'https://intentionaut.com/#person' },
+  offers: { '@type': 'Offer', priceCurrency: 'GBP', price: rates.aiAudit },
+};
+---
+
+<BaseLayout
+  jsonLd={serviceSchema}
+  title="AI Product Audit for Scale-ups, London | Saielle DaSilva"
+  description={`A fixed-price AI product audit for scale-ups in London and Europe. In one week, every AI feature gets a keep, change or stop call. ${gbp(rates.aiAudit)}.`}
+>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">AI product audit · {offerDays.aiAudit} days · {gbp(rates.aiAudit)}</p>
+      <h1>Know which AI work to keep, change or stop. In one week.</h1>
+      <p class="lede">
+        Saielle DaSilva reviews every AI feature you have shipped or planned.
+        Then she walks your leadership team through the findings, and through
+        how well strategy and execution line up across the organisation.
+      </p>
+      <ul class="problem-lines">
+        <li>Several AI pilots are running, and nobody can say which one the business depends on.</li>
+        <li>The demo looks good. Nobody can say what a user does with the output.</li>
+        <li>The board asks about AI every quarter, and the answer changes every quarter.</li>
+      </ul>
+      <div class="cta-row">
+        <a class="btn-primary" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a free call</a>
+        <a class="link-arrow" href="#contact-section"><span>{gbp(rates.aiAudit)} fixed · book an audit</span></a>
+      </div>
+    </header>
+
+    <div class="case-meta">
+      <dl>
+        <dt class="meta-label">For</dt>
+        <dd class="meta-value">Leadership teams with AI work underway and no shared view of which of it matters.</dd>
+      </dl>
+    </div>
+
+    <article class="prose">
+      <h2>What Saielle recommends</h2>
+      <p>
+        Keep, change or stop, for each piece of AI work. Each recommendation rests on
+        what a user does differently because of the output, whether the model
+        has met real data, and what happens when it is confidently wrong.
+      </p>
+      <h2>How does the week run?</h2>
+      <ol>
+        <li>Day one: short sessions with the people who own each piece of AI work, and a review of the product and the data.</li>
+        <li>Day two: Saielle writes up her findings, with your team or on her own. The day ends with a review of those findings, and of how well strategy and execution line up across the organisation.</li>
+      </ol>
+      <h2>What does your team leave with?</h2>
+      <p>
+        A ranked list of your AI work with the reason for each recommendation, the one or
+        two bets worth funding next and the evidence that would prove them, and
+        the failure modes written down before a customer finds them.
+      </p>
+      <p>
+        It isn't a build. If the next step is building, that is
+        <a href="/ai-pilot-to-production/">forward-deployed work</a>; if it is
+        leadership, the fee is credited against a
+        <a href="/fractional/">fractional engagement</a> that starts within 30 days.
+      </p>
+    </article>
+
+    <ul class="stat-strip audit-stats">
+      {results.map((r) => (
+        <li><span class="stat-num">{r.num}</span><span class="stat-label">{r.label}</span></li>
+      ))}
+    </ul>
+
+    <TestimonialCarousel testimonials={testimonialsFor('fractional')} heading="What people say" />
+
+    <section class="contact-form-section" id="contact-section" aria-label="Book an audit">
+      <div class="contact-card">
+        <h2>Book an audit.</h2>
+        <p class="form-lede">
+          {gbp(rates.aiAudit)}, fixed, {offerDays.aiAudit} days across one week.
+          Start with a free call to check it fits.
+        </p>
+        <ContactForm source="ai-product-audit" selected="strategic-direction" booking referral />
+      </div>
+    </section>
+  </section>
+</BaseLayout>
+
+<style>
+  .audit-stats {
+    margin-bottom: clamp(3rem, 6vw, 5rem);
+  }
+</style>

@@ -1,12 +1,14 @@
 ---
-import '@fontsource-variable/roboto-serif';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.astro';
 import { rates, gbp, fractionalMonthly1Day, fractionalMonthly2Day } from '../data/rates';
 import { testimonialsFor } from '../data/testimonials';
+import TestimonialCarousel from '../components/TestimonialCarousel.astro';
 import { faqsFor } from '../data/faqs';
+import RelatedReading from '../components/RelatedReading.astro';
 import FaqList from '../components/FaqList.astro';
-import { PRIMARY_PHRASE } from '../data/positioning';
+import WhoFor from '../components/WhoFor.astro';
+import { BOOKING_URL } from '../data/links';
 
 
 const testimonials = testimonialsFor('fractional');
@@ -18,7 +20,7 @@ const serviceSchema = {
   name: 'Fractional & Interim Product Leadership',
   serviceType: 'Fractional product leadership',
   description:
-    'Director-level product leadership for a defined period: one or two days a week, three months and up, with executive stakeholder access and accountability for delivery.',
+    'Director-level product leadership for a defined period: one or two days a week, one month minimum then 30 days\' notice either side, with executive stakeholder access and accountability for delivery.',
   provider: { '@id': 'https://intentionaut.com/#person' },
   areaServed: [
     { '@type': 'City', name: 'London' },
@@ -50,39 +52,47 @@ const faqSchema = {
 ---
 
 <BaseLayout
-  title={`${PRIMARY_PHRASE}, London | Saielle DaSilva`}
-  description="Fractional and interim CPO, based in London and working across the UK and Europe. Senior leadership for a defined period."
+  title="Fractional CPO London, UK & Europe | Saielle DaSilva"
+  description="Fractional CPO for scale-ups building AI products. Saielle DaSilva's products have served 100 million customers. London-based, working across Europe."
   jsonLd={[serviceSchema, faqSchema]}
   ogImage="/og/fractional.png"
 >
   <section class="wrap">
     <header class="page-head">
       <p class="eyebrow">Leadership &amp; advisory</p>
-      <h1>A senior product leader without the permanent commitment.</h1>
+      <h1>Product leadership from someone whose products have served over 100 million customers.</h1>
       <p class="lede">
-        For teams that need Director-level leadership, but are not ready for
-        a permanent hire.
+        For teams building AI products who need Director-level product and
+        design leadership, one or two days a week.
       </p>
+      <div class="cta-row">
+        <a class="btn-primary" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a free call <span class="sr-only">(opens in a new tab)</span></a>
+      </div>
       <ul class="problem-lines">
         <li>A product that works and nobody likes, with no agreement on why.</li>
         <li>Designers with nobody senior leading them.</li>
         <li>AI features where nobody can yet say what good looks like.</li>
+        <li>AI tools haven't changed the team's ways of working, or its maturity.</li>
       </ul>
     </header>
 
     <div class="prose">
+      <h2>Where has this been done before?</h2>
+      <ul>
+        <li>As interim CPO at a direct-to-consumer grocery scaleup, monthly recurring revenue grew 450 per cent in 90 days.</li>
+        <li>I led the product and design organisation at StepStone, with a 3.2x return on investment.</li>
+        <li>At Sainsbury's I ran product for AI, data platforms and machine learning, and took production AI from a handful of experiments to dozens of generative AI systems.</li>
+        <li>I was on the founding team at <a href="/case-studies/cazoo/">Cazoo</a>, through to a $7B IPO.</li>
+      </ul>
+      <TestimonialCarousel testimonials={testimonials} heading="What people say" />
+
       <p>
         Sometimes you do not need a consultant. You need someone who will
         own the problem. Someone who shows up, makes the hard calls,
         leads the team and stays accountable for the outcome.
       </p>
-      <p>
-        But the timing is not right for a permanent hire. The role is
-        evolving. You need to prove the model before you commit. Or you
-        need someone senior while you figure out the permanent answer.
-      </p>
 
-      <h2>What I do</h2>
+      <h2>What does a fractional product leader do?</h2>
       <p>
         I become your senior product leader for a defined period. Typically
         one or two days a week, over three to six months. I have executive
@@ -94,8 +104,15 @@ const faqSchema = {
         inside the organisation, with the same authority and accountability
         as a permanent Director.
       </p>
+      <p>
+        You can check how that works. Each engagement agrees a small set of
+        product KPIs at the start, and you review them together on a set
+        rhythm. Saielle DaSilva works directly with your team's data, not a
+        summary of it. She leads the team day to day and has access to your
+        executive stakeholders.
+      </p>
 
-      <h2>What you get</h2>
+      <h2>What do you get?</h2>
       <ul>
         <li>Strategic decisions and product direction</li>
         <li>Team leadership and coaching</li>
@@ -104,16 +121,34 @@ const faqSchema = {
         <li>Delivery accountability and outcomes</li>
       </ul>
 
-      <h2>How it works</h2>
-      <p>
-        A minimum commitment of three months. One or two days a week. Enough
-        time to build context, lead with authority and create real momentum.
-      </p>
-      <p>
-        {gbp(fractionalMonthly1Day)} a month for one day a week (four days),
-        or {gbp(fractionalMonthly2Day)} a month for two days a week (eight
-        days). Three months and up. Day rate {gbp(rates.fractional)}.
-      </p>
+      <h2>How does it work?</h2>
+      <dl class="ledger">
+        <div><dt>Minimum commitment</dt><dd>One month</dd></div>
+        <div><dt>Notice</dt><dd>30 days, either side</dd></div>
+        <div><dt>Day rate</dt><dd>{gbp(rates.fractional)}</dd></div>
+      </dl>
+      <div class="rates rates-pair fractional-tiers">
+        <div class="rate-card">
+          <p class="rate-price">{gbp(fractionalMonthly1Day)} a month</p>
+          <p class="rate-name">One day a week</p>
+          <p class="rate-desc">Saielle DaSilva advises, challenges and guides. Your team leads the work.</p>
+          <ul>
+            <li>Monthly strategy review with leadership</li>
+            <li>Fortnightly coaching for your product lead</li>
+            <li>Roadmap challenge before each planning cycle</li>
+          </ul>
+        </div>
+        <div class="rate-card">
+          <p class="rate-price">{gbp(fractionalMonthly2Day)} a month</p>
+          <p class="rate-name">Two days a week</p>
+          <p class="rate-desc">Saielle DaSilva leads the work alongside your team, setting new ways of working and scaling them.</p>
+          <ul>
+            <li>Owns the roadmap and the planning rhythm</li>
+            <li>Weekly product reviews</li>
+            <li>Coaching your PMs, and help with hiring</li>
+          </ul>
+        </div>
+      </div>
       <p>
         The engagement ends with a clear handover: a functioning team, an
         operating model that runs without me, and decisions that do not need
@@ -127,54 +162,92 @@ const faqSchema = {
         rather than leading.
       </p>
 
-      <h2>Where I have done this</h2>
-      <p>
-        As interim CPO at a direct-to-consumer grocery scaleup, monthly
-        recurring revenue grew 450 per cent in 90 days. I led the product and
-        design organisation at StepStone, where the satellite portfolio
-        delivered a 3.2x return on investment. At Sainsbury's I ran product for AI, data platforms and
-        machine learning, and took production AI from a handful of experiments
-        to a platform serving over 100 million customers. I was on the founding
-        team at <a href="/case-studies/cazoo/">Cazoo</a>, through to a $7B IPO.
-      </p>
-      {testimonials.map((t) => (
-        <figure class="pull-quote">
-          <blockquote><p>{t.quote}</p></blockquote>
-          <figcaption>
-            {t.url ? <a href={t.url} target="_blank" rel="noopener noreferrer">{t.name}</a> : t.name},
-            {' '}{t.role}, {t.org}
-          </figcaption>
-        </figure>
-      ))}
-
-      <h2>How to start</h2>
+      <h2>How do you start?</h2>
       <p>
         A free preliminary call. We check it is a fit. If it is, you get a
         written proposal: what we would do, when, and what it costs.
       </p>
       <p>
-        Need a second opinion rather than a leader? That is the
-        {' '}<a href="/contact/">strategy session</a>: {gbp(rates.strategySession)},
-        90 minutes, on its own, separate from fractional work.
+        Want to test the fit before you commit? Start with a
+        {' '}<a href="/office-hours/">office hours</a> session: {gbp(rates.strategySession)},
+        90 minutes on your hardest product question. It works on its own, and
+        it is also the first step into fractional work.
+      </p>
+      <p>
+        Need more than one question answered? The
+        {' '}<a href="/ai-product-audit/">AI product audit</a> ({gbp(rates.aiAudit)}, two days)
+        and the <a href="/product-strategy-sprint/">product strategy sprint</a>
+        {' '}({gbp(rates.strategySprint)}, four days) are fixed in scope and price.
+        Either fee is credited against a fractional engagement that starts
+        within 30 days.
       </p>
     </div>
 
+    <RelatedReading href="/writing/impact-cant-bypass-politics/" title="Impact can't bypass politics" summary="Impact is decided by people before it is delivered by software." />
+
     <section class="contact-form-section" aria-label="Get in touch">
       <div class="contact-card">
-        <h2>Let's talk.</h2>
+        <h2>Ask for a proposal.</h2>
         <p class="form-lede">
-          If your team needs a senior product leader who will own the problem
-          and stay until it is solved, let us talk.
+          The team, the product, and the decisions that keep slipping. If it fits, you get a written proposal: one day a week or two, what I would own, and what it costs.
         </p>
-        <ContactForm source="fractional" selected="fractional" booking />
+        <ContactForm source="fractional" selected="fractional" booking referral />
       </div>
     </section>
 
+    {/* After the form, before the FAQ: match the gap the FAQ and form use. */}
+    <div class="fit-before-faq">
+      <WhoFor
+        fit={[
+          'Founders and CEOs who need Director-level product leadership now.',
+          'Scale-ups whose product leader has left, or whose growth has outrun the team. <a href="/for-scale-ups/">Product leadership for scale-ups</a>.',
+          'Teams with a product that works and no agreement on why it is not landing.',
+          'Designers and product managers with nobody senior leading them.',
+          'Companies shipping AI features without an agreed view of what good looks like.',
+        ]}
+        notFit={[
+          'You are ready to hire a permanent head of product now. A search is the better route, and a fractional leader can help shape the role.',
+          'You need one decision made or one plan reviewed, not ongoing leadership. 90 minutes of <a href="/office-hours/">office hours</a> covers that, and it can also be the first step into fractional work.',
+          'You need something built rather than led. <a href="/forward-deployed/">Product building</a> embeds for four to twelve weeks and ends in a prototype or in software your team can run.',
+        ]}
+      />
+    </div>
+
     <FaqList
+      heading="FAQ: Fractional and interim CPO"
       items={fractionalFaqs}
-      sub="What founders ask before bringing in a part-time leader."
+      sub="What founders ask before bringing in a fractional CPO."
     />
   </section>
 
 </BaseLayout>
 
+<style>
+  .fit-before-faq {
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+  }
+  .fit-before-faq :global(.who-for) {
+    margin-top: 0;
+  }
+  /* Two price cards inside the reading column. */
+  .fractional-tiers {
+    margin: var(--space-5) 0 var(--space-6);
+  }
+  .fractional-tiers p {
+    margin: 0 0 var(--space-2);
+  }
+  /* Titles match the contact page's offer cards. */
+  .fractional-tiers .rate-name {
+    font-family: var(--font-display);
+    font-weight: 560;
+    font-size: 0.95rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-3);
+  }
+  .fractional-tiers ul {
+    margin: var(--space-3) 0 0;
+    padding-left: 1.1em;
+    font-size: 0.95rem;
+  }
+</style>

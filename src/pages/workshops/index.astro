@@ -1,0 +1,206 @@
+---
+import Plate from '../../components/Plate.astro';
+import { iconFor } from '../../data/icons';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqList from '../../components/FaqList.astro';
+import TestimonialCarousel from '../../components/TestimonialCarousel.astro';
+import WorkshopPricing from '../../components/WorkshopPricing.astro';
+import WorkshopClose from '../../components/WorkshopClose.astro';
+import WorkshopTopCta from '../../components/WorkshopTopCta.astro';
+import { workshops } from '../../data/workshops';
+import { faqsFor } from '../../data/faqs';
+import { testimonialsFor } from '../../data/testimonials';
+import { results } from '../../data/results';
+import { rates } from '../../data/rates';
+
+const faqs = faqsFor('workshops');
+
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer.replace(/\s+/g, ' ').trim() },
+  })),
+};
+const catalogSchema = {
+  '@type': 'OfferCatalog',
+  '@id': 'https://intentionaut.com/workshops/#catalog',
+  name: 'Workshops',
+  itemListElement: workshops.map((w) => ({
+    '@type': 'Offer',
+    priceCurrency: 'GBP',
+    price: rates.workshopTaster,
+    itemOffered: { '@id': `https://intentionaut.com/workshops/${w.slug}/#service` },
+  })),
+};
+---
+
+<BaseLayout
+  title="AI Strategy Workshops, London & Europe | Saielle DaSilva"
+  description="AI strategy, opportunity mapping and product maturity workshops for scale-up leadership teams in London and Europe, tied to results the business measures."
+  jsonLd={[catalogSchema, faqSchema]}
+>
+  <section class="wrap ws-page">
+    <div class="ws-hero">
+      <header class="page-head">
+        <p class="eyebrow">Workshops</p>
+        <h1>Product workshops that lead to real bottom line impact.</h1>
+        <p class="lede">
+          Planning season again? Walk into it with a strategy your team will
+          actually move on, tied to a result your business already measures.
+        </p>
+        <WorkshopTopCta />
+      </header>
+        <div class="workshop-prints" oncontextmenu="return false" ondragstart="return false">
+          <img src="/images/workshops/workshop-in-session.jpg" alt="A team placing sticky notes on a confidence scale during a workshop" width="240" height="180" draggable="false" />
+          <img src="/images/workshops/whiteboard-data-ai.jpg" alt="A glass wall mapping data flows into ML and AI capabilities" width="240" height="180" draggable="false" />
+          <img src="/images/workshops/start-process-output.jpg" alt="A whiteboard sketching a discovery process from start to output" width="240" height="180" draggable="false" />
+          <img src="/images/workshops/cost-of-delay.jpg" alt="A whiteboard ranking work by effort and cost of delay" width="240" height="180" draggable="false" />
+          <img src="/images/workshops/brand-values.jpg" alt="A whiteboard of values and principles from a strategy session" width="240" height="180" draggable="false" />
+          <img src="/images/workshops/sticky-note-matrix.jpg" alt="A sticky-note matrix of roles against platform capabilities" width="180" height="240" draggable="false" />
+        </div>
+    </div>
+
+    <section class="rates-section workshop-proof" aria-label="Track record">
+      <h2>Track record</h2>
+      <p class="workshop-id">
+        Run by Saielle DaSilva, a London-based fractional CPO who builds with AI.
+      </p>
+      <ul class="stat-strip workshop-stats">
+        {results.map((r) => (
+          <li><span class="stat-num">{r.num}</span><span class="stat-label">{r.label}</span></li>
+        ))}
+      </ul>
+      <p><a class="link-arrow" href="/case-studies/"><span>See the case studies</span></a></p>
+    </section>
+
+    <section class="rates-section" aria-label="Where teams get stuck">
+      <h2>Where teams get stuck</h2>
+      <ul class="prose">
+        <li>Last year's strategy still isn't showing up in the numbers.</li>
+        <li>AI work is scattered across teams, with no measure and no owner.</li>
+        <li>An AI pilot works in the demo but won't reach production.</li>
+      </ul>
+    </section>
+
+    <section class="rates-section" aria-label="Workshops">
+      <h2>Choose a workshop</h2>
+      <div class="rates">
+        {workshops.filter((w) => !w.variantOf).map((w, i) => (
+          <a class="rate-row rate-card envelope" href={`/workshops/${w.slug}/`}>
+            <Plate name={iconFor(`/workshops/${w.slug}/`)} tone={i % 2 ? 'blue' : 'pink'} />
+            <p class="rate-name">{w.title}</p>
+            <p class="rate-desc">{w.card}</p>
+            <p class="rate-shape">For {w.audience}.</p>
+          </a>
+        ))}
+      </div>
+    </section>
+
+
+    <section class="rates-section" aria-label="Testimonials">
+      <TestimonialCarousel testimonials={testimonialsFor('workshops')} heading="What people say" compact />
+    </section>
+
+
+
+
+    <section class="rates-section workshop-steps" aria-label="How it works">
+      <h2>How it works</h2>
+      <ol class="talk-list">
+        {[
+          ['A free scoping call', 'We agree the decision and who should be in the room.'],
+          ['About 20 minutes of prework each', 'A few days before, usually one example from your own work.'],
+          ['The session', 'Remote or in person, in London or across the UK and Europe.'],
+          ['Written follow-up', 'The decision, its owner and a date to check it.'],
+        ].map(([title, meta], i) => (
+          <li class="talk-row">
+            <span class="talk-date">Step {i + 1}</span>
+            <div><span class="talk-title">{title}</span><p class="talk-meta">{meta}</p></div>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <WorkshopPricing />
+
+    <WorkshopClose source="workshops" />
+
+    <FaqList items={faqs} heading="FAQ: Product workshops in London" sub="What leaders ask before booking a workshop." />
+  </section>
+</BaseLayout>
+
+<style>
+  /* Workshop photos as scattered prints: off-white frame, hairline edge, soft lift. */
+  /* One vertical rhythm: every block on this page sits --space-10 from the next.
+     Blocks bring their own bottom padding, so it is zeroed here and the gap does the work. */
+  .ws-page {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-10);
+    padding-bottom: var(--space-11);
+  }
+  .ws-page > :global(*),
+  .ws-page > :global(*) > :global(section),
+  .ws-page :global(.page-head) {
+    margin-block: 0;
+    padding-bottom: 0;
+  }
+  .ws-page :global(.rates-section > :last-child),
+  .ws-page :global(.prose:last-child) {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  /* Hero: words left, a scatter of workshop prints right. */
+  @media (min-width: 1000px) {
+    .ws-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      gap: var(--space-8);
+      align-items: center;
+    }
+  }
+  .workshop-prints {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-4);
+    margin: var(--space-6) 0;
+  }
+  .workshop-prints img {
+    width: 120px;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    background: var(--card);
+    padding: 7px 7px 22px;
+    border: 1px solid var(--slate);
+    /* Deterrent only: no long-press save menu or text selection. */
+    -webkit-touch-callout: none;
+    user-select: none;
+    box-shadow:
+      0 1px 1px color-mix(in srgb, var(--ink) 8%, transparent),
+      0 3px 6px -1px color-mix(in srgb, var(--ink) 12%, transparent),
+      0 12px 20px -8px color-mix(in srgb, var(--ink) 22%, transparent);
+  }
+  .workshop-prints img:nth-child(1) { rotate: -3deg; }
+  .workshop-prints img:nth-child(2) { rotate: 2deg; }
+  .workshop-prints img:nth-child(3) { rotate: -1.5deg; }
+  .workshop-prints img:nth-child(4) { rotate: 3deg; }
+  .workshop-prints img:nth-child(5) { rotate: -2deg; }
+  .workshop-prints img:nth-child(6) { rotate: 1.5deg; }
+  /* Decorative on small screens: left out rather than stacked. */
+  @media (max-width: 719px) {
+    .workshop-prints { display: none; }
+  }
+
+  .workshop-id {
+    margin: 0 0 var(--space-6);
+  }
+  .workshop-stats {
+    margin-bottom: var(--space-7);
+  }
+
+</style>

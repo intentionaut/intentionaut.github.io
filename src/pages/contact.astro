@@ -1,5 +1,6 @@
 ---
-import '@fontsource-variable/roboto-serif';
+import Plate from '../components/Plate.astro';
+import { iconFor } from '../data/icons';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.astro';
 import { BOOKING_URL } from '../data/links';
@@ -7,6 +8,7 @@ import { rates, gbp, fractionalMonthly1Day, fractionalMonthly2Day, buildingWeekl
 import { faqsFor } from '../data/faqs';
 import { testimonialsFor } from '../data/testimonials';
 import FaqList from '../components/FaqList.astro';
+import TestimonialCarousel from '../components/TestimonialCarousel.astro';
 import { LOCATION_LINE } from '../data/positioning';
 
 
@@ -31,7 +33,7 @@ const offerCatalog = {
   name: 'Services and rates',
   itemListElement: [
     offer(
-      { '@type': 'Service', name: 'Strategy session', provider: { '@id': 'https://intentionaut.com/#person' }, url: 'https://intentionaut.com/strategic-direction/' },
+      { '@type': 'Service', name: 'Office hours', provider: { '@id': 'https://intentionaut.com/#person' }, url: 'https://intentionaut.com/office-hours/' },
       rates.strategySession,
       '90-minute session'
     ),
@@ -45,18 +47,26 @@ const offerCatalog = {
       'keynote'
     ),
     offer(
-      { '@type': 'Service', name: 'Team workshop', provider: { '@id': 'https://intentionaut.com/#person' }, url: 'https://intentionaut.com/keynote-speaker/' },
+      { '@type': 'Service', name: 'Team workshop', provider: { '@id': 'https://intentionaut.com/#person' }, url: 'https://intentionaut.com/workshops/' },
       rates.workshop,
       'full-day workshop'
     ),
   ],
+};
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: faqsFor('contact').map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer.replace(/\s+/g, ' ').trim() },
+  })),
 };
 ---
 
 <BaseLayout
   title="Contact & rates | Fractional CPO, London | Saielle DaSilva"
   description={`Work with Saielle DaSilva: advisory, fractional product leadership, speaking and mentoring. ${LOCATION_LINE}`}
-  jsonLd={offerCatalog}
+  jsonLd={[offerCatalog, faqSchema]}
 >
   <section class="wrap">
     <header class="page-head">
@@ -78,25 +88,29 @@ const offerCatalog = {
       <h2>Which one fits?</h2>
       <p class="rates-intro">Every option starts with a free preliminary call.</p>
       <div class="rates">
-        <a class="rate-row rate-card" href="/strategic-direction/">
-          <p class="rate-name">Strategy session</p>
+        <a class="rate-row rate-card envelope" href="/office-hours/">
+          <Plate name={iconFor('/office-hours/')} tone="pink" />
+          <p class="rate-name">Office hours</p>
           <p class="rate-price">{gbp(rates.strategySession)} · 90 min</p>
           <p class="rate-desc">
             A sounding board for founders and product leaders: strategy
             reviews, roadmap calls, hiring help, AI reality-checks.
           </p>
+          <p class="rate-shape">Also the first step into fractional leadership.</p>
           <p class="rate-scale">Sliding scale · Yes</p>
         </a>
-        <a class="rate-row rate-card" href="/fractional/">
+        <a class="rate-row rate-card envelope" href="/fractional/">
+          <Plate name={iconFor('/fractional/')} tone="blue" />
           <p class="rate-name">Fractional leadership</p>
           <p class="rate-price">From {gbp(fractionalMonthly1Day)} a month</p>
           <p class="rate-desc">
-            Part-time head of product for early teams that need direction
-            now, before they're ready for a full-time hire.
+            Head of product for teams that need direction now, one or two
+            days a week.
           </p>
-          <p class="rate-shape">One day a week ({gbp(fractionalMonthly1Day)} a month) or two ({gbp(fractionalMonthly2Day)} a month). Three months and up. Day rate {gbp(rates.fractional)}.</p>
+          <p class="rate-shape">One day a week ({gbp(fractionalMonthly1Day)} a month) or two ({gbp(fractionalMonthly2Day)} a month). One month minimum, then 30 days' notice. Day rate {gbp(rates.fractional)}.</p>
         </a>
-        <a class="rate-row rate-card" href="/forward-deployed/">
+        <a class="rate-row rate-card envelope" href="/forward-deployed/">
+          <Plate name={iconFor('/forward-deployed/')} tone="pink" />
           <p class="rate-name">Product building</p>
           <p class="rate-price">{gbp(buildingWeekly)} / week</p>
           <p class="rate-desc">
@@ -105,17 +119,19 @@ const offerCatalog = {
           </p>
           <p class="rate-shape">Three days a week, four to twelve weeks.</p>
         </a>
-        <a class="rate-row rate-card" href="/keynote-speaker/">
+        <a class="rate-row rate-card envelope" href="/keynote-speaker/">
+          <Plate name={iconFor('/keynote-speaker/')} tone="blue" />
           <p class="rate-name">Speaking &amp; workshops</p>
           <p class="rate-price">Keynote from {gbp(rates.keynote)}</p>
           <p class="rate-desc">
             From conference keynotes to hands-on team sessions about building
             with intention across design, data and AI.
           </p>
-          <p class="rate-shape">Team workshop, full day, from {gbp(rates.workshop)}. Half day on request, from {gbp(rates.workshopHalfDay)}.</p>
+          <p class="rate-shape">Team workshops from {gbp(rates.workshopTaster)}: half day {gbp(rates.workshopHalfDay)}, full day {gbp(rates.workshop)}.</p>
           <p class="rate-scale">Sliding scale · Yes</p>
         </a>
-        <a class="rate-row rate-card" href="/mentoring/">
+        <a class="rate-row rate-card envelope" href="/mentoring/">
+          <Plate name={iconFor('/mentoring/')} tone="pink" />
           <p class="rate-name">Mentoring</p>
           <p class="rate-price">Get in touch</p>
           <p class="rate-desc">
@@ -226,266 +242,19 @@ const offerCatalog = {
     {/* Hidden entirely when nothing is enabled for this page, rather than
         leaving a heading over an empty carousel. An empty state should mean
         "there are none", and here there being none is a choice. */}
-    {testimonials.length > 0 && (
-    <section class="testimonials-section" aria-label="Testimonials">
-      <style>
-        :root {
-          --acc-blue: #a9cbd0;
-        }
-        .testimonials-section {
-          padding-bottom: clamp(3rem, 6vw, 5rem);
-        }
-        .testimonials-section h2 {
-          font-size: var(--text-lg);
-          margin: 0 0 var(--space-2);
-        }
-        .testi-sub {
-          margin: 0 0 var(--space-7);
-          max-width: 52ch;
-          font-size: 1.05rem;
-          color: var(--muted);
-        }
-        .carousel {
-          position: relative;
-        }
-        .carousel-track {
-          display: grid;
-          grid-auto-flow: column;
-          grid-auto-columns: 88%;
-          gap: var(--space-6);
-          overflow-x: auto;
-          scroll-snap-type: x mandatory;
-          scrollbar-width: none;
-          padding: var(--space-1);
-        }
-        .carousel-track::-webkit-scrollbar {
-          display: none;
-        }
-        @media (min-width: 720px) {
-          .carousel-track {
-            grid-auto-columns: calc(100% / 2.2 - var(--space-6));
-          }
-        }
-        .tcard {
-          position: relative;
-          border: 1px solid var(--ink);
-          background: var(--paper);
-          padding: var(--space-6) var(--space-7);
-          display: flex;
-          flex-direction: column;
-          scroll-snap-align: start;
-          /* Grows with the quote; the carousel row stretches every card to the tallest. */
-          min-height: 460px;
-        }
-        .tcard::after {
-          content: '';
-          position: absolute;
-          inset: 3px;
-          border: 1px solid var(--slate);
-          pointer-events: none;
-        }
-        .tcard .q {
-          font-family: var(--font-display);
-          font-optical-sizing: auto;
-          font-size: 1.12rem;
-          line-height: 1.55;
-          margin: 0 0 var(--space-4);
-          flex: 1 1 auto;
-          min-height: 0;
-          display: flex;
-          flex-direction: column;
-          justify-content: safe center;
-        }
-        .tcard .a {
-          margin: 0;
-          flex-shrink: 0;
-          min-height: calc(var(--space-9) + var(--space-6));
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-end;
-          font-family: var(--font-body);
-          font-size: var(--text-sm);
-          color: var(--ink);
-        }
-        .tcard .a .name {
-          display: block;
-          color: var(--ink);
-          font-weight: 600;
-          font-size: 0.95rem;
-          margin-bottom: 0.15em;
-          border-top: 1px solid var(--slate);
-          padding-top: var(--space-4);
-        }
-        .tcard .a .name a {
-          color: inherit;
-          text-decoration: none;
-        }
-        .tcard .a .name a:hover,
-        .tcard .a .role a:hover {
-          text-decoration: underline;
-          text-decoration-color: var(--accent);
-        }
-        .tcard .a .role {
-          display: block;
-          font-style: italic;
-        }
-        .tcard .a .role a {
-          color: var(--ink);
-          text-decoration: none;
-        }
-        .carousel-controls {
-          display: flex;
-          align-items: center;
-          gap: var(--space-3);
-          margin-top: var(--space-6);
-        }
-        .car-arrow {
-          position: relative;
-          z-index: 0;
-          appearance: none;
-          background: var(--paper);
-          border: 1px solid var(--ink);
-          color: var(--ink);
-          font-family: var(--font-body);
-          font-size: 0.78rem;
-          font-weight: 600;
-          letter-spacing: 0.16em;
-          text-transform: uppercase;
-          min-width: 3rem;
-          height: 3rem;
-          padding: 0 var(--space-4);
-          cursor: pointer;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          transition: color var(--dur-med) ease;
-        }
-        .car-arrow::after {
-          content: '';
-          position: absolute;
-          inset: 3px;
-          border: 1px solid var(--slate);
-          pointer-events: none;
-          transition: border-color var(--dur-med) ease;
-        }
-        .car-arrow::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          z-index: -1;
-          background: var(--acc-blue);
-          transform: scaleX(0);
-          transform-origin: center;
-          transition: transform var(--dur-med) ease;
-        }
-        .car-arrow:hover {
-          color: var(--ink);
-        }
-        .car-arrow:hover::before {
-          transform: scaleX(1);
-        }
-        .car-arrow:hover::after {
-          border-color: var(--ink);
-        }
-        .car-arrow:disabled {
-          opacity: 0.45;
-          cursor: default;
-          color: var(--muted);
-        }
-        .car-arrow:disabled::before {
-          transform: scaleX(0);
-        }
-        .car-arrow:disabled::after {
-          border-color: var(--slate);
-        }
-        .car-hint {
-          font-family: var(--font-body);
-          font-size: 0.8rem;
-          letter-spacing: 0.14em;
-          text-transform: uppercase;
-          color: var(--muted);
-        }
-      </style>
-
-      <h2>Testimonials</h2>
-      <p class="testi-sub">
-        I leave organisations clearer about what matters. See for yourself.
-      </p>
-
-      <div class="carousel" id="testi-carousel">
-        <div class="carousel-track" id="testi-track">
-          {testimonials.map((t) => (
-            <div class="tcard">
-              <p class="q">{t.quote}</p>
-              <p class="a">
-                <span class="name">
-                  {t.url ? (
-                    <a href={t.url} target="_blank" rel="noopener noreferrer">{t.name}</a>
-                  ) : (
-                    t.name
-                  )}
-                </span>
-                <span class="role">
-                  {t.role},{' '}
-                  {t.url ? (
-                    <a href={t.url} target="_blank" rel="noopener noreferrer">{t.org}</a>
-                  ) : (
-                    t.org
-                  )}
-                </span>
-              </p>
-            </div>
-          ))}
-        </div>
-
-        <div class="carousel-controls">
-          <button class="car-arrow" type="button" id="testi-prev" aria-label="Previous testimonials">‹</button>
-          <button class="car-arrow" type="button" id="testi-next" aria-label="Next testimonials">›</button>
-          <span class="car-hint">Scroll or use the arrows</span>
-        </div>
-      </div>
-    </section>
-    )}
+    <TestimonialCarousel
+      testimonials={testimonials}
+      sub="I leave organisations clearer about what matters. See for yourself."
+    />
 
     <FaqList
+      heading="FAQ: Rates and engagements with Saielle DaSilva"
       items={faqsFor('contact')}
       sub="Straight answers about rates, sliding scale and how engagements actually run. Anything missing: ask me."
     />
   </section>
 
   <script>
-    // The carousel is left out when no testimonials are enabled; without this
-    // guard the script threw and the FAQ below never got its handler.
-    const track = document.getElementById('testi-track');
-    if (track) {
-      const prev = document.getElementById('testi-prev') as HTMLButtonElement | null;
-      const next = document.getElementById('testi-next') as HTMLButtonElement | null;
-
-      const update = () => {
-        const max = track.scrollWidth - track.clientWidth;
-        if (prev) prev.disabled = track.scrollLeft <= 0;
-        if (next) next.disabled = track.scrollLeft >= max - 1;
-      };
-
-      const step = () => {
-        const card = track.querySelector<HTMLElement>('.tcard');
-        if (!card) return 0;
-        const cardWidth = card.getBoundingClientRect().width + 20;
-        return cardWidth * 2;
-      };
-
-      next?.addEventListener('click', () => {
-        track.scrollBy({ left: step(), behavior: 'smooth' });
-      });
-      prev?.addEventListener('click', () => {
-        track.scrollBy({ left: -step(), behavior: 'smooth' });
-      });
-
-      track.addEventListener('scroll', update, { passive: true });
-      window.addEventListener('resize', update);
-      update();
-    }
-
     const faqItems = document.querySelectorAll<HTMLDetailsElement>('.faq-item');
     faqItems.forEach((item) => {
       item.addEventListener('toggle', () => {

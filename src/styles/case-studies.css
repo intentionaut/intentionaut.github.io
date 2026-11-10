@@ -12,8 +12,8 @@
   margin-inline: auto;
   height: auto;
   border: 1px solid var(--slate);
-  border-radius: var(--radius-m);
-  background: #fff;
+  border-radius: 0;
+  background: var(--card);
 }
 
 .cs-prose figcaption {
@@ -79,10 +79,27 @@
 }
 
 /* Private-link lock (locked: true). */
-.cs-lock-note {
+/* Same card as the contact form, so it reads as the page's one action. */
+.cs-lock-card {
   margin: var(--space-7) 0;
+  max-width: 40rem;
 }
 
-.cs-lock-note[hidden] {
+.cs-lock-card[hidden] {
   display: none;
+}
+
+.cs-lock-card h2 {
+  font-size: var(--text-lg);
+  margin: 0 0 var(--space-3);
+}
+
+.cs-lock-note {
+  margin: 0 0 var(--space-5);
+}
+
+.cs-lock-mail {
+  margin: var(--space-4) 0 0;
+  font-size: var(--text-sm);
+  color: var(--muted);
 }

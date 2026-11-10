@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import RelatedReading from '../components/RelatedReading.astro';
 import data from '../data/ai-adoption-evidence.json';
+import { BOOKING_URL } from '../data/links';
 import { TOPICS, SOURCE_TYPES, REGIONS, isStale, sortNewestFirst, validate } from '../lib/evidence.mjs';
 
 // Fail the build on bad data; warn on cards not reviewed for six months.
@@ -19,9 +21,16 @@ const groups = [
   { key: 'region', label: 'Region', options: REGIONS },
 ].map((g) => ({ ...g, options: Object.entries(g.options).filter(([v]) => used(g.key as any).has(v)) }));
 
-const title = 'What the data says about AI in business | Saielle DaSilva';
+const title = 'AI adoption statistics: Gartner CIO survey and more | Saielle DaSilva';
 // COPY FOR APPROVAL (site owner): description, intro and the "last checked" line.
-const description = 'Published figures on AI in business, each with who measured it, the base, the date and a link to the original document.';
+const description = 'Only 13% of CIOs say AI has delivered significant value (Gartner, 2026). Published AI adoption figures, each with its source, sample and date.';
+
+// COPY FOR APPROVAL (site owner): closing block.
+const closing = {
+  heading: 'What this means for your team',
+  body: 'These figures show what is happening across many companies. They cannot tell you what good looks like in yours. As a fractional CPO, Saielle DaSilva helps teams work that out for their own product.',
+  link: 'See how fractional work runs',
+};
 
 const lastChecked = new Date(data.lastChecked + 'T00:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
 
@@ -87,6 +96,16 @@ const jsonLd = {
     </ol>
 
     <p class="ev-none" id="ev-none" hidden>No figures match these filters.</p>
+    <RelatedReading href="/writing/insights-to-actions/" title="Getting the most out of product discovery" summary="What to do and why it matters, before the features you ship." />
+
+    <section class="ev-close" aria-labelledby="ev-close-h">
+      <h2 id="ev-close-h">{closing.heading}</h2>
+      <p>{closing.body}</p>
+      <div class="cta-row">
+        <a class="link-arrow" href="/fractional/"><span>{closing.link}</span></a>
+        <a class="btn-primary" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a free call <span class="sr-only">(opens in a new tab)</span></a>
+      </div>
+    </section>
   </section>
 </BaseLayout>
 
@@ -99,23 +118,25 @@ const jsonLd = {
   .ev-label { font-size: var(--text-sm); color: var(--muted); min-width: 6.5rem; }
   .ev-chip {
     font: inherit; font-size: var(--text-sm); color: var(--ink);
-    background: transparent; border: 1px solid var(--ink); border-radius: var(--radius-l);
+    background: transparent; border: 1px solid var(--ink);
     padding: var(--space-1) var(--space-3); cursor: pointer; min-height: 2.75rem;
   }
   .ev-chip:hover { background: var(--slate); }
   .ev-chip[aria-pressed='true'] { background: var(--ink); color: var(--paper); }
   .ev-status { margin: 0; font-size: var(--text-sm); color: var(--muted); }
   .ev-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-6); grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr)); }
-  .ev-card { border: 1px solid var(--slate); border-top: 2px solid var(--accent); border-radius: var(--radius-m); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3); }
+  .ev-card { border: 1px solid var(--slate); border-top: 2px solid var(--accent); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3); }
   .ev-card[hidden] { display: none; }
   .ev-badges { display: flex; gap: var(--space-2); margin: 0; flex-wrap: wrap; }
-  .ev-badge { font-size: var(--text-xs); letter-spacing: 0.04em; text-transform: uppercase; border: 1px solid var(--muted); border-radius: var(--radius-s); padding: 0 var(--space-2); color: var(--muted); }
+  .ev-badge { font-size: var(--text-xs); letter-spacing: 0.04em; text-transform: uppercase; border: 1px solid var(--muted); padding: 0 var(--space-2); color: var(--muted); }
   .ev-figure { font-family: var(--font-display); font-size: var(--text-md); font-weight: 500; line-height: 1.25; margin: 0; }
   .ev-meta { margin: 0; font-size: var(--text-sm); display: grid; grid-template-columns: max-content 1fr; gap: var(--space-1) var(--space-3); }
   .ev-meta dt { color: var(--muted); }
   .ev-meta dd { margin: 0; }
   .ev-source { margin-top: auto; font-size: var(--text-sm); color: var(--accent-text); overflow-wrap: anywhere; }
   .ev-none { color: var(--muted); }
+  .ev-close { margin-top: var(--space-8); border-top: 1px solid var(--slate); padding-top: var(--space-6); }
+  .ev-close p { max-width: 40rem; }
 </style>
 
 <script>

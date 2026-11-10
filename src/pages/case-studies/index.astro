@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import '../../styles/case-studies.css';
+import { PRIMARY_PHRASE } from '../../data/positioning';
 
 const studies = (await getCollection('caseStudies')).sort((a, b) => a.data.order - b.data.order);
 const probe = studies.find((s) => s.data.locked);
@@ -10,7 +11,7 @@ const probe = studies.find((s) => s.data.locked);
 <BaseLayout
   noAnalytics
   title="Case studies | Saielle DaSilva"
-  description="Organisations built, products shipped, and the decisions behind them."
+  description="Case studies from Saielle DaSilva, fractional CPO: Cazoo through hyper-growth to IPO, and AI at Sainsbury's taken from pilot to production."
 >
   <section class="wrap">
     <header class="page-head">
@@ -38,6 +39,11 @@ const probe = studies.find((s) => s.data.locked);
         ))
       }
     </ol>
+
+    <p>
+      Want this kind of work on your team? See <a href="/fractional/">{PRIMARY_PHRASE}</a> or
+      <a href="/forward-deployed/">Product building</a>.
+    </p>
   </section>
   {probe && <div id="lock-probe" hidden data-lock={`/case-studies/${probe.id}/locked.json`} />}
 </BaseLayout>

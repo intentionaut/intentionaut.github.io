@@ -15,6 +15,7 @@
  *   />
  */
 import SubscribeForm from './SubscribeForm.astro';
+import { fetchPosts } from '../lib/beehiiv';
 
 interface Props {
   /** Uppercase accent label above the heading. Optional. */
@@ -48,13 +49,31 @@ const {
   maxWidth = '46rem',
   align = 'center',
 } = Astro.props;
+
+// The latest letter, for the masthead line: shows the newsletter is alive.
+const latest = eyebrow
+  ? (await fetchPosts()).reduce<Awaited<ReturnType<typeof fetchPosts>>[number] | undefined>(
+      (a, p) => (!a || p.publish_date > a.publish_date ? p : a),
+      undefined
+    )
+  : undefined;
+const latestLabel = latest
+  ? new Date(latest.publish_date * 1000).toLocaleDateString('en-GB', { month: 'short', year: 'numeric' })
+  : '';
 ---
 
 <div
   class:list={['frame-subscribe', align === 'left' && 'frame-subscribe--left']}
   style={`max-width: ${maxWidth}; text-align: ${align}; margin-inline: ${align === 'left' ? '0' : 'auto'};`}
 >
-  {eyebrow && <p class="eyebrow fs-eyebrow">{eyebrow}</p>}
+  {eyebrow && (
+    <div class="fs-masthead">
+      <p class="eyebrow">{eyebrow}</p>
+      {latest && (
+        <a class="fs-latest" href={`/writing/${latest.slug}/`}>Latest · {latestLabel}</a>
+      )}
+    </div>
+  )}
   {heading && <h2 class="fs-heading">{heading}</h2>}
   {sub && <p class="fs-sub">{sub}</p>}
   <SubscribeForm source={source} campaign={campaign} emailId={emailId} buttonLabel={buttonLabel} />
@@ -76,8 +95,31 @@ const {
     pointer-events: none;
   }
 
-  .fs-eyebrow {
+  /* Masthead: label left, the latest letter's date right, over a rule. */
+  .fs-masthead {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: var(--space-2);
     margin-bottom: var(--space-4);
+  }
+  .fs-masthead .eyebrow {
+    margin: 0;
+  }
+  .fs-latest {
+    font: 500 0.7rem var(--font-body);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+  }
+  .fs-latest:hover,
+  .fs-latest:focus-visible {
+    color: var(--accent-text);
+    text-decoration: underline;
   }
 
   .fs-heading {

@@ -2,7 +2,9 @@
 import { existsSync } from 'node:fs';
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { lastmodFor } from '../../../scripts/lastmod.mjs';
 import FrameSubscribe from '../../components/FrameSubscribe.astro';
+import { BOOKING_URL } from '../../data/links';
 import '../../styles/case-studies.css';
 
 export async function getStaticPaths() {
@@ -28,10 +30,38 @@ const { study } = Astro.props;
 const { locked } = study.data;
 const { Content } = await render(study);
 // Asking for access is an email, not the contact form: one tap, subject filled.
+// Article + breadcrumb for answer engines; a locked study is noindex'd and gets none.
+const origin = Astro.site!.origin;
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+const modified = lastmodFor(Astro.url.pathname);
+const studyLd = locked
+  ? undefined
+  : [
+      {
+        '@type': 'Article',
+        '@id': `${canonical}#article`,
+        headline: study.data.title,
+        description: study.data.summary,
+        ...(modified && { dateModified: modified }),
+        about: { '@type': 'Organization', name: study.data.company },
+        author: { '@id': `${origin}/#person` },
+        publisher: { '@id': `${origin}/#organization` },
+        mainEntityOfPage: { '@id': `${canonical}#webpage` },
+        isPartOf: { '@id': `${origin}/#website` },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${origin}/` },
+          { '@type': 'ListItem', position: 2, name: 'Case studies', item: `${origin}/case-studies/` },
+          { '@type': 'ListItem', position: 3, name: study.data.title, item: canonical },
+        ],
+      },
+    ];
 const accessMail = 'mailto:hello@intentionaut.com?subject=Case%20study%20access%20request';
 ---
 
-<BaseLayout title={`${study.data.title} | Saielle DaSilva`} description={study.data.summary} noindex={locked} noAnalytics={locked}>
+<BaseLayout title={`${study.data.title} | Saielle DaSilva`} description={study.data.summary} noindex={locked} noAnalytics={locked} jsonLd={studyLd}>
   <section class="wrap">
     <header class="page-head">
       <p class="eyebrow">Case study · {study.data.company}</p>
@@ -40,11 +70,11 @@ const accessMail = 'mailto:hello@intentionaut.com?subject=Case%20study%20access%
     </header>
 
     <div class="case-meta">
-      <dl>
+      <dl class="memo">
+        <dt class="meta-label">Company</dt>
+        <dd class="meta-value">{study.data.company}</dd>
         <dt class="meta-label">Role</dt>
         <dd class="meta-value">{study.data.role}</dd>
-      </dl>
-      <dl>
         <dt class="meta-label">When</dt>
         <dd class="meta-value">{study.data.years}</dd>
       </dl>
@@ -55,10 +85,18 @@ const accessMail = 'mailto:hello@intentionaut.com?subject=Case%20study%20access%
 
     {
       locked ? (
-        <div class="cs-lock" data-lock={`/case-studies/${study.id}/locked.json`} data-slug={study.id} data-ask={accessMail}>
-          <p class="cs-lock-note" role="status" aria-live="polite">
-            This case study is private. Open it from the link you were sent, or <a href={accessMail}>ask me for one</a>.
-          </p>
+        <div class="cs-lock" data-lock={`/case-studies/${study.id}/locked.json`} data-slug={study.id}>
+          <section class="cs-lock-card contact-card" aria-labelledby="cs-lock-title">
+            <h2 id="cs-lock-title">This case study is private</h2>
+            <p class="cs-lock-note" role="status" aria-live="polite">
+              The full story, with results, opens from the private link Saielle DaSilva shares. If you have the link, open it from there.
+            </p>
+            <div class="cta-row">
+              <a class="btn-primary" href={accessMail}>Request access</a>
+              <a class="link-arrow" href={BOOKING_URL} target="_blank" rel="noopener noreferrer"><span>Book a free call</span></a>
+            </div>
+            <p class="cs-lock-mail">Request access opens an email to hello@intentionaut.com.</p>
+          </section>
           <article class="prose cs-prose" hidden />
         </div>
       ) : (
@@ -93,6 +131,7 @@ const accessMail = 'mailto:hello@intentionaut.com?subject=Case%20study%20access%
 
   const box = document.querySelector<HTMLElement>('.cs-lock');
   if (box) {
+    const card = box.querySelector<HTMLElement>('.cs-lock-card')!;
     const note = box.querySelector('.cs-lock-note')!;
     const article = box.querySelector('article')!;
 
@@ -108,7 +147,7 @@ const accessMail = 'mailto:hello@intentionaut.com?subject=Case%20study%20access%
         locked = await res.json();
       } catch {
         // A failed load says nothing about the key, so keep it.
-        note.hidden = false;
+        card.hidden = false;
         note.textContent = 'This case study did not load. Refresh to try again.';
         return;
       }
@@ -116,7 +155,7 @@ const accessMail = 'mailto:hello@intentionaut.com?subject=Case%20study%20access%
       if (opened) {
         article.innerHTML = opened.html;
         article.hidden = false;
-        note.hidden = true;
+        card.hidden = true;
         saveKey(opened.key);
         // The key is saved, so it needn't stay in the address bar or history.
         history.replaceState(null, '', location.pathname + location.search);
@@ -124,12 +163,9 @@ const accessMail = 'mailto:hello@intentionaut.com?subject=Case%20study%20access%
         // No key opens it, so the saved one is stale too.
         forgetKey();
         article.hidden = true;
-        note.hidden = false;
-        note.textContent = 'This link no longer opens the case study. ';
-        const ask = document.createElement('a');
-        ask.href = box.dataset.ask!;
-        ask.textContent = 'Ask me for a new one';
-        note.append(ask, '.');
+        card.hidden = false;
+        // The Request access button below covers asking for a new link.
+        note.textContent = 'This link no longer opens the case study. Request a new one below.';
       }
     };
     open();

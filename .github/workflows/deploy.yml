@@ -62,7 +62,10 @@ jobs:
     if: ${{ !cancelled() && (github.event_name != 'schedule' || needs.check.outputs.changed == 'true') }}
     runs-on: ubuntu-latest
     steps:
+      # Full history, so each sitemap lastmod is the page's own last commit.
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: withastro/action@v3
         env:
           BEEHIIV_API_KEY: ${{ secrets.BEEHIIV_API_KEY }}

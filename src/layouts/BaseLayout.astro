@@ -3,8 +3,10 @@ import '@fontsource-variable/fraunces';
 import '@fontsource-variable/fraunces/wght-italic.css';
 import '@fontsource-variable/jost';
 import '../styles/global.css';
+import '../styles/motion.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Consent from '../components/Consent.astro';
 import { JOB_TITLE } from '../data/positioning';
 
 interface Props {
@@ -97,6 +99,7 @@ const person = {
   ],
   sameAs: [
     'https://www.linkedin.com/in/intentionaut',
+    'https://www.mindtheproduct.com/the-f-words-of-highly-successful-product-organisations-by-saielle-dasilva/',
     'https://turingfest.com/speaker/saielle-dasilva/',
     'https://businessofsoftware.org/talks/speakers/saielle-dasilva/',
     'https://www.oneknightinproduct.com/saielle-dasilva/',
@@ -241,6 +244,7 @@ const graph = {
       <slot />
     </main>
     <Footer />
+    <Consent disabled={noAnalytics} />
     {/* Every contact form on the site posts its FormData as-is, so hidden
         fields added here reach the worker without touching ten page scripts. */}
     <script is:inline>
@@ -264,6 +268,70 @@ const graph = {
           i.value = String(fields[k]).slice(0, 200);
           form.appendChild(i);
         });
+      })();
+    </script>
+    <script is:inline>
+      /* Site motion (styles/motion.css). ?motion=off previews the still page. */
+      (function () {
+        if (new URLSearchParams(location.search).get('motion') === 'off') return;
+        if (!('IntersectionObserver' in window)) return;
+        var m = 'drafting';
+        document.documentElement.dataset.motion = m;
+        var els = document.querySelectorAll('main .home-section, main .lanes, main .signup');
+        els.forEach(function (el) { el.classList.add('reveal'); });
+        var draws = document.querySelectorAll('main .stat-strip, main .cs-stats, main .project-list, main .rate-card');
+        draws.forEach(function (el) {
+          el.classList.add('draw');
+          var i = Array.prototype.indexOf.call(el.parentNode.children, el);
+          el.style.setProperty('--i', i);
+          el.querySelectorAll(':scope > li').forEach(function (c, j) { c.style.setProperty('--i', j); });
+        });
+        var io = new IntersectionObserver(function (es) {
+          es.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+          });
+        }, { rootMargin: '0px 0px -10% 0px' });
+        els.forEach(function (el) { io.observe(el); });
+        draws.forEach(function (el) { io.observe(el); });
+        {
+          var tick = false;
+          addEventListener('scroll', function () {
+            if (tick) return; tick = true;
+            requestAnimationFrame(function () {
+              document.documentElement.style.setProperty('--scroll', Math.min(scrollY, 800));
+              tick = false;
+            });
+          }, { passive: true });
+        }
+      })();
+    </script>
+    <script is:inline>
+      /* Easter egg: hold Shift over a "Book a free call" button and it reads "Let's rock".
+         Visual only: the accessible name stays as written. */
+      (function () {
+        var sel = 'a.btn-primary[href*="calendar.app.google"]';
+        var on = null, saved = null;
+        function swap(a) {
+          var t = a.firstChild;
+          if (!t || t.nodeType !== 3) return;
+          on = a; saved = t.nodeValue;
+          a.setAttribute('aria-label', a.textContent.trim());
+          t.nodeValue = "Let's rock ";
+          a.addEventListener('mouseleave', restore, { once: true });
+        }
+        function restore() {
+          if (!on) return;
+          on.firstChild.nodeValue = saved;
+          on.removeAttribute('aria-label');
+          on = null;
+        }
+        addEventListener('keydown', function (e) {
+          if (e.key !== 'Shift' || on) return;
+          var a = document.querySelector(sel + ':hover');
+          if (a) swap(a);
+        });
+        addEventListener('keyup', function (e) { if (e.key === 'Shift') restore(); });
+        addEventListener('blur', restore);
       })();
     </script>
   </body>
