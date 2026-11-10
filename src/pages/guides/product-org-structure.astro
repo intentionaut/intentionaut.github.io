@@ -1,6 +1,5 @@
 ---
 import GuidePage from '../../components/GuidePage.astro';
-const blank = { target: '_blank', rel: 'noopener noreferrer' };
 ---
 
 <GuidePage
@@ -19,129 +18,65 @@ const blank = { target: '_blank', rel: 'noopener noreferrer' };
     ['Google re:Work, Foster psychological safety', 'https://rework.withgoogle.com/guides/understanding-team-effectiveness/steps/foster-psychological-safety/'],
   ]}
 >
-  <Fragment slot="lede">An org chart is a bet, much like other bets in product. Make it a conscious one.</Fragment>
+  <Fragment slot="lede">Every org chart is a bet about how your company builds things. Place it on purpose.</Fragment>
 
   <h2>The short answer</h2>
-  <p>
-    Start with the outcome, not the chart. Find the friction between your teams
-    and customer value, and organise around removing it. Look past product,
-    design and engineering: research, product operations, data and product
-    marketing all shape how value ships. And if you are reorganising, write
-    down why, share the thinking, and say what you are not touching.
-  </p>
+
+  <p>Begin with the result you want, then draw the chart. Find where work gets stuck on its way to customers, and organise to unstick it. Count more than product, design and engineering: research, product operations, data and product marketing all decide how well value ships. If you're reorganising, write down why, show your reasoning, and be clear about what stays the same.</p>
 
   <h2>Treat the org chart as a bet</h2>
-  <p>
-    An org chart says: "This layout of people is our best bet of how we
-    efficiently and repeatably bring products to market and sustain them over
-    time." Like any bet, it can be wrong.
-  </p>
-  <p>
-    I've worked through about a dozen reorgs, maybe more. People are hard. Org
-    structures are one of the big frontiers of what I call the "Great
-    Unexamined": the parts of work life we take for granted.
-  </p>
-  <p>
-    It helps to think of an org as a kind of product: a thing that needs
-    intentional design to help someone achieve a purpose. So be clear about the
-    purpose.
-  </p>
-  <p>
-    There's no perfect structure to find, either. Organisations are organic,
-    more like a garden than a building. And like all organic things, they have
-    minds of their own.
-  </p>
+
+  <p>Look at an org chart and it's making a claim: this arrangement of people is our best guess at how to get products out and keep them healthy. Guesses can be wrong.</p>
+
+  <p>I've been through a dozen or so reorgs. People are the hard part. How we organise is one of those things at work that almost nobody stops to question.</p>
+
+  <p>It helps to treat the org itself as a product, something designed to help people do a job. Then the first question is obvious: what job?</p>
+
+  <p>Don't go looking for the perfect structure. Organisations grow more like gardens than get built like houses, and they have a habit of doing their own thing.</p>
 
   <h2>Why reorgs often fail</h2>
-  <p>
-    The forces behind a reorg are often cost savings or mergers and
-    acquisitions, and those forces aren't neutral. Reorgs end up as exercises
-    in political posturing, or short-term bets instead of long-term outcomes.
-    The result is net neutral customer value, at best.
-  </p>
-  <p>
-    Most reorgs start with every intention of improving things. Then they get
-    caught in bulky approvals and worries about misalignment. Leaders don't
-    share the context and thinking. People end up confused, cynical or anxious
-    about their own position.
-  </p>
-  <p>
-    That has a real cost. Reorganisation can lead to
-    <a href="https://www.tandfonline.com/doi/full/10.1080/02678373.2015.1136710" {...blank}>poor wellbeing for employees</a>,
-    in many cases <a href="https://www.sciencedaily.com/releases/2016/02/160201220120.htm" {...blank}>regardless of job cuts</a>.
-    Where reorgs do help, it's mostly
-    <a href="https://oshwiki.eu/wiki/Protecting_worker_health_during_restructuring" {...blank}>when people gain autonomy</a>.
-  </p>
 
-  <h2>What a good reorg looks like</h2>
-  <p>
-    A good reorg begins with a goal statement. Org design is design. It should
-    be guided by an intention we're working towards together. Something like:
-  </p>
-  <blockquote>
-    <p>
-      We are better able to deliver value internally and externally than
-      before, and in more sustainable ways. We achieve this with clearer
-      communication, a better shared clarity of purpose at all levels, and a
-      more effective way of sharing context and results across teams.
-    </p>
-  </blockquote>
-  <p>
-    Work backwards from there. A good reorg starts with people and balances
-    that with clear organisational needs. It starts with the friction to
-    customer value and business outcomes, and realigns around those two poles.
-  </p>
-  <p>Four questions help with the tradeoffs:</p>
+  <p>Most reorgs are triggered by cost cutting or a merger, and neither is a neutral starting point. The reorg turns into a power play, or a quick fix that ignores the long term. Customers rarely notice any difference, and that's the good outcome.</p>
+
+  <p>Even well-meant reorgs get bogged down in sign-offs and fear of getting it wrong. The people at the top don't explain their thinking. Everyone else is left confused, cynical or worried about their job.</p>
+
+  <p>That has a real cost. <a href="https://www.tandfonline.com/doi/full/10.1080/02678373.2015.1136710" target="_blank" rel="noopener noreferrer">Studies link reorganisation to worse wellbeing</a> for employees, <a href="https://www.sciencedaily.com/releases/2016/02/160201220120.htm" target="_blank" rel="noopener noreferrer">often even when nobody loses their job</a>. When reorgs help, it's mostly because people end up with <a href="https://oshwiki.eu/wiki/Protecting_worker_health_during_restructuring" target="_blank" rel="noopener noreferrer">more autonomy</a>.</p>
+
+  <h2>Signs of a good reorg</h2>
+
+  <p>Write the goal down first. Org design is a design problem, and design needs an intent everyone can work towards. A goal statement might read:</p>
+
+  <blockquote><p>After this change, we deliver value to customers and to each other better than before, and we can keep it up. We get there through clearer communication, a shared sense of purpose at every level, and better ways of sharing context and results across teams.</p></blockquote>
+
+  <p>Then work back from it. Start with the people and weigh that against what the business needs. Look for the friction between your teams and customer value, and between your teams and business results, and organise around those two.</p>
+
+  <p>Four questions to settle the tradeoffs:</p>
+
   <ol>
-    <li>What are we optimising for by moving people around? To what end?</li>
-    <li>What are the outcomes and goals of the reorg?</li>
-    <li>Who and what is involved in getting value into the hands of customers? How can we align around that better?</li>
-    <li>What are we clearly not touching or doing right now?</li>
+    <li>What are we trying to improve by moving people? Why?</li>
+    <li>What should be true once the reorg is done?</li>
+    <li>Who and what does it take to get value to customers, and how could we line up behind that better?</li>
+    <li>What are we deliberately leaving alone for now?</li>
   </ol>
-  <p>
-    If we take <a href="https://www.atlassian.com/blog/teamwork/what-is-conways-law-acmi" {...blank}>Conway's Law</a>
-    seriously, our structure shapes our product. As long as we're making those
-    seams invisible to customers, why not ease them for ourselves too? This
-    isn't just an HR concern. It's a design decision for product leaders.
-  </p>
+
+  <p><a href="https://www.atlassian.com/blog/teamwork/what-is-conways-law-acmi" target="_blank" rel="noopener noreferrer">Conway's Law</a> says your product ends up shaped like your org. If customers shouldn't see the joins, your teams shouldn't trip over them either. Org design isn't only HR's job. It's a product leadership decision.</p>
 
   <h2>Look beyond the trio</h2>
-  <p>
-    Modern product management was built on the trio of product, design and
-    engineering. A product org at scale needs a lot more: user research,
-    product operations, research operations, data and analytics, product
-    marketing, and people and talent.
-  </p>
-  <p>
-    A product leader needs an opinion on how to organise all of them into a
-    team that ships value reliably. The product leader isn't just responsible
-    for good software. They're responsible for the organisation that makes it
-    happen.
-  </p>
+
+  <p>Product, design and engineering built modern product management. A product org at scale leans on many more people: user research, product operations, research operations, data and analytics, product marketing, and people and talent.</p>
+
+  <p>A product leader should have a view on how all of those fit together into a team that ships reliably. Owning the software isn't enough. You also own the organisation that produces it.</p>
 
   <h2>Culture comes before structure</h2>
-  <p>
-    Culture is built from our beliefs, carried through our systems, and ends in
-    our behaviours. Move the boxes without touching the beliefs and systems,
-    and not much changes.
-  </p>
-  <p>
-    <a href="https://rework.withgoogle.com/guides/understanding-team-effectiveness/steps/foster-psychological-safety/" {...blank}>Psychological safety</a>
-    is one of the most important ingredients in teams that outperform their
-    competition. Yet few leaders know how to cultivate it. It comes from the
-    actions we take as leaders.
-  </p>
-  <p>
-    Hiring is where culture gets built on purpose. Define the technical and
-    people skills you need, leave little room for bias, and hire for culture
-    add, not culture fit.
-  </p>
+
+  <p>Culture starts with what people believe, shows up in the systems they work inside, and ends in what they do. Redraw the chart without touching beliefs or systems, and very little changes.</p>
+
+  <p>Teams that beat their competitors tend to share one trait: <a href="https://rework.withgoogle.com/guides/understanding-team-effectiveness/steps/foster-psychological-safety/" target="_blank" rel="noopener noreferrer">psychological safety</a>. Lots of leaders talk about it. Far fewer know how to build it. It comes from what leaders do, day to day.</p>
+
+  <p>Hiring is the moment you shape culture on purpose. Be precise about the skills, technical and human, that the role needs, design out as much bias as you can, and look for what someone adds to the culture, not how well they fit it.</p>
 
   <h2>When to bring someone in</h2>
-  <p>
-    If the product org has outgrown its structure, or a reorg is coming and
-    nobody senior owns its design, that's a product leadership gap. A
-    <a href="/fractional/">fractional product leader</a> can write the goal
-    statement, design the structure with the team, and hand it over.
-  </p>
+
+  <p>If the product org has outgrown its shape, or a reorg is coming and nobody senior owns the design, that's a product leadership gap. A <a href="/fractional/">fractional product leader</a> can write the goal statement, design the structure with the team, and hand it over.</p>
+
 </GuidePage>
