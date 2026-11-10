@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 
 const consent = readFileSync(new URL('../src/components/Consent.astro', import.meta.url), 'utf8');
 const layout = readFileSync(new URL('../src/layouts/BaseLayout.astro', import.meta.url), 'utf8');
@@ -43,4 +43,27 @@ test('survey is capped: selector marker, 3 showings in 30 days, none after an an
   assert.match(consent, /30 \* 864e5/);
   assert.match(consent, /indexOf\('sent'\) !== -1\) return false/);
   assert.match(consent, /noteSurvey\(ev\);/);
+});
+
+// Analytics that sets a cookie or stores an id loads only from Consent.astro,
+// after Accept (AGENTS.md, "Analytics and consent"). #147 and #197 each tried
+// to load a tracker on page load. Add a new tool's loader to this list too.
+const TRACKER = /posthog\.init|\/static\/array\.js|pendo\.(initialize|io)|googletagmanager|gtag\(|hotjar|clarity\.ms|mixpanel|amplitude|fullstory|cdn\.segment|['"](posthog-js|@amplitude|mixpanel-browser)['"]/i;
+const ALLOWED = new Set(['src/components/Consent.astro']);
+
+function files(dir) {
+  return readdirSync(dir, { withFileTypes: true }).flatMap((d) => {
+    const p = `${dir}/${d.name}`;
+    if (d.isDirectory()) return p === 'src/content' ? [] : files(p); // prose may name tools; it cannot load scripts
+    return /\.(astro|ts|js|mjs|html|md|mdx)$/.test(d.name) ? [p] : [];
+  });
+}
+
+test('no analytics loader outside Consent.astro', () => {
+  const hits = [...files('src'), ...files('public'), 'package.json', 'astro.config.mjs']
+    .filter((f) => !ALLOWED.has(f))
+    .flatMap((f) => readFileSync(f, 'utf8').split('\n')
+      .map((line, i) => (TRACKER.test(line) ? `${f}:${i + 1}: ${line.trim().slice(0, 80)}` : null))
+      .filter(Boolean));
+  assert.deepEqual(hits, [], 'Analytics must load from Consent.astro after Accept, with a privacy page line:\n' + hits.join('\n'));
 });
