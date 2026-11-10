@@ -75,3 +75,8 @@ test('Pendo loads only inside load(), and Decline stops it and clears its ids', 
   assert.match(consent, /indexOf\('_pendo_'\) === 0/);
   assert.match(consent, /attr: 'hash', action: 'Clear'/);
 });
+
+test('Accept after a Decline turns PostHog capture back on', () => {
+  assert.match(consent, /__loaded\) \{ window\.posthog\.opt_in_capturing\(\); return; \}/);
+  assert.match(consent, /loaded: function \(ph\) \{ if \(ph\.has_opted_out_capturing\(\)\) ph\.opt_in_capturing\(\); \}/);
+});
