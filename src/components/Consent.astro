@@ -19,6 +19,8 @@ const { disabled = false } = Astro.props;
 
 // Public project key: it identifies the project, it cannot read data.
 const POSTHOG_KEY = 'phc_p2f3kZLXM7tjJ47PFtHwhKALFks4qz6ZPCdv4EnWVyv4';
+// Novus by Pendo app key: public, identifies the app.
+const PENDO_KEY = '1aa2cec7-ac47-43ce-8b5c-1f396b553619';
 const enabled = import.meta.env.PROD && !disabled;
 ---
 
@@ -27,8 +29,8 @@ const enabled = import.meta.env.PROD && !disabled;
     <section class="consent" id="consent" role="dialog" aria-labelledby="consent-h" aria-describedby="consent-p" hidden>
       <h2 id="consent-h">Cookies</h2>
       <p id="consent-p">
-        May the site use one analytics cookie to see which pages and buttons help?
-        No advertising, nothing shared. <a href="/privacy/#analytics">Privacy</a>
+        May the site use analytics cookies?
+        No advertising. No sale of data. <a href="/privacy/#analytics">Privacy</a>
       </p>
       <div class="consent-row">
         <button type="button" class="consent-btn consent-yes" data-consent="yes">Accept</button>
@@ -36,7 +38,7 @@ const enabled = import.meta.env.PROD && !disabled;
       </div>
     </section>
 
-    <script is:inline define:vars={{ POSTHOG_KEY }}>
+    <script is:inline define:vars={{ POSTHOG_KEY, PENDO_KEY }}>
       (function () {
         var KEY = 'consent';
         var box = document.getElementById('consent');
@@ -93,11 +95,39 @@ const enabled = import.meta.env.PROD && !disabled;
           document.dispatchEvent(new CustomEvent('posthog:ready'));
         }
 
+        // Novus by Pendo (US-hosted). Same gate as PostHog: nothing loads before Accept.
+        function loadPendo() {
+          if (window.pendo) { if (window.pendo.startSendingEvents) window.pendo.startSendingEvents(); return; }
+          (function(p,e,n,d,o){var v,w,x,y,z;o=p[d]=p[d]||{};o._q=o._q||[];
+          v=['initialize','identify','updateOptions','pageLoad','track','trackAgent'];for(w=0,x=v.length;w<x;++w)(function(m){
+          o[m]=o[m]||function(){o._q[m===v[0]?'unshift':'push']([m].concat([].slice.call(arguments,0)));};})(v[w]);
+          y=e.createElement(n);y.async=!0;y.src='https://cdn.pendo.io/agent/static/'+PENDO_KEY+'/pendo.js';
+          z=e.getElementsByTagName(n)[0];z.parentNode.insertBefore(y,z);})(window,document,'script','pendo');
+          // Case-study keys live in the fragment: clear it before Pendo records a URL.
+          window.pendo.initialize({ visitor: { id: '' }, location: { transforms: [{ attr: 'hash', action: 'Clear' }] } });
+        }
+
+        // Withdrawal: stop sending and clear Pendo's stored identifiers.
+        function stopPendo() {
+          if (window.pendo && window.pendo.stopSendingEvents) window.pendo.stopSendingEvents();
+          try {
+            Object.keys(localStorage).forEach(function (k) { if (k.indexOf('_pendo_') === 0) localStorage.removeItem(k); });
+            Object.keys(sessionStorage).forEach(function (k) { if (k.indexOf('_pendo_') === 0) sessionStorage.removeItem(k); });
+          } catch (e) {}
+          document.cookie.split(';').forEach(function (c) {
+            var n = c.split('=')[0].trim();
+            if (n.indexOf('_pendo_') === 0) document.cookie = n + '=; Max-Age=0; path=/';
+          });
+        }
+
         function choose(v) {
           set(v);
           box.hidden = true;
-          if (v === 'yes') load();
-          else if (window.posthog && window.posthog.opt_out_capturing) window.posthog.opt_out_capturing();
+          if (v === 'yes') { load(); loadPendo(); }
+          else {
+            if (window.posthog && window.posthog.opt_out_capturing) window.posthog.opt_out_capturing();
+            stopPendo();
+          }
         }
 
         box.querySelectorAll('[data-consent]').forEach(function (b) {
@@ -109,7 +139,7 @@ const enabled = import.meta.env.PROD && !disabled;
         });
 
         var c = get();
-        if (c === 'yes') load();
+        if (c === 'yes') { load(); loadPendo(); }
         else if (c !== 'no') box.hidden = false;
 
         // Named events the experiment and dashboard read. Autocapture sees the
