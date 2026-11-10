@@ -19,6 +19,7 @@ export type FaqPlacement =
   | 'tools-impact-first-ai'
   | 'office-hours'
   | 'guide-decision-quality'
+  | 'guide-product-org'
   | 'home';
 
 export interface Faq {
@@ -501,6 +502,31 @@ export const faqs: Faq[] = [
     question: 'What is decision velocity?',
     answer: 'Many companies think about developer velocity and story points, but never focus on decision velocity. The less important a decision, the faster you should get to it.',
     placements: ['guide-decision-quality'],
+  },
+  {
+    question: 'What should drive how a product org is structured?',
+    answer: 'Start with the outcome, not the chart. Find the friction between your teams and customer value, and organise around removing it.',
+    placements: ['guide-product-org'],
+  },
+  {
+    question: 'Why do reorgs often fail?',
+    answer: "The forces behind a reorg are often cost savings or mergers and acquisitions, and those forces aren't neutral. Reorgs end up as exercises in political posturing, or short-term bets instead of long-term outcomes.",
+    placements: ['guide-product-org'],
+  },
+  {
+    question: 'What should a reorg goal statement say?',
+    answer: 'Something like: we are better able to deliver value internally and externally than before, and in more sustainable ways, with clearer communication, a better shared clarity of purpose at all levels, and a more effective way of sharing context and results across teams.',
+    placements: ['guide-product-org'],
+  },
+  {
+    question: 'What questions should you ask before a reorg?',
+    answer: 'What are we optimising for by moving people around? What are the outcomes and goals of the reorg? Who and what is involved in getting value into the hands of customers? What are we clearly not touching or doing right now?',
+    placements: ['guide-product-org'],
+  },
+  {
+    question: 'Who belongs in a product org beyond product, design and engineering?',
+    answer: 'A product org at scale needs a lot more than the trio: user research, product operations, research operations, data and analytics, product marketing, and people and talent.',
+    placements: ['guide-product-org'],
   },
 ];
 
