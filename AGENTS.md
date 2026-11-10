@@ -53,3 +53,11 @@ can catch.
   the design.
 - Enforcement: CI blocks accidental drift. Updating the baseline is
   instruction only.
+
+## Analytics and consent
+
+- No analytics script that sets a cookie or stores an id loads before the
+  reader presses Accept. PostHog loads from `src/components/Consent.astro`
+  on Accept; any new tool (Pendo, Novus) loads from the same place.
+- A new tool also needs a line on the privacy page, approved by Elle, in the
+  same PR.
