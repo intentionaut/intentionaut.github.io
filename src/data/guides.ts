@@ -28,7 +28,13 @@ export const guides: Guide[] = [
     title: "Why doesn't our research change what we build?",
     summary: 'Shape insights so they are easy to act on, reward evidence over ideas, and plan for the politics around every finding.',
     published: '2026-11-10',
+  },  {
+    slug: 'choosing-a-fractional-product-leader',
+    title: 'How do you choose a fractional product leader?',
+    summary: 'Define the role first, ask every candidate the same questions, check references you can reach, and plan the handover.',
+    published: '2026-11-10',
   },
+
 ];
 
 export const guideHref = (g: Guide) => `/guides/${g.slug}/`;

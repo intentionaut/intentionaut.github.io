@@ -21,6 +21,7 @@ export type FaqPlacement =
   | 'guide-decision-quality'
   | 'guide-product-org'
   | 'guide-research'
+  | 'guide-choosing'
   | 'home';
 
 export interface Faq {
@@ -553,6 +554,31 @@ export const faqs: Faq[] = [
     question: 'How do politics affect product research?',
     answer: "Evidence can influence politics. It can't skip them. Get agreement on the problem before anyone debates the fix, and walk through any assumed link between a feature and the outcome.",
     placements: ['guide-research'],
+  },
+  {
+    question: 'How do you choose a fractional CPO?',
+    answer: 'Write down what you need them to own before you meet anyone. Put every candidate through the same questions, scored against that list, and check references you can actually reach.',
+    placements: ['guide-choosing'],
+  },
+  {
+    question: 'What should you ask a fractional product leader before hiring?',
+    answer: 'Ask what they would own, to walk you through a decision and why, about a call they got wrong, how your team keeps moving on the days they are not there, and what you will have when they leave.',
+    placements: ['guide-choosing'],
+  },
+  {
+    question: 'What are the warning signs when hiring a fractional CPO?',
+    answer: 'Every answer is a framework that does not fit your situation, they cannot name a decision they got wrong, the plan depends on them staying indefinitely, or you like them but cannot say what they would change.',
+    placements: ['guide-choosing'],
+  },
+  {
+    question: "How should you check a fractional CPO's references?",
+    answer: 'Ask for people you can look up and contact yourself. Ask each the same questions: what did this person own, what changed while they were there, and what did the team look like after they left?',
+    placements: ['guide-choosing'],
+  },
+  {
+    question: 'What should a fractional engagement leave behind?',
+    answer: 'Less dependence on the leader, not more: a team that runs without them, a way of working someone else can pick up, and decisions that stay decided.',
+    placements: ['guide-choosing'],
   },
 ];
 
