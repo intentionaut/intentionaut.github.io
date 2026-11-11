@@ -1,0 +1,102 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { bios, photos, photoCredit } from '../data/bios';
+
+const talks = (await getCollection('talks')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+const year = (d: Date) => String(d.getFullYear());
+---
+
+<BaseLayout
+  title="Media Kit: Bios, Photos and Talks | Saielle DaSilva"
+  description="Bios at three lengths, headshots to download and past talks, for organisers and press writing about Saielle DaSilva."
+  profilePage
+>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Media kit</p>
+      <h1>Bios, photos and talks.</h1>
+      <p class="lede">
+        For organisers and press. Use any of it as it stands, no need to ask.
+        If you need something that isn't here, <a href="/contact/">get in touch</a>.
+      </p>
+    </header>
+
+    <h2 class="kit-h">Photos</h2>
+    <p class="kit-note">Photos by {photoCredit}. Please credit "Photo: {photoCredit}".</p>
+    <ul class="kit-photos">
+      {photos.map((p) => (
+        <li>
+          <figure>
+            <div class="img-card">
+              <img src={`/media-kit/${p.slug}.jpg`} alt={p.alt} width={p.w} height={p.h} loading="lazy" />
+            </div>
+            <figcaption class="img-caption">
+              <a href={`/media-kit/${p.slug}-hires.jpg`} download>Download high resolution</a> ({p.hiW} × {p.hiH})
+            </figcaption>
+          </figure>
+        </li>
+      ))}
+    </ul>
+
+    <div class="prose">
+      <h2>Bios</h2>
+      <p>Third person. Pronouns: she/her.</p>
+      {bios.map((b) => (
+        <>
+          <h3>{b.length}</h3>
+          {b.text.split('\n\n').map((para) => <p>{para}</p>)}
+        </>
+      ))}
+
+      <h2>Talks</h2>
+      <ul>
+        {talks.map((t) => (
+          <li>
+            {t.data.url ? (
+              <a href={t.data.url} {...(t.data.url.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>{t.data.title}</a>
+            ) : (
+              t.data.title
+            )}
+            {' '}· {t.data.event}, {year(t.data.date)}
+          </li>
+        ))}
+      </ul>
+      <p>Topics, formats and fees are on the <a href="/keynote-speaker/">speaking page</a>.</p>
+
+      <h2>Practical</h2>
+      <ul>
+        <li>Name: Saielle DaSilva. Pronouns: she/her.</li>
+        <li>In person or remote. For in-person events, the organiser covers travel and accommodation.</li>
+        <li>Website: intentionaut.com</li>
+      </ul>
+    </div>
+
+    <section class="contact-form-section" aria-label="Book a talk">
+      <div class="contact-card">
+        <h2>Check a date.</h2>
+        <p class="form-lede">The event, the date and who will be in the room. I will confirm availability and the fee.</p>
+        <ContactForm source="media-kit" selected="speaking" booking />
+      </div>
+    </section>
+  </section>
+</BaseLayout>
+
+<style>
+  .kit-h { margin-top: 2rem; }
+  .kit-note { color: var(--muted, inherit); margin: 0.25rem 0 1rem; }
+  .kit-photos {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
+    align-items: start;
+  }
+  .kit-photos figure { margin: 0; }
+  .kit-photos img { width: 100%; height: auto; display: block; }
+</style>
