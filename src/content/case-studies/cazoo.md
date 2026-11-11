@@ -1,5 +1,6 @@
 ---
 title: "Cazoo: Scaling a product from 0-1"
+outcome: "Over 150,000 five-star Trustpilot reviews"
 summary: The first design hire at Cazoo, through hyper-growth and IPO. One rubric for hiring and development, so the standard lived in the team and not in one person.
 company: Cazoo
 role: Head of UX, then Director of User Experience

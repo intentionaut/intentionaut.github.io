@@ -92,6 +92,8 @@ const caseStudies = defineCollection({
     depth: z.enum(['in-depth', 'outline']),
     order: z.number(),
     sources: z.array(z.string()).default([]),
+    /** One public outcome, shown on the card even when the study is locked. Outcomes, never inventory. */
+    outcome: z.string().optional(),
     // Body is encrypted in public/case-studies/<slug>/locked.json and the .md
     // body stays empty. Written by scripts/lock-case-study.mjs, never by hand.
     locked: z.boolean().default(false),
