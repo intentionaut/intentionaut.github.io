@@ -36,7 +36,7 @@ const lastChecked = new Date(data.lastChecked + 'T00:00:00Z').toLocaleDateString
 
 const jsonLd = {
   '@type': 'ItemList',
-  name: 'What the data says about AI in business',
+  name: 'AI adoption statistics: what the Gartner CIO survey and others show',
   dateModified: data.lastChecked,
   itemListElement: cards.map((c, i) => ({
     '@type': 'ListItem',
@@ -57,7 +57,7 @@ const jsonLd = {
   <section class="wrap evidence">
     <header class="page-head">
       <p class="eyebrow">Evidence</p>
-      <h1>What the data says about AI in business</h1>
+      <h1>AI adoption statistics: what the Gartner CIO survey and others show</h1>
       <p class="lede">
         Published figures, each with who measured it, the base, the date and a link to the original document.
       </p>
