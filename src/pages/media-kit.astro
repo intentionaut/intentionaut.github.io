@@ -8,11 +8,22 @@ const talks = (await getCollection('talks')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
 const year = (d: Date) => String(d.getFullYear());
+// Approved by the site owner 11 Nov 2026 (drafted through Familiar; trace in the vault, 2026-11-09-impact-first-ai/linkedin-r2-2-v3.md).
+const postText = `Name the number before you build.
+
+Only 13% of CIOs say AI has delivered significant value, in Gartner's survey of over 2,000 this autumn. Most of the teams I talk to have plenty of AI. What they don't have is a number they agreed on before they started.
+
+And you can't fix that afterwards. Once it's shipped, any number that moved looks like proof, and any number that didn't looks like the wrong one.
+
+Last month I wrote that we measure AI by usage when we should measure decision quality. Naming the number first is how you get there. I've turned it into two free tools, Impact First AI.
+
+If you had to make the case for your AI work today, what number would you point to?`;
+const gartnerUrl = 'https://www.gartner.com/en/newsroom/press-releases/2026-10-19-gartner-survey-finds-only-13-percent-of-cios-say-their-enterprise-has-realized-significant-or-transformational-value-from-ai';
 ---
 
 <BaseLayout
   title="Media Kit: Bios, Photos and Talks | Saielle DaSilva"
-  description="Bios at three lengths, headshots to download and past talks, for organisers and press writing about Saielle DaSilva."
+  description="Bios at three lengths, headshots to download, past talks and posts to share, for organisers and press writing about Saielle DaSilva."
   profilePage
 >
   <section class="wrap">
@@ -66,6 +77,19 @@ const year = (d: Date) => String(d.getFullYear());
         ))}
       </ul>
       <p>Topics, formats and fees are on the <a href="/keynote-speaker/">speaking page</a>.</p>
+
+      <h2>Impact First AI: a post to share</h2>
+      <p>
+        Impact First AI is a set of free tools by Saielle DaSilva for showing the value of AI work, one practice at a time.
+        The tools are CC BY 4.0: share and adapt them with credit to Saielle DaSilva. The post below is hers, ready to share or quote as it stands.
+      </p>
+      <blockquote>
+        {postText.split('\n\n').map((para) => <p>{para}</p>)}
+      </blockquote>
+      <ul>
+        <li><a href="/tools/impact-first-ai/">The Impact First AI tools</a></li>
+        <li><a href={gartnerUrl} target="_blank" rel="noopener noreferrer">The Gartner survey behind the 13% figure</a> (19 October 2026)</li>
+      </ul>
 
       <h2>Practical</h2>
       <ul>

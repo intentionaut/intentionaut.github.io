@@ -12,9 +12,9 @@ test('Services groups the five paid offers, in order', () => {
   assert.deepEqual(hrefs(block), ['/fractional/', '/forward-deployed/', '/workshops/', '/keynote-speaker/', '/office-hours/']);
 });
 
-test('Resources groups the case studies, tools and guides', () => {
+test('Resources groups the case studies, tools, guides and media kit', () => {
   const block = src.slice(src.indexOf('const resources'), src.indexOf('const groups'));
-  assert.deepEqual(hrefs(block), ['/case-studies/', '/tools/', '/guides/']);
+  assert.deepEqual(hrefs(block), ['/case-studies/', '/tools/', '/guides/', '/media-kit/']);
 });
 
 test('the header links are Writing, Projects, About', () => {
