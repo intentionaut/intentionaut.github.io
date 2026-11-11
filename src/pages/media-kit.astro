@@ -9,15 +9,16 @@ const talks = (await getCollection('talks')).sort(
 );
 const year = (d: Date) => String(d.getFullYear());
 // Approved by the site owner 11 Nov 2026 (drafted through Familiar; trace in the vault, 2026-11-09-impact-first-ai/linkedin-r2-2-v3.md).
+// Sample post for someone else to share about the tools. Site owner asked 11 Nov 2026 for a post ABOUT her tools, not her own post.
 const postText = `Name the number before you build.
 
-Only 13% of CIOs say AI has delivered significant value, in Gartner's survey of over 2,000 this autumn. Most of the teams I talk to have plenty of AI. What they don't have is a number they agreed on before they started.
+That's the idea behind Impact First AI, a set of free tools from Saielle DaSilva for showing whether AI work is paying off, one practice at a time.
 
-And you can't fix that afterwards. Once it's shipped, any number that moved looks like proof, and any number that didn't looks like the wrong one.
+The case for it: only 13% of CIOs say AI has delivered significant value, in Gartner's survey of over 2,000 this autumn. Once something has shipped, any number that moved looks like proof. Agreeing the number first is what makes the result mean anything.
 
-Last month I wrote that we measure AI by usage when we should measure decision quality. Naming the number first is how you get there. I've turned it into two free tools, Impact First AI.
+There are two tools. The FIRST AI Maturity Model rates where one practice is today. The Impact Chain finds the first link between the work and the payoff that you can't back with evidence.
 
-If you had to make the case for your AI work today, what number would you point to?`;
+Both are free under CC BY 4.0: intentionaut.com/tools/impact-first-ai/`;
 const gartnerUrl = 'https://www.gartner.com/en/newsroom/press-releases/2026-10-19-gartner-survey-finds-only-13-percent-of-cios-say-their-enterprise-has-realized-significant-or-transformational-value-from-ai';
 ---
 
@@ -78,10 +79,10 @@ const gartnerUrl = 'https://www.gartner.com/en/newsroom/press-releases/2026-10-1
       </ul>
       <p>Topics, formats and fees are on the <a href="/keynote-speaker/">speaking page</a>.</p>
 
-      <h2>Impact First AI: a post to share</h2>
+      <h2>Sharing Impact First AI</h2>
       <p>
         Impact First AI is a set of free tools by Saielle DaSilva for showing the value of AI work, one practice at a time.
-        The tools are CC BY 4.0: share and adapt them with credit to Saielle DaSilva. The post below is hers, ready to share or quote as it stands.
+        The tools are CC BY 4.0: share and adapt them with credit to Saielle DaSilva. Below is a sample post you can share as your own. Edit it freely; please keep the credit and the link.
       </p>
       <blockquote>
         {postText.split('\n\n').map((para) => <p>{para}</p>)}
