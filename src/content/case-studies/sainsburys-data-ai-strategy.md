@@ -1,5 +1,6 @@
 ---
 title: "Sainsbury's: Data platforms, AI and machine learning at scale"
+outcome: "44% of engineering time moved to customer work"
 summary: "Sainsbury's Data Platforms and AI adoption strategy. I worked with engineering, product and data to cut incident response times, improve resilience and drive innovation inside and across Sainsbury’s."
 company: Sainsbury's
 role: Senior Head of Product, AI, ML and Data Platforms

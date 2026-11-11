@@ -1,5 +1,6 @@
 ---
 title: "Sainsbury's: AI pilots into production"
+outcome: "80% faster from request to production"
 summary: "Nobody at Sainsbury's knew how many AI systems were in production, because there was no register. One platform, one strategy and a governance council took generative AI in production from fewer than 5 systems to over 20."
 company: Sainsbury's
 role: Senior Head of Product, AI, ML and Data Platforms

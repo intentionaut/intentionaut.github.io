@@ -28,6 +28,7 @@ const probe = studies.find((s) => s.data.locked);
         studies.map((s) => (
           <li class="project-row">
             <a class="project-card" href={`/case-studies/${s.id}/`}>
+              {s.data.outcome && <span class="project-outcome">{s.data.outcome}</span>}
               <span class="talk-title">{s.data.title}</span>
               <span class="project-summary">{s.data.summary}</span>
               <span class="talk-meta">

@@ -138,7 +138,8 @@ const faqSchema = {
       {studies.map((s) => (
         <li class="project-row">
           <a class="project-card" href={`/case-studies/${s.id}/`}>
-            <span class="talk-title">{s.data.title}</span>
+            {s.data.outcome && <span class="project-outcome">{s.data.outcome}</span>}
+              <span class="talk-title">{s.data.title}</span>
             <span class="project-summary">{s.data.summary}</span>
           </a>
         </li>

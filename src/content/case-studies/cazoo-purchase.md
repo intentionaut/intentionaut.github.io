@@ -1,5 +1,6 @@
 ---
 title: "Expanding TAM and building customer trust"
+outcome: "88% more sales in its first year"
 summary: Cazoo needed cars, and sellers expected a haggle at handover. One promised price, paid in over 97% of cases, and what it did to volume, trust and retention.
 company: Cazoo
 role: Director of User Experience, leading the design team
