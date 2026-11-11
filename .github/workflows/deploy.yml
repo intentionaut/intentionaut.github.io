@@ -62,6 +62,14 @@ jobs:
     if: ${{ !cancelled() && (github.event_name != 'schedule' || needs.check.outputs.changed == 'true') }}
     runs-on: ubuntu-latest
     steps:
+      # Wake beehiiv while checkout and install run, so the build's own fetch
+      # is less likely to meet a cold, empty answer. Never fails the job.
+      - name: Warm up beehiiv
+        run: |
+          (curl -s -o /dev/null --max-time 30 -H "Authorization: Bearer $BEEHIIV_API_KEY" \
+            "https://api.beehiiv.com/v2/publications/pub_96b7bfbb-25ad-448f-a8e8-b4d61019e30d/posts?status=confirmed&limit=1" || true) &
+        env:
+          BEEHIIV_API_KEY: ${{ secrets.BEEHIIV_API_KEY }}
       # Full history, so each sitemap lastmod is the page's own last commit.
       - uses: actions/checkout@v4
         with:
