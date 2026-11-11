@@ -7,31 +7,50 @@ import { createHash } from 'node:crypto';
 export const PUB_ID = 'pub_96b7bfbb-25ad-448f-a8e8-b4d61019e30d';
 const API_BASE = 'https://api.beehiiv.com/v2';
 
+// beehiiv sometimes answers empty or busy for a moment (5 and 10-11 Nov 2026),
+// then fine minutes later. Each page gets three tries before the guard below
+// refuses the build. A lasting outage still stops the deploy.
+export const RETRY_WAITS_MS = [5000, 15000];
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+async function fetchPage(apiKey, page) {
+  const res = await fetch(
+    `${API_BASE}/publications/${PUB_ID}/posts?status=confirmed&limit=50&page=${page}&expand=free_web_content`,
+    { headers: { Authorization: `Bearer ${apiKey}` } }
+  );
+  if (!res.ok) {
+    return {
+      retry: res.status === 429 || res.status >= 500,
+      error: `beehiiv API returned ${res.status}. Refusing to build with an empty ` +
+        '/writing archive; the previous deploy stays live.',
+    };
+  }
+  const body = await res.json();
+  // beehiiv has answered 200 with no post list (5 Nov 2026). Say so plainly
+  // instead of crashing on the spread below.
+  if (!Array.isArray(body?.data)) {
+    return {
+      retry: true,
+      error: `beehiiv API returned no post list on page ${page}. Refusing to build ` +
+        'with an empty /writing archive; the previous deploy stays live.',
+    };
+  }
+  return { body };
+}
+
 /** Every confirmed post, all pages. */
-export async function fetchRawPosts(apiKey) {
+export async function fetchRawPosts(apiKey, waits = RETRY_WAITS_MS) {
   const all = [];
   for (let page = 1; ; page++) {
-    const res = await fetch(
-      `${API_BASE}/publications/${PUB_ID}/posts?status=confirmed&limit=50&page=${page}&expand=free_web_content`,
-      { headers: { Authorization: `Bearer ${apiKey}` } }
-    );
-    if (!res.ok) {
-      throw new Error(
-        `beehiiv API returned ${res.status}. Refusing to build with an empty ` +
-          '/writing archive; the previous deploy stays live.'
-      );
+    let got = await fetchPage(apiKey, page);
+    for (const ms of waits) {
+      if (got.body || !got.retry) break;
+      await sleep(ms);
+      got = await fetchPage(apiKey, page);
     }
-    const body = await res.json();
-    // beehiiv has answered 200 with no post list (5 Nov 2026). Say so plainly
-    // instead of crashing on the spread below.
-    if (!Array.isArray(body?.data)) {
-      throw new Error(
-        `beehiiv API returned no post list on page ${page}. Refusing to build ` +
-          'with an empty /writing archive; the previous deploy stays live.'
-      );
-    }
-    all.push(...body.data);
-    if (!body.total_pages || page >= body.total_pages) return all;
+    if (!got.body) throw new Error(got.error);
+    all.push(...got.body.data);
+    if (!got.body.total_pages || page >= got.body.total_pages) return all;
   }
 }
 
