@@ -80,3 +80,7 @@ test('Accept after a Decline turns PostHog capture back on', () => {
   assert.match(consent, /__loaded\) \{ window\.posthog\.opt_in_capturing\(\); return; \}/);
   assert.match(consent, /loaded: function \(ph\) \{ if \(ph\.has_opted_out_capturing\(\)\) ph\.opt_in_capturing\(\); \}/);
 });
+
+test('only the live site sends PostHog events', () => {
+  assert.match(consent, /if \(location\.hostname !== 'intentionaut\.com'\) return null;/);
+});
