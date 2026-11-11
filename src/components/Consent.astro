@@ -87,6 +87,8 @@ const enabled = import.meta.env.PROD && !disabled;
             loaded: function (ph) { if (ph.has_opted_out_capturing()) ph.opt_in_capturing(); },
             // Case-study keys live in the fragment: never let one leave the page.
             before_send: function (ev) {
+              // Only the live site counts. A local test page carrying this key once logged views as real visits.
+              if (location.hostname !== 'intentionaut.com') return null;
               noteSurvey(ev);
               if (ev && ev.properties) {
                 ['$current_url', '$referrer', '$initial_current_url'].forEach(function (k) {
@@ -101,6 +103,7 @@ const enabled = import.meta.env.PROD && !disabled;
 
         // Novus by Pendo (US-hosted). Same gate as PostHog: nothing loads before Accept.
         function loadPendo() {
+          if (location.hostname !== 'intentionaut.com') return;
           if (window.pendo) { if (window.pendo.startSendingEvents) window.pendo.startSendingEvents(); return; }
           (function(p,e,n,d,o){var v,w,x,y,z;o=p[d]=p[d]||{};o._q=o._q||[];
           v=['initialize','identify','updateOptions','pageLoad','track','trackAgent'];for(w=0,x=v.length;w<x;++w)(function(m){
