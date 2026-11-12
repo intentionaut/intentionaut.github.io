@@ -41,3 +41,9 @@ test('only published figures, no prices, no em dashes', () => {
     assert.ok(src.includes(fig) && published.includes(fig), fig);
   }
 });
+
+test('page passes a Service node, priced from rates.ts, to the layout', () => {
+  assert.match(src, /jsonLd=\{serviceSchema\}/);
+  assert.match(src, /'@type': 'Service'/);
+  assert.match(src, /price: rates\.fractional/);
+});

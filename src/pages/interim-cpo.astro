@@ -2,11 +2,35 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.astro';
 import { BOOKING_URL } from '../data/links';
+import { rates, fractionalMonthly1Day, fractionalMonthly2Day } from '../data/rates';
+
+// Same offer and terms as /fractional/; this page is the interim name for it.
+const serviceSchema = {
+  '@type': 'Service',
+  '@id': 'https://intentionaut.com/interim-cpo/#service',
+  name: 'Interim CPO',
+  serviceType: 'Interim product leadership',
+  provider: { '@id': 'https://intentionaut.com/#person' },
+  areaServed: { '@type': 'Country', name: 'United Kingdom' },
+  isRelatedTo: { '@id': 'https://intentionaut.com/fractional/#service' },
+  offers: {
+    '@type': 'Offer',
+    priceCurrency: 'GBP',
+    price: rates.fractional,
+    priceSpecification: [
+      { '@type': 'UnitPriceSpecification', price: fractionalMonthly1Day, priceCurrency: 'GBP', unitText: 'month (1 day a week)' },
+      { '@type': 'UnitPriceSpecification', price: fractionalMonthly2Day, priceCurrency: 'GBP', unitText: 'month (2 days a week)' },
+      { '@type': 'UnitPriceSpecification', price: rates.fractional, priceCurrency: 'GBP', unitText: 'day' },
+    ],
+    availability: 'https://schema.org/LimitedAvailability',
+  },
+};
 ---
 
 <BaseLayout
   title="Interim CPO UK | Saielle DaSilva"
   description="Interim CPO for UK companies with no product leader right now. Saielle DaSilva steps in one or two days a week. Book a free call."
+  jsonLd={serviceSchema}
 >
   <section class="wrap">
     <header class="page-head">
