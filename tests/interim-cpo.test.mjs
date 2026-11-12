@@ -30,14 +30,18 @@ test('sitemap filter does not drop the page', () => {
   assert.ok(!cfg.includes('interim-cpo'));
 });
 
-test('only published figures, no prices, no em dashes', () => {
+test('only published figures, no em dashes', () => {
   assert.ok(!src.includes('—'));
-  assert.ok(!src.includes('£'));
-  assert.ok(!src.includes('data/rates'));
   assert.ok(!src.includes('data/positioning'));
   assert.ok(!src.includes('80%'));
   const published = read('../src/pages/for-advisors.astro') + read('../src/pages/fractional.astro');
   for (const fig of ['450 per cent in 90 days', '3.2x return on investment']) {
     assert.ok(src.includes(fig) && published.includes(fig), fig);
   }
+});
+
+test('page passes a Service node, priced from rates.ts, to the layout', () => {
+  assert.match(src, /jsonLd=\{serviceSchema\}/);
+  assert.match(src, /'@type': 'Service'/);
+  assert.match(src, /price: rates\.fractional/);
 });
