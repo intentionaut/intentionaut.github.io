@@ -17,6 +17,7 @@ She is based in London and works across the UK and Europe.
 - [AI product audit](https://intentionaut.com/ai-product-audit/): ${offerDays.aiAudit} days across one week, a keep, change or stop recommendation for each piece of AI work, ${gbp(rates.aiAudit)} fixed.
 - [Product strategy sprint](https://intentionaut.com/product-strategy-sprint/): ${offerDays.strategySprint} days across two weeks, including a full-day workshop, ${gbp(rates.strategySprint)} fixed.
 - [Fractional leadership](https://intentionaut.com/fractional/): senior product leadership, from ${gbp(fractionalMonthly1Day)} a month for one day a week or ${gbp(fractionalMonthly2Day)} a month for two; day rate ${gbp(rates.fractional)}.
+- [Interim CPO](https://intentionaut.com/interim-cpo/): full-time product leadership in the UK while a permanent leader is hired, usually three to six months, three-month minimum; day rate ${gbp(rates.interim)}.
 - [For scale-ups](https://intentionaut.com/for-scale-ups/): fractional and interim CPO for scale-ups, with the Cazoo and interim CPO results.
 - [Product building](https://intentionaut.com/forward-deployed/): embedded work to make a product idea tangible, ${gbp(buildingWeekly)} a week.
 - [Two-day pilot](https://intentionaut.com/forward-deployed/): a fixed-price pilot that opens a product building block, ${gbp(rates.fdePilot)}.
