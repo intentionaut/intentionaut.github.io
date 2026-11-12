@@ -19,6 +19,7 @@ const arc = [
     org: 'Pesky Fish (Herd Market)',
     years: 'Jan to Jun 2024',
     role: 'Interim CPO',
+    href: '/interim-cpo/',
     note: '+450% MRR in 90 days.',
   },
   {
@@ -126,7 +127,7 @@ const stats = [
             <li class="talk-row">
               <span class="talk-date">{a.org}{a.years && <><br />{a.years}</>}</span>
               <div>
-                <span class="talk-title">{a.role}</span>
+                <span class="talk-title">{a.href ? <a href={a.href}>{a.role}</a> : a.role}</span>
                 <p class="talk-desc">{a.note}</p>
               </div>
             </li>
