@@ -1,10 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import SubscribeForm from '../../components/SubscribeForm.astro';
 
 // Placeholder until the talk on 18 Nov 2026; the full resources pack replaces it just before the talk.
 const signup =
   'https://go.mindtheproduct.com/november-product-tank-webinar-register?utm_source=saielle&utm_medium=socials&utm_campaign=ptankglobal';
-const form = 'https://tally.so/r/BEdAeR?utm_source=early';
 ---
 
 <BaseLayout
@@ -33,22 +33,15 @@ const form = 'https://tally.so/r/BEdAeR?utm_source=early';
     <p>
       Everything from the talk in one place: Dualtrack Agents, the open source
       agentic product team Saielle runs, ready to install; the tools she uses;
-      and the write-up. The full pack goes live here on the day.
+      and the write-up. Subscribe and the pack arrives in your welcome email.
     </p>
-    <p>
-      Leave your email and the pack comes to you. The same form takes
-      feedback after the talk.
-    </p>
-    <p><a class="btn-primary" href={form} target="_blank" rel="noopener noreferrer">Get the resources pack</a></p>
-    <figure class="qr">
-      <img
-        src="/speaking/producttank-global-2026-qr.svg"
-        width="200"
-        height="200"
-        alt="QR code linking to the resources pack sign-up form"
-      />
-      <figcaption>Or scan to open the form on your phone.</figcaption>
-    </figure>
+    <SubscribeForm
+      variant="inline"
+      source="talk"
+      campaign="producttank-global-2026"
+      emailId="talk-email"
+      buttonLabel="Get the pack"
+    />
   </section>
 </BaseLayout>
 
@@ -56,16 +49,5 @@ const form = 'https://tally.so/r/BEdAeR?utm_source=early';
   .talk-when {
     margin-top: var(--space-4);
     font-weight: 600;
-  }
-  .qr {
-    margin-top: var(--space-4);
-  }
-  .qr img {
-    background: #fff;
-    padding: 8px;
-  }
-  .qr figcaption {
-    font-size: 0.95rem;
-    color: var(--muted);
   }
 </style>
