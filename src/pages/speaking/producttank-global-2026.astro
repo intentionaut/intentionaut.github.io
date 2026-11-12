@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SubscribeForm from '../../components/SubscribeForm.astro';
+
+// Placeholder until the talk on 18 Nov 2026; the full resources pack replaces it just before the talk.
+const signup =
+  'https://go.mindtheproduct.com/november-product-tank-webinar-register?utm_source=saielle&utm_medium=socials&utm_campaign=ptankglobal';
+---
+
+<BaseLayout
+  title="How do you manage AI agents as a product leader? | Saielle DaSilva"
+  description="How a product leader manages a team of AI agents: checks, budgets and small batches. A free online talk from Saielle DaSilva, 18 November 2026."
+>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Free talk · ProductTank Global</p>
+      <h1>How do you manage AI agents as a product leader?</h1>
+      <p class="lede">
+        Saielle DaSilva manages a small team of AI agents with what has always
+        worked on people: small batches of work, a budget for each, and checks
+        that give the same answer every time. This talk shows what that looks
+        like day to day.
+      </p>
+      <p class="talk-when">
+        Wednesday 18 November 2026, 1pm GMT (8am ET). Online, free and recorded.
+      </p>
+      <p><a class="btn-primary" href={signup} target="_blank" rel="noopener noreferrer">Register on Mind the Product</a></p>
+    </header>
+
+    <h2>Get the resources pack</h2>
+    <p>
+      Dualtrack Agents is an open source product team of AI agents: a product
+      manager, an engineer and a designer. You can install it and run it
+      yourself. The pack also has the tools Saielle DaSilva uses and her
+      write-up of the talk. Subscribe to the newsletter and it arrives in your
+      welcome email.
+    </p>
+    <SubscribeForm
+      variant="inline"
+      source="talk"
+      campaign="producttank-global-2026"
+      emailId="talk-email"
+      buttonLabel="Subscribe and get the pack"
+    />
+  </section>
+</BaseLayout>
+
+<style>
+  .talk-when {
+    margin-top: var(--space-4);
+    font-weight: 600;
+  }
+</style>
