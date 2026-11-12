@@ -3,6 +3,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.astro';
 import { BOOKING_URL } from '../data/links';
 import { rates, gbp } from '../data/rates';
+import FaqList from '../components/FaqList.astro';
+import { faqsFor } from '../data/faqs';
+
+const interimFaqs = faqsFor('interim-cpo');
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: interimFaqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer },
+  })),
+};
 
 // Full-time cover with its own terms; /fractional/ is the part-time alternative.
 const serviceSchema = {
@@ -26,7 +38,7 @@ const serviceSchema = {
 <BaseLayout
   title="Interim CPO UK | Saielle DaSilva"
   description="Interim CPO for UK companies, from a product leader who has run product and design teams at StepStone and Sainsbury's and taken AI into production."
-  jsonLd={serviceSchema}
+  jsonLd={[serviceSchema, faqSchema]}
 >
   <section class="wrap">
     <header class="page-head">
@@ -105,5 +117,7 @@ const serviceSchema = {
         <ContactForm source="interim-cpo" selected="fractional" booking referral />
       </div>
     </section>
+
+    <FaqList heading="FAQ: Interim CPO" items={interimFaqs} />
   </section>
 </BaseLayout>

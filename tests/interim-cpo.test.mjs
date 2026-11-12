@@ -41,7 +41,7 @@ test('only published figures, no em dashes', () => {
 });
 
 test('page passes a Service node, priced from rates.ts, to the layout', () => {
-  assert.match(src, /jsonLd=\{serviceSchema\}/);
+  assert.match(src, /jsonLd=\{\[serviceSchema, faqSchema\]\}/);
   assert.match(src, /'@type': 'Service'/);
   assert.match(src, /price: rates\.interim/);
   assert.ok(!src.includes('fractionalMonthly'), 'interim is full time: no part-time monthly prices');

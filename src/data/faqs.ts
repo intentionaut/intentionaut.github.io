@@ -5,6 +5,7 @@ export type FaqPlacement =
   | 'faq'
   | 'contact'
   | 'fractional'
+  | 'interim-cpo'
   | 'workshops'
   | 'workshops-ai-strategy'
   | 'workshops-opportunity-mapping'
@@ -46,7 +47,7 @@ export const faqs: Faq[] = [
   {
     question: 'Do you work with scale-ups outside London?',
     answer: 'Yes. Saielle DaSilva works with scale-ups across the UK and Europe, with a mix of remote and in-person work.',
-    placements: ['faq', 'fractional', 'for-scale-ups'],
+    placements: ['faq', 'fractional', 'for-scale-ups', 'interim-cpo'],
   },
   {
     question: 'Who are office hours for?',
@@ -431,7 +432,7 @@ export const faqs: Faq[] = [
   },
   {
     question: "Fractional vs interim CPO: what's the difference?",
-    placements: ['faq', 'fractional', 'for-scale-ups'],
+    placements: ['faq', 'fractional', 'for-scale-ups', 'interim-cpo'],
     answer:
       "The difference is how much of the week the job needs. An interim CPO takes the role full time for a fixed spell, usually to cover a vacancy, a transition or a turnaround. A fractional CPO holds the same senior role one or two days a week, over months, which works when the team underneath is strong enough to run on the days they're not there. If your product would stall without a leader in the room every day, hire interim.",
   },
