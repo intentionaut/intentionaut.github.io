@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// Placeholder until the talk on 18 Nov 2026; the full resources pack replaces it just before the talk.
+const signup = 'https://bit.ly/4kvorVU';
+const form = 'https://tally.so/r/BEdAeR?utm_source=early';
+---
+
+<BaseLayout
+  title="How do you manage AI agents as a product leader? | Saielle DaSilva"
+  description="Saielle DaSilva at ProductTank Global, 18 November 2026: from AI skeptic to running a team of agents. Sign up, and get the resources pack."
+>
+  <section class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Speaking · ProductTank Global</p>
+      <h1>How do you manage AI agents as a product leader?</h1>
+      <p class="lede">
+        Saielle DaSilva went from AI skeptic to running a small team of agents
+        that build, test and ship alongside her. In this screen-open session
+        she walks through a real working day: the controls that keep agents on
+        budget and auditable, the checks that keep the work honest, and the
+        habits that let a product person defend every decision her agents make.
+      </p>
+      <p class="talk-when">
+        Wednesday 18 November 2026, 1pm GMT (8am ET), online. Free, and
+        recorded.
+      </p>
+      <p><a class="btn-primary" href={signup} target="_blank" rel="noopener noreferrer">Sign up for the talk</a></p>
+    </header>
+
+    <h2>The resources pack</h2>
+    <p>
+      Everything from the talk in one place: Dualtrack Agents, the open source
+      agentic product team Saielle runs, ready to install; the tools she uses;
+      and the write-up. The full pack goes live here on the day.
+    </p>
+    <p>
+      Leave your email and the pack comes to you. The same form takes
+      feedback after the talk.
+    </p>
+    <p><a class="btn-primary" href={form} target="_blank" rel="noopener noreferrer">Get the resources pack</a></p>
+    <figure class="qr">
+      <img
+        src="/speaking/producttank-global-2026-qr.svg"
+        width="200"
+        height="200"
+        alt="QR code linking to the resources pack sign-up form"
+      />
+      <figcaption>Or scan to open the form on your phone.</figcaption>
+    </figure>
+  </section>
+</BaseLayout>
+
+<style>
+  .talk-when {
+    margin-top: var(--space-4);
+    font-weight: 600;
+  }
+  .qr {
+    margin-top: var(--space-4);
+  }
+  .qr img {
+    background: #fff;
+    padding: 8px;
+  }
+  .qr figcaption {
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+</style>
