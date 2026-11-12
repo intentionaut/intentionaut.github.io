@@ -2,9 +2,9 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.astro';
 import { BOOKING_URL } from '../data/links';
-import { rates, fractionalMonthly1Day, fractionalMonthly2Day } from '../data/rates';
+import { rates, gbp } from '../data/rates';
 
-// Same offer and terms as /fractional/; this page is the interim name for it.
+// Full-time cover with its own terms; /fractional/ is the part-time alternative.
 const serviceSchema = {
   '@type': 'Service',
   '@id': 'https://intentionaut.com/interim-cpo/#service',
@@ -16,12 +16,8 @@ const serviceSchema = {
   offers: {
     '@type': 'Offer',
     priceCurrency: 'GBP',
-    price: rates.fractional,
-    priceSpecification: [
-      { '@type': 'UnitPriceSpecification', price: fractionalMonthly1Day, priceCurrency: 'GBP', unitText: 'month (1 day a week)' },
-      { '@type': 'UnitPriceSpecification', price: fractionalMonthly2Day, priceCurrency: 'GBP', unitText: 'month (2 days a week)' },
-      { '@type': 'UnitPriceSpecification', price: rates.fractional, priceCurrency: 'GBP', unitText: 'day' },
-    ],
+    price: rates.interim,
+    priceSpecification: { '@type': 'UnitPriceSpecification', price: rates.interim, priceCurrency: 'GBP', unitText: 'day' },
     availability: 'https://schema.org/LimitedAvailability',
   },
 };
@@ -51,8 +47,8 @@ const serviceSchema = {
       <h2>What is an interim CPO?</h2>
       <p>
         An interim CPO covers the gap. You get senior product leadership now,
-        without a long search. She joins as your product leader for a set time.
-        Usually it is one or two days a week, over three to six months.
+        without a long search. She joins as your product leader full time,
+        usually for three to six months.
       </p>
       <p>
         She has executive access. She leads the team, makes the hard calls and
@@ -82,13 +78,15 @@ const serviceSchema = {
 
       <h2>How does it work?</h2>
       <dl class="ledger">
-        <div><dt>Time a week</dt><dd>One or two days</dd></div>
-        <div><dt>Minimum commitment</dt><dd>One month</dd></div>
+        <div><dt>Time a week</dt><dd>Full time</dd></div>
+        <div><dt>Day rate</dt><dd>{gbp(rates.interim)}</dd></div>
+        <div><dt>Minimum commitment</dt><dd>Three months</dd></div>
+        <div><dt>Typical length</dt><dd>Three to six months</dd></div>
         <div><dt>Notice</dt><dd>30 days, either side</dd></div>
       </dl>
       <p>
-        Rates are on the <a href="/fractional/">fractional page</a>. The work
-        is the same. Interim is the name for cover while you fill a gap.
+        Need fewer days? <a href="/fractional/">Fractional product leadership</a>
+        is the same senior role, one or two days a week.
       </p>
 
       <h2>How do you start?</h2>

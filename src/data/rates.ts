@@ -1,6 +1,6 @@
 // Single source of truth for published rates. Change a number here and it
 // updates everywhere it's quoted: /contact, /speaker, /forward-deployed,
-// /fractional, /capabilities, llms.txt and the FAQ page.
+// /fractional, /interim-cpo, /capabilities, llms.txt and the FAQ page.
 // Currency is GBP throughout, per the payment FAQ ("Invoice and bank
 // transfer, GBP unless we agree otherwise").
 //
@@ -11,6 +11,7 @@
 export const rates = {
   strategySession: 750, // per 90-minute session
   fractional: 1500, // per day
+  interim: 1500, // per day, full time (/interim-cpo/)
   keynote: 3500, // per event, from
   // Team workshops (/workshops/). Hours sit beside each price so the per-hour
   // figures and the full-day saving on the page are derived, never typed.
