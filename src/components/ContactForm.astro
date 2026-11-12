@@ -173,6 +173,7 @@ const topics: [string, string][] = [
 
 <script>
   import { trackEvent } from '../lib/pendo';
+  import { BOOKING_URL } from '../data/links';
 
   const ENDPOINT = 'https://contact-form.intentionaut.workers.dev/contact';
   const form = document.getElementById('contact-form') as HTMLFormElement | null;
@@ -184,6 +185,38 @@ const topics: [string, string][] = [
 
   const say = (msg: string) => {
     if (statusEl) statusEl.textContent = msg;
+  };
+
+  const link = (href: string, text: string, external: boolean) => {
+    const a = document.createElement('a');
+    a.href = href;
+    a.textContent = text;
+    if (external) {
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+    }
+    return a;
+  };
+
+  // shortcut: a Worker error counts as visitor-written only if it reads as one
+  // short sentence; upgrade to a code from the Worker once it sends one.
+  const visitorMessage = (error: unknown) =>
+    typeof error === 'string' && /^[A-Z][^<>]{0,198}[.!?]$/.test(error.trim()) ? error.trim() : '';
+
+  // Built from DOM nodes and textContent only: Worker text is never parsed as HTML.
+  const sayFailure = (workerError?: string) => {
+    if (!statusEl) return;
+    const nodes: (string | Node)[] = [];
+    const own = visitorMessage(workerError);
+    if (own) nodes.push(`${own} `);
+    nodes.push(
+      "That message didn't send. Your text is still here, so you can try again, or email ",
+      link('mailto:hello@intentionaut.com', 'hello@intentionaut.com', false),
+      ', or ',
+      link(BOOKING_URL, 'Book a free call', true),
+      '.',
+    );
+    statusEl.replaceChildren(...nodes);
   };
 
   form?.addEventListener('submit', async (e) => {
@@ -256,7 +289,7 @@ const topics: [string, string][] = [
           first_source: attribution.first_source,
           first_campaign: attribution.first_campaign,
         });
-        say(result.error || 'Something went wrong; please email me directly.');
+        sayFailure(result.error);
       }
     } catch {
       trackEvent('contact_enquiry_failed', {
@@ -266,7 +299,7 @@ const topics: [string, string][] = [
         first_source: attribution.first_source,
         first_campaign: attribution.first_campaign,
       });
-      say('Something went wrong; please email me directly.');
+      sayFailure();
     } finally {
       // A Turnstile token is single-use; a retry needs a fresh one.
       (window as any).turnstile?.reset?.();
