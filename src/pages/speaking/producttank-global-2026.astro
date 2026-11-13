@@ -41,7 +41,8 @@ const signup =
       <p><a class="btn-primary" href={signup} target="_blank" rel="noopener noreferrer">Register on Mind the Product</a></p>
     </header>
 
-    <h2>Get the resources pack</h2>
+    <section class="talk-band" aria-labelledby="pack-h">
+    <h2 id="pack-h">Get the resources pack</h2>
     <p>
       Dualtrack Agents is an open source product team of AI agents: a product
       manager, an engineer and a designer. You can install it and run it
@@ -56,10 +57,11 @@ const signup =
       emailId="talk-email"
       buttonLabel="Subscribe and get the pack"
     />
+    </section>
 
     {quotes.length > 0 && (
-      <>
-        <h2>What people said last time</h2>
+      <section class="talk-band" aria-labelledby="quotes-h">
+        <h2 id="quotes-h">What people said last time</h2>
         <div class="talk-quotes">
           {quotes.map((q) => (
             <figure class="pull-quote">
@@ -68,7 +70,7 @@ const signup =
             </figure>
           ))}
         </div>
-      </>
+      </section>
     )}
 
     <KeepReading items={reading} heading="Read for yourself" />
@@ -76,6 +78,15 @@ const signup =
 </BaseLayout>
 
 <style>
+  /* Same band as KeepReading, so every section below the header is spaced alike. */
+  .talk-band {
+    margin-top: clamp(3rem, 6vw, 5rem);
+    padding-top: var(--space-7);
+    border-top: 1px solid var(--slate);
+  }
+  .talk-band > h2 {
+    margin: 0 0 var(--space-4);
+  }
   .talk-when {
     margin-top: var(--space-4);
     font-weight: 600;
