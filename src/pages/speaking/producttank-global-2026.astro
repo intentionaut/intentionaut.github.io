@@ -8,8 +8,13 @@ import { writingEntries } from '../../data/writing';
 // Anonymised quotes from her last Mind the Product talk: same audience. The f-word one stays on /speaking/ only.
 const pastTalk = await getEntry('talks', 'mtp-f-words-2022');
 const quotes = (pastTalk?.data.quotes ?? []).filter((q) => !q.text.includes('fuck'));
-// Search Console shows no post traffic yet, so newest first. Swap for most-read once there is data.
-const reading = [...writingEntries].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3);
+// Chosen for an agents audience; Search Console has no post traffic to rank by yet.
+const picks = [
+  '/writing/the-ai-agent-reality-check/',
+  '/writing/the-new-architecture-of-software-quality/',
+  '/writing/the-coming-shift-in-enterprise-metadata/',
+];
+const reading = picks.map((u) => writingEntries.find((e) => e.url === u)).filter((e) => e !== undefined);
 
 // Placeholder until the talk on 18 Nov 2026; the full resources pack replaces it just before the talk.
 const signup =
