@@ -1,6 +1,15 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SubscribeForm from '../../components/SubscribeForm.astro';
+import KeepReading from '../../components/KeepReading.astro';
+import { getEntry } from 'astro:content';
+import { writingEntries } from '../../data/writing';
+
+// Anonymised quotes from her last Mind the Product talk: same audience. The f-word one stays on /speaking/ only.
+const pastTalk = await getEntry('talks', 'mtp-f-words-2022');
+const quotes = (pastTalk?.data.quotes ?? []).filter((q) => !q.text.includes('fuck'));
+// Search Console shows no post traffic yet, so newest first. Swap for most-read once there is data.
+const reading = [...writingEntries].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3);
 
 // Placeholder until the talk on 18 Nov 2026; the full resources pack replaces it just before the talk.
 const signup =
@@ -42,6 +51,22 @@ const signup =
       emailId="talk-email"
       buttonLabel="Subscribe and get the pack"
     />
+
+    {quotes.length > 0 && (
+      <>
+        <h2>What people said last time</h2>
+        <div class="talk-quotes">
+          {quotes.map((q) => (
+            <figure class="pull-quote">
+              <blockquote><p>{q.text}</p></blockquote>
+              <figcaption>{q.attribution}, Mind the Product 2022</figcaption>
+            </figure>
+          ))}
+        </div>
+      </>
+    )}
+
+    <KeepReading items={reading} heading="Read for yourself" />
   </section>
 </BaseLayout>
 
