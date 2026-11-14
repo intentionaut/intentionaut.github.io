@@ -198,10 +198,15 @@ const topics: [string, string][] = [
     return a;
   };
 
-  // shortcut: a Worker error counts as visitor-written only if it reads as one
-  // short sentence; upgrade to a code from the Worker once it sends one.
+  // Only Worker errors written for visitors are shown; anything else (a server
+  // error, "Invalid JSON") falls back to the standard wording alone.
+  const VISITOR_ERRORS = new Set([
+    'Name, email and message are required.',
+    'Please enter a valid email address.',
+    'Please complete the check.',
+  ]);
   const visitorMessage = (error: unknown) =>
-    typeof error === 'string' && /^[A-Z][^<>]{0,198}[.!?]$/.test(error.trim()) ? error.trim() : '';
+    typeof error === 'string' && VISITOR_ERRORS.has(error.trim()) ? error.trim() : '';
 
   // Built from DOM nodes and textContent only: Worker text is never parsed as HTML.
   const sayFailure = (workerError?: string) => {

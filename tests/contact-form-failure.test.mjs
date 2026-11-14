@@ -35,3 +35,9 @@ test('a failure never resets the form, so typed text stays', () => {
   assert.doesNotMatch(nonOk, /form\.reset/);
   assert.doesNotMatch(rejected, /form\.reset/);
 });
+
+test('only known visitor-facing Worker errors are shown', () => {
+  assert.match(script, /VISITOR_ERRORS\.has\(/);
+  assert.match(script, /'Please enter a valid email address\.'/);
+  assert.doesNotMatch(script, /\[A-Z\]\[\^<>\]/);
+});
