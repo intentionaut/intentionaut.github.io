@@ -987,7 +987,7 @@
       }
     ]
   },
-  "/interim-cpo/ @1000": {
+  "/guides/ @1000": {
     "block": {
       "paddingTop": "80px",
       "paddingBottom": "40px"
@@ -1025,21 +1025,10 @@
         "textTransform": "none",
         "marginTop": "24px",
         "marginBottom": "0px"
-      },
-      {
-        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
-        "fontSize": "17px",
-        "fontWeight": "400",
-        "fontStyle": "normal",
-        "lineHeight": "28.9px",
-        "letterSpacing": "normal",
-        "textTransform": "none",
-        "marginTop": "40px",
-        "marginBottom": "0px"
       }
     ]
   },
-  "/guides/ @1000": {
+  "/guides/choosing-a-fractional-product-leader/ @1000": {
     "block": {
       "paddingTop": "80px",
       "paddingBottom": "40px"
@@ -1162,7 +1151,141 @@
       }
     ]
   },
+  "/guides/research-to-roadmap/ @1000": {
+    "block": {
+      "paddingTop": "80px",
+      "paddingBottom": "40px"
+    },
+    "children": [
+      {
+        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
+        "fontSize": "12.48px",
+        "fontWeight": "600",
+        "fontStyle": "normal",
+        "lineHeight": "21.216px",
+        "letterSpacing": "2.2464px",
+        "textTransform": "uppercase",
+        "marginTop": "0px",
+        "marginBottom": "24px"
+      },
+      {
+        "fontFamily": "\"Fraunces Variable\", \"Fraunces Variable Fallback\", Georgia, \"Times New Roman\", serif",
+        "fontSize": "50px",
+        "fontWeight": "480",
+        "fontStyle": "normal",
+        "lineHeight": "54px",
+        "letterSpacing": "-0.75px",
+        "textTransform": "none",
+        "marginTop": "0px",
+        "marginBottom": "0px"
+      },
+      {
+        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
+        "fontSize": "19.52px",
+        "fontWeight": "400",
+        "fontStyle": "normal",
+        "lineHeight": "32.208px",
+        "letterSpacing": "normal",
+        "textTransform": "none",
+        "marginTop": "24px",
+        "marginBottom": "0px"
+      }
+    ]
+  },
+  "/interim-cpo/ @1000": {
+    "block": {
+      "paddingTop": "80px",
+      "paddingBottom": "40px"
+    },
+    "children": [
+      {
+        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
+        "fontSize": "12.48px",
+        "fontWeight": "600",
+        "fontStyle": "normal",
+        "lineHeight": "21.216px",
+        "letterSpacing": "2.2464px",
+        "textTransform": "uppercase",
+        "marginTop": "0px",
+        "marginBottom": "24px"
+      },
+      {
+        "fontFamily": "\"Fraunces Variable\", \"Fraunces Variable Fallback\", Georgia, \"Times New Roman\", serif",
+        "fontSize": "50px",
+        "fontWeight": "480",
+        "fontStyle": "normal",
+        "lineHeight": "54px",
+        "letterSpacing": "-0.75px",
+        "textTransform": "none",
+        "marginTop": "0px",
+        "marginBottom": "0px"
+      },
+      {
+        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
+        "fontSize": "19.52px",
+        "fontWeight": "400",
+        "fontStyle": "normal",
+        "lineHeight": "32.208px",
+        "letterSpacing": "normal",
+        "textTransform": "none",
+        "marginTop": "24px",
+        "marginBottom": "0px"
+      },
+      {
+        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
+        "fontSize": "17px",
+        "fontWeight": "400",
+        "fontStyle": "normal",
+        "lineHeight": "28.9px",
+        "letterSpacing": "normal",
+        "textTransform": "none",
+        "marginTop": "40px",
+        "marginBottom": "0px"
+      }
+    ]
+  },
   "/keynote-speaker/ @1000": {
+    "block": {
+      "paddingTop": "80px",
+      "paddingBottom": "40px"
+    },
+    "children": [
+      {
+        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
+        "fontSize": "12.48px",
+        "fontWeight": "600",
+        "fontStyle": "normal",
+        "lineHeight": "21.216px",
+        "letterSpacing": "2.2464px",
+        "textTransform": "uppercase",
+        "marginTop": "0px",
+        "marginBottom": "24px"
+      },
+      {
+        "fontFamily": "\"Fraunces Variable\", \"Fraunces Variable Fallback\", Georgia, \"Times New Roman\", serif",
+        "fontSize": "50px",
+        "fontWeight": "480",
+        "fontStyle": "normal",
+        "lineHeight": "54px",
+        "letterSpacing": "-0.75px",
+        "textTransform": "none",
+        "marginTop": "0px",
+        "marginBottom": "0px"
+      },
+      {
+        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
+        "fontSize": "19.52px",
+        "fontWeight": "400",
+        "fontStyle": "normal",
+        "lineHeight": "32.208px",
+        "letterSpacing": "normal",
+        "textTransform": "none",
+        "marginTop": "24px",
+        "marginBottom": "0px"
+      }
+    ]
+  },
+  "/media-kit/ @1000": {
     "block": {
       "paddingTop": "80px",
       "paddingBottom": "40px"
@@ -1536,6 +1659,69 @@
       }
     ]
   },
+  "/speaking/producttank-global-2026/ @1000": {
+    "block": {
+      "paddingTop": "80px",
+      "paddingBottom": "40px"
+    },
+    "children": [
+      {
+        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
+        "fontSize": "12.48px",
+        "fontWeight": "600",
+        "fontStyle": "normal",
+        "lineHeight": "21.216px",
+        "letterSpacing": "2.2464px",
+        "textTransform": "uppercase",
+        "marginTop": "0px",
+        "marginBottom": "24px"
+      },
+      {
+        "fontFamily": "\"Fraunces Variable\", \"Fraunces Variable Fallback\", Georgia, \"Times New Roman\", serif",
+        "fontSize": "50px",
+        "fontWeight": "480",
+        "fontStyle": "normal",
+        "lineHeight": "54px",
+        "letterSpacing": "-0.75px",
+        "textTransform": "none",
+        "marginTop": "0px",
+        "marginBottom": "0px"
+      },
+      {
+        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
+        "fontSize": "19.52px",
+        "fontWeight": "400",
+        "fontStyle": "normal",
+        "lineHeight": "32.208px",
+        "letterSpacing": "normal",
+        "textTransform": "none",
+        "marginTop": "24px",
+        "marginBottom": "0px"
+      },
+      {
+        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
+        "fontSize": "17px",
+        "fontWeight": "600",
+        "fontStyle": "normal",
+        "lineHeight": "28.9px",
+        "letterSpacing": "normal",
+        "textTransform": "none",
+        "marginTop": "16px",
+        "marginBottom": "17px"
+      },
+      {
+        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
+        "fontSize": "17px",
+        "fontWeight": "400",
+        "fontStyle": "normal",
+        "lineHeight": "28.9px",
+        "letterSpacing": "normal",
+        "textTransform": "none",
+        "marginTop": "17px",
+        "marginBottom": "17px"
+      }
+    ]
+  },
   "/subscribe/ @1000": {
     "block": {
       "paddingTop": "80px",
@@ -1770,17 +1956,6 @@
         "letterSpacing": "normal",
         "textTransform": "none",
         "marginTop": "40px",
-        "marginBottom": "0px"
-      },
-      {
-        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
-        "fontSize": "14.72px",
-        "fontWeight": "400",
-        "fontStyle": "normal",
-        "lineHeight": "25.024px",
-        "letterSpacing": "normal",
-        "textTransform": "none",
-        "marginTop": "16px",
         "marginBottom": "0px"
       }
     ]
@@ -2814,7 +2989,7 @@
       }
     ]
   },
-  "/interim-cpo/ @1440": {
+  "/guides/ @1440": {
     "block": {
       "paddingTop": "96px",
       "paddingBottom": "48px"
@@ -2852,21 +3027,10 @@
         "textTransform": "none",
         "marginTop": "24px",
         "marginBottom": "0px"
-      },
-      {
-        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
-        "fontSize": "17px",
-        "fontWeight": "400",
-        "fontStyle": "normal",
-        "lineHeight": "28.9px",
-        "letterSpacing": "normal",
-        "textTransform": "none",
-        "marginTop": "40px",
-        "marginBottom": "0px"
       }
     ]
   },
-  "/guides/ @1440": {
+  "/guides/choosing-a-fractional-product-leader/ @1440": {
     "block": {
       "paddingTop": "96px",
       "paddingBottom": "48px"
@@ -2989,7 +3153,141 @@
       }
     ]
   },
+  "/guides/research-to-roadmap/ @1440": {
+    "block": {
+      "paddingTop": "96px",
+      "paddingBottom": "48px"
+    },
+    "children": [
+      {
+        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
+        "fontSize": "12.48px",
+        "fontWeight": "600",
+        "fontStyle": "normal",
+        "lineHeight": "21.216px",
+        "letterSpacing": "2.2464px",
+        "textTransform": "uppercase",
+        "marginTop": "0px",
+        "marginBottom": "24px"
+      },
+      {
+        "fontFamily": "\"Fraunces Variable\", \"Fraunces Variable Fallback\", Georgia, \"Times New Roman\", serif",
+        "fontSize": "57.6px",
+        "fontWeight": "480",
+        "fontStyle": "normal",
+        "lineHeight": "62.208px",
+        "letterSpacing": "-0.864px",
+        "textTransform": "none",
+        "marginTop": "0px",
+        "marginBottom": "0px"
+      },
+      {
+        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
+        "fontSize": "19.52px",
+        "fontWeight": "400",
+        "fontStyle": "normal",
+        "lineHeight": "32.208px",
+        "letterSpacing": "normal",
+        "textTransform": "none",
+        "marginTop": "24px",
+        "marginBottom": "0px"
+      }
+    ]
+  },
+  "/interim-cpo/ @1440": {
+    "block": {
+      "paddingTop": "96px",
+      "paddingBottom": "48px"
+    },
+    "children": [
+      {
+        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
+        "fontSize": "12.48px",
+        "fontWeight": "600",
+        "fontStyle": "normal",
+        "lineHeight": "21.216px",
+        "letterSpacing": "2.2464px",
+        "textTransform": "uppercase",
+        "marginTop": "0px",
+        "marginBottom": "24px"
+      },
+      {
+        "fontFamily": "\"Fraunces Variable\", \"Fraunces Variable Fallback\", Georgia, \"Times New Roman\", serif",
+        "fontSize": "57.6px",
+        "fontWeight": "480",
+        "fontStyle": "normal",
+        "lineHeight": "62.208px",
+        "letterSpacing": "-0.864px",
+        "textTransform": "none",
+        "marginTop": "0px",
+        "marginBottom": "0px"
+      },
+      {
+        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
+        "fontSize": "19.52px",
+        "fontWeight": "400",
+        "fontStyle": "normal",
+        "lineHeight": "32.208px",
+        "letterSpacing": "normal",
+        "textTransform": "none",
+        "marginTop": "24px",
+        "marginBottom": "0px"
+      },
+      {
+        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
+        "fontSize": "17px",
+        "fontWeight": "400",
+        "fontStyle": "normal",
+        "lineHeight": "28.9px",
+        "letterSpacing": "normal",
+        "textTransform": "none",
+        "marginTop": "40px",
+        "marginBottom": "0px"
+      }
+    ]
+  },
   "/keynote-speaker/ @1440": {
+    "block": {
+      "paddingTop": "96px",
+      "paddingBottom": "48px"
+    },
+    "children": [
+      {
+        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
+        "fontSize": "12.48px",
+        "fontWeight": "600",
+        "fontStyle": "normal",
+        "lineHeight": "21.216px",
+        "letterSpacing": "2.2464px",
+        "textTransform": "uppercase",
+        "marginTop": "0px",
+        "marginBottom": "24px"
+      },
+      {
+        "fontFamily": "\"Fraunces Variable\", \"Fraunces Variable Fallback\", Georgia, \"Times New Roman\", serif",
+        "fontSize": "57.6px",
+        "fontWeight": "480",
+        "fontStyle": "normal",
+        "lineHeight": "62.208px",
+        "letterSpacing": "-0.864px",
+        "textTransform": "none",
+        "marginTop": "0px",
+        "marginBottom": "0px"
+      },
+      {
+        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
+        "fontSize": "19.52px",
+        "fontWeight": "400",
+        "fontStyle": "normal",
+        "lineHeight": "32.208px",
+        "letterSpacing": "normal",
+        "textTransform": "none",
+        "marginTop": "24px",
+        "marginBottom": "0px"
+      }
+    ]
+  },
+  "/media-kit/ @1440": {
     "block": {
       "paddingTop": "96px",
       "paddingBottom": "48px"
@@ -3363,6 +3661,69 @@
       }
     ]
   },
+  "/speaking/producttank-global-2026/ @1440": {
+    "block": {
+      "paddingTop": "96px",
+      "paddingBottom": "48px"
+    },
+    "children": [
+      {
+        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
+        "fontSize": "12.48px",
+        "fontWeight": "600",
+        "fontStyle": "normal",
+        "lineHeight": "21.216px",
+        "letterSpacing": "2.2464px",
+        "textTransform": "uppercase",
+        "marginTop": "0px",
+        "marginBottom": "24px"
+      },
+      {
+        "fontFamily": "\"Fraunces Variable\", \"Fraunces Variable Fallback\", Georgia, \"Times New Roman\", serif",
+        "fontSize": "57.6px",
+        "fontWeight": "480",
+        "fontStyle": "normal",
+        "lineHeight": "62.208px",
+        "letterSpacing": "-0.864px",
+        "textTransform": "none",
+        "marginTop": "0px",
+        "marginBottom": "0px"
+      },
+      {
+        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
+        "fontSize": "19.52px",
+        "fontWeight": "400",
+        "fontStyle": "normal",
+        "lineHeight": "32.208px",
+        "letterSpacing": "normal",
+        "textTransform": "none",
+        "marginTop": "24px",
+        "marginBottom": "0px"
+      },
+      {
+        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
+        "fontSize": "17px",
+        "fontWeight": "600",
+        "fontStyle": "normal",
+        "lineHeight": "28.9px",
+        "letterSpacing": "normal",
+        "textTransform": "none",
+        "marginTop": "16px",
+        "marginBottom": "17px"
+      },
+      {
+        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
+        "fontSize": "17px",
+        "fontWeight": "400",
+        "fontStyle": "normal",
+        "lineHeight": "28.9px",
+        "letterSpacing": "normal",
+        "textTransform": "none",
+        "marginTop": "17px",
+        "marginBottom": "17px"
+      }
+    ]
+  },
   "/subscribe/ @1440": {
     "block": {
       "paddingTop": "96px",
@@ -3598,17 +3959,6 @@
         "textTransform": "none",
         "marginTop": "40px",
         "marginBottom": "0px"
-      },
-      {
-        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
-        "fontSize": "14.72px",
-        "fontWeight": "400",
-        "fontStyle": "normal",
-        "lineHeight": "25.024px",
-        "letterSpacing": "normal",
-        "textTransform": "none",
-        "marginTop": "16px",
-        "marginBottom": "0px"
       }
     ]
   },
@@ -3650,378 +4000,6 @@
         "textTransform": "none",
         "marginTop": "24px",
         "marginBottom": "0px"
-      }
-    ]
-  },
-  "/guides/research-to-roadmap/ @1000": {
-    "block": {
-      "paddingTop": "80px",
-      "paddingBottom": "40px"
-    },
-    "children": [
-      {
-        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
-        "fontSize": "12.48px",
-        "fontWeight": "600",
-        "fontStyle": "normal",
-        "lineHeight": "21.216px",
-        "letterSpacing": "2.2464px",
-        "textTransform": "uppercase",
-        "marginTop": "0px",
-        "marginBottom": "24px"
-      },
-      {
-        "fontFamily": "\"Fraunces Variable\", \"Fraunces Variable Fallback\", Georgia, \"Times New Roman\", serif",
-        "fontSize": "50px",
-        "fontWeight": "480",
-        "fontStyle": "normal",
-        "lineHeight": "54px",
-        "letterSpacing": "-0.75px",
-        "textTransform": "none",
-        "marginTop": "0px",
-        "marginBottom": "0px"
-      },
-      {
-        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
-        "fontSize": "19.52px",
-        "fontWeight": "400",
-        "fontStyle": "normal",
-        "lineHeight": "32.208px",
-        "letterSpacing": "normal",
-        "textTransform": "none",
-        "marginTop": "24px",
-        "marginBottom": "0px"
-      }
-    ]
-  },
-  "/guides/research-to-roadmap/ @1440": {
-    "block": {
-      "paddingTop": "96px",
-      "paddingBottom": "48px"
-    },
-    "children": [
-      {
-        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
-        "fontSize": "12.48px",
-        "fontWeight": "600",
-        "fontStyle": "normal",
-        "lineHeight": "21.216px",
-        "letterSpacing": "2.2464px",
-        "textTransform": "uppercase",
-        "marginTop": "0px",
-        "marginBottom": "24px"
-      },
-      {
-        "fontFamily": "\"Fraunces Variable\", \"Fraunces Variable Fallback\", Georgia, \"Times New Roman\", serif",
-        "fontSize": "57.6px",
-        "fontWeight": "480",
-        "fontStyle": "normal",
-        "lineHeight": "62.208px",
-        "letterSpacing": "-0.864px",
-        "textTransform": "none",
-        "marginTop": "0px",
-        "marginBottom": "0px"
-      },
-      {
-        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
-        "fontSize": "19.52px",
-        "fontWeight": "400",
-        "fontStyle": "normal",
-        "lineHeight": "32.208px",
-        "letterSpacing": "normal",
-        "textTransform": "none",
-        "marginTop": "24px",
-        "marginBottom": "0px"
-      }
-    ]
-  },
-  "/guides/choosing-a-fractional-product-leader/ @1000": {
-    "block": {
-      "paddingTop": "80px",
-      "paddingBottom": "40px"
-    },
-    "children": [
-      {
-        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
-        "fontSize": "12.48px",
-        "fontWeight": "600",
-        "fontStyle": "normal",
-        "lineHeight": "21.216px",
-        "letterSpacing": "2.2464px",
-        "textTransform": "uppercase",
-        "marginTop": "0px",
-        "marginBottom": "24px"
-      },
-      {
-        "fontFamily": "\"Fraunces Variable\", \"Fraunces Variable Fallback\", Georgia, \"Times New Roman\", serif",
-        "fontSize": "50px",
-        "fontWeight": "480",
-        "fontStyle": "normal",
-        "lineHeight": "54px",
-        "letterSpacing": "-0.75px",
-        "textTransform": "none",
-        "marginTop": "0px",
-        "marginBottom": "0px"
-      },
-      {
-        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
-        "fontSize": "19.52px",
-        "fontWeight": "400",
-        "fontStyle": "normal",
-        "lineHeight": "32.208px",
-        "letterSpacing": "normal",
-        "textTransform": "none",
-        "marginTop": "24px",
-        "marginBottom": "0px"
-      }
-    ]
-  },
-  "/guides/choosing-a-fractional-product-leader/ @1440": {
-    "block": {
-      "paddingTop": "96px",
-      "paddingBottom": "48px"
-    },
-    "children": [
-      {
-        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
-        "fontSize": "12.48px",
-        "fontWeight": "600",
-        "fontStyle": "normal",
-        "lineHeight": "21.216px",
-        "letterSpacing": "2.2464px",
-        "textTransform": "uppercase",
-        "marginTop": "0px",
-        "marginBottom": "24px"
-      },
-      {
-        "fontFamily": "\"Fraunces Variable\", \"Fraunces Variable Fallback\", Georgia, \"Times New Roman\", serif",
-        "fontSize": "57.6px",
-        "fontWeight": "480",
-        "fontStyle": "normal",
-        "lineHeight": "62.208px",
-        "letterSpacing": "-0.864px",
-        "textTransform": "none",
-        "marginTop": "0px",
-        "marginBottom": "0px"
-      },
-      {
-        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
-        "fontSize": "19.52px",
-        "fontWeight": "400",
-        "fontStyle": "normal",
-        "lineHeight": "32.208px",
-        "letterSpacing": "normal",
-        "textTransform": "none",
-        "marginTop": "24px",
-        "marginBottom": "0px"
-      }
-    ]
-  },
-  "/media-kit/ @1000": {
-    "block": {
-      "paddingTop": "80px",
-      "paddingBottom": "40px"
-    },
-    "children": [
-      {
-        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
-        "fontSize": "12.48px",
-        "fontWeight": "600",
-        "fontStyle": "normal",
-        "lineHeight": "21.216px",
-        "letterSpacing": "2.2464px",
-        "textTransform": "uppercase",
-        "marginTop": "0px",
-        "marginBottom": "24px"
-      },
-      {
-        "fontFamily": "\"Fraunces Variable\", \"Fraunces Variable Fallback\", Georgia, \"Times New Roman\", serif",
-        "fontSize": "50px",
-        "fontWeight": "480",
-        "fontStyle": "normal",
-        "lineHeight": "54px",
-        "letterSpacing": "-0.75px",
-        "textTransform": "none",
-        "marginTop": "0px",
-        "marginBottom": "0px"
-      },
-      {
-        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
-        "fontSize": "19.52px",
-        "fontWeight": "400",
-        "fontStyle": "normal",
-        "lineHeight": "32.208px",
-        "letterSpacing": "normal",
-        "textTransform": "none",
-        "marginTop": "24px",
-        "marginBottom": "0px"
-      }
-    ]
-  },
-  "/media-kit/ @1440": {
-    "block": {
-      "paddingTop": "96px",
-      "paddingBottom": "48px"
-    },
-    "children": [
-      {
-        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
-        "fontSize": "12.48px",
-        "fontWeight": "600",
-        "fontStyle": "normal",
-        "lineHeight": "21.216px",
-        "letterSpacing": "2.2464px",
-        "textTransform": "uppercase",
-        "marginTop": "0px",
-        "marginBottom": "24px"
-      },
-      {
-        "fontFamily": "\"Fraunces Variable\", \"Fraunces Variable Fallback\", Georgia, \"Times New Roman\", serif",
-        "fontSize": "57.6px",
-        "fontWeight": "480",
-        "fontStyle": "normal",
-        "lineHeight": "62.208px",
-        "letterSpacing": "-0.864px",
-        "textTransform": "none",
-        "marginTop": "0px",
-        "marginBottom": "0px"
-      },
-      {
-        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
-        "fontSize": "19.52px",
-        "fontWeight": "400",
-        "fontStyle": "normal",
-        "lineHeight": "32.208px",
-        "letterSpacing": "normal",
-        "textTransform": "none",
-        "marginTop": "24px",
-        "marginBottom": "0px"
-      }
-    ]
-  },
-  "/speaking/producttank-global-2026/ @1000": {
-    "block": {
-      "paddingTop": "80px",
-      "paddingBottom": "40px"
-    },
-    "children": [
-      {
-        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
-        "fontSize": "12.48px",
-        "fontWeight": "600",
-        "fontStyle": "normal",
-        "lineHeight": "21.216px",
-        "letterSpacing": "2.2464px",
-        "textTransform": "uppercase",
-        "marginTop": "0px",
-        "marginBottom": "24px"
-      },
-      {
-        "fontFamily": "\"Fraunces Variable\", \"Fraunces Variable Fallback\", Georgia, \"Times New Roman\", serif",
-        "fontSize": "50px",
-        "fontWeight": "480",
-        "fontStyle": "normal",
-        "lineHeight": "54px",
-        "letterSpacing": "-0.75px",
-        "textTransform": "none",
-        "marginTop": "0px",
-        "marginBottom": "0px"
-      },
-      {
-        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
-        "fontSize": "19.52px",
-        "fontWeight": "400",
-        "fontStyle": "normal",
-        "lineHeight": "32.208px",
-        "letterSpacing": "normal",
-        "textTransform": "none",
-        "marginTop": "24px",
-        "marginBottom": "0px"
-      },
-      {
-        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
-        "fontSize": "17px",
-        "fontWeight": "600",
-        "fontStyle": "normal",
-        "lineHeight": "28.9px",
-        "letterSpacing": "normal",
-        "textTransform": "none",
-        "marginTop": "16px",
-        "marginBottom": "17px"
-      },
-      {
-        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
-        "fontSize": "17px",
-        "fontWeight": "400",
-        "fontStyle": "normal",
-        "lineHeight": "28.9px",
-        "letterSpacing": "normal",
-        "textTransform": "none",
-        "marginTop": "17px",
-        "marginBottom": "17px"
-      }
-    ]
-  },
-  "/speaking/producttank-global-2026/ @1440": {
-    "block": {
-      "paddingTop": "96px",
-      "paddingBottom": "48px"
-    },
-    "children": [
-      {
-        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
-        "fontSize": "12.48px",
-        "fontWeight": "600",
-        "fontStyle": "normal",
-        "lineHeight": "21.216px",
-        "letterSpacing": "2.2464px",
-        "textTransform": "uppercase",
-        "marginTop": "0px",
-        "marginBottom": "24px"
-      },
-      {
-        "fontFamily": "\"Fraunces Variable\", \"Fraunces Variable Fallback\", Georgia, \"Times New Roman\", serif",
-        "fontSize": "57.6px",
-        "fontWeight": "480",
-        "fontStyle": "normal",
-        "lineHeight": "62.208px",
-        "letterSpacing": "-0.864px",
-        "textTransform": "none",
-        "marginTop": "0px",
-        "marginBottom": "0px"
-      },
-      {
-        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
-        "fontSize": "19.52px",
-        "fontWeight": "400",
-        "fontStyle": "normal",
-        "lineHeight": "32.208px",
-        "letterSpacing": "normal",
-        "textTransform": "none",
-        "marginTop": "24px",
-        "marginBottom": "0px"
-      },
-      {
-        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
-        "fontSize": "17px",
-        "fontWeight": "600",
-        "fontStyle": "normal",
-        "lineHeight": "28.9px",
-        "letterSpacing": "normal",
-        "textTransform": "none",
-        "marginTop": "16px",
-        "marginBottom": "17px"
-      },
-      {
-        "fontFamily": "\"Jost Variable\", \"Jost Variable Fallback\", Futura, \"Century Gothic\", \"Trebuchet MS\", sans-serif",
-        "fontSize": "17px",
-        "fontWeight": "400",
-        "fontStyle": "normal",
-        "lineHeight": "28.9px",
-        "letterSpacing": "normal",
-        "textTransform": "none",
-        "marginTop": "17px",
-        "marginBottom": "17px"
       }
     ]
   }

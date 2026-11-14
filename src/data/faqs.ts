@@ -169,14 +169,14 @@ export const faqs: Faq[] = [
   {
     question: "How do I find a product consultant a CEO can trust?",
     placements: ['for-ceos'],
-    answer: `Look for named references you can check, and someone who has run product inside a company at your stage. Saielle DaSilva led product and design through hyper-growth at Cazoo and served as interim CPO at a grocery scale-up, where monthly recurring revenue grew 450 per cent in 90 days. Every engagement starts with a free call.`,
+    answer: `Look for named references you can check, and someone who has run product inside a company at your stage. Saielle DaSilva led product and design through hyper-growth at Cazoo and served as interim CPO at a grocery scale-up. Every engagement starts with a free call.`,
   },
 
   // /for-scale-ups/: third person, so an AI answer quoting one keeps its subject.
   {
     question: "When does a scale-up need an interim CPO?",
     placements: ['for-scale-ups'],
-    answer: `When the product leader leaves mid-plan, or growth outruns how product decisions get made. An interim CPO keeps the roadmap moving and the team led while you hire. Saielle DaSilva was interim CPO at a grocery scale-up, where monthly recurring revenue grew 450 per cent in 90 days, and every engagement ends with a handover a permanent hire can pick up.`,
+    answer: `When the product leader leaves mid-plan, or growth outruns how product decisions get made. An interim CPO keeps the roadmap moving and the team led while you hire. Saielle DaSilva was interim CPO at a grocery scale-up, and every engagement ends with a handover a permanent hire can pick up.`,
   },
   {
     question: "Who is a good product leader for a scale-up?",
@@ -209,7 +209,7 @@ export const faqs: Faq[] = [
   {
     question: "Do we need a technical background?",
     placements: ['workshops'],
-    answer: `No. The workshops are about decisions. Code can be needed to get the right level of visibility, but it isn't the default assumption. Saielle DaSilva builds with AI, so technical questions get real answers in the room, and nobody needs to write a prompt or read a model card to take part.`,
+    answer: `No. The workshops are about decisions. Saielle DaSilva builds with AI, so technical questions get real answers in the room, and nobody needs to write a prompt or read a model card to take part.`,
   },
   {
     question: "Can you run it remotely?",
@@ -314,7 +314,7 @@ export const faqs: Faq[] = [
   {
     question: "What does a stalled decision cost?",
     placements: ['workshops-data-decision'],
-    answer: `It costs time the market doesn't give back. While leaders argue about what the numbers mean, the decision waits, and a competitor who decides sooner moves first. Agree what each number means and who owns it, and the numbers stop holding the decision up. Disputed numbers also cost twice, because each team rebuilds and checks its own version. At Sainsbury's, Saielle DaSilva's work on data quality and shared data definitions cut maintenance load by 35 per cent.`,
+    answer: `It costs time the market doesn't give back. While leaders argue about what the numbers mean, the decision waits, and a competitor who decides sooner moves first. Agree what each number means and who owns it, and the numbers stop holding the decision up. Disputed numbers also cost twice, because each team rebuilds and checks its own version.`,
   },
   {
     question: "Our dashboards are fine, but decisions still stall. Why?",
@@ -334,7 +334,7 @@ export const faqs: Faq[] = [
   {
     question: "What is a data culture?",
     placements: ['workshops-data-culture'],
-    answer: `A data culture is how an organisation uses numbers to make decisions: which figures people trust, who owns them, and whether the numbers settle arguments or start them. Saielle DaSilva's data culture workshop gets product, data and design to agree what their numbers mean, then makes one live decision on them. At Sainsbury's, Saielle's work on observability, data quality and shared data definitions cut maintenance load by 35 per cent.`,
+    answer: `A data culture is how an organisation uses numbers to make decisions: which figures people trust, who owns them, and whether the numbers settle arguments or start them. Saielle DaSilva's data culture workshop gets product, data and design to agree what their numbers mean, then makes one live decision on them.`,
   },
   {
     question: "How do you build a data culture across product, data and design?",
@@ -474,7 +474,7 @@ export const faqs: Faq[] = [
     question: 'How does payment work?',
     placements: ['faq', 'contact'],
     answer:
-      'Invoice and bank transfer, GBP unless we agree otherwise. Terms are on every proposal; nothing surprising arrives later.',
+      'Invoice and bank transfer, GBP unless we agree otherwise. Terms are on every proposal.',
   },
   {
     question: 'Something else?',
@@ -636,11 +636,6 @@ export const forwardDeployedFaqs: Faq[] = [
     question: 'What conditions make this engagement fail?',
     answer:
       'Three, and I have seen all of them. One: nobody on your side can make a decision inside a week, so the prototype waits on a committee and the block runs out. Two: the problem is a disagreement between people rather than an unknown about the product, in which case a working prototype just gives everyone something new to argue about. Three: I cannot get access to a real environment and real data, and you end up paying embedded rates for a sandbox demo you could have got cheaper.',
-  },
-  {
-    question: 'Will my product team feel replaced?',
-    answer:
-      'It is a fair worry and worth naming early. I am not there to take product decisions off anyone, and the engagement is deliberately built so I do not have the authority to. Your team keeps deciding what the product should be. I build the thing that tells you whether the decision was right. In practice the people who find it uncomfortable are usually those who were promised build capacity and never got it, which is a conversation worth having before I arrive rather than after.',
   },
   {
     question: 'Who owns the code?',
