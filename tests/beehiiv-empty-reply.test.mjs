@@ -4,7 +4,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { mkdtempSync, readFileSync } from 'node:fs';
+import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fetchRawPosts } from '../src/lib/beehiiv-core.mjs';
@@ -52,8 +52,10 @@ test('a normal page still returns its posts', async (t) => {
   assert.deepEqual(await fetchRawPosts('key'), [{ id: 'p1' }]);
 });
 
-test('the daily check reports changed when beehiiv is unreadable', () => {
-  const out = join(mkdtempSync(join(tmpdir(), 'posts-changed-')), 'out');
+test('the daily check reports changed when beehiiv is unreadable', (t) => {
+  const dir = mkdtempSync(join(tmpdir(), 'posts-changed-'));
+  t.after(() => rmSync(dir, { recursive: true, force: true }));
+  const out = join(dir, 'out');
   const preload =
     'data:text/javascript,' +
     encodeURIComponent('globalThis.fetch = async () => ({ ok: true, status: 200, json: async () => ({}) });');
