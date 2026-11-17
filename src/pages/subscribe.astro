@@ -16,8 +16,8 @@ const recommendations = await liveRecommendations();
       <p class="eyebrow">Newsletter</p>
       <h1>How leaders set direction when AI does more of the building.</h1>
       <p class="lede">
-        I write about it in practice: what shipped, what broke, and what it
-        cost. Field-tested with the receipts.
+        For product, design and engineering leaders. What shipped, what broke,
+        and what it cost, with the receipts. Weekly, five to fifteen minutes an issue.
       </p>
     </header>
 
@@ -31,25 +31,25 @@ const recommendations = await liveRecommendations();
     </section>
 
     <div class="prose subscribe-page">
-      <p>
-        I've spent 15+ years on both sides of the bridge between the people who
-        build and the boards who fund: production AI taken from a handful of
-        experiments to millions of customers at Sainsbury's, some of the
-        earliest LLM products in European recruitment at StepStone, and Cazoo's
-        founding team through hyper-growth to listing at a $7B valuation. The technology keeps
-        changing. The hard part never does.
-      </p>
-
-      <p>What you'll get:</p>
+      <h2>What you get</h2>
       <ul>
         <li>What shipped, what broke, and what it cost, from my own AI-built products</li>
         <li>Where a model got something wrong: a number, a quote, a decision, and how I caught it</li>
         <li>The tools I build to fix my own process, released open source as I go</li>
       </ul>
+      <p>If it doesn't change a decision you make, it doesn't make the cut.</p>
+    </div>
 
+    <Recommendations items={recommendations} heading="Start with these." />
+
+    <div class="prose subscribe-page subscribe-about">
+      <h2>Who writes it</h2>
       <p>
-        Five to fifteen minutes per issue. If it
-        doesn't change a decision you make, it doesn't make the cut.
+        I've spent 15+ years on both sides of the bridge between the people who
+        build and the boards who fund: production AI at Sainsbury's, some of the
+        earliest LLM products in European recruitment at StepStone, and Cazoo's
+        founding team through to listing at a $7B valuation. The technology keeps
+        changing. The hard part never does.
       </p>
     </div>
 
@@ -57,8 +57,6 @@ const recommendations = await liveRecommendations();
       P.S. Subscribers will see early thinking from my book in progress with Matt
       LeMay.
     </p>
-
-    <Recommendations items={recommendations} heading="Not sure yet? Start here." />
   </section>
 </BaseLayout>
 
@@ -72,7 +70,7 @@ const recommendations = await liveRecommendations();
   .subscribe-cta {
     /* .prose already carries the section's bottom padding (matches every
        service page: prose → CTA with no extra top margin). */
-    margin-bottom: var(--space-6);
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
   }
   .subscribe-ps {
     max-width: 46ch;
