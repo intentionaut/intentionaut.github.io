@@ -5,7 +5,10 @@ import { BOOKING_URL } from '../data/links';
 import { rates, gbp } from '../data/rates';
 import FaqList from '../components/FaqList.astro';
 import { faqsFor } from '../data/faqs';
+import { testimonialsFor } from '../data/testimonials';
+import TestimonialCarousel from '../components/TestimonialCarousel.astro';
 
+const testimonials = testimonialsFor('interim-cpo');
 const interimFaqs = faqsFor('interim-cpo');
 const faqSchema = {
   '@type': 'FAQPage',
@@ -87,6 +90,7 @@ const serviceSchema = {
         <li>Day-to-day leadership of the product and design team.</li>
         <li>A clear handover when it ends: a working team, and an operating model that runs without her.</li>
       </ul>
+      <TestimonialCarousel testimonials={testimonials} heading="What people say" />
 
       <h2>How does it work?</h2>
       <dl class="ledger">

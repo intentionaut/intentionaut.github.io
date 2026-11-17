@@ -181,7 +181,7 @@ export const faqs: Faq[] = [
   {
     question: "Who is a good product leader for a scale-up?",
     placements: ['for-scale-ups'],
-    answer: `Someone who has run product inside a company at your stage, with results you can check. Saielle DaSilva was the first design hire at Cazoo and stayed through hyper-growth to a $7B IPO. She set one rubric for hiring and development, so the standard lived in the team and not in one person.`,
+    answer: `Someone who has run product inside a company at your stage, with results you can check. Saielle DaSilva was the first design hire at Cazoo and stayed through hyper-growth to listing at a $7B valuation. She set one rubric for hiring and development, so the standard lived in the team and not in one person.`,
   },
 
   // Workshops (/workshops/ and its three pages). Answers name Saielle DaSilva
