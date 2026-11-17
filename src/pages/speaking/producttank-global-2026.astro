@@ -5,6 +5,8 @@ import FrameSubscribe from '../../components/FrameSubscribe.astro';
 // Recap after the talk on 18 Nov 2026. Mind the Product does the full write-up; this page points there.
 const mtp =
   'https://go.mindtheproduct.com/november-product-tank-webinar-register?utm_medium=socials&utm_campaign=ptankglobal';
+// Same feedback form as on the day; utm_source tells later viewers apart.
+const feedback = 'https://tally.so/r/BEdAeR?utm_source=talk-recording';
 const dualtrack =
   'https://github.com/intentionaut/dualtrack-core?utm_source=intentionaut&utm_medium=referral&utm_campaign=producttank-global-2026-11-18&utm_content=talk-recap';
 
@@ -82,7 +84,10 @@ const jsonLd = {
         {takeaways.map(([lead, rest]) => <li><span><strong>{lead}</strong> {rest}</span></li>)}
       </ol>
     </div>
-    <p><a class="btn-primary" href={mtp} target="_blank" rel="noopener noreferrer">Watch the full talk on Mind the Product</a></p>
+    <p class="talk-actions">
+      <a class="btn-primary" href={mtp} target="_blank" rel="noopener noreferrer">Watch the full talk on Mind the Product</a>
+      <a class="link-arrow" href={feedback} target="_blank" rel="noopener noreferrer"><span>Watched it? Tell me how it went</span></a>
+    </p>
 
     {groups.map((g, i) => (
       <section class="talk-band" aria-label={g.heading}>
@@ -149,6 +154,12 @@ const jsonLd = {
     margin: var(--space-1) 0 0;
     font-size: var(--text-xs, 0.8rem);
     color: var(--accent-text);
+  }
+  .talk-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-4) var(--space-6);
   }
   .talk-who {
     margin-top: var(--space-5);
