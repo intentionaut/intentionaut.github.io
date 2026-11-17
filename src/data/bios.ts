@@ -13,7 +13,7 @@ export const bios = [
     length: '150 words',
     text: [
       "Saielle DaSilva (she/her) works as a fractional chief product officer through Intentionaut, for companies building AI products. The work starts with what a business is trying to change, then gives teams a direction they can act on.",
-      "At Sainsbury's, she was Senior Head of Product for AI, Data Platforms and Machine Learning, making the route from AI request to production 80% faster. Before that came Global VP of Experience Design at StepStone, building some of the first LLM-powered products in European recruitment; interim CPO at Herd Market, where monthly recurring revenue grew 450% in 90 days; and three years on Cazoo's founding team, as it scaled fast and listed at a $7B valuation. Earlier roles include a founding hire at Pivotal in Dallas, and time at Amazon and AT&T.",
+      "At Sainsbury's, she was Senior Head of Product for AI, Data Platforms and Machine Learning, making the route from AI request to production 80% faster. Before that came Global VP of Experience Design at StepStone, building some of the first LLM-powered products in European recruitment; interim CPO at a grocery scale-up, where monthly recurring revenue grew 450% in 90 days; and three years on Cazoo's founding team, as it scaled fast and listed at a $7B valuation. Earlier roles include a founding hire at Pivotal in Dallas, and time at Amazon and AT&T.",
       "She has spoken at Mind the Product London, Turing Fest and Business of Software.",
     ].join('\n\n'),
   },
