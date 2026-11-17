@@ -19,6 +19,7 @@ const LEGACY_REDIRECTS = new Set([
   '/releases/kernic/',
   '/projects/kernic/',
   '/projects/familiar/',
+  '/speaking/producttank-global-2026/',
 ]);
 
 // Pages whose canonical points to another domain. Listing them here made the
@@ -87,7 +88,7 @@ export default defineConfig({
         // noindex'd: a page of UI tokens, not something to rank for.
         !/\/design-system\/?$/.test(page) &&
         // Talk resources page stays unlisted until after the talk (18 Nov 2026); remove this line then.
-        new URL(page).pathname !== '/speaking/producttank-global-2026/' &&
+        new URL(page).pathname !== '/speaking/how-to-manage-ai-agents-as-a-product-leader/' &&
         !LEGACY_REDIRECTS.has(new URL(page).pathname) &&
         !CROSS_DOMAIN_CANONICAL.has(new URL(page).pathname) &&
         !LOCKED_CASE_STUDIES.has(new URL(page).pathname),
