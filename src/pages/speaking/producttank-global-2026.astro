@@ -70,7 +70,7 @@ const jsonLd = {
       <h1>How to manage AI agents as a product leader</h1>
       <p class="talk-who"><strong>Saielle DaSilva</strong>, fractional chief product officer and maker of Dualtrack. Talk and resources from Mind the Product's ProductTank Global.</p>
       <p class="lede">Five takeaways and every link from the talk, in one place.</p>
-      <p>
+      <p class="talk-context">
         At ProductTank Global, Mind the Product's online meetup, on 18 November 2026, Saielle DaSilva spoke about
         managing AI agents as a product leader. The talk covers how to choose work worth doing, write the outcome and
         evidence before handing a task to an agent, and keep the agent that builds separate from the one that reviews.
@@ -161,8 +161,15 @@ const jsonLd = {
     align-items: center;
     gap: var(--space-4) var(--space-6);
   }
+  /* Even rhythm in the header: name line, lede, then context. */
   .talk-who {
-    margin-top: var(--space-5);
+    margin: var(--space-5) 0 0;
+  }
+  .page-head .lede {
+    margin: var(--space-5) 0 0;
+  }
+  .talk-context {
+    margin: var(--space-4) 0 0;
   }
   .house-rules {
     position: relative;
