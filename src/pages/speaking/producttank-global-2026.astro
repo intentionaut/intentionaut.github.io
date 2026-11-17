@@ -1,94 +1,222 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import SubscribeForm from '../../components/SubscribeForm.astro';
-import KeepReading from '../../components/KeepReading.astro';
-import { getEntry } from 'astro:content';
-import { writingEntries } from '../../data/writing';
+import FrameSubscribe from '../../components/FrameSubscribe.astro';
 
-// Anonymised quotes from her last Mind the Product talk: same audience. The f-word one stays on /speaking/ only.
-const pastTalk = await getEntry('talks', 'mtp-f-words-2022');
-const quotes = (pastTalk?.data.quotes ?? []).filter((q) => !q.text.includes('fuck'));
-// Chosen for an agents audience; Search Console has no post traffic to rank by yet.
-const picks = [
-  '/writing/the-ai-agent-reality-check/',
-  '/writing/the-new-architecture-of-software-quality/',
-  '/writing/the-coming-shift-in-enterprise-metadata/',
+// Recap after the talk on 18 Nov 2026. Mind the Product does the full write-up; this page points there.
+const mtp =
+  'https://go.mindtheproduct.com/november-product-tank-webinar-register?utm_medium=socials&utm_campaign=ptankglobal';
+// Same feedback form as on the day; utm_source tells later viewers apart.
+const feedback = 'https://tally.so/r/Arpx5e?utm_source=talk-recording';
+const dualtrack =
+  'https://github.com/intentionaut/dualtrack-core?utm_source=intentionaut&utm_medium=referral&utm_campaign=producttank-global-2026-11-18&utm_content=talk-recap';
+
+const takeaways = [
+  ['Choosing is the job now.', 'Building is cheap. Impact is not.'],
+  ['Write the outcome and the evidence before the task.', 'The Impact Chain shows you the weak link.'],
+  ['Manage agents with practices you already run, written down.', "People fill gaps from context. Agents only have what's written."],
+  ['Checks, not trust.', 'Keep the builder and the reviewer separate. Every miss becomes a rule.'],
+  ["The leader's role shifts", 'from doing the work to setting the bar, from reviewing output to reading evidence, and from more tasks to fewer, better bets.'],
 ];
-const reading = picks.map((u) => writingEntries.find((e) => e.url === u)).filter((e) => e !== undefined);
 
-// Placeholder until the talk on 18 Nov 2026; the full resources pack replaces it just before the talk.
-const signup =
-  'https://go.mindtheproduct.com/november-product-tank-webinar-register?utm_source=saielle&utm_medium=socials&utm_campaign=ptankglobal';
+type Link = { title: string; text: string; href: string; host: string; note?: { text: string; label: string; href: string } };
+const groups: { heading: string; links: Link[] }[] = [
+  {
+    heading: 'From Saielle',
+    links: [
+      { title: 'Dualtrack: free to take home', text: 'The product team of agents from the talk, for Claude Code. Free to install and use. Each role has written limits, it never merges without your say, and it publishes its test results, failures included.', href: dualtrack, host: 'github.com/intentionaut/dualtrack-core' },
+      { title: 'The Impact Chain', text: 'Trace an AI bet from the job it does to the payoff, and find the weak link.', href: '/tools/impact-first-ai/impact-chain/', host: 'intentionaut.com' },
+      { title: 'The F words of highly successful product organisations', text: 'Her Mind the Product London talk on the habits that make product organisations work.', href: 'https://www.mindtheproduct.com/the-f-words-of-highly-successful-product-organisations-by-saielle-dasilva', host: 'mindtheproduct.com' },
+    ],
+  },
+  {
+    heading: 'Get started',
+    links: [
+      { title: 'Impact-first Product Teams', text: 'Matt LeMay. The book behind the thinking that powers Dualtrack: define success first, then do the work that matters.', href: 'https://mattlemay.com/books', host: 'mattlemay.com' },
+      { title: 'Claude Code for Absolute Beginners', text: "Allie K. Miller. A video walkthrough if you've never opened it.", href: 'https://www.youtube.com/watch?v=v1ynWeHhzXs', host: 'youtube.com'},
+      { title: 'Claude Code quickstart', text: "Anthropic's own guide to installing it and your first session, kept up to date.", href: 'https://code.claude.com/docs/en/quickstart', host: 'claude.com' },
+      { title: 'A definition of done for an AI feature', text: 'Jeff Gothelf. Who owns the failures, and when it counts as done.', href: 'https://jeffgothelf.com/blog/how-to-write-a-definition-of-done-for-an-ai-feature/', host: 'jeffgothelf.com' },
+      { title: 'Novus', text: 'Product feedback and friction, from real use.', href: 'https://www.novus.ai/', host: 'novus.ai' },
+    ],
+  },
+  {
+    heading: 'Keep going',
+    links: [
+      { title: 'The next ProductTank Global', text: 'Mind the Product events, including the next ProductTank Global.', href: mtp, host: 'mindtheproduct.com' },
+    ],
+  },
+];
+
+const jsonLd = {
+  '@type': 'Event',
+  name: 'How to manage AI agents as a product leader',
+  startDate: '2026-11-18',
+  eventAttendanceMode: 'https://schema.org/OnlineEventAttendanceMode',
+  location: { '@type': 'VirtualLocation', url: 'https://go.mindtheproduct.com/november-product-tank-webinar-register' },
+  organizer: { '@type': 'Organization', name: 'Mind the Product', url: 'https://www.mindtheproduct.com/' },
+  performer: { '@type': 'Person', name: 'Saielle DaSilva', url: 'https://intentionaut.com/' },
+  superEvent: { '@type': 'EventSeries', name: 'ProductTank Global' },
+};
 ---
 
 <BaseLayout
-  title="How do you manage AI agents as a product leader? | Saielle DaSilva"
-  description="How a product leader manages a team of AI agents: checks, budgets and small batches. A free online talk from Saielle DaSilva, 18 November 2026."
+  title="How to manage AI agents as a product leader | Saielle DaSilva, Mind the Product"
+  description="Saielle DaSilva's ProductTank Global talk (Mind the Product, 18 November 2026) on managing AI agents as a product leader: five takeaways, Dualtrack, and curated links for getting started with AI."
+  jsonLd={jsonLd}
+  noindex
 >
   <section class="wrap">
     <header class="page-head">
-      <p class="eyebrow">Free talk · ProductTank Global</p>
-      <h1>How do you manage AI agents as a product leader?</h1>
-      <p class="lede">
-        Saielle DaSilva manages a small team of AI agents with what has always
-        worked on people: small batches of work, a budget for each, and checks
-        that give the same answer every time. This talk shows what that looks
-        like day to day.
+      <p class="eyebrow">ProductTank Global · 18 November 2026</p>
+      <h1>How to manage AI agents as a product leader</h1>
+      <p class="talk-who"><strong>Saielle DaSilva</strong>, fractional chief product officer and maker of Dualtrack. Talk and resources from Mind the Product's ProductTank Global.</p>
+      <p class="lede">Five takeaways and every link from the talk, in one place.</p>
+      <p class="talk-context">
+        At ProductTank Global, Mind the Product's online meetup, on 18 November 2026, Saielle DaSilva spoke about
+        managing AI agents as a product leader. The talk covers how to choose work worth doing, write the outcome and
+        evidence before handing a task to an agent, and keep the agent that builds separate from the one that reviews.
+        It shows Dualtrack, her free product team of agents for Claude Code, as a working example.
       </p>
-      <p class="talk-when">
-        Wednesday 18 November 2026, 1pm GMT (8am ET). Online, free and recorded.
-      </p>
-      <p><a class="btn-primary" href={signup} target="_blank" rel="noopener noreferrer">Register on Mind the Product</a></p>
     </header>
 
-    <section class="talk-band" aria-labelledby="pack-h">
-    <h2 id="pack-h">Get the resources pack</h2>
-    <p>
-      Dualtrack Agents is an open source product team of AI agents: a product
-      manager, an engineer and a designer. You can install it and run it
-      yourself. The pack also has the tools Saielle DaSilva uses and her
-      write-up of the talk. Subscribe to the newsletter and it arrives in your
-      welcome email.
+    <div class="house-rules">
+      <p class="house-rules-label">Five things to take away</p>
+      <ol>
+        {takeaways.map(([lead, rest]) => <li><span><strong>{lead}</strong> {rest}</span></li>)}
+      </ol>
+    </div>
+    <p class="talk-actions">
+      <a class="btn-primary" href={mtp} target="_blank" rel="noopener noreferrer">Watch the full talk on Mind the Product</a>
+      <a class="link-arrow" href={feedback} target="_blank" rel="noopener noreferrer"><span>Watched it? Tell me how it went</span></a>
     </p>
-    <SubscribeForm
-      variant="inline"
-      source="talk"
-      campaign="producttank-global-2026"
-      emailId="talk-email"
-      buttonLabel="Subscribe and get the pack"
-    />
-    </section>
 
-    {quotes.length > 0 && (
-      <section class="talk-band" aria-labelledby="quotes-h">
-        <h2 id="quotes-h">What people said last time</h2>
-        <div class="talk-quotes">
-          {quotes.map((q) => (
-            <figure class="pull-quote">
-              <blockquote><p>{q.text}</p></blockquote>
-              <figcaption>{q.attribution}, Mind the Product 2022</figcaption>
-            </figure>
-          ))}
-        </div>
+    {groups.map((g, i) => (
+      <section class="talk-band" aria-label={g.heading}>
+        <h2>{g.heading}</h2>
+        {i === 0 ? (
+          <ol class="project-list">
+            {g.links.map((l) => (
+              <li class="project-row">
+                <a class="project-card" href={l.href} {...(l.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
+                  <span class="talk-title">{l.title}</span>
+                  <span class="project-summary">{l.text}</span>
+                  <span class="talk-meta">{l.host}</span>
+                </a>
+              </li>
+            ))}
+          </ol>
+        ) : (
+          <ol class="talk-list">
+            {g.links.map((l) => (
+              <li class="talk-row">
+                <div>
+                  <a class="talk-title" href={l.href} target="_blank" rel="noopener noreferrer">{l.title}</a>
+                  <p class="talk-meta">{l.text}</p>
+                  <p class="tl-host">{l.host}</p>
+                  {l.note && <p class="talk-meta">{l.note.text} <a href={l.note.href} target="_blank" rel="noopener noreferrer">{l.note.label}</a>.</p>}
+                </div>
+              </li>
+            ))}
+          </ol>
+        )}
       </section>
-    )}
+    ))}
 
-    <KeepReading items={reading} heading="Read for yourself" />
+    <section class="talk-band">
+      <FrameSubscribe
+        eyebrow="Newsletter"
+        heading="Tips, tools and guidance for product leaders working with AI."
+        source="talk"
+        campaign="producttank-global-2026"
+        emailId="talk-email"
+        align="left"
+      />
+    </section>
   </section>
 </BaseLayout>
 
 <style>
-  /* Same band as KeepReading, so every section below the header is spaced alike. */
+  /* One section gap between bands; the lists bring their own ink rule, so no extra rule or bottom padding. */
   .talk-band {
     margin-top: clamp(3rem, 6vw, 5rem);
-    padding-top: var(--space-7);
-    border-top: 1px solid var(--slate);
+  }
+  .talk-band :global(.project-list),
+  .talk-band :global(.talk-list) {
+    padding-bottom: 0;
   }
   .talk-band > h2 {
     margin: 0 0 var(--space-4);
   }
-  .talk-when {
-    margin-top: var(--space-4);
+  /* Rows here have no date column: one column, the site under the text. */
+  .talk-band :global(.talk-row) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .tl-host {
+    margin: var(--space-1) 0 0;
+    font-size: var(--text-xs, 0.8rem);
+    color: var(--accent-text);
+  }
+  /* Short link cards: let the summary run the card's width. */
+  .talk-band :global(.project-summary) {
+    max-width: none;
+  }
+  .talk-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-4) var(--space-6);
+  }
+  /* Even rhythm in the header: name line, lede, then context. */
+  .talk-who {
+    margin: var(--space-5) 0 0;
+  }
+  .page-head .lede {
+    margin: var(--space-5) 0 0;
+  }
+  .talk-context {
+    margin: var(--space-4) 0 0;
+  }
+  .house-rules {
+    position: relative;
+    margin: 0 0 var(--space-6);
+    padding: var(--space-5) var(--space-6);
+    border: 1px solid var(--ink);
+    background: var(--card);
+    box-shadow: var(--lift);
+  }
+  .house-rules::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border: 1px solid var(--slate);
+    pointer-events: none;
+  }
+  .house-rules-label {
+    margin: 0 0 var(--space-4);
+    font: 400 var(--text-lg, 1.4rem) / 1.2 var(--font-display);
+    color: var(--ink);
+  }
+  .house-rules ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: rule;
+    display: grid;
+    gap: var(--space-3);
+  }
+  /* Number in its own column, so wrapped lines hang level with the text. */
+  .house-rules li {
+    counter-increment: rule;
+    display: grid;
+    grid-template-columns: 1.6em minmax(0, 1fr);
+    align-items: baseline;
+  }
+  .house-rules strong {
     font-weight: 600;
+  }
+  .house-rules li::before {
+    content: counter(rule) '.';
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--accent-text);
   }
 </style>
