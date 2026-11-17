@@ -25,7 +25,7 @@ const groups: { heading: string; links: Link[] }[] = [
     links: [
       { title: 'Dualtrack: free to take home', text: 'The product team of agents from the talk, for Claude Code. Free to install and use. Each role has written limits, it never merges without your say, and it publishes its test results, failures included.', href: dualtrack, host: 'github.com/intentionaut/dualtrack-core',
         // The repo goes public at talk time. Delete this line then, and the card becomes a link.
-        soon: 'Coming soon: the link goes live during the talk on 18 November.' },
+        soon: 'Coming soon' },
       { title: 'The Impact Chain', text: 'Trace an AI bet from the job it does to the payoff, and find the weak link.', href: '/tools/impact-first-ai/impact-chain/', host: 'intentionaut.com' },
       { title: 'The F words of highly successful product organisations', text: 'Her Mind the Product London talk on the habits that make product organisations work.', href: 'https://www.mindtheproduct.com/the-f-words-of-highly-successful-product-organisations-by-saielle-dasilva', host: 'mindtheproduct.com' },
     ],
@@ -99,10 +99,11 @@ const jsonLd = {
             {g.links.map((l) => (
               <li class="project-row">
                 {l.soon ? (
-                  <div class="project-card">
+                  <div class="project-card is-soon">
+                    <span class="soon-label">{l.soon}</span>
                     <span class="talk-title">{l.title}</span>
                     <span class="project-summary">{l.text}</span>
-                    <span class="talk-meta">{l.soon}</span>
+                    <span class="talk-meta">{l.host}</span>
                   </div>
                 ) : (
                   <a class="project-card" href={l.href} {...(l.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
@@ -228,5 +229,24 @@ const jsonLd = {
     font-family: var(--font-display);
     font-style: italic;
     color: var(--accent-text);
+  }
+  /* Not live yet: a small label in the card's top-right corner, the title clear of it. */
+  .is-soon {
+    position: relative;
+  }
+  .is-soon .talk-title {
+    padding-right: 8rem;
+  }
+  .soon-label {
+    position: absolute;
+    top: var(--space-4);
+    right: var(--space-4);
+    font: 600 0.7rem var(--font-body);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-text);
+    border: 1px solid var(--slate);
+    background: var(--paper);
+    padding: 0.4em 0.8em;
   }
 </style>
