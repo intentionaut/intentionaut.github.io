@@ -21,6 +21,15 @@ const recommendations = await liveRecommendations();
       </p>
     </header>
 
+    <section class="subscribe-cta" aria-label="Subscribe">
+      <SubscribeForm
+        variant="full"
+        source="subscribe-page"
+        emailId="subscribe-email"
+        buttonLabel="Get the letter"
+      />
+    </section>
+
     <div class="prose subscribe-page">
       <p>
         I've spent 15+ years on both sides of the bridge between the people who
@@ -43,15 +52,6 @@ const recommendations = await liveRecommendations();
         doesn't change a decision you make, it doesn't make the cut.
       </p>
     </div>
-
-    <section class="subscribe-cta" aria-label="Subscribe">
-      <SubscribeForm
-        variant="full"
-        source="subscribe-page"
-        emailId="subscribe-email"
-        buttonLabel="Get the letter"
-      />
-    </section>
 
     <p class="subscribe-ps">
       P.S. Subscribers will see early thinking from my book in progress with Matt

@@ -103,8 +103,23 @@ const {
     gap: var(--space-3);
     text-align: left;
   }
+  /* The one action on the page: filled, so it reads as the thing to press. */
   .subscribe--full .btn-plain {
     align-self: flex-start;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 1em 2em;
+  }
+  .subscribe--full .btn-plain::before {
+    background: var(--accent);
+  }
+  .subscribe--full .btn-plain::after {
+    border-color: color-mix(in srgb, var(--paper) 55%, transparent);
+  }
+  @media (max-width: 720px) {
+    .subscribe--full .btn-plain {
+      align-self: stretch;
+    }
   }
   .subscribe--full .subscribe-note,
   .subscribe--full .subscribe-status,
