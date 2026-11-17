@@ -155,6 +155,10 @@ const jsonLd = {
     font-size: var(--text-xs, 0.8rem);
     color: var(--accent-text);
   }
+  /* Short link cards: let the summary run the card's width. */
+  .talk-band :global(.project-summary) {
+    max-width: none;
+  }
   .talk-actions {
     display: flex;
     flex-wrap: wrap;
