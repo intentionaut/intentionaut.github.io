@@ -18,12 +18,12 @@ const takeaways = [
   ["The leader's role shifts", 'from doing the work to setting the bar, from reviewing output to reading evidence, and from more tasks to fewer, better bets.'],
 ];
 
-type Link = { title: string; text: string; href: string; host: string; note?: { text: string; label: string; href: string }; soon?: string };
+type Link = { title: string; text: string; href: string; host: string; note?: { text: string; label: string; href: string }; soon?: string; tag?: string };
 const groups: { heading: string; links: Link[] }[] = [
   {
     heading: 'From Saielle',
     links: [
-      { title: 'Dualtrack: free to take home', text: 'The product team of agents from the talk, for Claude Code. Free to install and use. Each role has written limits, and it publishes its test results, failures included.', href: dualtrack, host: 'github.com/intentionaut/dualtrack-core' },
+      { title: 'Dualtrack: free to take home', text: 'The product team of agents from the talk, for Claude Code. Free to install and use. Each role has written limits, and it publishes its test results, failures included.', href: dualtrack, host: 'github.com/intentionaut/dualtrack-core', tag: 'Try Dualtrack' },
       { title: 'The Impact Chain', text: 'Trace an AI bet from the job it does to the payoff, and find the weak link.', href: '/tools/impact-first-ai/impact-chain/', host: 'intentionaut.com' },
     ],
   },
@@ -106,7 +106,8 @@ const jsonLd = {
                     <span class="talk-meta">{l.host}</span>
                   </div>
                 ) : (
-                  <a class="project-card" href={l.href} {...(l.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
+                  <a class={l.tag ? 'project-card is-soon' : 'project-card'} href={l.href} {...(l.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
+                    {l.tag && <span class="soon-label">{l.tag}</span>}
                     <span class="talk-title">{l.title}</span>
                     <span class="project-summary">{l.text}</span>
                     <span class="talk-meta">{l.host}</span>
@@ -230,7 +231,7 @@ const jsonLd = {
     font-style: italic;
     color: var(--accent-text);
   }
-  /* Not live yet: a small label in the card's top-right corner, the title clear of it. */
+  /* A small label (Coming soon, Try Dualtrack) in the card's top-right corner, the title clear of it. */
   .is-soon {
     position: relative;
   }
