@@ -18,12 +18,14 @@ const takeaways = [
   ["The leader's role shifts", 'from doing the work to setting the bar, from reviewing output to reading evidence, and from more tasks to fewer, better bets.'],
 ];
 
-type Link = { title: string; text: string; href: string; host: string; note?: { text: string; label: string; href: string } };
+type Link = { title: string; text: string; href: string; host: string; note?: { text: string; label: string; href: string }; soon?: string };
 const groups: { heading: string; links: Link[] }[] = [
   {
     heading: 'From Saielle',
     links: [
-      { title: 'Dualtrack: free to take home', text: 'The product team of agents from the talk, for Claude Code. Free to install and use. Each role has written limits, it never merges without your say, and it publishes its test results, failures included.', href: dualtrack, host: 'github.com/intentionaut/dualtrack-core' },
+      { title: 'Dualtrack: free to take home', text: 'The product team of agents from the talk, for Claude Code. Free to install and use. Each role has written limits, it never merges without your say, and it publishes its test results, failures included.', href: dualtrack, host: 'github.com/intentionaut/dualtrack-core',
+        // The repo goes public at talk time. Delete this line then, and the card becomes a link.
+        soon: 'Coming soon: the link goes live during the talk on 18 November.' },
       { title: 'The Impact Chain', text: 'Trace an AI bet from the job it does to the payoff, and find the weak link.', href: '/tools/impact-first-ai/impact-chain/', host: 'intentionaut.com' },
       { title: 'The F words of highly successful product organisations', text: 'Her Mind the Product London talk on the habits that make product organisations work.', href: 'https://www.mindtheproduct.com/the-f-words-of-highly-successful-product-organisations-by-saielle-dasilva', host: 'mindtheproduct.com' },
     ],
@@ -96,11 +98,19 @@ const jsonLd = {
           <ol class="project-list">
             {g.links.map((l) => (
               <li class="project-row">
-                <a class="project-card" href={l.href} {...(l.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
-                  <span class="talk-title">{l.title}</span>
-                  <span class="project-summary">{l.text}</span>
-                  <span class="talk-meta">{l.host}</span>
-                </a>
+                {l.soon ? (
+                  <div class="project-card">
+                    <span class="talk-title">{l.title}</span>
+                    <span class="project-summary">{l.text}</span>
+                    <span class="talk-meta">{l.soon}</span>
+                  </div>
+                ) : (
+                  <a class="project-card" href={l.href} {...(l.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
+                    <span class="talk-title">{l.title}</span>
+                    <span class="project-summary">{l.text}</span>
+                    <span class="talk-meta">{l.host}</span>
+                  </a>
+                )}
               </li>
             ))}
           </ol>
