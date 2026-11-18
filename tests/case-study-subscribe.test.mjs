@@ -24,6 +24,16 @@ test('the card carries the approved copy, exactly', () => {
   assert.ok(openBranch.includes('buttonLabel="Follow along"'));
 });
 
+test('a "Book a free call" link sits just below the card, using the shared booking URL', () => {
+  const after = openBranch.slice(openBranch.indexOf('<FrameSubscribe'));
+  assert.match(after, /<\/section>\s*<p class="cs-book">\s*<a class="link-arrow" href=\{BOOKING_URL\}[^>]*><span>Book a free call<\/span>/);
+});
+
+test('a locked study still carries noindex and its password card', () => {
+  assert.ok(page.includes('noindex={locked}'));
+  assert.ok(lockedBranch.includes('cs-lock'));
+});
+
 test('a locked study has no card', () => {
   assert.ok(!lockedBranch.includes('FrameSubscribe'));
 });
