@@ -34,6 +34,9 @@ const {
   variant = 'inline',
   placeholder = 'your@email.com',
 } = Astro.props;
+
+// Same widget as the contact form; a test keeps the two keys equal.
+const TURNSTILE_SITEKEY = '0x4AAAAAAEcCwzuExy2fSCmH';
 ---
 
 <div class:list={['subscribe', `subscribe--${variant}`]}>
@@ -75,6 +78,8 @@ const {
         </label>
       )
     }
+    {/* Bot check. Invisible unless Cloudflare needs the reader to click. */}
+    <div class="subscribe-turnstile" data-sitekey={TURNSTILE_SITEKEY} data-theme="light" data-appearance="interaction-only"></div>
     <button class="btn-plain" type="submit">{buttonLabel}</button>
   </form>
 
@@ -130,6 +135,15 @@ const {
   /* Keep the inline row to just input + button. */
   .subscribe--inline .btn-plain {
     flex-shrink: 0;
+  }
+
+  /* When the check does show, it takes its own row below the inline input. */
+  .subscribe-turnstile {
+    flex-basis: 100%;
+    order: 3;
+  }
+  .subscribe-turnstile:empty {
+    display: none;
   }
 
   .subscribe-hp {
@@ -203,6 +217,31 @@ const {
   import { trackEvent } from '../lib/pendo';
 
   const ENDPOINT = 'https://contact-form.intentionaut.workers.dev/subscribe';
+
+  // Explicit render, so each form keeps its widget id and resets only its own widget.
+  // Not class "cf-turnstile": the contact form's implicit script would render it without an id.
+  const API = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+  const renderWidgets = () =>
+    document.querySelectorAll<HTMLElement>('.subscribe-turnstile:not([data-widget-id])').forEach((el) => {
+      el.dataset.widgetId = (window as any).turnstile.render(el);
+    });
+  if ((window as any).turnstile) renderWidgets();
+  else {
+    // One Turnstile script per page, however many forms it holds.
+    const loaded = document.querySelector<HTMLScriptElement>(`script[src^="${API}"]`);
+    if (loaded) loaded.addEventListener('load', renderWidgets);
+    else {
+      (window as any).onSubscribeTurnstile = renderWidgets;
+      const s = document.createElement('script');
+      s.src = `${API}?render=explicit&onload=onSubscribeTurnstile`;
+      s.async = true;
+      document.head.appendChild(s);
+    }
+  }
+  const resetWidget = (form: HTMLElement) => {
+    const id = form.querySelector<HTMLElement>('.subscribe-turnstile')?.dataset.widgetId;
+    if (id) (window as any).turnstile?.reset(id);
+  };
 
   // A ?utm_source= / ?ref= on the URL wins over the form's placement label, so a
   // link shared on Bluesky (intentionaut.com/subscribe/?utm_source=bluesky)
@@ -296,6 +335,7 @@ const {
             campaign: signupCampaign,
             medium: medium || undefined,
             website: fd.get('website') || '',
+            'cf-turnstile-response': fd.get('cf-turnstile-response') || undefined,
             referrer,
           }),
         });
@@ -326,11 +366,14 @@ const {
             error_type: 'http_error',
           });
           setStatus(result.error || 'Something went wrong. Try again in a moment.', true);
+          // A Turnstile token is single-use; a retry needs a fresh one.
+          resetWidget(form);
           if (button) button.disabled = false;
         }
       } catch {
         trackEvent('newsletter_signup_failed', { ...tracked, error_type: 'network_error' });
         setStatus('Something went wrong. Try again in a moment.', true);
+        resetWidget(form);
         if (button) button.disabled = false;
       }
     });
