@@ -45,6 +45,15 @@ const enabled = import.meta.env.PROD && !disabled;
         function get() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
         function set(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
 
+        // Internal browsers never send analytics. Visit any page with ?internal=1 once per browser to mark it; ?internal=0 undoes it.
+        var INTERNAL = 'analytics-internal';
+        try {
+          var flag = new URLSearchParams(location.search).get('internal');
+          if (flag === '1') localStorage.setItem(INTERNAL, '1');
+          if (flag === '0') localStorage.removeItem(INTERNAL);
+        } catch (e) {}
+        function internal() { try { return localStorage.getItem(INTERNAL) === '1'; } catch (e) { return false; } }
+
         function strip(u) { return typeof u === 'string' ? u.split('#')[0] : u; }
 
         // Survey cap: at most 3 showings in 30 days, never after an answer.
@@ -72,6 +81,7 @@ const enabled = import.meta.env.PROD && !disabled;
         }
 
         function load() {
+          if (internal()) return;
           loadPendo();
           // Re-accept after a decline on the same page: PostHog is loaded but opted out.
           if (window.posthog && window.posthog.__loaded) { window.posthog.opt_in_capturing(); return; }
