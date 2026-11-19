@@ -21,6 +21,13 @@ test('"Book a free call" link sits directly under the lede', () => {
   assert.match(m[0], /rel="noopener noreferrer"/);
 });
 
+test('enquiry form preselects Interim cover; other pages keep their default', () => {
+  assert.match(src, /<ContactForm[^>]*selected="interim"/);
+  assert.match(read('../src/components/ContactForm.astro'), /\['interim', 'Interim cover'\]/);
+  assert.match(read('../src/pages/fractional.astro'), /<ContactForm[^>]*selected="fractional"/);
+  assert.match(read('../src/pages/contact.astro'), /<ContactForm[^>]*selected="other"/);
+});
+
 test('/fractional/ links to /interim-cpo/', () => {
   assert.ok(read('../src/pages/fractional.astro').includes('href="/interim-cpo/"'));
 });
