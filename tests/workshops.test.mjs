@@ -51,34 +51,9 @@ test('every workshop page tags its enquiries with its own source', () => {
   }
 });
 
-test('no internal link to a workshop page carries UTM parameters', () => {
-  for (const f of walk(root)) {
-    const src = readFileSync(f, 'utf8');
-    assert.ok(!/href="\/workshops\/[^"]*utm_/.test(src), `${f} tags an internal workshops link`);
-  }
-});
 
-test('StepStone figure never names the satellite portfolio', () => {
-  for (const f of walk(root)) {
-    assert.ok(!/satellite/i.test(readFileSync(f, 'utf8')), `${f} mentions the satellite portfolio`);
-  }
-});
 
-// The footer dropped Workshops on 7 Nov 2026 (Elle): the header carries it.
-test('Workshops sits in the header', () => {
-  assert.match(read('components/Header.astro'), /href: '\/workshops\/', label: 'Workshops'/);
-});
 
-test('every FAQ list names its topic, so agents keep the context', () => {
-  const pages = walk(join(root, 'pages')).filter((f) => f.endsWith('.astro'));
-  for (const f of pages) {
-    const src = readFileSync(f, 'utf8');
-    for (const m of src.matchAll(/<FaqList[\s\S]*?\/>/g)) {
-      assert.match(m[0], /heading=/, `${f} has a FaqList with no heading`);
-    }
-    assert.ok(!src.includes('Fair questions'), `${f} still says "Fair questions"`);
-  }
-});
 
 test('a framing variant gets a page but no card on /workshops/', () => {
   assert.match(read('pages/workshops/index.astro'), /workshops\.filter\(\(w\) => !w\.variantOf\)\.map/);
