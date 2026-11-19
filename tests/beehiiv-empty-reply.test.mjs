@@ -58,7 +58,7 @@ test('the daily check reports changed when beehiiv is unreadable', (t) => {
   const out = join(dir, 'out');
   const preload =
     'data:text/javascript,' +
-    encodeURIComponent('globalThis.fetch = async () => ({ ok: true, status: 200, json: async () => ({}) });');
+    encodeURIComponent('globalThis.fetch = async () => ({ ok: true, status: 200, json: async () => ({}) }); globalThis.setTimeout = (f) => (f(), 0);'); // skip the real retry waits
   const r = spawnSync(process.execPath, ['--import', preload, 'scripts/posts-changed.mjs'], {
     env: { ...process.env, BEEHIIV_API_KEY: 'test', GITHUB_OUTPUT: out },
     encoding: 'utf8',

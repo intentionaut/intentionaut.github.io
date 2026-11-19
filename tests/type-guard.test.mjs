@@ -18,6 +18,7 @@ import { chromium } from 'playwright-core';
 const BASELINE = new URL('./type-baseline.json', import.meta.url);
 const PORT = 4499;
 const WIDTHS = [1000, 1440];
+const TABS = 4;
 const PROPS = ['fontFamily', 'fontSize', 'fontWeight', 'fontStyle', 'lineHeight',
   'letterSpacing', 'textTransform', 'marginTop', 'marginBottom'];
 const BLOCK_PROPS = ['paddingTop', 'paddingBottom'];
@@ -58,11 +59,16 @@ async function measure() {
     await waitFor(`http://localhost:${PORT}/`);
     const browser = await chromium.launch({ channel: 'chrome' });
     const out = {};
-    for (const width of WIDTHS) {
-      const page = await browser.newPage({ viewport: { width, height: 900 }, reducedMotion: 'reduce' });
-      for (const route of pages()) {
-        await page.goto(`http://localhost:${PORT}${route}`, { waitUntil: 'load' });
-        out[`${route} @${width}`] = await page.evaluate(([props, blockProps]) => {
+    const jobs = pages().flatMap((route) => WIDTHS.map((width) => ({ route, width })));
+    // A few tabs load pages at once; each takes the next job until none are left.
+    await Promise.all(Array.from({ length: TABS }, async () => {
+      const page = await browser.newPage({ viewport: { width: 1000, height: 900 }, reducedMotion: 'reduce' });
+      for (let job; (job = jobs.shift());) {
+        await page.setViewportSize({ width: job.width, height: 900 });
+        await page.goto(`http://localhost:${PORT}${job.route}`, { waitUntil: 'load' });
+        // Under parallel load the dev server can be slow to paint a page's head; give it time, then measure what is there.
+        await page.waitForSelector('.hero, .page-head', { timeout: 10_000 }).catch(() => {});
+        out[`${job.route} @${job.width}`] = await page.evaluate(([props, blockProps]) => {
           const block = document.querySelector('.hero, .page-head');
           if (!block) return null;
           const pick = (el, keys) => { const c = getComputedStyle(el); return Object.fromEntries(keys.map((k) => [k, c[k]])); };
@@ -71,7 +77,7 @@ async function measure() {
         }, [PROPS, BLOCK_PROPS]);
       }
       await page.close();
-    }
+    }));
     await browser.close();
     return out;
   } finally {
