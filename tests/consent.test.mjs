@@ -69,7 +69,7 @@ test('no analytics loader outside Consent.astro', () => {
 });
 
 test('Pendo loads only inside load(), and Decline stops it and clears its ids', () => {
-  assert.match(consent, /function load\(\) \{\n\s+loadPendo\(\);/);
+  assert.match(consent, /function load\(\) \{\n(\s+if \(internal\(\)\) return;\n)?\s+loadPendo\(\);/);
   assert.equal((consent.match(/\bloadPendo\(\);/g) || []).length, 1);
   assert.match(consent, /stopSendingEvents/);
   assert.match(consent, /indexOf\('_pendo_'\) === 0/);
@@ -83,4 +83,10 @@ test('Accept after a Decline turns PostHog capture back on', () => {
 
 test('only the live site sends PostHog events', () => {
   assert.match(consent, /if \(location\.hostname !== 'intentionaut\.com'\) return null;/);
+});
+
+test('an internal browser (?internal=1) loads no analytics at all', () => {
+  assert.match(consent, /function load\(\) \{\n\s+if \(internal\(\)\) return;\n\s+loadPendo\(\);/);
+  assert.match(consent, /if \(flag === '1'\) localStorage\.setItem\(INTERNAL, '1'\);/);
+  assert.match(consent, /if \(flag === '0'\) localStorage\.removeItem\(INTERNAL\);/);
 });
