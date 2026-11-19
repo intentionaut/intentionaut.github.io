@@ -1,0 +1,77 @@
+---
+/**
+ * Testimonials for short quotes: the first one set large as a lead, the rest
+ * as compact cards. Quotes over 200 characters take two columns; text size
+ * never changes. Hidden when the list is empty.
+ */
+import type { Testimonial } from '../data/testimonials';
+
+interface Props {
+  testimonials: Testimonial[];
+  heading?: string;
+  /** Credit with the event (org) or with the role. Event pages that already name the event use role. */
+  credit?: 'org' | 'role';
+}
+
+const { testimonials, heading = 'Testimonials', credit = 'org' } = Astro.props;
+const [lead, ...rest] = testimonials;
+const by = (t: Testimonial) => (credit === 'org' ? t.org : t.role || t.org);
+---
+
+{lead && (
+  <section class="quote-grid" aria-labelledby="quote-grid-h">
+    <h2 id="quote-grid-h">{heading}</h2>
+    <figure class="qg-lead">
+      <blockquote><p class="qg-q">“{lead.quote}”</p></blockquote>
+      <figcaption class="qg-by"><b>{lead.name}</b>, {by(lead)}</figcaption>
+    </figure>
+    {rest.length > 0 && (
+      <div class:list={['qg-cards', { two: rest.length % 2 === 0 }]}>
+        {rest.map((t) => (
+          <figure class:list={['qg-card', { wide: t.quote.length > 200 }]}>
+            <blockquote><p class="qg-q">“{t.quote}”</p></blockquote>
+            <figcaption class="qg-by"><b>{t.name}</b>, {by(t)}</figcaption>
+          </figure>
+        ))}
+      </div>
+    )}
+  </section>
+)}
+
+<style>
+  .quote-grid { padding-bottom: clamp(3rem, 6vw, 5rem); }
+  .quote-grid h2 { font-size: var(--text-lg); margin: 0 0 var(--space-6); }
+  .quote-grid blockquote { margin: 0; }
+  .qg-by { font-size: var(--text-sm); color: var(--muted); margin: 0; }
+  .qg-by b { color: var(--ink); font-weight: 500; }
+  .qg-lead { margin: 0 0 var(--space-8); max-width: 50rem; }
+  .qg-lead .qg-q {
+    font: 400 clamp(1.8rem, 4vw, 2.6rem)/1.15 var(--font-display);
+    margin: 0 0 var(--space-4);
+    text-wrap: balance;
+  }
+  .qg-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+    gap: var(--space-5);
+  }
+  .qg-card {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: var(--card);
+    box-shadow: var(--lift);
+    outline: 1px solid var(--slate);
+    outline-offset: -4px;
+    padding: var(--space-6);
+  }
+  .qg-card .qg-q { font: 400 1.05rem/1.45 var(--font-display); margin: 0 0 var(--space-4); }
+  @media (min-width: 720px) {
+    .qg-cards.two { grid-template-columns: repeat(2, 1fr); max-width: 56rem; }
+  }
+  @media (min-width: 900px) {
+    .qg-cards { grid-auto-flow: dense; }
+    .qg-card.wide { grid-column: span 2; }
+  }
+</style>

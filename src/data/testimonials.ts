@@ -19,7 +19,7 @@
  */
 
 /** Where a testimonial may appear. Add to this as pages need them. */
-export type Placement = 'contact' | 'home' | 'speaking' | 'fractional' | 'workshops' | 'for-ceos' | 'for-cpos-ctos' | 'for-scale-ups' | 'interim-cpo' | 'impact-chain';
+export type Placement = 'contact' | 'home' | 'speaking' | 'fractional' | 'workshops' | 'for-ceos' | 'for-cpos-ctos' | 'for-scale-ups' | 'interim-cpo' | 'impact-chain' | 'talk-agents-2026';
 
 export interface Testimonial {
   /** Stable, human-readable. Used as a key and to talk about one in a commit. */
@@ -177,6 +177,140 @@ export const testimonials: Testimonial[] = [
     source: 'LinkedIn recommendation',
     receivedAt: '2026-08-28',
     note: 'Excerpt, trimmed further 2026-09-27 at Saielle\'s request: it opened "She is also particularly strong at framing choices and trade-offs for senior leaders. Rather than allowing discussions to become lost in detail," which read oddly out of context. The full recommendation is on his LinkedIn.',
+  },
+  {
+    id: 'louise-taylor',
+    quote:
+      'Clear, accessible information delivered by a knowledgeable expert - useful even for a total AI novice!',
+    name: 'Louise Taylor',
+    role: 'Attendee',
+    org: 'ProductTank Global 2026',
+    enabled: true,
+    placements: ['talk-agents-2026'],
+    source: "ProductTank Global talk survey (Tally form Arpx5e), ticked 'You can quote this on intentionaut.com, with my name'",
+    receivedAt: '2026-11-18',
+  },
+  {
+    id: 'chris-producttank',
+    quote:
+      'The Openness and \'real world\' tone it had. The speaker was great and she handled the tech issues brilliantly.',
+    name: 'Chris',
+    role: 'Attendee',
+    org: 'ProductTank Global 2026',
+    enabled: true,
+    placements: ['talk-agents-2026'],
+    source: "ProductTank Global talk survey (Tally form Arpx5e), ticked 'You can quote this on intentionaut.com, with my name'",
+    receivedAt: '2026-11-18',
+  },
+  {
+    id: 'sebastian-producttank',
+    quote:
+      'It was a very honest and down-to-earth session. Very helpful to get into the topic and not be scared about starting.',
+    name: 'Sebastian',
+    role: 'Attendee',
+    org: 'ProductTank Global 2026',
+    enabled: true,
+    placements: ['talk-agents-2026'],
+    source: "ProductTank Global talk survey (Tally form Arpx5e), ticked 'You can quote this on intentionaut.com, with my name'",
+    receivedAt: '2026-11-18',
+  },
+  {
+    id: 'katy-producttank',
+    quote:
+      'I loved how human and relatable you talked through everything, so refreshing against a lot of buzzwords on podcasts or AI generated content elsewhere!',
+    name: 'Katy',
+    role: 'Attendee',
+    org: 'ProductTank Global 2026',
+    enabled: true,
+    placements: ['talk-agents-2026'],
+    source: "ProductTank Global talk survey (Tally form Arpx5e), ticked 'You can quote this on intentionaut.com, with my name'",
+    receivedAt: '2026-11-18',
+    note: 'Trailing space trimmed; words unchanged.',
+  },
+  {
+    id: 'amy-wells',
+    quote:
+      'I’ve just got Claud through terminal and this was perfect timing on how to use this and more insight in how to help me as a senior product manager.',
+    name: 'Amy Wells',
+    role: 'Attendee',
+    org: 'ProductTank Global 2026',
+    enabled: true,
+    placements: ['talk-agents-2026'],
+    source: "ProductTank Global talk survey (Tally form Arpx5e), ticked 'You can quote this on intentionaut.com, with my name'",
+    receivedAt: '2026-11-18',
+    note: 'Verbatim, including "Claud".',
+  },
+  {
+    id: 'mtp-2022-senior-pm',
+    quote:
+      'Best talk of the conference, you owned that stage!',
+    name: 'Senior product manager',
+    role: '',
+    org: 'mtpcon London 2022',
+    enabled: true,
+    placements: ['speaking'],
+    source: "Mind the Product feedback, moved from the talk archive entry (src/content/talks/mtp-f-words-2022.md)",
+    receivedAt: '2022-10-14',
+  },
+  {
+    id: 'pk-producttank',
+    quote:
+      'Saielle’s authenticity - I honestly wished it went longer/wish I could have a 1:1!',
+    name: 'PK',
+    role: 'Attendee',
+    org: 'ProductTank Global 2026',
+    enabled: true,
+    placements: ['speaking'],
+    source: "ProductTank Global talk survey (Tally form Arpx5e), ticked 'You can quote this on intentionaut.com, with my name'",
+    receivedAt: '2026-11-18',
+  },
+  {
+    id: 'fiona-macneill',
+    quote:
+      'I love how authentic, clear, and open Saielle is – she really inspired me to get into product.',
+    name: 'Fiona MacNeill',
+    role: 'Attendee',
+    org: 'ProductTank Global 2026',
+    enabled: true,
+    placements: ['speaking'],
+    source: "ProductTank Global talk survey (Tally form Arpx5e), ticked 'You can quote this on intentionaut.com, with my name'",
+    receivedAt: '2026-11-18',
+  },
+  {
+    id: 'mtp-2022-pm',
+    quote:
+      'You were excellent, I needed a reminder to give a fuck, thank you.',
+    name: 'Product manager',
+    role: '',
+    org: 'mtpcon London 2022',
+    enabled: true,
+    placements: ['speaking'],
+    source: "Mind the Product feedback, moved from the talk archive entry (src/content/talks/mtp-f-words-2022.md)",
+    receivedAt: '2022-10-14',
+  },
+  {
+    id: 'paul-producttank',
+    quote:
+      'I think the scope was well set. Not going too deep in to details, but focussing on the overall concept.',
+    name: 'Paul',
+    role: 'Attendee',
+    org: 'ProductTank Global 2026',
+    enabled: true,
+    placements: ['speaking'],
+    source: "ProductTank Global talk survey (Tally form Arpx5e), ticked 'You can quote this on intentionaut.com, with my name'",
+    receivedAt: '2026-11-18',
+  },
+  {
+    id: 'mtp-2022-leader',
+    quote:
+      'What I loved about your talk was that it was truly original content, on an important topic, delivered with passion and energy, and contextualised in your personal experience in a way that felt very visceral. You created a connection with the audience that was unique to that room, on that day.',
+    name: 'Product leader, mtpcon attendee since 2015',
+    role: '',
+    org: 'mtpcon London 2022',
+    enabled: true,
+    placements: ['speaking'],
+    source: "Mind the Product feedback, moved from the talk archive entry (src/content/talks/mtp-f-words-2022.md)",
+    receivedAt: '2022-10-14',
   },
 ];
 
