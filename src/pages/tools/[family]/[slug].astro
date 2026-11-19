@@ -1,6 +1,7 @@
 ---
 import Plate from '../../../components/Plate.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { testimonialsFor, type Placement } from '../../../data/testimonials';
 import { families, toolHref, toolPdf, toolPreview, type Family, type Tool } from '../../../data/tools';
 
 export function getStaticPaths() {
@@ -9,6 +10,8 @@ export function getStaticPaths() {
 const { f, t } = Astro.props as { f: Family; t: Tool };
 const others = f.tools.filter((o) => o.slug !== t.slug);
 const pdf = toolPdf(f, t);
+// Tool slugs double as placements; a tool with no entries renders no section.
+const quotes = testimonialsFor(t.slug as Placement);
 const schema = {
   '@type': 'CreativeWork',
   name: t.title,
@@ -78,6 +81,22 @@ const schema = {
       </p>
     </section>
 
+    {quotes.length > 0 && (
+      <section class="rates-section" aria-labelledby="testimonials-h">
+        <h2 id="testimonials-h">Testimonials</h2>
+        {quotes.map((q) => (
+          <figure class="field-note">
+            <p class="eyebrow">From the field</p>
+            <blockquote><p class="fn-quote">“{q.quote}”</p></blockquote>
+            <figcaption class="fn-by">
+              <cite>{q.name}, {q.org}</cite>
+              {q.url && <a class="link-arrow" href={q.url} rel="noopener"><span>Read the article</span></a>}
+            </figcaption>
+          </figure>
+        ))}
+      </section>
+    )}
+
     <section class="rates-section" aria-labelledby="more-h">
       <h2 id="more-h">The other {f.name} tools</h2>
       <div class="rates">
@@ -98,6 +117,42 @@ const schema = {
 </BaseLayout>
 
 <style>
+  .field-note {
+    position: relative;
+    margin: 0 0 var(--space-6);
+    max-width: 46rem;
+    padding: var(--space-8) var(--space-8) var(--space-7);
+    background: var(--card);
+    box-shadow: var(--lift);
+    outline: 1px solid var(--slate);
+  }
+  .field-note::before {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border: 1px solid var(--slate);
+    pointer-events: none;
+  }
+  .field-note .eyebrow { color: var(--accent-text); margin: 0 0 var(--space-4); }
+  .field-note blockquote { margin: 0; }
+  .fn-quote {
+    font: 400 var(--text-lg)/1.35 var(--font-display);
+    margin: 0 0 var(--space-5);
+    text-wrap: pretty;
+  }
+  .fn-by {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
+    align-items: baseline;
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--slate);
+  }
+  .fn-by cite { font-style: normal; font-weight: 500; }
+  @media (max-width: 600px) {
+    .field-note { padding: var(--space-7) var(--space-5) var(--space-6); }
+    .fn-quote { font-size: var(--text-md); }
+  }
   .sheet-preview { display: block; max-width: 56rem; margin-bottom: var(--space-10); border: 1px solid var(--ink); box-shadow: var(--lift); background: #fff; }
   .sheet-preview img { display: block; width: 100%; height: auto; }
   .sheet-preview:hover, .sheet-preview:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
