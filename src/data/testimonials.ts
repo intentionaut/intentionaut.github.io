@@ -19,7 +19,7 @@
  */
 
 /** Where a testimonial may appear. Add to this as pages need them. */
-export type Placement = 'contact' | 'home' | 'speaking' | 'fractional' | 'workshops' | 'for-ceos' | 'for-cpos-ctos' | 'for-scale-ups' | 'interim-cpo';
+export type Placement = 'contact' | 'home' | 'speaking' | 'fractional' | 'workshops' | 'for-ceos' | 'for-cpos-ctos' | 'for-scale-ups' | 'interim-cpo' | 'impact-chain';
 
 export interface Testimonial {
   /** Stable, human-readable. Used as a key and to talk about one in a commit. */
@@ -58,6 +58,20 @@ export interface Testimonial {
 }
 
 export const testimonials: Testimonial[] = [
+  {
+    id: 'james-gadsby-peet',
+    quote:
+      'Even better, mapping the impact chain early highlights your weakest assumptions – such as testing whether a real society can import its register in under an hour before building complex extra features.',
+    name: 'James Gadsby Peet',
+    role: '',
+    org: 'William Joseph',
+    url: 'https://www.williamjoseph.co.uk/blog/how-to-connect-mural-and-claude-to-build-digital-products-that-people-actually-need',
+    enabled: true,
+    placements: ['impact-chain'],
+    source: "William Joseph blog article, 'How to connect Mural and Claude to build digital products that people actually need'",
+    receivedAt: '2026-11-19',
+    note: 'He agreed by message on 2026-11-19 to this article quote on the Impact Chain page, credited "James Gadsby Peet, William Joseph" with the article link. Not agreed for other pages or channels. url is the article, not a profile.',
+  },
   {
     id: 'susan-standiford',
     quote:
