@@ -1,6 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import QuoteGrid from '../components/QuoteGrid.astro';
+import { testimonialsFor } from '../data/testimonials';
 
 const talks = (await getCollection('talks')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
@@ -26,6 +28,8 @@ const fmt = (d: Date) =>
         in the <a href="/media-kit/">media kit</a>.
       </p>
     </header>
+
+    <QuoteGrid testimonials={testimonialsFor('speaking')} />
 
     {
       talks.length === 0 ? (
